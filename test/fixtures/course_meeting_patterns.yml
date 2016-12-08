@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 
+  meeting_time_start: 2016-12-08 14:17:38
+  meeting_time_end: 2016-12-08 14:17:38
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  sunday: false
+  start_date: 2016-12-08
+  end_date: 2016-12-08
+  facility_id: 
+  facilitly_description: 
+
+two:
+  course_id: 
+  meeting_time_start: 2016-12-08 14:17:38
+  meeting_time_end: 2016-12-08 14:17:38
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+  sunday: false
+  start_date: 2016-12-08
+  end_date: 2016-12-08
+  facility_id: 
+  facilitly_description: 

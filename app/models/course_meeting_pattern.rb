@@ -1,0 +1,2 @@
+class CourseMeetingPattern < ApplicationRecord
+end
