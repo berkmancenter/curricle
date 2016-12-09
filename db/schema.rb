@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208202032) do
+ActiveRecord::Schema.define(version: 20161209205224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "course_instructors", force: :cascade do |t|
+    t.integer  "external_course_id"
     t.integer  "course_id"
     t.string   "instructor_role"
     t.string   "print_instructor_flag"
@@ -30,35 +31,36 @@ ActiveRecord::Schema.define(version: 20161208202032) do
   end
 
   create_table "course_meeting_patterns", force: :cascade do |t|
+    t.integer  "external_course_id"
     t.integer  "course_id"
     t.datetime "meeting_time_start"
     t.datetime "meeting_time_end"
-    t.boolean  "monday"
-    t.boolean  "tuesday"
-    t.boolean  "wednesday"
-    t.boolean  "thursday"
-    t.boolean  "friday"
-    t.boolean  "saturday"
-    t.boolean  "sunday"
+    t.boolean  "meets_on_monday"
+    t.boolean  "meets_on_tuesday"
+    t.boolean  "meets_on_wednesday"
+    t.boolean  "meets_on_thursday"
+    t.boolean  "meets_on_friday"
+    t.boolean  "meets_on_saturday"
+    t.boolean  "meets_on_sunday"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "facility_id"
+    t.string   "external_facility_id"
     t.text     "facilitly_description"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
 
   create_table "courses", force: :cascade do |t|
-    t.integer  "course_id"
-    t.text     "course_desc"
+    t.integer  "external_course_id"
+    t.text     "course_description"
     t.string   "title"
     t.string   "term_name"
-    t.string   "term_year"
+    t.integer  "term_year"
     t.integer  "academic_year"
     t.string   "component"
+    t.integer  "prereq"
     t.string   "subject"
     t.text     "subject_description"
-    t.string   "prereq"
     t.text     "subject_academic_org_description"
     t.string   "academic_group"
     t.text     "academic_group_description"
@@ -70,4 +72,7 @@ ActiveRecord::Schema.define(version: 20161208202032) do
     t.datetime "updated_at",                       null: false
   end
 
+  add_foreign_key "course_instructors", "courses"
+  add_foreign_key "course_meeting_patterns", "courses"
+  add_foreign_key "courses", "courses", column: "prereq"
 end
