@@ -1,1 +1,24 @@
 @import "bourbon";
+@import "grid-settings";
+@import "neat";
+
+.app-wrapper {
+  @include outer-container;
+
+  .left-content {
+    @include span-columns(2);
+
+    @include media($mobile) {
+      @include span-columns(12);
+    }
+  }
+
+  .right-content {
+    @include span-columns(10);
+    @include omega();
+
+    @include media($mobile) {
+      @include span-columns(12);
+    }
+  }
+}
