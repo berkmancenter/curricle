@@ -9,6 +9,7 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'bourbon'
 gem 'slim-rails'
+gem 'neat'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
