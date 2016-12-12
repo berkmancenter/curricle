@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  root 'welcome#index'
+  get 'path', to: 'path#index'
+  get 'search', to: 'search#index'
+  root 'search#index'
 end

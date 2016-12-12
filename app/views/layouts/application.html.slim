@@ -8,4 +8,14 @@ html
     == javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    == yield
+    .app-wrapper
+      .header
+        .left-content
+          h2 Curricle
+        .right-content
+          == render "header_right"
+      .main
+        .left-content
+          == render "nav"
+        .right-content
+          == yield
