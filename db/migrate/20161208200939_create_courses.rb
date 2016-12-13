@@ -18,6 +18,9 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.string :term_pattern_code
       t.text :term_pattern_description
       t.integer :units_maximum
+      t.integer :catalog_number
+      t.text :course_description_long
+      t.text :course_note
       
       t.timestamps
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209205224) do
+ActiveRecord::Schema.define(version: 20161213024412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,11 +68,43 @@ ActiveRecord::Schema.define(version: 20161209205224) do
     t.string   "term_pattern_code"
     t.text     "term_pattern_description"
     t.integer  "units_maximum"
+    t.integer  "catalog_number"
+    t.text     "course_description_long"
+    t.text     "course_note"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_courses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.boolean  "include_in_path"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "external_user_id"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "major"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_foreign_key "course_instructors", "courses"
   add_foreign_key "course_meeting_patterns", "courses"
   add_foreign_key "courses", "courses", column: "prereq"
+  add_foreign_key "tags", "courses"
+  add_foreign_key "tags", "users"
+  add_foreign_key "user_courses", "courses"
+  add_foreign_key "user_courses", "users"
 end
