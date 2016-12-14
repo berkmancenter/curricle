@@ -1,0 +1,108 @@
+.search-header {
+  .filters {
+    label {
+      width: 175px;
+      padding-right: 5px;
+    }
+  }
+}
+
+.search-main {
+  .grid-wrapper {
+    @include span-columns(3 of 10);
+
+    ul {
+      vertical-align: top;
+      width: 20%;
+      text-align: center;
+    }
+
+    li {
+      vertical-align: top;
+      display: inline-block;
+      position: relative;
+      width: 100%;
+
+      &:first-of-type {
+        padding-bottom: 10px;
+      }
+
+      .dummy {
+        vertical-align: top;
+        margin-top: 100%;
+      }
+
+      .color {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        &.red {
+          background: #d42529;
+        }
+        &.green {
+          background: #83b971;
+        }
+        &.blue {
+          background: #539db7;
+        }
+      }
+    }
+  }
+
+  .details-wrapper {
+    @include span-columns(7 of 10);
+
+    .course-wrapper {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border: 1px solid gray;
+      position: relative;
+
+      .add_to_tray {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+
+        button {
+          display: inline-block;
+          margin: 0px 2px;
+          font-size: 16px;
+          padding: 0px 2px 2px 2px;
+        }
+      }
+
+      .units {
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+      }
+
+      .title {
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      &.green {
+        border: 1px solid #83b971;
+        color: #83b971;
+
+        &.solid {
+          color: white;
+          background: #83b971;
+        }
+      }
+      &.blue {
+        border: 1px solid #539db7;
+        color: #539db7;
+
+        &.solid {
+          color: white;
+          background: #539db7;
+        }
+      }
+    }
+  }
+}

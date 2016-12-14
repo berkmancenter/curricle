@@ -1,0 +1,15 @@
+.nav-wrapper {
+  li {
+    display: block;
+    padding: 5px 0px;
+    margin-bottom: 5px;
+
+    button {
+      display: inline-block;
+      margin: 0px 2px;
+      font-size: 16px;
+      padding: 0px 2px 2px 2px;
+      float: right;
+    }
+  }
+}
