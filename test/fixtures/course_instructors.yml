@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 
+  instructor_role: 
+  print_instructor_flag: 
+  first_name: 
+  middle_name: 
+  last_name: 
+  name_prefix: 
+  name_suffix: 
+  email: 
+
+two:
+  course_id: 
+  instructor_role: 
+  print_instructor_flag: 
+  first_name: 
+  middle_name: 
+  last_name: 
+  name_prefix: 
+  name_suffix: 
+  email: 

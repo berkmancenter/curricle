@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  course_id: MyString
+  include_in_path: false
+
+two:
+  user_id: MyString
+  course_id: MyString
+  include_in_path: false
