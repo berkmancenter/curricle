@@ -1,0 +1,80 @@
+.path-main {
+  margin-top: 20px;
+
+  .toggles {
+    button {
+      margin-left: 10px;
+
+      &.active {
+        font-weight: bold;
+        color: red;
+      }
+    }
+  }
+
+  .grid-wrapper.semester {
+    ul {
+      vertical-align: top;
+      width: 12.5%;
+      text-align: center;
+      position: relative;
+
+      &.times {
+        li {
+          line-height: 60px;
+        }
+      }
+    }
+
+    li {
+      vertical-align: top;
+      display: block;
+      width: 100%;
+      border-bottom: 1px dashed lightgray;
+      border-right: 1px dashed lightgray;
+      height: 60px;
+
+      &:first-of-type {
+        line-height: 60px;
+      }
+
+      .class {
+        display: table;
+        width: 100%;
+        position: absolute;
+        background: #d42529;
+        color: white;
+
+        .title {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .grid-wrapper.career {
+    .col {
+      @include span-columns(1 of 4);
+    }
+
+    ul {
+      @include span-columns(1 of 2);
+      vertical-align: top;
+
+      li {
+        text-align: center;
+        margin: 10px 0px;
+
+        &.class {
+          height: 60px;
+          line-height: 60px;
+          width: 100%;
+          background: #d42529;
+          color: white;
+        }
+      }
+    }
+  }
+}

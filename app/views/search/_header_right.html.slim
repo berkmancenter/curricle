@@ -1,1 +1,26 @@
-h2 Search filters go here
+.search-header
+  .col
+    form
+      input type="text" placeholder="Search Courses"
+      input type="submit" value="Go"
+  .col
+    div
+      | Colored by: 
+      strong Subject
+    div
+      | Filter by: 
+      strong FAS
+  .col.filters
+    strong.block Filter:
+    label.iblock
+      input type="checkbox"
+      | Pre-requisites
+    label.iblock
+      input type="checkbox"
+      | Intro-level
+    label.iblock
+      input type="checkbox"
+      | Advanced
+    label.iblock
+      input type="checkbox"
+      | By lottery

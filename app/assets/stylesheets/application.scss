@@ -1,24 +1,88 @@
 @import "bourbon";
 @import "grid-settings";
 @import "neat";
+@import "nav";
+@import "search";
+@import "path";
+
+body {
+  // TODO: find appropriate fonts
+  font-family: sans-serif;
+}
 
 .app-wrapper {
   @include outer-container;
 
+  .header {
+    min-height: 100px;
+    padding: 20px 0px;
+    border-bottom: 1px solid #eee;
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    .left-content {
+    }
+
+    .right-content {
+      .col {
+        @include span-columns(3 of 10);
+
+        &:last-of-type {
+          @include span-columns(4 of 10);
+        }
+      }
+    }
+  }
+
+  .main {
+    .left-content {
+      padding: 0px 5px;
+    }
+
+    .right-content {
+      border-radius: 3px;
+    }
+  }
+
   .left-content {
     @include span-columns(2);
-
-    @include media($mobile) {
-      @include span-columns(12);
-    }
   }
 
   .right-content {
     @include span-columns(10);
     @include omega();
-
-    @include media($mobile) {
-      @include span-columns(12);
-    }
   }
+}
+
+// common stylized classes
+
+.hidden {
+  display: none;
+}
+
+.float-l {
+  float: left;
+}
+
+.float-r {
+  float: right;
+}
+
+.block {
+  display: block;
+}
+
+.iblock {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+ul.plain {
+  list-style-type: none;
+  padding: 0;
 }
