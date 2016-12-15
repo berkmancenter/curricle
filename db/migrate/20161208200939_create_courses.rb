@@ -2,7 +2,6 @@ class CreateCourses < ActiveRecord::Migration[5.0]
   def change
     create_table :courses do |t|
       t.integer :external_course_id
-      t.text :course_description
       t.string :title
       t.string :term_name
       t.integer :term_year
@@ -19,6 +18,7 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.text :term_pattern_description
       t.integer :units_maximum
       t.integer :catalog_number
+      t.text :course_description
       t.text :course_description_long
       t.text :course_note
       
