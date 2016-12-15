@@ -46,13 +46,12 @@ ActiveRecord::Schema.define(version: 20161213024412) do
     t.date     "end_date"
     t.string   "external_facility_id"
     t.text     "facility_description"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "courses", force: :cascade do |t|
     t.integer  "external_course_id"
-    t.text     "course_description"
     t.string   "title"
     t.string   "term_name"
     t.integer  "term_year"
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 20161213024412) do
     t.text     "term_pattern_description"
     t.integer  "units_maximum"
     t.integer  "catalog_number"
+    t.text     "course_description"
     t.text     "course_description_long"
     t.text     "course_note"
     t.datetime "created_at",                       null: false
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20161213024412) do
   create_table "tags", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
