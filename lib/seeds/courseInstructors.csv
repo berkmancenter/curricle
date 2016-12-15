@@ -1,0 +1,693 @@
+courseId,courseOfferNumber,termCode,termDescription,sessionCode,classSection,classMeetingNumber,instructorSequence,instructorId,instructorRole,instructorRoleDescription,printInstructorFlag,instructorName,instructorFirstName,instructorMiddleName,instructorLastName,instructorNamePrefix,instructorNameSuffix,instructorEmail,academicCareer,bracketedFlag,headInstructorFlag
+104039,1,2172,2017 Spring,1,01,1,1,50546152,PI,Primary Instructor,Y,Kevin Madigan,Kevin,J.,Madigan, , ,KMADIGAN@HDS.HARVARD.EDU,HDS,N,Y
+105609,1,2178,2017 Fall,1,01,1,1,20640081,PI,Primary Instructor,Y,Matthew Potts,Matthew,Lawrence,Potts,Mr, ,mpotts@hds.harvard.edu,HDS,N,Y
+108354,1,2172,2017 Spring,1,001,1,1,60536295,HEAD,Head Instructor,Y,Wesley Wong,Wesley,Philip,Wong,Dr, ,wesley_wong@hms.harvard.edu,FAS,N,Y
+108355,1,2172,2017 Spring,1,001,1,1,20518499,HEAD,Head Instructor,Y,Maria Lehtinen,Maria,Kristiina,Lehtinen,Dr, ,maria.lehtinen@post.harvard.edu,FAS,N,Y
+108356,1,2172,2017 Spring,1,001,1,1,40843795,HEAD,Head Instructor,Y,Pascal Kaeser,Pascal, ,Kaeser, , ,PASCAL_KAESER@HMS.HARVARD.EDU,FAS,N,Y
+108374,1,2172,2017 Spring,1,001,1,1,30847024,HEAD,Head Instructor,Y,Ryan Adams,Ryan,Prescott,Adams, , ,RPA@SEAS.HARVARD.EDU,FAS,N,Y
+108389,1,2172,2017 Spring,1,001,1,1,80412797,HEAD,Head Instructor,Y,Abraham Loeb,Abraham, ,Loeb, , ,ALOEB@CFA.HARVARD.EDU,FAS,N,Y
+108446,1,2172,2017 Spring,1,001,1,1,30181395,HEAD,Head Instructor,Y,Ali S. Asani,Ali S., ,Asani, , ,ALIASANI@FAS.HARVARD.EDU,FAS,N,Y
+108446,1,2172,2017 Spring,1,002,1,1,80423810,HEAD,Head Instructor,Y,William Granara,William, ,Granara, , ,GRANARA@FAS.HARVARD.EDU,FAS,N,Y
+108446,1,2172,2017 Spring,1,004,1,1,20809973,HEAD,Head Instructor,Y,Malika Zeghal,Malika, ,Zeghal, , ,MZEGHAL@FAS.HARVARD.EDU,FAS,N,Y
+108447,1,2172,2017 Spring,1,001,1,1,30181395,HEAD,Head Instructor,Y,Ali S. Asani,Ali S., ,Asani, , ,ALIASANI@FAS.HARVARD.EDU,FAS,N,Y
+108447,1,2172,2017 Spring,1,002,1,1,80423810,HEAD,Head Instructor,Y,William Granara,William, ,Granara, , ,GRANARA@FAS.HARVARD.EDU,FAS,N,Y
+108447,1,2172,2017 Spring,1,003,1,1,20638214,HEAD,Head Instructor,Y,Baber Johansen,Baber, ,Johansen, , ,BJOHANSEN@HDS.HARVARD.EDU,FAS,N,Y
+108447,1,2172,2017 Spring,1,005,1,1,20809973,HEAD,Head Instructor,Y,Malika Zeghal,Malika, ,Zeghal, , ,MZEGHAL@FAS.HARVARD.EDU,FAS,N,Y
+108465,1,2172,2017 Spring,1,001,1,1,10850215,HEAD,Head Instructor,Y,Matthew Reece,Matthew, ,Reece, , ,MREECE@PHYSICS.HARVARD.EDU,FAS,N,Y
+108513,1,2172,2017 Spring,1,001,1,1,10069254,HEAD,Head Instructor,Y,Peter S. Pershan,Peter S., ,Pershan, , ,PERSHAN@SEAS.HARVARD.EDU,FAS,N,Y
+108564,1,2172,2017 Spring,1,001,1,1,20455535,HEAD,Head Instructor,Y,Brian Farrell,Brian,D.,Farrell, , ,FARRELLB@OEB.HARVARD.EDU,FAS,N,Y
+108639,1,2172,2017 Spring,1,001,1,1,60151911,HEAD,Head Instructor,Y,Cheryl Brown Welch,Cheryl Brown, ,Welch, , ,CWELCH@GOV.HARVARD.EDU,FAS,N,Y
+108639,1,2172,2017 Spring,1,001,1,2,80659849,CD,Course Director,N,Karen Kaletka,Karen, ,Kaletka, , ,KBKALETKA@GOV.HARVARD.EDU,FAS,N,N
+108694,1,2172,2017 Spring,1,001,1,1,60587124,HEAD,Head Instructor,Y,Jean Comaroff,Jean, ,Comaroff, , ,JEANCOMAROFF@FAS.HARVARD.EDU,FAS,N,Y
+108694,1,2172,2017 Spring,1,001,1,2,30587235,HEAD,Head Instructor,Y,John Comaroff,John, ,Comaroff, , ,JCOMAROFF@FAS.HARVARD.EDU,FAS,N,N
+108694,1,2172,2017 Spring,1,001,2,1,60587124,HEAD,Head Instructor,Y,Jean Comaroff,Jean, ,Comaroff, , ,JEANCOMAROFF@FAS.HARVARD.EDU,FAS,N,N
+108694,1,2172,2017 Spring,1,001,2,2,30587235,HEAD,Head Instructor,Y,John Comaroff,John, ,Comaroff, , ,JCOMAROFF@FAS.HARVARD.EDU,FAS,N,N
+108705,1,2172,2017 Spring,1,001,1,1,40770429,HEAD,Head Instructor,Y,Lisa Parkes,Lisa,Caroline,Parkes, , ,LPARKES@FAS.HARVARD.EDU,FAS,N,Y
+109282,1,2172,2017 Spring,1,001,1,1,60175330,HEAD,Head Instructor,Y,Michael Aziz,Michael,J.,Aziz, , ,maziz@harvard.edu,FAS,N,Y
+110256,1,2172,2017 Spring,1,001,1,1,10555221,HEAD,Head Instructor,Y,Daniel Jafferis,Daniel,Louis,Jafferis, , ,jafferis@fas.harvard.edu,FAS,N,Y
+110257,1,2172,2017 Spring,1,001,1,1,10555221,HEAD,Head Instructor,Y,Daniel Jafferis,Daniel,Louis,Jafferis, , ,jafferis@fas.harvard.edu,FAS,N,Y
+110258,1,2172,2017 Spring,1,001,1,1,70918145,HEAD,Head Instructor,Y,Gojko Barjamovic,Gojko, ,Barjamovic, , ,BARJAMOVIC@FAS.HARVARD.EDU,FAS,N,Y
+110261,1,2172,2017 Spring,1,001,1,1,50854205,HEAD,Head Instructor,Y,Jelani Nelson,Jelani, ,Nelson, , ,MINILEK@SEAS.HARVARD.EDU,FAS,N,Y
+110263,1,2172,2017 Spring,1,001,1,1,10884195,HEAD,Head Instructor,Y,Yaron Singer,Yaron, ,Singer, , ,YARON@SEAS.HARVARD.EDU,FAS,N,Y
+110265,1,2172,2017 Spring,1,001,1,1,90758969,HEAD,Head Instructor,Y,Shmuel Rubinstein,Shmuel, ,Rubinstein, , ,SHMUEL@SEAS.HARVARD.EDU,FAS,N,Y
+110267,1,2172,2017 Spring,1,001,1,1,70418207,HEAD,Head Instructor,Y,Kiran Musunuru,Kiran, ,Musunuru,Dr, ,KIRAN_MUSUNURU@HARVARD.EDU,FAS,N,Y
+110272,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+110309,1,2172,2017 Spring,1,001,1,1,40306013,HEAD,Head Instructor,Y,Cass Sunstein,Cass,Robert,Sunstein, , ,CSUNSTEI@LAW.HARVARD.EDU,FAS,N,Y
+110310,1,2172,2017 Spring,1,001,1,1,20087943,HEAD,Head Instructor,Y,Lawrence H. Summers,Lawrence H., ,Summers, , ,LAWRENCE_SUMMERS@HKS.HARVARD.EDU,FAS,N,Y
+110362,1,2172,2017 Spring,1,001,1,1,50607739,HEAD,Head Instructor,Y,Zaneta HONG,Zaneta,H.,HONG, , ,zhong@gsd.harvard.edu,FAS,N,Y
+110387,1,2172,2017 Spring,1,001,1,2,20578629,HEAD,Head Instructor,Y,Hideko Nakajima,Hideko,Heidi,Nakajima,Dr, ,HHN@EPL.MEEI.HARVARD.EDU,FAS,N,Y
+110387,1,2172,2017 Spring,1,001,1,1,30343379,INST,Instructor,N,John Rosowski,John,J,Rosowski, , ,JJR@EPL.MEEI.HARVARD.EDU,FAS,N,N
+110390,1,2172,2017 Spring,1,001,1,2,20578629,HEAD,Head Instructor,Y,Hideko Nakajima,Hideko,Heidi,Nakajima,Dr, ,HHN@EPL.MEEI.HARVARD.EDU,FAS,N,Y
+110390,1,2172,2017 Spring,1,001,1,1,30343379,INST,Instructor,N,John Rosowski,John,J,Rosowski, , ,JJR@EPL.MEEI.HARVARD.EDU,FAS,N,N
+110416,1,2172,2017 Spring,1,001,1,1,80362366,HEAD,Head Instructor,Y,David Frank,David, ,Frank, , ,DAVID_FRANK@DFCI.HARVARD.EDU,FAS,N,Y
+110421,1,2172,2017 Spring,1,001,1,1,20274018,HEAD,Head Instructor,Y,Marcy MacDonald,Marcy,Elizabeth,MacDonald,Dr, ,MACDONAM@HELIX.MGH.HARVARD.EDU,FAS,N,Y
+110451,1,2172,2017 Spring,1,001,1,1,80310153,HEAD,Head Instructor,Y,Robert Lue,Robert,A.,Lue, , ,LUE@HARVARD.EDU,FAS,N,Y
+110451,1,2172,2017 Spring,1,001,1,4,30730569,PREC,Preceptor,N,Jessica Liu,Jessica,Chishow,Liu, , ,liu9@fas.harvard.edu,FAS,N,N
+110488,1,2172,2017 Spring,1,001,1,1,90047515,HEAD,Head Instructor,Y,James Cunningham,James,Morgan,Cunningham,Dr, ,JCUNNINGHAM@RICS.BWH.HARVARD.EDU,FAS,N,Y
+110641,1,2172,2017 Spring,1,001,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+110641,1,2172,2017 Spring,1,002,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+110816,1,2172,2017 Spring,1,001,1,1,10069254,HEAD,Head Instructor,Y,Peter S. Pershan,Peter S., ,Pershan, , ,PERSHAN@SEAS.HARVARD.EDU,FAS,N,Y
+110817,1,2172,2017 Spring,1,001,1,1,10069254,HEAD,Head Instructor,Y,Peter S. Pershan,Peter S., ,Pershan, , ,PERSHAN@SEAS.HARVARD.EDU,FAS,N,Y
+110818,1,2172,2017 Spring,1,001,1,1,40912835,HEAD,Head Instructor,Y,Horacio Larreguy,Horacio, ,Larreguy, , ,HLARREGUY@FAS.HARVARD.EDU,FAS,N,Y
+110818,1,2172,2017 Spring,1,001,1,2,70650932,HEAD,Head Instructor,Y,Melani Cammett,Melani,Claire,Cammett, , ,mcammett@fas.harvard.edu,FAS,N,N
+110822,1,2172,2017 Spring,1,001,1,1,30736834,HEAD,Head Instructor,Y,Edo Berger,Edo, ,Berger, , ,EBERGER@CFA.HARVARD.EDU,FAS,N,Y
+110836,1,2172,2017 Spring,1,001,1,1,70481405,HEAD,Head Instructor,Y,Elizabeth Perry,Elizabeth,J.,Perry, , ,EPERRY@GOV.HARVARD.EDU,FAS,N,Y
+110837,1,2172,2017 Spring,1,001,1,1,10008093,HEAD,Head Instructor,Y,Arthur Jaffe,Arthur, ,Jaffe, , ,ARTHUR_JAFFE@HARVARD.EDU,FAS,N,Y
+110852,1,2172,2017 Spring,1,001,1,1,70493918,HEAD,Head Instructor,Y,Maria Parra-Velasco,Maria,Luisa,Parra-Velasco, , ,parra@fas.harvard.edu,FAS,N,Y
+110855,1,2172,2017 Spring,1,001,1,3,50915204,PI,Primary Instructor,Y,Eric Peterson,Eric, ,Peterson, , ,peterson.eric.c@gmail.com,FAS,N,Y
+110857,1,2172,2017 Spring,1,001,1,1,90204483,HEAD,Head Instructor,Y,Stephen Mitchell,Stephen,A.,Mitchell, , ,SAMITCH@FAS.HARVARD.EDU,FAS,N,Y
+110882,1,2172,2017 Spring,1,001,1,1,30392922,HEAD,Head Instructor,Y,Jonathan Cohen,Jonathan,B.,Cohen,Dr, ,JONATHAN_COHEN@HMS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,001,1,1,70409917,HEAD,Head Instructor,Y,Carolyn Abbate,Carolyn, ,Abbate, , ,CABBATE@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,002,1,1,70689162,HEAD,Head Instructor,Y,Suzannah Clark,Suzannah, ,Clark, , ,SCLARK@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,003,1,1,30306058,HEAD,Head Instructor,Y,Chaya Czernowin,Chaya, ,Czernowin, , ,CHAYACZERNOWIN@GMAIL.COM,FAS,N,Y
+111023,1,2172,2017 Spring,1,004,1,1,80777477,HEAD,Head Instructor,Y,Emily Dolan,Emily, ,Dolan, , ,EDOLAN@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,005,1,1,20578823,HEAD,Head Instructor,Y,Christopher Hasty,Christopher, ,Hasty, , ,HASTY@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,006,1,1,70927519,HEAD,Head Instructor,Y,Vijay Iyer,Vijay, ,Iyer, , ,VIJAYIYER@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,007,1,1,20433221,HEAD,Head Instructor,Y,Thomas F. Kelly,Thomas F., ,Kelly, , ,TKELLY@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,008,1,1,90515071,HEAD,Head Instructor,Y,Ingrid Monson,Ingrid, ,Monson, , ,IMONSON@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,009,1,1,10314666,HEAD,Head Instructor,Y,Carol Oja,Carol,J.,Oja, , ,COJA@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,010,1,1,10589282,HEAD,Head Instructor,Y,Alexander Rehding,Alexander, ,Rehding, , ,AREHDING@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,011,1,1,40704469,HEAD,Head Instructor,Y,Sindhumathi Revuluri,Sindhumathi, ,Revuluri, , ,REVULURI@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,012,1,1,90379461,HEAD,Head Instructor,Y,Kay Shelemay,Kay,K.,Shelemay, , ,shelemay@fas.harvard.edu,FAS,N,Y
+111023,1,2172,2017 Spring,1,013,1,1,30589009,HEAD,Head Instructor,Y,Anne Shreffler,Anne,C.,Shreffler, , ,ACSHREFF@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,014,1,1,60627177,HEAD,Head Instructor,Y,Hans Tutschku,Hans, ,Tutschku, , ,tutschku@fas.harvard.edu,FAS,N,Y
+111023,1,2172,2017 Spring,1,015,1,1,80886829,HEAD,Head Instructor,Y,Kate van Orden,Kate, ,van Orden, , ,VANORDEN@FAS.HARVARD.EDU,FAS,N,Y
+111023,1,2172,2017 Spring,1,016,1,1,60517258,HEAD,Head Instructor,Y,Richard Wolf,Richard,Kent,Wolf, , ,RWOLF@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,001,1,1,80604866,HEAD,Head Instructor,Y,Ryuichi Abe,Ryuichi, ,Abe, , ,RABE@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,001,1,2,30181395,HEAD,Head Instructor,Y,Ali S. Asani,Ali S., ,Asani, , ,ALIASANI@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,3,60525757,HEAD,Head Instructor,Y,Leila Ahmed,Leila, ,Ahmed, , ,LAHMED@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,4,60758964,HEAD,Head Instructor,Y,Giovanni Bazzana,Giovanni,Battista,Bazzana, , ,GBAZZANA@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,5,30684168,HEAD,Head Instructor,Y,Janet Browne,Janet, ,Browne, , ,JBROWNE@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,6,40563067,HEAD,Head Instructor,Y,Davíd L. Carrasco,Davíd L., ,Carrasco, , ,DCARRASCO@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,7,70446294,HEAD,Head Instructor,Y,Francis Clooney,Francis,X,Clooney, , ,FCLOONEY@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,9,40150501,HEAD,Head Instructor,Y,Diana Eck,Diana,L.,Eck, , ,DIANAECK@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,10,70301865,HEAD,Head Instructor,Y,Francis Fiorenza,Francis,Schussler,Fiorenza, , ,FFIORENZA@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,11,10599296,HEAD,Head Instructor,Y,Marla Frederick,Marla, ,Frederick, , ,FREDERIC@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,12,30261712,HEAD,Head Instructor,Y,Luis Giron Negron,Luis,M.,Giron Negron, , ,GIRON@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,13,40165479,HEAD,Head Instructor,Y,William A. Graham,William A., ,Graham, , ,WGRAHAM@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,14,50479625,HEAD,Head Instructor,Y,Janet Gyatso,Janet, ,Gyatso, , ,JGYATSO@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,15,90353969,HEAD,Head Instructor,Y,David Hall,David,D.,Hall, , ,DHALL@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,16,90396803,HEAD,Head Instructor,Y,Helen Hardacre,Helen, ,Hardacre, , ,HARDACRE@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,17,30679725,HEAD,Head Instructor,Y,David Hempton,David,Neil,Hempton, , ,DHEMPTON@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,18,50133788,HEAD,Head Instructor,Y,Albert Henrichs,Albert,M.,Henrichs, , ,HENRICHS@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,19,90422936,HEAD,Head Instructor,Y,Evelyn Brooks Higginbotham,Evelyn Brooks, ,Higginbotham, , ,EBHIGGIN@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,20,40528792,HEAD,Head Instructor,Y,Amy Hollywood,Amy, ,Hollywood, , ,AHOLLYWOOD@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,21,20638214,HEAD,Head Instructor,Y,Baber Johansen,Baber, ,Johansen, , ,BJOHANSEN@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,23,40438629,HEAD,Head Instructor,Y,Karen King,Karen,L.,King, , ,KKING@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,24,10069807,HEAD,Head Instructor,Y,Arthur Kleinman,Arthur, ,Kleinman, , ,KLEINMAN@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,25,40514546,HEAD,Head Instructor,Y,James Kloppenberg,James, ,Kloppenberg, , ,JKLOPPEN@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,26,30310020,HEAD,Head Instructor,Y,David Lamberth,David, ,Lamberth, , ,DAVID_LAMBERTH@HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,27,10334691,HEAD,Head Instructor,Y,Jon Levenson,Jon,D.,Levenson, , ,JLEVENSON@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,28,60377308,HEAD,Head Instructor,Y,Peter Machinist,Peter, ,Machinist, , ,MACHINIS@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,29,50546152,HEAD,Head Instructor,Y,Kevin Madigan,Kevin,J.,Madigan, , ,KMADIGAN@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,30,50108430,HEAD,Head Instructor,Y,Everett Mendelsohn,Everett, ,Mendelsohn, , ,EMENDELS@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,31,50222853,HEAD,Head Instructor,Y,Anne E. Monius,Anne E., ,Monius, , ,AMONIUS@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,32,50292150,HEAD,Head Instructor,Y,Roy Mottahedeh,Roy,Parviz,Mottahedeh, , ,MOTTAHED@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,33,70380684,HEAD,Head Instructor,Y,Laura Nasrallah,Laura,Salah,Nasrallah, , ,LNASRALLAH@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,34,60425957,HEAD,Head Instructor,Y,Jacob Olupona,Jacob, ,Olupona, , ,OLUPONA@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,35,60354383,HEAD,Head Instructor,Y,Parimal G. Patil,Parimal G., ,Patil, , ,ppatil@fas.harvard.edu,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,36,90063820,HEAD,Head Instructor,Y,Kimberley Patton,Kimberley, ,Patton, , ,KPATTON@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,37,10439183,HEAD,Head Instructor,Y,Michael J. Puett,Michael J., ,Puett, , ,PUETT@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,38,50322858,HEAD,Head Instructor,Y,Elisabeth Schussler Fiorenza,Elisabeth, ,Schussler Fiorenza, , ,ESCHUSSLER@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,39,60378703,HEAD,Head Instructor,Y,P. Skjaervo,P.,Oktor,Skjaervo, , ,SKJAERVO@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,40,90439502,HEAD,Head Instructor,Y,Charles Stang,Charles, ,Stang, , ,cstang@hds.harvard.edu,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,41,30803175,HEAD,Head Instructor,Y,Jonathan Walton,Jonathan,Lee,Walton, , ,JONATHAN_WALTON@HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,42,20809973,HEAD,Head Instructor,Y,Malika Zeghal,Malika, ,Zeghal, , ,MZEGHAL@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,43,80441452,HEAD,Head Instructor,Y,Leonard W. J. van der Kuijp,Leonard W. J., ,van der Kuijp, , ,VANDERK@FAS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,001,1,44,90740105,HEAD,Head Instructor,Y,Mark Jordan,Mark,D.,Jordan, , ,MJORDAN@HDS.HARVARD.EDU,FAS,N,N
+111117,1,2172,2017 Spring,1,02,1,1,30181395,HEAD,Head Instructor,Y,Ali S. Asani,Ali S., ,Asani, , ,ALIASANI@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,03,1,1,60525757,HEAD,Head Instructor,Y,Leila Ahmed,Leila, ,Ahmed, , ,LAHMED@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,04,1,1,60758964,HEAD,Head Instructor,Y,Giovanni Bazzana,Giovanni,Battista,Bazzana, , ,GBAZZANA@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,05,1,1,30684168,HEAD,Head Instructor,Y,Janet Browne,Janet, ,Browne, , ,JBROWNE@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,06,1,1,40563067,HEAD,Head Instructor,Y,Davíd L. Carrasco,Davíd L., ,Carrasco, , ,DCARRASCO@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,07,1,1,70446294,HEAD,Head Instructor,Y,Francis Clooney,Francis,X,Clooney, , ,FCLOONEY@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,09,1,1,40150501,HEAD,Head Instructor,Y,Diana Eck,Diana,L.,Eck, , ,DIANAECK@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,10,1,1,70301865,HEAD,Head Instructor,Y,Francis Fiorenza,Francis,Schussler,Fiorenza, , ,FFIORENZA@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,11,1,1,10599296,HEAD,Head Instructor,Y,Marla Frederick,Marla, ,Frederick, , ,FREDERIC@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,12,1,1,30261712,HEAD,Head Instructor,Y,Luis Giron Negron,Luis,M.,Giron Negron, , ,GIRON@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,13,1,1,40165479,HEAD,Head Instructor,Y,William A. Graham,William A., ,Graham, , ,WGRAHAM@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,14,1,1,50479625,HEAD,Head Instructor,Y,Janet Gyatso,Janet, ,Gyatso, , ,JGYATSO@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,15,1,1,90353969,HEAD,Head Instructor,Y,David Hall,David,D.,Hall, , ,DHALL@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,16,1,1,90396803,HEAD,Head Instructor,Y,Helen Hardacre,Helen, ,Hardacre, , ,HARDACRE@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,17,1,1,30679725,HEAD,Head Instructor,Y,David Hempton,David,Neil,Hempton, , ,DHEMPTON@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,18,1,1,50133788,HEAD,Head Instructor,Y,Albert Henrichs,Albert,M.,Henrichs, , ,HENRICHS@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,19,1,1,90422936,HEAD,Head Instructor,Y,Evelyn Brooks Higginbotham,Evelyn Brooks, ,Higginbotham, , ,EBHIGGIN@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,20,1,1,40528792,HEAD,Head Instructor,Y,Amy Hollywood,Amy, ,Hollywood, , ,AHOLLYWOOD@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,21,1,1,20638214,HEAD,Head Instructor,Y,Baber Johansen,Baber, ,Johansen, , ,BJOHANSEN@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,22,1,1,40438629,HEAD,Head Instructor,Y,Karen King,Karen,L.,King, , ,KKING@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,23,1,1,10069807,HEAD,Head Instructor,Y,Arthur Kleinman,Arthur, ,Kleinman, , ,KLEINMAN@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,24,1,1,40514546,HEAD,Head Instructor,Y,James Kloppenberg,James, ,Kloppenberg, , ,JKLOPPEN@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,25,1,1,30310020,HEAD,Head Instructor,Y,David Lamberth,David, ,Lamberth, , ,DAVID_LAMBERTH@HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,26,1,1,10334691,HEAD,Head Instructor,Y,Jon Levenson,Jon,D.,Levenson, , ,JLEVENSON@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,27,1,1,60377308,HEAD,Head Instructor,Y,Peter Machinist,Peter, ,Machinist, , ,MACHINIS@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,28,1,1,50546152,HEAD,Head Instructor,Y,Kevin Madigan,Kevin,J.,Madigan, , ,KMADIGAN@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,29,1,1,50108430,HEAD,Head Instructor,Y,Everett Mendelsohn,Everett, ,Mendelsohn, , ,EMENDELS@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,30,1,1,50222853,HEAD,Head Instructor,Y,Anne E. Monius,Anne E., ,Monius, , ,AMONIUS@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,31,1,1,50292150,HEAD,Head Instructor,Y,Roy Mottahedeh,Roy,Parviz,Mottahedeh, , ,MOTTAHED@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,32,1,1,70380684,HEAD,Head Instructor,Y,Laura Nasrallah,Laura,Salah,Nasrallah, , ,LNASRALLAH@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,33,1,1,60425957,HEAD,Head Instructor,Y,Jacob Olupona,Jacob, ,Olupona, , ,OLUPONA@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,34,1,1,60354383,HEAD,Head Instructor,Y,Parimal G. Patil,Parimal G., ,Patil, , ,ppatil@fas.harvard.edu,FAS,N,Y
+111117,1,2172,2017 Spring,1,35,1,1,90063820,HEAD,Head Instructor,Y,Kimberley Patton,Kimberley, ,Patton, , ,KPATTON@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,36,1,1,10439183,HEAD,Head Instructor,Y,Michael J. Puett,Michael J., ,Puett, , ,PUETT@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,37,1,1,50322858,HEAD,Head Instructor,Y,Elisabeth Schussler Fiorenza,Elisabeth, ,Schussler Fiorenza, , ,ESCHUSSLER@HDS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,38,1,1,60378703,HEAD,Head Instructor,Y,P. Skjaervo,P.,Oktor,Skjaervo, , ,SKJAERVO@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,39,1,1,90439502,HEAD,Head Instructor,Y,Charles Stang,Charles, ,Stang, , ,cstang@hds.harvard.edu,FAS,N,Y
+111117,1,2172,2017 Spring,1,40,1,1,30803175,HEAD,Head Instructor,Y,Jonathan Walton,Jonathan,Lee,Walton, , ,JONATHAN_WALTON@HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,41,1,1,20809973,HEAD,Head Instructor,Y,Malika Zeghal,Malika, ,Zeghal, , ,MZEGHAL@FAS.HARVARD.EDU,FAS,N,Y
+111117,1,2172,2017 Spring,1,42,1,1,80441452,HEAD,Head Instructor,Y,Leonard W. J. van der Kuijp,Leonard W. J., ,van der Kuijp, , ,VANDERK@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,001,1,1,10433541,HEAD,Head Instructor,Y,Selim Berker,Selim, ,Berker, , ,sberker@fas.harvard.edu,FAS,N,Y
+111147,1,2172,2017 Spring,1,002,1,1,20366540,HEAD,Head Instructor,Y,Matthew Boyle,Matthew, ,Boyle, , ,BOYLE2@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,003,1,1,20061316,HEAD,Head Instructor,Y,Warren Goldfarb,Warren, ,Goldfarb, , ,GOLDFARB@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,004,1,1,80645880,HEAD,Head Instructor,Y,Ned Hall,Ned, ,Hall, , ,EHALL@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,005,1,1,10808847,HEAD,Head Instructor,Y,Russell Jones,Russell,Edward,Jones, , ,RJONES@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,006,1,1,40568662,HEAD,Head Instructor,Y,Frances Kamm,Frances, ,Kamm, , ,frances_kamm@hks.harvard.edu,FAS,N,Y
+111147,1,2172,2017 Spring,1,007,1,1,80677464,HEAD,Head Instructor,Y,Sean Kelly,Sean,D,Kelly, , ,SDKELLY@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,008,1,1,70598345,HEAD,Head Instructor,Y,Peter Koellner,Peter, ,Koellner, , ,KOELLNER@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,009,1,1,40388850,HEAD,Head Instructor,Y,Christine Korsgaard,Christine,M.,Korsgaard, , ,CHRISTINE_KORSGAARD@HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,010,1,1,30640705,HEAD,Head Instructor,Y,Jeffrey McDonough,Jeffrey,K.,McDonough, , ,JKMCDON@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,011,1,1,80408064,HEAD,Head Instructor,Y,Richard Moran,Richard, ,Moran, , ,MORAN@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,012,1,1,80667272,HEAD,Head Instructor,Y,Bernhard Nickel,Bernhard, ,Nickel, , ,BNICKEL@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,013,1,1,60810168,HEAD,Head Instructor,Y,Mark Richard,Mark, ,Richard, , ,RICHARD4@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,014,1,1,70953986,HEAD,Head Instructor,Y,Susanna Rinard,Susanna, ,Rinard, , ,SRINARD@GMAIL.COM,FAS,N,Y
+111147,1,2172,2017 Spring,1,015,1,1,30992067,HEAD,Head Instructor,Y,Jacob Rosen,Jacob,J.,Rosen, , ,jacobrosen@fas.harvard.edu,FAS,N,Y
+111147,1,2172,2017 Spring,1,016,1,1,30265580,HEAD,Head Instructor,Y,Thomas M. Scanlon,Thomas M., ,Scanlon, , ,SCANLON@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,017,1,1,30309154,HEAD,Head Instructor,Y,Amartya Sen,Amartya, ,Sen, , ,ASEN@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,018,1,1,20543116,HEAD,Head Instructor,Y,Tommie Shelby,Tommie, ,Shelby, , ,TSHELBY@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,019,1,1,10526043,HEAD,Head Instructor,Y,Susanna C. Siegel,Susanna C., ,Siegel, , ,SSIEGEL@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,020,1,1,80430841,HEAD,Head Instructor,Y,Alison Simmons,Alison, ,Simmons, , ,ASIMMONS@FAS.HARVARD.EDU,FAS,N,Y
+111147,1,2172,2017 Spring,1,021,1,1,90928333,HEAD,Head Instructor,Y,W. Hugh Woodin,W. Hugh, ,Woodin, , ,WWOODIN@FAS.HARVARD.EDU,FAS,N,Y
+111409,1,2172,2017 Spring,1,001,1,1,60282781,HEAD,Head Instructor,Y,David Cardozo,David, ,Cardozo, , ,DAVID_CARDOZO@HMS.HARVARD.EDU,FAS,N,Y
+111429,1,2172,2017 Spring,1,001,1,1,90913247,HEAD,Head Instructor,Y,Danielle Truxaw,Danielle, ,Truxaw, , ,TRUXAW@FAS.HARVARD.EDU,FAS,N,Y
+111429,1,2172,2017 Spring,1,001,1,3,60682631,CD,Course Director,N,Laura Chivers,Laura,L,Chivers, , ,lchivers@wjh.harvard.edu,FAS,N,N
+111429,1,2172,2017 Spring,1,001,1,4,60961166,GA,Gradesheet Administrator,N,Sarah Bates,Sarah, ,Bates, , ,sarah_bates@hms.harvard.edu,FAS,N,N
+112091,1,2172,2017 Spring,1,001,1,1,70389525,HEAD,Head Instructor,Y,Efthimios Kaxiras,Efthimios, ,Kaxiras, , ,KAXIRAS@PHYSICS.HARVARD.EDU,FAS,N,Y
+112092,1,2172,2017 Spring,1,001,1,1,70389525,HEAD,Head Instructor,Y,Efthimios Kaxiras,Efthimios, ,Kaxiras, , ,KAXIRAS@PHYSICS.HARVARD.EDU,FAS,N,Y
+112119,1,2172,2017 Spring,1,001,1,1,80291833,HEAD,Head Instructor,Y,Michael Greenberg,Michael,E.,Greenberg, , ,MEG@HMS.HARVARD.EDU,FAS,N,Y
+112128,1,2172,2017 Spring,1,001,1,1,80056850,HEAD,Head Instructor,Y,Donald Coen,Donald, ,Coen, , ,DONALD_COEN@HMS.HARVARD.EDU,FAS,N,Y
+112135,1,2172,2017 Spring,1,001,1,1,80068077,HEAD,Head Instructor,Y,Louis Kunkel,Louis,Martens,Kunkel,Dr, ,KUNKEL@ENDERS.TCH.HARVARD.EDU,FAS,N,Y
+112139,1,2172,2017 Spring,1,001,1,1,51123751,HEAD,Head Instructor,Y,Joungmok Lee,Joungmok, ,Lee, , ,joungmok@hawaii.edu,FAS,N,Y
+112211,1,2172,2017 Spring,1,001,1,1,20335009,HEAD,Head Instructor,Y,Stuart Schreiber,Stuart,L.,Schreiber, , ,STUART_SCHREIBER@HARVARD.EDU,FAS,N,Y
+112340,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+112340,1,2172,2017 Spring,1,001,2,1,70052962,HEAD,Head Instructor,N,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,N
+112838,1,2172,2017 Spring,1,001,1,1,10433541,HEAD,Head Instructor,Y,Selim Berker,Selim, ,Berker, , ,sberker@fas.harvard.edu,FAS,N,Y
+112838,1,2172,2017 Spring,1,002,1,1,20366540,HEAD,Head Instructor,Y,Matthew Boyle,Matthew, ,Boyle, , ,BOYLE2@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,003,1,1,20061316,HEAD,Head Instructor,Y,Warren Goldfarb,Warren, ,Goldfarb, , ,GOLDFARB@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,004,1,1,80645880,HEAD,Head Instructor,Y,Ned Hall,Ned, ,Hall, , ,EHALL@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,005,1,1,10808847,HEAD,Head Instructor,Y,Russell Jones,Russell,Edward,Jones, , ,RJONES@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,006,1,1,40568662,HEAD,Head Instructor,Y,Frances Kamm,Frances, ,Kamm, , ,frances_kamm@hks.harvard.edu,FAS,N,Y
+112838,1,2172,2017 Spring,1,007,1,1,80677464,HEAD,Head Instructor,Y,Sean Kelly,Sean,D,Kelly, , ,SDKELLY@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,008,1,1,70598345,HEAD,Head Instructor,Y,Peter Koellner,Peter, ,Koellner, , ,KOELLNER@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,009,1,1,40388850,HEAD,Head Instructor,Y,Christine Korsgaard,Christine,M.,Korsgaard, , ,CHRISTINE_KORSGAARD@HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,010,1,1,30640705,HEAD,Head Instructor,Y,Jeffrey McDonough,Jeffrey,K.,McDonough, , ,JKMCDON@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,011,1,1,80408064,HEAD,Head Instructor,Y,Richard Moran,Richard, ,Moran, , ,MORAN@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,012,1,1,80667272,HEAD,Head Instructor,Y,Bernhard Nickel,Bernhard, ,Nickel, , ,BNICKEL@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,013,1,1,60810168,HEAD,Head Instructor,Y,Mark Richard,Mark, ,Richard, , ,RICHARD4@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,014,1,1,70953986,HEAD,Head Instructor,Y,Susanna Rinard,Susanna, ,Rinard, , ,SRINARD@GMAIL.COM,FAS,N,Y
+112838,1,2172,2017 Spring,1,015,1,1,30992067,HEAD,Head Instructor,Y,Jacob Rosen,Jacob,J.,Rosen, , ,jacobrosen@fas.harvard.edu,FAS,N,Y
+112838,1,2172,2017 Spring,1,016,1,1,30265580,HEAD,Head Instructor,Y,Thomas M. Scanlon,Thomas M., ,Scanlon, , ,SCANLON@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,017,1,1,30309154,HEAD,Head Instructor,Y,Amartya Sen,Amartya, ,Sen, , ,ASEN@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,018,1,1,20543116,HEAD,Head Instructor,Y,Tommie Shelby,Tommie, ,Shelby, , ,TSHELBY@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,019,1,1,10526043,HEAD,Head Instructor,Y,Susanna C. Siegel,Susanna C., ,Siegel, , ,SSIEGEL@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,020,1,1,80430841,HEAD,Head Instructor,Y,Alison Simmons,Alison, ,Simmons, , ,ASIMMONS@FAS.HARVARD.EDU,FAS,N,Y
+112838,1,2172,2017 Spring,1,021,1,1,90928333,HEAD,Head Instructor,Y,W. Hugh Woodin,W. Hugh, ,Woodin, , ,WWOODIN@FAS.HARVARD.EDU,FAS,N,Y
+112840,1,2172,2017 Spring,1,001,1,1,30181395,HEAD,Head Instructor,Y,Ali S. Asani,Ali S., ,Asani, , ,ALIASANI@FAS.HARVARD.EDU,FAS,N,Y
+112840,1,2172,2017 Spring,1,002,1,1,80423810,HEAD,Head Instructor,Y,William Granara,William, ,Granara, , ,GRANARA@FAS.HARVARD.EDU,FAS,N,Y
+112840,1,2172,2017 Spring,1,004,1,1,10334691,HEAD,Head Instructor,Y,Jon Levenson,Jon,D.,Levenson, , ,JLEVENSON@HDS.HARVARD.EDU,FAS,N,Y
+112840,1,2172,2017 Spring,1,005,1,1,90569090,HEAD,Head Instructor,Y,Peter Der Manuelian,Peter Der, ,Manuelian, , ,PETER_MANUELIAN@HARVARD.EDU,FAS,N,Y
+112840,1,2172,2017 Spring,1,006,1,1,50292150,HEAD,Head Instructor,Y,Roy Mottahedeh,Roy,Parviz,Mottahedeh, , ,MOTTAHED@FAS.HARVARD.EDU,FAS,N,Y
+112840,1,2172,2017 Spring,1,007,1,1,20809973,HEAD,Head Instructor,Y,Malika Zeghal,Malika, ,Zeghal, , ,MZEGHAL@FAS.HARVARD.EDU,FAS,N,Y
+112844,1,2172,2017 Spring,1,001,1,1,20524731,HEAD,Head Instructor,Y,Darren Higgins,Darren, ,Higgins, , ,DARREN_HIGGINS@HMS.HARVARD.EDU,FAS,N,Y
+112845,1,2172,2017 Spring,1,001,1,1,90229117,HEAD,Head Instructor,Y,Christine Seidman,Christine,Edry,Seidman,Dr, ,CSEIDMAN@GENETICS.MED.HARVARD.EDU,FAS,N,Y
+112846,1,2172,2017 Spring,1,001,1,1,80512392,HEAD,Head Instructor,Y,Qiufu Ma,Qiufu, ,Ma,Dr, ,QIUFU_MA@DFCI.HARVARD.EDU,FAS,N,Y
+112848,1,2172,2017 Spring,1,001,1,1,20514922,HEAD,Head Instructor,Y,Kwang-Soo Kim,Kwang-Soo, ,Kim,Dr, ,KSKIM@MCLEAN.HARVARD.EDU,FAS,N,Y
+112849,1,2172,2017 Spring,1,001,1,1,60409870,HEAD,Head Instructor,Y,Eng Lo,Eng,H.,Lo,Dr, ,LO@HELIX.MGH.HARVARD.EDU,FAS,N,Y
+112850,1,2172,2017 Spring,1,001,1,1,30513169,HEAD,Head Instructor,Y,Venkatesh Murthy,Venkatesh, ,Murthy, , ,VNMURTHY@FAS.HARVARD.EDU,FAS,N,Y
+112851,1,2172,2017 Spring,1,001,1,1,10183065,HEAD,Head Instructor,Y,Dennis Kasper,Dennis, ,Kasper, , ,DENNIS_KASPER@HMS.HARVARD.EDU,FAS,N,Y
+112852,1,2172,2017 Spring,1,001,1,1,60495939,HEAD,Head Instructor,Y,Jie Shen,Jie, ,Shen,Dr, ,JSHEN@RICS.BWH.HARVARD.EDU,FAS,N,Y
+112853,1,2172,2017 Spring,1,001,1,1,60125406,HEAD,Head Instructor,Y,Kenneth Kaye,Kenneth, ,Kaye, , ,KKAYE@RICS.BWH.HARVARD.EDU,FAS,N,Y
+112871,1,2172,2017 Spring,1,001,1,1,20281081,PI,Primary Instructor,Y,Noam D. Elkies,Noam D., ,Elkies, , ,ELKIES@MATH.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,001,1,1,40297685,HEAD,Head Instructor,Y,Jonathan Bolton,Jonathan,Hughes,Bolton, , ,JBOLTON@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,002,1,1,40346546,HEAD,Head Instructor,Y,Julie A. Buckler,Julie A., ,Buckler, , ,BUCKLER@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,003,1,1,50882616,HEAD,Head Instructor,Y,Steven Clancy,Steven, ,Clancy, , ,SCLANCY@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,004,1,1,10356148,HEAD,Head Instructor,Y,Michael Flier,Michael,S.,Flier, , ,FLIER@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,005,1,1,10099315,HEAD,Head Instructor,Y,George Grabowicz,George, ,Grabowicz, , ,GRABOWIC@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,006,1,1,90953230,HEAD,Head Instructor,Y,Daria Khitrova,Daria, ,Khitrova, , ,DKHITROVA@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,007,1,1,61251731,HEAD,Head Instructor,Y,Aleksandra Kremer,Aleksandra, ,Kremer, , ,akremer@fas.harvard.edu,FAS,N,Y
+112938,1,2172,2017 Spring,1,008,1,1,10446252,HEAD,Head Instructor,Y,Stephanie Sandler,Stephanie, ,Sandler, , ,SSANDLER@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,009,1,1,40326731,HEAD,Head Instructor,Y,William Todd,William,Mills,Todd, ,III,TODD@FAS.HARVARD.EDU,FAS,N,Y
+112938,1,2172,2017 Spring,1,010,1,1,80543131,HEAD,Head Instructor,Y,Justin Weir,Justin,M.,Weir, , ,WEIR@FAS.HARVARD.EDU,FAS,N,Y
+113257,1,2172,2017 Spring,1,001,1,1,50085856,HEAD,Head Instructor,Y,Harry Lewis,Harry,R.,Lewis, , ,dean@seas.harvard.edu,FAS,N,Y
+113489,1,2172,2017 Spring,1,001,1,1,90412388,HEAD,Head Instructor,Y,Marc Kirschner,Marc, ,Kirschner, , ,MARC@HMS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,001,1,1,50673367,HEAD,Head Instructor,Y,Jason Beckfield,Jason, ,Beckfield, , ,jasonbeckfield@fas.harvard.edu,FAS,N,Y
+113583,1,2172,2017 Spring,1,002,1,1,70481391,HEAD,Head Instructor,Y,Lawrence Bobo,Lawrence, ,Bobo, , ,BOBO@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,003,1,1,60845751,HEAD,Head Instructor,Y,Bart Bonikowski,Bart, ,Bonikowski, , ,BONIKOWSKI@FAS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,004,1,1,10585643,HEAD,Head Instructor,Y,Mary Brinton,Mary,C.,Brinton, , ,BRINTON@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,005,1,1,20482826,HEAD,Head Instructor,Y,Paul Chang,Paul,Y.,Chang, , ,paulchang@fas.harvard.edu,FAS,N,Y
+113583,1,2172,2017 Spring,1,006,1,1,60810001,HEAD,Head Instructor,Y,Matthew Desmond,Matthew,Stephen,Desmond, , ,MDESMOND@FAS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,007,1,1,20587970,HEAD,Head Instructor,Y,Frank Dobbin,Frank, ,Dobbin, , ,FRANK_DOBBIN@HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,008,1,1,20635029,HEAD,Head Instructor,Y,Ya-Wen Lei,Ya-Wen, ,Lei, , ,YAWENLEI@UMICH.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,009,1,1,60231796,HEAD,Head Instructor,Y,Mary Jo Good,Mary Jo,DelVecchio,Good, , ,MARYJO_GOOD@HMS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,010,1,1,80464746,HEAD,Head Instructor,Y,Christopher Jencks,Christopher, ,Jencks, , ,CHRISTOPHER_JENCKS@HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,011,1,1,60415234,HEAD,Head Instructor,Y,Rakesh Khurana,Rakesh, ,Khurana, , ,rkhurana@hbs.edu,FAS,N,Y
+113583,1,2172,2017 Spring,1,012,1,1,50863379,HEAD,Head Instructor,Y,Alexandra Killewald,Alexandra,Achen,Killewald, , ,KILLEWALD@FAS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,013,1,1,10310555,HEAD,Head Instructor,Y,Michele Lamont,Michele, ,Lamont, , ,MLAMONT@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,014,1,1,50318206,HEAD,Head Instructor,Y,Peter Marsden,Peter,V.,Marsden, , ,PETER_MARSDEN@HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,015,1,1,20954043,HEAD,Head Instructor,Y,Tey Meadow,Tey, ,Meadow, , ,TMEADOW@FAS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,016,1,1,30917855,HEAD,Head Instructor,Y,Devah Pager,Devah, ,Pager, , ,devah_pager@harvard.edu,FAS,N,Y
+113583,1,2172,2017 Spring,1,017,1,1,20061928,HEAD,Head Instructor,Y,Orlando Patterson,Orlando, ,Patterson, , ,OPATTERS@FAS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,018,1,1,80549113,HEAD,Head Instructor,Y,Robert Sampson,Robert,J.,Sampson, , ,RSAMPSON@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,019,1,1,20291885,HEAD,Head Instructor,Y,Theda Skocpol,Theda,R,Skocpol, , ,SKOCPOL@FAS.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,020,1,1,20466898,HEAD,Head Instructor,Y,Mario Small,Mario,Luis,Small, , ,mariosmall@fas.harvard.edu,FAS,N,Y
+113583,1,2172,2017 Spring,1,021,1,1,20682442,HEAD,Head Instructor,Y,Jocelyn Viterna,Jocelyn, ,Viterna, , ,JVITERNA@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,022,1,1,70292769,HEAD,Head Instructor,Y,Mary Waters,Mary,C.,Waters, , ,MCW@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,023,1,1,40704450,HEAD,Head Instructor,Y,Bruce Western,Bruce, ,Western, , ,WESTERN@WJH.HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,024,1,1,10464749,HEAD,Head Instructor,Y,William Wilson,William,Julius,Wilson, , ,BILL_WILSON@HARVARD.EDU,FAS,N,Y
+113583,1,2172,2017 Spring,1,025,1,1,30396316,HEAD,Head Instructor,Y,Christopher Winship,Christopher, ,Winship, , ,CWINSHIP@WJH.HARVARD.EDU,FAS,N,Y
+113633,1,2172,2017 Spring,1,001,1,1,40263845,HEAD,Head Instructor,Y,Josiah Blackmore,Josiah, ,Blackmore, , ,JBLACKMORE@FAS.HARVARD.EDU,FAS,N,Y
+113633,1,2172,2017 Spring,1,002,1,1,30808851,HEAD,Head Instructor,Y,Sergio Delgado,Sergio, ,Delgado, , ,SDELGADO@FAS.HARVARD.EDU,FAS,N,Y
+113633,1,2172,2017 Spring,1,004,1,1,70363208,HEAD,Head Instructor,Y,Mary Gaylord,Mary, ,Gaylord, , ,MGAYLORD@FAS.HARVARD.EDU,FAS,N,Y
+113633,1,2172,2017 Spring,1,005,1,1,50673170,HEAD,Head Instructor,Y,Mariano Siskind,Mariano, ,Siskind, , ,SISKIND@FAS.HARVARD.EDU,FAS,N,Y
+113633,1,2172,2017 Spring,1,006,1,1,60379505,HEAD,Head Instructor,Y,Doris Sommer,Doris, ,Sommer, , ,DSOMMER@FAS.HARVARD.EDU,FAS,N,Y
+113814,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,003,1,1,20366540,HEAD,Head Instructor,Y,Matthew Boyle,Matthew, ,Boyle, , ,BOYLE2@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,005,1,1,20061316,HEAD,Head Instructor,Y,Warren Goldfarb,Warren, ,Goldfarb, , ,GOLDFARB@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,007,1,1,80645880,HEAD,Head Instructor,Y,Ned Hall,Ned, ,Hall, , ,EHALL@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,008,1,1,10808847,HEAD,Head Instructor,Y,Russell Jones,Russell,Edward,Jones, , ,RJONES@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,009,1,1,40568662,HEAD,Head Instructor,Y,Frances Kamm,Frances, ,Kamm, , ,frances_kamm@hks.harvard.edu,FAS,N,Y
+113934,1,2172,2017 Spring,1,010,1,1,80677464,HEAD,Head Instructor,Y,Sean Kelly,Sean,D,Kelly, , ,SDKELLY@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,011,1,1,70598345,HEAD,Head Instructor,Y,Peter Koellner,Peter, ,Koellner, , ,KOELLNER@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,012,1,1,40388850,HEAD,Head Instructor,Y,Christine Korsgaard,Christine,M.,Korsgaard, , ,CHRISTINE_KORSGAARD@HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,013,1,1,30640705,HEAD,Head Instructor,Y,Jeffrey McDonough,Jeffrey,K.,McDonough, , ,JKMCDON@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,014,1,1,80408064,HEAD,Head Instructor,Y,Richard Moran,Richard, ,Moran, , ,MORAN@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,015,1,1,80667272,HEAD,Head Instructor,Y,Bernhard Nickel,Bernhard, ,Nickel, , ,BNICKEL@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,017,1,1,60810168,HEAD,Head Instructor,Y,Mark Richard,Mark, ,Richard, , ,RICHARD4@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,018,1,1,70953986,HEAD,Head Instructor,Y,Susanna Rinard,Susanna, ,Rinard, , ,SRINARD@GMAIL.COM,FAS,N,Y
+113934,1,2172,2017 Spring,1,019,1,1,30265580,HEAD,Head Instructor,Y,Thomas M. Scanlon,Thomas M., ,Scanlon, , ,SCANLON@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,020,1,1,30309154,HEAD,Head Instructor,Y,Amartya Sen,Amartya, ,Sen, , ,ASEN@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,021,1,1,20543116,HEAD,Head Instructor,Y,Tommie Shelby,Tommie, ,Shelby, , ,TSHELBY@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,022,1,1,10526043,HEAD,Head Instructor,Y,Susanna C. Siegel,Susanna C., ,Siegel, , ,SSIEGEL@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,023,1,1,80430841,HEAD,Head Instructor,Y,Alison Simmons,Alison, ,Simmons, , ,ASIMMONS@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,024,1,1,90928333,HEAD,Head Instructor,Y,W. Hugh Woodin,W. Hugh, ,Woodin, , ,WWOODIN@FAS.HARVARD.EDU,FAS,N,Y
+113934,1,2172,2017 Spring,1,026,1,1,30992067,HEAD,Head Instructor,Y,Jacob Rosen,Jacob,J.,Rosen, , ,jacobrosen@fas.harvard.edu,FAS,N,Y
+113947,1,2172,2017 Spring,1,001,1,1,40297685,HEAD,Head Instructor,Y,Jonathan Bolton,Jonathan,Hughes,Bolton, , ,JBOLTON@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,002,1,1,40346546,HEAD,Head Instructor,Y,Julie A. Buckler,Julie A., ,Buckler, , ,BUCKLER@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,003,1,1,10356148,HEAD,Head Instructor,Y,Michael Flier,Michael,S.,Flier, , ,FLIER@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,004,1,1,10099315,HEAD,Head Instructor,Y,George Grabowicz,George, ,Grabowicz, , ,GRABOWIC@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,005,1,1,90953230,HEAD,Head Instructor,Y,Daria Khitrova,Daria, ,Khitrova, , ,DKHITROVA@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,006,1,1,90210602,HEAD,Head Instructor,Y,John Malmstad,John,E.,Malmstad, , ,MALMSTAD@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,007,1,1,10446252,HEAD,Head Instructor,Y,Stephanie Sandler,Stephanie, ,Sandler, , ,SSANDLER@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,008,1,1,40607609,HEAD,Head Instructor,Y,Joanna Nizynska,Joanna, ,Nizynska, , ,NIZYNSKA@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,009,1,1,40326731,HEAD,Head Instructor,Y,William Todd,William,Mills,Todd, ,III,TODD@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,010,1,1,80543131,HEAD,Head Instructor,Y,Justin Weir,Justin,M.,Weir, , ,WEIR@FAS.HARVARD.EDU,FAS,N,Y
+113947,1,2172,2017 Spring,1,011,1,1,61251731,HEAD,Head Instructor,Y,Aleksandra Kremer,Aleksandra, ,Kremer, , ,akremer@fas.harvard.edu,FAS,N,Y
+113957,1,2172,2017 Spring,1,001,1,1,90164252,HEAD,Head Instructor,Y,Tomas Kirchhausen,Tomas, ,Kirchhausen, , ,KIRCHHAUSEN@CRYSTAL.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,001,1,1,50536696,HEAD,Head Instructor,Y,George Alvarez,George,Angelo,Alvarez, , ,alvarez@wjh.harvard.edu,FAS,N,Y
+113960,1,2172,2017 Spring,1,0010,1,1,40464492,HEAD,Head Instructor,Y,Daniel Gilbert,Daniel, ,Gilbert, , ,GILBERT@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0011,1,1,50428222,HEAD,Head Instructor,Y,Joshua Greene,Joshua,D.,Greene, , ,JGREENE@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0012,1,1,30283759,HEAD,Head Instructor,Y,Jill Hooley,Jill,M.,Hooley, , ,JMH@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0013,1,1,90784242,HEAD,Head Instructor,Y,Talia Konkle,Talia,A,Konkle, , ,talia_konkle@harvard.edu,FAS,N,Y
+113960,1,2172,2017 Spring,1,0014,1,1,50895947,HEAD,Head Instructor,Y,Max Krasnow,Max, ,Krasnow, , ,KRASNOW@FAS.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0015,1,1,70133342,HEAD,Head Instructor,Y,Ellen Langer,Ellen,J.,Langer, , ,LANGER@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0016,1,1,30380339,HEAD,Head Instructor,Y,Richard McNally,Richard,J.,McNally, , ,RJM@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0017,1,1,10491371,HEAD,Head Instructor,Y,Jason Mitchell,Jason,Paul,Mitchell, , ,jason_mitchell@harvard.edu,FAS,N,Y
+113960,1,2172,2017 Spring,1,0018,1,1,20363339,HEAD,Head Instructor,Y,Ken Nakayama,Ken, ,Nakayama, , ,KEN@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0019,1,1,40589635,HEAD,Head Instructor,Y,Matthew Nock,Matthew,K.,Nock, , ,NOCK@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,002,1,1,30465296,HEAD,Head Instructor,Y,Mahzarin Banaji,Mahzarin,R.,Banaji, , ,MAHZARIN_BANAJI@HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0020,1,1,90317679,HEAD,Head Instructor,Y,Steven Pinker,Steven, ,Pinker, , ,PINKER@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0021,1,1,30377869,HEAD,Head Instructor,Y,Daniel Schacter,Daniel, ,Schacter, , ,DLS@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0022,1,1,60659168,HEAD,Head Instructor,Y,James Sidanius,James, ,Sidanius, , ,SIDANIUS@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0023,1,1,20561890,HEAD,Head Instructor,Y,Jesse Snedeker,Jesse, ,Snedeker, , ,SNEDEKER@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0024,1,1,50853632,HEAD,Head Instructor,Y,Leah Somerville,Leah, ,Somerville, , ,SOMERVILLE@FAS.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0025,1,1,40550720,HEAD,Head Instructor,Y,Elizabeth Spelke,Elizabeth, ,Spelke, , ,SPELKE@FAS.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0026,1,1,10777372,HEAD,Head Instructor,Y,Felix Warneken,Felix, ,Warneken, , ,WARNEKEN@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,0027,1,1,50622193,HEAD,Head Instructor,Y,John Weisz,John,R,Weisz,Dr, ,john_weisz@harvard.edu,FAS,N,Y
+113960,1,2172,2017 Spring,1,0028,1,1,80549679,HEAD,Head Instructor,Y,Yaoda Xu,Yaoda, ,Xu, , ,YAODAXU@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,003,1,1,50844498,HEAD,Head Instructor,Y,Joshua Buckholtz,Joshua,William,Buckholtz, , ,JOSHUABUCKHOLTZ@FAS.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,004,1,1,60479992,HEAD,Head Instructor,Y,Randy Buckner,Randy,Lee,Buckner, , ,RANDY_BUCKNER@HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,005,1,1,20457775,HEAD,Head Instructor,Y,Alfonso Caramazza,Alfonso, ,Caramazza, , ,CARAM@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,006,1,1,40288341,HEAD,Head Instructor,Y,Susan Carey,Susan, ,Carey, , ,SCAREY@WJH.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,007,1,1,30946901,HEAD,Head Instructor,Y,Mina Cikara,Mina, ,Cikara, , ,MCIKARA@FAS.HARVARD.EDU,FAS,N,Y
+113960,1,2172,2017 Spring,1,008,1,1,40520287,HEAD,Head Instructor,Y,Fiery Cushman,Fiery,Andrews,Cushman, , ,cushman@fas.harvard.edu,FAS,N,Y
+113960,1,2172,2017 Spring,1,009,1,1,50965600,HEAD,Head Instructor,Y,Samuel Gershman,Samuel,Joseph,Gershman, , ,GERSHMAN@FAS.HARVARD.EDU,FAS,N,Y
+113968,1,2172,2017 Spring,1,001,1,1,10418372,HEAD,Head Instructor,Y,Matt Saunders,Matt, ,Saunders, , ,MSAUNDERS@FAS.HARVARD.EDU,FAS,N,Y
+113976,1,2172,2017 Spring,1,001,1,1,40347038,HEAD,Head Instructor,Y,Gregory C. Tucci,Gregory C., ,Tucci, , ,TUCCI@FAS.HARVARD.EDU,FAS,N,Y
+113976,1,2172,2017 Spring,1,001,1,2,50388824,HEAD,Head Instructor,Y,Charles Lieber,Charles,M.,Lieber, , ,CML@CMLIRIS.HARVARD.EDU,FAS,N,N
+113986,1,2172,2017 Spring,1,001,1,1,90309870,HEAD,Head Instructor,Y,Melissa Franklin,Melissa, ,Franklin, , ,FRANKLIN@PHYSICS.HARVARD.EDU,FAS,N,Y
+113987,1,2172,2017 Spring,1,001,1,1,90309870,HEAD,Head Instructor,Y,Melissa Franklin,Melissa, ,Franklin, , ,FRANKLIN@PHYSICS.HARVARD.EDU,FAS,N,Y
+114000,1,2172,2017 Spring,1,001,1,1,60634904,HEAD,Head Instructor,Y,Emma Dench,Emma, ,Dench, , ,edench@hbs.edu,FAS,N,Y
+114000,1,2172,2017 Spring,1,002,1,1,10723744,HEAD,Head Instructor,N,Ruth Bielfeldt,Ruth, ,Bielfeldt, , ,RBIELFEL@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,003,1,1,70474980,HEAD,Head Instructor,N,Kathleen Coleman,Kathleen,M.,Coleman, , ,KCOLEMAN@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,004,1,1,60433909,HEAD,Head Instructor,N,David Elmer,David,Franklin,Elmer, , ,delmer@fas.harvard.edu,FAS,N,N
+114000,1,2172,2017 Spring,1,005,1,1,10401828,HEAD,Head Instructor,N,Panagiotis Roilos,Panagiotis, ,Roilos, , ,ROILOS@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,006,1,1,20415363,HEAD,Head Instructor,N,Mark Schiefsky,Mark, ,Schiefsky, , ,mjschief@fas.harvard.edu,FAS,N,N
+114000,1,2172,2017 Spring,1,007,1,1,60820031,HEAD,Head Instructor,N,Adrian Staehli,Adrian, ,Staehli, , ,STAEHLI@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,008,1,1,80213905,HEAD,Head Instructor,N,R.J. Tarrant,R.J., ,Tarrant, , ,TARRANT@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,009,1,1,10314372,HEAD,Head Instructor,N,Richard Thomas,Richard,F.,Thomas, , ,RTHOMAS@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,010,1,1,90049070,HEAD,Head Instructor,N,Jan Ziolkowski,Jan,M.,Ziolkowski, , ,JMZIOLK@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,012,1,1,50133788,HEAD,Head Instructor,N,Albert Henrichs,Albert,M.,Henrichs, , ,HENRICHS@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,013,1,1,60955921,HEAD,Head Instructor,N,Jared Hudson,Jared,M,Hudson, , ,JHUDSON@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,014,1,1,30636961,HEAD,Head Instructor,N,Paul Kosmin,Paul,J.,Kosmin, , ,pjkosmin@fas.harvard.edu,FAS,N,N
+114000,1,2172,2017 Spring,1,015,1,1,20125454,HEAD,Head Instructor,N,Gregory Nagy,Gregory, ,Nagy, , ,GNAGY@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,016,1,1,10507154,HEAD,Head Instructor,N,Jeremy Rau,Jeremy, ,Rau, , ,RAU@FAS.HARVARD.EDU,FAS,N,N
+114000,1,2172,2017 Spring,1,017,1,1,30774248,HEAD,Head Instructor,N,Naomi Weiss,Naomi,A,Weiss, , ,nweiss@fas.harvard.edu,FAS,N,N
+114008,1,2172,2017 Spring,1,001,1,1,10555019,HEAD,Head Instructor,Y,Xi Yin,Xi, ,Yin, , ,xiyin@fas.harvard.edu,FAS,N,Y
+114008,1,2172,2017 Spring,1,001D,1,1,10555019,HEAD,Head Instructor,Y,Xi Yin,Xi, ,Yin, , ,xiyin@fas.harvard.edu,FAS,N,Y
+114009,1,2172,2017 Spring,1,001,1,1,30275527,HEAD,Head Instructor,Y,C. Vafa,C., ,Vafa, , ,VAFA@PHYSICS.HARVARD.EDU,FAS,N,Y
+114014,1,2172,2017 Spring,1,001,1,1,30275527,HEAD,Head Instructor,Y,C. Vafa,C., ,Vafa, , ,VAFA@PHYSICS.HARVARD.EDU,FAS,N,Y
+114035,1,2172,2017 Spring,1,001,1,1,40562575,HEAD,Head Instructor,Y,David Parkes,David, ,Parkes, , ,PARKES@EECS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,001,1,1,80602111,HEAD,Head Instructor,Y,Michael Szonyi,Michael, ,Szonyi, , ,SZONYI@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,001,1,2,80604866,HEAD,Head Instructor,Y,Ryuichi Abe,Ryuichi, ,Abe, , ,RABE@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,3,10476453,HEAD,Head Instructor,Y,Theodore Bestor,Theodore,C,Bestor, , ,BESTOR@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,4,20073659,HEAD,Head Instructor,Y,Edwin Cranston,Edwin,A.,Cranston, , ,CRANSTON@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,5,90356968,HEAD,Head Instructor,Y,Nara Dillon,Nara, ,Dillon, , ,NDILLON@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,6,60283729,HEAD,Head Instructor,Y,Carter Eckert,Carter,J.,Eckert, , ,ECKERT@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,7,50543307,HEAD,Head Instructor,Y,Mark Elliott,Mark,C.,Elliott, , ,ELLIOTT3@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,8,40606491,HEAD,Head Instructor,Y,Rowan Flad,Rowan,K.,Flad, , ,RFLAD@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,9,80453337,HEAD,Head Instructor,Y,Andrew Gordon,Andrew,D.,Gordon, , ,agordon@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,10,50479625,HEAD,Head Instructor,Y,Janet Gyatso,Janet, ,Gyatso, , ,JGYATSO@HDS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,11,90396803,HEAD,Head Instructor,Y,Helen Hardacre,Helen, ,Hardacre, , ,HARDACRE@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,12,10816904,HEAD,Head Instructor,Y,Nicholas Harkness,Nicholas,H.,Harkness, , ,HARKNESS@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,13,60389217,HEAD,Head Instructor,Y,Michael Herzfeld,Michael, ,Herzfeld, , ,herzfeld@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,14,90650343,HEAD,Head Instructor,Y,David Howell,David,L,Howell, , ,DHOWELL@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,15,60405107,HEAD,Head Instructor,Y,Alastair Johnston,Alastair,Iain,Johnston, , ,JOHNSTON@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,16,50353621,HEAD,Head Instructor,Y,William Kirby,William,C.,Kirby, , ,wkirby@hbs.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,17,50547582,HEAD,Head Instructor,Y,Sun Joo Kim,Sun Joo, ,Kim, , ,SJKIM@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,18,30537009,HEAD,Head Instructor,Y,Shigehisa Kuriyama,Shigehisa, ,Kuriyama, , ,HKURIYAM@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,19,80363141,HEAD,Head Instructor,Y,Wai-Yee Li,Wai-Yee, ,Li, , ,WYLI@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,20,90491245,HEAD,Head Instructor,Y,Jie Li,Jie, ,Li, , ,jieli@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,21,10645867,HEAD,Head Instructor,Y,Melissa M. McCormick,Melissa M., ,McCormick, , ,MCCORM@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,22,50409503,HEAD,Head Instructor,Y,Felicity Lufkin,Felicity, ,Lufkin, , ,lufkin@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,23,90329529,HEAD,Head Instructor,Y,Yukio Lippit,Yukio, ,Lippit, , ,LIPPIT@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,24,50703193,HEAD,Head Instructor,Y,Ian J. Miller,Ian J., ,Miller, , ,IAN_MILLER@HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,25,50371883,HEAD,Head Instructor,Y,Mary Steedly,Mary,M.,Steedly, , ,MSTEED@WJH.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,26,40257136,HEAD,Head Instructor,Y,Susan Pharr,Susan,J.,Pharr, , ,SUSAN_PHARR@HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,27,70481405,HEAD,Head Instructor,Y,Elizabeth Perry,Elizabeth,J.,Perry, , ,EPERRY@GOV.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,28,40384499,HEAD,Head Instructor,Y,Xiaofei Tian,Xiaofei, ,Tian, , ,STIAN@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,29,30466942,HEAD,Head Instructor,Y,Karen Thornber,Karen,Laura,Thornber, , ,thornber@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,30,30292758,HEAD,Head Instructor,Y,David Der-Wei Wang,David Der-Wei, ,Wang, , ,DWANG@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,31,80441452,HEAD,Head Instructor,Y,Leonard W. J. van der Kuijp,Leonard W. J., ,van der Kuijp, , ,VANDERK@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,32,40310126,HEAD,Head Instructor,Y,Tomiko Yoda,Tomiko, ,Yoda, , ,yoda@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,33,90315269,HEAD,Head Instructor,Y,Eugene Wang,Eugene,Yuejin,Wang, , ,EYWANG@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,34,50883760,HEAD,Head Instructor,Y,Alexander Zahlten,Alexander, ,Zahlten, , ,AZAHLTEN@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,35,20573163,HEAD,Head Instructor,Y,Alison Jones,Alison,Denton,Jones, , ,adjones@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,36,80553145,HEAD,Head Instructor,Y,C.-T. James Huang,C.-T. James, ,Huang, , ,CTJHUANG@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,37,60847495,HEAD,Head Instructor,Y,Susan Greenhalgh,Susan, ,Greenhalgh, , ,GREENHALGH@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,38,20482826,HEAD,Head Instructor,Y,Paul Chang,Paul,Y.,Chang, , ,paulchang@fas.harvard.edu,FAS,N,N
+114050,1,2172,2017 Spring,1,001,1,39,30955994,HEAD,Head Instructor,Y,Si Nae Park,Si Nae, ,Park, , ,SINAEPARK@FAS.HARVARD.EDU,FAS,N,N
+114050,1,2172,2017 Spring,1,002,1,1,30466942,HEAD,Head Instructor,Y,Karen Thornber,Karen,Laura,Thornber, , ,thornber@fas.harvard.edu,FAS,N,Y
+114050,1,2172,2017 Spring,1,003,1,1,10476453,HEAD,Head Instructor,Y,Theodore Bestor,Theodore,C,Bestor, , ,BESTOR@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,004,1,1,10203619,HEAD,Head Instructor,Y,Richard Cooper,Richard,N.,Cooper, , ,RCOOPER@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,005,1,1,40272119,HEAD,Head Instructor,Y,Peter K. Bol,Peter K., ,Bol, , ,PETER_BOL@HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,006,1,1,20073659,HEAD,Head Instructor,Y,Edwin Cranston,Edwin,A.,Cranston, , ,CRANSTON@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,007,1,1,90356968,HEAD,Head Instructor,Y,Nara Dillon,Nara, ,Dillon, , ,NDILLON@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,008,1,1,60283729,HEAD,Head Instructor,Y,Carter Eckert,Carter,J.,Eckert, , ,ECKERT@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,009,1,1,50543307,HEAD,Head Instructor,Y,Mark Elliott,Mark,C.,Elliott, , ,ELLIOTT3@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,010,1,1,40606491,HEAD,Head Instructor,Y,Rowan Flad,Rowan,K.,Flad, , ,RFLAD@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,011,1,1,80453337,HEAD,Head Instructor,Y,Andrew Gordon,Andrew,D.,Gordon, , ,agordon@fas.harvard.edu,FAS,N,Y
+114050,1,2172,2017 Spring,1,012,1,1,90396803,HEAD,Head Instructor,Y,Helen Hardacre,Helen, ,Hardacre, , ,HARDACRE@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,013,1,1,10816904,HEAD,Head Instructor,Y,Nicholas Harkness,Nicholas,H.,Harkness, , ,HARKNESS@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,014,1,1,60389217,HEAD,Head Instructor,Y,Michael Herzfeld,Michael, ,Herzfeld, , ,herzfeld@fas.harvard.edu,FAS,N,Y
+114050,1,2172,2017 Spring,1,015,1,1,90650343,HEAD,Head Instructor,Y,David Howell,David,L,Howell, , ,DHOWELL@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,016,1,1,60405107,HEAD,Head Instructor,Y,Alastair Johnston,Alastair,Iain,Johnston, , ,JOHNSTON@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,017,1,1,50547582,HEAD,Head Instructor,Y,Sun Joo Kim,Sun Joo, ,Kim, , ,SJKIM@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,018,1,1,80553145,HEAD,Head Instructor,Y,C.-T. James Huang,C.-T. James, ,Huang, , ,CTJHUANG@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,019,1,1,50353621,HEAD,Head Instructor,Y,William Kirby,William,C.,Kirby, , ,wkirby@hbs.edu,FAS,N,Y
+114050,1,2172,2017 Spring,1,020,1,1,30537009,HEAD,Head Instructor,Y,Shigehisa Kuriyama,Shigehisa, ,Kuriyama, , ,HKURIYAM@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,021,1,1,90491245,HEAD,Head Instructor,Y,Jie Li,Jie, ,Li, , ,jieli@fas.harvard.edu,FAS,N,Y
+114050,1,2172,2017 Spring,1,022,1,1,80363141,HEAD,Head Instructor,Y,Wai-Yee Li,Wai-Yee, ,Li, , ,WYLI@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,023,1,1,90329529,HEAD,Head Instructor,Y,Yukio Lippit,Yukio, ,Lippit, , ,LIPPIT@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,024,1,1,10645867,HEAD,Head Instructor,Y,Melissa M. McCormick,Melissa M., ,McCormick, , ,MCCORM@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,025,1,1,50703193,HEAD,Head Instructor,Y,Ian J. Miller,Ian J., ,Miller, , ,IAN_MILLER@HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,026,1,1,50212750,HEAD,Head Instructor,Y,Stephen Owen,Stephen, ,Owen,Mr, ,SOWEN@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,027,1,1,30955994,HEAD,Head Instructor,Y,Si Nae Park,Si Nae, ,Park, , ,SINAEPARK@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,028,1,1,70481405,HEAD,Head Instructor,Y,Elizabeth Perry,Elizabeth,J.,Perry, , ,EPERRY@GOV.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,029,1,1,40257136,HEAD,Head Instructor,Y,Susan Pharr,Susan,J.,Pharr, , ,SUSAN_PHARR@HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,030,1,1,80742614,HEAD,Head Instructor,Y,James Robson,James, ,Robson, , ,JROBSON@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,031,1,1,90514296,HEAD,Head Instructor,Y,Anthony Saich,Anthony, ,Saich, , ,ANTHONY_SAICH@HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,032,1,1,40384499,HEAD,Head Instructor,Y,Xiaofei Tian,Xiaofei, ,Tian, , ,STIAN@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,033,1,1,30292758,HEAD,Head Instructor,Y,David Der-Wei Wang,David Der-Wei, ,Wang, , ,DWANG@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,034,1,1,90315269,HEAD,Head Instructor,Y,Eugene Wang,Eugene,Yuejin,Wang, , ,EYWANG@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,035,1,1,40310126,HEAD,Head Instructor,Y,Tomiko Yoda,Tomiko, ,Yoda, , ,yoda@fas.harvard.edu,FAS,N,Y
+114050,1,2172,2017 Spring,1,036,1,1,50883760,HEAD,Head Instructor,Y,Alexander Zahlten,Alexander, ,Zahlten, , ,AZAHLTEN@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,037,1,1,80441452,HEAD,Head Instructor,Y,Leonard W. J. van der Kuijp,Leonard W. J., ,van der Kuijp, , ,VANDERK@FAS.HARVARD.EDU,FAS,N,Y
+114050,1,2172,2017 Spring,1,038,1,1,90954210,HEAD,Head Instructor,Y,Arunabh Ghosh,Arunabh, ,Ghosh, , ,aghosh@fas.harvard.edu,FAS,N,Y
+114054,1,2172,2017 Spring,1,001,1,1,50390543,HEAD,Head Instructor,Y,Yang Shi,Yang, ,Shi,Dr, ,YANG_SHI@HMS.HARVARD.EDU,FAS,N,Y
+114061,1,2172,2017 Spring,1,001,1,1,80604866,HEAD,Head Instructor,Y,Ryuichi Abe,Ryuichi, ,Abe, , ,RABE@FAS.HARVARD.EDU,FAS,N,Y
+114061,1,2172,2017 Spring,1,002,1,1,20073659,HEAD,Head Instructor,Y,Edwin Cranston,Edwin,A.,Cranston, , ,CRANSTON@FAS.HARVARD.EDU,FAS,N,Y
+114061,1,2172,2017 Spring,1,003,1,1,30537009,HEAD,Head Instructor,Y,Shigehisa Kuriyama,Shigehisa, ,Kuriyama, , ,HKURIYAM@FAS.HARVARD.EDU,FAS,N,Y
+114061,1,2172,2017 Spring,1,004,1,1,10645867,HEAD,Head Instructor,Y,Melissa M. McCormick,Melissa M., ,McCormick, , ,MCCORM@FAS.HARVARD.EDU,FAS,N,Y
+114061,1,2172,2017 Spring,1,005,1,1,40310126,HEAD,Head Instructor,Y,Tomiko Yoda,Tomiko, ,Yoda, , ,yoda@fas.harvard.edu,FAS,N,Y
+114061,1,2172,2017 Spring,1,006,1,1,80391242,HEAD,Head Instructor,Y,Wesley Jacobsen,Wesley,Mark,Jacobsen, , ,JACOBSEN@FAS.HARVARD.EDU,FAS,N,Y
+114073,1,2172,2017 Spring,1,001,1,1,80274270,HEAD,Head Instructor,Y,Benedict Gross,Benedict,H.,Gross, , ,GROSS@MATH.HARVARD.EDU,FAS,N,Y
+114080,1,2172,2017 Spring,1,001,1,1,10309298,HEAD,Head Instructor,Y,Shing-Tung Yau,Shing-Tung, ,Yau, , ,YAU@MATH.HARVARD.EDU,FAS,N,Y
+114133,1,2172,2017 Spring,1,001,1,1,10734851,HEAD,Head Instructor,Y,Tomasz Strzalecki,Tomasz, ,Strzalecki, , ,tomasz_strzalecki@harvard.edu,FAS,N,Y
+114133,1,2172,2017 Spring,1,001,1,2,40439439,HEAD,Head Instructor,Y,David Laibson,David,I.,Laibson, , ,LAIBSON@FAS.HARVARD.EDU,FAS,N,N
+114200,1,2172,2017 Spring,1,001,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,002,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,003,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,004,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,005,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,006,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,007,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114200,1,2172,2017 Spring,1,008,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+114944,1,2172,2017 Spring,1,001,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+115000,1,2172,2017 Spring,1,001,1,1,80464150,HEAD,Head Instructor,Y,Timothy Mitchison,Timothy, ,Mitchison, , ,TIMOTHY_MITCHISON@HMS.HARVARD.EDU,FAS,N,Y
+115026,1,2172,2017 Spring,1,001,1,1,90318667,HEAD,Head Instructor,Y,Gary Chamberlain,Gary, ,Chamberlain, , ,GARY_CHAMBERLAIN@HARVARD.EDU,FAS,N,Y
+115094,1,2172,2017 Spring,1,001,1,1,50132366,HEAD,Head Instructor,Y,Charles Richardson,Charles,C.,Richardson, , ,CCR@HMS.HARVARD.EDU,FAS,N,Y
+115102,1,2172,2017 Spring,1,001,1,1,10048486,HEAD,Head Instructor,Y,Irwin Shapiro,Irwin,I.,Shapiro, , ,ISHAPIRO@CFA.HARVARD.EDU,FAS,N,Y
+115113,1,2172,2017 Spring,1,001,1,1,10048486,HEAD,Head Instructor,Y,Irwin Shapiro,Irwin,I.,Shapiro, , ,ISHAPIRO@CFA.HARVARD.EDU,FAS,N,Y
+115123,1,2172,2017 Spring,1,001,1,1,20294663,HEAD,Head Instructor,Y,Zhigang Suo,Zhigang, ,Suo, , ,SUO@SEAS.HARVARD.EDU,FAS,N,Y
+115128,1,2172,2017 Spring,1,001,1,1,80270313,HEAD,Head Instructor,Y,Bjorn Olsen,Bjorn,R.,Olsen, , ,BJORN_OLSEN@HSDM.HARVARD.EDU,FAS,N,Y
+115694,1,2172,2017 Spring,1,001,1,1,40568972,HEAD,Head Instructor,Y,Gu-Yeon Wei,Gu-Yeon, ,Wei, , ,GUYEON@SEAS.HARVARD.EDU,FAS,N,Y
+115734,1,2172,2017 Spring,1,001,1,1,90664409,PI,Primary Instructor,Y,Mark Kisin,Mark, ,Kisin, , ,KISIN@MATH.HARVARD.EDU,FAS,N,Y
+115778,1,2172,2017 Spring,1,001,1,1,71253856,HEAD,Head Instructor,Y,Regina Schouten,Regina,L,Schouten, , ,gschouten@fas.harvard.edu,FAS,N,Y
+115919,1,2172,2017 Spring,1,001,1,1,70493918,HEAD,Head Instructor,Y,Maria Parra-Velasco,Maria,Luisa,Parra-Velasco, , ,parra@fas.harvard.edu,FAS,N,Y
+115920,1,2172,2017 Spring,1,001,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+115920,1,2172,2017 Spring,1,002,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+115920,1,2172,2017 Spring,1,003,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+115920,1,2172,2017 Spring,1,004,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+116233,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+116469,1,2172,2017 Spring,1,001,1,1,80750730,HEAD,Head Instructor,Y,Maria Celeste Moreno Palmero,Maria Celeste, ,Moreno Palmero, , ,MCMORENO@FAS.HARVARD.EDU,FAS,N,Y
+116469,1,2172,2017 Spring,1,001,2,1,80750730,HEAD,Head Instructor,Y,Maria Celeste Moreno Palmero,Maria Celeste, ,Moreno Palmero, , ,MCMORENO@FAS.HARVARD.EDU,FAS,N,N
+116503,1,2172,2017 Spring,1,001,1,1,20006005,PI,Primary Instructor,Y,Barry Mazur,Barry,C.,Mazur, , ,MAZUR@MATH.HARVARD.EDU,FAS,N,Y
+116504,1,2172,2017 Spring,1,001,1,1,20423919,HEAD,Head Instructor,Y,Joseph Nagy,Joseph,F,Nagy, , ,jfnagy@fas.harvard.edu,FAS,N,Y
+116504,1,2172,2017 Spring,1,001,1,2,10767350,HEAD,Head Instructor,Y,Natasha Sumner,Natasha, ,Sumner, , ,nsumner@fas.harvard.edu,FAS,N,N
+116507,1,2172,2017 Spring,1,001,1,1,70116669,HEAD,Head Instructor,Y,Brian Seed,Brian, ,Seed,Dr, ,SEED@MOLBIO.MGH.HARVARD.EDU,FAS,N,Y
+116509,1,2172,2017 Spring,1,001,1,1,40585737,HEAD,Head Instructor,Y,David Bell,David,C.,Bell, , ,DCB@SEAS.HARVARD.EDU,FAS,N,Y
+116539,1,2172,2017 Spring,1,001,1,1,30248783,HEAD,Head Instructor,Y,Richard Born,Richard,T.,Born, , ,RICHARD_BORN@HMS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,002,1,1,30684168,HEAD,Head Instructor,Y,Janet Browne,Janet, ,Browne, , ,JBROWNE@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,003,1,1,10499518,HEAD,Head Instructor,Y,Joyce Chaplin,Joyce,E.,Chaplin, , ,CHAPLIN@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,004,1,1,10607426,HEAD,Head Instructor,Y,Alex Csiszar,Alex, ,Csiszar, , ,acsiszar@fas.harvard.edu,FAS,N,Y
+116549,1,2172,2017 Spring,1,005,1,1,30396901,HEAD,Head Instructor,Y,Peter Galison,Peter, ,Galison, , ,GALISON@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,006,1,1,60554803,HEAD,Head Instructor,Y,Jean-Francois Gauvin,Jean-Francois, ,Gauvin, , ,gauvin@fas.harvard.edu,FAS,N,Y
+116549,1,2172,2017 Spring,1,007,1,1,80283458,HEAD,Head Instructor,Y,Evelynn Hammonds,Evelynn,M.,Hammonds, , ,EVELYNN_HAMMONDS@HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,008,1,1,30328485,HEAD,Head Instructor,Y,Anne Harrington,Anne, ,Harrington, , ,AHARRING@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,009,1,1,70997479,HEAD,Head Instructor,Y,Matthew Hersch,Matthew,H,Hersch, , ,matthew.hersch@gmail.com,FAS,N,Y
+116549,1,2172,2017 Spring,1,010,1,1,40457755,HEAD,Head Instructor,Y,Sheila Jasanoff,Sheila, ,Jasanoff, , ,SHEILA_JASANOFF@HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,011,1,1,50329534,HEAD,Head Instructor,Y,David Shumway Jones,David Shumway, ,Jones, , ,dsjones@harvard.edu,FAS,N,Y
+116549,1,2172,2017 Spring,1,012,1,1,30537009,HEAD,Head Instructor,Y,Shigehisa Kuriyama,Shigehisa, ,Kuriyama, , ,HKURIYAM@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,013,1,1,20668539,HEAD,Head Instructor,Y,Rebecca Lemov,Rebecca, ,Lemov, , ,RLEMOV@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,014,1,1,80821980,HEAD,Head Instructor,Y,Elizabeth Lunbeck,Elizabeth, ,Lunbeck, , ,LUNBECK@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,015,1,1,20006005,HEAD,Head Instructor,Y,Barry Mazur,Barry,C.,Mazur, , ,MAZUR@MATH.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,016,1,1,50108430,HEAD,Head Instructor,Y,Everett Mendelsohn,Everett, ,Mendelsohn, , ,EMENDELS@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,017,1,1,20565829,HEAD,Head Instructor,Y,Naomi Oreskes,Naomi, ,Oreskes, , ,ORESKES@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,018,1,1,70352095,HEAD,Head Instructor,Y,Scott Podolsky,Scott,Harris,Podolsky,Dr, ,scott_podolsky@hms.harvard.edu,FAS,N,Y
+116549,1,2172,2017 Spring,1,019,1,1,20746866,HEAD,Head Instructor,Y,Ahmed Ragab,Ahmed, ,Ragab, , ,AHMED_RAGAB@HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,020,1,1,90809636,HEAD,Head Instructor,Y,Sarah Richardson,Sarah,S,Richardson, , ,SRICHARD@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,021,1,1,90846205,HEAD,Head Instructor,Y,Sophia Roosth,Sophia, ,Roosth, , ,ROOSTH@FAS.HARVARD.EDU,FAS,N,Y
+116549,1,2172,2017 Spring,1,022,1,1,20415363,HEAD,Head Instructor,Y,Mark Schiefsky,Mark, ,Schiefsky, , ,mjschief@fas.harvard.edu,FAS,N,Y
+116572,1,2172,2017 Spring,1,001,1,1,60415102,HEAD,Head Instructor,Y,Martha Bulyk,Martha, ,Bulyk, , ,mlbulyk@receptor.med.harvard.edu,FAS,N,Y
+116573,1,2172,2017 Spring,1,001,1,1,60380023,HEAD,Head Instructor,Y,Jun Liu,Jun, ,Liu, , ,JLIU@STAT.HARVARD.EDU,FAS,N,Y
+116574,1,2172,2017 Spring,1,001,1,1,90283243,HEAD,Head Instructor,Y,Steven Shoelson,Steven,E.,Shoelson,Dr, ,STEVEN.SHOELSON@JOSLIN.HARVARD.EDU,FAS,N,Y
+116575,1,2172,2017 Spring,1,001,1,1,50498336,HEAD,Head Instructor,Y,John Wakeley,John, ,Wakeley, , ,WAKELEY@FAS.HARVARD.EDU,FAS,N,Y
+116576,1,2172,2017 Spring,1,001,1,1,30432193,HEAD,Head Instructor,Y,Leonid Mirny,Leonid, ,Mirny, , ,LEONID@MIT.EDU,FAS,N,Y
+116577,1,2172,2017 Spring,1,001,1,1,90387030,HEAD,Head Instructor,Y,Xiaowei Zhuang,Xiaowei, ,Zhuang, , ,ZHUANG@CHEMISTRY.HARVARD.EDU,FAS,N,Y
+116593,1,2172,2017 Spring,1,001,1,1,10225566,HEAD,Head Instructor,Y,Cynthia Friend,Cynthia, ,Friend, , ,FRIEND@FAS.HARVARD.EDU,FAS,N,Y
+117520,1,2172,2017 Spring,1,001,1,1,70150468,HEAD,Head Instructor,Y,James Anderson,James,G.,Anderson, , ,ANDERSON@HUARP.HARVARD.EDU,FAS,N,Y
+117526,1,2172,2017 Spring,1,001,1,1,60282781,HEAD,Head Instructor,Y,David Cardozo,David, ,Cardozo, , ,DAVID_CARDOZO@HMS.HARVARD.EDU,FAS,N,Y
+117548,1,2172,2017 Spring,1,001,1,1,10082005,HEAD,Head Instructor,Y,David Nelson,David,R.,Nelson, , ,NELSON@PHYSICS.HARVARD.EDU,FAS,N,Y
+117620,1,2172,2017 Spring,1,001,1,1,10582784,HEAD,Head Instructor,Y,Donhee Ham,Donhee, ,Ham, , ,DONHEE@SEAS.HARVARD.EDU,FAS,N,Y
+118124,1,2172,2017 Spring,1,001,1,1,70873079,HEAD,Head Instructor,Y,Daniel Nocera,Daniel, ,Nocera, , ,DNOCERA@FAS.HARVARD.EDU,FAS,N,Y
+118193,1,2172,2017 Spring,1,001,1,1,90271598,HEAD,Head Instructor,Y,Connie Cepko,Connie, ,Cepko, , ,CEPKO@GENETICS.MED.HARVARD.EDU,FAS,N,Y
+118254,1,2172,2017 Spring,1,001,1,1,50895947,HEAD,Head Instructor,Y,Max Krasnow,Max, ,Krasnow, , ,KRASNOW@FAS.HARVARD.EDU,FAS,N,Y
+119062,1,2172,2017 Spring,1,001,1,1,90946684,HEAD,Head Instructor,Y,Robin Wordsworth,Robin, ,Wordsworth, , ,RWORDSWORTH@SEAS.HARVARD.EDU,FAS,N,Y
+120237,1,2172,2017 Spring,1,001,1,1,80600550,HEAD,Head Instructor,Y,Madhu Sudan,Madhu, ,Sudan,Dr, ,madhu@cs.harvard.edu,FAS,N,Y
+121934,1,2172,2017 Spring,1,001,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+124332,1,2172,2017 Spring,1,001,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+124332,1,2172,2017 Spring,1,001,2,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,N
+124524,1,2172,2017 Spring,1,001,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,001,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,002,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,003,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,004,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,005,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,006,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,007,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,008,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125011,1,2172,2017 Spring,1,009,1,1,70391201,HEAD,Head Instructor,Y,Adriana Gutierrez,Adriana, ,Gutierrez, , ,AGUTIERR@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,001,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,002,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,003,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,004,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,005,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,006,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,007,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125014,1,2172,2017 Spring,1,008,1,1,40077332,HEAD,Head Instructor,Y,Johanna Liander,Johanna,D.,Liander, , ,JLIANDER@FAS.HARVARD.EDU,FAS,N,Y
+125061,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+125061,1,2172,2017 Spring,1,002,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+125061,1,2172,2017 Spring,1,003,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+126539,1,2172,2017 Spring,1,001,1,1,90329529,HEAD,Head Instructor,Y,Yukio Lippit,Yukio, ,Lippit, , ,LIPPIT@FAS.HARVARD.EDU,FAS,N,Y
+126559,1,2172,2017 Spring,1,001,1,1,90456628,HEAD,Head Instructor,Y,Julie Reuben,Julie,A.,Reuben, , ,JULIE_REUBEN@GSE.HARVARD.EDU,FAS,N,Y
+126610,1,2172,2017 Spring,1,001,1,1,21259322,PI,Primary Instructor,Y,Brendan McLellan,Brendan,D,McLellan, , ,mclellan@math.harvard.edu,FAS,N,Y
+126647,1,2172,2017 Spring,1,001,1,1,90204483,HEAD,Head Instructor,Y,Stephen Mitchell,Stephen,A.,Mitchell, , ,SAMITCH@FAS.HARVARD.EDU,FAS,N,Y
+126648,1,2172,2017 Spring,1,001,1,1,70982307,HEAD,Head Instructor,Y,Agnes Broome,Agnes, ,Broome, , ,agnesbroome@gmail.com,FAS,N,Y
+126649,1,2172,2017 Spring,1,001,1,1,90204483,HEAD,Head Instructor,Y,Stephen Mitchell,Stephen,A.,Mitchell, , ,SAMITCH@FAS.HARVARD.EDU,FAS,N,Y
+126650,1,2172,2017 Spring,1,001,1,1,90204483,HEAD,Head Instructor,Y,Stephen Mitchell,Stephen,A.,Mitchell, , ,SAMITCH@FAS.HARVARD.EDU,FAS,N,Y
+126651,1,2172,2017 Spring,1,001,1,1,90204483,HEAD,Head Instructor,Y,Stephen Mitchell,Stephen,A.,Mitchell, , ,SAMITCH@FAS.HARVARD.EDU,FAS,N,Y
+126670,1,2172,2017 Spring,1,001,1,1,30189116,HEAD,Head Instructor,Y,David Livingston,David,Morse,Livingston,Dr, ,DAVID_LIVINGSTON@DFCI.HARVARD.EDU,FAS,N,Y
+126673,1,2172,2017 Spring,1,001,1,1,70751356,HEAD,Head Instructor,Y,Sun Hur,Sun, ,Hur,Dr, ,HUR@IDI.HARVARD.EDU,FAS,N,Y
+126674,1,2172,2017 Spring,1,001,1,1,50776921,HEAD,Head Instructor,Y,Erel Levine,Erel, ,Levine, , ,ELEVINE@PHYSICS.HARVARD.EDU,FAS,N,Y
+126675,1,2172,2017 Spring,1,001,1,1,40401806,HEAD,Head Instructor,Y,Sharad Ramanathan,Sharad, ,Ramanathan, , ,RAMANATH@G.HARVARD.EDU,FAS,N,Y
+126676,1,2172,2017 Spring,1,001,1,1,70569779,HEAD,Head Instructor,Y,Hanno Steen,Hanno, ,Steen,Dr, ,HANNO.STEEN@CHILDRENS.HARVARD.EDU,FAS,N,Y
+126744,1,2172,2017 Spring,1,001,1,1,20768576,HEAD,Head Instructor,Y,Fernando Camargo,Fernando,D.,Camargo, , ,CAMARGO@FAS.HARVARD.EDU,FAS,N,Y
+126777,1,2172,2017 Spring,1,001,1,1,40371400,HEAD,Head Instructor,Y,Claudia Goldin,Claudia, ,Goldin, , ,CGOLDIN@HARVARD.EDU,FAS,N,Y
+126777,1,2172,2017 Spring,1,001,1,2,70300079,HEAD,Head Instructor,Y,Lawrence Katz,Lawrence,F.,Katz, , ,KATZ2@FAS.HARVARD.EDU,FAS,N,N
+126777,1,2172,2017 Spring,1,001,1,3,80953895,GA,Gradesheet Administrator,N,Dani Doyle,Dani, ,Doyle, , ,DDOYLE@FAS.HARVARD.EDU,FAS,N,N
+126786,1,2172,2017 Spring,1,001,1,1,20598506,HEAD,Head Instructor,Y,Qiao Zhou,Qiao, ,Zhou, , ,QIAO_ZHOU@HARVARD.EDU,FAS,N,Y
+126787,1,2172,2017 Spring,1,001,1,1,30565738,HEAD,Head Instructor,Y,Edwin Robertson,Edwin,Malcolm,Robertson,Dr, ,EMROBERT@CAREGROUP.HARVARD.EDU,FAS,N,Y
+126933,1,2172,2017 Spring,1,001,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126933,1,2172,2017 Spring,1,002,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126933,1,2172,2017 Spring,1,003,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126935,1,2172,2017 Spring,1,001,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126935,1,2172,2017 Spring,1,002,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126935,1,2172,2017 Spring,1,003,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126935,1,2172,2017 Spring,1,004,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126935,1,2172,2017 Spring,1,005,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126935,1,2172,2017 Spring,1,006,1,1,90810898,HEAD,Head Instructor,Y,Nicole Mills,Nicole, ,Mills, , ,MILLS@FAS.HARVARD.EDU,FAS,N,Y
+126942,1,2172,2017 Spring,1,001,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+126942,1,2172,2017 Spring,1,002,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+126942,1,2172,2017 Spring,1,003,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+126942,1,2172,2017 Spring,1,004,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+126997,1,2172,2017 Spring,1,001,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+126997,1,2172,2017 Spring,1,002,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+126997,1,2172,2017 Spring,1,003,1,1,50888339,HEAD,Head Instructor,Y,Ericka Knudson,Ericka,Karina,Knudson, , ,EKNUDSON@FAS.HARVARD.EDU,FAS,N,Y
+127583,1,2172,2017 Spring,1,001,1,1,50719510,HEAD,Head Instructor,Y,David Weinstock,David,Marc,Weinstock,Dr, ,DAVIDM_WEINSTOCK@DFCI.HARVARD.EDU,FAS,N,Y
+127598,1,2172,2017 Spring,1,001,1,1,40387447,HEAD,Head Instructor,Y,Chih-Hao Lee,Chih-Hao, ,Lee, , ,CLEE@HSPH.HARVARD.EDU,FAS,N,Y
+127598,1,2172,2017 Spring,1,001,2,1,40387447,HEAD,Head Instructor,Y,Chih-Hao Lee,Chih-Hao, ,Lee, , ,CLEE@HSPH.HARVARD.EDU,FAS,N,N
+127598,1,2172,2017 Spring,1,001,2,2,80342705,HEAD,Head Instructor,Y,Gokhan Hotamisligil,Gokhan,S.,Hotamisligil, , ,GHOTAMIS@HSPH.HARVARD.EDU,FAS,N,N
+127599,1,2172,2017 Spring,1,001,1,1,80709609,HEAD,Head Instructor,Y,Quan Lu,Quan, ,Lu,Dr, ,QLU@HSPH.HARVARD.EDU,FAS,N,Y
+127599,1,2172,2017 Spring,1,001,1,2,60554978,HEAD,Head Instructor,Y,Bernardo Lemos,Bernardo, ,Lemos, , ,blemos@hsph.harvard.edu,FAS,N,N
+127669,1,2172,2017 Spring,1,001,1,1,60724393,HEAD,Head Instructor,Y,Gabriel Kreiman,Gabriel, ,Kreiman,Dr, ,GABRIEL.KREIMAN@CHILDRENS.HARVARD.EDU,FAS,N,Y
+127686,1,2172,2017 Spring,1,001,1,1,30689895,HEAD,Head Instructor,Y,Joseph John Loparo,Joseph John, ,Loparo, , ,JOSEPH_LOPARO@HMS.HARVARD.EDU,FAS,N,Y
+127687,1,2172,2017 Spring,1,001,1,1,20783311,HEAD,Head Instructor,Y,Peng Yin,Peng, ,Yin,Dr, ,PENG_YIN@HMS.HARVARD.EDU,FAS,N,Y
+127688,1,2172,2017 Spring,1,001,1,1,40536582,HEAD,Head Instructor,Y,Michael Desai,Michael,M,Desai, , ,mdesai@oeb.harvard.edu,FAS,N,Y
+127689,1,2172,2017 Spring,1,001,1,1,50586197,HEAD,Head Instructor,Y,Andrew Kiruluta,Andrew,J.M.,Kiruluta, , ,KIRULUTA@PHYSICS.HARVARD.EDU,FAS,N,Y
+127690,1,2172,2017 Spring,1,001,1,1,60573085,HEAD,Head Instructor,Y,Conor Evans,Conor,L.,Evans, , ,evans.conor@mgh.harvard.edu,FAS,N,Y
+127739,1,2172,2017 Spring,1,001,1,1,70678004,HEAD,Head Instructor,Y,Lee Rubin,Lee, ,Rubin, , ,LEE_RUBIN@HARVARD.EDU,FAS,N,Y
+127757,1,2172,2017 Spring,1,001,1,1,70449684,HEAD,Head Instructor,Y,Judith Flynn,Judith,X,Flynn, , ,quincyhousedean@fas.harvard.edu,FAS,N,Y
+127768,1,2172,2017 Spring,1,001,1,1,90232401,HEAD,Head Instructor,Y,David P. Harrington,David P., ,Harrington, , ,DAVIDHARRINGTON@G.HARVARD.EDU,FAS,N,Y
+127768,1,2172,2017 Spring,1,001,1,2,20562838,HEAD,Head Instructor,Y,Kevin A. Rader,Kevin A., ,Rader, , ,krader@fas.harvard.edu,FAS,N,N
+127804,1,2172,2017 Spring,1,001,1,1,80890338,HEAD,Head Instructor,Y,Nour Barmada,Nour, ,Barmada, , ,BARMADAABIDA@FAS.HARVARD.EDU,FAS,N,Y
+127804,1,2172,2017 Spring,1,002,1,1,80890338,HEAD,Head Instructor,Y,Nour Barmada,Nour, ,Barmada, , ,BARMADAABIDA@FAS.HARVARD.EDU,FAS,N,Y
+127804,1,2172,2017 Spring,1,003,1,1,80890338,HEAD,Head Instructor,Y,Nour Barmada,Nour, ,Barmada, , ,BARMADAABIDA@FAS.HARVARD.EDU,FAS,N,Y
+127859,1,2172,2017 Spring,1,001,1,1,50409503,HEAD,Head Instructor,Y,Felicity Lufkin,Felicity, ,Lufkin, , ,lufkin@fas.harvard.edu,FAS,N,Y
+127863,1,2172,2017 Spring,1,001,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+127863,1,2172,2017 Spring,1,002,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+127889,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+127889,1,2172,2017 Spring,1,001,2,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,N
+127929,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+127934,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+128053,1,2172,2017 Spring,1,001,1,1,20845775,HEAD,Head Instructor,Y,Amanda Pallais,Amanda,D.,Pallais, , ,APALLAIS@FAS.HARVARD.EDU,FAS,N,Y
+128073,1,2172,2017 Spring,1,001,1,1,50085856,HEAD,Head Instructor,Y,Harry Lewis,Harry,R.,Lewis, , ,dean@seas.harvard.edu,FAS,N,Y
+128118,1,2172,2017 Spring,1,001,1,1,80001835,HEAD,Head Instructor,Y,Nancy Etcoff,Nancy,Lee,Etcoff,Dr, ,NETCOFF@PARTNERS.ORG,FAS,N,Y
+128122,1,2172,2017 Spring,1,001,1,1,60335974,HEAD,Head Instructor,Y,Laura Prager,Laura,Marie,Prager,Dr, ,LMPRAGER@PARTNERS.ORG,FAS,N,Y
+128150,1,2172,2017 Spring,1,001,1,1,20163690,HEAD,Head Instructor,Y,Guido Guidotti,Guido, ,Guidotti, , ,GUIDOTTI@FAS.HARVARD.EDU,FAS,N,Y
+128166,1,2172,2017 Spring,1,001,1,1,50271528,HEAD,Head Instructor,Y,Bruce Yankner,Bruce,A.,Yankner,Dr, ,BRUCE_YANKNER@HMS.HARVARD.EDU,FAS,N,Y
+128167,1,2172,2017 Spring,1,001,1,1,20517174,HEAD,Head Instructor,Y,David Sinclair,David, ,Sinclair, , ,DAVID_SINCLAIR@HMS.HARVARD.EDU,FAS,N,Y
+128168,1,2172,2017 Spring,1,001,1,1,50430529,HEAD,Head Instructor,Y,T. Blackwell,T.,Keith,Blackwell,Dr, ,KEITH.BLACKWELL@JOSLIN.HARVARD.EDU,FAS,N,Y
+128169,1,2172,2017 Spring,1,001,1,1,10494257,HEAD,Head Instructor,Y,Peter Sicinski,Peter, ,Sicinski,Dr, ,PETER_SICINSKI@DFCI.HARVARD.EDU,FAS,N,Y
+128170,1,2172,2017 Spring,1,001,1,1,60649642,HEAD,Head Instructor,Y,Alexander Gimelbrant,Alexander, ,Gimelbrant,Dr, ,alexander_gimelbrant@hms.harvard.edu,FAS,N,Y
+128171,1,2172,2017 Spring,1,001,1,1,80268629,HEAD,Head Instructor,Y,Wade Harper,Wade, ,Harper,Dr, ,WADE_HARPER@HMS.HARVARD.EDU,FAS,N,Y
+128172,1,2172,2017 Spring,1,001,1,1,40686878,HEAD,Head Instructor,Y,Marcia Haigis,Marcia,C.,Haigis,Dr, ,Marcia_Haigis@hms.harvard.edu,FAS,N,Y
+128173,1,2172,2017 Spring,1,001,1,1,10065895,HEAD,Head Instructor,Y,Thomas Roberts,Thomas,M.,Roberts, , ,THOMAS_ROBERTS@DFCI.HARVARD.EDU,FAS,N,Y
+128175,1,2172,2017 Spring,1,001,1,1,80530870,HEAD,Head Instructor,Y,Jean Zhao,Jean,J.,Zhao,Dr, ,JEAN_ZHAO@DFCI.HARVARD.EDU,FAS,N,Y
+128185,1,2172,2017 Spring,1,001,1,1,40430091,HEAD,Head Instructor,Y,Ulrich von Andrian,Ulrich,H.,von Andrian, , ,UVA@HMS.HARVARD.EDU,FAS,N,Y
+128186,1,2172,2017 Spring,1,001,1,1,20092297,HEAD,Head Instructor,Y,Arlene Sharpe,Arlene, ,Sharpe, , ,ARLENE_SHARPE@HMS.HARVARD.EDU,FAS,N,Y
+128190,1,2172,2017 Spring,1,001,1,1,50390977,HEAD,Head Instructor,Y,Peter Howley,Peter,M.,Howley,Dr, ,PETER_HOWLEY@HMS.HARVARD.EDU,FAS,N,Y
+128265,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+128266,1,2172,2017 Spring,1,001,1,1,70052962,HEAD,Head Instructor,Y,Elvira G. DiFabio,Elvira G., ,DiFabio, , ,EDIFABIO@FAS.HARVARD.EDU,FAS,N,Y
+131285,1,2172,2017 Spring,1,001,1,1,80175744,HEAD,Head Instructor,Y,Robert Westervelt,Robert,M.,Westervelt, , ,WESTERVELT@SEAS.HARVARD.EDU,FAS,N,Y
+131405,1,2172,2017 Spring,1,001,1,1,40406867,HEAD,Head Instructor,Y,Daniel Hartl,Daniel,L.,Hartl, , ,DHARTL@OEB.HARVARD.EDU,FAS,N,Y
+131524,1,2172,2017 Spring,1,001,1,1,20455535,HEAD,Head Instructor,Y,Brian Farrell,Brian,D.,Farrell, , ,FARRELLB@OEB.HARVARD.EDU,FAS,N,Y
+131766,1,2172,2017 Spring,1,001,1,1,50528553,HEAD,Head Instructor,Y,Diane Mathis,Diane,J.,Mathis,Dr, ,DIANE_MATHIS@HMS.HARVARD.EDU,FAS,N,Y
+133437,1,2172,2017 Spring,1,001,1,1,50085856,HEAD,Head Instructor,Y,Harry Lewis,Harry,R.,Lewis, , ,dean@seas.harvard.edu,FAS,N,Y
+133725,1,2172,2017 Spring,1,001,1,1,10023025,HEAD,Head Instructor,Y,Stephen Harrison,Stephen,C.,Harrison, , ,SCHADMIN@CRYSTAL.HARVARD.EDU,FAS,N,Y
+140160,1,2172,2017 Spring,1,001,1,1,20226595,HEAD,Head Instructor,Y,Phyllis Kanki,Phyllis, ,Kanki, , ,PKANKI@HSPH.HARVARD.EDU,FAS,N,Y
+141598,1,2172,2017 Spring,1,001,1,1,60282781,HEAD,Head Instructor,Y,David Cardozo,David, ,Cardozo, , ,DAVID_CARDOZO@HMS.HARVARD.EDU,FAS,N,Y
+146387,1,2172,2017 Spring,1,001,1,1,90021591,HEAD,Head Instructor,Y,Colleen Cavanaugh,Colleen, ,Cavanaugh, , ,CAVANAUG@FAS.HARVARD.EDU,FAS,N,Y
+146443,1,2172,2017 Spring,1,001,1,1,90421484,HEAD,Head Instructor,Y,William Haining,William,Nicholas,Haining,Dr, ,NICHOLAS_HAINING@DFCI.HARVARD.EDU,FAS,N,Y
+146614,1,2172,2017 Spring,1,001,1,1,80602111,HEAD,Head Instructor,Y,Michael Szonyi,Michael, ,Szonyi, , ,SZONYI@FAS.HARVARD.EDU,FAS,N,Y
+146665,1,2172,2017 Spring,1,001,1,1,30527569,HEAD,Head Instructor,Y,Christopher Carman,Christopher,Vincent,Carman,Dr, ,CCARMAN@BIDMC.HARVARD.EDU,FAS,N,Y
+146667,1,2172,2017 Spring,1,001,1,1,10693306,HEAD,Head Instructor,Y,Tiffany Horng,Tiffany, ,Horng,Dr, ,THORNG@HSPH.HARVARD.EDU,FAS,N,Y
+146711,1,2172,2017 Spring,1,001,1,1,70040050,HEAD,Head Instructor,Y,David Golan,David, ,Golan, , ,DAVID_GOLAN@HMS.HARVARD.EDU,FAS,N,Y
+150200,1,2172,2017 Spring,1,001,1,1,30630785,HEAD,Head Instructor,Y,Adam Muri-Rosenthal,Adam, ,Muri-Rosenthal, , ,adamshousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,002,1,1,80555830,HEAD,Head Instructor,Y,Tiffanie Ting,Tiffanie, ,Ting, , ,cabothousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,10,1,1,60952000,HEAD,Head Instructor,Y,Brigitte Libby,Brigitte,A. B.,Libby, , ,pforzheimerhousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,11,1,1,70449684,HEAD,Head Instructor,Y,Judith Flynn,Judith,X,Flynn, , ,quincyhousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,12,1,1,10672163,HEAD,Head Instructor,Y,Kip Richardson,Kip,Carroll,Richardson, , ,krichard@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,13,1,1,90473077,HEAD,Head Instructor,Y,Amanda Lobell,Amanda,Swenson,Lobell, , ,currierhousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,3,1,1,30432517,HEAD,Head Instructor,Y,Karen Flood,Karen,P.,Flood, , ,dudleyhousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,4,1,1,30470915,HEAD,Head Instructor,Y,Carlos Diaz Rosillo,Carlos,E.,Diaz Rosillo, , ,cdiaz@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,5,1,1,90507664,HEAD,Head Instructor,Y,Michael Canfield,Michael,Ross,Canfield, , ,eliothousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,6,1,1,10541417,HEAD,Head Instructor,Y,Cory Way,Cory, ,Way, , ,kirklandhousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,7,1,1,50644537,HEAD,Head Instructor,Y,Bilal Malik,Bilal, ,Malik, , ,leveretthousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,8,1,1,40520147,HEAD,Head Instructor,Y,Caitlin Casey,Caitlin,Marie,Casey,Dr, ,lowellhousedean@fas.harvard.edu,FAS,N,Y
+150200,1,2172,2017 Spring,1,9,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+156461,1,2172,2017 Spring,1,001,1,1,50400727,HEAD,Head Instructor,Y,David Levine,David,Marcel,Levine, , ,david_levine@fas.harvard.edu,FAS,N,Y
+156944,1,2172,2017 Spring,1,001,1,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,Y
+156944,1,2172,2017 Spring,1,001,2,1,30883241,HEAD,Head Instructor,Y,Viviane Gontijo,Viviane, ,Gontijo, , ,VIVIANEGONTIJO@FAS.HARVARD.EDU,FAS,N,N
+159567,1,2172,2017 Spring,1,001,1,1,30559061,HEAD,Head Instructor,Y,Alexandra Rosati,Alexandra,Grace,Rosati, , ,rosati@fas.harvard.edu,FAS,N,Y
+159848,1,2172,2017 Spring,1,001,1,1,90913247,HEAD,Head Instructor,Y,Danielle Truxaw,Danielle, ,Truxaw, , ,TRUXAW@FAS.HARVARD.EDU,FAS,N,Y
+159848,1,2172,2017 Spring,1,001,1,3,60682631,CD,Course Director,N,Laura Chivers,Laura,L,Chivers, , ,lchivers@wjh.harvard.edu,FAS,N,N
+159848,1,2172,2017 Spring,1,001,1,4,60961166,GA,Gradesheet Administrator,N,Sarah Bates,Sarah, ,Bates, , ,sarah_bates@hms.harvard.edu,FAS,N,N
+159850,1,2172,2017 Spring,1,001,1,1,50365204,HEAD,Head Instructor,Y,Kathy Richman,Kathy,A.,Richman, , ,richman@fas.harvard.edu,FAS,N,Y
+159851,1,2172,2017 Spring,1,001,1,1,90204483,HEAD,Head Instructor,Y,Stephen Mitchell,Stephen,A.,Mitchell, , ,SAMITCH@FAS.HARVARD.EDU,FAS,N,Y
+159852,1,2172,2017 Spring,1,001,1,1,70536609,HEAD,Head Instructor,Y,William J. Anderson,William J., ,Anderson, , ,william_anderson@harvard.edu,FAS,N,Y
+159853,1,2172,2017 Spring,1,001,1,1,10446252,HEAD,Head Instructor,Y,Stephanie Sandler,Stephanie, ,Sandler, , ,SSANDLER@FAS.HARVARD.EDU,FAS,N,Y
+159854,1,2172,2017 Spring,1,001,1,1,90736566,HEAD,Head Instructor,Y,Rachel Meyer,Rachel, ,Meyer, , ,MEYER2@FAS.HARVARD.EDU,FAS,N,Y
+159854,1,2172,2017 Spring,1,001,1,2,80690185,GA,Gradesheet Administrator,N,Laura Thomas,Laura,Gorman,Thomas, , ,LTHOMAS@WJH.HARVARD.EDU,FAS,N,N
+159855,1,2172,2017 Spring,1,001,1,1,70493918,HEAD,Head Instructor,Y,Maria Parra-Velasco,Maria,Luisa,Parra-Velasco, , ,parra@fas.harvard.edu,FAS,N,Y
+159859,1,2172,2017 Spring,1,001,1,1,10569389,HEAD,Head Instructor,Y,Serhii Plokhii,Serhii, ,Plokhii, , ,PLOKHII@FAS.HARVARD.EDU,FAS,N,Y
+159860,1,2172,2017 Spring,1,001,1,1,80187181,HEAD,Head Instructor,Y,Ross McElwee,Ross, ,McElwee, , ,MCELWEE@FAS.HARVARD.EDU,FAS,N,Y
+159860,1,2172,2017 Spring,1,001,2,1,80187181,HEAD,Head Instructor,Y,Ross McElwee,Ross, ,McElwee, , ,MCELWEE@FAS.HARVARD.EDU,FAS,N,N
+159862,1,2172,2017 Spring,1,001,1,1,40277080,HEAD,Head Instructor,Y,Shankar Ramaswami,Shankar, ,Ramaswami, , ,sramaswami@fas.harvard.edu,FAS,N,Y
+159863,1,2172,2017 Spring,1,001,1,1,70384299,HEAD,Head Instructor,Y,Anya Bassett,Anya, ,Bassett, , ,ANYA_BASSETT@HARVARD.EDU,FAS,N,Y
+159863,1,2172,2017 Spring,1,001,1,12,80432674,HEAD,Head Instructor,Y,Nicole Newendorp,Nicole,Dejong,Newendorp, , ,newendor@fas.harvard.edu,FAS,N,N
+159865,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+159869,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+159870,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+159871,1,2172,2017 Spring,1,001,1,1,20562978,HEAD,Head Instructor,Y,Yuri Vedenyapin,Yuri, ,Vedenyapin, , ,vedenyap@fas.harvard.edu,FAS,N,Y
+159872,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+159873,1,2172,2017 Spring,1,001,1,1,10600480,HEAD,Head Instructor,Y,John Mugane,John,M,Mugane, , ,MUGANE@FAS.HARVARD.EDU,FAS,N,Y
+159876,1,2172,2017 Spring,1,001,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+159876,1,2172,2017 Spring,1,002,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+159876,1,2172,2017 Spring,1,003,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+159876,1,2172,2017 Spring,1,004,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+159876,1,2172,2017 Spring,1,005,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+159876,1,2172,2017 Spring,1,006,1,1,10607256,HEAD,Head Instructor,Y,Luke Leafgren,Luke, ,Leafgren, , ,matherhousedean@fas.harvard.edu,FAS,N,Y
+161075,1,2172,2017 Spring,1,001,1,1,10483069,HEAD,Head Instructor,Y,Sheila Thomas,Sheila, ,Thomas,Dr, ,STHOMAS@FAS.HARVARD.EDU,FAS,N,Y
+161076,1,2172,2017 Spring,1,001,1,1,10483069,HEAD,Head Instructor,Y,Sheila Thomas,Sheila, ,Thomas,Dr, ,STHOMAS@FAS.HARVARD.EDU,FAS,N,Y
+161178,1,2172,2017 Spring,1,001,1,1,10406609,HEAD,Head Instructor,Y,Volodymyr Dibrova,Volodymyr, ,Dibrova, , ,VDIBROVA@FAS.HARVARD.EDU,FAS,N,Y
+161178,1,2172,2017 Spring,1,001,1,2,50882616,CD,Course Director,N,Steven Clancy,Steven, ,Clancy, , ,SCLANCY@FAS.HARVARD.EDU,FAS,N,N
+161201,1,2172,2017 Spring,1,001,1,1,50634558,HEAD,Head Instructor,Y,Vinothan Manoharan,Vinothan,N,Manoharan, , ,VNM@SEAS.HARVARD.EDU,FAS,N,Y
+161207,1,2172,2017 Spring,1,001,1,1,30952731,HEAD,Head Instructor,Y,Ya-chieh Hsu,Ya-chieh, ,Hsu,Dr, ,yachiehhsu@fas.harvard.edu,FAS,N,Y
+200032,1,2172,2017 Spring,1,001,1,1,90343025,PI,Primary Instructor,Y,Gary Hilderbrand,Gary, ,Hilderbrand, , ,GHILDERBRAND@GSD.HARVARD.EDU,GSD,N,Y
+200258,1,2172,2017 Spring,1,001,1,1,10196779,PI,Primary Instructor,Y,John Stilgoe,John,R.,Stilgoe, , ,STILGOE@FAS.HARVARD.EDU,GSD,N,Y
+200260,1,2172,2017 Spring,1,001,1,1,10196779,PI,Primary Instructor,Y,John Stilgoe,John,R.,Stilgoe, , ,STILGOE@FAS.HARVARD.EDU,GSD,N,Y
+200494,1,2172,2017 Spring,1,001,1,1,20262974,PI,Primary Instructor,Y,Richard Forman,Richard,T.T.,Forman, , ,RFORMAN@GSD.HARVARD.EDU,GSD,N,Y
+200509,1,2172,2017 Spring,1,001,1,1,10838827,PI,Primary Instructor,Y,Timothy Dekker,Timothy,John,Dekker, , ,tdekker@limno.com,GSD,N,Y
+200509,1,2172,2017 Spring,1,001,1,2,91141396,SI,Secondary Instructor,Y,Nicholas Nelson,Nicholas,Colin,Nelson, , ,nnelson@gsd.harvard.edu,GSD,N,N
+200582,1,2172,2017 Spring,1,001,1,1,90283774,PI,Primary Instructor,Y,Alistair McIntosh,Alistair, ,McIntosh, , ,atmland@gmail.com,GSD,N,Y
+203096,1,2172,2017 Spring,1,001,1,1,90740105,HEAD,Head Instructor,Y,Mark Jordan,Mark,D.,Jordan, , ,MJORDAN@HDS.HARVARD.EDU,FAS,N,Y
+203228,1,2172,2017 Spring,1,001,1,1,10473713,HEAD,Head Instructor,Y,Ivy Livingston,Ivy, ,Livingston, , ,LIVINGS@G.HARVARD.EDU,FAS,N,Y
+203228,1,2172,2017 Spring,1,001,1,2,10875684,TF,Teaching Fellow,Y,Keating McKeon,Keating,Patrick Joseph,McKeon, , ,keatingmckeon@fas.harvard.edu,FAS,N,N
