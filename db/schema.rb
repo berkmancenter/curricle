@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161213024412) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "external_facility_id"
-    t.text     "facilitly_description"
+    t.text     "facility_description"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end

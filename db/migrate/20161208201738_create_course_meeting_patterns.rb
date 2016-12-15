@@ -15,7 +15,7 @@ class CreateCourseMeetingPatterns < ActiveRecord::Migration[5.0]
       t.date :start_date
       t.date :end_date
       t.string :external_facility_id
-      t.text :facilitly_description
+      t.text :facility_description
      
       t.timestamps
     end

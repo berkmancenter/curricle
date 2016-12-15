@@ -14,7 +14,7 @@ one:
   start_date: 2016-12-08
   end_date: 2016-12-08
   facility_id: 
-  facilitly_description: 
+  facility_description: 
 
 two:
   course_id: 
@@ -30,4 +30,4 @@ two:
   start_date: 2016-12-08
   end_date: 2016-12-08
   facility_id: 
-  facilitly_description: 
+  facility_description: 
