@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213024412) do
+ActiveRecord::Schema.define(version: 20161219202747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "btree_gin"
 
   create_table "course_instructors", force: :cascade do |t|
     t.integer  "external_course_id"
@@ -73,6 +74,9 @@ ActiveRecord::Schema.define(version: 20161213024412) do
     t.text     "course_note"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.index ["course_description_long"], name: "index_courses_on_course_description_long", using: :gin
+    t.index ["course_note"], name: "index_courses_on_course_note", using: :gin
+    t.index ["title"], name: "index_courses_on_title", using: :gin
   end
 
   create_table "tags", force: :cascade do |t|
