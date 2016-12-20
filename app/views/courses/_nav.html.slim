@@ -3,7 +3,7 @@
 
   == form_tag '/courses/search', method: 'POST'
     .query-box
-      == text_field_tag  'query', nil, placeholder: 'Keyword'
+      == text_field_tag 'keywords', @keywords, placeholder: 'Keyword'
 
       br
 
