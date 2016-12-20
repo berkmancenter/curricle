@@ -1,8 +1,8 @@
 .search-header
   .col
-    form
-      input type="text" placeholder="Search Courses"
-      input type="submit" value="Go"
+    == form_tag '/courses/search', method: 'POST'
+      == text_field_tag  'query', nil, placeholder: 'Search Courses'
+      == submit_tag "Go"
   .col
     div
       | Colored by: 

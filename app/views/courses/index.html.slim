@@ -105,64 +105,48 @@
 
   .details-wrapper
     ul.plain
-      li.course-wrapper.solid.blue
-        .subject
-          | Gen Ed
-        .add_to_tray
-          button &#43;
+      - if @no_matches
+        li No matches found
+      - @matching_courses.each do |course|
+        li.course-wrapper.blue
+          .subject
+            == course.academic_group
+          .add_to_tray
+            button &#43;
 
-        .title
-          | Dilemmas of Equality and Excellence in American K-12 Ed.
+          .title
+            == course.title
 
-        span.subject
-          | US-WORLD 
-        span.catalog
-          | 35
-
-        p.description
-          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida a ipsum sit amet rutrum. Sed tincidunt cursus fermentum. In ut neque sed enim aliquet finibus sed id quam. Fusce justo erat, ullamcorper eget enim eget, molestie dignissim quam. Maecenas volutpat cursus tincidunt. Nullam venenatis, tellus quis mattis porta, velit arcu dignissim nisi, quis cursus ante est quis urna. Integer dignissim bibendum hendrerit. Aliquam ut nunc eros.
-
-        .component
-          | Component: 
+          span.subject
+            == course.subject
           span
-            | Lecture
-        .basis
-          | Grading Basis: 
-          span
-            | Letter Grades
+            |  
+          span.catalog
+            == course.catalog_number
 
-        .units
-          | 4 Units
+          p.description
+            == course.course_description_long
+          p.notes
+            == course.course_note
 
-      li.course-wrapper.green
-        .subject
-          | History
-        .add_to_tray
-          button &#43;
+          .component
+            | Component: 
+            span
+              == course.component || "Unknown"
+          .basis
+            | Grading Basis: 
+            span
+              == course.grading_basis_description || "Unknown"
+          - if course.meeting.present? && course.meeting.facility_description.present?
+            .location
+              | Location: 
+              span
+                == course.meeting.facility_description
+          - if course.instructor.present?
+            .instructor
+              | Instructor: 
+              span
+                == course.instructor.full_name
 
-        .title
-          | Urban America in the Twentieth Century
-
-        span.subject
-          | HIST
-        span.catalog
-          | 84j
-
-        p.description
-          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida a ipsum sit amet rutrum. Sed tincidunt cursus fermentum. In ut neque sed enim aliquet finibus sed id quam. Fusce justo erat, ullamcorper eget enim eget, molestie dignissim quam. Maecenas volutpat cursus tincidunt. Nullam venenatis, tellus quis mattis porta, velit arcu dignissim nisi, quis cursus ante est quis urna. Integer dignissim bibendum hendrerit. Aliquam ut nunc eros.
-
-        .component
-          | Component: 
-          span
-            | Lecture
-        .basis
-          | Grading Basis: 
-          span
-            | Letter Grades
-        .location
-          | Location: 
-          span
-            | Robinson Hall 107
-
-        .units
-          | 6 Units
+          .units
+             == course.units_maximum
