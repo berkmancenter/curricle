@@ -14,31 +14,12 @@ body {
   @include outer-container;
 
   .header {
-    min-height: 100px;
-    padding: 20px 0px;
     border-bottom: 1px solid #eee;
-
-    h1, h2 {
-      margin-top: 0;
-    }
-
-    .left-content {
-    }
-
-    .right-content {
-      .col {
-        @include span-columns(3 of 10);
-
-        &:last-of-type {
-          @include span-columns(4 of 10);
-        }
-      }
-    }
   }
 
   .main {
     .left-content {
-      padding: 0px 5px;
+      padding: 0px 0px 0px 5px;
     }
 
     .right-content {
@@ -82,7 +63,15 @@ body {
   display: inline;
 }
 
-ul.plain {
-  list-style-type: none;
-  padding: 0;
+ul {
+  &.plain {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  &.horizontal {
+    li {
+      display: inline-block;
+    }
+  }
 }

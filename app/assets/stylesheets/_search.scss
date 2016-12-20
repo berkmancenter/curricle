@@ -9,36 +9,22 @@
 
 .search-main {
   .grid-wrapper {
-    @include span-columns(3 of 10);
+    @include span-columns(5 of 10);
 
-    ul {
-      vertical-align: top;
-      width: 20%;
-      text-align: center;
+    ul.block-list {
+      margin: 0;
+      padding: 0;
     }
 
-    li {
+    li.block {
       vertical-align: top;
       display: inline-block;
-      position: relative;
-      width: 100%;
+      width: 15px;
+      height: 15px;
+      margin: 1px;
+      background: #f3f3f3;
 
-      &:first-of-type {
-        padding-bottom: 10px;
-      }
-
-      .dummy {
-        vertical-align: top;
-        margin-top: 100%;
-      }
-
-      .color {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-
+      &.matched {
         &.red {
           background: #d42529;
         }
@@ -49,16 +35,20 @@
           background: #539db7;
         }
       }
+
+      &.added {
+        background: #696969 !important;
+      }
     }
   }
 
   .details-wrapper {
-    @include span-columns(7 of 10);
+    @include span-columns(5 of 10);
 
     .course-wrapper {
       margin-bottom: 20px;
       padding: 10px 20px;
-      border: 1px solid gray;
+      border: 2px solid gray;
       position: relative;
 
       .add_to_tray {
@@ -86,8 +76,7 @@
       }
 
       &.green {
-        border: 1px solid #83b971;
-        color: #83b971;
+        border: 2px solid #83b971;
 
         &.solid {
           color: white;
@@ -95,8 +84,7 @@
         }
       }
       &.blue {
-        border: 1px solid #539db7;
-        color: #539db7;
+        border: 2px solid #539db7;
 
         &.solid {
           color: white;

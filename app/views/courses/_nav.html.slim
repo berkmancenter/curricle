@@ -1,19 +1,112 @@
-.nav-wrapper
-  h3 My Tray
+.search-nav
+  h3 Search
 
-  ul.plain
-    li
-      | Course 1
-      button.action &#215;
-    li
-      | Course 2
-      button.action &#215;
-    li
-      | Course 3
-      button.action &#215;
-    li
-      | Course 4
-      button.action &#215;
-    li
-      | Course 5
-      button.action &#215;
+  == form_tag '/courses/search', method: 'POST'
+    .query-box
+      == text_field_tag  'query', nil, placeholder: 'Keyword'
+
+      br
+
+      label Apply to:
+      select
+        option All
+        option Course title
+        option Course description
+        option Instructor
+        option Library reserves
+
+      br
+
+      label Weight:
+      input type="range"
+
+    hr
+
+    .schedule-wrapper
+      table
+        tr
+          td Mon
+          td
+            select
+              option Any
+          td to
+          td
+            select
+              option Any
+        tr
+          td Tue
+          td
+            select
+              option Any
+          td to
+          td
+            select
+              option Any
+        tr
+          td Wed
+          td
+            select
+              option Any
+          td to
+          td
+            select
+              option Any
+        tr
+          td Thu
+          td
+            select
+              option Any
+          td to
+          td
+            select
+              option Any
+        tr
+          td Fri
+          td
+            select
+              option Any
+          td to
+          td
+            select
+              option Any
+
+    label School
+    select
+      option FAS
+
+    br
+
+    label Department
+    select
+      option All
+
+    table
+      tr
+        td Units
+        td
+          select
+            option Any
+            option 1
+        td to
+        td
+          select
+            option Any
+            option 5
+
+    ul.plain
+      li
+        label
+          input type="checkbox"
+          | Lecture
+      li
+        label
+          input type="checkbox"
+          | Seminar
+      li
+        label
+          input type="checkbox"
+          | Undergrad
+      li
+        label
+          input type="checkbox"
+          | Graduate
