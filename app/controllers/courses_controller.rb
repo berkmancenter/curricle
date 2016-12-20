@@ -28,7 +28,6 @@ class CoursesController < ApplicationController
     end
 
     @matching_courses = query.all
-    @no_matches = @matching_courses.empty?
 
     render :index
   end

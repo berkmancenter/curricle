@@ -22,7 +22,7 @@
 
   .details-wrapper
     ul.plain
-      - if @no_matches
+      - if @matching_courses.empty?
         li No matches found
       - @matching_courses.each do |course|
         li.course-wrapper.green
