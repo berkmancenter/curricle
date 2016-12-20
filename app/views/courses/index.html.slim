@@ -29,7 +29,12 @@
           .subject
             == course.academic_group
           .add_to_tray
-            button &#43;
+            - if current_user.added?(course.id)
+              == form_tag "/courses/#{course.id}/remove-from-tray", method: 'delete'
+                == submit_tag 'Remove'
+            - else
+              == form_tag "/courses/#{course.id}/add-to-tray", method: 'post'
+                == submit_tag 'Add'
 
           .title
             == course.title
