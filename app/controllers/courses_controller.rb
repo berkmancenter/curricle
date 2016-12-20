@@ -3,11 +3,34 @@ class CoursesController < ApplicationController
   
   def index
     @matching_courses ||= []
+    @course_groups ||= []
   end
 
   def search
-    @matching_courses = Course.search_for(params["query"])
+    query = Course.search_for(params["query"])
+    subjects = query.select(:subject_academic_org_description).map(&:subject_academic_org_description).uniq
+
+    @course_groups = []
+
+    subjects.each do |subject|
+      group = {
+        subject: subject,
+        days: [
+          { name: 'Mon', courses: Course.for_day(:monday, subject_academic_org_description: subject) },
+          { name: 'Tue', courses: Course.for_day(:tuesday, subject_academic_org_description: subject) },
+          { name: 'Wed', courses: Course.for_day(:wednesday, subject_academic_org_description: subject) },
+          { name: 'Thu', courses: Course.for_day(:thursday, subject_academic_org_description: subject) },
+          { name: 'Fri', courses: Course.for_day(:friday, subject_academic_org_description: subject) },
+        ]
+      }
+
+      not_empty = group[:days].find { |day| !day[:courses].empty? }
+      @course_groups << group if not_empty
+    end
+
+    @matching_courses = query.all
     @no_matches = @matching_courses.empty?
+
     render :index
   end
 end
