@@ -8,11 +8,10 @@ class CoursesController < ApplicationController
 
   def search
     query = Course.search_for(params["query"])
-    subjects = query.select(:subject_academic_org_description).map(&:subject_academic_org_description).uniq
 
     @course_groups = []
 
-    subjects.each do |subject|
+    Course.subjects(query).each do |subject|
       group = {
         subject: subject,
         days: [
