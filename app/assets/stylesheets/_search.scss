@@ -107,18 +107,13 @@
     width: 100%;
     margin: 10px 0;
     text-align: left;
+    cursor: pointer; cursor: hand;
 
     &:hover {
       outline: none;
       border: 1px solid $color-green;
       box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.15);
     }
-
-    // &:focus {
-    //   outline: none;
-    //   border: 1px solid $color-green;
-    //   box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.15);
-    // }
   }
 
   .box {
