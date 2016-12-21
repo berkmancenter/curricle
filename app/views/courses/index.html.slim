@@ -25,16 +25,14 @@
       - if @matching_courses.empty?
         li No matches found
       - @matching_courses.each do |course|
-        li.course-wrapper.green
+        li.course-wrapper.green data-id=(course.id)
           .subject
             == course.academic_group
-          .add_to_tray
+          .tray-form-wrapper
             - if current_user.added?(course.id)
-              == form_tag "/courses/#{course.id}/remove-from-tray", method: 'delete'
-                == submit_tag 'Remove'
+              == render "remove_from_tray", course: course
             - else
-              == form_tag "/courses/#{course.id}/add-to-tray", method: 'post'
-                == submit_tag 'Add'
+              == render "add_to_tray", course: course
 
           .title
             == course.title

@@ -36,20 +36,26 @@ class CoursesController < ApplicationController
   end
 
   def add_to_tray
-    course = Course.find(params["id"])
+    @course = Course.find(params["id"])
 
-    UserCourse.find_or_create_by(user_id: current_user.id, course_id: course.id)
+    UserCourse.find_or_create_by(user_id: current_user.id, course_id: @course.id)
 
-    redirect_to '/'
+    respond_to do |format|
+      format.html { redirect_to '/' }
+      format.js
+    end
   end
 
   def remove_from_tray
-    course = Course.find(params["id"])
+    @course = Course.find(params["id"])
 
-    if user_course = UserCourse.find_by(user_id: current_user.id, course_id: course.id)
+    if user_course = UserCourse.find_by(user_id: current_user.id, course_id: @course.id)
       user_course.destroy
     end
 
-    redirect_to '/'
+    respond_to do |format|
+      format.html { redirect_to '/' }
+      format.js
+    end
   end
 end
