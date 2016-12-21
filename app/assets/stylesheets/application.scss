@@ -1,9 +1,12 @@
 @import "bourbon";
 @import "grid-settings";
 @import "neat";
+@import "vars";
 @import "nav";
 @import "search";
 @import "path";
+@import "forms";
+
 
 body {
   // TODO: find appropriate fonts
@@ -28,11 +31,11 @@ body {
   }
 
   .left-content {
-    @include span-columns(2);
+    @include span-columns(3);
   }
 
   .right-content {
-    @include span-columns(10);
+    @include span-columns(9);
     @include omega();
   }
 }
@@ -63,6 +66,23 @@ body {
   display: inline;
 }
 
+.align-c {
+  text-align: center;
+}
+
+.border {
+  border: 1px solid $color-medium-gray;
+  border-radius: 3px;
+}
+
+.padding {
+  padding: 7px;
+}
+
+.italic {
+  font-style: italic;
+}
+
 ul {
   &.plain {
     list-style-type: none;
@@ -74,4 +94,11 @@ ul {
       display: inline-block;
     }
   }
+}
+
+button {
+  background-color: white;
+  border: 1px solid $color-medium-gray;
+  border-radius: 3px;
+  height: 25px;
 }
