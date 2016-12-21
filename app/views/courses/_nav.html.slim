@@ -1,27 +1,41 @@
 .search-nav
-  h3 Search
+  h3.italic Search
 
   == form_tag '/courses/search', method: 'POST'
-    .query-box
-      == text_field_tag  'query', nil, placeholder: 'Keyword'
+  
+    select.dark.full
+      option Term: Fall 2017
+      option Term: Spring 2017
+      option Term: Fall 2018
+      option Term: Spring 2018
+  
+    .border.padding.box
+      .query-box.full
+        == text_field_tag  'query', nil, placeholder: 'Keyword'
 
+        br
+
+        label.italic Apply to:
+        <select multiple class="multiple-select">
+          option All
+          option Course title
+          option Course description
+          option Instructor
+          option Library reserves
+        </select>
+
+        br
+
+        label.italic Weight:
+        input type="range"
+        
+    button
+      | + Add Seach Term
+        
       br
-
-      label Apply to:
-      select
-        option All
-        option Course title
-        option Course description
-        option Instructor
-        option Library reserves
-
-      br
-
-      label Weight:
-      input type="range"
 
     hr
-
+    
     .schedule-wrapper
       table
         tr
@@ -29,7 +43,7 @@
           td
             select
               option Any
-          td to
+          td.align-c to
           td
             select
               option Any
@@ -38,7 +52,7 @@
           td
             select
               option Any
-          td to
+          td.align-c to
           td
             select
               option Any
@@ -47,7 +61,7 @@
           td
             select
               option Any
-          td to
+          td.align-c to
           td
             select
               option Any
@@ -56,7 +70,7 @@
           td
             select
               option Any
-          td to
+          td.align-c to
           td
             select
               option Any
@@ -65,48 +79,51 @@
           td
             select
               option Any
-          td to
+          td.align-c to
           td
             select
               option Any
 
-    label School
-    select
-      option FAS
+    select.full
+      option School: FAS
 
     br
 
-    label Department
-    select
-      option All
+    select.full
+      option Department: All
 
-    table
-      tr
-        td Units
-        td
-          select
-            option Any
-            option 1
-        td to
-        td
-          select
-            option Any
-            option 5
+    .unit-wrapper
+      table
+        tr
+          td Units
+          td
+            select
+              option Any
+              option 1
+          td.align-c to
+          td
+            select
+              option Any
+              option 5
 
-    ul.plain
-      li
-        label
-          input type="checkbox"
-          | Lecture
-      li
-        label
-          input type="checkbox"
-          | Seminar
-      li
-        label
-          input type="checkbox"
-          | Undergrad
-      li
-        label
-          input type="checkbox"
-          | Graduate
+    .course-type
+      table
+        tr
+          td
+            label
+              input.checkbox type="checkbox"
+              | Lecture
+          td
+            label
+              input.checkbox type="checkbox"
+              | Seminar
+      
+        tr
+          td
+            label
+              input.checkbox type="checkbox"
+              | Undergrad
+          td
+            label
+              input.checkbox type="checkbox"
+              | Graduate

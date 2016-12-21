@@ -22,22 +22,22 @@
       width: 15px;
       height: 15px;
       margin: 1px;
-      background: #f3f3f3;
+      background: $color-light-gray;
 
       &.matched {
         &.red {
-          background: #d42529;
+          background: $color-red;
         }
         &.green {
-          background: #83b971;
+          background: $color-green;
         }
         &.blue {
-          background: #539db7;
+          background: $color-blue;
         }
       }
 
       &.added {
-        background: #696969 !important;
+        background: $color-gray !important;
       }
     }
   }
@@ -76,21 +76,66 @@
       }
 
       &.green {
-        border: 2px solid #83b971;
+        border: 2px solid $color-green;
 
         &.solid {
           color: white;
-          background: #83b971;
+          background: $color-green;
         }
       }
       &.blue {
-        border: 2px solid #539db7;
+        border: 2px solid $color-green;
 
         &.solid {
           color: white;
-          background: #539db7;
+          background: $color-green;
         }
       }
+    }
+  }
+}
+
+.search-nav {
+  padding: 20px;
+  border: 1px solid $color-light-gray;
+
+  h3 {
+    margin-top: 0px;
+  }
+
+  button {
+    width: 100%;
+    margin: 10px 0;
+    text-align: left;
+
+    &:hover {
+      outline: none;
+      border: 1px solid $color-green;
+      box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.15);
+    }
+
+    // &:focus {
+    //   outline: none;
+    //   border: 1px solid $color-green;
+    //   box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.15);
+    // }
+  }
+
+  .box {
+    margin-top: 10px;
+    input[type="text"] {
+      width: 100%;
+    }
+  }
+
+  .schedule-wrapper, .unit-wrapper, .course-type {
+    margin: 15px 0;
+    table {
+      width : 100%;
+    }
+
+    select {
+      width: 100%;
     }
   }
 }
