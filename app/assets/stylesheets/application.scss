@@ -18,6 +18,11 @@ body {
 
   .header {
     border-bottom: 1px solid #eee;
+
+    a.logo {
+      text-decoration: none;
+      color: black;
+    }
   }
 
   .main {
