@@ -1,325 +1,38 @@
 .search-main
-  h3 Results (125 courses)
+  h3
+    | Results (
+    == @matching_courses.count
+    |  courses)
 
   .grid-wrapper
-    .grid-section
-      h4 Humanities
+    - @course_groups.each do |group|
+      .grid-section
+        h4
+          == group[:subject]
 
-      label Mon
-      ul.block-list
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block.matched.added.green
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-
-      label Tue
-      ul.block-list
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.added.green
-        li.block
-        li.block.added.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block.added.green
-
-      label Wed
-      ul.block-list
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block.matched.added.green
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-
-      label Thu
-      ul.block-list
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.added.green
-        li.block
-        li.block.added.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block.added.green
-
-      label Fri
-      ul.block-list
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block.matched.added.green
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-
-    .grid-section
-      h4 Social Sciences
-
-      label Mon
-      ul.block-list
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block.matched.added.green
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-
-      label Tue
-      ul.block-list
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.added.green
-        li.block
-        li.block.added.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block.added.green
-
-      label Wed
-      ul.block-list
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block.matched.added.green
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-
-      label Thu
-      ul.block-list
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.added.green
-        li.block
-        li.block.added.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block.added.green
-
-      label Fri
-      ul.block-list
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block
-        li.block.matched.green
-        li.block.matched.green
-        li.block
-        li.block
-        li.block.matched.added.green
-        li.block
-        li.block
-        li.block.matched.green
-        li.block
-        li.block
+        - group[:days].each do |day|
+          label
+            == day[:name]
+          ul.block-list
+            - if day[:courses].empty?
+              li.empty No courses
+            - else
+              - day[:courses].each do |course|
+                li.block class=(classes_for_course(course)) data-id=(course.id)
 
   .details-wrapper
     ul.plain
-      - if @no_matches
+      - if @matching_courses.empty?
         li No matches found
       - @matching_courses.each do |course|
-        li.course-wrapper.green
+        li.course-wrapper.green data-id=(course.id)
           .subject
             == course.academic_group
-          .add_to_tray
-            button &#43;
+          .tray-form-wrapper
+            - if current_user.added?(course.id)
+              == render "remove_from_tray", course: course
+            - else
+              == render "add_to_tray", course: course
 
           .title
             == course.title
