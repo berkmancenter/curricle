@@ -17,7 +17,7 @@ body {
   @include outer-container;
 
   .header {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-medium-gray;
 
     a.logo {
       text-decoration: none;
@@ -27,7 +27,9 @@ body {
 
   .main {
     .left-content {
+      height: auto;
       padding: 0px 0px 0px 5px;
+      border-right: 1px solid $color-medium-gray;
     }
 
     .right-content {
@@ -76,7 +78,7 @@ body {
 }
 
 .border {
-  border: 1px solid $color-medium-gray;
+  border: 1px solid $color-gray;
   border-radius: 3px;
 }
 

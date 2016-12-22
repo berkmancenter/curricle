@@ -6,9 +6,10 @@ select {
   height: 25px;
   margin-bottom: 5px;
   cursor: pointer; cursor: hand;
+  background-color: $color-white;
 
   &.dark {
-    background-color: $color-gray;
+    background-color: $color-medium-gray;
     color: white;
   }
 
@@ -22,7 +23,7 @@ input[type="text"] {
   margin-bottom: 5px;
   padding: 0 7px;
   border-radius: 3px;
-  border: 1px solid $color-medium-gray;
+  border: 1px solid $color-gray;
   &:focus {
     outline: none;
     border: 1px solid $color-green;
@@ -42,9 +43,9 @@ input[type="range"] {
   height: rem(10);
   width: rem(10);
   border-radius: 3px;
-  border: 1px solid #3C3C3C;
+  border: 1px solid $color-medium-gray;
   box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.15);
-  color: $color-white;
+  background-color: $color-white;
 }
 
 input[type="checkbox"]{
