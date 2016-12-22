@@ -1,0 +1,79 @@
+label {
+  font-size: 12px;
+}
+
+select {
+  height: 25px;
+  margin-bottom: 5px;
+  cursor: pointer; cursor: hand;
+  background-color: $color-white;
+
+  &.dark {
+    background-color: $color-medium-gray;
+    color: white;
+  }
+
+  &.full {
+    width: 100%;
+  }
+}
+
+input[type="text"] {
+  height: 25px;
+  margin-bottom: 5px;
+  padding: 0 7px;
+  border-radius: 3px;
+  border: 1px solid $color-gray;
+  &:focus {
+    outline: none;
+    border: 1px solid $color-green;
+  }
+}
+
+input[type="range"] {
+  margin-left: 10px;
+  vertical-align: sub;
+  cursor: pointer; cursor: hand;
+}
+
+.checkbox{
+  vertical-align: bottom;
+  margin-bottom: 0;
+  margin-right: rem(5);
+  height: rem(10);
+  width: rem(10);
+  border-radius: 3px;
+  border: 1px solid $color-medium-gray;
+  box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.15);
+  background-color: $color-white;
+}
+
+input[type="checkbox"]{
+  -webkit-appearance: none;
+  cursor: pointer; cursor: hand;
+}
+
+input[type="checkbox"]:checked{
+  width: rem(10);
+  height: rem(10);
+  background: url('check.png') no-repeat;
+  background-position: center;
+  padding: 5px;
+}
+
+.multiple-select {
+  border: none;
+  font-style: italic;
+  padding-left: 5px;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+input:focus {
+  outline: none;
+}
+
+select:focus {
+  outline: none;
+  border: 1px solid $color-green;
+}
