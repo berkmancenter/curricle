@@ -1,19 +1,129 @@
-.nav-wrapper
-  h3 My Tray
+.search-nav
+  h3.italic Search
 
-  ul.plain
-    li
-      | Course 1
-      button.action &#215;
-    li
-      | Course 2
-      button.action &#215;
-    li
-      | Course 3
-      button.action &#215;
-    li
-      | Course 4
-      button.action &#215;
-    li
-      | Course 5
-      button.action &#215;
+  == form_tag '/courses/search', method: 'POST'
+  
+    select.dark.full
+      option Term: Fall 2017
+      option Term: Spring 2017
+      option Term: Fall 2018
+      option Term: Spring 2018
+  
+    .border.padding.box
+      .query-box.full
+        == text_field_tag  'query', nil, placeholder: 'Keyword'
+
+        br
+
+        label.italic Apply to:
+        <select multiple class="multiple-select">
+          option All
+          option Course title
+          option Course description
+          option Instructor
+          option Library reserves
+        </select>
+
+        br
+
+        label.italic Weight:
+        input type="range"
+        
+    button
+      | + Add Seach Term
+        
+      br
+
+    hr
+    
+    .schedule-wrapper
+      table
+        tr
+          td Mon
+          td
+            select
+              option Any
+          td.align-c to
+          td
+            select
+              option Any
+        tr
+          td Tue
+          td
+            select
+              option Any
+          td.align-c to
+          td
+            select
+              option Any
+        tr
+          td Wed
+          td
+            select
+              option Any
+          td.align-c to
+          td
+            select
+              option Any
+        tr
+          td Thu
+          td
+            select
+              option Any
+          td.align-c to
+          td
+            select
+              option Any
+        tr
+          td Fri
+          td
+            select
+              option Any
+          td.align-c to
+          td
+            select
+              option Any
+
+    select.full
+      option School: FAS
+
+    br
+
+    select.full
+      option Department: All
+
+    .unit-wrapper
+      table
+        tr
+          td Units
+          td
+            select
+              option Any
+              option 1
+          td.align-c to
+          td
+            select
+              option Any
+              option 5
+
+    .course-type
+      table
+        tr
+          td
+            label
+              input.checkbox type="checkbox"
+              | Lecture
+          td
+            label
+              input.checkbox type="checkbox"
+              | Seminar
+      
+        tr
+          td
+            label
+              input.checkbox type="checkbox"
+              | Undergrad
+          td
+            label
+              input.checkbox type="checkbox"
+              | Graduate
