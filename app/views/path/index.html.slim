@@ -22,14 +22,19 @@
       li 07:00
       li 08:00
 
+
+
     ul.plain.iblock
       li
-        | Mon
+        | Monday
         // top: number of minutes past 7am
         // height: number of minutes in length
         .class style="top: 240px; height: 60px;"
           .title
             | Course 1
+        .class style="top: 420px; height: 60px;"
+          .title.recommended
+            | Rec 1
       li
         /! empty element used for spacing
       li
@@ -59,13 +64,16 @@
 
     ul.plain.iblock
       li
-        | Tue
+        | Tuesday
         .class style="top: 180px; height: 60px;"
           .title
-            | Course 4
-        .class style="top: 660px; height: 90px;"
+            | Course 3
+        .class style="top: 660px; height: 120px;"
           .title
             | Course 2
+        .class style="top: 300px; height: 60px;"
+          .title.recommended
+            | Rec 2
       li
         /! empty element used for spacing
       li
@@ -99,6 +107,9 @@
         .class style="top: 240px; height: 60px;"
           .title
             | Course 1
+        .class style="top: 420px; height: 60px;"
+          .title.recommended
+            | Rec 1
       li
         /! empty element used for spacing
       li
@@ -128,10 +139,13 @@
 
     ul.plain.iblock
       li
-        | Thu
+        | Thursday
         .class style="top: 180px; height: 60px;"
           .title
-            | Course 4
+            | Course 3
+        .class style="top: 300px; height: 60px;"
+          .title.recommended
+            | Rec 2
       li
         /! empty element used for spacing
       li
@@ -161,70 +175,10 @@
 
     ul.plain.iblock
       li
-        | Fri
-        .class style="top: 420px; height: 240px;"
+        | Friday
+        .class style="top: 240px; height: 60px;"
           .title
             | Course 1
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        | Sat
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        | Sun
       li
         /! empty element used for spacing
       li
@@ -280,6 +234,90 @@
         li Fall 4
       ul.plain.iblock
         li Spring 4
+
+  .path-info-wrapper
+    ul.plain
+      li.course-path-wrapper.solid.blue
+        .subject
+          | FAS
+
+        .title
+          | Course 1
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.blue
+        .subject
+          | FAS
+
+        .title
+          | Course 2
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.blue
+        .subject
+          | FAS
+
+        .title
+          | Course 3
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.green
+        .subject
+          | FAS
+
+        .title
+          | Introduction to the Modern Middle East
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.green
+        .subject
+          | FAS
+
+        .title
+          | Introduction to the Modern Middle East
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+
+
 
 javascript:
   var semesterGrid = $('.grid-wrapper.semester');

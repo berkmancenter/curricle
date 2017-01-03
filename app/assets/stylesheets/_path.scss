@@ -1,6 +1,5 @@
 .path-main {
   margin-top: 20px;
-
   .toggles {
     button {
       margin-left: 10px;
@@ -12,16 +11,27 @@
     }
   }
 
+  .grid-wrapper {
+     @include span-columns(7 of 10);
+
+     &.hidden {
+       display: none !important;
+     }
+  }
+
   .grid-wrapper.semester {
+    //@include span-columns(7 of 7);
     ul {
       vertical-align: top;
-      width: 12.5%;
+      width: 15%;
       text-align: center;
       position: relative;
+      padding: 20px, 10px;
 
       &.times {
         li {
           line-height: 60px;
+          opacity: 0.2;
         }
       }
     }
@@ -31,7 +41,6 @@
       display: block;
       width: 100%;
       border-bottom: 1px dashed lightgray;
-      border-right: 1px dashed lightgray;
       height: 60px;
 
       &:first-of-type {
@@ -40,10 +49,14 @@
 
       .class {
         display: table;
-        width: 100%;
+        width: 80%;
         position: absolute;
-        background: #d42529;
+        background: #539db7;
         color: white;
+
+        .recommended {
+          background: #83b971;
+        }
 
         .title {
           display: table-cell;
@@ -77,4 +90,41 @@
       }
     }
   }
+
+  .path-info-wrapper {
+    @include span-columns(3 of 10);
+    .course-path-wrapper {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border: 1px solid gray;
+      position: relative;
+
+      .title {
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: left;
+      }
+
+      &.green {
+        border: 1px solid #83b971;
+        color: #83b971;
+
+        &.solid {
+          color: white;
+          background: #83b971;
+        }
+      }
+      &.blue {
+        border: 1px solid #539db7;
+        color: #539db7;
+
+        &.solid {
+          color: white;
+          background: #539db7;
+        }
+      }
+    }
+  }
+
+
 }
