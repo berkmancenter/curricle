@@ -6,6 +6,7 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.string :term_name
       t.integer :term_year
       t.integer :academic_year
+      t.string :class_section
       t.string :component
       t.integer :prereq
       t.string :subject
