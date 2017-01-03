@@ -6,13 +6,14 @@ csv_text = File.read(Rails.root.join('lib', 'seeds', 'courses.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   term_year, term_name = row['termDescription'].to_s.split(' ')
-  c = Course.find_or_create_by(
+  c = Course.create(
     external_course_id: row['courseId'],
     course_description: row['courseDescr'],
     title: row['courseTitleLong'],
     term_name: term_name,
     term_year: term_year,
     academic_year: row['academicYear'],
+    class_section: row['classSection'].to_s =~ /^\d+$/ ? row['classSection'].to_i : row['classSection'],
     component: row['componentDescription'],
     subject: row['subject'],
     subject_description: row['subjectDescription'],

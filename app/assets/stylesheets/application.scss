@@ -1,9 +1,12 @@
 @import "bourbon";
 @import "grid-settings";
 @import "neat";
+@import "vars";
 @import "nav";
 @import "search";
 @import "path";
+@import "forms";
+
 
 body {
   // TODO: find appropriate fonts
@@ -14,31 +17,19 @@ body {
   @include outer-container;
 
   .header {
-    min-height: 100px;
-    padding: 20px 0px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-medium-gray;
 
-    h1, h2 {
-      margin-top: 0;
-    }
-
-    .left-content {
-    }
-
-    .right-content {
-      .col {
-        @include span-columns(3 of 10);
-
-        &:last-of-type {
-          @include span-columns(4 of 10);
-        }
-      }
+    a.logo {
+      text-decoration: none;
+      color: black;
     }
   }
 
   .main {
     .left-content {
-      padding: 0px 5px;
+      height: auto;
+      padding: 0px 0px 0px 5px;
+      border-right: 1px solid $color-medium-gray;
     }
 
     .right-content {
@@ -47,11 +38,11 @@ body {
   }
 
   .left-content {
-    @include span-columns(2);
+    @include span-columns(3);
   }
 
   .right-content {
-    @include span-columns(10);
+    @include span-columns(9);
     @include omega();
   }
 }
@@ -82,7 +73,39 @@ body {
   display: inline;
 }
 
-ul.plain {
-  list-style-type: none;
-  padding: 0;
+.align-c {
+  text-align: center;
+}
+
+.border {
+  border: 1px solid $color-gray;
+  border-radius: 3px;
+}
+
+.padding {
+  padding: 7px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+ul {
+  &.plain {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  &.horizontal {
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+button {
+  background-color: white;
+  border: 1px solid $color-medium-gray;
+  border-radius: 3px;
+  height: 25px;
 }
