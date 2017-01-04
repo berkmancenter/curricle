@@ -1,10 +1,18 @@
 .path-main
-  .toggles
-    button.semester.iblock.active
-      | Week
-    button.career.iblock
-      | 4-Year
-
+  ul.toggles.plain
+    / button.semester.iblock.active
+    /   | Week
+    / button.career.iblock
+    /   | 4-Year
+    li.inline 
+      span.label Semester
+    li.inline
+      label class="label-switch"
+        input type="checkbox"
+        div class="checkbox"
+    li.inline 
+      span.label 4-Year
+    
   .grid-wrapper.semester
     ul.plain.iblock.times
       li Time
