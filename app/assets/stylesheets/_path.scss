@@ -49,7 +49,7 @@
 
       .class {
         display: table;
-        width: 80%;
+        width: 100%;
         position: absolute;
         background: #539db7;
         color: white;
@@ -62,6 +62,20 @@
           display: table-cell;
           vertical-align: middle;
           text-align: center;
+
+          .add-remove {
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            line-height: 12px;
+            margin-bottom: 10px;
+            font-size: 12px;
+          }
+          .course {
+            text-align: left;
+            padding-left: 10px;
+            
+          }
         }
       }
     }
