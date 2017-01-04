@@ -1,14 +1,90 @@
 .path-main {
   margin-top: 20px;
-  .toggles {
-    button {
-      margin-left: 10px;
+  ul.toggles {
+    li {
+      font-size: 20px;
+      margin-right: 10px;
+      color: $color-medium-gray;
+    }
 
-      &.active {
-        font-weight: bold;
-        color: red;
+    .label-switch {
+      $action-color: $color-green !default;
+      $base-background-color: $color-medium-gray !default;
+      $switch-width: 52px;
+      $switch-padding: 2px;
+      $switch-height: 32px;
+      $switch-radius: $switch-height;
+      $knob-size: $switch-height - ($switch-padding * 2);
+      $knob-radius: $switch-height - ($switch-padding * 2);
+      $knob-width: $knob-size;
+      $switch-background: $color-medium-gray;
+      $switch-border-background: $base-background-color;
+      $switch-shadow: 0 2px 5px transparentize(black, 0.6);
+
+      border-radius: $switch-radius;
+      cursor: pointer;
+      display: inline-block;
+      height: $switch-height;
+      position: relative;
+      width: $switch-width;
+      padding-top: 10px;
+
+      input[type="checkbox"] {
+        display: none;
+
+        + .checkbox {
+          background: $switch-border-background;
+          border: 0;
+          border-radius: $switch-radius;
+          cursor: pointer;
+          height: $switch-height;
+          margin: 0;
+          padding: 0;
+          position: relative;
+          transition: all 0.3s ease;
+          width: $switch-width;
+          z-index: 0;
+
+          &::before {
+            @include position(absolute, 2px 0 0 2px);
+            background: $switch-background;
+            border-radius: $switch-radius;
+            content: "";
+            height: $knob-radius;
+            transform: scale(1);
+            transition: all 0.3s ease;
+            width: $switch-width - ($switch-padding * 2);
+            z-index: 1;
+          }
+
+          &::after {
+            @include position(absolute, 2px 0 0 2px);
+            @include size($knob-size);
+            background: $color-white;
+            border-radius: $knob-radius;
+            box-shadow: $switch-shadow;
+            content: "";
+            transition: all 0.3s ease;
+            z-index: 2;
+          }
+        }
+
+        &:checked {
+          + .checkbox {
+            background: $action-color;
+
+            &::before {
+              transform: scale(0);
+            }
+
+            &::after {
+              left: $switch-width - $knob-width - ($switch-padding);
+            }
+          }
+        }
       }
     }
+
   }
 
   .grid-wrapper {
