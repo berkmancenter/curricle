@@ -20,10 +20,9 @@
   }
 
   .grid-wrapper.semester {
-    //@include span-columns(7 of 7);
     ul {
       vertical-align: top;
-      width: 15%;
+      width: 16.6%;
       text-align: center;
       position: relative;
       padding: 20px, 10px;
@@ -117,6 +116,10 @@
         font-weight: bold;
         margin-top: 20px;
         text-align: left;
+      }
+
+      .subject {
+        margin-right: 7px;
       }
 
       &.green {
