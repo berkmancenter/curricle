@@ -25,6 +25,10 @@ class CoursesController < ApplicationController
         query = query.where(subject_description: query_filters[:subject])
       end
 
+      unless query_filters[:type] == 'all'
+        query = query.where(component: query_filters[:type])
+      end
+
       unless query_filters[:units][:min] == 'any'
         query = query.where("units_maximum >= ?", query_filters[:units][:min])
       end
@@ -73,6 +77,7 @@ class CoursesController < ApplicationController
       school: params[:school],
       department: params[:department],
       subject: params[:subject],
+      type: params[:type],
       units: {
         min: params[:units_min],
         max: params[:units_max]

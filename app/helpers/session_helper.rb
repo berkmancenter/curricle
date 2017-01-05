@@ -48,6 +48,8 @@ module SessionHelper
                  query_filters[:department].to_s == value.to_s
                when :subject
                  query_filters[:subject].to_s == value.to_s
+               when :type
+                 query_filters[:type].to_s == value.to_s
                when /units_(min|max)/
                  if query_filters[:units].present?
                    query_filters[:units][option.to_s.sub('units_', '').to_sym].to_s == value.to_s
