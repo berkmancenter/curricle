@@ -5,8 +5,43 @@ class CoursesController < ApplicationController
     @matching_courses ||= []
     @course_groups ||= []
 
-    if @keywords = session[:keywords]
-      query = Course.search_for(@keywords)
+    if query_filters.present?
+      @keywords = query_filters[:keywords]
+
+      query = Course.left_outer_joins(:course_meeting_patterns).search_for(query_filters)
+
+      term, year = query_filters[:term].split('_')
+      query = query.where(term_name: term, term_year: year)
+
+      unless query_filters[:school] == 'all'
+        query = query.where(academic_group: query_filters[:school])
+      end
+
+      unless query_filters[:department] == 'all'
+        query = query.where(class_academic_org_description: query_filters[:department])
+      end
+
+      unless query_filters[:subject] == 'all'
+        query = query.where(subject_description: query_filters[:subject])
+      end
+
+      unless query_filters[:units][:min] == 'any'
+        query = query.where("units_maximum >= ?", query_filters[:units][:min])
+      end
+
+      unless query_filters[:units][:max] == 'any'
+        query = query.where("units_maximum <= ?", query_filters[:units][:max])
+      end
+
+      query_filters[:times].each do |day, values|
+        unless values[:min] == 'any'
+          query = query.where.not("course_meeting_patterns.meets_on_#{day} = ? AND EXTRACT(HOUR from meeting_time_start) < ?", true, values[:min])
+        end
+
+        unless values[:max] == 'any'
+          query = query.where.not("course_meeting_patterns.meets_on_#{day} = ? AND EXTRACT(HOUR from meeting_time_start) > ?", true, values[:max])
+        end
+      end
 
       @course_groups = []
 
@@ -31,7 +66,20 @@ class CoursesController < ApplicationController
   end
 
   def search
-    session[:keywords] = params["keywords"]
+    session[:query_filters] = {
+      term: params[:term] || '',
+      keywords: params[:keywords] || '',
+      keyword_options: params[:keyword_options] || [],
+      school: params[:school],
+      department: params[:department],
+      subject: params[:subject],
+      units: {
+        min: params[:units_min],
+        max: params[:units_max]
+      },
+      times: Course.schedule_filter_map(params)
+    }.to_json
+
     redirect_to '/'
   end
 
