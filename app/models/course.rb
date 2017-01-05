@@ -41,7 +41,7 @@ class Course < ApplicationRecord
     Course.where(query_params).distinct
   end
 
-  def self.subjects(query = nil)
+  def self.subject_groups(query = nil)
     # TODO: figure out if we can replace uniq with distinct
     query.pluck(:subject_academic_org_description).uniq
   end
