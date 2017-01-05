@@ -1,4 +1,11 @@
 $(document).ready( function () {
+  // submit search on enter
+  $('input.keyword-box').keypress(function (e) {
+    if (e.which == '13') {
+      $(this).closest('form').submit();
+    }
+  });
+
   $('select.multiple.dropdown').multiselect({
     placeholder: '',
     minHeight: null,
