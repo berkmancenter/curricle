@@ -59,4 +59,13 @@ $(document).ready( function () {
     prefix: 'Subject: ',
     search: true
   });
+
+  $('select.type-select.dropdown').multiselect({
+    placeholder: '',
+    minHeight: null,
+    showCheckbox: false,
+    multiple: false,
+    prefix: 'Type: ',
+    search: true
+  });
 });

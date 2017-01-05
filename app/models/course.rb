@@ -58,6 +58,10 @@ class Course < ApplicationRecord
     order(:subject_description).distinct.pluck(:subject_description)
   end
 
+  def self.component_types
+    order(:component).distinct.pluck(:component)
+  end
+
   def self.terms
     select('DISTINCT on (term_name,term_year) term_name, term_year').where("term_year >= ?", Date.today.year).order(term_year: :asc, term_name: :desc).map { |term|
       "#{term.term_name}_#{term.term_year}"

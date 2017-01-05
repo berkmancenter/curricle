@@ -94,6 +94,13 @@
         option value=(subject) selected=(filter_option_state(:subject, subject))
           == subject
 
+    select.full.type-select.dropdown name="type"
+      option value="all" selected=(filter_option_state(:type, 'all'))
+        | All
+      - Course.component_types.each do |type|
+        option value=(type) selected=(filter_option_state(:type, type))
+          == type
+
     .unit-wrapper
       table
         tr
@@ -116,16 +123,6 @@
 
     .course-type
       table
-        tr
-          td
-            label
-              input.checkbox type="checkbox"
-              | Lecture
-          td
-            label
-              input.checkbox type="checkbox"
-              | Seminar
-      
         tr
           td
             label
