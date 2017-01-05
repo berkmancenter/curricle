@@ -6,6 +6,12 @@ $(document).ready( function () {
     }
   });
 
+  // submit reset form
+  $('.reset-link').click(function (e) {
+    e.preventDefault();
+    $(this).closest('form').submit();
+  });
+
   $('select.multiple.dropdown').multiselect({
     placeholder: '',
     minHeight: null,

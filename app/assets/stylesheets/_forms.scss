@@ -5,7 +5,7 @@ label {
 select {
   height: 25px;
   margin-bottom: 5px;
-  cursor: pointer; cursor: hand;
+  cursor: pointer;
   background-color: $color-white;
 
   &.dark {
@@ -37,7 +37,7 @@ input[type="text"] {
 input[type="range"] {
   margin-left: 10px;
   vertical-align: sub;
-  cursor: pointer; cursor: hand;
+  cursor: pointer;
 }
 
 .checkbox{
@@ -54,7 +54,7 @@ input[type="range"] {
 
 input[type="checkbox"]{
   -webkit-appearance: none;
-  cursor: pointer; cursor: hand;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:checked{

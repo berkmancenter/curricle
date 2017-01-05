@@ -83,6 +83,11 @@ class CoursesController < ApplicationController
     redirect_to '/'
   end
 
+  def clear_search
+    session.delete(:query_filters)
+    redirect_to '/'
+  end
+
   def add_to_tray
     @course = Course.find(params["id"])
 
