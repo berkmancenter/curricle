@@ -45,7 +45,7 @@ class CoursesController < ApplicationController
 
       @course_groups = []
 
-      Course.subjects(query).each do |subject|
+      Course.subject_groups(query).each do |subject|
         group = {
           subject: subject,
           days: [
