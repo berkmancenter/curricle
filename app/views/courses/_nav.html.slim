@@ -1,7 +1,7 @@
 .search-nav
   h3.italic Course Search
 
-  == form_tag '/courses/search', method: 'POST'
+  == form_tag '/courses/search', method: 'POST', class: 'search-form'
   
     .term-select-wrapper
       select.term-select.dropdown.dark.full name="term"
@@ -137,3 +137,6 @@
               | Graduate
 
     == submit_tag 'Search'
+
+  == form_tag '/courses/search/clear', method: 'POST', class: 'reset-form'
+    a.reset-link href="#" Reset search filters
