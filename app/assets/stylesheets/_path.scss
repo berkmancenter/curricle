@@ -2,24 +2,25 @@
   margin-top: 20px;
   ul.toggles {
     li {
-      font-size: 20px;
+      font-size: 16px;
       margin-right: 10px;
       color: $color-medium-gray;
+      font-weight: lighter;
     }
 
     .label-switch {
       $action-color: $color-green !default;
       $base-background-color: $color-medium-gray !default;
-      $switch-width: 52px;
-      $switch-padding: 2px;
-      $switch-height: 32px;
+      $switch-width: 45px;
+      $switch-padding: 1px;
+      $switch-height: 26px;
       $switch-radius: $switch-height;
       $knob-size: $switch-height - ($switch-padding * 2);
       $knob-radius: $switch-height - ($switch-padding * 2);
       $knob-width: $knob-size;
       $switch-background: $color-medium-gray;
       $switch-border-background: $base-background-color;
-      $switch-shadow: 0 2px 5px transparentize(black, 0.6);
+      $switch-shadow: 0 1px 5px transparentize(black, 0.6);
 
       border-radius: $switch-radius;
       cursor: pointer;
@@ -27,7 +28,7 @@
       height: $switch-height;
       position: relative;
       width: $switch-width;
-      padding-top: 10px;
+      padding-top: 6px;
 
       input[type="checkbox"] {
         display: none;
@@ -46,7 +47,7 @@
           z-index: 0;
 
           &::before {
-            @include position(absolute, 2px 0 0 2px);
+            @include position(absolute, 1px 0 0 1px);
             background: $switch-background;
             border-radius: $switch-radius;
             content: "";
@@ -58,7 +59,7 @@
           }
 
           &::after {
-            @include position(absolute, 2px 0 0 2px);
+            @include position(absolute, 1px 0 0 1px);
             @include size($knob-size);
             background: $color-white;
             border-radius: $knob-radius;
@@ -118,6 +119,11 @@
       border-bottom: 1px dashed lightgray;
       height: 60px;
 
+      >h4 {
+        color: $color-medium-gray;
+        margin-top: 0;
+      }
+
       &:first-of-type {
         line-height: 60px;
       }
@@ -149,7 +155,7 @@
           .course {
             text-align: left;
             padding-left: 10px;
-            
+
           }
         }
       }
