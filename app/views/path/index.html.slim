@@ -4,13 +4,13 @@
     /   | Week
     / button.career.iblock
     /   | 4-Year
-    li.inline 
+    li.inline
       span.label Semester
     li.inline
       label.label-switch
-        input type="checkbox"
+        input.toggle type="checkbox"
         div.checkbox
-    li.inline 
+    li.inline
       span.label 4-Year
     
   .grid-wrapper.semester
@@ -357,11 +357,17 @@ javascript:
   var careerGrid = $('.grid-wrapper.career');
   var careerBtn = $('button.career');
 
-  $('button.semester').click(function () {
-    careerBtn.removeClass('active');
-    careerGrid.addClass('hidden');
-    semesterBtn.addClass('active');
-    semesterGrid.removeClass('hidden');
+  $('input.toggle').change(function (e) {
+    if(this.checked)
+    {
+      semesterGrid.addClass('hidden');
+      careerGrid.removeClass('hidden'); 
+    }
+    else 
+    {
+      semesterGrid.removeClass('hidden');
+      careerGrid.addClass('hidden');
+    }
   });
 
   $('button.career').click(function () {
