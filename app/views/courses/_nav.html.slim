@@ -1,123 +1,128 @@
 .search-nav
-  h3.italic Search
+  h3.italic Course Search
 
-  == form_tag '/courses/search', method: 'POST'
+  == form_tag '/courses/search', method: 'POST', class: 'search-form'
   
-    select.dark.full
-      option Term: Fall 2017
-      option Term: Spring 2017
-      option Term: Fall 2018
-      option Term: Spring 2018
-  
-    .border.padding.box
+    .term-select-wrapper
+      select.term-select.dropdown.dark.full name="term"
+        - Course.terms.each do |t|
+          option value=(t) selected=(filter_option_state(:term, t))
+            == t.split('_').join(' ')
+
+    .box
+      label Keywords
       .query-box.full
-        == text_field_tag  'keywords', @keywords, placeholder: 'Keyword'
+        == text_field_tag  'keywords', @keywords, placeholder: 'Keyword', class: 'keyword-box'
 
         br
 
-        label.italic Apply to:
-        <select multiple class="multiple-select">
-          option All
-          option Course title
-          option Course description
-          option Instructor
-          option Library reserves
-        </select>
+        select.multiple.dropdown multiple="multiple" style="width:100%" name='keyword_options[]'
+          - Course.keyword_options_map.each do |key, opts|
+            option value=(key) selected=(filter_option_state(:keyword_option, key))
+              == opts[:display]
 
         br
-
-        label.italic Weight:
-        input type="range"
-        
-    button
-      | + Add Seach Term
-        
-      br
 
     hr
+  
+    // NOTE: query box for if/when multiple keyword boxes are supported
+    //.border.padding.box
+    //  .query-box.full
+    //    == text_field_tag  'keywords', @keywords, placeholder: 'Keyword'
+
+    //    br
+
+    //    label.italic Apply to:
+    //    br
+    //    select.apply-to-select multiple="multiple" style="width:100%" name='keyword_options[]'
+    //      - Course.keyword_options_map.each do |key, opts|
+    //        option value=(key) selected=(opts[:default] ? 'selected' : false)
+    //          == opts[:display]
+
+    //    br
+
+    //    label.italic Weight:
+    //    input type="range"
+    //    
+    //button
+    //  | + Add Seach Term
+    //    
+    //  br
+
+    //hr
     
     .schedule-wrapper
       table
-        tr
-          td Mon
-          td
-            select
-              option Any
-          td.align-c to
-          td
-            select
-              option Any
-        tr
-          td Tue
-          td
-            select
-              option Any
-          td.align-c to
-          td
-            select
-              option Any
-        tr
-          td Wed
-          td
-            select
-              option Any
-          td.align-c to
-          td
-            select
-              option Any
-        tr
-          td Thu
-          td
-            select
-              option Any
-          td.align-c to
-          td
-            select
-              option Any
-        tr
-          td Fri
-          td
-            select
-              option Any
-          td.align-c to
-          td
-            select
-              option Any
+        - Course.schedule_filter_map.each do |day, values|
+          tr
+            td
+              == day.to_s.capitalize[0,3]
+            td
+              select.single.dropdown name="#{day}_min"
+                option value="any" selected=(filter_option_state(:"#{day}_min", 'any'))
+                  | Any
+                - CourseMeetingPattern.hours_range.each do |i|
+                  option value=(i) selected=(filter_option_state(:"#{day}_min", i))
+                    == pretty_hour(i)
+            td.align-c to
+            td
+              select.single.dropdown name="#{day}_max"
+                option value="any" selected=(filter_option_state(:"#{day}_max", 'any'))
+                  | Any
+                - CourseMeetingPattern.hours_range.each do |i|
+                  option value=(i) selected=(filter_option_state(:"#{day}_max", i))
+                    == pretty_hour(i)
 
-    select.full
-      option School: FAS
+    select.full.school-select.dropdown name="school"
+      option value="all" selected=(filter_option_state(:school, 'all'))
+        | All
+      - Course.schools.each do |school|
+        option value=(school) selected=(filter_option_state(:school, school))
+          == school
 
-    br
+    select.full.department-select.dropdown name="department"
+      option value="all" selected=(filter_option_state(:department, 'all'))
+        | All
+      - Course.departments.each do |department|
+        option value=(department) selected=(filter_option_state(:department, department))
+          == department
 
-    select.full
-      option Department: All
+    select.full.subject-select.dropdown name="subject"
+      option value="all" selected=(filter_option_state(:subject, 'all'))
+        | All
+      - Course.subject_descriptions.each do |subject|
+        option value=(subject) selected=(filter_option_state(:subject, subject))
+          == subject
+
+    select.full.type-select.dropdown name="type"
+      option value="all" selected=(filter_option_state(:type, 'all'))
+        | All
+      - Course.component_types.each do |type|
+        option value=(type) selected=(filter_option_state(:type, type))
+          == type
 
     .unit-wrapper
       table
         tr
           td Units
           td
-            select
-              option Any
-              option 1
+            select.single.dropdown name="units_min"
+              option value="any" selected=(filter_option_state(:units_min, 'any'))
+                | Any
+              - (1..16).each do |i|
+                option value=(i) selected=(filter_option_state(:units_min, i))
+                  == i
           td.align-c to
           td
-            select
-              option Any
-              option 5
+            select.single.dropdown name="units_max"
+              option value="any" selected=(filter_option_state(:units_max, 'any'))
+                | Any
+              - (1..16).each do |i|
+                option value=(i) selected=(filter_option_state(:units_max, i))
+                  == i
 
     .course-type
       table
-        tr
-          td
-            label
-              input.checkbox type="checkbox"
-              | Lecture
-          td
-            label
-              input.checkbox type="checkbox"
-              | Seminar
-      
         tr
           td
             label
@@ -127,3 +132,8 @@
             label
               input.checkbox type="checkbox"
               | Graduate
+
+    == submit_tag 'Search'
+
+  == form_tag '/courses/search/clear', method: 'POST', class: 'reset-form'
+    a.reset-link href="#" Reset search filters
