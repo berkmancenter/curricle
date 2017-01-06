@@ -170,16 +170,21 @@
     ul {
       @include span-columns(1 of 2);
       vertical-align: top;
+      width: 100%;
 
       li {
         text-align: center;
+        font-size: 16px;
         margin: 10px 0px;
-
+        &:first-of-type {
+         border-bottom: 1px dashed lightgray;
+        }
+        
         &.class {
           height: 60px;
           line-height: 60px;
           width: 100%;
-          background: #d42529;
+          background: #539db7;
           color: white;
         }
       }
