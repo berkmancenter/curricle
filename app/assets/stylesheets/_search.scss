@@ -140,6 +140,15 @@
     margin-top: 0px;
   }
 
+  .term-select-wrapper {
+    .ms-options-wrap {
+      button {
+        background-color: $color-medium-gray;
+        color: white;
+      }
+    }
+  }
+
   button {
     width: 100%;
     margin: 10px 0;
@@ -169,6 +178,34 @@
 
     select {
       width: 100%;
+    }
+  }
+
+  .schedule-wrapper {
+    .ms-options-wrap {
+      width: 85px;
+    }
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+  }
+
+  .search-form {
+    input[type="submit"] {
+      margin: 20px 0px;
+      background: $color-green;
+      color: white;
+      border: none;
+      padding: 8px 15px 9px;
+      font-size: 16px;
+    }
+  }
+
+  .reset-form {
+    .reset-link {
+      color: $color-medium-gray;
+      font-size: 14px;
     }
   }
 }

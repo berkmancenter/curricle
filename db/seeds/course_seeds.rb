@@ -18,6 +18,7 @@ csv.each do |row|
     subject: row['subject'],
     subject_description: row['subjectDescription'],
     subject_academic_org_description: row['subjectAcadOrgDescription'],
+    class_academic_org_description: row['classAcadOrgDescription'],
     academic_group: row['acadGroup'],
     academic_group_description: row['acadGroupDescription'],
     grading_basis_description: row['gradingBasisDescription'],

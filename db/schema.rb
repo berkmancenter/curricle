@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20161219202747) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 20161219202747) do
     t.index ["course_description_long"], name: "index_courses_on_course_description_long", using: :gin
     t.index ["course_note"], name: "index_courses_on_course_note", using: :gin
     t.index ["title"], name: "index_courses_on_title", using: :gin
+    t.text     "class_academic_org_description"
   end
 
   create_table "tags", force: :cascade do |t|
