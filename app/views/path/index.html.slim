@@ -1,10 +1,18 @@
 .path-main
-  .toggles
-    button.semester.iblock.active
-      | Week
-    button.career.iblock
-      | 4-Year
-
+  ul.toggles.plain
+    / button.semester.iblock.active
+    /   | Week
+    / button.career.iblock
+    /   | 4-Year
+    li.inline
+      span.label Semester
+    li.inline
+      label.label-switch
+        input.toggle type="checkbox"
+        div.checkbox
+    li.inline
+      span.label 4-Year
+    
   .grid-wrapper.semester
     ul.plain.iblock.times
       li Time
@@ -22,14 +30,24 @@
       li 07:00
       li 08:00
 
+
+
     ul.plain.iblock
       li
-        | Mon
+        h4 Monday
         // top: number of minutes past 7am
         // height: number of minutes in length
         .class style="top: 240px; height: 60px;"
           .title
-            | Course 1
+            .add-remove
+              div x
+            .course Course 1
+        .class style="top: 420px; height: 60px;"
+          .title.recommended
+            .add-remove
+              div x
+              div +
+            | Rec 1
       li
         /! empty element used for spacing
       li
@@ -59,13 +77,23 @@
 
     ul.plain.iblock
       li
-        | Tue
+        h4 Tuesday
         .class style="top: 180px; height: 60px;"
           .title
-            | Course 4
-        .class style="top: 660px; height: 90px;"
+            .add-remove
+              div x
+            | Course 3
+        .class style="top: 660px; height: 120px;"
           .title
+            .add-remove
+              div x
             | Course 2
+        .class style="top: 300px; height: 60px;"
+          .title.recommended
+            .add-remove
+              div x
+              div +
+            | Rec 2
       li
         /! empty element used for spacing
       li
@@ -95,10 +123,18 @@
 
     ul.plain.iblock
       li
-        | Wed
+        h4 Wednesday
         .class style="top: 240px; height: 60px;"
           .title
+            .add-remove
+              div x
             | Course 1
+        .class style="top: 420px; height: 60px;"
+          .title.recommended
+            .add-remove
+              div x
+              div +  
+            | Rec 1
       li
         /! empty element used for spacing
       li
@@ -128,10 +164,18 @@
 
     ul.plain.iblock
       li
-        | Thu
+        h4 Thursday
         .class style="top: 180px; height: 60px;"
           .title
-            | Course 4
+            .add-remove
+              div x
+            | Course 3
+        .class style="top: 300px; height: 60px;"
+          .title.recommended
+            .add-remove
+              div x
+              div +
+            | Rec 2
       li
         /! empty element used for spacing
       li
@@ -161,70 +205,12 @@
 
     ul.plain.iblock
       li
-        | Fri
-        .class style="top: 420px; height: 240px;"
+        h4 Friday
+        .class style="top: 240px; height: 60px;"
           .title
+            .add-remove
+              div x
             | Course 1
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        | Sat
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        | Sun
       li
         /! empty element used for spacing
       li
@@ -256,23 +242,37 @@
     .col
       ul.plain.iblock
         li Fall 1
-        li.class Course 1
-        li.class Course 2
-        li.class Course 11
+        li.class
+          div x
+          | Course 1
+        li.class
+          div x
+          | Course 2
+        li.class
+          div x
+          | Course 3
       ul.plain.iblock
         li Spring 1
-        li.class Course 4
+        li.class
+          div x
+          | Course 4
     .col
       ul.plain.iblock
         li Fall 2
-        li.class Course 7
+        li.class
+          div x
+          | Course 7
       ul.plain.iblock
         li Spring 2
-        li.class Course 105
+        li.class
+          div x
+          | Course 105
     .col
       ul.plain.iblock
         li Fall 3
-        li.class Course 10
+        li.class
+          div x
+          | Course 10
       ul.plain.iblock
         li Spring 3
     .col
@@ -281,17 +281,107 @@
       ul.plain.iblock
         li Spring 4
 
+  .path-info-wrapper
+    ul.plain
+      li.course-path-wrapper.solid.blue
+        .subject
+          | FAS
+
+        .title
+          | Course 1
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.blue
+        .subject
+          | FAS
+
+        .title
+          | Course 2
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.blue
+        .subject
+          | FAS
+
+        .title
+          | Course 3
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.green
+        .subject
+          | FAS
+
+        .title
+          | Introduction to the Modern Middle East
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+    ul.plain
+      li.course-path-wrapper.solid.green
+        .subject
+          | FAS
+
+        .title
+          | Introduction to the Modern Middle East
+
+        span.subject
+          | MODMDEST
+        span.catalog
+          | 100
+
+        .day-time
+          | M / W 9-10 AM
+
+
+
+
 javascript:
   var semesterGrid = $('.grid-wrapper.semester');
   var semesterBtn = $('button.semester');
   var careerGrid = $('.grid-wrapper.career');
   var careerBtn = $('button.career');
 
-  $('button.semester').click(function () {
-    careerBtn.removeClass('active');
-    careerGrid.addClass('hidden');
-    semesterBtn.addClass('active');
-    semesterGrid.removeClass('hidden');
+  $('input.toggle').change(function (e) {
+    if(this.checked)
+    {
+      semesterGrid.addClass('hidden');
+      careerGrid.removeClass('hidden'); 
+    }
+    else 
+    {
+      semesterGrid.removeClass('hidden');
+      careerGrid.addClass('hidden');
+    }
   });
 
   $('button.career').click(function () {

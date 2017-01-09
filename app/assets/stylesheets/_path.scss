@@ -1,27 +1,113 @@
 .path-main {
   margin-top: 20px;
+  ul.toggles {
+    li {
+      font-size: 16px;
+      margin-right: 10px;
+      color: $color-medium-gray;
+      font-weight: lighter;
+    }
 
-  .toggles {
-    button {
-      margin-left: 10px;
+    .label-switch {
+      $action-color: $color-green !default;
+      $base-background-color: $color-medium-gray !default;
+      $switch-width: 45px;
+      $switch-padding: 1px;
+      $switch-height: 26px;
+      $switch-radius: $switch-height;
+      $knob-size: $switch-height - ($switch-padding * 2);
+      $knob-radius: $switch-height - ($switch-padding * 2);
+      $knob-width: $knob-size;
+      $switch-background: $color-medium-gray;
+      $switch-border-background: $base-background-color;
+      $switch-shadow: 0 1px 5px transparentize(black, 0.6);
 
-      &.active {
-        font-weight: bold;
-        color: red;
+      border-radius: $switch-radius;
+      cursor: pointer;
+      display: inline-block;
+      height: $switch-height;
+      position: relative;
+      width: $switch-width;
+      padding-top: 6px;
+
+      input[type="checkbox"] {
+        display: none;
+
+        + .checkbox {
+          background: $switch-border-background;
+          border: 0;
+          border-radius: $switch-radius;
+          cursor: pointer;
+          height: $switch-height;
+          margin: 0;
+          padding: 0;
+          position: relative;
+          transition: all 0.3s ease;
+          width: $switch-width;
+          z-index: 0;
+
+          &::before {
+            @include position(absolute, 1px 0 0 1px);
+            background: $switch-background;
+            border-radius: $switch-radius;
+            content: "";
+            height: $knob-radius;
+            transform: scale(1);
+            transition: all 0.3s ease;
+            width: $switch-width - ($switch-padding * 2);
+            z-index: 1;
+          }
+
+          &::after {
+            @include position(absolute, 1px 0 0 1px);
+            @include size($knob-size);
+            background: $color-white;
+            border-radius: $knob-radius;
+            box-shadow: $switch-shadow;
+            content: "";
+            transition: all 0.3s ease;
+            z-index: 2;
+          }
+        }
+
+        &:checked {
+          + .checkbox {
+            background: $action-color;
+
+            &::before {
+              transform: scale(0);
+            }
+
+            &::after {
+              left: $switch-width - $knob-width - ($switch-padding);
+            }
+          }
+        }
       }
     }
+
+  }
+
+  .grid-wrapper {
+     @include span-columns(7 of 10);
+
+     &.hidden {
+       display: none !important;
+     }
   }
 
   .grid-wrapper.semester {
     ul {
       vertical-align: top;
-      width: 12.5%;
+      width: 16.6%;
       text-align: center;
       position: relative;
+      padding: 20px, 10px;
 
       &.times {
         li {
           line-height: 60px;
+          opacity: 0.2;
         }
       }
     }
@@ -31,8 +117,12 @@
       display: block;
       width: 100%;
       border-bottom: 1px dashed lightgray;
-      border-right: 1px dashed lightgray;
       height: 60px;
+
+      >h4 {
+        color: $color-medium-gray;
+        margin-top: 0;
+      }
 
       &:first-of-type {
         line-height: 60px;
@@ -42,13 +132,31 @@
         display: table;
         width: 100%;
         position: absolute;
-        background: #d42529;
+        background: #539db7;
         color: white;
+
+        .recommended {
+          background: #83b971;
+        }
 
         .title {
           display: table-cell;
           vertical-align: middle;
           text-align: center;
+
+          .add-remove {
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            line-height: 12px;
+            margin-bottom: 10px;
+            font-size: 12px;
+          }
+          .course {
+            text-align: left;
+            padding-left: 10px;
+
+          }
         }
       }
     }
@@ -62,19 +170,73 @@
     ul {
       @include span-columns(1 of 2);
       vertical-align: top;
+      width: 100%;
 
       li {
         text-align: center;
+        font-size: 16px;
         margin: 10px 0px;
 
+        &:first-of-type {
+         border-bottom: 1px dashed lightgray;
+        }
+        
         &.class {
           height: 60px;
           line-height: 60px;
           width: 100%;
-          background: #d42529;
+          background: #539db7;
           color: white;
+
+          div {
+            float:right; 
+            margin-top: -20px;
+            margin-right: 4px; 
+          }
+
         }
       }
     }
   }
+
+  .path-info-wrapper {
+    @include span-columns(3 of 10);
+    .course-path-wrapper {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      border: 1px solid gray;
+      position: relative;
+
+      .title {
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: left;
+      }
+
+      .subject {
+        margin-right: 7px;
+      }
+
+      &.green {
+        border: 1px solid #83b971;
+        color: #83b971;
+
+        &.solid {
+          color: white;
+          background: #83b971;
+        }
+      }
+      &.blue {
+        border: 1px solid #539db7;
+        color: #539db7;
+
+        &.solid {
+          color: white;
+          background: #539db7;
+        }
+      }
+    }
+  }
+
+
 }
