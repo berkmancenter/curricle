@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161219202747) do
-
+ActiveRecord::Schema.define(version: 20170104043109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "btree_gin"
 
   create_table "course_instructors", force: :cascade do |t|
     t.integer  "external_course_id"
     t.integer  "course_id"
+    t.string   "term_name"
+    t.integer  "term_year"
+    t.string   "class_section"
+    t.string   "class_meeting_number"
     t.string   "instructor_role"
     t.string   "print_instructor_flag"
     t.string   "first_name"
@@ -36,6 +37,10 @@ ActiveRecord::Schema.define(version: 20161219202747) do
   create_table "course_meeting_patterns", force: :cascade do |t|
     t.integer  "external_course_id"
     t.integer  "course_id"
+    t.string   "term_name"
+    t.integer  "term_year"
+    t.string   "class_section"
+    t.string   "class_meeting_number"
     t.datetime "meeting_time_start"
     t.datetime "meeting_time_end"
     t.boolean  "meets_on_monday"
@@ -59,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161219202747) do
     t.string   "term_name"
     t.integer  "term_year"
     t.integer  "academic_year"
+    t.string   "class_section"
     t.string   "component"
     t.integer  "prereq"
     t.string   "subject"
@@ -76,9 +82,6 @@ ActiveRecord::Schema.define(version: 20161219202747) do
     t.text     "course_note"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.index ["course_description_long"], name: "index_courses_on_course_description_long", using: :gin
-    t.index ["course_note"], name: "index_courses_on_course_note", using: :gin
-    t.index ["title"], name: "index_courses_on_title", using: :gin
     t.text     "class_academic_org_description"
   end
 
