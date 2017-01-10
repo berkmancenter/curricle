@@ -10,6 +10,8 @@
 .search-main {
   .grid-wrapper {
     @include span-columns(5 of 10);
+    overflow: scroll;
+    max-height: 750px;
 
     ul.block-list {
       margin: 0;
@@ -47,6 +49,7 @@
     }
 
     .grid-section {
+      
       padding: 14px 10px 35px 10px;
       border-bottom: 1px solid $color-gray;
 
@@ -62,6 +65,8 @@
 
   .details-wrapper {
     @include span-columns(5 of 10);
+     overflow: scroll;
+     max-height: 750px;
 
     .course-wrapper {
       margin-bottom: 20px;
