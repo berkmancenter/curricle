@@ -27,7 +27,6 @@ body {
   .main {
     .left-content {
       height: auto;
-      padding: 0px 0px 0px 5px;
       border-right: 1px solid $color-medium-gray;
     }
 
@@ -43,6 +42,9 @@ body {
   .right-content {
     @include span-columns(9);
     @include omega();
+    height: 645px;
+    padding-bottom: 10px;
+    overflow: auto;
   }
 }
 

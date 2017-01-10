@@ -52,6 +52,13 @@
       
       padding: 14px 10px 35px 10px;
       border-bottom: 1px solid $color-gray;
+      &:first-of-type {
+        padding-top: 0;
+        
+        h4 {
+          margin-top: 0;
+        }
+      }
 
       h4 {
         margin-bottom: 8px;
@@ -67,6 +74,10 @@
     @include span-columns(5 of 10);
      overflow: scroll;
      max-height: 750px;
+
+     ul {
+       margin-top: 0;
+     }
 
     .course-wrapper {
       margin-bottom: 20px;
