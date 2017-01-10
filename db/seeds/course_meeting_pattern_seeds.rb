@@ -8,10 +8,10 @@ csv.each do |row|
   term_year, term_name = row['termDescription'].to_s.split(' ')
   cmp = CourseMeetingPattern.new(
     external_course_id: row['courseId'],
-    term_name: term_name,
-    term_year: term_year,
-    class_section: row['classSection'].to_s =~ /^\d+$/ ? row['classSection'].to_i : row['classSection'],
-    class_meeting_number: row['classMtgNbr'],
+    #term_name: term_name,
+    #term_year: term_year,
+    #class_section: row['classSection'].to_s =~ /^\d+$/ ? row['classSection'].to_i : row['classSection'],
+    #class_meeting_number: row['classMtgNbr'],
     meeting_time_start: row['meetingTimeStart'] ? Time.strptime(row['meetingTimeStart'], '%d-%b-%y %I.%M.%S.000000000 %P') : nil,
     meeting_time_end: row['meetingTimeEnd'] ? Time.strptime(row['meetingTimeEnd'], '%d-%b-%y %I.%M.%S.000000000 %P') : nil,
     meets_on_monday: row['mon'] == 'Y',
@@ -29,9 +29,9 @@ csv.each do |row|
 
   course = Course.find_by(
     external_course_id: cmp.external_course_id,
-    term_name: cmp.term_name,
-    term_year: cmp.term_year,
-    class_section: cmp.class_section
+    #term_name: cmp.term_name,
+    #term_year: cmp.term_year,
+    #class_section: cmp.class_section
   )
 
   if course.nil?
@@ -41,5 +41,5 @@ csv.each do |row|
   end
 
   cmp.save
-  puts "'#{cmp.external_course_id}-#{cmp.class_section}' saved"
+  #puts "'#{cmp.external_course_id}-#{cmp.class_section}' saved"
 end
