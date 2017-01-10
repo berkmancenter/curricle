@@ -13,7 +13,7 @@ csv.each do |row|
     term_name: term_name,
     term_year: term_year,
     academic_year: row['academicYear'],
-    class_section: row['classSection'].to_s =~ /^\d+$/ ? row['classSection'].to_i : row['classSection'],
+    #class_section: row['classSection'].to_s =~ /^\d+$/ ? row['classSection'].to_i : row['classSection'],
     component: row['componentDescription'],
     subject: row['subject'],
     subject_description: row['subjectDescription'],
