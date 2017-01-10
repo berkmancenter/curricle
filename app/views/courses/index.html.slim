@@ -1,11 +1,10 @@
 .search-main
 
-  .grid-wrapper
-    h3.italic
+  h3.italic style="margin-bottom: 40px;"
       | Results (
       == @matching_courses.count
       |  courses)
-      
+  .grid-wrapper
     - @course_groups.each do |group|
       .grid-section
         h4
