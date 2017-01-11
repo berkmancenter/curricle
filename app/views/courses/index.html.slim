@@ -26,7 +26,7 @@
       - if @matching_courses.empty?
         li.italic No matches found
       - @matching_courses.each do |course|
-        li.course-wrapper.green data-id=(course.id)
+        li.course-wrapper.green data-id=(course.id) id=(course.id)
           .subject
             == course.academic_group
           .tray-form-wrapper
@@ -71,3 +71,12 @@
 
           .units
              == course.units_maximum
+
+javascript:
+  
+
+  $('.block').click(function (e) {
+    var course_id = $(this).data("id");
+    var element = document.getElementById(course_id);
+    element.scrollIntoView({behavior: "smooth"});
+  });
