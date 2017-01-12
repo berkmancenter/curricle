@@ -121,18 +121,6 @@
                 option value=(i) selected=(filter_option_state(:units_max, i))
                   == i
 
-    .course-type
-      table
-        tr
-          td
-            label
-              input.checkbox type="checkbox"
-              | Undergrad
-          td
-            label
-              input.checkbox type="checkbox"
-              | Graduate
-
     == submit_tag 'Search'
 
   == form_tag '/courses/search/clear', method: 'POST', class: 'reset-form'
