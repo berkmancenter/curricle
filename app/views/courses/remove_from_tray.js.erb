@@ -1,2 +1,10 @@
-$(".course-wrapper[data-id=<%= @course.id %>] .tray-form-wrapper").html('<%= render("add_to_tray", course: @course) %>');
-$(".block-list .block[data-id=<%= @course.id %>]").removeClass('added');
+// search page actions
+<% if @course.present? %>
+  $(".search-main .course-wrapper[data-id=<%= @course.id %>] .tray-form-wrapper").html('<%= render("add_to_tray", course: @course) %>');
+  $(".search-main .block-list .block[data-id=<%= @course.id %>]").removeClass('added');
+<% end %>
+
+// path page actions
+<% if @pattern.present? %>
+  $(".path-main [data-id=<%= @pattern.id %>]").remove();
+<% end %>
