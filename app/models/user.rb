@@ -15,7 +15,6 @@ class User < ApplicationRecord
     )
   end
 
-  def patterns_for_all_courses(by_day = nil)
   def patterns_for_all_courses(by_day: nil, by_term: nil)
     query = CourseMeetingPattern.where(course: courses)
 
