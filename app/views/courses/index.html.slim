@@ -1,74 +1,90 @@
 .search-main
 
-  .grid-wrapper
-    h3.italic
-      | Results (
-      == @matching_courses.count
-      |  courses)
-      
-    - @course_groups.each do |group|
-      .grid-section
-        h4
-          == group[:subject]
+  h3.italic
+    | Results (
+    == @matching_courses.count
+    |  courses)
 
-        - group[:days].each do |day|
-          label
-            == day[:name]
-          ul.block-list
-            - if day[:courses].empty?
-              li.empty.italic
-                p No courses
-            - else
-              - day[:courses].each do |course|
-                li.block class=(classes_for_course(course)) data-id=(course.id)
+  .search-contents
+    .grid-wrapper
+      - @course_groups.each do |group|
+        .grid-section
+          h4
+            == group[:subject]
 
-  .details-wrapper
-    ul.plain
-      - if @matching_courses.empty?
-        li.italic No matches found
-      - @matching_courses.each do |course|
-        li.course-wrapper.green data-id=(course.id)
-          .subject
-            == course.academic_group
-          .tray-form-wrapper
-            - if current_user.added?(course.id)
-              == render "remove_from_tray", course: course
-            - else
-              == render "add_to_tray", course: course
+          - group[:days].each do |day|
+            label
+              == day[:name]
+            ul.block-list
+              - if day[:courses].empty?
+                li.empty.italic
+                  p No courses
+              - else
+                - day[:courses].each do |course|
+                  li.block class=(classes_for_course(course)) data-id=(course.id)
 
-          .title
-            == course.title
+    .details-wrapper
+      ul.plain
+        - if @matching_courses.empty?
+          li.italic No matches found
+        - @matching_courses.each do |course|
+          li.course-wrapper.green data-id=(course.id) id=(course.id)
+            .subject
+              == course.academic_group
+            .tray-form-wrapper
+              - if current_user.added?(course.id)
+                == render "remove_from_tray", course: course
+              - else
+                == render "add_to_tray", course: course
 
-          span.subject
-            == course.subject
-          span
-            |  
-          span.catalog
-            == course.catalog_number
+            .title
+              == course.title
 
-          p.description
-            == course.course_description_long
-          p.notes
-            == course.course_note
-
-          .component
-            | Component: 
+            span.subject
+              == course.subject
             span
-              == course.component || "Unknown"
-          .basis
-            | Grading Basis: 
-            span
-              == course.grading_basis_description || "Unknown"
-          - if course.meeting.present? && course.meeting.facility_description.present?
-            .location
-              | Location: 
-              span
-                == course.meeting.facility_description
-          - if course.instructor.present?
-            .instructor
-              | Instructor: 
-              span
-                == course.instructor.full_name
+              |  
+            span.catalog
+              == course.catalog_number
 
-          .units
-             == course.units_maximum
+            p.description
+              == course.course_description_long
+            p.notes
+              == course.course_note
+
+            .component
+              | Component: 
+              span
+                == course.component || "Unknown"
+            .basis
+              | Grading Basis: 
+              span
+                == course.grading_basis_description || "Unknown"
+            - if course.meeting.present? && course.meeting.facility_description.present?
+              .location
+                | Location: 
+                span
+                  == course.meeting.facility_description
+            - if course.instructor.present?
+              .instructor
+                | Instructor: 
+                span
+                  == course.instructor.full_name
+
+            .units
+               == course.units_maximum
+
+javascript:
+  
+  $('.block').click(function (e) {
+    var course_id = $(this).data("id");
+    var element = document.getElementById(course_id);
+    var speed = 1000;
+
+    var position = $(element).position().top;
+    if (position < -20 || position > 40) {
+      $('.details-wrapper').animate({
+        scrollTop: position
+      }, speed, 'swing');
+    }
+  });

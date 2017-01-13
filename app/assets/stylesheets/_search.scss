@@ -7,9 +7,16 @@
   }
 }
 
-.search-main {
+.search-contents {
+  position: absolute;
+  top: 141px;
+  bottom: 0px;
+  width: 892px;
+
   .grid-wrapper {
     @include span-columns(5 of 10);
+    overflow-y: auto;
+    max-height: 100%;
 
     ul.block-list {
       margin: 0;
@@ -47,7 +54,7 @@
     }
 
     .grid-section {
-      padding: 14px 10px 35px 10px;
+      padding-bottom: 35px;
       border-bottom: 1px solid $color-gray;
 
       h4 {
@@ -62,6 +69,8 @@
 
   .details-wrapper {
     @include span-columns(5 of 10);
+     overflow-y: auto;
+     max-height: 100%;
 
     .course-wrapper {
       margin-bottom: 20px;
