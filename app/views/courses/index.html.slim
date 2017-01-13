@@ -79,10 +79,12 @@ javascript:
   $('.block').click(function (e) {
     var course_id = $(this).data("id");
     var element = document.getElementById(course_id);
-    var thespeed = 1000;
+    var speed = 1000;
 
-    var offset = $(element).offset().top;
-        $('.details-wrapper').animate({
-          scrollTop: offset
-        }, thespeed, 'swing');
+    var position = $(element).position().top;
+    if (position < -20 || position > 40) {
+      $('.details-wrapper').animate({
+        scrollTop: position
+      }, speed, 'swing');
+    }
   });
