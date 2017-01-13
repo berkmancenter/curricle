@@ -16,8 +16,18 @@ class User < ApplicationRecord
   end
 
   def patterns_for_all_courses(by_day = nil)
+  def patterns_for_all_courses(by_day: nil, by_term: nil)
     query = CourseMeetingPattern.where(course: courses)
-    query = query.where("meets_on_#{by_day}": true) if by_day.present?
+
+    if by_day.present?
+      query = query.where("meets_on_#{by_day}": true)
+    end
+
+    if by_term.present?
+      name, year = by_term.split(" ")
+      query = query.where(term_name: name, term_year: year)
+    end
+
     query
   end
 end

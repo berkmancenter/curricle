@@ -5,12 +5,21 @@ class PathController < ApplicationController
     # TODO: scope this to only courses for the selected semester
     @meeting_patterns = current_user.patterns_for_all_courses
     @meeting_patterns_per_day = {
-      monday: current_user.patterns_for_all_courses(:monday),
-      tuesday: current_user.patterns_for_all_courses(:tuesday),
-      wednesday: current_user.patterns_for_all_courses(:wednesday),
-      thursday: current_user.patterns_for_all_courses(:thursday),
-      friday: current_user.patterns_for_all_courses(:friday)
+      monday: current_user.patterns_for_all_courses(by_day: :monday),
+      tuesday: current_user.patterns_for_all_courses(by_day: :tuesday),
+      wednesday: current_user.patterns_for_all_courses(by_day: :wednesday),
+      thursday: current_user.patterns_for_all_courses(by_day: :thursday),
+      friday: current_user.patterns_for_all_courses(by_day: :friday)
     }
+
+    @meeting_patterns_per_year = []
+    semester_map.each do |year|
+      column = {}
+      year.each do |semester|
+        column[:"#{semester}"] = current_user.patterns_for_all_courses(by_term: semester)
+      end
+      @meeting_patterns_per_year << column
+    end
   end
 
   # add course meeting pattern to current user's path
