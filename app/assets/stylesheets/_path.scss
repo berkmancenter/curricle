@@ -94,6 +94,37 @@
      &.hidden {
        display: none !important;
      }
+
+     .class {
+        display: none;
+        background: $color-slate;
+        color: white;
+        box-shadow: 1px 2px 3px 2px rgba(0,0,0,0.75);
+        position: relative;
+
+        .add-remove {
+          input[type="submit"] {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            padding: 3px 4px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 12px;
+          }
+        }
+
+        &.in-path {
+          display: block;
+        }
+
+        &.recommended {
+          background: $color-green;
+        }
+     }
   }
 
   .grid-wrapper.semester {
@@ -126,40 +157,13 @@
       }
 
       .class {
-        display: none;
         position: absolute;
         left: 4px;
         right: 4px;
-        background: $color-slate;
-        color: white;
-        box-shadow: 1px 2px 3px 2px rgba(0,0,0,0.75);
-
-        .recommended {
-          background: $color-green;
-        }
-
-        .add-remove {
-          input[type="submit"] {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            padding: 3px 4px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 20px;
-            line-height: 12px;
-          }
-        }
 
         .title {
-          text-align: left;
+          text-align: center;
           padding: 22px 10px;
-        }
-
-        &.in-path {
-          display: block;
         }
       }
     }
@@ -188,15 +192,6 @@
           height: 60px;
           line-height: 60px;
           width: 100%;
-          background: $color-slate;
-          color: white;
-
-          div {
-            float:right; 
-            margin-top: -20px;
-            margin-right: 4px; 
-          }
-
         }
       }
     }
@@ -212,16 +207,6 @@
       border: 1px solid $color-slate;
       color: $color-slate;
 
-      &.in-path {
-        color: white;
-        background: $color-slate;
-
-        input[type="submit"] {
-          color: white;
-          border: 1px solid white;
-        }
-      }
-
       .title {
         font-weight: bold;
         margin-top: 20px;
@@ -235,6 +220,16 @@
         background: none;
         border: 1px solid $color-slate;
         border-radius: 3px;
+      }
+
+      &.in-path {
+        color: white;
+        background: $color-slate;
+
+        input[type="submit"] {
+          color: white;
+          border: 1px solid white;
+        }
       }
 
       &.recommended {

@@ -72,47 +72,24 @@
           /! empty element used for spacing
 
   .grid-wrapper.career.hidden
-    .col
-      ul.plain.iblock
-        li Fall 2016
-        li.class
-          div x
-          | Course 1
-        li.class
-          div x
-          | Course 2
-        li.class
-          div x
-          | Course 3
-      ul.plain.iblock
-        li Spring 2017
-        li.class
-          div x
-          | Course 4
-    .col
-      ul.plain.iblock
-        li Fall 2017
-        li.class
-          div x
-          | Course 7
-      ul.plain.iblock
-        li Spring 2018
-        li.class
-          div x
-          | Course 105
-    .col
-      ul.plain.iblock
-        li Fall 2018
-        li.class
-          div x
-          | Course 10
-      ul.plain.iblock
-        li Spring 2019
-    .col
-      ul.plain.iblock
-        li Fall 2019
-      ul.plain.iblock
-        li Spring 2020
+    - @meeting_patterns_per_year.each do |year|
+      .col
+        - year.each do |semester, patterns|
+          ul.plain.iblock
+            li
+              == semester
+            - patterns.each do |pattern|
+              li.class data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
+                .add-remove
+                  == form_tag "/path/#{pattern.id}", method: 'delete', remote: true
+                    == submit_tag '&times;'.html_safe
+                .title
+                  span.subject
+                    == pattern.course.subject
+                  span
+                    |  
+                  span.catalog
+                    == pattern.course.catalog_number
 
   .path-info-wrapper
     ul.plain
