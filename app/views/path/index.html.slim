@@ -1,9 +1,5 @@
 .path-main
   ul.toggles.plain
-    / button.semester.iblock.active
-    /   | Week
-    / button.career.iblock
-    /   | 4-Year
     li.inline
       span.label Semester
     li.inline
@@ -30,347 +26,111 @@
       li 07:00
       li 08:00
 
-
-
-    ul.plain.iblock
-      li
-        h4 Monday
-        // top: number of minutes past 7am
-        // height: number of minutes in length
-        .class style="top: 240px; height: 60px;"
-          .title
-            .add-remove
-              div x
-            .course Course 1
-        .class style="top: 420px; height: 60px;"
-          .title.recommended
-            .add-remove
-              div x
-              div +
-            | Rec 1
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        h4 Tuesday
-        .class style="top: 180px; height: 60px;"
-          .title
-            .add-remove
-              div x
-            | Course 3
-        .class style="top: 660px; height: 120px;"
-          .title
-            .add-remove
-              div x
-            | Course 2
-        .class style="top: 300px; height: 60px;"
-          .title.recommended
-            .add-remove
-              div x
-              div +
-            | Rec 2
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        h4 Wednesday
-        .class style="top: 240px; height: 60px;"
-          .title
-            .add-remove
-              div x
-            | Course 1
-        .class style="top: 420px; height: 60px;"
-          .title.recommended
-            .add-remove
-              div x
-              div +  
-            | Rec 1
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        h4 Thursday
-        .class style="top: 180px; height: 60px;"
-          .title
-            .add-remove
-              div x
-            | Course 3
-        .class style="top: 300px; height: 60px;"
-          .title.recommended
-            .add-remove
-              div x
-              div +
-            | Rec 2
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-
-    ul.plain.iblock
-      li
-        h4 Friday
-        .class style="top: 240px; height: 60px;"
-          .title
-            .add-remove
-              div x
-            | Course 1
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
-      li
-        /! empty element used for spacing
+    - @meeting_patterns_per_day.each do |day, patterns|
+      ul.plain.iblock
+        li
+          h4
+            == day.capitalize
+          - patterns.each do |pattern|
+            // style: top = number of minutes past 7am, height = number of minutes in length
+            .class style=("top: #{pattern.minutes_past(7)}px; height: #{pattern.length}px;") data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
+              .add-remove
+                == form_tag "/path/#{pattern.id}", method: 'delete', remote: true
+                  == submit_tag '&times;'.html_safe
+              .title
+                span.subject
+                  == pattern.course.subject
+                span
+                  |  
+                span.catalog
+                  == pattern.course.catalog_number
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
+        li
+          /! empty element used for spacing
 
   .grid-wrapper.career.hidden
-    .col
-      ul.plain.iblock
-        li Fall 1
-        li.class
-          div x
-          | Course 1
-        li.class
-          div x
-          | Course 2
-        li.class
-          div x
-          | Course 3
-      ul.plain.iblock
-        li Spring 1
-        li.class
-          div x
-          | Course 4
-    .col
-      ul.plain.iblock
-        li Fall 2
-        li.class
-          div x
-          | Course 7
-      ul.plain.iblock
-        li Spring 2
-        li.class
-          div x
-          | Course 105
-    .col
-      ul.plain.iblock
-        li Fall 3
-        li.class
-          div x
-          | Course 10
-      ul.plain.iblock
-        li Spring 3
-    .col
-      ul.plain.iblock
-        li Fall 4
-      ul.plain.iblock
-        li Spring 4
+    - @meeting_patterns_per_year.each do |year|
+      .col
+        - year.each do |semester, patterns|
+          ul.plain.iblock
+            li
+              == semester
+            - patterns.each do |pattern|
+              li.class data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
+                .add-remove
+                  == form_tag "/path/#{pattern.id}", method: 'delete', remote: true
+                    == submit_tag '&times;'.html_safe
+                .title
+                  span.subject
+                    == pattern.course.subject
+                  span
+                    |  
+                  span.catalog
+                    == pattern.course.catalog_number
 
   .path-info-wrapper
     ul.plain
-      li.course-path-wrapper.solid.blue
-        .subject
-          | FAS
+      - if @meeting_patterns.empty?
+        li
+          p 
+            | Your tray is empty.
+          P 
+            a href="/" Find courses here.
+      - @meeting_patterns.each do |pattern|
+        li.course-path-wrapper.solid.gray data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
+          .academic-group
+            == pattern.course.academic_group
 
-        .title
-          | Course 1
+          .title
+            == pattern.course.title
 
-        span.subject
-          | MODMDEST
-        span.catalog
-          | 100
+          span.subject
+            == pattern.course.subject
+          span
+            |  
+          span.catalog
+            == pattern.course.catalog_number
 
-        .day-time
-          | M / W 9-10 AM
+          .day-time
+            == pattern.schedule
 
-    ul.plain
-      li.course-path-wrapper.solid.blue
-        .subject
-          | FAS
+          .path-form-wrapper
+            - if current_user.in_path?(pattern.id)
+              == render "remove_from_path", pattern: pattern
+            - else
+              == render "add_to_path", pattern: pattern
 
-        .title
-          | Course 2
-
-        span.subject
-          | MODMDEST
-        span.catalog
-          | 100
-
-        .day-time
-          | M / W 9-10 AM
-
-    ul.plain
-      li.course-path-wrapper.solid.blue
-        .subject
-          | FAS
-
-        .title
-          | Course 3
-
-        span.subject
-          | MODMDEST
-        span.catalog
-          | 100
-
-        .day-time
-          | M / W 9-10 AM
-
-    ul.plain
-      li.course-path-wrapper.solid.green
-        .subject
-          | FAS
-
-        .title
-          | Introduction to the Modern Middle East
-
-        span.subject
-          | MODMDEST
-        span.catalog
-          | 100
-
-        .day-time
-          | M / W 9-10 AM
-
-    ul.plain
-      li.course-path-wrapper.solid.green
-        .subject
-          | FAS
-
-        .title
-          | Introduction to the Modern Middle East
-
-        span.subject
-          | MODMDEST
-        span.catalog
-          | 100
-
-        .day-time
-          | M / W 9-10 AM
-
-
-
+          .tray-form-wrapper
+            == render "remove_from_tray", pattern: pattern
 
 javascript:
   var semesterGrid = $('.grid-wrapper.semester');
-  var semesterBtn = $('button.semester');
   var careerGrid = $('.grid-wrapper.career');
-  var careerBtn = $('button.career');
 
+  // toggle between semester and 4-year views
   $('input.toggle').change(function (e) {
     if(this.checked)
     {
@@ -384,9 +144,11 @@ javascript:
     }
   });
 
-  $('button.career').click(function () {
-    semesterBtn.removeClass('active');
-    semesterGrid.addClass('hidden');
-    careerBtn.addClass('active');
-    careerGrid.removeClass('hidden');
+  // confirm remove from tray action
+  $('.tray-form-wrapper form').submit(function (e) {
+    if (confirm('Are you sure?')) {
+      return true;
+    } else {
+      return false;
+    }
   });
