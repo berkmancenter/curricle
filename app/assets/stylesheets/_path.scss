@@ -9,7 +9,7 @@
     }
 
     .label-switch {
-      $action-color: $color-green !default;
+      $action-color: $color-medium-gray !default;
       $base-background-color: $color-medium-gray !default;
       $switch-width: 45px;
       $switch-padding: 1px;
@@ -94,6 +94,37 @@
      &.hidden {
        display: none !important;
      }
+
+     .class {
+        display: none;
+        background: $color-slate;
+        color: white;
+        box-shadow: 1px 2px 3px 2px rgba(0,0,0,0.75);
+        position: relative;
+
+        .add-remove {
+          input[type="submit"] {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            padding: 3px 4px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 12px;
+          }
+        }
+
+        &.in-path {
+          display: block;
+        }
+
+        &.recommended {
+          background: $color-green;
+        }
+     }
   }
 
   .grid-wrapper.semester {
@@ -122,41 +153,17 @@
       >h4 {
         color: $color-medium-gray;
         margin-top: 0;
-      }
-
-      &:first-of-type {
         line-height: 60px;
       }
 
       .class {
-        display: table;
-        width: 100%;
         position: absolute;
-        background: #539db7;
-        color: white;
-
-        .recommended {
-          background: #83b971;
-        }
+        left: 4px;
+        right: 4px;
 
         .title {
-          display: table-cell;
-          vertical-align: middle;
           text-align: center;
-
-          .add-remove {
-            position: absolute;
-            top: 2px;
-            right: 5px;
-            line-height: 12px;
-            margin-bottom: 10px;
-            font-size: 12px;
-          }
-          .course {
-            text-align: left;
-            padding-left: 10px;
-
-          }
+          padding: 22px 10px;
         }
       }
     }
@@ -185,15 +192,6 @@
           height: 60px;
           line-height: 60px;
           width: 100%;
-          background: #539db7;
-          color: white;
-
-          div {
-            float:right; 
-            margin-top: -20px;
-            margin-right: 4px; 
-          }
-
         }
       }
     }
@@ -203,9 +201,11 @@
     @include span-columns(3 of 10);
     .course-path-wrapper {
       margin-bottom: 20px;
-      padding: 10px 20px;
+      padding: 10px 12px;
       border: 1px solid gray;
       position: relative;
+      border: 1px solid $color-slate;
+      color: $color-slate;
 
       .title {
         font-weight: bold;
@@ -213,30 +213,34 @@
         text-align: left;
       }
 
-      .subject {
-        margin-right: 7px;
+      input[type="submit"] {
+        cursor: pointer;
+        margin-top: 10px;
+        color: $color-slate;
+        background: none;
+        border: 1px solid $color-slate;
+        border-radius: 3px;
       }
 
-      &.green {
-        border: 1px solid #83b971;
-        color: #83b971;
+      &.in-path {
+        color: white;
+        background: $color-slate;
 
-        &.solid {
+        input[type="submit"] {
           color: white;
-          background: #83b971;
+          border: 1px solid white;
         }
       }
-      &.blue {
-        border: 1px solid #539db7;
-        color: #539db7;
+
+      &.recommended {
+        border: 1px solid $color-green;
+        color: $color-green;
 
         &.solid {
           color: white;
-          background: #539db7;
+          background: $color-green;
         }
       }
     }
   }
-
-
 }

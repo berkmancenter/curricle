@@ -1,0 +1,3 @@
+== form_tag "/courses/#{pattern.course.id}/remove-from-tray", method: 'delete', remote: true
+  input type="hidden" name="pattern_id" value=(pattern.id) 
+  == submit_tag 'Remove from Tray'

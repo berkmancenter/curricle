@@ -106,6 +106,7 @@ class CoursesController < ApplicationController
 
   def remove_from_tray
     @course = Course.find(params["id"])
+    @pattern = CourseMeetingPattern.find_by(id: params["pattern_id"])
 
     if user_course = UserCourse.find_by(user_id: current_user.id, course_id: @course.id)
       user_course.destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104043109) do
+ActiveRecord::Schema.define(version: 20170112041305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,8 +101,9 @@ ActiveRecord::Schema.define(version: 20170104043109) do
     t.integer  "user_id"
     t.integer  "course_id"
     t.boolean  "include_in_path"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "course_meeting_pattern_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(version: 20170104043109) do
   add_foreign_key "courses", "courses", column: "prereq"
   add_foreign_key "tags", "courses"
   add_foreign_key "tags", "users"
+  add_foreign_key "user_courses", "course_meeting_patterns"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"
 end
