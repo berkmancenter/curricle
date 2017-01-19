@@ -84,6 +84,10 @@ class Course < ApplicationRecord
     )
   end
 
+  def subject_and_catalog
+    "#{subject} #{catalog_number}"
+  end
+
   # Users can select from a set of keyword options to query against. This is a map of those
   # options, their metadata, and their related fields in the database
   def self.keyword_options_map
