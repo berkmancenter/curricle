@@ -1,0 +1,5 @@
+// remove "in-path" class from all elements with this pattern ID
+$("[data-id=<%= @pattern.id %>]").removeClass('in-path').removeClass('recommended');
+
+// re-render the meeting pattern info
+$(".course-path-wrapper[data-id=<%= @pattern.id %>]").remove();

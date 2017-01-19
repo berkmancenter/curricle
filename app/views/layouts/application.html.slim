@@ -13,8 +13,8 @@ html
   body
     .app-wrapper
       .header
-        a.logo href="/"
-          h1 Curricle
+        h1
+          == link_to 'Curricle', root_path, class: 'logo', method: :get
       .main
         .left-content
           == render "nav"

@@ -95,7 +95,7 @@
        display: none !important;
      }
 
-     .class {
+     .class-wrapper {
         display: none;
         background: $color-slate;
         color: white;
@@ -114,15 +114,22 @@
             cursor: pointer;
             font-size: 20px;
             line-height: 12px;
+
+            &.left {
+              left: 1px;
+            }
           }
         }
 
-        &.in-path {
-          display: block;
-        }
+        &.visible {
+          &.in-path {
+            display: block;
+          }
 
-        &.recommended {
-          background: $color-green;
+          &.recommended {
+            display: block;
+            background: $color-green;
+          }
         }
      }
   }
@@ -156,7 +163,7 @@
         line-height: 60px;
       }
 
-      .class {
+      .class-wrapper {
         position: absolute;
         left: 4px;
         right: 4px;
@@ -179,19 +186,19 @@
       vertical-align: top;
       width: 100%;
 
-      li {
-        text-align: center;
+      li {    
         font-size: 16px;
         margin: 10px 0px;
 
         &:first-of-type {
          border-bottom: 1px dashed lightgray;
         }
-        
-        &.class {
+
+        .class-wrapper {
           height: 60px;
           line-height: 60px;
-          width: 100%;
+          padding: 0px 10px;
+          margin: 0px 5px;
         }
       }
     }
@@ -200,12 +207,17 @@
   .path-info-wrapper {
     @include span-columns(3 of 10);
     .course-path-wrapper {
+      display: none;
       margin-bottom: 20px;
       padding: 10px 12px;
       border: 1px solid gray;
       position: relative;
       border: 1px solid $color-slate;
       color: $color-slate;
+
+      &.visible {
+        display: block;
+      }
 
       .title {
         font-weight: bold;
@@ -239,6 +251,11 @@
         &.solid {
           color: white;
           background: $color-green;
+        }
+
+        input[type="submit"] {
+          color: white;
+          border: 1px solid white;
         }
       }
     }

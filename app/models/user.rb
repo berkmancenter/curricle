@@ -23,7 +23,7 @@ class User < ApplicationRecord
     end
 
     if by_term.present?
-      name, year = by_term.split(" ")
+      name, year = by_term.split(/[_\s]/)
       query = query.where(term_name: name, term_year: year)
     end
 

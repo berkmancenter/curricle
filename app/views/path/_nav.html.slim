@@ -1,12 +1,12 @@
 .search-nav
   h3.italic Course Search
 
-  == form_tag '/courses/search', method: 'POST', class: 'search-form'
+  == form_tag '/path/generate', method: 'POST', class: 'search-form'
 
     .term-select-wrapper
       select.term-select.dropdown.dark.full name="term"
         - Course.terms.each do |t|
-          option value=(t) selected=(filter_option_state(:term, t))
+          option value=(t) selected=(filter_option_state(generate_filters, :term, t))
             == t.split('_').join(' ')
 
     .box
@@ -18,7 +18,7 @@
 
         select.multiple.dropdown multiple="multiple" style="width:100%" name='keyword_options[]'
           - Course.keyword_options_map.each do |key, opts|
-            option value=(key) selected=(filter_option_state(:keyword_option, key))
+            option value=(key) selected=(filter_option_state(generate_filters, :keyword_option, key))
               == opts[:display]
 
         br
@@ -26,31 +26,31 @@
     hr
   
     select.full.school-select.dropdown name="school"
-      option value="all" selected=(filter_option_state(:school, 'all'))
+      option value="all" selected=(filter_option_state(generate_filters, :school, 'all'))
         | All
       - Course.schools.each do |school|
-        option value=(school) selected=(filter_option_state(:school, school))
+        option value=(school) selected=(filter_option_state(generate_filters, :school, school))
           == school
 
     select.full.department-select.dropdown name="department"
-      option value="all" selected=(filter_option_state(:department, 'all'))
+      option value="all" selected=(filter_option_state(generate_filters, :department, 'all'))
         | All
       - Course.departments.each do |department|
-        option value=(department) selected=(filter_option_state(:department, department))
+        option value=(department) selected=(filter_option_state(generate_filters, :department, department))
           == department
 
     select.full.subject-select.dropdown name="subject"
-      option value="all" selected=(filter_option_state(:subject, 'all'))
+      option value="all" selected=(filter_option_state(generate_filters, :subject, 'all'))
         | All
       - Course.subject_descriptions.each do |subject|
-        option value=(subject) selected=(filter_option_state(:subject, subject))
+        option value=(subject) selected=(filter_option_state(generate_filters, :subject, subject))
           == subject
 
     select.full.type-select.dropdown name="type"
-      option value="all" selected=(filter_option_state(:type, 'all'))
+      option value="all" selected=(filter_option_state(generate_filters, :type, 'all'))
         | All
       - Course.component_types.each do |type|
-        option value=(type) selected=(filter_option_state(:type, type))
+        option value=(type) selected=(filter_option_state(generate_filters, :type, type))
           == type
 
     .unit-wrapper
@@ -59,30 +59,28 @@
           td Units
           td
             select.single.dropdown name="units_min"
-              option value="any" selected=(filter_option_state(:units_min, 'any'))
+              option value="any" selected=(filter_option_state(generate_filters, :units_min, 'any'))
                 | Any
               - (1..16).each do |i|
-                option value=(i) selected=(filter_option_state(:units_min, i))
+                option value=(i) selected=(filter_option_state(generate_filters, :units_min, i))
                   == i
           td.align-c to
           td
             select.single.dropdown name="units_max"
-              option value="any" selected=(filter_option_state(:units_max, 'any'))
+              option value="any" selected=(filter_option_state(generate_filters, :units_max, 'any'))
                 | Any
               - (1..16).each do |i|
-                option value=(i) selected=(filter_option_state(:units_max, i))
+                option value=(i) selected=(filter_option_state(generate_filters, :units_max, i))
                   == i
         tr
           td Total Units
           td
             select.single.dropdown name="units_total"
-              option value="any" selected=(filter_option_state(:units_total, 'any'))
-                | Any
-              - (1..16).each do |i|
-                option value=(i) selected=(filter_option_state(:units_total, i))
+              - (1..16).to_a.reverse.each do |i|
+                option value=(i) selected=(filter_option_state(generate_filters, :units_total, i))
                   == i
 
     == submit_tag 'Generate'
 
-  == form_tag '/courses/search/clear', method: 'POST', class: 'reset-form'
-    a.reset-link href="#" Reset filters
+  == form_tag '/path/search/clear', method: 'POST', class: 'reset-form'
+    a.reset-link href="#" Clear recommendations

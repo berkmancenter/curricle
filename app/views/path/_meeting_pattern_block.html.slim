@@ -1,0 +1,22 @@
+// top = number of minutes past 7am
+// height = number of minutes in length
+- style = offset ? "top: #{pattern.minutes_past(7)}px; height: #{pattern.length}px;" : ""
+
+- if current_user.added?(pattern.course_id)
+  // these are courses the user has explicitly add to their tray/path
+  .class-wrapper.visible style=(style) data-id=(pattern.id) class=("#{current_user.in_path?(pattern.id) ? "in-path" : ""} #{pattern.semester(safe: true)}")
+    .add-remove
+      == form_tag "/path/#{pattern.id}", method: 'delete', remote: true
+        == submit_tag '&times;'.html_safe
+    .title
+      == pattern.course.subject_and_catalog
+- else
+  // these are recommendations that haven't been saved to the user's tray/path
+  .class-wrapper.recommended.visible style=(style) data-id=(pattern.id) class=("#{pattern.semester(safe: true)}")
+    .add-remove
+      == form_tag "/path/#{pattern.id}", method: 'post', remote: true
+        == submit_tag '&plus;'.html_safe, class: 'left'
+      == form_tag "/path/#{pattern.id}/discard-recommendation", method: 'delete', remote: true, class: "confirm"
+        == submit_tag '&times;'.html_safe
+    .title
+      == pattern.course.subject_and_catalog

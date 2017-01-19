@@ -6,7 +6,7 @@
     .term-select-wrapper
       select.term-select.dropdown.dark.full name="term"
         - Course.terms.each do |t|
-          option value=(t) selected=(filter_option_state(:term, t))
+          option value=(t) selected=(filter_option_state(query_filters, :term, t))
             == t.split('_').join(' ')
 
     .box
@@ -18,7 +18,7 @@
 
         select.multiple.dropdown multiple="multiple" style="width:100%" name='keyword_options[]'
           - Course.keyword_options_map.each do |key, opts|
-            option value=(key) selected=(filter_option_state(:keyword_option, key))
+            option value=(key) selected=(filter_option_state(query_filters, :keyword_option, key))
               == opts[:display]
 
         br
@@ -59,46 +59,46 @@
               == day.to_s.capitalize[0,3]
             td
               select.single.dropdown name="#{day}_min"
-                option value="any" selected=(filter_option_state(:"#{day}_min", 'any'))
+                option value="any" selected=(filter_option_state(query_filters, :"#{day}_min", 'any'))
                   | Any
                 - CourseMeetingPattern.hours_range.each do |i|
-                  option value=(i) selected=(filter_option_state(:"#{day}_min", i))
+                  option value=(i) selected=(filter_option_state(query_filters, :"#{day}_min", i))
                     == pretty_hour(i)
             td.align-c to
             td
               select.single.dropdown name="#{day}_max"
-                option value="any" selected=(filter_option_state(:"#{day}_max", 'any'))
+                option value="any" selected=(filter_option_state(query_filters, :"#{day}_max", 'any'))
                   | Any
                 - CourseMeetingPattern.hours_range.each do |i|
-                  option value=(i) selected=(filter_option_state(:"#{day}_max", i))
+                  option value=(i) selected=(filter_option_state(query_filters, :"#{day}_max", i))
                     == pretty_hour(i)
 
     select.full.school-select.dropdown name="school"
-      option value="all" selected=(filter_option_state(:school, 'all'))
+      option value="all" selected=(filter_option_state(query_filters, :school, 'all'))
         | All
       - Course.schools.each do |school|
-        option value=(school) selected=(filter_option_state(:school, school))
+        option value=(school) selected=(filter_option_state(query_filters, :school, school))
           == school
 
     select.full.department-select.dropdown name="department"
-      option value="all" selected=(filter_option_state(:department, 'all'))
+      option value="all" selected=(filter_option_state(query_filters, :department, 'all'))
         | All
       - Course.departments.each do |department|
-        option value=(department) selected=(filter_option_state(:department, department))
+        option value=(department) selected=(filter_option_state(query_filters, :department, department))
           == department
 
     select.full.subject-select.dropdown name="subject"
-      option value="all" selected=(filter_option_state(:subject, 'all'))
+      option value="all" selected=(filter_option_state(query_filters, :subject, 'all'))
         | All
       - Course.subject_descriptions.each do |subject|
-        option value=(subject) selected=(filter_option_state(:subject, subject))
+        option value=(subject) selected=(filter_option_state(query_filters, :subject, subject))
           == subject
 
     select.full.type-select.dropdown name="type"
-      option value="all" selected=(filter_option_state(:type, 'all'))
+      option value="all" selected=(filter_option_state(query_filters, :type, 'all'))
         | All
       - Course.component_types.each do |type|
-        option value=(type) selected=(filter_option_state(:type, type))
+        option value=(type) selected=(filter_option_state(query_filters, :type, type))
           == type
 
     .unit-wrapper
@@ -107,18 +107,18 @@
           td Units
           td
             select.single.dropdown name="units_min"
-              option value="any" selected=(filter_option_state(:units_min, 'any'))
+              option value="any" selected=(filter_option_state(query_filters, :units_min, 'any'))
                 | Any
               - (1..16).each do |i|
-                option value=(i) selected=(filter_option_state(:units_min, i))
+                option value=(i) selected=(filter_option_state(query_filters, :units_min, i))
                   == i
           td.align-c to
           td
             select.single.dropdown name="units_max"
-              option value="any" selected=(filter_option_state(:units_max, 'any'))
+              option value="any" selected=(filter_option_state(query_filters, :units_max, 'any'))
                 | Any
               - (1..16).each do |i|
-                option value=(i) selected=(filter_option_state(:units_max, i))
+                option value=(i) selected=(filter_option_state(query_filters, :units_max, i))
                   == i
 
     == submit_tag 'Search'
