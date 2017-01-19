@@ -19,10 +19,10 @@ module ApplicationHelper
   end
 
   # returns the current semester (e.g. "Spring 2017")
-  def current_semester
+  def current_semester(safe: false)
     year = Time.now.year
     name = Time.now.month < 6 ? "Spring" : "Fall"
-    "#{name} #{year}"
+    safe ? "#{name}_#{year}" : "#{name} #{year}"
   end
 
   def semester_map(starts_at = nil)
@@ -48,5 +48,36 @@ module ApplicationHelper
     end
 
     years
+  end
+
+  def apply_common_filters(query, filters)
+    term, year = filters[:term].split('_')
+    query = query.where(term_name: term, term_year: year)
+
+    unless filters[:school] == 'all'
+      query = query.where('courses.academic_group': filters[:school])
+    end
+
+    unless filters[:department] == 'all'
+      query = query.where('courses.class_academic_org_description': filters[:department])
+    end
+
+    unless filters[:subject] == 'all'
+      query = query.where('courses.subject_description': filters[:subject])
+    end
+
+    unless filters[:type] == 'all'
+      query = query.where('courses.component': filters[:type])
+    end
+
+    unless filters[:units][:min] == 'any'
+      query = query.where("courses.units_maximum >= ?", filters[:units][:min])
+    end
+
+    unless filters[:units][:max] == 'any'
+      query = query.where("courses.units_maximum <= ?", filters[:units][:max])
+    end
+
+    query
   end
 end

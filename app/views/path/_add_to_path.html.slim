@@ -1,2 +1,5 @@
 == form_tag "/path/#{pattern.id}", method: 'post', remote: true
-  == submit_tag 'Add to Path'
+  - if current_user.added?(pattern.course_id)
+    == submit_tag 'Add to Path'
+  - else
+    == submit_tag 'Save to Path'

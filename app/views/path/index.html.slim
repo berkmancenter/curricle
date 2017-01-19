@@ -32,18 +32,7 @@
           h4
             == day.capitalize
           - patterns.each do |pattern|
-            // style: top = number of minutes past 7am, height = number of minutes in length
-            .class style=("top: #{pattern.minutes_past(7)}px; height: #{pattern.length}px;") data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
-              .add-remove
-                == form_tag "/path/#{pattern.id}", method: 'delete', remote: true
-                  == submit_tag '&times;'.html_safe
-              .title
-                span.subject
-                  == pattern.course.subject
-                span
-                  |  
-                span.catalog
-                  == pattern.course.catalog_number
+            == render "meeting_pattern_block", pattern: pattern, offset: true
         li
           /! empty element used for spacing
         li
@@ -73,82 +62,64 @@
 
   .grid-wrapper.career.hidden
     - @meeting_patterns_per_year.each do |year|
-      .col
-        - year.each do |semester, patterns|
-          ul.plain.iblock
-            li
-              == semester
-            - patterns.each do |pattern|
-              li.class data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
-                .add-remove
-                  == form_tag "/path/#{pattern.id}", method: 'delete', remote: true
-                    == submit_tag '&times;'.html_safe
-                .title
-                  span.subject
-                    == pattern.course.subject
-                  span
-                    |  
-                  span.catalog
-                    == pattern.course.catalog_number
+      - year.each do |semester, patterns|
+        ul.plain.iblock
+          li.align-l
+            == semester
+          - patterns.each do |pattern|
+            li.iblock
+              == render "meeting_pattern_block", pattern: pattern, offset: false
 
   .path-info-wrapper
     ul.plain
-      - if @meeting_patterns.empty?
+      - if @meeting_patterns_per_year.empty?
         li
           p 
             | Your tray is empty.
           P 
             a href="/" Find courses here.
-      - @meeting_patterns.each do |pattern|
-        li.course-path-wrapper.solid.gray data-id=(pattern.id) class=(current_user.in_path?(pattern.id) ? "in-path" : "")
-          .academic-group
-            == pattern.course.academic_group
-
-          .title
-            == pattern.course.title
-
-          span.subject
-            == pattern.course.subject
-          span
-            |  
-          span.catalog
-            == pattern.course.catalog_number
-
-          .day-time
-            == pattern.schedule
-
-          .path-form-wrapper
-            - if current_user.in_path?(pattern.id)
-              == render "remove_from_path", pattern: pattern
-            - else
-              == render "add_to_path", pattern: pattern
-
-          .tray-form-wrapper
-            == render "remove_from_tray", pattern: pattern
+      - @meeting_patterns_per_year.each do |year|
+        - year.each do |semester, patterns|
+          - patterns.each do |pattern|
+            == render "meeting_pattern_info", pattern: pattern
 
 javascript:
+  var semesterSelect = $('select.term-select');
+
+  // display the appropriate courses based on the selected semester
+  window.setVisibilityBySemester = function() {
+    if ($('input.toggle').is(':checked')) {
+      $('.course-path-wrapper, .class-wrapper').addClass('visible');
+    } else {
+      $('.course-path-wrapper, .class-wrapper').removeClass('visible');
+      $('.course-path-wrapper.' + semesterSelect.val() + ', .class-wrapper.' + semesterSelect.val()).addClass('visible');
+    }
+  }
+
+  setVisibilityBySemester();
+
   var semesterGrid = $('.grid-wrapper.semester');
   var careerGrid = $('.grid-wrapper.career');
 
   // toggle between semester and 4-year views
   $('input.toggle').change(function (e) {
-    if(this.checked)
-    {
+    if(this.checked) {
       semesterGrid.addClass('hidden');
       careerGrid.removeClass('hidden'); 
-    }
-    else 
-    {
+    } else {
       semesterGrid.removeClass('hidden');
       careerGrid.addClass('hidden');
     }
+
+    setVisibilityBySemester();
   });
 
-  // confirm remove from tray action
-  $('.tray-form-wrapper form').submit(function (e) {
+  // confirm form submission
+  $('.path-main').on('submit', 'form.confirm', function (e) {
     if (confirm('Are you sure?')) {
       return true;
     } else {
+      e.preventDefault();
       return false;
     }
   });

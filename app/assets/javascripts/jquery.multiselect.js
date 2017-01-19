@@ -374,7 +374,7 @@
                 }
 
                 if( typeof instance.options.onOptionClick == 'function' ) {
-                    instance.options.onOptionClick();
+                    instance.options.onOptionClick( instance.element );
                 }
 
                 instance._updatePlaceholderText();
