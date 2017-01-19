@@ -186,19 +186,23 @@
       vertical-align: top;
       width: 100%;
 
-      li {
-        text-align: center;
+      li {    
         font-size: 16px;
-        margin: 10px 0px;
+        margin: 10px 5px;
 
         &:first-of-type {
          border-bottom: 1px dashed lightgray;
         }
-        
+
         .class-wrapper {
           height: 60px;
           line-height: 60px;
+          padding: 0px 10px;
           width: 100%;
+
+          li {
+            text-align: center;
+          }
         }
       }
     }

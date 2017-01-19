@@ -62,14 +62,13 @@
 
   .grid-wrapper.career.hidden
     - @meeting_patterns_per_year.each do |year|
-      .col
-        - year.each do |semester, patterns|
-          ul.plain.iblock
-            li
-              == semester
-            - patterns.each do |pattern|
-              li
-                == render "meeting_pattern_block", pattern: pattern, offset: false
+      - year.each do |semester, patterns|
+        ul.plain.iblock
+          li.align-l
+            == semester
+          - patterns.each do |pattern|
+            li.iblock
+              == render "meeting_pattern_block", pattern: pattern, offset: false
 
   .path-info-wrapper
     ul.plain
