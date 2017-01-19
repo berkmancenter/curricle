@@ -5,6 +5,10 @@ class CourseMeetingPattern < ApplicationRecord
     (8..20)
   end
 
+  def semester(safe: false)
+    safe ? "#{term_name}_#{term_year}" : "#{term_name} #{term_year}"
+  end
+
   def meeting_days
     days = []
 
@@ -28,6 +32,7 @@ class CourseMeetingPattern < ApplicationRecord
   end
 
   def schedule
+    return "#{meeting_days.join(" / ")}" if meeting_time_start.blank? || meeting_time_end.blank?
     "#{meeting_days.join(" / ")} #{meeting_time_start.strftime("%l:%M")} - #{meeting_time_end.strftime("%l:%M %p")}"
   end
 end

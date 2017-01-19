@@ -1,0 +1,24 @@
+li.course-path-wrapper.visible.solid.gray data-id=(pattern.id) class=("#{current_user.in_path?(pattern.id) ? "in-path" : ""} #{current_user.added?(pattern.course_id) ? "" : "recommended"} #{pattern.semester(safe: true)}")
+  .academic-group
+    == pattern.course.academic_group
+
+  .title
+    == pattern.course.title
+
+  span.subject
+    == pattern.course.subject_and_catalog
+
+  .day-time
+    == pattern.schedule
+
+  .path-form-wrapper
+    - if current_user.in_path?(pattern.id)
+      == render "remove_from_path", pattern: pattern
+    - else
+      == render "add_to_path", pattern: pattern
+
+  .tray-form-wrapper
+    - if current_user.added?(pattern.course_id)
+      == render "remove_from_tray", pattern: pattern
+    - else
+      == render "discard_recommendation", pattern: pattern

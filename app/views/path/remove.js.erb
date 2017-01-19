@@ -1,2 +1,5 @@
-$("[data-id=<%= @pattern.id %>] .path-form-wrapper").html('<%= render("add_to_path", pattern: @pattern) %>');
+// remove "in-path" class from all elements with this pattern ID
 $("[data-id=<%= @pattern.id %>]").removeClass('in-path');
+
+// re-render the meeting pattern info
+$(".course-path-wrapper[data-id=<%= @pattern.id %>]").replaceWith('<%= render("meeting_pattern_info", pattern: @pattern) %>');

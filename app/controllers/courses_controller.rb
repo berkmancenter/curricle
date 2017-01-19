@@ -9,33 +9,7 @@ class CoursesController < ApplicationController
       @keywords = query_filters[:keywords]
 
       query = Course.left_outer_joins(:course_meeting_patterns).search_for(query_filters)
-
-      term, year = query_filters[:term].split('_')
-      query = query.where(term_name: term, term_year: year)
-
-      unless query_filters[:school] == 'all'
-        query = query.where(academic_group: query_filters[:school])
-      end
-
-      unless query_filters[:department] == 'all'
-        query = query.where(class_academic_org_description: query_filters[:department])
-      end
-
-      unless query_filters[:subject] == 'all'
-        query = query.where(subject_description: query_filters[:subject])
-      end
-
-      unless query_filters[:type] == 'all'
-        query = query.where(component: query_filters[:type])
-      end
-
-      unless query_filters[:units][:min] == 'any'
-        query = query.where("units_maximum >= ?", query_filters[:units][:min])
-      end
-
-      unless query_filters[:units][:max] == 'any'
-        query = query.where("units_maximum <= ?", query_filters[:units][:max])
-      end
+      query = apply_common_filters(query, query_filters)
 
       query_filters[:times].each do |day, values|
         unless values[:min] == 'any'
