@@ -58,9 +58,25 @@ class PathController < ApplicationController
       # apply the user's search filters
       query = apply_common_filters(query, filters)
 
-      # TODO: randomly select courses until we hit the total units cap
-      # TODO: ensure randoms don't overlap
-      recommendations = query.all.shuffle.take(3)
+      recommendations = []
+      available = query.to_a.shuffle
+      units_remaining = filters[:units][:total].to_i
+      while units_remaining > 0 && available.length > 0 do
+        available.delete_if { |r| r.course.units_maximum > units_remaining }
+        rec = available.pop
+        break if rec.nil?
+
+        recommendations << rec
+        units_remaining -= rec.course.units_maximum
+
+        available.keep_if { |r|
+          (r.meets_on_monday == false || r.meets_on_monday != rec.meets_on_monday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
+          (r.meets_on_tuesday == false || r.meets_on_tuesday != rec.meets_on_tuesday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
+          (r.meets_on_wednesday == false || r.meets_on_wednesday != rec.meets_on_wednesday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
+          (r.meets_on_thursday == false || r.meets_on_thursday != rec.meets_on_thursday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
+          (r.meets_on_friday == false || r.meets_on_friday != rec.meets_on_friday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start))
+        }
+      end
 
       # add generated courses to the datasets of existing courses
       recommendations.each do |rec|
@@ -92,7 +108,8 @@ class PathController < ApplicationController
       type: params[:type],
       units: {
         min: params[:units_min],
-        max: params[:units_max]
+        max: params[:units_max],
+        total: params[:units_total]
       }
     }
 
