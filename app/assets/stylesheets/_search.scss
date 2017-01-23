@@ -137,13 +137,9 @@
           background: $color-green;
         }
       }
-      &.selected {
-        border: 2px solid $color-blue !important;
-
-        &.solid {
-          color: white;
-          background: $color-green;
-        }
+      &.selected {  
+        color: white;
+        background: $color-green;
       }
 
     }
