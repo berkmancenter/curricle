@@ -7,21 +7,22 @@
 
   .search-contents
     .grid-wrapper
-      - @course_groups.each do |group|
-        .grid-section
-          h4
-            == group[:subject]
+      .grid-wrapper-inner
+        - @course_groups.each do |group|
+          .grid-section
+            h4
+              == group[:subject]
 
-          - group[:days].each do |day|
-            label
-              == day[:name]
-            ul.block-list
-              - if day[:courses].empty?
-                li.empty.italic
-                  p No courses
-              - else
-                - day[:courses].each do |course|
-                  li.block class=(classes_for_course(course)) title=(hover_info(course)) data-id=(course.id) id=(course.id)
+            - group[:days].each do |day|
+              label
+                == day[:name]
+              ul.block-list
+                - if day[:courses].empty?
+                  li.empty.italic
+                    p No courses
+                - else
+                  - day[:courses].each do |course|
+                    li.block class=(classes_for_course(course)) title=(hover_info(course)) data-id=(course.id) id=(course.id)
 
     .details-wrapper
       ul.plain
@@ -98,9 +99,12 @@ javascript:
   $('.course-wrapper').click(function (e) {
     var course_id = $(this).data("id");
     var element = $('.grid-wrapper [data-id="'+ course_id + '"]');
+    var list = $('.grid-wrapper .grid-wrapper-inner');
+    var gridSection = $(element).closest(".grid-section");
     var speed = 1000;
-    if (element.length) {
-      var position = $(element).position().top;
+    if (gridSection.length) {
+      var position = gridSection.position().top - list.position().top;
+      console.log(position);
       if (position < -20 || position > 40) {
         $('.grid-wrapper').animate({
           scrollTop: position
