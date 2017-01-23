@@ -2,6 +2,7 @@ class CoursesController < ApplicationController
   before_action :require_auth
   
   def index
+    @nav = :catalog
     @matching_courses ||= []
     @course_groups ||= []
 

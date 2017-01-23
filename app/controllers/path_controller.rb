@@ -2,6 +2,7 @@ class PathController < ApplicationController
   before_action :require_auth
 
   def index
+    @nav = :path
     filters = generate_filters
     semester = filters.present? ? filters[:term] : current_semester(safe: true)
     @meeting_patterns = current_user.patterns_for_all_courses()
