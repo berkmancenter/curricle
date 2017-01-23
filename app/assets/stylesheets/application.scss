@@ -23,6 +23,29 @@ body {
       text-decoration: none;
       color: black;
     }
+
+    .head-nav {
+      font-weight: bold;
+      font-size: 18px;
+      position: absolute;
+      right: 250px;
+      top: 15px;
+
+      li {
+        padding-left: 15px;
+      }
+      
+      a {
+        text-decoration: none;
+        color: $color-black;
+        &.active {
+          color: $color-green;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
   .main {

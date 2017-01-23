@@ -15,6 +15,12 @@ html
       .header
         h1
           == link_to 'Curricle', root_path, class: 'logo', method: :get
+          
+        ul.head-nav.plain
+          li.inline
+            a.plain.active href="/" Catalog
+          li.inline
+            a.plain href="/path" My Path
       .main
         .left-content
           == render "nav"
