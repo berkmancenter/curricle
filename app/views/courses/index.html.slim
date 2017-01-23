@@ -21,7 +21,7 @@
                   p No courses
               - else
                 - day[:courses].each do |course|
-                  li.block class=(classes_for_course(course)) data-id=(course.id) id=(course.id)
+                  li.block class=(classes_for_course(course)) title=(hover_info(course)) data-id=(course.id) id=(course.id)
 
     .details-wrapper
       ul.plain
@@ -78,20 +78,21 @@ javascript:
   
   $('.block').click(function (e) {
     var course_id = $(this).data("id");
+    var list = $('.details-wrapper ul');
     var element = $('.details-wrapper [data-id="'+ course_id + '"]');
-    var courseElements = document.getElementsByClassName("course-wrapper");
-    var target = courseElements.namedItem(course_id);
     var speed = 1000;
+    var diff = element.position().top - list.position().top;
+
     if(element.length)
     {
-      var position = $(element).position().top;
-      if (position < -20 || position > 40) {
+      if (diff < -20 || diff > 40) {
         $('.details-wrapper').animate({
-          scrollTop: position
+          scrollTop: diff
         }, speed, 'swing');
-       }
+      }
     }
-     $(target).addClass("selected");
+     $('.details-wrapper .course-wrapper.selected').removeClass("selected");
+     $(element).addClass("selected");
   });
 
   $('.course-wrapper').click(function (e) {
@@ -113,9 +114,3 @@ javascript:
     $('.course-wrapper').removeClass("selected");
   });
 
-  function sleep(miliseconds) {
-   var currentTime = new Date().getTime();
-
-   while (currentTime + miliseconds >= new Date().getTime()) {
-    }
-  }
