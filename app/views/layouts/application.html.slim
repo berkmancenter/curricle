@@ -13,14 +13,14 @@ html
   body
     .app-wrapper
       .header
-        h1
-          == link_to 'Curricle', root_path, class: 'logo', method: :get
           
         ul.head-nav.plain
           li.inline
-            a.plain.active href="/" Catalog
+            == link_to 'Catalog', '/', class: ("active" if @nav == :catalog), method: :get
           li.inline
-            a.plain href="/path" My Path
+            == link_to 'My Path', '/path', class: ("active" if @nav == :path), method: :get
+        h1
+          == link_to 'Curricle', root_path, class: 'logo', method: :get
       .main
         .left-content
           == render "nav"
