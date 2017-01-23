@@ -21,7 +21,7 @@
                   p No courses
               - else
                 - day[:courses].each do |course|
-                  li.block class=(classes_for_course(course)) data-id=(course.id) id=(course.id)
+                  li.block class=(classes_for_course(course)) class=(course) data-id=(course.id) id=(course.id)
 
     .details-wrapper
       ul.plain
