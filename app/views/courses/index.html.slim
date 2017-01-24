@@ -82,10 +82,10 @@ javascript:
     var list = $('.details-wrapper ul');
     var element = $('.details-wrapper [data-id="'+ course_id + '"]');
     var speed = 1000;
-    var diff = element.position().top - list.position().top;
 
     if(element.length)
     {
+      var diff = element.position().top - list.position().top;
       if (diff < -20 || diff > 40) {
         $('.details-wrapper').animate({
           scrollTop: diff
@@ -104,7 +104,6 @@ javascript:
     var speed = 1000;
     if (gridSection.length) {
       var position = gridSection.position().top - list.position().top;
-      console.log(position);
       if (position < -20 || position > 40) {
         $('.grid-wrapper').animate({
           scrollTop: position
