@@ -46,8 +46,11 @@
         &.blue {
           background: $color-blue;
         }
+        &:hover {
+          cursor: pointer;
+          }
       }
-
+      
       &.added {
         background: $color-gray !important;
       }
@@ -137,6 +140,11 @@
           background: $color-green;
         }
       }
+      &.selected {  
+        color: white;
+        background: $color-green;
+      }
+
     }
   }
 }
