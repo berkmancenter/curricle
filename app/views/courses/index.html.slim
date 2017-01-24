@@ -7,21 +7,22 @@
 
   .search-contents
     .grid-wrapper
-      - @course_groups.each do |group|
-        .grid-section
-          h4
-            == group[:subject]
+      .grid-wrapper-inner
+        - @course_groups.each do |group|
+          .grid-section
+            h4
+              == group[:subject]
 
-          - group[:days].each do |day|
-            label
-              == day[:name]
-            ul.block-list
-              - if day[:courses].empty?
-                li.empty.italic
-                  p No courses
-              - else
-                - day[:courses].each do |course|
-                  li.block class=(classes_for_course(course)) data-id=(course.id)
+            - group[:days].each do |day|
+              label
+                == day[:name]
+              ul.block-list
+                - if day[:courses].empty?
+                  li.empty.italic
+                    p No courses
+                - else
+                  - day[:courses].each do |course|
+                    li.block class=(classes_for_course(course)) title=(hover_info(course)) data-id=(course.id) id=(course.id)
 
     .details-wrapper
       ul.plain
@@ -78,13 +79,41 @@ javascript:
   
   $('.block').click(function (e) {
     var course_id = $(this).data("id");
-    var element = document.getElementById(course_id);
+    var list = $('.details-wrapper ul');
+    var element = $('.details-wrapper [data-id="'+ course_id + '"]');
     var speed = 1000;
 
-    var position = $(element).position().top;
-    if (position < -20 || position > 40) {
-      $('.details-wrapper').animate({
-        scrollTop: position
-      }, speed, 'swing');
+    if(element.length)
+    {
+      var diff = element.position().top - list.position().top;
+      if (diff < -20 || diff > 40) {
+        $('.details-wrapper').animate({
+          scrollTop: diff
+        }, speed, 'swing');
+      }
     }
+     $('.details-wrapper .course-wrapper.selected').removeClass("selected");
+     $(element).addClass("selected");
   });
+
+  $('.course-wrapper').click(function (e) {
+    var course_id = $(this).data("id");
+    var element = $('.grid-wrapper [data-id="'+ course_id + '"]');
+    var list = $('.grid-wrapper .grid-wrapper-inner');
+    var gridSection = $(element).closest(".grid-section");
+    var speed = 1000;
+    if (gridSection.length) {
+      var position = gridSection.position().top - list.position().top;
+      if (position < -20 || position > 40) {
+        $('.grid-wrapper').animate({
+          scrollTop: position
+        }, speed, 'swing');
+      }
+    }
+
+  });
+
+  $('.details-wrapper').on("click", function(){
+    $('.course-wrapper').removeClass("selected");
+  });
+
