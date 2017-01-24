@@ -58,33 +58,8 @@ class PathController < ApplicationController
       # apply the user's search filters
       query = apply_common_filters(query, filters)
 
-      recommendations = []
-      available = query.to_a.shuffle
-      units_remaining = filters[:units][:total].to_i
-      while units_remaining > 0 && available.length > 0 do
-        # remove any courses from consideration that are worth more units than we have remaining
-        available.delete_if { |r| r.course.units_maximum > units_remaining }
-
-        # select a course
-        rec = available.pop
-        break if rec.nil?
-        recommendations << rec
-
-        # decrement units remaining
-        units_remaining -= rec.course.units_maximum
-
-        # remove any courses from consideration in future loops that would overlap the course we just selected
-        available.keep_if { |r|
-          (r.meets_on_monday == false || r.meets_on_monday != rec.meets_on_monday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
-          (r.meets_on_tuesday == false || r.meets_on_tuesday != rec.meets_on_tuesday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
-          (r.meets_on_wednesday == false || r.meets_on_wednesday != rec.meets_on_wednesday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
-          (r.meets_on_thursday == false || r.meets_on_thursday != rec.meets_on_thursday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start)) &&
-          (r.meets_on_friday == false || r.meets_on_friday != rec.meets_on_friday || (r.meeting_time_start >= rec.meeting_time_end || r.meeting_time_end <= rec.meeting_time_start))
-        }
-      end
-
       # add generated courses to the datasets of existing courses
-      recommendations.each do |rec|
+      RecommendationService.new(query: query, max_units: filters[:units][:total]).generate.each do |rec|
         @meeting_patterns_per_day[:monday] << rec if rec.meets_on_monday
         @meeting_patterns_per_day[:tuesday] << rec if rec.meets_on_tuesday
         @meeting_patterns_per_day[:wednesday] << rec if rec.meets_on_wednesday
