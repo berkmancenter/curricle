@@ -11,6 +11,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bourbon'
 gem 'slim-rails'
 gem 'neat'
+gem 'rack-cas'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

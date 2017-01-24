@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/logout', to: 'application#logout'
 
   get '/courses', to: 'courses#index'
   get '/courses/search', to: 'courses#index'
