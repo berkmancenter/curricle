@@ -53,12 +53,10 @@ module SessionHelper
                  query_filters[:subject].to_s == value.to_s
                when :type
                  query_filters[:type].to_s == value.to_s
-               when /units_(min|max)/
+               when /units_(min|max|total)/
                  if query_filters[:units].present?
                    query_filters[:units][option.to_s.sub('units_', '').to_sym].to_s == value.to_s
                  end
-               when :units_total
-                 query_filters[:units_total].to_s == value.to_s
                when /day_min/
                  if query_filters[:times].present?
                    query_filters[:times][option.to_s.sub('_min', '').to_sym][:min].to_s == value.to_s

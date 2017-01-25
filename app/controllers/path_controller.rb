@@ -59,12 +59,8 @@ class PathController < ApplicationController
       # apply the user's search filters
       query = apply_common_filters(query, filters)
 
-      # TODO: randomly select courses until we hit the total units cap
-      # TODO: ensure randoms don't overlap
-      recommendations = query.all.shuffle.take(3)
-
       # add generated courses to the datasets of existing courses
-      recommendations.each do |rec|
+      RecommendationService.new(query: query, max_units: filters[:units][:total]).generate.each do |rec|
         @meeting_patterns_per_day[:monday] << rec if rec.meets_on_monday
         @meeting_patterns_per_day[:tuesday] << rec if rec.meets_on_tuesday
         @meeting_patterns_per_day[:wednesday] << rec if rec.meets_on_wednesday
@@ -93,7 +89,8 @@ class PathController < ApplicationController
       type: params[:type],
       units: {
         min: params[:units_min],
-        max: params[:units_max]
+        max: params[:units_max],
+        total: params[:units_total]
       }
     }
 
