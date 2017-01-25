@@ -1,20 +1,19 @@
 module SessionHelper
   # Returns the currently authed user (if any)
   def current_user
-    # just return the first user for now, later we'll use the session check below
-    return @current_user ||= User.first
+    return @current_user if @current_user.present?
+    return nil if session['cas'].blank? || session['cas']['user'].blank?
 
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
-
-  # Auths the provided user
-  def auth(user)
-    session[:user_id] = user.id
+    # TODO: probably want to refactor this once we see what `extra_attributes` HarvardKey gives back
+    # as part of the `cas` session object, but for now we'll simply create a new user if the external_user_id doesn't exist
+    @current_user = User.find_or_create_by(external_user_id: session['cas']['user'])
   end
 
   # Unauths the current user
   def unauth
-    session.delete(:user_id)
+    session.delete('cas')
+    session.delete(:query_filters)
+    session.delete(:generate_filters)
     @current_user = nil
   end
 
