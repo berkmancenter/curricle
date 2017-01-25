@@ -19,6 +19,8 @@ html
             == link_to 'Catalog', '/', class: ("active" if @nav == :catalog), method: :get
           li.inline
             == link_to 'My Path', '/path', class: ("active" if @nav == :path), method: :get
+          li.inline
+            == link_to 'Logout', '/logout', method: :get
         h1
           == link_to 'Curricle', root_path, class: 'logo', method: :get
       .main

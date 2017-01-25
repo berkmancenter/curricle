@@ -3,11 +3,16 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include SessionHelper
 
+  def logout
+    unauth
+    redirect_to '/'
+  end
+
   private
 
   def require_auth
     unless authed?
-      # TODO: redirect to login url once we know what that is
+      render nothing: true, status: :unauthorized
     end
   end
 end
