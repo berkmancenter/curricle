@@ -123,3 +123,16 @@ javascript:
       return false;
     }
   });
+
+  // change active course
+  window.handleCourseClick = function (e) {
+    if ($(e.target).is(':not(input[type="submit"])')) {
+      var isActive = $(this).hasClass('active');
+      $('.grid-wrapper .class-wrapper, .path-info-wrapper .course-path-wrapper').removeClass('active');
+      $('[data-id="' + $(this).data('id') + '"]').toggleClass('active', !isActive);
+    }
+  };
+
+  // handle click on course
+  $('.grid-wrapper').on('click', '.class-wrapper', handleCourseClick);
+  $('.path-info-wrapper').on('click', '.course-path-wrapper', handleCourseClick);
