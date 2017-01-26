@@ -101,6 +101,8 @@
         color: white;
         box-shadow: 1px 2px 3px 2px rgba(0,0,0,0.75);
         position: relative;
+        z-index: 10;
+        cursor: pointer;
 
         .add-remove {
           input[type="submit"] {
@@ -129,6 +131,11 @@
           &.recommended {
             display: block;
             background: $color-green;
+          }
+
+          &.active {
+            z-index: 11;
+            background: $color-gray !important;
           }
         }
      }
@@ -214,6 +221,7 @@
       position: relative;
       border: 1px solid $color-slate;
       color: $color-slate;
+      cursor: pointer;
 
       &.visible {
         display: block;
@@ -258,6 +266,17 @@
           border: 1px solid white;
         }
       }
+
+      &.active {
+        color: white;
+        background: $color-gray !important;
+
+        input[type="submit"] {
+          color: white;
+          border: 1px solid white;
+        }
+      }
+
     }
   }
 }
