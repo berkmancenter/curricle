@@ -117,11 +117,11 @@ class Course < ApplicationRecord
           table: :course_instructors,
           columns: [:first_name, :last_name]
         }
-      },
-      library: {
-        display: 'Library reserves',
-        default: false
       }
+      #library: {
+      #  display: 'Library reserves',
+      #  default: false
+      #}
     }
   end
 
