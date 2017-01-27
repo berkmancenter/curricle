@@ -34,6 +34,19 @@ module SessionHelper
     @generate_filters ||= (session[:generate_filters] || {}).deep_symbolize_keys
   end
 
+  def build_keyword_filters(filters)
+    filter_set = []
+    filters[:keywords].each do |key, value|
+      next if value.blank?
+      filter_set << {
+        keywords: value,
+        keyword_options: filters[:keyword_options][key]
+      }
+    end
+
+    filter_set.blank? ? [{ keywords: '', keyword_options: {} }] : filter_set
+  end
+
   def filter_option_state(query_filters, option, value)
     selected = case option
                when :term

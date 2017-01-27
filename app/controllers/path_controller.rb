@@ -3,7 +3,6 @@ class PathController < ApplicationController
 
   def index
     @nav = :path
-    @keyword_filters ||= []
     filters = generate_filters
     semester = filters.present? ? filters[:term] : current_semester(safe: true)
     @meeting_patterns = current_user.patterns_for_all_courses()
@@ -30,15 +29,7 @@ class PathController < ApplicationController
     if filters.present?
       # generate recommendations and add them to the various datasets as appropriate
 
-      filters[:keywords].each do |key, value|
-        next if value.blank?
-        @keyword_filters << {
-          keywords: value,
-          keyword_options: filters[:keyword_options][key]
-        }
-      end
-
-      @keyword_filters << { keywords: '', keyword_options: {} } if @keyword_filters.blank?
+      @keyword_filters = build_keyword_filters(filters)
       keyword_filters = @keyword_filters.deep_dup
 
       # search for courses that match the filters and haven't already been added
@@ -90,7 +81,7 @@ class PathController < ApplicationController
         end
       end
     else
-      @keyword_filters << { keywords: '', keyword_options: '' }
+      @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
   end
 

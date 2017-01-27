@@ -5,19 +5,11 @@ class CoursesController < ApplicationController
     @nav = :catalog
     @matching_courses ||= []
     @course_groups ||= []
-    @keyword_filters ||= []
 
     if query_filters.present?
-      query_filters[:keywords].each do |key, value|
-        next if value.blank?
-        @keyword_filters << {
-          keywords: value,
-          keyword_options: query_filters[:keyword_options][key]
-        }
-      end
-
-      @keyword_filters << { keywords: '', keyword_options: {} } if @keyword_filters.blank?
+      @keyword_filters = build_keyword_filters(query_filters)
       keyword_filters = @keyword_filters.deep_dup
+
       query = Course.left_outer_joins(:course_meeting_patterns).search_for(keyword_filters.shift)
       keyword_filters.each do |filter|
         query = query.search_for(filter)
@@ -55,7 +47,7 @@ class CoursesController < ApplicationController
 
       @matching_courses = query.all
     else
-      @keyword_filters << { keywords: '', keyword_options: '' }
+      @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
   end
 
