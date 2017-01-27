@@ -11,7 +11,9 @@ class Course < ApplicationRecord
       associated_against: {},
       using: {
         tsearch: {
-          dictionary: "english"
+          dictionary: "english",
+          any_word: true,
+          prefix: true
         }
       }
     }
@@ -115,11 +117,11 @@ class Course < ApplicationRecord
           table: :course_instructors,
           columns: [:first_name, :last_name]
         }
-      },
-      library: {
-        display: 'Library reserves',
-        default: false
       }
+      #library: {
+      #  display: 'Library reserves',
+      #  default: false
+      #}
     }
   end
 
