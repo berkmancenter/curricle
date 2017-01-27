@@ -73,7 +73,7 @@ class CoursesController < ApplicationController
         max: params[:units_max]
       },
       times: Course.schedule_filter_map(params)
-    }.to_json
+    }
 
     redirect_to '/'
   end

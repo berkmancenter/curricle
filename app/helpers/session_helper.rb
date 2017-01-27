@@ -24,7 +24,7 @@ module SessionHelper
 
   # retrieves the most recent search filters submitted by the user
   def query_filters
-    @query_filters ||= JSON.parse(session[:query_filters] || "{}").deep_symbolize_keys
+    @query_filters ||= (session[:query_filters] || {}).deep_symbolize_keys
   rescue JSON::ParserError
     @query_filters = {}
   end
