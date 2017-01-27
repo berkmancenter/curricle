@@ -24,7 +24,7 @@ module SessionHelper
 
   # retrieves the most recent search filters submitted by the user
   def query_filters
-    @query_filters ||= JSON.parse(session[:query_filters] || "{}").deep_symbolize_keys
+    @query_filters ||= (session[:query_filters] || {}).deep_symbolize_keys
   rescue JSON::ParserError
     @query_filters = {}
   end
@@ -32,6 +32,19 @@ module SessionHelper
   # retrieves the most recent recommendation filters submitted by the user
   def generate_filters
     @generate_filters ||= (session[:generate_filters] || {}).deep_symbolize_keys
+  end
+
+  def build_keyword_filters(filters)
+    filter_set = []
+    filters[:keywords].each do |key, value|
+      next if value.blank?
+      filter_set << {
+        keywords: value,
+        keyword_options: filters[:keyword_options][key]
+      }
+    end
+
+    filter_set.blank? ? [{ keywords: '', keyword_options: {} }] : filter_set
   end
 
   def filter_option_state(query_filters, option, value)

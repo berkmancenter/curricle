@@ -1,6 +1,6 @@
 var ready = function () {
   // submit search on enter
-  $('input.keyword-box').keypress(function (e) {
+  $('.search-form').on('keypress', 'input.keyword-box', function (e) {
     if (e.which == '13') {
       $(this).closest('form').submit();
     }
@@ -72,6 +72,42 @@ var ready = function () {
     multiple: false,
     prefix: 'Type: ',
     search: true
+  });
+
+  // handle add new search keyword
+  $('button.add-keywords').click(function (e) {
+    e.preventDefault();
+
+    var template = $('.keywords-wrapper .box').last();
+    var box = template.clone();
+    var newIndex = box.data('index') + 1;
+
+    // setup text box
+    box.find('.keyword-box').val('').attr('name', 'keywords[' + newIndex + ']');
+
+    // setup multiselect
+    box.find('.ms-options-wrap').remove();
+    box.find('select').val(['title', 'description']).attr('name', 'keyword_options[' + newIndex + '][]').removeClass('jqmsLoaded').multiselect({
+      placeholder: '',
+      minHeight: null,
+      showCheckbox: false,
+      prefix: 'Apply to: '
+    });
+
+    // add to dom
+    template.closest('.keywords-wrapper').append(box);
+
+    // give focus
+    box.find('.keyword-box').focus();
+  });
+
+  // handle remove search keyword
+  $('.keywords-wrapper').on('click', '.box .remove', function (e) {
+    e.preventDefault();
+
+    if ($('.keywords-wrapper .box').length > 1) {
+      $(this).closest('.box').remove();
+    }
   });
 };
 
