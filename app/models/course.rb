@@ -11,7 +11,9 @@ class Course < ApplicationRecord
       associated_against: {},
       using: {
         tsearch: {
-          dictionary: "english"
+          dictionary: "english",
+          any_word: true,
+          prefix: true
         }
       }
     }
