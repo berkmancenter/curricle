@@ -3,6 +3,7 @@ class PathController < ApplicationController
 
   def index
     @nav = :path
+    @keyword_filters ||= []
     filters = generate_filters
     semester = filters.present? ? filters[:term] : current_semester(safe: true)
     @meeting_patterns = current_user.patterns_for_all_courses()
@@ -29,11 +30,25 @@ class PathController < ApplicationController
     if filters.present?
       # generate recommendations and add them to the various datasets as appropriate
 
-      @keywords = filters[:keywords]
+      filters[:keywords].each do |key, value|
+        next if value.blank?
+        @keyword_filters << {
+          keywords: value,
+          keyword_options: filters[:keyword_options][key]
+        }
+      end
+
+      @keyword_filters << { keywords: '', keyword_options: {} } if @keyword_filters.blank?
+      keyword_filters = @keyword_filters.deep_dup
 
       # search for courses that match the filters and haven't already been added
       query = CourseMeetingPattern.joins(:course)
-      query = query.where(course_id: Course.search_for(filters).select(:id))
+
+      course_query = Course.search_for(keyword_filters.shift)
+      keyword_filters.each do |filter|
+        course_query = course_query.search_for(filter)
+      end
+      query = query.where(course_id: course_query.select(:id))
         .where.not(id: @meeting_patterns.map(&:id))
 
       # exlude any courses without meeting times
@@ -74,15 +89,17 @@ class PathController < ApplicationController
           end
         end
       end
+    else
+      @keyword_filters << { keywords: '', keyword_options: '' }
     end
   end
 
   def generate
     session[:generate_filters] = {
       excludes: [],
-      term: params[:term] || '',
-      keywords: params[:keywords] || '',
-      keyword_options: params[:keyword_options] || [],
+      term: params[:term],
+      keywords: params[:keywords],
+      keyword_options: params[:keyword_options] || { "0": [] },
       school: params[:school],
       department: params[:department],
       subject: params[:subject],
