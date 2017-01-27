@@ -5,11 +5,24 @@ class CoursesController < ApplicationController
     @nav = :catalog
     @matching_courses ||= []
     @course_groups ||= []
+    @keyword_filters ||= []
 
     if query_filters.present?
-      @keywords = query_filters[:keywords]
+      query_filters[:keywords].each do |key, value|
+        next if value.blank?
+        @keyword_filters << {
+          keywords: value,
+          keyword_options: query_filters[:keyword_options][key]
+        }
+      end
 
-      query = Course.left_outer_joins(:course_meeting_patterns).search_for(query_filters)
+      @keyword_filters << { keywords: '', keyword_options: {} } if @keyword_filters.blank?
+      keyword_filters = @keyword_filters.deep_dup
+      query = Course.left_outer_joins(:course_meeting_patterns).search_for(keyword_filters.shift)
+      keyword_filters.each do |filter|
+        query = query.search_for(filter)
+      end
+
       query = apply_common_filters(query, query_filters)
 
       query_filters[:times].each do |day, values|
@@ -41,14 +54,16 @@ class CoursesController < ApplicationController
       end
 
       @matching_courses = query.all
+    else
+      @keyword_filters << { keywords: '', keyword_options: '' }
     end
   end
 
   def search
     session[:query_filters] = {
-      term: params[:term] || '',
-      keywords: params[:keywords] || '',
-      keyword_options: params[:keyword_options] || [],
+      term: params[:term],
+      keywords: params[:keywords],
+      keyword_options: params[:keyword_options] || { "0": [] },
       school: params[:school],
       department: params[:department],
       subject: params[:subject],
