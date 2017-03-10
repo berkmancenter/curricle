@@ -49,19 +49,19 @@ class Course < ApplicationRecord
   end
 
   def self.schools
-    order(:academic_group).distinct.pluck(:academic_group)
+    where.not(academic_group: [nil, '']).order(:academic_group).distinct.pluck(:academic_group)
   end
 
   def self.departments
-    order(:class_academic_org_description).distinct.pluck(:class_academic_org_description)
+    where.not(class_academic_org_description: [nil, '']).order(:class_academic_org_description).distinct.pluck(:class_academic_org_description)
   end
 
   def self.subject_descriptions
-    order(:subject_description).distinct.pluck(:subject_description)
+    where.not(subject_description: [nil, '']).order(:subject_description).distinct.pluck(:subject_description)
   end
 
   def self.component_types
-    order(:component).distinct.pluck(:component)
+    where.not(component: [nil, '']).order(:component).distinct.pluck(:component)
   end
 
   def self.terms
