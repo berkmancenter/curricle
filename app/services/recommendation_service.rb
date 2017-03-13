@@ -10,8 +10,10 @@ class RecommendationService
     available = @query.to_a.shuffle
     units_remaining = @max_units
     while units_remaining > 0 && available.length > 0 do
-      # remove any courses from consideration that are worth more units than we have remaining
-      available.delete_if { |r| r.course.units_maximum > units_remaining }
+      # remove any courses from consideration that
+      # - don't have a units value OR
+      # - are worth more units than we have remaining
+      available.delete_if { |r| r.course.units_maximum.nil? || r.course.units_maximum > units_remaining }
 
       # select a course
       rec = available.pop
