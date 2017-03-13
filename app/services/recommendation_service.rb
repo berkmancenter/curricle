@@ -13,7 +13,7 @@ class RecommendationService
       # remove any courses from consideration that
       # - don't have a units value OR
       # - are worth more units than we have remaining
-      available.delete_if { |r| r.course.units_maximum.nil? || r.course.units_maximum > units_remaining }
+      available.delete_if { |r| r.course.units_maximum.blank? || r.course.units_maximum > units_remaining }
 
       # select a course
       rec = available.pop
