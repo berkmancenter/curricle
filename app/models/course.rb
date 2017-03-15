@@ -4,6 +4,51 @@ class Course < ApplicationRecord
   has_many :course_meeting_patterns
   has_many :course_instructors
 
+  searchable do
+    integer :id
+    integer :external_course_id
+    text :title
+    string :term_name
+    integer :term_year
+    integer :academic_year
+    string :class_section
+    string :component
+    integer :prereq
+    string :subject
+    text :subject_description
+    string :subject_description
+    text :subject_academic_org_description
+    text :academic_group
+    string :academic_group
+    text :academic_group_description
+    text :grading_basis_description
+    string :term_pattern_code
+    text :term_pattern_description
+    integer :units_maximum
+    integer :catalog_number
+    text :course_description
+    text :course_description_long
+    text :course_note
+    text :class_academic_org_description
+    string :class_academic_org_description
+    join(:class_meeting_number, :target => CourseMeetingPattern, :type => :string, :join => { :from => :course_id, :to => :id })
+    join(:meeting_time_start, :target => CourseMeetingPattern, :type => :integer, :join => { :from => :course_id, :to => :id })
+    join(:meeting_time_end, :target => CourseMeetingPattern, :type => :integer, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_monday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_tuesday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_wednesday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_thursday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_friday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_saturday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:meets_on_sunday, :target => CourseMeetingPattern, :type => :boolean, :join => { :from => :course_id, :to => :id })
+    join(:start_date, :target => CourseMeetingPattern, :type => :date, :join => { :from => :course_id, :to => :id })
+    join(:end_date, :target => CourseMeetingPattern, :type => :date, :join => { :from => :course_id, :to => :id })
+    join(:external_facility_id, :target => CourseMeetingPattern, :type => :string, :join => { :from => :course_id, :to => :id })
+    join(:facility_description, :target => CourseMeetingPattern, :type => :string, :join => { :from => :course_id, :to => :id })
+    join(:first_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:last_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+  end
+
   pg_search_scope :search_for, lambda { |query_filters|
     query = {
       query: query_filters[:keywords],
@@ -38,9 +83,26 @@ class Course < ApplicationRecord
     query
   }
 
+  scope :return_as_relation, ->(search_results) do
+    matching_item_ids = search_results.hits.map(&:primary_key)
+    where :id => matching_item_ids 
+    #Course.left_outer_joins(:course_meeting_patterns).where(:id => matching_item_ids) + Course.left_outer_joins(:course_meeting_patterns).where(:course_id => matching_item_ids)
+  end
+
   def self.for_day(day, query_params = {})
     query_params[:id] = CourseMeetingPattern.select(:course_id).where("meets_on_#{day}": true)
+    
+    # search = Sunspot.search(CourseMeetingPattern) do
+    #   with("meets_on_#{day}", true)
+    # end
+    # query_params[:id] = search.results[:course_id]
+
     Course.where(query_params).distinct
+
+    # result = Sunspot.search(Course) do
+    #   with(:subject_academic_org_description, query_params[:subject_academic_org_description])
+    # end
+    # result #to do, make sure that it returns distinct values
   end
 
   def self.subject_groups(query = nil)
