@@ -4,7 +4,7 @@ class CourseMeetingPattern < ApplicationRecord
   searchable do
     integer :id
     integer :external_course_id
-    integer :course_id, eferences: Course
+    integer :course_id, references: Course
     string :term_name
     integer :term_year
     string :class_section
