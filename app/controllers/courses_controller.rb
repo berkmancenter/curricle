@@ -29,15 +29,15 @@ class CoursesController < ApplicationController
 
       @course_groups = []
 
-      Course.subject_groups(query).each do |subject|
+      Course.groups(query).each do |group|
         group = {
-          subject: subject,
+          group: group,
           days: [
-            { name: 'Mon', courses: Course.for_day(:monday, subject_academic_org_description: subject) },
-            { name: 'Tue', courses: Course.for_day(:tuesday, subject_academic_org_description: subject) },
-            { name: 'Wed', courses: Course.for_day(:wednesday, subject_academic_org_description: subject) },
-            { name: 'Thu', courses: Course.for_day(:thursday, subject_academic_org_description: subject) },
-            { name: 'Fri', courses: Course.for_day(:friday, subject_academic_org_description: subject) },
+            { name: 'Mon', courses: Course.for_day(:monday, division_description: group) },
+            { name: 'Tue', courses: Course.for_day(:tuesday, division_description: group) },
+            { name: 'Wed', courses: Course.for_day(:wednesday, division_description: group) },
+            { name: 'Thu', courses: Course.for_day(:thursday, division_description: group) },
+            { name: 'Fri', courses: Course.for_day(:friday, division_description: group) },
           ]
         }
 

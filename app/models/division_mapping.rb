@@ -1,0 +1,2 @@
+class DivisionMapping < ApplicationRecord
+end
