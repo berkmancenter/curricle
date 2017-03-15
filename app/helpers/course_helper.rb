@@ -11,5 +11,5 @@ module CourseHelper
 
   def hover_info(course)
     course.subject + " " + course.catalog_number.to_s
-  end  
+  end
 end
