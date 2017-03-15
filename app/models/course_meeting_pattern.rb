@@ -4,13 +4,13 @@ class CourseMeetingPattern < ApplicationRecord
   searchable do
     integer :id
     integer :external_course_id
-    integer :course_id, :references => Course
+    integer :course_id, eferences: Course
     string :term_name
     integer :term_year
     string :class_section
     string :class_meeting_number
-    integer :meeting_time_start, :using => :extract_hour_from_meeting_time_start
-    integer :meeting_time_end, :using => :extract_hour_from_meeting_time_end
+    integer :meeting_time_start, using:  :extract_hour_from_meeting_time_start
+    integer :meeting_time_end, using: :extract_hour_from_meeting_time_end
     boolean :meets_on_monday
     boolean :meets_on_tuesday
     boolean :meets_on_wednesday
