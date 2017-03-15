@@ -3,7 +3,7 @@ class CourseInstructor < ApplicationRecord
 
   searchable do
     integer :external_course_id
-    integer :course_id, :references => Course
+    integer :course_id, references: Course
     string :term_name
     integer :term_year
     string :class_section
