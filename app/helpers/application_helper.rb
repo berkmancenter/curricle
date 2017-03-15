@@ -74,73 +74,23 @@ module ApplicationHelper
         end
 
         if type == :courses
+          array_days = [:monday, :tuesday, :wednesday, :thursday, :friday]
+          array_days.each do |day_of_week| 
 
-          unless search_filters[:times][:monday][:min]=="any"
-            all_of do
-            with(:meets_on_monday, true)
-            with(:meeting_time_start).greater_than(search_filters[:times][:monday][:min])
+            unless search_filters[:times][day_of_week][:min]=="any"
+              all_of do
+              with("meets_on_#{day_of_week}".to_sym, true)
+              with(:meeting_time_start).greater_than(search_filters[:times][day_of_week][:min])
+              end
+            end
+            unless search_filters[:times][day_of_week][:max]=="any"
+              all_of do
+              with("meets_on_#{day_of_week}", true)
+              with(:meeting_time_start).less_than(search_filters[:times][day_of_week][:max])
+              end
             end
           end
-          unless search_filters[:times][:monday][:max]=="any"
-            all_of do
-            with(:meets_on_monday, true)
-            with(:meeting_time_start).less_than(search_filters[:times][:monday][:max])
-            end
-          end
-
-          unless search_filters[:times][:tuesday][:min]=="any"
-            all_of do
-            with(:meets_on_tuesday, true)
-            with(:meeting_time_start).greater_than(search_filters[:times][:tuesday][:min])
-            end
-          end
-          unless search_filters[:times][:tuesday][:max]=="any"
-            all_of do
-            with(:meets_on_tuesday, true)
-            with(:meeting_time_start).less_than(search_filters[:times][:tuesday][:max])
-            end
-          end
-
-          unless search_filters[:times][:wednesday][:min]=="any"
-            all_of do
-            with(:meets_on_wednesday, true)
-            with(:meeting_time_start).greater_than(search_filters[:times][:wednesday][:min])
-            end
-          end
-          unless search_filters[:times][:wednesday][:max]=="any"
-            all_of do
-            with(:meets_on_wednesday, true)
-            with(:meeting_time_start).less_than(search_filters[:times][:wednesday][:max])
-            end
-          end
-
-          unless search_filters[:times][:thursday][:min]=="any"
-            all_of do
-            with(:meets_on_thursday, true)
-            with(:meeting_time_start).greater_than(search_filters[:times][:thursday][:min])
-            end
-          end
-          unless search_filters[:times][:thursday][:max]=="any"
-            all_of do
-            with(:meets_on_thursday, true)
-            with(:meeting_time_start).less_than(search_filters[:times][:thursday][:max])
-            end
-          end
-
-          unless search_filters[:times][:friday][:min]=="any"
-            all_of do
-            with(:meets_on_friday, true)
-            with(:meeting_time_start).greater_than(search_filters[:times][:friday][:min])
-            end
-          end
-          unless search_filters[:times][:friday][:max]=="any"
-            all_of do
-            with(:meets_on_friday, true)
-            with(:meeting_time_start).less_than(search_filters[:times][:friday][:max])
-            end
-          end
-        end
-
+         end
       end
       query = Course.return_as_relation(res)
       query
