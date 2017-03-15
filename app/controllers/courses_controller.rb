@@ -13,7 +13,6 @@ class CoursesController < ApplicationController
       query = sunspot_search(query_filters, :courses)
 
       @course_groups = []
-
       
       Course.subject_groups(query).each do |subject|
         group = {
@@ -31,7 +30,6 @@ class CoursesController < ApplicationController
         @course_groups << group if not_empty
       end
       
-
       @matching_courses = query.all
     else
       @keyword_filters = [{ keywords: '', keyword_options: '' }]
