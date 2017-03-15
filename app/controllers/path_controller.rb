@@ -34,11 +34,10 @@ class PathController < ApplicationController
 
       # search for courses that match the filters and haven't already been added
       query = CourseMeetingPattern.joins(:course)
-
-      course_query = Course.search_for(keyword_filters.shift)
-      keyword_filters.each do |filter|
-        course_query = course_query.search_for(filter)
-      end
+      
+      course_query = sunspot_search(filters, :path)
+        
+     
       query = query.where(course_id: course_query.select(:id))
         .where.not(id: @meeting_patterns.map(&:id))
 
