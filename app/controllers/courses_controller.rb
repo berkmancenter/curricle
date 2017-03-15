@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
       @keyword_filters = build_keyword_filters(query_filters)
       keyword_filters = @keyword_filters.deep_dup
 
-      query = sunspot_search(query_filters)
+      query = sunspot_search(query_filters, :courses)
 
       @course_groups = []
 
