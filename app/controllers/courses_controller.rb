@@ -10,25 +10,11 @@ class CoursesController < ApplicationController
       @keyword_filters = build_keyword_filters(query_filters)
       keyword_filters = @keyword_filters.deep_dup
 
-      query = Course.left_outer_joins(:course_meeting_patterns).search_for(keyword_filters.shift)
-      keyword_filters.each do |filter|
-        query = query.search_for(filter)
-      end
-
-      query = apply_common_filters(query, query_filters)
-
-      query_filters[:times].each do |day, values|
-        unless values[:min] == 'any'
-          query = query.where.not("course_meeting_patterns.meets_on_#{day} = ? AND EXTRACT(HOUR from meeting_time_start) < ?", true, values[:min])
-        end
-
-        unless values[:max] == 'any'
-          query = query.where.not("course_meeting_patterns.meets_on_#{day} = ? AND EXTRACT(HOUR from meeting_time_start) > ?", true, values[:max])
-        end
-      end
+      query = sunspot_search(query_filters)
 
       @course_groups = []
 
+      
       Course.subject_groups(query).each do |subject|
         group = {
           subject: subject,
@@ -44,6 +30,7 @@ class CoursesController < ApplicationController
         not_empty = group[:days].find { |day| !day[:courses].empty? }
         @course_groups << group if not_empty
       end
+      
 
       @matching_courses = query.all
     else
