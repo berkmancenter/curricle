@@ -85,24 +85,12 @@ class Course < ApplicationRecord
 
   scope :return_as_relation, ->(search_results) do
     matching_item_ids = search_results.hits.map(&:primary_key)
-    where :id => matching_item_ids 
-    #Course.left_outer_joins(:course_meeting_patterns).where(:id => matching_item_ids) + Course.left_outer_joins(:course_meeting_patterns).where(:course_id => matching_item_ids)
+    where :id => matching_item_ids
   end
 
   def self.for_day(day, query_params = {})
     query_params[:id] = CourseMeetingPattern.select(:course_id).where("meets_on_#{day}": true)
-    
-    # search = Sunspot.search(CourseMeetingPattern) do
-    #   with("meets_on_#{day}", true)
-    # end
-    # query_params[:id] = search.results[:course_id]
-
     Course.where(query_params).distinct
-
-    # result = Sunspot.search(Course) do
-    #   with(:subject_academic_org_description, query_params[:subject_academic_org_description])
-    # end
-    # result #to do, make sure that it returns distinct values
   end
 
   def self.subject_groups(query = nil)
