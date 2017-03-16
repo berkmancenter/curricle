@@ -20,11 +20,5 @@
 
 
 # Solr
-/solr/data
-/solr/default
-/solr/development
-/solr/pids
-/solr/test
-/solr/conf/_rest_managed.json
-/solr/core.properties
+solr/
 
