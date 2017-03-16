@@ -17,7 +17,7 @@
 .byebug_history
 
 .DS_Store
-<<<<<<< HEAD
+
 
 # Solr
 /solr/data
@@ -27,5 +27,4 @@
 /solr/test
 /solr/conf/_rest_managed.json
 /solr/core.properties
-=======
->>>>>>> 6ac15bd7ae2b735cc2b3bfd32b690de07268d18c
+
