@@ -54,36 +54,65 @@ class Course < ApplicationRecord
     where :id => matching_item_ids
   end
 
+  before_save :set_division
+
   def self.for_day(day, query_params = {})
     query_params[:id] = CourseMeetingPattern.select(:course_id).where("meets_on_#{day}": true)
     Course.where(query_params).distinct
   end
 
-  def self.subject_groups(query = nil)
-    # TODO: figure out if we can replace uniq with distinct
-    query.pluck(:subject_academic_org_description).uniq
+  def self.groups(query = nil)
+    query.pluck(:division_description).uniq
   end
 
   def self.schools
-    order(:academic_group).distinct.pluck(:academic_group)
+    where.not(academic_group: [nil, '']).order(:academic_group).distinct.pluck(:academic_group)
   end
 
   def self.departments
-    order(:class_academic_org_description).distinct.pluck(:class_academic_org_description)
+    where.not(class_academic_org_description: [nil, '']).order(:class_academic_org_description).distinct.pluck(:class_academic_org_description)
   end
 
   def self.subject_descriptions
-    order(:subject_description).distinct.pluck(:subject_description)
+    where.not(subject_description: [nil, '']).order(:subject_description).distinct.pluck(:subject_description)
   end
 
   def self.component_types
-    order(:component).distinct.pluck(:component)
+    where.not(component: [nil, '']).order(:component).distinct.pluck(:component)
   end
 
   def self.terms
     select('DISTINCT on (term_name,term_year) term_name, term_year').where("term_year >= ?", Date.today.year).order(term_year: :asc, term_name: :desc).map { |term|
       "#{term.term_name}_#{term.term_year}"
     }
+  end
+
+  def set_division
+    mapping = DivisionMapping.find_by(
+      academic_group: academic_group,
+      subject_description: subject_description
+    )
+
+    # if we didn't find a mapping, search for one without an academic_group
+    if mapping.blank?
+      mapping = DivisionMapping.find_by(
+        academic_group: nil,
+        subject_description: subject_description
+      )
+    end
+
+    if mapping.blank?
+      self.division = 'misc'
+      self.division_description = 'Misc'
+    else
+      self.division = mapping.division
+      self.division_description = mapping.division_description
+    end
+  end
+
+  def set_division!
+    set_division
+    save
   end
 
   def meeting
