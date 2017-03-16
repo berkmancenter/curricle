@@ -1,0 +1,224 @@
+academic_group,subject_description,division,division_description
+FAS,Graduate Audit,misc,Misc
+FAS,Graduate Independent Study,misc,Misc
+FAS,Graduate Research,misc,Misc
+FAS,Graduate Teaching,misc,Misc
+FAS,Independent Study,misc,Misc
+FAS,Leverett House Seminar,HSEM,House Seminars
+FAS,Freshman Seminar,FRSP,Freshman Seminar
+FAS,Aesthetic and Interpretive Understanding,GEN_ED,GenEd
+FAS,Culture and Belief,GEN_ED,GenEd
+FAS,Empirical and Mathematical Reasoning,GEN_ED,GenEd
+FAS,Ethical Reasoning,GEN_ED,GenEd
+FAS,Humanities Studio,GEN_ED,GenEd
+FAS,Science of Living Systems,GEN_ED,GenEd
+FAS,Science of the Physical Universe,GEN_ED,GenEd
+FAS,Societies of the World,GEN_ED,GenEd
+FAS,United States in the World,GEN_ED,GenEd
+FAS,Global Health and Health Policy,GLOBHLTH,Global Health and Health Policy
+FAS,Winthrop House Seminar,HSEM,House Seminars
+FAS,Akkadian,HUMANITIES,Humanities
+FAS,Ancient Near East,HUMANITIES,Humanities
+FAS,Arabic,HUMANITIES,Humanities
+FAS,Aramaic,HUMANITIES,Humanities
+FAS,Armenian,HUMANITIES,Humanities
+FAS,Armenian Studies,HUMANITIES,Humanities
+FAS,"Bosnian, Croatian, and Serbian",HUMANITIES,Humanities
+FAS,Catalan,HUMANITIES,Humanities
+FAS,Celtic,HUMANITIES,Humanities
+FAS,Celtic (Summer),HUMANITIES,Humanities
+FAS,Chaghatay,HUMANITIES,Humanities
+FAS,Chinese,HUMANITIES,Humanities
+FAS,Chinese (Summer),HUMANITIES,Humanities
+FAS,Chinese History,HUMANITIES,Humanities
+FAS,Chinese Literature,HUMANITIES,Humanities
+FAS,Classical Archaeology,HUMANITIES,Humanities
+FAS,Classical Hebrew,HUMANITIES,Humanities
+FAS,Classical Philology,HUMANITIES,Humanities
+FAS,Classical Studies,HUMANITIES,Humanities
+FAS,Classics,HUMANITIES,Humanities
+FAS,Creative Writing (Summer),HUMANITIES,Humanities
+FAS,Czech,HUMANITIES,Humanities
+FAS,Czech (Summer),HUMANITIES,Humanities
+FAS,Dramatic Arts (Summer),HUMANITIES,Humanities
+FAS,East Asian Buddhist Studies,HUMANITIES,Humanities
+FAS,East Asian Film and Media Studies,HUMANITIES,Humanities
+FAS,East Asian Languages and Cultures (Summer),HUMANITIES,Humanities
+FAS,East Asian Studies,HUMANITIES,Humanities
+FAS,Egyptian,HUMANITIES,Humanities
+FAS,English,HUMANITIES,Humanities
+FAS,English (Summer),HUMANITIES,Humanities
+FAS,Expository Writing,HUMANITIES,Humanities
+FAS,Folklore and Mythology,HUMANITIES,Humanities
+FAS,French,HUMANITIES,Humanities
+FAS,French (Summer),HUMANITIES,Humanities
+FAS,German,HUMANITIES,Humanities
+FAS,Germanic Languages and Literature (Summer),HUMANITIES,Humanities
+FAS,Germanic Philology,HUMANITIES,Humanities
+FAS,Gikuyu,HUMANITIES,Humanities
+FAS,Greek,HUMANITIES,Humanities
+FAS,Hebrew,HUMANITIES,Humanities
+FAS,Hindi-Urdu,HUMANITIES,Humanities
+FAS,History and Literature,HUMANITIES,Humanities
+FAS,History of Art and Architecture,HUMANITIES,Humanities
+FAS,History of Art and Architecture (Summer),HUMANITIES,Humanities
+FAS,Humanities,HUMANITIES,Humanities
+FAS,Iranian,HUMANITIES,Humanities
+FAS,Irish,HUMANITIES,Humanities
+FAS,Islamic Civilizations,HUMANITIES,Humanities
+FAS,Italian,HUMANITIES,Humanities
+FAS,Japanese,HUMANITIES,Humanities
+FAS,Japanese (Summer),HUMANITIES,Humanities
+FAS,Japanese History,HUMANITIES,Humanities
+FAS,Japanese Literature,HUMANITIES,Humanities
+FAS,Jewish Studies,HUMANITIES,Humanities
+FAS,Korean,HUMANITIES,Humanities
+FAS,Korean (Summer),HUMANITIES,Humanities
+FAS,Korean History,HUMANITIES,Humanities
+FAS,Korean Literature,HUMANITIES,Humanities
+FAS,Latin,HUMANITIES,Humanities
+FAS,Latin (Summer),HUMANITIES,Humanities
+FAS,Latin American Studies,HUMANITIES,Humanities
+FAS,Linguistics,HUMANITIES,Humanities
+FAS,Manchu,HUMANITIES,Humanities
+FAS,Medieval Greek,HUMANITIES,Humanities
+FAS,Medieval Latin,HUMANITIES,Humanities
+FAS,Medieval Studies,HUMANITIES,Humanities
+FAS,Modern Greek,HUMANITIES,Humanities
+FAS,Modern Hebrew,HUMANITIES,Humanities
+FAS,Modern Middle East,HUMANITIES,Humanities
+FAS,Mongolian,HUMANITIES,Humanities
+FAS,Music,HUMANITIES,Humanities
+FAS,Music (Summer),HUMANITIES,Humanities
+FAS,Near Eastern Civilizations,HUMANITIES,Humanities
+FAS,Near Eastern Languages and Civilizations (Summer),HUMANITIES,Humanities
+FAS,Nepali,HUMANITIES,Humanities
+FAS,Pali,HUMANITIES,Humanities
+FAS,Persian,HUMANITIES,Humanities
+FAS,Philosophy,HUMANITIES,Humanities
+FAS,Polish,HUMANITIES,Humanities
+FAS,Portuguese,HUMANITIES,Humanities
+FAS,Regional Studies - East Asia,HUMANITIES,Humanities
+FAS,Religion,HUMANITIES,Humanities
+FAS,Religion (Summer),HUMANITIES,Humanities
+FAS,Romance Languages,HUMANITIES,Humanities
+FAS,Romance Studies,HUMANITIES,Humanities
+FAS,Russian,HUMANITIES,Humanities
+FAS,Sanskrit,HUMANITIES,Humanities
+FAS,Scandinavian,HUMANITIES,Humanities
+FAS,Scandinavian (Summer),HUMANITIES,Humanities
+FAS,Scottish Gaelic,HUMANITIES,Humanities
+FAS,Semitic Philology,HUMANITIES,Humanities
+FAS,Slavic,HUMANITIES,Humanities
+FAS,South Asian Studies,HUMANITIES,Humanities
+FAS,Spanish,HUMANITIES,Humanities
+FAS,Spanish Language and Literature (Summer),HUMANITIES,Humanities
+FAS,Special Concentrations,HUMANITIES,Humanities
+FAS,Sumerian,HUMANITIES,Humanities
+FAS,Swahili,HUMANITIES,Humanities
+FAS,Swedish,HUMANITIES,Humanities
+FAS,Tamil,HUMANITIES,Humanities
+FAS,Thai,HUMANITIES,Humanities
+FAS,"Theater, Dance, and Media",HUMANITIES,Humanities
+FAS,Tibetan,HUMANITIES,Humanities
+FAS,Turkish,HUMANITIES,Humanities
+FAS,Twi,HUMANITIES,Humanities
+FAS,Ukrainian,HUMANITIES,Humanities
+FAS,Ukrainian Studies,HUMANITIES,Humanities
+FAS,Ukranian (Summer),HUMANITIES,Humanities
+FAS,Uyghur,HUMANITIES,Humanities
+FAS,Vietnamese,HUMANITIES,Humanities
+FAS,Visual and Environmental Studies,HUMANITIES,Humanities
+FAS,Visual and Environmental Studies (Summer),HUMANITIES,Humanities
+FAS,Welsh,HUMANITIES,Humanities
+FAS,Yiddish,HUMANITIES,Humanities
+FAS,Yoruba,HUMANITIES,Humanities
+FAS,Applied Computation,SEAS,Engineering and Applied Sciences
+FAS,Astronomy,NATURAL_SCIENCES,Natural Sciences
+FAS,Biological and Biomedical Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Biological Chemistry and Molecular Pharmacology,NATURAL_SCIENCES,Natural Sciences
+FAS,Biological Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Biological Sciences (Summer),NATURAL_SCIENCES,Natural Sciences
+FAS,Biological Sciences in Dental Medicine,NATURAL_SCIENCES,Natural Sciences
+FAS,Biological Sciences in Public Health,NATURAL_SCIENCES,Natural Sciences
+FAS,Biophysics,NATURAL_SCIENCES,Natural Sciences
+FAS,Biostatistics,NATURAL_SCIENCES,Natural Sciences
+FAS,Cell Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Chemical and Physical Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Chemical Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Chemistry,NATURAL_SCIENCES,Natural Sciences
+FAS,Developmental and Regenerative Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Earth and Planetary Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Environmental Science and Public Policy,NATURAL_SCIENCES,Natural Sciences
+FAS,Environmental Studies (Summer),NATURAL_SCIENCES,Natural Sciences
+FAS,Genetics,NATURAL_SCIENCES,Natural Sciences
+FAS,Human Biology and Translational Medicine,NATURAL_SCIENCES,Natural Sciences
+FAS,Human Evolutionary Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Immunology,NATURAL_SCIENCES,Natural Sciences
+FAS,Life and Physical Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Life Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Mathematics,NATURAL_SCIENCES,Natural Sciences
+FAS,Medical Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Microbiology,NATURAL_SCIENCES,Natural Sciences
+FAS,"Mind, Brain, and Behavior",NATURAL_SCIENCES,Natural Sciences
+FAS,Molecular and Cellular Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Neurobiology,NATURAL_SCIENCES,Natural Sciences
+FAS,Neurobiology - Undergraduate,NATURAL_SCIENCES,Natural Sciences
+FAS,Organismic and Evolutionary Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Physical Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Physics,NATURAL_SCIENCES,Natural Sciences
+FAS,Physics (Summer),NATURAL_SCIENCES,Natural Sciences
+FAS,Population Health Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Speech and Hearing Sciences,NATURAL_SCIENCES,Natural Sciences
+FAS,Statistics,NATURAL_SCIENCES,Natural Sciences
+FAS,Stem Cell and Regenerative Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Systems Biology,NATURAL_SCIENCES,Natural Sciences
+FAS,Virology,NATURAL_SCIENCES,Natural Sciences
+FAS,Applied Mathematics,SEAS,Engineering and Applied Sciences
+FAS,Applied Mathematics (Summer),SEAS,Engineering and Applied Sciences
+FAS,Applied Physics,SEAS,Engineering and Applied Sciences
+FAS,Biomedical Engineering,SEAS,Engineering and Applied Sciences
+FAS,Computer Science,SEAS,Engineering and Applied Sciences
+FAS,Computer Science (Summer),SEAS,Engineering and Applied Sciences
+FAS,Engineering Sciences,SEAS,Engineering and Applied Sciences
+FAS,MIT-Engineering Systems Divisi,SEAS,Engineering and Applied Sciences
+FAS,African and African American Studies,SOCIAL_SCIENCES,Social Sciences
+FAS,African and African American Studies (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,American Studies,SOCIAL_SCIENCES,Social Sciences
+FAS,Anthropology,SOCIAL_SCIENCES,Social Sciences
+FAS,Anthropology and Archaelogy (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,Comparative Literature,SOCIAL_SCIENCES,Social Sciences
+FAS,Comparative Literature (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,Design,SOCIAL_SCIENCES,Social Sciences
+FAS,Economics,SOCIAL_SCIENCES,Social Sciences
+FAS,Education,SOCIAL_SCIENCES,Social Sciences
+FAS,"Ethnicity, Migration, Rights",SOCIAL_SCIENCES,Social Sciences
+FAS,Government,SOCIAL_SCIENCES,Social Sciences
+FAS,Government (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,Health Policy,SOCIAL_SCIENCES,Social Sciences
+FAS,History,SOCIAL_SCIENCES,Social Sciences
+FAS,History of Science,SOCIAL_SCIENCES,Social Sciences
+FAS,History of Science (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,Middle Eastern Studies,SOCIAL_SCIENCES,Social Sciences
+FAS,Psychology,SOCIAL_SCIENCES,Social Sciences
+FAS,Psychology (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,"Russia, Eastern Europe, and Central Asia",SOCIAL_SCIENCES,Social Sciences
+FAS,Social Policy,SOCIAL_SCIENCES,Social Sciences
+FAS,Social Studies,SOCIAL_SCIENCES,Social Sciences
+FAS,Sociology,SOCIAL_SCIENCES,Social Sciences
+FAS,Sociology (Summer),SOCIAL_SCIENCES,Social Sciences
+FAS,"Studies of Women, Gender, and Sexuality (Summer)",SOCIAL_SCIENCES,Social Sciences
+FAS,"Women, Gender, and Sexuality",SOCIAL_SCIENCES,Social Sciences
+FAS,XREG Brown University,XREG,Cross-Registration
+FAS,XREG Fletcher School of Law,XREG,Cross-Registration
+FAS,XREG Harvard Business School,XREG,Cross-Registration
+FAS,XREG Harvard Chan School of Public Health,XREG,Cross-Registration
+FAS,XREG Harvard Divinity School,XREG,Cross-Registration
+FAS,XREG Harvard Graduate School of Design,XREG,Cross-Registration
+FAS,XREG Harvard Graduate School of Education,XREG,Cross-Registration
+FAS,XREG Harvard Kennedy School,XREG,Cross-Registration
+FAS,XREG Harvard Kennedy School of Government,XREG,Cross-Registration
+FAS,XREG Harvard Law School,XREG,Cross-Registration
+FAS,XREG Harvard Medical School,XREG,Cross-Registration
+FAS,XREG Massachusetts Institute of Technology,XREG,Cross-Registration
+FAS,XREG Princeton University,XREG,Cross-Registration

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112041305) do
+ActiveRecord::Schema.define(version: 20170314053518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,9 +84,20 @@ ActiveRecord::Schema.define(version: 20170112041305) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.text     "class_academic_org_description"
+    t.string   "division"
+    t.string   "division_description"
     t.index ["course_description_long"], name: "index_courses_on_course_description_long", using: :gin
     t.index ["course_note"], name: "index_courses_on_course_note", using: :gin
     t.index ["title"], name: "index_courses_on_title", using: :gin
+  end
+
+  create_table "division_mappings", force: :cascade do |t|
+    t.string   "academic_group"
+    t.string   "subject_description"
+    t.string   "division"
+    t.string   "division_description"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "tags", force: :cascade do |t|
