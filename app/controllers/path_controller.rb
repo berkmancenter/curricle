@@ -61,7 +61,6 @@ class PathController < ApplicationController
         query = query.where.not(id: filters[:excludes])
       end
 
-
       # add generated courses to the datasets of existing courses
       RecommendationService.new(query: query, max_units: filters[:units][:total]).generate.each do |rec|
         @meeting_patterns_per_day[:monday] << rec if rec.meets_on_monday

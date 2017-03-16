@@ -32,6 +32,7 @@ class CourseMeetingPattern < ApplicationRecord
      self.meeting_time_end.hour unless self.meeting_time_end.nil?
   end
 
+
   def self.hours_range
     (8..20)
   end
