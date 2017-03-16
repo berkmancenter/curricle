@@ -1,5 +1,4 @@
 class Course < ApplicationRecord
-  include PgSearch
 
   has_many :course_meeting_patterns
   has_many :course_instructors
