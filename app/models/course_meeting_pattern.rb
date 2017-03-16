@@ -25,11 +25,11 @@ class CourseMeetingPattern < ApplicationRecord
   end
 
   def extract_hour_from_meeting_time_start
-    self.meeting_time_start.to_s[11..12].to_i
+    self.meeting_time_start.hour unless self.meeting_time_start.nil?
   end
 
   def extract_hour_from_meeting_time_end
-    self.meeting_time_end.to_s[11..12].to_i
+     self.meeting_time_end.hour unless self.meeting_time_end.nil?
   end
 
   def self.hours_range
