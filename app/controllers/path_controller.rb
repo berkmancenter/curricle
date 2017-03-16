@@ -61,8 +61,6 @@ class PathController < ApplicationController
         query = query.where.not(id: filters[:excludes])
       end
 
-      # apply the user's search filters
-      query = apply_common_filters(query, filters)
 
       # add generated courses to the datasets of existing courses
       RecommendationService.new(query: query, max_units: filters[:units][:total]).generate.each do |rec|

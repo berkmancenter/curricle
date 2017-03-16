@@ -69,9 +69,9 @@ module ApplicationHelper
         with(:units_maximum).less_than(search_filters[:units][:max]) unless search_filters[:units][:max]=="any"
         with(:units_maximum).greater_than(search_filters[:units][:min]) unless search_filters[:units][:max]=="any"
 
-        if type == :path
-          with(:term_name, search_filters[:term][0..5])
-        end
+        name, year = search_filters[:term].split('_')
+        with(:term_name, name)
+        with(:term_year, year)
 
         if type == :courses
           array_days = [:monday, :tuesday, :wednesday, :thursday, :friday]
@@ -94,36 +94,5 @@ module ApplicationHelper
       end
       query = Course.return_as_relation(res)
       query
-  end
-
-  def apply_common_filters(query, filters)
-    term, year = filters[:term].split('_')
-    query = query.where(term_name: term, term_year: year)
-
-    unless filters[:school] == 'all'
-      query = query.where('courses.academic_group': filters[:school])
-    end
-
-    unless filters[:department] == 'all'
-      query = query.where('courses.class_academic_org_description': filters[:department])
-    end
-
-    unless filters[:subject] == 'all'
-      query = query.where('courses.subject_description': filters[:subject])
-    end
-
-    unless filters[:type] == 'all'
-      query = query.where('courses.component': filters[:type])
-    end
-
-    unless filters[:units][:min] == 'any'
-      query = query.where("courses.units_maximum >= ?", filters[:units][:min])
-    end
-
-    unless filters[:units][:max] == 'any'
-      query = query.where("courses.units_maximum <= ?", filters[:units][:max])
-    end
-
-    query
   end
 end
