@@ -49,40 +49,6 @@ class Course < ApplicationRecord
     join(:last_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
   end
 
-  pg_search_scope :search_for, lambda { |query_filters|
-    query = {
-      query: query_filters[:keywords],
-      against: [],
-      associated_against: {},
-      using: {
-        tsearch: {
-          dictionary: "english",
-          any_word: true,
-          prefix: true
-        }
-      }
-    }
-
-    # build against/associated_against options based on selected keyword options
-    query_filters[:keyword_options].map { |field|
-      if map = Course.keyword_options_map[field.to_sym]
-        if db_field = map[:db_field]
-          if db_field[:table] == :courses
-            Array(db_field[:columns]).each do |col|
-              query[:against] << col
-            end
-          else
-            query[:associated_against][db_field[:table]] = db_field[:columns]
-          end
-        end
-      end
-    }
-
-    query[:against] = %w(title course_description_long) if query[:against].empty? && query[:associated_against].empty?
-
-    query
-  }
-
   scope :return_as_relation, ->(search_results) do
     matching_item_ids = search_results.hits.map(&:primary_key)
     where :id => matching_item_ids
