@@ -96,38 +96,4 @@ module ApplicationHelper
       query = Course.return_as_relation(res)
       query
   end
-<<<<<<< HEAD
-=======
-
-  def apply_common_filters(query, filters)
-    term, year = filters[:term].split('_')
-    query = query.where(term_name: term, term_year: year)
-
-    unless filters[:school] == 'all'
-      query = query.where('courses.academic_group': filters[:school])
-    end
-
-    unless filters[:department] == 'all'
-      query = query.where('courses.class_academic_org_description': filters[:department])
-    end
-
-    unless filters[:subject] == 'all'
-      query = query.where('courses.subject_description': filters[:subject])
-    end
-
-    unless filters[:type] == 'all'
-      query = query.where('courses.component': filters[:type])
-    end
-
-    unless filters[:units][:min] == 'any'
-      query = query.where("courses.units_maximum >= ?", filters[:units][:min])
-    end
-
-    unless filters[:units][:max] == 'any'
-      query = query.where("courses.units_maximum <= ?", filters[:units][:max])
-    end
-
-    query
-  end
->>>>>>> 6ac15bd7ae2b735cc2b3bfd32b690de07268d18c
 end
