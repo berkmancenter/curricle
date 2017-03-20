@@ -59,6 +59,7 @@ module ApplicationHelper
             fields << map[:db_field][:columns]
           end
           keywords value, fields: fields.flatten.map(&:to_sym), minimum_match: 1
+          paginate page: 1, per_page: Course.count
         end
 
         with(:subject_description, search_filters[:subject]) unless search_filters[:subject]=="all"
