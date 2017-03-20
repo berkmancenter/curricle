@@ -58,7 +58,7 @@ module ApplicationHelper
             map = Course.keyword_options_map[field.to_sym]
             fields << map[:db_field][:columns]
           end
-          keywords value, fields: fields.flatten.map(&:to_sym)
+          keywords value, fields: fields.flatten.map(&:to_sym), minimum_match: 1
         end
 
         with(:subject_description, search_filters[:subject]) unless search_filters[:subject]=="all"
