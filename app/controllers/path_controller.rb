@@ -34,11 +34,10 @@ class PathController < ApplicationController
 
       # search for courses that match the filters and haven't already been added
       query = CourseMeetingPattern.joins(:course)
-
-      course_query = Course.search_for(keyword_filters.shift)
-      keyword_filters.each do |filter|
-        course_query = course_query.search_for(filter)
-      end
+      
+      course_query = sunspot_search(filters, :path)
+        
+     
       query = query.where(course_id: course_query.select(:id))
         .where.not(id: @meeting_patterns.map(&:id))
 
@@ -61,9 +60,6 @@ class PathController < ApplicationController
       if filters[:excludes].present?
         query = query.where.not(id: filters[:excludes])
       end
-
-      # apply the user's search filters
-      query = apply_common_filters(query, filters)
 
       # add generated courses to the datasets of existing courses
       RecommendationService.new(query: query, max_units: filters[:units][:total]).generate.each do |rec|

@@ -18,5 +18,8 @@
 
 .DS_Store
 
+# Solr
+solr/
+
 # Ignore seeds by default
 /lib/seeds/*

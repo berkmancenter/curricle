@@ -1,6 +1,38 @@
 class CourseMeetingPattern < ApplicationRecord
   belongs_to :course
 
+  searchable do
+    integer :id
+    integer :external_course_id
+    integer :course_id, references: Course
+    string :term_name
+    integer :term_year
+    string :class_section
+    string :class_meeting_number
+    integer :meeting_time_start, using:  :extract_hour_from_meeting_time_start
+    integer :meeting_time_end, using: :extract_hour_from_meeting_time_end
+    boolean :meets_on_monday
+    boolean :meets_on_tuesday
+    boolean :meets_on_wednesday
+    boolean :meets_on_thursday
+    boolean :meets_on_friday
+    boolean :meets_on_saturday
+    boolean :meets_on_sunday
+    date :start_date
+    date :end_date
+    string :external_facility_id
+    text :facility_description
+  end
+
+  def extract_hour_from_meeting_time_start
+    self.meeting_time_start.hour unless self.meeting_time_start.nil?
+  end
+
+  def extract_hour_from_meeting_time_end
+     self.meeting_time_end.hour unless self.meeting_time_end.nil?
+  end
+
+
   def self.hours_range
     (8..20)
   end
