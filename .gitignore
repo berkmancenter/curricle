@@ -22,4 +22,4 @@
 solr/
 
 # Ignore seeds by default
-/lib/seeds/*
+/lib/seeds/*.csv
