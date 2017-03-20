@@ -17,3 +17,6 @@
 .byebug_history
 
 .DS_Store
+
+# Ignore seeds by default
+/lib/seeds/*
