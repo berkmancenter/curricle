@@ -10,6 +10,8 @@ Replace the default text field in the Solr schema file with the template we've c
 
 * config/templates/text-field-schema.xml
 
+Add/replace the synonyms.txt file in the Solr/configsets/sunspot/conf/ with the one provided in config/templates/
+
 Then reindex the Solr models:
 
 `rake sunspot:reindex`
