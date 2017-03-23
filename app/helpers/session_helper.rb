@@ -40,7 +40,8 @@ module SessionHelper
       next if value.blank?
       filter_set << {
         keywords: value,
-        keyword_options: filters[:keyword_options][key]
+        keyword_options: filters[:keyword_options][key],
+        keyword_weights: filters[:keyword_weights][key]
       }
     end
 

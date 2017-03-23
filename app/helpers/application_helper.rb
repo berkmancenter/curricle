@@ -52,13 +52,24 @@ module ApplicationHelper
 
   def sunspot_search(search_filters, type)
     res = Sunspot.search(Course) do
+          adjust_solr_params do |params|
+           params[:q] = params[:q].gsub(/AND _query/, "OR _query") if params[:q].present?
+          end
         search_filters[:keywords].each do |key, value|
           fields = []
           search_filters[:keyword_options][key].each do |field|
             map = Course.keyword_options_map[field.to_sym]
             fields << map[:db_field][:columns]
+          end unless search_filters[:keyword_options][key].blank?
+          fields_with_boost = Hash.new
+          fields.flatten.map(&:to_sym).each do |field|
+            fields_with_boost[field] = search_filters[:keyword_weights][key]
           end
-          keywords value, fields: fields.flatten.map(&:to_sym), minimum_match: 1
+          
+          keywords value do 
+            fields(fields_with_boost)
+          end
+          
           paginate page: 1, per_page: Course.count
         end
 
@@ -94,7 +105,9 @@ module ApplicationHelper
           end
          end
       end
-      query = Course.return_as_relation(res)
-      query
+      if type == :path
+        return Course.return_as_relation(res)
+      end
+      res
   end
 end

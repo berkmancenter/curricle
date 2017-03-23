@@ -84,6 +84,7 @@ var ready = function () {
 
     // setup text box
     box.find('.keyword-box').val('').attr('name', 'keywords[' + newIndex + ']');
+    box.find('.keyword-weights-box').val('').attr('name', 'keyword_weights[' + newIndex + ']');
 
     // setup multiselect
     box.find('.ms-options-wrap').remove();

@@ -87,6 +87,7 @@ class PathController < ApplicationController
       term: params[:term],
       keywords: params[:keywords],
       keyword_options: params[:keyword_options] || { "0": [] },
+      keyword_weights: params[:keyword_weights],
       school: params[:school],
       department: params[:department],
       subject: params[:subject],
