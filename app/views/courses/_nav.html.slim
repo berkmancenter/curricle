@@ -17,6 +17,8 @@
           label Keywords
           .query-box.full
             == text_field_tag  "keywords[#{index}]", filter[:keywords], placeholder: 'Keyword', class: 'keyword-box'
+            br
+            == range_field_tag "keyword_weights[#{index}]", filter[:keyword_weights], min: 0, max: 100, class: 'keyword-weights-box'
 
             br
 
