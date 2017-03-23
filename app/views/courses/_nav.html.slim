@@ -17,15 +17,15 @@
           label Keywords
           .query-box.full
             == text_field_tag  "keywords[#{index}]", filter[:keywords], placeholder: 'Keyword', class: 'keyword-box'
-            br
-            == range_field_tag "keyword_weights[#{index}]", filter[:keyword_weights], min: 0, max: 100, class: 'keyword-weights-box'
-
-            br
 
             select.multiple.dropdown multiple="multiple" style="width:100%" name="keyword_options[#{index}][]"
               - Course.keyword_options_map.each do |key, opts|
                 option value=(key) selected=(filter_option_state(filter, :keyword_option, key))
                   == opts[:display]
+
+            .weight-wrapper
+              label Weight:
+              == range_field_tag "keyword_weights[#{index}]", filter[:keyword_weights], min: 0, max: 100, class: 'keyword-weights-box'
 
     button.add-keywords
       | + Add Keywords
