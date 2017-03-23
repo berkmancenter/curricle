@@ -11,6 +11,9 @@ class CoursesController < ApplicationController
       keyword_filters = @keyword_filters.deep_dup
 
       query = sunspot_search(query_filters, :courses)
+      @matching_courses = query.results
+
+      query = Course.return_as_relation(query)
 
       @course_groups = []
       Course.groups(query).each do |group|
@@ -28,8 +31,7 @@ class CoursesController < ApplicationController
         not_empty = group[:days].find { |day| !day[:courses].empty? }
         @course_groups << group if not_empty
       end
-      
-      @matching_courses = query.all
+
     else
       @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
@@ -40,6 +42,7 @@ class CoursesController < ApplicationController
       term: params[:term],
       keywords: params[:keywords],
       keyword_options: params[:keyword_options] || { "0": [] },
+      keyword_weights: params[:keyword_weights],
       school: params[:school],
       department: params[:department],
       subject: params[:subject],
