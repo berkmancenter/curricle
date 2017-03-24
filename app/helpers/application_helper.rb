@@ -65,9 +65,13 @@ module ApplicationHelper
           fields.flatten.map(&:to_sym).each do |field|
             fields_with_boost[field] = search_filters[:keyword_weights][key]
           end
-          
-          keywords value do 
-            fields(fields_with_boost)
+
+          if fields_with_boost.key?(:first_name) || fields_with_boost.key?(:last_name)
+              fulltext value, fields: [:first_name, :last_name]
+          else
+            keywords value do
+              fields(fields_with_boost)
+            end
           end
           
           paginate page: 1, per_page: Course.count
