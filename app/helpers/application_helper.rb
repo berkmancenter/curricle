@@ -57,17 +57,20 @@ module ApplicationHelper
           end
         search_filters[:keywords].each do |key, value|
           fields = []
+
           search_filters[:keyword_options][key].each do |field|
             map = Course.keyword_options_map[field.to_sym]
             fields << map[:db_field][:columns]
           end unless search_filters[:keyword_options][key].blank?
+
           fields_with_boost = Hash.new
-          fields.flatten.map(&:to_sym).each do |field|
+          fields = fields.flatten.map(&:to_sym)
+          fields.each do |field|
             fields_with_boost[field] = search_filters[:keyword_weights][key]
           end
           
-          keywords value do 
-            fields(fields_with_boost)
+          keywords value, fields: fields do
+            boost_fields fields_with_boost
           end
           
           paginate page: 1, per_page: Course.count

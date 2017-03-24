@@ -46,6 +46,9 @@ class Course < ApplicationRecord
     join(:facility_description, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
     join(:first_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
     join(:last_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:title, prefix: 'reading', target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:author_first_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:author_last_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
   end
 
   scope :return_as_relation, ->(search_results) do
@@ -161,11 +164,15 @@ class Course < ApplicationRecord
           table: :course_instructors,
           columns: [:first_name, :last_name]
         }
+      },
+      library: {
+        display: 'Course Readings',
+        default: false,
+        db_field: {
+          table: :course_readings,
+          columns: [:reading_title, :author_last_name, :author_first_name]
+        }
       }
-      #library: {
-      #  display: 'Library reserves',
-      #  default: false
-      #}
     }
   end
 
