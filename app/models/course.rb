@@ -2,6 +2,7 @@ class Course < ApplicationRecord
 
   has_many :course_meeting_patterns
   has_many :course_instructors
+  has_many :course_readings
 
   searchable do
     integer :id
