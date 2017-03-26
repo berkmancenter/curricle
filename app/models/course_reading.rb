@@ -5,9 +5,9 @@ class CourseReading < ApplicationRecord
     integer :external_course_id
     integer :external_citation_id
     integer :course_id, references: Course
-    string :title
-    string :author_last_name
-    string :author_first_name
+    text :title
+    text :author_last_name
+    text :author_first_name
     string :url
     text :annotation
   end
