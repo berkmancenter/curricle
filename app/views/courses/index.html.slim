@@ -33,7 +33,7 @@
             .subject
               == course.academic_group
             .tray-form-wrapper
-              - if current_user.added?(course.id)
+              - if @user_course_ids.include?(course.id)
                 == render "remove_from_tray", course: course
               - else
                 == render "add_to_tray", course: course

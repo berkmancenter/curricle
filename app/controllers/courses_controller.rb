@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
     @nav = :catalog
     @matching_courses ||= []
     @course_groups ||= []
+    @user_course_ids = current_user.courses.all.map(&:id)
 
     if query_filters.present?
       @keyword_filters = build_keyword_filters(query_filters)
@@ -12,6 +13,7 @@ class CoursesController < ApplicationController
 
       query = sunspot_search(query_filters, :courses)
       @matching_courses = query.results
+      @matching_course_ids = @matching_courses.map(&:id)
 
       query = Course.return_as_relation(query)
 

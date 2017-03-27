@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323051956) do
+ActiveRecord::Schema.define(version: 20170327173904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,28 @@ ActiveRecord::Schema.define(version: 20170323051956) do
     t.text     "facility_description"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["course_id"], name: "index_course_meeting_patterns_on_course_id", using: :btree
+    t.index ["meets_on_friday"], name: "index_course_meeting_patterns_on_meets_on_friday", using: :btree
+    t.index ["meets_on_monday"], name: "index_course_meeting_patterns_on_meets_on_monday", using: :btree
+    t.index ["meets_on_saturday"], name: "index_course_meeting_patterns_on_meets_on_saturday", using: :btree
+    t.index ["meets_on_sunday"], name: "index_course_meeting_patterns_on_meets_on_sunday", using: :btree
+    t.index ["meets_on_thursday"], name: "index_course_meeting_patterns_on_meets_on_thursday", using: :btree
+    t.index ["meets_on_tuesday"], name: "index_course_meeting_patterns_on_meets_on_tuesday", using: :btree
+    t.index ["meets_on_wednesday"], name: "index_course_meeting_patterns_on_meets_on_wednesday", using: :btree
+  end
+
+  create_table "course_readings", force: :cascade do |t|
+    t.integer  "external_course_id"
+    t.integer  "external_citation_id"
+    t.integer  "course_id"
+    t.string   "title"
+    t.string   "author_last_name"
+    t.string   "author_first_name"
+    t.string   "url"
+    t.text     "annotation"
+    t.boolean  "required",             default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "course_readings", force: :cascade do |t|
@@ -102,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170323051956) do
     t.string   "division_description"
     t.index ["course_description_long"], name: "index_courses_on_course_description_long", using: :gin
     t.index ["course_note"], name: "index_courses_on_course_note", using: :gin
+    t.index ["division_description"], name: "index_courses_on_division_description", using: :btree
     t.index ["title"], name: "index_courses_on_title", using: :gin
   end
 
