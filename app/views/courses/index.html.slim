@@ -6,7 +6,7 @@
     |  courses)
 
   .search-contents
-    .grid-wrapper
+    .grid-wrapper data-ui="block-highlighter"
       .grid-wrapper-inner
         - @course_groups.each do |group|
           .grid-section
@@ -24,12 +24,12 @@
                   - day[:courses].each do |course|
                     li.block class=(classes_for_course(course)) title=(hover_info(course)) data-id=(course.id) id=(course.id)
 
-    .details-wrapper
+    .details-wrapper data-ui="scroll-broadcaster"
       ul.plain
         - if @matching_courses.empty?
           li.italic No matches found
         - @matching_courses.each do |course|
-          li.course-wrapper.green data-id=(course.id) id=(course.id)
+          li.course-wrapper.green data-id=(course.id) id=(course.id) data-ui="visibility-broadcaster" data-config="rel: .details-wrapper"
             .subject
               == course.academic_group
             .tray-form-wrapper

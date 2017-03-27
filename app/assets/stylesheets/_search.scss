@@ -35,24 +35,54 @@
       height: 15px;
       margin: 1px;
       background: $color-light-gray;
+      position: relative;
 
       &.matched {
         &.red {
           background: $color-red;
+
+          &::after {
+            background: $color-red;
+          }
         }
         &.green {
           background: $color-green;
+
+          &::after {
+            background: $color-green;
+          }
         }
         &.blue {
           background: $color-blue;
+
+          &::after {
+            background: $color-blue;
+          }
         }
         &:hover {
           cursor: pointer;
-          }
+        }
       }
       
       &.added {
         background: $color-gray !important;
+
+        &::after {
+          background: $color-gray !important;
+        }
+      }
+
+      &.highlight {
+        &::after {
+          content: ' ';
+          display: block;
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          margin-top: -5.5px;
+          margin-left: -5.5px;
+          z-index: 1;
+        }
       }
     }
 
