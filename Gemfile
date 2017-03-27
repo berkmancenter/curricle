@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'progress_bar'
 
 
 group :development, :test do

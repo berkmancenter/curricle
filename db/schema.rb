@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314053518) do
+ActiveRecord::Schema.define(version: 20170323051956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,20 @@ ActiveRecord::Schema.define(version: 20170314053518) do
     t.text     "facility_description"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "course_readings", force: :cascade do |t|
+    t.integer  "external_course_id"
+    t.integer  "external_citation_id"
+    t.integer  "course_id"
+    t.string   "title"
+    t.string   "author_last_name"
+    t.string   "author_first_name"
+    t.string   "url"
+    t.text     "annotation"
+    t.boolean  "required",             default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -129,6 +143,7 @@ ActiveRecord::Schema.define(version: 20170314053518) do
 
   add_foreign_key "course_instructors", "courses"
   add_foreign_key "course_meeting_patterns", "courses"
+  add_foreign_key "course_readings", "courses"
   add_foreign_key "courses", "courses", column: "prereq"
   add_foreign_key "tags", "courses"
   add_foreign_key "tags", "users"
