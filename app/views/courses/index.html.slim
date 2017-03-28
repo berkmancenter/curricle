@@ -71,6 +71,14 @@
                 | Instructor: 
                 span
                   == course.instructor.full_name
+            - unless course.course_readings.blank?
+              br
+              .readings
+                | Course Readings: 
+              ul
+                - course.course_readings.each do |reading|
+                  li.reading
+                    == reading.title
 
             .units
                == course.units_maximum
