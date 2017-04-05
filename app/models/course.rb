@@ -1,42 +1,63 @@
 class Course < ApplicationRecord
-  include PgSearch
 
   has_many :course_meeting_patterns
   has_many :course_instructors
+  has_many :course_readings
 
-  pg_search_scope :search_for, lambda { |query_filters|
-    query = {
-      query: query_filters[:keywords],
-      against: [],
-      associated_against: {},
-      using: {
-        tsearch: {
-          dictionary: "english",
-          any_word: true,
-          prefix: true
-        }
-      }
-    }
+  searchable do
+    integer :id
+    integer :external_course_id
+    text :title
+    string :term_name
+    integer :term_year
+    integer :academic_year
+    string :class_section
+    string :component
+    integer :prereq
+    string :subject
+    text :subject_description
+    string :subject_description
+    text :subject_academic_org_description
+    text :academic_group
+    string :academic_group
+    text :academic_group_description
+    text :grading_basis_description
+    string :term_pattern_code
+    text :term_pattern_description
+    integer :units_maximum
+    integer :catalog_number
+    text :course_description
+    text :course_description_long
+    text :course_note
+    text :class_academic_org_description
+    string :class_academic_org_description
+    join(:class_meeting_number, target:  CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:meeting_time_start, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
+    join(:meeting_time_end, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
+    join(:meets_on_monday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_tuesday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_wednesday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_thursday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_friday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_saturday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_sunday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:start_date, target: CourseMeetingPattern, type: :date, join: { from: :course_id, to: :id })
+    join(:end_date, target: CourseMeetingPattern, type: :date, join: { from: :course_id, to: :id })
+    join(:external_facility_id, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:facility_description, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:first_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:last_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:title, prefix: 'reading', target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:author_first_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:author_last_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+  end
 
-    # build against/associated_against options based on selected keyword options
-    query_filters[:keyword_options].map { |field|
-      if map = Course.keyword_options_map[field.to_sym]
-        if db_field = map[:db_field]
-          if db_field[:table] == :courses
-            Array(db_field[:columns]).each do |col|
-              query[:against] << col
-            end
-          else
-            query[:associated_against][db_field[:table]] = db_field[:columns]
-          end
-        end
-      end
-    }
+  scope :return_as_relation, ->(search_results) do
+    matching_item_ids = search_results.hits.map(&:primary_key)
+    where :id => matching_item_ids
+  end
 
-    query[:against] = %w(title course_description_long) if query[:against].empty? && query[:associated_against].empty?
-
-    query
-  }
+  before_save :set_division
 
   before_save :set_division
 
@@ -146,11 +167,15 @@ class Course < ApplicationRecord
           table: :course_instructors,
           columns: [:first_name, :last_name]
         }
+      },
+      library: {
+        display: 'Course Readings',
+        default: false,
+        db_field: {
+          table: :course_readings,
+          columns: [:reading_title, :author_last_name, :author_first_name]
+        }
       }
-      #library: {
-      #  display: 'Library reserves',
-      #  default: false
-      #}
     }
   end
 

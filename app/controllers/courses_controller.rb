@@ -5,30 +5,19 @@ class CoursesController < ApplicationController
     @nav = :catalog
     @matching_courses ||= []
     @course_groups ||= []
+    @user_course_ids = current_user.courses.all.map(&:id)
 
     if query_filters.present?
       @keyword_filters = build_keyword_filters(query_filters)
       keyword_filters = @keyword_filters.deep_dup
 
-      query = Course.left_outer_joins(:course_meeting_patterns).search_for(keyword_filters.shift)
-      keyword_filters.each do |filter|
-        query = query.search_for(filter)
-      end
+      query = sunspot_search(query_filters, :courses)
+      @matching_courses = query.results
+      @matching_course_ids = @matching_courses.map(&:id)
 
-      query = apply_common_filters(query, query_filters)
-
-      query_filters[:times].each do |day, values|
-        unless values[:min] == 'any'
-          query = query.where.not("course_meeting_patterns.meets_on_#{day} = ? AND EXTRACT(HOUR from meeting_time_start) < ?", true, values[:min])
-        end
-
-        unless values[:max] == 'any'
-          query = query.where.not("course_meeting_patterns.meets_on_#{day} = ? AND EXTRACT(HOUR from meeting_time_start) > ?", true, values[:max])
-        end
-      end
+      query = Course.return_as_relation(query)
 
       @course_groups = []
-
       Course.groups(query).each do |group|
         group = {
           group: group,
@@ -45,7 +34,6 @@ class CoursesController < ApplicationController
         @course_groups << group if not_empty
       end
 
-      @matching_courses = query.all
     else
       @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
@@ -56,6 +44,7 @@ class CoursesController < ApplicationController
       term: params[:term],
       keywords: params[:keywords],
       keyword_options: params[:keyword_options] || { "0": [] },
+      keyword_weights: params[:keyword_weights],
       school: params[:school],
       department: params[:department],
       subject: params[:subject],

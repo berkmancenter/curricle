@@ -6,7 +6,7 @@
     |  courses)
 
   .search-contents
-    .grid-wrapper
+    .grid-wrapper data-ui="block-highlighter"
       .grid-wrapper-inner
         - @course_groups.each do |group|
           .grid-section
@@ -24,16 +24,16 @@
                   - day[:courses].each do |course|
                     li.block class=(classes_for_course(course)) title=(hover_info(course)) data-id=(course.id) id=(course.id)
 
-    .details-wrapper
+    .details-wrapper data-ui="scroll-broadcaster"
       ul.plain
         - if @matching_courses.empty?
           li.italic No matches found
         - @matching_courses.each do |course|
-          li.course-wrapper.green data-id=(course.id) id=(course.id)
+          li.course-wrapper.green data-id=(course.id) id=(course.id) data-ui="visibility-broadcaster" data-config="rel: .details-wrapper"
             .subject
               == course.academic_group
             .tray-form-wrapper
-              - if current_user.added?(course.id)
+              - if @user_course_ids.include?(course.id)
                 == render "remove_from_tray", course: course
               - else
                 == render "add_to_tray", course: course
@@ -71,6 +71,14 @@
                 | Instructor: 
                 span
                   == course.instructor.full_name
+            - unless course.course_readings.blank?
+              br
+              .readings
+                | Course Readings: 
+              ul
+                - course.course_readings.each do |reading|
+                  li.reading
+                    == reading.title
 
             .units
                == course.units_maximum
