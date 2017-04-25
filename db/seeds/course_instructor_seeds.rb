@@ -1,6 +1,6 @@
 require 'csv'
 
-puts "Seeding CourseMeetingPatterns!"
+puts "Seeding CourseInstructors!"
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'courseInstructors.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
