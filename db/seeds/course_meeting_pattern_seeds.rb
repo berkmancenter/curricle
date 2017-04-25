@@ -21,8 +21,8 @@ csv.each do |row|
     meets_on_friday: row['fri'] == 'Y',
     meets_on_saturday: row['sat'] == 'Y',
     meets_on_sunday: row['sun'] == 'Y',
-    start_date: Date.parse(row['startDt']),
-    end_date: Date.parse(row['endDt']),
+    start_date: Date.strptime(row['startDt'], "%m/%d/%Y"),
+    end_date: Date.strptime(row['endDt'], "%m/%d/%Y"),
     external_facility_id: row['facilityId'],
     facility_description: row['facilityDescription']
   )
