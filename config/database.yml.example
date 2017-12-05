@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: curricle_development
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: curricle_test
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: curricle_production
+pool: 5
