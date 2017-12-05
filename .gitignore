@@ -21,8 +21,13 @@
 /yarn-error.log
 
 .byebug_history
+/nginx
+/pgsql
 /public/packs
 /public/packs-test
 /node_modules
+/var
 
+/bin/camp-restart-hook.sh
 /config/database.yml
+/config/puma.rb
