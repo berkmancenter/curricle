@@ -1,10 +1,14 @@
 require: rubocop-rspec
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+  TargetRailsVersion: 5.1
+  TargetRubyVersion: 2.4
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
+    - 'db/schema.rb'
 Metrics/LineLength:
   Enabled: false
 Rails:
   Enabled: true
-AllCops:
-TargetRubyVersion: 2.4
