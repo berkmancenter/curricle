@@ -35,11 +35,6 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :sendmail
 
-  config.action_mailer.default_url_options = {
-    host: config.hostname,
-    port: config.hostport
-  }
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
