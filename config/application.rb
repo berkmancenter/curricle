@@ -16,5 +16,10 @@ module Curricle
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.time_zone = 'America/New_York'
+
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
   end
 end
