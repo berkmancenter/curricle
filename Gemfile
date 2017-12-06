@@ -15,7 +15,6 @@ gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
 gem 'sass-rails', '~> 5.0'
-gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 4.0'
 gem 'webpacker', '~> 3.0'
 
@@ -25,7 +24,6 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.5'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails', '~> 3.7'
-  gem 'therubyracer', '~> 0.12'
 end
 
 group :development do
@@ -43,15 +41,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara-webkit', '~> 1.14'
-  gem 'database_cleaner', '~> 1.6'
-  gem 'factory_girl_rails', '~> 4.9'
+  gem 'factory_bot_rails', '~> 4.8'
   gem 'fuubar', '~> 2.2'
-  gem 'headless', '~> 2.3'
-  gem 'launchy', '~> 2.4'
-  gem 'selenium-client', '~> 1.2'
-  gem 'selenium-webdriver', '~> 3.8'
   gem 'shoulda-matchers', '~> 3.1'
-  gem 'vcr', '~> 4.0'
-  gem 'webmock', '~> 3.1'
 end

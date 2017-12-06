@@ -16,6 +16,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*.swp
 
 /node_modules
 /yarn-error.log
@@ -31,3 +32,5 @@
 /bin/camp-restart-hook.sh
 /config/database.yml
 /config/puma.rb
+
+/spec/examples.txt
