@@ -10,14 +10,14 @@ end
 
 gem 'devise', '~> 4.3'
 gem 'haml-rails', '~> 1.0'
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 0.21'
-gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.1.4'
+gem 'puma', '~> 3.11'
+gem 'rails', '~> 5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'sunspot_rails', '~> 2.2'
 gem 'uglifier', '~> 4.0'
-gem 'webpacker', '~> 3.0'
+gem 'webpacker', '~> 3.1'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
@@ -32,12 +32,12 @@ group :development do
   gem 'drg', '~> 1.5'
   gem 'haml_lint', '~> 0.27'
   gem 'listen', '~> 3.1'
-  gem 'rubocop', '~> 0.51'
+  gem 'rubocop', '~> 0.52'
   gem 'rubocop-rspec', '~> 1.20'
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0'
   gem 'sunspot_solr', '~> 2.2'
   gem 'web-console', '~> 3.5'
 end
