@@ -32,5 +32,6 @@
 /bin/camp-restart-hook.sh
 /config/database.yml
 /config/puma.rb
+/config/sunspot.yml
 
 /spec/examples.txt

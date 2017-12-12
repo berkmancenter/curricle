@@ -15,6 +15,7 @@ gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
 gem 'sass-rails', '~> 5.0'
+gem 'sunspot_rails', '~> 2.2'
 gem 'uglifier', '~> 4.0'
 gem 'webpacker', '~> 3.0'
 
@@ -37,6 +38,7 @@ group :development do
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'sunspot_solr', '~> 2.2'
   gem 'web-console', '~> 3.5'
 end
 
