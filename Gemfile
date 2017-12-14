@@ -3,20 +3,13 @@
 source 'https://rubygems.org'
 ruby '2.3.5'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'devise', '~> 4.3'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.1'
-gem 'sass-rails', '~> 5.0'
 gem 'sunspot_rails', '~> 2.2'
-gem 'uglifier', '~> 4.0'
 gem 'webpacker', '~> 3.1'
 
 group :development, :test do
@@ -30,7 +23,6 @@ end
 group :development do
   gem 'brakeman', '~> 4.0'
   gem 'drg', '~> 1.5'
-  gem 'haml_lint', '~> 0.27'
   gem 'listen', '~> 3.1'
   gem 'rubocop', '~> 0.52'
   gem 'rubocop-rspec', '~> 1.20'

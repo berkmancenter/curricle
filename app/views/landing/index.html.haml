@@ -1,2 +1,12 @@
-%h1 Landing#index
-%p Find me in app/views/landing/index.html.erb
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+    %title Curricle
+
+  %body
+    .container
+      #app
+
+    = javascript_pack_tag 'application'
+    = stylesheet_pack_tag 'application'
