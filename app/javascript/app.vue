@@ -1,6 +1,9 @@
 <template lang="pug">
 #app
-  navbar
+  header
+    navbar
+
+  router-view
 </template>
 
 <script>
