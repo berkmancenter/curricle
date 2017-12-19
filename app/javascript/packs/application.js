@@ -15,6 +15,7 @@ import solid from '@fortawesome/fontawesome-free-solid'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from '../app'
+window.$ = window.jQuery = require('jquery');
 
 // TODO: import only needed icons instead of the entire FA library
 fontawesome.library.add(solid)
