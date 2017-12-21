@@ -5,6 +5,14 @@ class Course < ApplicationRecord
   has_many :course_instructors
   has_many :course_readings
 
+  searchable do
+    integer :id
+    text :title
+    string :term_name
+    integer :term_year
+    text :course_description_long
+  end
+
   scope :return_as_relation, ->(search_results) do
     matching_item_ids = search_results.hits.map(&:primary_key)
     where id: matching_item_ids

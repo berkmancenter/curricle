@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327173904) do
+ActiveRecord::Schema.define(version: 20171221085445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 20170327173904) do
     t.text "class_academic_org_description"
     t.string "division"
     t.string "division_description"
+    t.index "to_tsvector('english'::regconfig, course_description_long)", name: "index_courses_on_to_tsvector_english_course_description_long", using: :gin
     t.index ["class_section"], name: "index_courses_on_class_section"
-    t.index ["course_description_long"], name: "index_courses_on_course_description_long", using: :gin
     t.index ["course_note"], name: "index_courses_on_course_note", using: :gin
     t.index ["division_description"], name: "index_courses_on_division_description"
     t.index ["term_name"], name: "index_courses_on_term_name"
