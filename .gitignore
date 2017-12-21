@@ -33,5 +33,6 @@
 /config/database.yml
 /config/puma.rb
 /config/sunspot.yml
+/lib/seeds
 
 /spec/examples.txt
