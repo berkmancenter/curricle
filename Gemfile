@@ -10,9 +10,9 @@ gem 'pg', '~> 0.21'
 gem 'progress_bar', '~> 1.1'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.1'
+gem 'smarter_csv', '~> 1.1', '>= 1.1.5'
 gem 'sunspot_rails', '~> 2.2'
 gem 'webpacker', '~> 3.1'
-gem 'smarter_csv', '~> 1.1', '>= 1.1.5'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
