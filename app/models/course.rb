@@ -7,10 +7,50 @@ class Course < ApplicationRecord
 
   searchable do
     integer :id
+    integer :external_course_id
     text :title
     string :term_name
     integer :term_year
+    integer :academic_year
+    string :class_section
+    string :component
+    integer :prereq
+    string :subject
+    text :subject_description
+    string :subject_description
+    text :subject_academic_org_description
+    text :academic_group
+    string :academic_group
+    text :academic_group_description
+    text :grading_basis_description
+    string :term_pattern_code
+    text :term_pattern_description
+    integer :units_maximum
+    integer :catalog_number
+    text :course_description
     text :course_description_long
+    text :course_note
+    text :class_academic_org_description
+    string :class_academic_org_description
+    join(:class_meeting_number, target:  CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:meeting_time_start, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
+    join(:meeting_time_end, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
+    join(:meets_on_monday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_tuesday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_wednesday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_thursday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_friday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_saturday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:meets_on_sunday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
+    join(:start_date, target: CourseMeetingPattern, type: :date, join: { from: :course_id, to: :id })
+    join(:end_date, target: CourseMeetingPattern, type: :date, join: { from: :course_id, to: :id })
+    join(:external_facility_id, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:facility_description, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:first_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:last_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:title, prefix: 'reading', target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:author_first_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:author_last_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
   end
 
   scope :return_as_relation, ->(search_results) do
@@ -86,16 +126,16 @@ class Course < ApplicationRecord
   def meeting
     course_meeting_patterns.find_by(
       term_name: term_name,
-      term_year: term_year,
-      class_section: class_section
+      term_year: term_year
+      # ToDo courses doen't have data - class_section: class_section
     )
   end
 
   def instructor
     course_instructors.find_by(
       term_name: term_name,
-      term_year: term_year,
-      class_section: class_section
+      term_year: term_year
+      # ToDo courses doen't have data - class_section: class_section
     )
   end
 
