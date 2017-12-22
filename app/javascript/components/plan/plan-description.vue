@@ -15,7 +15,7 @@
     <div class="heading">{{course.class_academic_org_description}}</div>
     <div class="second-description">
       <p>Description</p>
-      <p>{{course.course_description_long}}</p>      
+      <p v-html="course.course_description_long"/>
     </div>
     <div class="instruction">
       <p>Instruction</p>

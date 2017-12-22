@@ -9,7 +9,7 @@
           <td>{{list.course_description}}</td>
           <td>{{list.academic_group}} <br> {{ list.subject }}</td>
           <td>{{list.term_name}} <br> {{list.units_maximum}} units</td>
-          <td>{{list.course_description_long}}</td>
+          <td v-html="list.course_description_long"/>
           <td style="border-right: 8px solid #660000; position: relative;">USA </td>
           <span><input type= "checkbox" name ="" value= ""/></span>         
         </tr>
