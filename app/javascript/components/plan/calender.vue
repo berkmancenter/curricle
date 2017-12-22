@@ -75,7 +75,7 @@ export default {
       .then((response) => {
         const courses = response.data
         this.events_arr = courses.map(item => {
-          return { title: item.title, start: item.created_at }
+          return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end }
         })
         this.setEvent()
       })
@@ -98,3 +98,23 @@ export default {
 }
 
 </script>
+<style>
+  .fc-event, .fc-event-dot {
+    background-color: inherit !important;
+    border: none !important;
+  }
+
+  .fc-slats table tbody tr {
+    height: 60px;
+  }
+
+  .fc-title{
+    background: blue;
+    color: #fff;
+  }
+  
+  .full-calendar table tbody tr td, .full-calendar table thead tr th {
+    border: none !important;
+    border-bottom: 1px solid gray !important;
+  }
+</style>
