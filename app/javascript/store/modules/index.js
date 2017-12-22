@@ -1,7 +1,7 @@
-import actions from './actions';
-import getters from './getters';
-import mutations from './mutations';
-import constants from './constants';
+import actions from './actions'
+import getters from './getters'
+import mutations from './mutations'
+import constants from './constants'
 
 const state = {
   courses: []
@@ -13,5 +13,5 @@ export default {
   actions,
   getters,
   mutations,
-  constants,
-};
+  constants
+}

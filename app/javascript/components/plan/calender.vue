@@ -1,7 +1,7 @@
 <template lang="pug">
   .row.margin-none
     .col-md-8
-      .col 
+      .col
         p Your Tray
         hr
       .drop-down.actions
@@ -23,78 +23,78 @@
 </template>
 
 <script type="text/javascript">
-  import lodash from 'lodash'
-  import fullCalendar from 'fullcalendar';
-  import CalendarSidebar from'components/plan/calendar-sidebar'
-  import axios from 'axios'
-  // var events_arr = [];
+import lodash from 'lodash'
+import fullCalendar from 'fullcalendar'
+import CalendarSidebar from 'components/plan/calendar-sidebar'
+import axios from 'axios'
+// var events_arr = [];
 
-  export default {
-    components: {
-      CalendarSidebar
-    },
-    props: ['selectedView'],
-    data() {
-      return { 
-        courses: [],
-        events_arr: [],
-        events_by_date: [
-          { 
-            day: 'Monday',
-            courses: [
-              { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            ]
-          },
-          { 
-            day: 'Tuesday',
-            courses: [
-              { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            ]
-          },
-          { 
-            day: 'Wedensday',
-            courses: [
-              { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            ]
-          }
-        ]
-      }
-    },
-    mounted () {
-      const course_url = '/courses';
-      const category_url = '/courses/categories';
-     
-      axios
-        .get(course_url)
-        .then((response) => {
-        const courses = response.data;
-        this.events_arr = courses.map(item =>  {
+export default {
+  components: {
+    CalendarSidebar
+  },
+  props: ['selectedView'],
+  data () {
+    return {
+      courses: [],
+      events_arr: [],
+      events_by_date: [
+        {
+          day: 'Monday',
+          courses: [
+            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
+            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
+            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
+          ]
+        },
+        {
+          day: 'Tuesday',
+          courses: [
+            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
+            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
+            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
+          ]
+        },
+        {
+          day: 'Wedensday',
+          courses: [
+            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
+            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
+            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
+          ]
+        }
+      ]
+    }
+  },
+  mounted () {
+    const course_url = '/courses'
+    const category_url = '/courses/categories'
+
+    axios
+      .get(course_url)
+      .then((response) => {
+        const courses = response.data
+        this.events_arr = courses.map(item => {
           return { title: item.title, start: item.created_at }
-        });
-        this.setEvent();
+        })
+        this.setEvent()
       })
+  },
+  methods: {
+    selectView (type) {
+      this.selectedView(type)
     },
-    methods: {
-      selectView(type) {
-        this.selectedView(type)
-      },
-      setEvent() {
-        $('.full-calendar').fullCalendar({
-          defaultView:  'agendaWeek',
-          allDaySlot: false,
-          displayEventTime: false,
-          slotDuration: '00:60:00',
-          columnFormat: 'dddd',
-          events: this.events_arr,  
-        });
-      },
+    setEvent () {
+      $('.full-calendar').fullCalendar({
+        defaultView: 'agendaWeek',
+        allDaySlot: false,
+        displayEventTime: false,
+        slotDuration: '00:60:00',
+        columnFormat: 'dddd',
+        events: this.events_arr
+      })
     }
   }
+}
 
 </script>

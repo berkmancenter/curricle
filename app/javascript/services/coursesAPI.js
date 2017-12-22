@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from 'axios'
 
 class CoursesAPI {
-  static getBaseUrl() {
+  static getBaseUrl () {
   	var url = '/courses'
-    return axios.get(url);
+    return axios.get(url)
   }
 }
 

@@ -1,18 +1,18 @@
 <template >
-  <div class='description'>
+  <div class="description">
     <div class="row margin-none">
-      <p class="pull-left"><b>{{course.academic_group}}</b></p>
+      <p class="pull-left"><b>{{ course.academic_group }}</b></p>
       <p class="pull-right">Component: <span><b>{{ course.component }}</b></span></p>
     </div>
     <div class="row margin-none">
-       <p class="pull-left"><b>{{course.term_name}}</b></p>
-       <p class="pull-right">Grading basis: <span><b>{{course.grading_basis_description}}</b></span></p>
+      <p class="pull-left"><b>{{ course.term_name }}</b></p>
+      <p class="pull-right">Grading basis: <span><b>{{ course.grading_basis_description }}</b></span></p>
     </div>
     <div class="row margin-none">
-       <p class="pull-left"><b>{{course.external_course_id}}</b></p>
-       <p class="pull-right">Instructor: <span><b>{{course.instructor.first_name}}</b></span></p>
-    </div>    
-    <div class="heading">{{course.class_academic_org_description}}</div>
+      <p class="pull-left"><b>{{ course.external_course_id }}</b></p>
+      <p class="pull-right">Instructor: <span><b>{{ course.instructor.first_name }}</b></span></p>
+    </div>
+    <div class="heading">{{ course.class_academic_org_description }}</div>
     <div class="second-description">
       <p>Description</p>
       <p v-html="course.course_description_long"/>
@@ -20,7 +20,7 @@
     <div class="instruction">
       <p>Instruction</p>
       <div class="row margin-none">
-        <p class="pull-left"><b>{{course.instructor.first_name}} {{course.instructor.last_name}}</b></p>
+        <p class="pull-left"><b>{{ course.instructor.first_name }} {{ course.instructor.last_name }}</b></p>
         <p class="pull-right">More Courses</p>
       </div>
     </div>
@@ -28,7 +28,7 @@
       <p>Reading</p>
       <div class="annotation-border">
         <div class="annotations">
-          <p><a href="#"><span class="fa fa-pencil"></span></a><b>Annotations</b></p>
+          <p><a href="#"><span class="fa fa-pencil"/></a><b>Annotations</b></p>
         </div>
         <div class="annotation-para">
           <p>
@@ -38,7 +38,7 @@
         <div class= "annonation-tag">
           <ul>
             <li>
-              Tag1 <span class=""></span>
+              Tag1 <span class=""/>
             </li>
           </ul>
         </div>
@@ -48,9 +48,9 @@
 </template>
 
 <script type="text/javascript">
-  export default {
-    props: ['course']
-  }
+export default {
+  props: ['course']
+}
 </script>
 
 <style>
@@ -90,8 +90,8 @@
   }
   .annotations {
     display: inline-block;
-    width: 100%; 
-    text-align: center;   
+    width: 100%;
+    text-align: center;
   }
   .annotations p span {
     display: inline-block;
@@ -113,6 +113,6 @@
   }
   .reading p:nth-child(1) {
     margin-bottom: 0px;
-    margin-top: 
+    margin-top:
   }
 </style>

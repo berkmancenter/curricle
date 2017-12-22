@@ -5,20 +5,20 @@
 </template>
 
 <script type="text/javascript">
-  export default {
-    props: ['title', 'items', 'selectedFilter', 'field', 'name'],
-    data() {
-      return { text: this.title }
-    },
-    methods: {
-      selectItem(value) {
-        const sort = {
-          name: this.field,
-          value: value
-        };
-        this.text = value
-        this.selectedFilter(sort, this.name)
+export default {
+  props: ['title', 'items', 'selectedFilter', 'field', 'name'],
+  data () {
+    return { text: this.title }
+  },
+  methods: {
+    selectItem (value) {
+      const sort = {
+        name: this.field,
+        value: value
       }
-    }  
+      this.text = value
+      this.selectedFilter(sort, this.name)
+    }
   }
-</script>    
+}
+</script>

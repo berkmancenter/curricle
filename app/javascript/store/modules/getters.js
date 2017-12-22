@@ -4,4 +4,4 @@
 export default {
   // Example:
   // user,
-};
+}

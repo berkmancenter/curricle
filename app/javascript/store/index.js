@@ -1,11 +1,11 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import module from './modules';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import module from './modules'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
-	modules : {
-        "_curricle" : module
-    },
-});
+  modules: {
+    '_curricle': module
+  }
+})

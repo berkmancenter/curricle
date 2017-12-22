@@ -5,34 +5,33 @@
 </template>
 
 <script type="text/javascript">
-  import PlanFilter from 'components/plan/plan-filter'
-  import PlanListItem from 'components/plan/list-item'
-  import PlanDescription from 'components/plan/plan-description'
-  import CalenderView from 'components/plan/calender'
-  import ListView from 'components/plan/list-view'
-  import axios from 'axios'
+import PlanFilter from 'components/plan/plan-filter'
+import PlanListItem from 'components/plan/list-item'
+import PlanDescription from 'components/plan/plan-description'
+import CalenderView from 'components/plan/calender'
+import ListView from 'components/plan/list-view'
 
-  export default {
-    components: {
-      PlanFilter,
-      PlanListItem,
-      PlanDescription,
-      CalenderView,
-      ListView
-    },
+export default {
+  components: {
+    PlanFilter,
+    PlanListItem,
+    PlanDescription,
+    CalenderView,
+    ListView
+  },
 
-    data() {
-      return { 
-        planView: 'list-view'
-      }  
-    },
+  data () {
+    return {
+      planView: 'list-view'
+    }
+  },
 
-    methods: {
-      selectedView(type) {
-        this.planView = type
-      }
+  methods: {
+    selectedView (type) {
+      this.planView = type
     }
   }
+}
 </script>
 <style type="text/css">
   .plan .list-group-item, .calendar-sidebar .list-group-item{

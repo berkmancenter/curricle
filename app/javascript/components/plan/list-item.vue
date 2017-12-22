@@ -1,17 +1,16 @@
 <template>
-  <div class="table-responsive">          
+  <div class="table-responsive">
     <table class="course-list-iltem table">
-      <thead>        
-      </thead>
+      <thead/>
       <tbody>
         <tr v-for="list in lists" @click="selectItem(list)">
-          <td>{{list.external_course_id}}</td>
-          <td>{{list.course_description}}</td>
-          <td>{{list.academic_group}} <br> {{ list.subject }}</td>
-          <td>{{list.term_name}} <br> {{list.units_maximum}} units</td>
+          <td>{{ list.external_course_id }}</td>
+          <td>{{ list.course_description }}</td>
+          <td>{{ list.academic_group }} <br> {{ list.subject }}</td>
+          <td>{{ list.term_name }} <br> {{ list.units_maximum }} units</td>
           <td v-html="list.course_description_long"/>
           <td style="border-right: 8px solid #660000; position: relative;">USA </td>
-          <span><input type= "checkbox" name ="" value= ""/></span>         
+          <span><input type= "checkbox" name ="" value= ""></span>
         </tr>
       </tbody>
     </table>
@@ -19,14 +18,14 @@
 </template>
 
 <script type="text/javascript">
-  export default {
-    props: ['selectedPlan', 'lists'],
-    methods: {
-      selectItem: function (value) {
-        this.selectedPlan(value)
-      }
-    }  
+export default {
+  props: ['selectedPlan', 'lists'],
+  methods: {
+    selectItem: function (value) {
+      this.selectedPlan(value)
+    }
   }
+}
 </script>
 
 <style type="text/css">
@@ -56,4 +55,3 @@
     vertical-align: middle;
   }
 </style>
-
