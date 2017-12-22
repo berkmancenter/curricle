@@ -1,9 +1,9 @@
 <template lang="pug">
-#app
-  header
-    navbar
+  #app
+    header
+      navbar
 
-  router-view
+    router-view
 </template>
 
 <script>

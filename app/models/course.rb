@@ -33,8 +33,12 @@ class Course < ApplicationRecord
     where.not(academic_group: [nil, '']).order(:academic_group).distinct.pluck(:academic_group)
   end
 
-  def departments
+  def self.departments
     where.not(class_academic_org_description: [nil, '']).order(:class_academic_org_description).distinct.pluck(:class_academic_org_description)
+  end
+
+  def self.semesters
+    where.not(term_year: [nil]).order(:term_name).distinct.pluck(:term_name)
   end
 
   def subject_descriptions
