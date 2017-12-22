@@ -1,20 +1,21 @@
+# frozen_string_literal: true
+
 class CoursesController < ApplicationController
-# ToDo
-# before_action :require_auth
+  # ToDo
+  # before_action :require_auth
 
-  def index
-  end
+  def index; end
 
-  # ToDo demo purpose
+  # TODO: demo purpose
   def search
     search = Course.search do
-      fulltext params[:keyword]? params[:keyword] : '', :fields => :title
-      fulltext params[:keyword]? params[:keyword] : '', :fields => :course_description_long
+      fulltext params[:keyword] ? params[:keyword] : '', fields: :title
+      fulltext params[:keyword] ? params[:keyword] : '', fields: :course_description_long
       with :term_year, 2017
-      paginate :page => 1, :per_page => 50
-    end    
+      paginate page: 1, per_page: 50
+    end
     @courses = search.results
-    render :json => @courses
+    render json: @courses
   end
 
   def index
@@ -29,7 +30,7 @@ class CoursesController < ApplicationController
   end
 
   def events_by_date
-    Course.where(:created_at => @selected_date.beginning_of_day..@selected_date.end_of_day)
+    Course.where(created_at: @selected_date.beginning_of_day..@selected_date.end_of_day)
   end
 
   def fullsearch
@@ -65,7 +66,7 @@ class CoursesController < ApplicationController
     else
       @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
-	render :json => @matching_courses, :methods => [:meeting, :instructor]
+    render json: @matching_courses, methods: %i[meeting instructor]
   end
 
   def clear_search

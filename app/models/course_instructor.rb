@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CourseInstructor < ApplicationRecord
   belongs_to :course
 

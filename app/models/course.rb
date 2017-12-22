@@ -32,7 +32,7 @@ class Course < ApplicationRecord
     text :course_note
     text :class_academic_org_description
     string :class_academic_org_description
-    join(:class_meeting_number, target:  CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
+    join(:class_meeting_number, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
     join(:meeting_time_start, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
     join(:meeting_time_end, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
     join(:meets_on_monday, target: CourseMeetingPattern, type: :boolean, join: { from: :course_id, to: :id })
@@ -46,8 +46,8 @@ class Course < ApplicationRecord
     join(:end_date, target: CourseMeetingPattern, type: :date, join: { from: :course_id, to: :id })
     join(:external_facility_id, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
     join(:facility_description, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
-    join(:first_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
-    join(:last_name, target: CourseInstructor, type: :text, join: {from: :course_id, to: :id })
+    join(:first_name, target: CourseInstructor, type: :text, join: { from: :course_id, to: :id })
+    join(:last_name, target: CourseInstructor, type: :text, join: { from: :course_id, to: :id })
     join(:title, prefix: 'reading', target: CourseReading, type: :text, join: { from: :course_id, to: :id })
     join(:author_first_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
     join(:author_last_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
@@ -60,7 +60,7 @@ class Course < ApplicationRecord
 
   before_save :set_division
 
-  def for_day(day, query_params = {})
+  def for_day(_day, query_params = {})
     query_params[:id] = CourseMeetingPattern.select(:course_id).where('meets_on_#{day}': true)
     Course.where(query_params).distinct
   end
@@ -90,9 +90,9 @@ class Course < ApplicationRecord
   end
 
   def terms
-    select('DISTINCT on (term_name,term_year) term_name, term_year').where('term_year >= ?', Time.zone.today.year).order(term_year: :asc, term_name: :desc).map { |term|
+    select('DISTINCT on (term_name,term_year) term_name, term_year').where('term_year >= ?', Time.zone.today.year).order(term_year: :asc, term_name: :desc).map do |term|
       "#{term.term_name}_#{term.term_year}"
-    }
+    end
   end
 
   def set_division
@@ -127,7 +127,7 @@ class Course < ApplicationRecord
     course_meeting_patterns.find_by(
       term_name: term_name,
       term_year: term_year
-      # ToDo courses doen't have data - class_section: class_section
+      # TODO: courses doen't have data - class_section: class_section
     )
   end
 
@@ -135,7 +135,7 @@ class Course < ApplicationRecord
     course_instructors.find_by(
       term_name: term_name,
       term_year: term_year
-      # ToDo courses doen't have data - class_section: class_section
+      # TODO: courses doen't have data - class_section: class_section
     )
   end
 

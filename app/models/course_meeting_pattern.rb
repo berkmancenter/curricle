@@ -11,7 +11,7 @@ class CourseMeetingPattern < ApplicationRecord
     integer :term_year
     string :class_section
     string :class_meeting_number
-    integer :meeting_time_start, using:  :extract_hour_from_meeting_time_start
+    integer :meeting_time_start, using: :extract_hour_from_meeting_time_start
     integer :meeting_time_end, using: :extract_hour_from_meeting_time_end
     boolean :meets_on_monday
     boolean :meets_on_tuesday
@@ -65,7 +65,7 @@ class CourseMeetingPattern < ApplicationRecord
   end
 
   def schedule
-    return "#{meeting_days.join(" / ")}" if meeting_time_start.blank? || meeting_time_end.blank?
-    "#{meeting_days.join(" / ")} #{meeting_time_start.strftime("%l:%M")} - #{meeting_time_end.strftime("%l:%M %p")}"
+    return meeting_days.join(' / ').to_s if meeting_time_start.blank? || meeting_time_end.blank?
+    "#{meeting_days.join(' / ')} #{meeting_time_start.strftime('%l:%M')} - #{meeting_time_end.strftime('%l:%M %p')}"
   end
 end

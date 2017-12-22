@@ -1,5 +1,6 @@
-module SessionHelper
+# frozen_string_literal: true
 
+module SessionHelper
   # retrieves the most recent search filters submitted by the user
   def query_filters
     @query_filters ||= (session[:query_filters] || {}).deep_symbolize_keys
@@ -23,7 +24,7 @@ module SessionHelper
       }
     end
 
-    filter_set.blank? ? [{ keywords: '', keyword_options: {} }] : filter_set
+    filter_set.presence || [{ keywords: '', keyword_options: {} }]
   end
 
   def filter_option_state(query_filters, option, value)
@@ -32,7 +33,7 @@ module SessionHelper
                  query_filters[:term].to_s == value.to_s
                when :keyword_option
                  if query_filters[:keyword_options].blank?
-                   %w(title description).include?(value.to_s)
+                   %w[title description].include?(value.to_s)
                  else
                    Array(query_filters[:keyword_options]).include?(value.to_s)
                  end
@@ -58,6 +59,6 @@ module SessionHelper
                  end
                else false
                end
-    selected ? "selected" : false
+    selected ? 'selected' : false
   end
 end
