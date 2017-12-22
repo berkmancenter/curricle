@@ -56,7 +56,7 @@ export default {
           ]
         },
         {
-          day: 'Wedensday',
+          day: 'Wednesday',
           courses: [
             { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
             { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
@@ -67,16 +67,18 @@ export default {
     }
   },
   mounted () {
-    const course_url = '/courses'
+    const course_url = '/courses/fullsearch?term=&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
     const category_url = '/courses/categories'
 
     axios
       .get(course_url)
       .then((response) => {
         const courses = response.data
-        this.events_arr = courses.map(item => {
-          return { title: item.title, start: item.created_at }
-        })
+        this.events_arr = courses
+          .filter(item => !!item.meeting)
+          .map(item => {
+            return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end }
+          })
         this.setEvent()
       })
   },
@@ -98,3 +100,23 @@ export default {
 }
 
 </script>
+<style>
+  .fc-event, .fc-event-dot {
+    background-color: inherit !important;
+    border: none !important;
+  }
+
+  .fc-slats table tbody tr {
+    height: 60px;
+  }
+
+  .fc-title{
+    background: blue;
+    color: #fff;
+  }
+  
+  .full-calendar table tbody tr td, .full-calendar table thead tr th {
+    border: none !important;
+    border-bottom: 1px solid gray !important;
+  }
+</style>
