@@ -1,22 +1,24 @@
 <template lang="pug">
   .row.margin-none
-    .col-md-8
-      .col
-        p Your Tray
-        hr
+    .col-md-9      
+      p.your-tray Your Tray
+      hr
       .drop-down.actions
         i.fa.fa-list-ul(@click="selectView('list-view')")
         i.fa.fa-calendar(@click="selectView('month-view')")
         i.fa.fa-square(@click="selectView('month-view')")
       .full-calendar
-    .col-md-4
-      hr
-      .row.actions.margin-none
-        i.fa.fa-folder
-        i.fa.fa-clock-o
-        i.fa.fa-share-alt
+    .col-md-3
+      .your-tray-parent
+        p.your-tray Your Tray 
+          span.fa.fa-close
+        hr
+        .row.actions.margin-none
+          i.fa.fa-folder
+          i.fa.fa-clock-o
+          i.fa.fa-share-alt
 
-        .pull-right See Course History
+          .pull-right See Course History
 
       .row.margin-none
         calendar-sidebar(:calender_events="events_by_date")
@@ -77,7 +79,7 @@ export default {
         this.events_arr = courses
           .filter(item => !!item.meeting)
           .map(item => {
-            return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end }
+            return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end, description: course.subject_description }
           })
         this.setEvent()
       })
@@ -92,8 +94,11 @@ export default {
         allDaySlot: false,
         displayEventTime: false,
         slotDuration: '00:60:00',
-        columnFormat: 'dddd',
-        events: this.events_arr
+        columnFormat: 'ddd',
+        events: this.events_arr,
+        eventRender: function(event, element) { 
+          element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>"); 
+        } 
       })
     }
   }
@@ -110,13 +115,52 @@ export default {
     height: 60px;
   }
 
-  .fc-title{
-    background: blue;
+  .fc-title {    
     color: #fff;
+    background-color: #000;
+    height: 10px;    
+  }
+  .fc-title .black{    
+    color: #fff;
+    background-color: #000;
+    height: 10px;    
+  }
+  .fc-title .red{    
+    color: #fff;
+    background-color: #ff0000;
+    height: 10px;    
+  }
+  .fc-title .green{    
+    color: #fff;
+    background-color: #008000;
+    height: 10px;    
+  }
+  .fc-title .purple{    
+    color: #fff;
+    background-color: #800080;
+    height: 10px;    
   }
   
   .full-calendar table tbody tr td, .full-calendar table thead tr th {
     border: none !important;
     border-bottom: 1px solid gray !important;
+  }
+  .your-tray {
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  .col {
+    padding: 0px;
+  }
+  .fc-head tr td, .fc-row.fc-widget-header{
+    border: none;
+  }
+  .fc-toolbar.fc-header-toolbar {
+    display: none;
+  }
+  .event-description .green{
+    background-color: #cecece;
+    color: #000;
   }
 </style>

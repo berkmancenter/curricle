@@ -75,6 +75,11 @@ export default {
     display: inline-block;
     width: 100%;
     text-align: right;
+    font-size: 12px;
+  }
+  .description .margin-none p {
+  margin-bottom: 0px;
+  line-height: 100%;
   }
   .description .margin-none p:nth-child(2) {
     text-align: right;
@@ -82,7 +87,7 @@ export default {
   .heading {
     display: inline-block;
     width: 100%;
-    font-size: 30px;
+    font-size: 22px;
     color:#ff00ff;
   }
   .instruction .margin-none{
