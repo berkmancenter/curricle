@@ -45,7 +45,7 @@ export default {
   },
   props: ['selectedView'],
   mounted () {
-    axios.get('/courses/search').then((response) => {
+    axios.get('/courses').then((response) => {
       this.courses = response.data
       this.filteredCourses = response.data
       this.course = this.courses[0]

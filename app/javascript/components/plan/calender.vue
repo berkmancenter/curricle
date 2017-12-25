@@ -6,7 +6,7 @@
       .drop-down.actions
         i.fa.fa-list-ul(@click="selectView('list-view')")
         i.fa.fa-calendar(@click="selectView('month-view')")
-        i.fa.fa-square(@click="selectView('month-view')")
+        i.fa.fa-square(@click="selectView('year-view')")
       .full-calendar
     .col-md-3
       .your-tray-parent
@@ -76,11 +76,31 @@ export default {
       .get(course_url)
       .then((response) => {
         const courses = response.data
-        this.events_arr = courses
-          .filter(item => !!item.meeting)
-          .map(item => {
-            return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end, description: course.subject_description }
-          })
+        this.events_arr = [
+          {
+            title  : ' ',
+            start  : '2017-12-26T01:30:00',
+            allDay : false, // will make the time show            
+            description: 'long description <br> long description'
+          },
+          {
+            title  : ' ',
+            start  : '2017-12-27T12:00:00',
+            allDay : false, // will make the time show            
+            description: 'long description <br> long description'
+          },
+          {
+            title  : ' ',
+            start  : '2017-12-28T02:30:00',
+            allDay : false, // will make the time show            
+            description: 'long description <br> long description'
+
+          }
+        ]
+          // .filter(item => !!item.meeting)
+          // .map(item => {
+          //   return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end, description: course.subject_description }
+          // })
         this.setEvent()
       })
   },

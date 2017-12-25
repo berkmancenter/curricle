@@ -1,14 +1,16 @@
 <template lang="pug">
   .abc
     list-view(:selectedView="selectedView" v-if="planView=='list-view'")
-    calender-view(:selectedView="selectedView" v-if="planView=='month-view'")
+    calender(:selectedView="selectedView" v-if="planView=='month-view'")
+    yearly-calendar(:selectedView="selectedView" v-if="planView=='year-view'")
 </template>
 
 <script type="text/javascript">
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'
 import PlanDescription from 'components/plan/plan-description'
-import CalenderView from 'components/plan/calender'
+import Calender from 'components/plan/calender'
+import YearlyCalendar from 'components/plan/yearly-calendar'
 import ListView from 'components/plan/list-view'
 
 export default {
@@ -16,7 +18,8 @@ export default {
     PlanFilter,
     PlanListItem,
     PlanDescription,
-    CalenderView,
+    Calender,
+    YearlyCalendar,
     ListView
   },
 
