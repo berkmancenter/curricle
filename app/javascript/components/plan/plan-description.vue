@@ -84,11 +84,19 @@ export default {
   .description .margin-none p:nth-child(2) {
     text-align: right;
   }
+  .description .margin-none:nth-child(2) p {
+    margin-top: -25px;
+  }
+  .description .margin-none:nth-child(3) p {
+    margin-top: -38px;
+  }
   .heading {
     display: inline-block;
     width: 100%;
     font-size: 22px;
     color:#ff00ff;
+    line-height: 1;
+    margin-bottom: 20px;
   }
   .instruction .margin-none{
     display: inline-block;

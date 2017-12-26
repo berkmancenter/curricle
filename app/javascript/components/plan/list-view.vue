@@ -45,10 +45,9 @@ export default {
   },
   props: ['selectedView'],
   mounted () {
-    axios.get('/courses').then((response) => {
+    axios.get('/courses/search').then((response) => {
       this.courses = response.data
       this.filteredCourses = response.data
-      this.course = this.courses[0]
     })
 
     axios.get('/courses/categories').then((response) => {
@@ -75,7 +74,6 @@ export default {
       })
     },
     selectedPlan (course) {
-      course['instructor'] = 'first name'
       this.course = course
     },
     selectView (type) {

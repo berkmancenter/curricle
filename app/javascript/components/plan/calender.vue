@@ -7,6 +7,7 @@
         i.fa.fa-list-ul(@click="selectView('list-view')")
         i.fa.fa-calendar(@click="selectView('month-view')")
         i.fa.fa-square(@click="selectView('year-view')")
+        plan-filter(:title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name") Filter By :
       .full-calendar
     .col-md-3
       .your-tray-parent
@@ -28,18 +29,23 @@
 import lodash from 'lodash'
 import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
+import PlanFilter from 'components/plan/plan-filter'
 import axios from 'axios'
 // var events_arr = [];
 
 export default {
   components: {
-    CalendarSidebar
+    CalendarSidebar,
+    PlanFilter
   },
   props: ['selectedView'],
   data () {
     return {
       courses: [],
       events_arr: [],
+      categories: [],
+      courses: [],
+      filteredCourses: [],
       events_by_date: [
         {
           day: 'Monday',
@@ -75,39 +81,47 @@ export default {
     axios
       .get(course_url)
       .then((response) => {
-        const courses = response.data
-        this.events_arr = [
-          {
-            title  : ' ',
-            start  : '2017-12-26T01:30:00',
-            allDay : false, // will make the time show            
-            description: 'long description <br> long description'
-          },
-          {
-            title  : ' ',
-            start  : '2017-12-27T12:00:00',
-            allDay : false, // will make the time show            
-            description: 'long description <br> long description'
-          },
-          {
-            title  : ' ',
-            start  : '2017-12-28T02:30:00',
-            allDay : false, // will make the time show            
-            description: 'long description <br> long description'
-
-          }
-        ]
-          // .filter(item => !!item.meeting)
-          // .map(item => {
-          //   return { title: (item.external_course_id + item.course_description + item.academic_group + item.subject), start: item.meeting.meeting_time_start, end: item.meeting.meeting_time_end, description: course.subject_description }
-          // })
+        this.courses = response.data
+        this.getEventData(this.courses)
         this.setEvent()
       })
+
+    axios.get('/courses/categories').then((response) => {
+      this.categories = response.data
+        .filter(item => item.name == 'Semester')
+    })  
   },
   methods: {
     selectView (type) {
       this.selectedView(type)
     },
+
+    selectedFilter (filter, name) {
+      let data = this.courses
+
+      if (filter.value != 'none') {
+        data = data.filter(item => {
+          return item[filter.name] == filter.value
+        })
+      }
+
+      this.getEventData(data)
+      this.setEvent()
+    },
+
+    getEventData(data){
+      this.events_arr = data
+        .filter(item => !!item.meeting)
+        .map(item => {
+          return { 
+            title  : " ",
+            start  : item.meeting.meeting_time_start,
+            end    : item.meeting.meeting_time_end,
+            description: item.subject_description 
+          }
+        })
+    },
+
     setEvent () {
       $('.full-calendar').fullCalendar({
         defaultView: 'agendaWeek',
@@ -118,7 +132,7 @@ export default {
         events: this.events_arr,
         eventRender: function(event, element) { 
           element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>"); 
-        } 
+        }
       })
     }
   }
