@@ -10,19 +10,44 @@
         </div>
       </div>
       <table class='yearly-view'>
-        <thead>
+        <thead>          
         </thead>
-        <tbody>
-          <tr style="border-top: 1px solid;">
-            <td></td>
-            <td>
+        <tbody style = "overflow-x: auto;">
+          <tr style="border-top: 1px solid;">     
+            <td style="width: 20px;"></td>       
+            <td style="width: 100px;">
               <div class="fc-content">
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
               <div class="fc-bg"></div>
             </td>
-            <td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
               <div class="fc-content">
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
@@ -30,9 +55,100 @@
               <div class="fc-bg"></div>
             </td>
           </tr>
+
           <tr>
-            <td><strong>1 hr</strong></td>
+            <td style="width: 100px;"><strong>1 hr</strong></td>   
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
+
+            <td style="width: 100px;">
+              <div class="fc-content">
+                <div class="fc-title"></div>
+                <div class="event-description">long description <br> long description</div>
+              </div>
+              <div class="fc-bg"></div>
+            </td>
           </tr>
+
+
           <tr>
             <td><strong>2 hr</strong></td>
           </tr>
@@ -53,8 +169,7 @@
     </div>
     <div class="col-md-3">
       <div class="your-tray-parent">
-        <p class="your-tray"> Your Tray </p>
-          <span class="fa fa-close"></span>
+        <p class="your-tray"> Your Tray <span class="fa fa-close"></span></p>          
         <hr>
         <div class="row actions margin-none">
           <i class="fa fa-folder"/>
@@ -129,11 +244,11 @@
   .yearly-view tr{
     border-bottom: 1px solid;
   }
-  table, table tbody {
+  .yearly-view table, .yearly-view table tbody {
     display: inline-block;
     width: 100%;
   }  
-  table tbody tr {
+  .yearly-view table tbody tr {
     display: inline-table;
     width: 100%;
     height: 50px;
