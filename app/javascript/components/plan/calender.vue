@@ -21,8 +21,10 @@
 
           .pull-right See Course History
 
+      <!-- .row.margin-none
+        calendar-sidebar(:calender_events="events_by_date") -->
       .row.margin-none
-        calendar-sidebar(:calender_events="events_by_date")
+        plan-description(:course="course")  
 </template>
 
 <script type="text/javascript">
@@ -30,13 +32,15 @@ import lodash from 'lodash'
 import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
+import PlanDescription from 'components/plan/plan-description'
 import axios from 'axios'
 // var events_arr = [];
 
 export default {
   components: {
     CalendarSidebar,
-    PlanFilter
+    PlanFilter,
+    PlanDescription
   },
   props: ['selectedView'],
   data () {
@@ -45,6 +49,7 @@ export default {
       events_arr: [],
       categories: [],
       courses: [],
+      course: {},
       filteredCourses: [],
       events_by_date: [
         {
@@ -117,7 +122,9 @@ export default {
             title  : " ",
             start  : item.meeting.meeting_time_start,
             end    : item.meeting.meeting_time_end,
-            description: item.subject_description 
+            description: item.subject_description,
+            course : item,
+            self   : this
           }
         })
     },
@@ -132,9 +139,16 @@ export default {
         events: this.events_arr,
         eventRender: function(event, element) { 
           element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>"); 
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+          calEvent.self.selectedPlan(calEvent.course)
         }
       })
-    }
+    },
+
+    selectedPlan (course) {
+      this.course = course
+    },
   }
 }
 
