@@ -28,12 +28,7 @@
       <p>Reading</p>
       <div class="annotation-border">
         <div class="annotations">
-          <p><a href="#"><span class="fa fa-pencil"/></a><b>Annotations</b></p>
-        </div>
-        <div class="annotation-para">
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-          </p>
+          <p><span class="fa fa-pencil" @click="OpenAnnotationsForm()"/><b>Annotations</b></p>
         </div>
         <div class= "annonation-tag">
           <tags
@@ -41,6 +36,36 @@
             :tag="tag"
             :course-id="course.id"
             @deactivateTag="deactivateTag($event)" />
+          <div v-if="!editableAnnotations">
+            <p>
+              {{editableAnnotationsText}}
+            </p>
+            <div class= "annonation-tag">
+              <ul>
+                <li v-for="(text, index) of annotationTags">
+                  {{ text }} <span class=""/>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div v-else>
+            <p>
+              <textarea rows="10" style="width: 100%"  v-model="editableAnnotationsText">
+              </textarea>
+              <input
+                placeholder="Enter Tag"
+                v-model="tag"
+                @keyup.enter="addTags">
+              <span
+                class=""
+                v-for="(text, index) of annotationTags"
+                @click="removeTags(index)">
+                {{ text }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
+              </span>
+
+              <button @click="updateAnnotations">Save</button>
+            </p>
+          </div>    
         </div>
       </div>
     </div>
@@ -49,15 +74,58 @@
 
 <script type="text/javascript">
 import Tags from './tags.vue'
+import axios from 'axios'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
-  props: ['course'],
   components: {
-    Tags,
+    FontAwesomeIcon,
+    Tags
   },
+
+  props: ['course'],
+
   data () {
     return {
-      tag: ''
+      editableAnnotations: false,
+      editableAnnotationsText: "",
+      annotationTags: [],
+      tag: ""
+    }
+  },
+
+  watch: {
+    course: function () {
+      this.editableAnnotationsText = this.course.course_reading.annotation
+      this.annotationTags = this.course.tags
+    }
+  },
+
+  methods: {
+    OpenAnnotationsForm(){
+      this.editableAnnotations = !this.editableAnnotations
+    },
+
+    updateAnnotations(){
+      const data = { course_reading: { annotation: this.editableAnnotationsText } }
+
+      axios.patch(`/course_readings/${this.course.course_reading.id}`, data).then((response) => {
+        this.course.course_reading = response.data
+        this.editableAnnotations = !this.editableAnnotations
+        this.tag = ""
+      })
+    },
+
+    addTags() {
+      if (this.tag) {
+        this.annotationTags.push(this.tag)
+      }
+
+      this.tag = ''
+    },
+
+    removeTags(index){
+      this.annotationTags.splice(index, 1)
     }
   }
 }
