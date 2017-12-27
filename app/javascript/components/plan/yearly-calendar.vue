@@ -20,7 +20,7 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
+
             </td>
 
             <td style="width: 100px;">
@@ -28,7 +28,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -36,7 +35,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -44,7 +42,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -52,7 +49,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
           </tr>
 
@@ -64,7 +60,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -72,7 +67,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -80,7 +74,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -88,7 +81,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -96,7 +88,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -104,7 +95,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -112,7 +102,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -120,7 +109,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -128,7 +116,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -136,7 +123,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
 
             <td style="width: 100px;">
@@ -144,7 +130,6 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-              <div class="fc-bg"></div>
             </td>
           </tr>
 
