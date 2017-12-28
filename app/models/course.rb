@@ -132,16 +132,16 @@ class Course < ApplicationRecord
   def meeting
     course_meeting_patterns.find_by(
       term_name: term_name,
-      term_year: term_year
-      # TODO: courses doen't have data - class_section: class_section
+      term_year: term_year,
+      class_section: class_section
     )
   end
 
   def instructor
     course_instructors.find_by(
       term_name: term_name,
-      term_year: term_year
-      # TODO: courses doen't have data - class_section: class_section
+      term_year: term_year,
+      class_section: class_section
     )
   end
 
