@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :categories
       get :fullsearch
       get :search
+      get :courses_by_day
     end
   end
 
