@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3" v-if="trayVisible">
       <div> <p class ="select-course">Selected Course</p>
         <hr>
         <div class="row actions margin-none">
@@ -41,9 +41,10 @@ export default {
   components: {
     PlanFilter,
     PlanListItem,
-    PlanDescription
+    PlanDescription,
   },
-  props: ['selectedView'],
+  props: ['selectedView', 'trayVisible'],
+
   mounted () {
     axios.get('/courses/search').then((response) => {
       this.courses = response.data
@@ -60,7 +61,8 @@ export default {
       filteredCourses: [],
       courses: {},
       course: {},
-      planView: 'list-view'
+      planView: 'list-view',
+      sideBarToggle: false
     }
   },
   methods: {
@@ -73,7 +75,7 @@ export default {
         return item[filter.name] == filter.value
       })
     },
-    selectedPlan (course) {
+    selectedPlan(course) {
       this.course = course
     },
     selectView (type) {

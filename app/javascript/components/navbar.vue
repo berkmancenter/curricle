@@ -12,18 +12,21 @@ b-navbar(toggleable="md" type="light" variant="light")
       b-nav-item(to='plan') Plan
     b-navbar-nav.ml-auto
       b-nav-item(@click='logout') Logout
+      b-nav-item(href='' @click="trayToggle") Tray
+      b-nav-item(href='#') Login
 </template>
-<script>
-import axios from 'axios'
 
-export default {
-  methods: {
-    logout () {
-      axios.get('/users/sign_out')
-        .then(response => {
-          this.$router.go('/users/sign_in')
-        })
+<script>
+  import axios from 'axios'
+  export default {
+    props: ['trayToggle'],
+    methods: {
+      logout () {
+        axios.get('/users/sign_out')
+          .then(response => {
+            this.$router.go('/users/sign_in')
+          })
+      }
     }
   }
-}
 </script>

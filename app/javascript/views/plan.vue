@@ -1,8 +1,8 @@
 <template lang="pug">
   .abc
-    list-view(:selectedView="selectedView" v-if="planView=='list-view'")
-    calender(:selectedView="selectedView" v-if="planView=='month-view'")
-    yearly-calendar(:selectedView="selectedView" v-if="planView=='year-view'")
+    list-view(:selectedView="selectedView" :trayVisible="trayVisible" v-if="planView=='list-view'")
+    calender(:selectedView="selectedView" :trayVisible="trayVisible" v-if="planView=='month-view'", )
+    yearly-calendar(:selectedView="selectedView" :trayVisible="trayVisible" v-if="planView=='year-view'")
 </template>
 
 <script type="text/javascript">
@@ -22,6 +22,8 @@ export default {
     YearlyCalendar,
     ListView
   },
+
+  props: ['trayVisible'],
 
   data () {
     return {

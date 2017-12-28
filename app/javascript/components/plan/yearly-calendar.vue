@@ -20,9 +20,7 @@
                 <div class="fc-title"></div>
                 <div class="event-description">long description <br> long description</div>
               </div>
-
             </td>
-
             <td style="width: 100px;">
               <div class="fc-content">
                 <div class="fc-title"></div>
@@ -152,14 +150,13 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3" v-if="trayVisible">
       <div class="your-tray-parent">
         <p class="your-tray"> Your Tray <span class="fa fa-close"></span></p>          
         <hr>
         <div class="row actions margin-none">
           <i class="fa fa-folder"/>
           <i class="fa fa-clock-o"/>
-          <i class="fa fa-share-alt"/>
           <div class="pull-right">See Course History</div>
         </div>  
         <div class="row margin-none">
@@ -176,10 +173,11 @@
       CalendarSidebar
     },
 
-    props: ['selectedView'],
+    props: ['selectedView', 'trayVisible'],
 
     data(){
       return {
+        sideBarview: 'single',
         events_by_date: [
           {
             day: 'Fall 2017',

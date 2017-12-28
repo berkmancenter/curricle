@@ -9,22 +9,22 @@
         i.fa.fa-square(@click="selectView('year-view')")
         plan-filter(:title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name") Filter By :
       .full-calendar
-    .col-md-3
+      .full-calendar1
+    .col-md-3(v-if="trayVisible")
       .your-tray-parent
         p.your-tray Your Tray 
           span.fa.fa-close
         hr
         .row.actions.margin-none
-          i.fa.fa-folder
-          i.fa.fa-clock-o
-          i.fa.fa-share-alt
+          i.fa.fa-folder(@click="selectSideBarView('single')")
+          i.fa.fa-clock-o(@click="selectSideBarView('multiple')")
 
           .pull-right See Course History
 
-      <!-- .row.margin-none
-        calendar-sidebar(:calender_events="events_by_date") -->
       .row.margin-none
-        plan-description(:course="course")  
+        calendar-sidebar(:calender_events="events_by_date", v-if="sideBarview=='single'")
+      .row.margin-none
+        plan-description(:course="course", v-if="sideBarview=='multiple'")
 </template>
 
 <script type="text/javascript">
@@ -42,15 +42,15 @@ export default {
     PlanFilter,
     PlanDescription
   },
-  props: ['selectedView'],
+  props: ['selectedView', 'trayVisible'],
   data () {
     return {
       courses: [],
       events_arr: [],
       categories: [],
-      courses: [],
       course: {},
       filteredCourses: [],
+      sideBarview: 'single',
       events_by_date: [
         {
           day: 'Monday',
@@ -88,6 +88,7 @@ export default {
       .then((response) => {
         this.courses = response.data
         this.getEventData(this.courses)
+        this.course = this.courses[0]
         this.setEvent()
       })
 
@@ -101,7 +102,13 @@ export default {
       this.selectedView(type)
     },
 
+    selectSideBarView(view){
+      this.sideBarview = view
+    },
+
     selectedFilter (filter, name) {
+      this.removeEvents()
+
       let data = this.courses
 
       if (filter.value != 'none') {
@@ -110,8 +117,10 @@ export default {
         })
       }
 
+
       this.getEventData(data)
-      this.setEvent()
+      this.addEvents()
+
     },
 
     getEventData(data){
@@ -144,6 +153,18 @@ export default {
           calEvent.self.selectedPlan(calEvent.course)
         }
       })
+    },
+
+    removeEvents(){
+      $('.full-calendar').fullCalendar('clientEvents').map(function(event) {
+        $('.full-calendar').fullCalendar('removeEvents', event._id);
+      });
+    },
+
+    addEvents(){
+      this.events_arr.map(function(event){
+        $('.full-calendar').fullCalendar('renderEvent', event)
+      });
     },
 
     selectedPlan (course) {
