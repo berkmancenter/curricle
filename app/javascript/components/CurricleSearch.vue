@@ -37,6 +37,9 @@ export default {
       default () {
         return []
       }
+    },
+    getResults: {
+      type: Function
     }
   },
   data () {
@@ -83,6 +86,7 @@ export default {
           .then(response => {
             this.results = response.data.courses
             this.searchComplete = true
+            this.getResults(this.results)
           })
       } else {
         this.results = []
