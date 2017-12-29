@@ -113,14 +113,17 @@ export default {
 
       if (filter.value != 'none') {
         data = data.filter(item => {
-          return item[filter.name] == filter.value
+          if (filter.name === 'term_name'){
+            const semester = filter.value.split(" ")
+            return item.term_name ==  semester[0] && item.term_year == semester[1]
+          }
+          else{
+            return item[filter.name] == filter.value
+          }
         })
       }
-
-
       this.getEventData(data)
       this.addEvents()
-
     },
 
     getEventData(data){

@@ -155,22 +155,28 @@
         <p class="your-tray"> Your Tray <span class="fa fa-close"></span></p>          
         <hr>
         <div class="row actions margin-none">
-          <i class="fa fa-folder"/>
-          <i class="fa fa-clock-o"/>
+          <i class="fa fa-folder" @click="selectSideBarView('single')"/>
+          <i class="fa fa-clock-o" @click="selectSideBarView('multiple')"/>
           <div class="pull-right">See Course History</div>
+        </div>
+        <div class="row margin-none">
+          <calendar-sidebar :calender_events="events_by_date" v-if="sideBarview=='single'"></calendar-sidebar>
         </div>  
         <div class="row margin-none">
-          <calendar-sidebar :calender_events="events_by_date"></calendar-sidebar>
-        </div>
+          <plan-description :course="course", v-if="sideBarview=='multiple'"></plan-description>
+        </div>  
       </div>
     </div>
   </div>
 </template>
 <script type="text/javascript">
   import CalendarSidebar from 'components/plan/calendar-sidebar'
+  import PlanDescription from 'components/plan/plan-description'
+
   export default {
     components: {
-      CalendarSidebar
+      CalendarSidebar,
+      PlanDescription
     },
 
     props: ['selectedView', 'trayVisible'],
@@ -219,6 +225,9 @@
       },
       selectView (type) {
         this.selectedView(type)
+      },
+      selectSideBarView(view){
+        this.sideBarview = view
       }
     }
   }   
