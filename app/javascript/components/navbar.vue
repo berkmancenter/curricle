@@ -11,5 +11,19 @@ b-navbar(toggleable="md" type="light" variant="light")
       b-nav-item(to='explore') Explore
       b-nav-item(to='plan') Plan
     b-navbar-nav.ml-auto
-      b-nav-item(href='#') Login
+      b-nav-item(@click='logout') Logout
 </template>
+<script>
+import axios from 'axios'
+
+export default {
+  methods: {
+    logout () {
+      axios.get('/users/sign_out')
+        .then(response => {
+          this.$router.go('/users/sign_in')
+        })
+    }
+  }
+}
+</script>
