@@ -228,9 +228,6 @@ export default {
   .fc-head tr td, .fc-row.fc-widget-header{
     border: none;
   }
-  .fc-toolbar.fc-header-toolbar {
-    display: none;
-  }
   .event-description .green{
     background-color: #cecece;
     color: #000;
