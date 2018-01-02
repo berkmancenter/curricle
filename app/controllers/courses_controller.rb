@@ -4,8 +4,6 @@ class CoursesController < ApplicationController
   # ToDo
   # before_action :require_auth
 
-  def index; end
-
   # TODO: demo purpose
   def search
     search = Course.search do
@@ -27,6 +25,34 @@ class CoursesController < ApplicationController
     filters << { name: 'Department', options: Course.departments, field: 'class_academic_org_description' }
     filters << { name: 'Semester', options: Course.semesters, field: 'term_name' }
     render json: filters.as_json
+  end
+
+  def courses_by_day
+    term_name = params[:term_name] || current_semester.split(' ').first
+    term_year = params[:term_year] || current_semester.split(' ').last
+    courses = [
+      {
+        day: 'Monday',
+        courses: Course.courses_by_day_and_term('meets_on_monday', term_name, term_year)
+      },
+      {
+        day: 'Tuesday',
+        courses: Course.courses_by_day_and_term('meets_on_tuesday', term_name, term_year)
+      },
+      {
+        day: 'Wednesday',
+        courses: Course.courses_by_day_and_term('meets_on_wednesday', term_name, term_year)
+      },
+      {
+        day: 'Thursday',
+        courses: Course.courses_by_day_and_term('meets_on_thursday', term_name, term_year)
+      },
+      {
+        day: 'Friday',
+        courses: Course.courses_by_day_and_term('meets_on_friday', term_name, term_year)
+      }
+    ]
+    render json: courses
   end
 
   def events_by_date
@@ -57,7 +83,6 @@ class CoursesController < ApplicationController
 
     if query_filters.present?
       @keyword_filters = build_keyword_filters(query_filters)
-      keyword_filters = @keyword_filters.deep_dup
 
       query = sunspot_search(query_filters, :courses)
       @matching_courses = query.results

@@ -78,7 +78,13 @@ class Course < ApplicationRecord
   end
 
   def self.semesters
-    where.not(term_year: [nil]).order(:term_name).distinct.pluck(:term_name)
+    select('DISTINCT on (term_name,term_year) term_name, term_year').order(term_year: :asc, term_name: :desc).map do |term|
+      "#{term.term_name} #{term.term_year}"
+    end
+  end
+
+  def self.courses_by_day_and_term(day, term_name, term_year)
+    Course.joins(:course_meeting_patterns).select('courses.id, courses.external_course_id as external_id, title').where("lower(courses.term_name) = ? and courses.term_year = ? and course_meeting_patterns.#{day} = ?", term_name.downcase, term_year, true).distinct
   end
 
   def subject_descriptions
@@ -126,16 +132,16 @@ class Course < ApplicationRecord
   def meeting
     course_meeting_patterns.find_by(
       term_name: term_name,
-      term_year: term_year
-      # TODO: courses doen't have data - class_section: class_section
+      term_year: term_year,
+      class_section: class_section
     )
   end
 
   def instructor
     course_instructors.find_by(
       term_name: term_name,
-      term_year: term_year
-      # TODO: courses doen't have data - class_section: class_section
+      term_year: term_year,
+      class_section: class_section
     )
   end
 
