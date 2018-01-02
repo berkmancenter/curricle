@@ -8,22 +8,22 @@
       <p class="pull-left"><b>{{ course.term_name }}</b></p>
       <p class="pull-right">Grading basis: <span><b>{{ course.grading_basis_description }}</b></span></p>
     </div>
-    <div class="row margin-none">
+<!--     <div class="row margin-none">
       <p class="pull-left"><b>{{ course.external_course_id }}</b></p>
       <p class="pull-right">Instructor: <span><b>{{ course.instructor.first_name }}</b></span></p>
-    </div>
+    </div> -->
     <div class="heading">{{ course.class_academic_org_description }}</div>
     <div class="second-description">
       <p>Description</p>
       <p v-html="course.course_description_long"/>
     </div>
-    <div class="instruction">
+    <!-- <div class="instruction">
       <p>Instruction</p>
       <div class="row margin-none">
         <p class="pull-left"><b>{{ course.instructor.first_name }} {{ course.instructor.last_name }}</b></p>
         <p class="pull-right">More Courses</p>
       </div>
-    </div>
+    </div> -->
     <div class= "reading">
       <p>Reading</p>
       <div class="annotation-border">
