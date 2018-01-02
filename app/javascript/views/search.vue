@@ -120,7 +120,7 @@ export default {
     getCoursesByYear(filter){
       let url = '/courses/courses_by_year'
 
-      if(filter){
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
         const semester = filter.value.split(" ")
         url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
       }
