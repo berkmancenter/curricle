@@ -7,7 +7,7 @@ Development
 ===========
 
 Requirements:
-* Ruby 2.4.2
+* Ruby 2.3.6
 * PostgreSQL 9.6
 
 Setup:
