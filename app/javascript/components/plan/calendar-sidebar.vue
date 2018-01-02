@@ -1,6 +1,6 @@
 <template>
   <div class="calendar-sidebar">
-    <div v-for="event in calender_events">
+    <div v-for="event in calenderEvents">
       <strong>{{ event.day }}</strong>
         <div class="table-responsive">
         <table class="course-list-iltem table">
@@ -9,7 +9,9 @@
             <tr v-for="course in event.courses" @click="selectItem(course)">
               <td>{{ course.external_id }}</td>
               <td>{{ course.title }}</td>            
-              <td style="border-right: 5px solid #000;"><i class= "fa fa-clock-o"></i></td>
+              <td style="border-right: 5px solid #000;">
+                <i class= "fa fa-clock-o"></i>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -19,9 +21,9 @@
 </template>
 
 <script type="text/javascript">
-export default {
-  props: ['calender_events']
-}
+  export default {
+    props: ['calenderEvents']
+  }
 </script>
 
 <style type="text/css">  

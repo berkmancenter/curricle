@@ -2,6 +2,9 @@
   <div
     class="row curricle-search-result"
     :style="borderStyle">
+    <div class="col-md-1">
+      <i class="fa fa-folder" @click="addRemoveCourse(id)"  v-bind:class="{ usercourse: !isUserCourse}"/>
+    </div>
     <div class="col-md-2">
       <strong>
         {{ academic_group }}
@@ -31,6 +34,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     academic_group: {
@@ -74,6 +79,12 @@ export default {
       default: 0
     }
   },
+  data () {
+    return {
+      isUserCourse: false
+    }  
+  },
+
   computed: {
     borderStyle () {
       // TODO: map course color to data
@@ -82,6 +93,18 @@ export default {
       return {
         'border-left-color': ('#' + randomColor)
       }
+    }
+  },
+  methods: {
+
+    addRemoveCourse (courseId) {
+      // TODO: change according to API
+      this.isUserCourse = !this.isUserCourse
+      // axios
+      //   .post(url, {course: {id: courseId}})
+      //   .then((response) => {
+
+      //   })
     }
   }
 }
@@ -99,5 +122,8 @@ export default {
   h5 {
     font-size: 16px;
   }
+}
+.usercourse {
+  color: gray;
 }
 </style>

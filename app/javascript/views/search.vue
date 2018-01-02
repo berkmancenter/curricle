@@ -15,9 +15,9 @@
           </p>
           <hr>
           <div class="row actions margin-none">
-            <i class="fa fa fa-list-ul" @click="selectSideBarView('single')"/>
-            <i class="fa fa-calendar" @click="selectSideBarView('multiple')"/>
-            <i class="fa fa-share-alt"/>
+            <i class="fa fa-list-ul" @click="selectSideBarView('list-view')"/>
+            <i class="fa fa-calendar" @click="selectSideBarView('semester')"/>
+            <i class="fa fa-square" @click="selectSideBarView('multi-year')"/>
             <div class="pull-right"> See Course History</div>
           </div>
         </div>
@@ -33,14 +33,20 @@
         </div>
         <div class="row margin-none">
           <course-list 
-            :courses = "results"
-            v-if="sideBarview=='single'"
+            :courses = "filteredResults"
+            v-if="sideBarview=='list-view'"
           />
         </div>
         <div class="row margin-none">
           <calendar-sidebar 
-            :calender_events="events_by_date",
-            v-if="sideBarview=='multiple'")
+            :calenderEvents="events"
+            v-if="sideBarview=='semester'"
+          />
+        </div>
+        <div class="row margin-none">
+          <calendar-sidebar 
+            :calenderEvents="yearlyEvents"
+            v-if="sideBarview=='multi-year'"
           />
         </div>
       </div>
@@ -61,74 +67,70 @@ export default {
     BasicSearch,
     CurricleSearch,
     CourseList,
-    PlanFilter
+    PlanFilter,
+    CalendarSidebar
   },
 
   props: ['trayVisible', 'trayToggle'],
 
   mounted () {
     this.filterCategories()
-    // this.getEventsByDate()
+    this.getCoursesByDate()
+    this.getCoursesByYear()
   },
 
   data () {
     return {
       keywords: [],
-      sideBarview: '',
+      sideBarview: 'list-view',
       results: [],
+      filteredResults: [],
       categories: [],
-      events: [
-        {
-          day: 'Monday',
-          courses: [
-            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-          ]
-        },
-        {
-          day: 'Tuesday',
-          courses: [
-            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-          ]
-        },
-        {
-          day: 'Wednesday',
-          courses: [
-            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-          ]
-        }
-      ]
+      events: [],
+      yearlyEvents: [],
+      currentFilter: {}
     }
   },
 
   methods: {
     selectSideBarView(view){
       this.sideBarview = view
+      this.filterData(this.currentFilter)
     },
 
     getResults(results){
       this.results = results
+      this.filteredResults = results
     },
 
-    // getEventsByDate(filter){
-    //   let data = {}
+    getCoursesByDate(filter){
+      let url = '/courses/courses_by_day'
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
+        const semester = filter.value.split(" ")
+        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
+      }
 
-    //   if(filter){
-    //     const semester = filter.value.split(" ")
-    //     data = {term_name: semester[0], term_year: semester[1]}
-    //   }
+      axios
+        .get(url)
+        .then((response) => {
+          this.events = response.data
+        })
+    },
 
-    //   axios
-    //     .get('/courses/courses_by_day', {data})
-    //     .then((response) => {
-    //       this.events = response.data
-    //     })
-    // },
+    getCoursesByYear(filter){
+      let url = '/courses/courses_by_year'
+
+      if(filter){
+        const semester = filter.value.split(" ")
+        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.yearlyEvents = response.data
+        })
+    },
 
     filterCategories(){
       axios.get('/courses/categories').then((response) => {
@@ -139,9 +141,37 @@ export default {
 
     selectedFilter (filter, name) {
       let data = this.results
+      this.currentFilter = filter
 
       if (filter.value != 'none') {
-        this.getEventsByDate(filter)
+        this.filterData(filter)
+      }
+    },
+
+    filterInListView (filter) {
+      this.filteredResults = this.results
+      this.filteredResults = this.results.filter(item => {
+        if (filter.name === 'term_name'){
+          const semester = filter.value.split(" ")
+          return item.term_name ==  semester[0] && item.term_year == semester[1]
+        }
+        else{
+          return item[filter.name] == filter.value
+        }
+      })
+    },
+
+    filterData (filter) {
+      if(this.sideBarview == 'semester'){
+        this.getCoursesByDate(filter)
+      }
+
+      if(this.sideBarview == 'list-view'){
+        this.filterInListView(filter)
+      }
+
+      if(this.sideBarview == 'multi-year'){
+        this.getCoursesByYear(filter)
       }
     }
   }
