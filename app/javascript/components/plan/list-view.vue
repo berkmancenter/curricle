@@ -18,7 +18,7 @@
       <div> <p class ="select-course">Selected Course</p>
         <hr>
         <div class="row actions margin-none">
-          <i class="fa fa-folder-open" @click="selectView('list-view')"/>
+          <i class="fa fa-folder-open"/>
           <i class="fa fa-clock-o" />
           <i class="fa fa-share-alt" />
           <div class="pull-right"> See Course History</div>

@@ -139,7 +139,7 @@ export default {
         columnFormat: 'ddd',
         events: this.events_arr,
         eventRender: function(event, element) { 
-          element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>"); 
+          element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>" + "<div class='event-description'>" + event.academic_group + "</div>" + "<div class='event-description'>" + event.subject + "</div>"); 
         },
         eventClick: function(calEvent, jsEvent, view) {
           calEvent.self.selectedPlan(calEvent.course)

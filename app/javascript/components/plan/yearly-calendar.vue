@@ -9,233 +9,179 @@
           <i class="fa fa-square" @click="selectView('year-view')"/>
         </div>
       </div>
-      <table class='yearly-view'>
-        <thead>          
-        </thead>
-        <tbody style = "overflow-x: auto;">
-          <tr style="border-top: 1px solid;">     
-            <td style="width: 20px;"></td>       
-            <td style="width: 100px;">
-              <div class="fc-content">
+      <div class="yearly-calendar" v-for="course in courses">
+        {{ course.day }}
+        <div class="bannner">
+          <div style="height: 300px;">
+            <ul>
+              <li v-for="event in course.courses" style="height: 300px;" @click="selectedPlan(course)">
                 <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td style="width: 100px;"><strong>1 hr</strong></td>   
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-
-            <td style="width: 100px;">
-              <div class="fc-content">
-                <div class="fc-title"></div>
-                <div class="event-description">long description <br> long description</div>
-              </div>
-            </td>
-          </tr>
-
-
-          <tr>
-            <td><strong>2 hr</strong></td>
-          </tr>
-          <tr>
-            <td><strong>3 hr</strong></td>
-          </tr>
-          <tr>
-            <td><strong>4 hr</strong></td>
-          </tr>
-          <tr>
-            <td><strong>5 hr</strong></td>
-          </tr>
-          <tr>
-            <td><strong>5 hr</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+                <p>
+                  {{ event.external_id }} <br>
+                  {{ event.title }}
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div> 
+        <div class="hr-breif">    
+          <div class="col100">
+            <ul>
+              <p> </p>
+            </ul>  
+          </div>  
+          <div class="col100">
+            <ul>
+              <p>1hr</p>
+            </ul>  
+          </div>  
+          <div class="col100">
+           <ul>
+              <p>2hr</p>
+            </ul>  
+         </div>  
+         <div class="col100">
+            <ul>
+               <p>3hr</p>
+           </ul>  
+          </div>  
+         <div class="col100">
+            <ul>
+             <p>4hr</p>
+           </ul>  
+          </div>  
+          <div class="col100">
+            <ul>
+               <p>5hr</p>
+            </ul>  
+          </div>
+        </div>
+      </div>
+    </div>  
     <div class="col-md-3" v-if="trayVisible">
       <div class="your-tray-parent">
-        <p class="your-tray"> Your Tray <span class="fa fa-close"></span></p>          
+        <p class="your-tray"> Your Tray
+          <span class="fa fa-close"></span>
+        </p>
         <hr>
         <div class="row actions margin-none">
-          <i class="fa fa-folder" @click="selectSideBarView('single')"/>
-          <i class="fa fa-clock-o" @click="selectSideBarView('multiple')"/>
+          <i class="fa fa-list-ul" @click="selectSideBarView('list-view')"/>
+          <i class="fa fa-calendar" @click="selectSideBarView('semester')"/>
+          <i class="fa fa-square" @click="selectSideBarView('multi-year')"/>
           <div class="pull-right">See Course History</div>
         </div>
-        <div class="row margin-none">
-          <calendar-sidebar :calender_events="events_by_date" v-if="sideBarview=='single'"></calendar-sidebar>
-        </div>  
-        <div class="row margin-none">
-          <plan-description :course="course", v-if="sideBarview=='multiple'"></plan-description>
-        </div>  
       </div>
+      <div class="row margin-none">
+        <calendar-sidebar :calenderEvents="events" v-if="sideBarview=='semester'"></calendar-sidebar>
+      </div>
+      <div class="row margin-none">
+        <calendar-sidebar :calenderEvents="yearlyEvents" v-if="sideBarview=='multi-year'"></calendar-sidebar>
+      </div>
+      <div class="row margin-none">
+        <plan-description :course="event" v-if="sideBarview=='list-view'"></plan-description>
+      </div>  
     </div>
   </div>
 </template>
 <script type="text/javascript">
-  import CalendarSidebar from 'components/plan/calendar-sidebar'
-  import PlanDescription from 'components/plan/plan-description'
+import lodash from 'lodash'
+import fullCalendar from 'fullcalendar'
+import CalendarSidebar from 'components/plan/calendar-sidebar'
+import PlanFilter from 'components/plan/plan-filter'
+import PlanDescription from 'components/plan/plan-description'
+import axios from 'axios'
+// var events_arr = [];
 
-  export default {
-    components: {
-      CalendarSidebar,
-      PlanDescription
+export default {
+  components: {
+    CalendarSidebar,
+    PlanFilter,
+    PlanDescription
+  },
+  props: ['selectedView', 'trayVisible'],
+  data () {
+    return {
+      courses: [],
+      event: [],
+      categories: [],
+      course: {},
+      filteredCourses: [],
+      sideBarview: 'list-view',
+      events: [],
+      yearlyEvents: [],
+      currentFilter: {}
+    }
+  },
+  mounted () {  
+    this.getCoursesByDate()
+    this.getCoursesByYear()
+
+  },
+  methods: {
+    selectView (type) {
+      this.selectedView(type)
     },
 
-    props: ['selectedView', 'trayVisible'],
-
-    data(){
-      return {
-        sideBarview: 'single',
-        events_by_date: [
-          {
-            day: 'Fall 2017',
-            courses: [
-              { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-            ]
-          },
-          {
-            day: 'Spring 2017',
-            courses: [
-              { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-            ]
-          },
-          {
-            day: 'Spring 2017',
-            courses: [
-              { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-              { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-            ]
-          }
-        ]
-      }  
+    selectSideBarView(view){
+      this.sideBarview = view
+      this.filterData(this.currentFilter)
     },
 
-    methods: {
-      selectedFilter (filter, name) {
-        let data = this.courses
-        if (name == 'Semester') {
-          data = this.filteredCourses
-        }
-        this.filteredCourses = data.filter(item => {
-          return item[filter.name] == filter.value
+    filterCategories(){
+      axios.get('/courses/categories').then((response) => {
+        this.categories = response.data
+        .filter(item => item.name == 'Semester')
+      })
+    },
+
+    getCoursesByDate(filter){
+      let url = '/courses/courses_by_day'
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
+        const semester = filter.value.split(" ")
+        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.events = response.data
         })
-      },
-      selectView (type) {
-        this.selectedView(type)
-      },
-      selectSideBarView(view){
-        this.sideBarview = view
+    },
+
+    getCoursesByYear(filter){
+      let url = '/courses/courses_by_year'
+
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
+        const semester = filter.value.split(" ")
+        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.courses = response.data
+          this.yearlyEvents = response.data
+        })
+    },
+    selectedPlan (course) {
+      this.event = course
+    },
+
+    filterData (filter) {
+      if(this.sideBarview == 'semester'){
+        this.getCoursesByDate(filter)
+      }
+
+      if(this.sideBarview == 'multi-year'){
+        this.getCoursesByYear(filter)
       }
     }
-  }   
+  }
+}
 </script>
 <style type="text/css">
-  .yearly-view tr{
-    border-bottom: 1px solid;
-  }
+  .yearly-calendar{width: 100%; display: table;}
+
   .yearly-view table, .yearly-view table tbody {
     display: inline-block;
     width: 100%;
@@ -244,5 +190,52 @@
     display: inline-table;
     width: 100%;
     height: 50px;
+  }
+  .col100{    
+    display: table;
+    width: 100%;
+    height: 70px;
+  }
+  .col100 ul{
+    display: table; 
+    width: 100%; 
+    padding: 0px; 
+    margin: 0px; 
+    border-top: 1px solid #000;
+  }
+  .col100 ul li{    
+    display: table;
+    width: calc(100% / 10 - 10px);
+    float: left;
+    border-top: 1px solid #000;
+    margin-right: 10px;
+  }
+
+  .hr-breif{position: relative;}
+
+  .bannner{
+    position: absolute;
+    height: 100%;
+    left: 50px; 
+    z-index: 99;
+  }
+  .bannner ul{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;    
+  }
+  .bannner ul li{    
+    display: table;
+    background: #dcdcdc;
+    width: calc(100% / 10 - 20px);
+    float: left;
+    margin-right: 13px;
+    text-align: center;
+  }
+  .bannner ul li:hover {
+    background-color: #C0C0C0;
+    cursor: pointer;
   }
 </style>
