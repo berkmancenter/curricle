@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :fullsearch
       get :search
       get :courses_by_day
+      get :courses_by_year
       post :add_to_tray
       delete :remove_from_tray
       post :add_to_schedule
