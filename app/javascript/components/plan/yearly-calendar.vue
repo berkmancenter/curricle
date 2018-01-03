@@ -9,12 +9,12 @@
           <i class="fa fa-square" @click="selectView('year-view')"/>
         </div>
       </div>
-      <div class="yearly-calendar" v-for="course in courses">
-        {{ course.day }}
+      <strong>Fall 2017</strong>
+      <div class="yearly-calendar" >
         <div class="bannner">
           <div style="height: 300px;">
             <ul>
-              <li v-for="event in course.courses" style="height: 300px;" @click="selectedPlan(course)">
+              <li v-for="event in courses" v-bind:style="{height: height()}" @click="selectedPlan(course)">
                 <div class="fc-title"></div>
                 <p>
                   {{ event.external_id }} <br>
@@ -57,7 +57,55 @@
           </div>
         </div>
       </div>
-    </div>  
+      <strong>Fall 2016</strong>
+      <div class="yearly-calendar" >
+        <div class="bannner">
+          <div style="height: 300px;">
+            <ul>
+              <li v-for="event in courses" style="height: 300px;" @click="selectedPlan(course)">
+                <div class="fc-title"></div>
+                <p>
+                  {{ event.external_id }} <br>
+                  {{ event.title }}
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div> 
+        <div class="hr-breif">    
+          <div class="col100">
+            <ul>
+              <p> </p>
+            </ul>  
+          </div>  
+          <div class="col100">
+            <ul>
+              <p>1hr</p>
+            </ul>  
+          </div>  
+          <div class="col100">
+           <ul>
+              <p>2hr</p>
+            </ul>  
+         </div>  
+         <div class="col100">
+            <ul>
+               <p>3hr</p>
+           </ul>  
+          </div>  
+         <div class="col100">
+            <ul>
+             <p>4hr</p>
+           </ul>  
+          </div>  
+          <div class="col100">
+            <ul>
+               <p>5hr</p>
+            </ul>  
+          </div>
+        </div>
+      </div>
+     </div> 
     <div class="col-md-3" v-if="trayVisible">
       <div class="your-tray-parent">
         <p class="your-tray"> Your Tray
@@ -113,6 +161,15 @@ export default {
     }
   },
   mounted () {  
+    const course_url = '/courses/fullsearch?term=Fall_2017&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
+    const category_url = '/courses/categories'
+
+    axios
+      .get(course_url)
+      .then((response) => {
+        this.courses = response.data
+      })
+
     this.getCoursesByDate()
     this.getCoursesByYear()
 
@@ -159,7 +216,7 @@ export default {
       axios
         .get(url)
         .then((response) => {
-          this.courses = response.data
+          // this.courses = response.data
           this.yearlyEvents = response.data
         })
     },
@@ -175,6 +232,9 @@ export default {
       if(this.sideBarview == 'multi-year'){
         this.getCoursesByYear(filter)
       }
+    },
+    height(){
+      Math.floor(Math.random() * 2)
     }
   }
 }
