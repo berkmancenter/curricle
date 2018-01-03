@@ -36,3 +36,4 @@
 /lib/seeds
 
 /spec/examples.txt
+config/webpacker.yml
