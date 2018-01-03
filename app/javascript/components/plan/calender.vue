@@ -80,14 +80,16 @@ export default {
     }
   },
   mounted () {
-    const course_url = '/courses/fullsearch?term=&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
+    const course_url = '/courses/fullsearch?term=Fall_2017&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
     const category_url = '/courses/categories'
 
     axios
       .get(course_url)
       .then((response) => {
         this.courses = response.data
-        this.getEventData(this.courses)
+        console.log(this.courses, 'courses')
+        this.getEventData(response.data)
+        console.log(this.events_arr, 'events_arr')
         this.course = this.courses[0]
         this.setEvent()
       })
@@ -228,6 +230,9 @@ export default {
   .fc-head tr td, .fc-row.fc-widget-header{
     border: none;
   }
+  /*.fc-toolbar.fc-header-toolbar {
+    display: none;
+  }*/
   .event-description .green{
     background-color: #cecece;
     color: #000;
