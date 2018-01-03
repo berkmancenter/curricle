@@ -16,15 +16,17 @@
           span.fa.fa-close
         hr
         .row.actions.margin-none
-          i.fa.fa-folder(@click="selectSideBarView('single')")
-          i.fa.fa-clock-o(@click="selectSideBarView('multiple')")
-
+          i.fa.fa-list-ul(@click="selectSideBarView('list-view')")
+          i.fa.fa-calendar(@click="selectSideBarView('semester')")
+          i.fa.fa-square(@click="selectSideBarView('multi-year')")
           .pull-right See Course History
 
       .row.margin-none
-        calendar-sidebar(:calender_events="events_by_date", v-if="sideBarview=='single'")
+        calendar-sidebar(:calenderEvents="events", v-if="sideBarview=='semester'")
       .row.margin-none
-        plan-description(:course="course", v-if="sideBarview=='multiple'")
+        calendar-sidebar(:calenderEvents="yearlyEvents", v-if="sideBarview=='multi-year'")  
+      .row.margin-none
+        plan-description(:course="course", v-if="sideBarview=='list-view'")
 </template>
 
 <script type="text/javascript">
@@ -50,33 +52,10 @@ export default {
       categories: [],
       course: {},
       filteredCourses: [],
-      sideBarview: 'single',
-      events_by_date: [
-        {
-          day: 'Monday',
-          courses: [
-            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-          ]
-        },
-        {
-          day: 'Tuesday',
-          courses: [
-            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-          ]
-        },
-        {
-          day: 'Wednesday',
-          courses: [
-            { external_id: '003121', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003122', title: 'Alquam laoreet lacus ut justo vestibulum'},
-            { external_id: '003123', title: 'Alquam laoreet lacus ut justo vestibulum'}
-          ]
-        }
-      ]
+      sideBarview: 'list-view',
+      events: [],
+      yearlyEvents: [],
+      currentFilter: {}
     }
   },
   mounted () {
@@ -87,17 +66,14 @@ export default {
       .get(course_url)
       .then((response) => {
         this.courses = response.data
-        console.log(this.courses, 'courses')
         this.getEventData(response.data)
-        console.log(this.events_arr, 'events_arr')
-        this.course = this.courses[0]
         this.setEvent()
       })
 
-    axios.get('/courses/categories').then((response) => {
-      this.categories = response.data
-        .filter(item => item.name == 'Semester')
-    })  
+    this.filterCategories()
+    this.getCoursesByDate()
+    this.getCoursesByYear()
+
   },
   methods: {
     selectView (type) {
@@ -106,14 +82,25 @@ export default {
 
     selectSideBarView(view){
       this.sideBarview = view
+      this.filterData(this.currentFilter)
+    },
+
+    filterCategories(){
+      axios.get('/courses/categories').then((response) => {
+        this.categories = response.data
+        .filter(item => item.name == 'Semester')
+      })
     },
 
     selectedFilter (filter, name) {
+      this.currentFilter = filter
       this.removeEvents()
+      this.course = {}
 
       let data = this.courses
 
       if (filter.value != 'none') {
+        this.filterData(filter)
         data = data.filter(item => {
           if (filter.name === 'term_name'){
             const semester = filter.value.split(" ")
@@ -160,6 +147,35 @@ export default {
       })
     },
 
+    getCoursesByDate(filter){
+      let url = '/courses/courses_by_day'
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
+        const semester = filter.value.split(" ")
+        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.events = response.data
+        })
+    },
+
+    getCoursesByYear(filter){
+      let url = '/courses/courses_by_year'
+
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
+        const semester = filter.value.split(" ")
+        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
+      }
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.yearlyEvents = response.data
+        })
+    },
+
     removeEvents(){
       $('.full-calendar').fullCalendar('clientEvents').map(function(event) {
         $('.full-calendar').fullCalendar('removeEvents', event._id);
@@ -175,6 +191,16 @@ export default {
     selectedPlan (course) {
       this.course = course
     },
+
+    filterData (filter) {
+      if(this.sideBarview == 'semester'){
+        this.getCoursesByDate(filter)
+      }
+
+      if(this.sideBarview == 'multi-year'){
+        this.getCoursesByYear(filter)
+      }
+    }
   }
 }
 
@@ -230,9 +256,9 @@ export default {
   .fc-head tr td, .fc-row.fc-widget-header{
     border: none;
   }
-  /*.fc-toolbar.fc-header-toolbar {
+  .fc-toolbar.fc-header-toolbar {
     display: none;
-  }*/
+  }
   .event-description .green{
     background-color: #cecece;
     color: #000;

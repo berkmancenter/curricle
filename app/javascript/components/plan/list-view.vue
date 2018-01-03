@@ -19,8 +19,8 @@
         <hr>
         <div class="row actions margin-none">
           <i class="fa fa-folder-open" @click="selectView('list-view')"/>
-          <i class="fa fa-clock-o" @click="selectView('month-view')"/>
-          <i class="fa fa-share-alt" @click="selectView('year-view')"/>
+          <i class="fa fa-clock-o" />
+          <i class="fa fa-share-alt" />
           <div class="pull-right"> See Course History</div>
         </div>
         <div class="row margin-none">
