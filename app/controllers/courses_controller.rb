@@ -56,36 +56,7 @@ class CoursesController < ApplicationController
     ]
     render json: courses
   end
-
-  # TODO to create API which gives data on the basis of Year
-  def courses_by_year
-    term_name = params[:term_name] || current_semester.split(' ').first
-    term_year = params[:term_year] || current_semester.split(' ').last
-    courses = [
-      {
-        day: 'Fall 2017',
-        courses: Course.courses_by_day_and_term('meets_on_monday', term_name, term_year).first(5)
-      },
-      {
-        day: 'Summer 2017',
-        courses: Course.courses_by_day_and_term('meets_on_tuesday', term_name, term_year).first(5)
-      },
-      {
-        day: 'Spring 2017',
-        courses: Course.courses_by_day_and_term('meets_on_wednesday', term_name, term_year).first(5)
-      },
-      {
-        day: 'Fall 2018',
-        courses: Course.courses_by_day_and_term('meets_on_thursday', term_name, term_year).first(5)
-      },
-      {
-        day: 'Summer 2018',
-        courses: Course.courses_by_day_and_term('meets_on_friday', term_name, term_year).first(5)
-      }
-    ]
-    render json: courses
-  end
-
+  
   def events_by_date
     Course.where(created_at: @selected_date.beginning_of_day..@selected_date.end_of_day)
   end
