@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       get :courses_by_day
       post :add_to_tray
       delete :remove_from_tray
+      post :add_to_schedule
+      delete :remove_from_schedule
     end
   end
 

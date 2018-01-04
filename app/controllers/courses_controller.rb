@@ -118,4 +118,34 @@ class CoursesController < ApplicationController
     render json: user_course
   end
 
+  # add course meeting pattern to current user's schedule
+  def add_to_schedule
+    pattern = CourseMeetingPattern.find(params[:pattern_id])
+
+    user_course = UserCourse.find_or_initialize_by(
+      user_id: current_user.id,
+      course_id: pattern.course_id,
+      course_meeting_pattern_id: [nil, pattern.id]
+    )
+
+    user_course.course_meeting_pattern_id = pattern.id
+    user_course.include_in_path = true
+    user_course.save
+
+    render json: user_course
+
+  end
+
+  # remove course meeting pattern from current user's schedule
+  def remove_from_schedule
+    pattern = CourseMeetingPattern.find(params[:pattern_id])
+
+    if (user_course = UserCourse.find_by(user_id: current_user.id, course_meeting_pattern_id: pattern.id))
+      user_course.course_meeting_pattern_id = nil
+      user_course.include_in_path = false
+      user_course.save
+    end
+
+    render json: user_course
+  end
 end
