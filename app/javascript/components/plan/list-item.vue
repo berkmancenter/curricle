@@ -8,7 +8,11 @@
           <td style = "width: 12em;">{{ list.course_description }}</td>
           <td>{{ list.academic_group }} <br> {{ list.subject }}</td>
           <td>{{ list.term_name }} <br> {{ list.units_maximum }} units</td>
-          <td v-html="list.course_description_long" style = "width: 16em; text-align: justify;"/>
+          <!-- <td v-html="list.course_description_long" style = "width: 16em; text-align: justify;"/> -->
+          <td style = "width: 16em; text-align: justify;">
+            <truncate class="course_description"  clamp="..." :length="50" less="Show Less" type="html" :text="list.course_description_long"></truncate>
+
+          </td>
           <td>4 pm to 6pm<br> 9 am to 10 pm</td>
           <td>
             <span>M<img src=""></span>
@@ -25,8 +29,12 @@
 
 <script type="text/javascript">
   import axios from 'axios'
+  import truncate from 'vue-truncate-collapsed';
   export default {
     props: ['selectedPlan', 'lists', 'isMeetingBelongsToUser', "fetchUserCourses"],
+    components: {
+      'truncate': truncate
+    },
     methods: {
       selectItem: function (value) {
         this.selectedPlan(value)
@@ -83,5 +91,11 @@
   }
   .user-schedule{
     color: gray;
+  }
+  .course_description p {
+    padding-top: 13px !important;
+  }
+  .table-responsive table td{
+    padding: 0px 10px;
   }
 </style>

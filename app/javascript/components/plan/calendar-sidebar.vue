@@ -35,6 +35,7 @@
     background: #DCDCDC;
     font-size: 12px;
     cursor: pointer;
+    height: 60px;
   }
   .course-list-iltem thead {
     display: table-caption;
