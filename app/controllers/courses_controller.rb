@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  # ToDo
-  # before_action :require_auth
+  before_action :authenticate_user!
 
   # TODO: demo purpose
   def search
