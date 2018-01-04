@@ -2,6 +2,8 @@
 
 class CoursesController < ApplicationController
   before_action :authenticate_user!
+  #TODO Clean up after session and token implementation at frontend
+  skip_before_action :verify_authenticity_token
 
   # TODO: demo purpose
   def search
@@ -97,4 +99,23 @@ class CoursesController < ApplicationController
     session.delete(:query_filters)
     redirect_to '/'
   end
+
+  # add course to current user's tray
+  def add_to_tray
+    course = Course.find(params["id"])
+    user_course = UserCourse.find_or_create_by(user_id: current_user.id, course_id: course.id)
+    render json: user_course
+  end
+
+  # remove course from current user's tray
+  def remove_from_tray
+    course = Course.find(params["id"])
+
+    if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: course.id))
+      user_course.destroy
+    end
+
+    render json: user_course
+  end
+
 end

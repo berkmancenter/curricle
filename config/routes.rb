@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       get :fullsearch
       get :search
       get :courses_by_day
+      post :add_to_tray
+      delete :remove_from_tray
     end
   end
 
