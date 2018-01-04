@@ -148,4 +148,36 @@ class CoursesController < ApplicationController
 
     render json: user_course
   end
+
+  # get user's course data
+  def user_courses
+    tray = current_user.courses
+
+    # organize the existing courses into days of the week
+    @meeting_patterns_per_day = {
+      monday: current_user.patterns_for_all_courses( by_day: :monday).to_a,
+      tuesday: current_user.patterns_for_all_courses( by_day: :tuesday).to_a,
+      wednesday: current_user.patterns_for_all_courses( by_day: :wednesday).to_a,
+      thursday: current_user.patterns_for_all_courses( by_day: :thursday).to_a,
+      friday: current_user.patterns_for_all_courses( by_day: :friday).to_a
+    }
+
+    # organize the existing courses into years/semesters
+    @meeting_patterns_per_year = []
+    semester_map.each do |year|
+      column = {}
+      year.each do |sem|
+        column[:"#{sem}"] = current_user.patterns_for_all_courses(by_term: sem).to_a
+      end
+      @meeting_patterns_per_year << column
+    end
+
+    user_courses = {
+      :tray => JSON.parse(tray.to_json(methods: %i[meeting instructor])),
+      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting instructor])),
+			:multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting instructor]))
+    }
+    render json: user_courses
+  end
+
 end

@@ -22,9 +22,9 @@ class User < ApplicationRecord
   end
 
   def patterns_for_all_courses(by_day: nil, by_term: nil)
-    query = CourseMeetingPattern.where(course: courses)
+    query = courses.includes(:course_meeting_patterns)
 
-    query = query.where("meets_on_#{by_day}": true) if by_day.present?
+    query = query.where("course_meeting_patterns.meets_on_#{by_day}": true) if by_day.present?
 
     if by_term.present?
       name, year = by_term.split(/[_\s]/)

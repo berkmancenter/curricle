@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       delete :remove_from_tray
       post :add_to_schedule
       delete :remove_from_schedule
+      get :user_courses
     end
   end
 
