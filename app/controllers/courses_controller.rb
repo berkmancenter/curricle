@@ -91,39 +91,38 @@ class CoursesController < ApplicationController
   end
 
   def fullsearch
-    # query_filters = {
-    #   term: params[:term],
-    #   keywords: params[:keywords],
-    #   keyword_options: params[:keyword_options] || { "0": [] },
-    #   keyword_weights: params[:keyword_weights],
-    #   school: params[:school],
-    #   department: params[:department],
-    #   subject: params[:subject],
-    #   type: params[:type],
-    #   units: {
-    #     min: params[:units_min],
-    #     max: params[:units_max]
-    #   },
-    #   times: Course.schedule_filter_map(params)
-    # }
+    query_filters = {
+      term: params[:term],
+      keywords: params[:keywords],
+      keyword_options: params[:keyword_options] || { "0": [] },
+      keyword_weights: params[:keyword_weights],
+      school: params[:school],
+      department: params[:department],
+      subject: params[:subject],
+      type: params[:type],
+      units: {
+        min: params[:units_min],
+        max: params[:units_max]
+      },
+      times: Course.schedule_filter_map(params)
+    }
 
-    # @nav = :catalog
-    # @matching_courses ||= []
-    # @course_groups ||= []
-    # @user_course_ids = [] # current_user.courses.all.map(&:id)
+    @nav = :catalog
+    @matching_courses ||= []
+    @course_groups ||= []
+    @user_course_ids = [] # current_user.courses.all.map(&:id)
 
-    # if query_filters.present?
-    #   @keyword_filters = build_keyword_filters(query_filters)
+    if query_filters.present?
+      @keyword_filters = build_keyword_filters(query_filters)
 
-    #   query = sunspot_search(query_filters, :courses)
-    #   @matching_courses = query.results
-    #   @matching_course_ids = @matching_courses.map(&:id)
+      query = sunspot_search(query_filters, :courses)
+      @matching_courses = query.results
+      @matching_course_ids = @matching_courses.map(&:id)
 
-    # else
-    #   @keyword_filters = [{ keywords: '', keyword_options: '' }]
-    # end
-    # render json: @matching_courses, methods: %i[meeting instructor]
-    render json: data.as_json
+    else
+      @keyword_filters = [{ keywords: '', keyword_options: '' }]
+    end
+    render json: @matching_courses, methods: %i[meeting instructor]
   end
 
   def clear_search
@@ -211,182 +210,16 @@ class CoursesController < ApplicationController
     render json: user_courses
   end
 
-  private
+  # private
 
-  def data
-      [
-    {
-      "id": 328304,
-      "external_course_id": 135598,
-      "title": "Engineering Thermodynamics sd asda",
-      "term_name": "1931 Fall",
-      "term_year": 2017,
-      "academic_year": 2018,
-      "class_section": nil,
-      "component": "Discussion",
-      "prereq": nil,
-      "subject": "ENG-SCI",
-      "subject_description": "Engineering Sciences",
-     "subject_academic_org_description": "Engineering Sciences",
-      "academic_group": "FAS",
-      "academic_group_description": "Faculty of Arts & Sciences",
-      "grading_basis_description": nil,
-      "term_pattern_code": "FA",
-      "term_pattern_description": "Fall Only",
-      "units_maximum": 4,
-      "catalog_number": 181,
-      "course_description": "Engineering Thermodynamics",
-      "course_description_long": "<p>Introduction to classical engineering thermodynamics. Topics: Zeroth Law and temperature. Properties of single-component gases",
-      "course_note": nil,
-      "created_at": "2017-12-21T15:10:47.554-05:00",
-      "updated_at": "2017-12-21T15:10:47.554-05:00",
-      "class_academic_org_description": nil,
-      "division": "misc",
-      "division_description": "Misc",
-      "meeting": {
-        "id": 292470,
-        "external_course_id": 135598,
-        "course_id": 328304,
-        "term_name": "Fall",
-        "term_year": 2017,
-        "class_section": "1",
-        "class_meeting_number": "1",
-        "meeting_time_start": DateTime.now,
-        "meeting_time_end": DateTime.now + 1.hours,
-        "meets_on_monday": false,
-        "meets_on_tuesday": true,
-        "meets_on_wednesday": false,
-        "meets_on_thursday": true,
-        "meets_on_friday": false,
-        "meets_on_saturday": false,
-        "meets_on_sunday": false,
-        "start_date": "2017-08-30",
-        "end_date": "2017-12-01",
-        "external_facility_id": nil,
-        "facility_description": nil,
-        "created_at": "2017-12-21T16:08:09.294-05:00",
-        "updated_at": "2017-12-21T16:08:09.294-05:00"
-      },
-      "instructor": {
-        "id": 482601,
-        "external_course_id": 135598,
-        "course_id": 328304,
-        "term_name": "Fall",
-        "term_year": 2017,
-        "class_section": "1",
-        "class_meeting_number": "1",
-        "instructor_role": "HEAD",
-        "print_instructor_flag": "Y",
-        "first_name": "Michael",
-        "middle_name": "J.",
-        "last_name": "Aziz",
-        "name_prefix": nil,
-        "name_suffix": nil,
-        "email": "maziz@harvard.edu",
-        "created_at": "2017-12-21T16:59:17.693-05:00",
-        "updated_at": "2017-12-21T16:59:17.693-05:00"
-      },
-      "tags": ['tag1', 'tag2', 'tag3'],
-      "course_reading":
-      {
-        "id"=>1,
-        "external_course_id"=>132559,
-        "external_citation_id"=>nil,
-        "course_id"=>5,
-        "title"=>"Reading",
-        "author_last_name"=>"John",
-       "author_first_name"=>"DEO",
-        "url"=>nil,
-        "annotation"=>" sdaf;sakd;f dsakf;lks;adkf;l ksad'flsakdf; k'sadf;lsjadf sadfsadfdsa 1111111",
-        "required"=>false
-      }
-    },
-    {
-    "id": 328304,
-    "external_course_id": 135598,
-    "title": "Engineering Thermodynamics",
-    "term_name": "Fall",
-    "term_year": 2017,
-    "academic_year": 2018,
-    "class_section": nil,
-    "component": "Discussion",
-    "prereq": nil,
-    "subject": "ENG-SCI",
-    "subject_description": "Engineering Sciences",
-    "subject_academic_org_description": "Engineering Sciences",
-    "academic_group": "FAS",
-    "academic_group_description": "Faculty of Arts & Sciences",
-    "grading_basis_description": nil,
-    "term_pattern_code": "FA",
-    "term_pattern_description": "Fall Only",
-    "units_maximum": 4,
-    "catalog_number": 181,
-    "course_description": "Engineering Thermodynamics",
-    "course_description_long": "<p>Introduction to classical engineering thermodynamics. Topics: Zeroth Law and temperature. Properties of single-component gases, ",
-    "course_note": nil,
-    "created_at": "2017-12-21T15:10:47.554-05:00",
-    "updated_at": "2017-12-21T15:10:47.554-05:00",
-    "class_academic_org_description": nil,
-    "division": "misc",
-    "division_description": "Misc",
-    "meeting": {
-      "id": 292470,
-      "external_course_id": 135598,
-      "course_id": 328304,
-      "term_name": "Fall",
-      "term_year": 2017,
-      "class_section": "1",
-      "class_meeting_number": "1",
-      "meeting_time_start": DateTime.now,
-      "meeting_time_end": DateTime.now + 1.hours,
-      "meets_on_monday": false,
-      "meets_on_tuesday": true,
-      "meets_on_wednesday": false,
-      "meets_on_thursday": true,
-      "meets_on_friday": false,
-      "meets_on_saturday": false,
-      "meets_on_sunday": false,
-      "start_date": "2017-08-30",
-     "end_date": "2017-12-01",
-      "external_facility_id": nil,
-      "facility_description": nil,
-      "created_at": "2017-12-21T16:08:09.294-05:00",
-      "updated_at": "2017-12-21T16:08:09.294-05:00"
-    },
-    "instructor": {
-      "id": 482601,
-      "external_course_id": 135598,
-     "course_id": 328304,
-      "term_name": "Fall",
-      "term_year": 2017,
-      "class_section": "1",
-      "class_meeting_number": "1",
-      "instructor_role": "HEAD",
-      "print_instructor_flag": "Y",
-      "first_name": "Michael",
-      "middle_name": "J.",
-      "last_name": "Aziz",
-      "name_prefix": nil,
-      "name_suffix": nil,
-      "email": "maziz@harvard.edu",
-      "created_at": "2017-12-21T16:59:17.693-05:00",
-      "updated_at": "2017-12-21T16:59:17.693-05:00"
-    },
-    "tags": ['tag1', 'tag2', 'tag3'],
-    "course_reading":
-    {
-      "id"=>1,
-      "external_course_id"=>132559,
-      "external_citation_id"=>nil,
-      "course_id"=>5,
-      "title"=>"Reading",
-      "author_last_name"=>"John",
-      "author_first_name"=>"DEO",
-      "url"=>nil,
-      "annotation"=>" sdaf;sakd;f dsakf;lks;adkf;l ksad'flsakdf; k'sadf;lsjadf adfsadfdsa 1111111",
-      "required"=>false    }
-  }
-]
+  # # remove course from current user's tray
+  # def remove_from_tray
+  #   course = Course.find(params["id"])
 
-  end
+  #   if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: course.id))
+  #     user_course.destroy
+  #   end
+
+  #   render json: user_course
+  # end
 end
