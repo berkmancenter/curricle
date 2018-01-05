@@ -102,9 +102,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.getUserCourses();
-  },
   methods: {
     addRemoveCourse (courseId) {
       if(this.isBelongsToUser(this.id)){

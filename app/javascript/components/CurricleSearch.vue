@@ -71,9 +71,6 @@ export default {
       this.searchByKeywords()
     }
   },
-  mounted(){
-    this.getUserCourses()
-  },
   methods: {
     searchByKeywords () {
       // TODO: Add error handling for failed API calls

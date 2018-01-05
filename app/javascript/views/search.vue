@@ -108,32 +108,25 @@ export default {
     },
 
     getCoursesByDate(filter){
-      let url = '/courses/courses_by_day'
       if((filter != undefined) && (Object.keys(filter).length > 0)){
+        this.events = {};
         const semester = filter.value.split(" ")
-        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
-      }
-
-      axios
-        .get(url)
-        .then((response) => {
-          this.events = response.data
+        _.forEach(this.userCourses.semester, (day, key) => {
+          this.events[key] = day.filter((item) => {
+            if (filter.name === 'term_name'){
+              return item.term_name ==  semester[0] && item.term_year == semester[1]
+            }
+            else{
+              return item[filter.name] == filter.value
+            }
+          })
         })
+      }else{
+        this.events = this.userCourses.semester
+      }
     },
 
     getCoursesByYear(filter){
-      let url = '/courses/courses_by_year'
-
-      if((filter != undefined) && (Object.keys(filter).length > 0)){
-        const semester = filter.value.split(" ")
-        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
-      }
-
-      axios
-        .get(url)
-        .then((response) => {
-          this.yearlyEvents = response.data
-        })
     },
 
     filterCategories(){
@@ -185,6 +178,7 @@ export default {
         .then((response) => {
           this.userCourses = response.data
           this.filteredResults = this.userCourses.tray
+          this.getCoursesByDate(this.currentFilter)
           this.userCoursesIds = this.userCourses.tray.map(item => { return item.id })
           this.userCoursesScheduleIds = this.userCourses.tray.filter(item => !!item.meeting).map(item => { return item.id })
       })
