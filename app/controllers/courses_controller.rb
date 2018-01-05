@@ -2,6 +2,8 @@
 
 class CoursesController < ApplicationController
   before_action :authenticate_user!
+  #TODO Clean up after session and token implementation at frontend
+  skip_before_action :verify_authenticity_token
 
   # TODO: demo purpose
   def search
@@ -97,4 +99,85 @@ class CoursesController < ApplicationController
     session.delete(:query_filters)
     redirect_to '/'
   end
+
+  # add course to current user's tray
+  def add_to_tray
+    course = Course.find(params["id"])
+    user_course = UserCourse.find_or_create_by(user_id: current_user.id, course_id: course.id)
+    render json: user_course
+  end
+
+  # remove course from current user's tray
+  def remove_from_tray
+    course = Course.find(params["id"])
+
+    if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: course.id))
+      user_course.destroy
+    end
+
+    render json: user_course
+  end
+
+  # add course meeting pattern to current user's schedule
+  def add_to_schedule
+    pattern = CourseMeetingPattern.find(params[:pattern_id])
+
+    user_course = UserCourse.find_or_initialize_by(
+      user_id: current_user.id,
+      course_id: pattern.course_id,
+      course_meeting_pattern_id: [nil, pattern.id]
+    )
+
+    user_course.course_meeting_pattern_id = pattern.id
+    user_course.include_in_path = true
+    user_course.save
+
+    render json: user_course
+
+  end
+
+  # remove course meeting pattern from current user's schedule
+  def remove_from_schedule
+    pattern = CourseMeetingPattern.find(params[:pattern_id])
+
+    if (user_course = UserCourse.find_by(user_id: current_user.id, course_meeting_pattern_id: pattern.id))
+      user_course.course_meeting_pattern_id = nil
+      user_course.include_in_path = false
+      user_course.save
+    end
+
+    render json: user_course
+  end
+
+  # get user's course data
+  def user_courses
+    tray = current_user.courses
+
+    # organize the existing courses into days of the week
+    @meeting_patterns_per_day = {
+      monday: current_user.patterns_for_all_courses( by_day: :monday).to_a,
+      tuesday: current_user.patterns_for_all_courses( by_day: :tuesday).to_a,
+      wednesday: current_user.patterns_for_all_courses( by_day: :wednesday).to_a,
+      thursday: current_user.patterns_for_all_courses( by_day: :thursday).to_a,
+      friday: current_user.patterns_for_all_courses( by_day: :friday).to_a
+    }
+
+    # organize the existing courses into years/semesters
+    @meeting_patterns_per_year = []
+    semester_map.each do |year|
+      column = {}
+      year.each do |sem|
+        column[:"#{sem}"] = current_user.patterns_for_all_courses(by_term: sem).to_a
+      end
+      @meeting_patterns_per_year << column
+    end
+
+    user_courses = {
+      :tray => JSON.parse(tray.to_json(methods: %i[meeting instructor])),
+      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting instructor])),
+			:multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting instructor]))
+    }
+    render json: user_courses
+  end
+
 end
