@@ -15,6 +15,10 @@
         :term_year="result.term_year"
         :title="result.title"
         :units_maximum="result.units_maximum"
+        :getUserCourses="getUserCourses"
+        :isBelongsToUser="isBelongsToUser"
+        :isMeetingBelongsToUser="isMeetingBelongsToUser"
+        :meeting="result.meeting"
       />
     </div>
   </div>
@@ -40,6 +44,15 @@ export default {
     },
     getResults: {
       type: Function
+    },
+    getUserCourses: {
+      type: Function
+    },
+    isBelongsToUser: {
+      type: Function
+    },
+    isMeetingBelongsToUser: {
+      type: Function
     }
   },
   data () {
@@ -57,6 +70,9 @@ export default {
     keywords () {
       this.searchByKeywords()
     }
+  },
+  mounted(){
+    this.getUserCourses()
   },
   methods: {
     searchByKeywords () {

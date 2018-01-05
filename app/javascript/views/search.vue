@@ -4,7 +4,7 @@
       <div class="col-md-8">
         <basic-search @keywordsUpdated="keywords = $event"/>
         <br>
-        <curricle-search :keywords="keywords" :getResults="getResults"/>
+        <curricle-search :keywords="keywords" :getResults="getResults" :getUserCourses="getUserCourses" :isBelongsToUser="isBelongsToUser" :isMeetingBelongsToUser="isMeetingBelongsToUser"/>
       </div>
       <div class="col-md-4 sidebar" v-if="trayVisible">
         <div class=".your-tray-parent">
@@ -33,8 +33,9 @@
         </div>
         <div class="row margin-none">
           <course-list 
-            :courses = "filteredResults"
+            :courses = "userCourses"
             v-if="sideBarview=='list-view'"
+            :isMeetingBelongsToUser="isMeetingBelongsToUser"
           />
         </div>
         <div class="row margin-none">
@@ -77,18 +78,22 @@ export default {
     this.filterCategories()
     this.getCoursesByDate()
     this.getCoursesByYear()
+    this.getUserCourses()
   },
 
   data () {
     return {
       keywords: [],
       sideBarview: 'list-view',
+      userCourses: [],
       results: [],
       filteredResults: [],
       categories: [],
       events: [],
       yearlyEvents: [],
-      currentFilter: {}
+      currentFilter: {},
+      userCoursesIds: [],
+      userCoursesScheduleIds: []
     }
   },
 
@@ -100,7 +105,6 @@ export default {
 
     getResults(results){
       this.results = results
-      this.filteredResults = results
     },
 
     getCoursesByDate(filter){
@@ -173,6 +177,22 @@ export default {
       if(this.sideBarview == 'multi-year'){
         this.getCoursesByYear(filter)
       }
+    },
+    getUserCourses() {
+      const course_url = '/courses/user_courses'
+      axios
+        .get(course_url)
+        .then((response) => {
+          this.userCourses = response.data.tray
+          this.userCoursesIds = this.userCourses.map(item => { return item.id })
+          this.userCoursesScheduleIds = this.userCourses.filter(item => !!item.meeting).map(item => { return item.id })
+      })
+    },
+    isBelongsToUser(id){
+      return this.userCoursesIds.includes(id)
+    },
+    isMeetingBelongsToUser(id){
+      return this.userCoursesScheduleIds.includes(id)
     }
   }
 }

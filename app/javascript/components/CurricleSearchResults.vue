@@ -3,7 +3,8 @@
     class="row curricle-search-result"
     :style="borderStyle">
     <div class="col-md-1">
-      <i class="fa fa-folder" @click="addRemoveCourse(id)"  v-bind:class="{ usercourse: !isUserCourse}"/>
+      <i class="fa fa-folder" @click="addRemoveCourse(id)"  v-bind:class="{ usercourse:   !isBelongsToUser(id)}"/><br>
+      <i class="fa fa-clock-o" @click="addRemoveSchedule(meeting.id)"  v-bind:class="{ userschedule: !isMeetingBelongsToUser(meeting.id)}" v-if="meeting"/>
     </div>
     <div class="col-md-2">
       <strong>
@@ -76,15 +77,21 @@ export default {
     },
     units_maximum: {
       type: Number,
-      default: 0
+      required: true
+    },
+    meeting: {
+      type: Object
+    },
+    getUserCourses: {
+      type: Function
+    },
+    isBelongsToUser: {
+      type: Function
+    },
+    isMeetingBelongsToUser: {
+      type: Function
     }
   },
-  data () {
-    return {
-      isUserCourse: false
-    }  
-  },
-
   computed: {
     borderStyle () {
       // TODO: map course color to data
@@ -95,17 +102,41 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getUserCourses();
+  },
   methods: {
-
     addRemoveCourse (courseId) {
-      // TODO: change according to API
-      this.isUserCourse = !this.isUserCourse
-      // axios
-      //   .post(url, {course: {id: courseId}})
-      //   .then((response) => {
-
-      //   })
-    }
+      if(this.isBelongsToUser(this.id)){
+        axios
+        .delete("/courses/remove_from_tray", {params: {id: courseId} })
+        .then((response) => {
+          this.getUserCourses()
+        })
+      }else{
+        axios
+        .post("/courses/add_to_tray", {id: courseId})
+        .then((response) => {
+          this.getUserCourses()
+        })
+      }
+    },
+    addRemoveSchedule (courseId) {
+      const url = "/courses/add_to_schedule"
+      if(this.isMeetingBelongsToUser(this.id)){
+        axios
+        .delete("/courses/remove_from_tray", {params: {id: courseId} })
+        .then((response) => {
+          this.getUserCourses()
+        })
+      }else{
+        axios
+        .post("/courses/add_to_schedule", {id: courseId})
+        .then((response) => {
+          this.getUserCourses()
+        })
+      }
+    },
   }
 }
 </script>
@@ -123,7 +154,7 @@ export default {
     font-size: 16px;
   }
 }
-.usercourse {
+.usercourse, .userschedule {
   color: gray;
 }
 </style>
