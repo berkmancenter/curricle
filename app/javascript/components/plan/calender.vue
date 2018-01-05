@@ -30,180 +30,189 @@
 </template>
 
 <script type="text/javascript">
-import lodash from 'lodash'
-import fullCalendar from 'fullcalendar'
-import CalendarSidebar from 'components/plan/calendar-sidebar'
-import PlanFilter from 'components/plan/plan-filter'
-import PlanDescription from 'components/plan/plan-description'
-import axios from 'axios'
-// var events_arr = [];
+  import lodash from 'lodash'
+  import fullCalendar from 'fullcalendar'
+  import CalendarSidebar from 'components/plan/calendar-sidebar'
+  import PlanFilter from 'components/plan/plan-filter'
+  import PlanDescription from 'components/plan/plan-description'
+  import axios from 'axios'
+  import _ from 'lodash'
+  // var events_arr = [];
 
-export default {
-  components: {
-    CalendarSidebar,
-    PlanFilter,
-    PlanDescription
-  },
-  props: ['selectedView', 'trayVisible'],
-  data () {
-    return {
-      courses: [],
-      events_arr: [],
-      categories: [],
-      course: {},
-      filteredCourses: [],
-      sideBarview: 'list-view',
-      events: [],
-      yearlyEvents: [],
-      currentFilter: {}
-    }
-  },
-  mounted () {
-    const course_url = '/courses/fullsearch?term=Fall_2017&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
-    const category_url = '/courses/categories'
-
-    axios
-      .get(course_url)
-      .then((response) => {
-        this.courses = response.data
-        this.getEventData(response.data)
-        this.setEvent()
-      })
-
-    this.filterCategories()
-    this.getCoursesByDate()
-    this.getCoursesByYear()
-
-  },
-  methods: {
-    selectView (type) {
-      this.selectedView(type)
+  export default {
+    components: {
+      CalendarSidebar,
+      PlanFilter,
+      PlanDescription
     },
-
-    selectSideBarView(view){
-      this.sideBarview = view
-      this.filterData(this.currentFilter)
-    },
-
-    filterCategories(){
-      axios.get('/courses/categories').then((response) => {
-        this.categories = response.data
-        .filter(item => item.name == 'Semester')
-      })
-    },
-
-    selectedFilter (filter, name) {
-      this.currentFilter = filter
-      this.removeEvents()
-      this.course = {}
-
-      let data = this.courses
-
-      if (filter.value != 'none') {
-        this.filterData(filter)
-        data = data.filter(item => {
-          if (filter.name === 'term_name'){
-            const semester = filter.value.split(" ")
-            return item.term_name ==  semester[0] && item.term_year == semester[1]
-          }
-          else{
-            return item[filter.name] == filter.value
-          }
-        })
+    props: ['selectedView', 'trayVisible'],
+    data () {
+      return {
+        user_courses: [],
+        courses: [],
+        events_arr: [],
+        categories: [],
+        course: {},
+        filteredCourses: [],
+        sideBarview: 'list-view',
+        events: [],
+        yearlyEvents: [],
+        currentFilter: {}
       }
-      this.getEventData(data)
-      this.addEvents()
     },
+    mounted () {
+      const course_url = '/courses/user_courses'
+      const category_url = '/courses/categories'
 
-    getEventData(data){
-      this.events_arr = data
-        .filter(item => !!item.meeting)
-        .map(item => {
-          return { 
-            title  : " ",
-            start  : item.meeting.meeting_time_start,
-            end    : item.meeting.meeting_time_end,
-            description: item.subject_description,
-            course : item,
-            self   : this
-          }
+      axios
+        .get(course_url)
+        .then((response) => {
+          this.user_courses = response.data
+          this.courses = this.user_courses.tray
+          this.getEventData(this.courses)
+          this.setEvent()
+          this.filterCategories()
+          this.getCoursesByDate()
+          this.getCoursesByYear()
         })
     },
+    methods: {
+      selectView (type) {
+        this.selectedView(type)
+      },
 
-    setEvent () {
-      $('.full-calendar').fullCalendar({
-        defaultView: 'agendaWeek',
-        allDaySlot: false,
-        displayEventTime: false,
-        slotDuration: '00:60:00',
-        columnFormat: 'ddd',
-        events: this.events_arr,
-        eventRender: function(event, element) { 
-          element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>" + "<div class='event-description'>" + event.academic_group + "</div>" + "<div class='event-description'>" + event.subject + "</div>"); 
-        },
-        eventClick: function(calEvent, jsEvent, view) {
-          calEvent.self.selectedPlan(calEvent.course)
+      selectSideBarView(view){
+        this.sideBarview = view
+        this.filterData(this.currentFilter)
+      },
+
+      filterCategories(){
+        axios.get('/courses/categories').then((response) => {
+          this.categories = response.data
+          .filter(item => item.name == 'Semester')
+        })
+      },
+
+      selectedFilter (filter, name) {
+        this.currentFilter = filter
+        this.removeEvents()
+        if (filter.value != 'none') {
+          this.filterData(this.currentFilter)
         }
-      })
-    },
+        this.getEventData(this.courses)
+        this.addEvents()
+      },
 
-    getCoursesByDate(filter){
-      let url = '/courses/courses_by_day'
-      if((filter != undefined) && (Object.keys(filter).length > 0)){
-        const semester = filter.value.split(" ")
-        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
-      }
+      getEventData(data){
+        this.events_arr = data
+          .filter(item => !!item.meeting)
+          .map(item => {
+            return { 
+              title  : " ",
+              start  : item.meeting.meeting_time_start,
+              end    : item.meeting.meeting_time_end,
+              description: item.subject_description,
+              course : item,
+              self   : this
+            }
+          })
+      },
 
-      axios
-        .get(url)
-        .then((response) => {
-          this.events = response.data
+      setEvent () {
+        $('.full-calendar').fullCalendar({
+          defaultView: 'agendaWeek',
+          allDaySlot: false,
+          displayEventTime: false,
+          slotDuration: '00:60:00',
+          columnFormat: 'ddd',
+          events: this.events_arr,
+          eventRender: function(event, element) { 
+            element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>" + "<div class='event-description'>" + event.academic_group + "</div>" + "<div class='event-description'>" + event.subject + "</div>"); 
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+            calEvent.self.selectedPlan(calEvent.course)
+          }
         })
-    },
+      },
 
-    getCoursesByYear(filter){
-      let url = '/courses/courses_by_year'
+      getCoursesByDate(filter){
+        if((filter != undefined) && (Object.keys(filter).length > 0)){
+          this.events = {};
+          const semester = filter.value.split(" ")
+          _.forEach(this.user_courses.semester, (day, key) => {
+            this.events[key] = day.filter((item) => {
+              if (filter.name === 'term_name'){
+                return item.term_name ==  semester[0] && item.term_year == semester[1]
+              }
+              else{
+                return item[filter.name] == filter.value
+              }
+            })
+          })
+        }else{
+          this.events = this.user_courses.semester
+        }
+      },
 
-      if((filter != undefined) && (Object.keys(filter).length > 0)){
-        const semester = filter.value.split(" ")
-        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
-      }
+      getCoursesByYear(filter){
+        this.yearlyEvents = []
+        // if((filter != undefined) && (Object.keys(filter).length > 0)){
+        //   this.yearlyEvents = {};
+        //   const semester = filter.value.split(" ")
+        //   _.forEach(this.user_courses.semester, (day, key) => {
+        //     this.events[key] = day.filter((item) => {
+        //       if (filter.name === 'term_name'){
+        //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+        //       }
+        //       else{
+        //         return item[filter.name] == filter.value
+        //       }
+        //     })
+        //   })
+        // }else{
+        //   this.yearlyEvents = this.user_courses.multi_year
+        // }
+      },
 
-      axios
-        .get(url)
-        .then((response) => {
-          this.yearlyEvents = response.data
-        })
-    },
+      removeEvents(){
+        $('.full-calendar').fullCalendar('clientEvents').map(function(event) {
+          $('.full-calendar').fullCalendar('removeEvents', event._id);
+        });
+      },
 
-    removeEvents(){
-      $('.full-calendar').fullCalendar('clientEvents').map(function(event) {
-        $('.full-calendar').fullCalendar('removeEvents', event._id);
-      });
-    },
+      addEvents(){
+        this.events_arr.map(function(event){
+          $('.full-calendar').fullCalendar('renderEvent', event)
+        });
+      },
 
-    addEvents(){
-      this.events_arr.map(function(event){
-        $('.full-calendar').fullCalendar('renderEvent', event)
-      });
-    },
+      selectedPlan (course) {
+        this.course = course
+      },
 
-    selectedPlan (course) {
-      this.course = course
-    },
+      filterData (filter) {
+        if(this.sideBarview == 'semester'){
+          this.getCoursesByDate(filter)
+        }
 
-    filterData (filter) {
-      if(this.sideBarview == 'semester'){
-        this.getCoursesByDate(filter)
-      }
+        if(this.sideBarview == 'multi-year'){
+          this.getCoursesByYear(filter)
+        }
 
-      if(this.sideBarview == 'multi-year'){
-        this.getCoursesByYear(filter)
+        if(this.sideBarview == 'list-view'){
+          this.courses = this.courses.filter(item => {
+            if (filter.name === 'term_name'){
+              const semester = filter.value.split(" ")
+              return item.term_name ==  semester[0] && item.term_year == semester[1]
+            }
+            else{
+              return item[filter.name] == filter.value
+            }
+          })
+        } 
       }
     }
   }
-}
-
 </script>
 <style>
   .fc-event, .fc-event-dot {

@@ -13,7 +13,6 @@ b-navbar(toggleable="md" type="light" variant="light")
     b-navbar-nav.ml-auto
       b-nav-item(@click='logout') Logout
       b-nav-item(href='' @click="trayToggle") Tray
-      b-nav-item(href='#') Login
 </template>
 
 <script>

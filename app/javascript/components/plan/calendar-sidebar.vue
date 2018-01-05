@@ -1,13 +1,13 @@
 <template>
   <div class="calendar-sidebar">
-    <div v-for="event in calenderEvents">
-      <strong>{{ event.day }}</strong>
-        <div class="table-responsive">
+    <div v-for="(courses, day) in calenderEvents">
+      <strong>{{ day }}</strong>
+      <div class="table-responsive">
         <table class="course-list-iltem table">
           <thead></thead>
           <tbody>
-            <tr v-for="course in event.courses" @click="selectItem(course)">
-              <td>{{ course.external_id }}</td>
+            <tr v-for="course in courses" @click="selectItem(course)">
+              <td>{{ course.external_course_id }}</td>
               <td>{{ course.title }}</td>            
               <td style="border-right: 5px solid #000;">
                 <i class= "fa fa-clock-o"></i>
