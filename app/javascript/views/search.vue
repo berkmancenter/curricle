@@ -33,7 +33,7 @@
         </div>
         <div class="row margin-none">
           <course-list 
-            :courses = "userCourses"
+            :courses = "filteredResults"
             v-if="sideBarview=='list-view'"
             :isMeetingBelongsToUser="isMeetingBelongsToUser"
           />
@@ -153,8 +153,8 @@ export default {
     },
 
     filterInListView (filter) {
-      this.filteredResults = this.results
-      this.filteredResults = this.results.filter(item => {
+      this.filteredResults = this.userCourses.tray
+      this.filteredResults = this.filteredResults.filter(item => {
         if (filter.name === 'term_name'){
           const semester = filter.value.split(" ")
           return item.term_name ==  semester[0] && item.term_year == semester[1]
@@ -183,9 +183,10 @@ export default {
       axios
         .get(course_url)
         .then((response) => {
-          this.userCourses = response.data.tray
-          this.userCoursesIds = this.userCourses.map(item => { return item.id })
-          this.userCoursesScheduleIds = this.userCourses.filter(item => !!item.meeting).map(item => { return item.id })
+          this.userCourses = response.data
+          this.filteredResults = this.userCourses.tray
+          this.userCoursesIds = this.userCourses.tray.map(item => { return item.id })
+          this.userCoursesScheduleIds = this.userCourses.tray.filter(item => !!item.meeting).map(item => { return item.id })
       })
     },
     isBelongsToUser(id){
