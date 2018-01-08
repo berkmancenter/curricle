@@ -127,6 +127,22 @@ export default {
     },
 
     getCoursesByYear(filter){
+      if((filter != undefined) && (Object.keys(filter).length > 0)){
+        this.yearlyEvents = {};
+        const semester = filter.value.split(" ")
+        _.forEach(this.userCourses.multi_year, (day, key) => {
+          this.yearlyEvents[key] = day.filter((item) => {
+            if (filter.name === 'term_name'){
+              return item.term_name ==  semester[0] && item.term_year == semester[1]
+            }
+            else{
+              return item[filter.name] == filter.value
+            }
+          })
+        })
+      }else{
+        this.yearlyEvents = this.userCourses.multi_year
+      }
     },
 
     filterCategories(){
