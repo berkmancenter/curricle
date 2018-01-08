@@ -5,6 +5,7 @@ class Course < ApplicationRecord
   has_many :course_instructors
   has_many :course_readings
   has_many :tags
+  has_many :user_courses
 
   searchable do
     integer :id
@@ -148,6 +149,12 @@ class Course < ApplicationRecord
 
   def user_tags
     tags.where(
+      user_id: User.current
+    )
+  end
+
+  def user_schedule
+    user_courses.where(
       user_id: User.current
     )
   end
