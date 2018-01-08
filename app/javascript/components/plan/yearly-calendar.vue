@@ -9,102 +9,56 @@
           <i class="fa fa-square" @click="selectView('year-view')"/>
         </div>
       </div>
-      <strong>Fall 2017</strong>
-      <div class="yearly-calendar" >
-        <div class="bannner">
-          <div style="height: 300px;">
-            <ul>
-              <li v-for="event in courses" v-bind:style="{height: height()}" @click="selectedPlan(course)">
-                <div class="fc-title"></div>
-                <p>
-                  {{ event.external_id }} <br>
-                  {{ event.title }}
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div> 
-        <div class="hr-breif">    
-          <div class="col100">
-            <ul>
-              <p> </p>
-            </ul>  
-          </div>  
-          <div class="col100">
-            <ul>
-              <p>1hr</p>
-            </ul>  
-          </div>  
-          <div class="col100">
-           <ul>
-              <p>2hr</p>
-            </ul>  
-         </div>  
-         <div class="col100">
-            <ul>
-               <p>3hr</p>
-           </ul>  
-          </div>  
-         <div class="col100">
-            <ul>
-             <p>4hr</p>
-           </ul>  
-          </div>  
-          <div class="col100">
-            <ul>
-               <p>5hr</p>
-            </ul>  
-          </div>
-        </div>
-      </div>
-      <strong>Fall 2016</strong>
-      <div class="yearly-calendar" >
-        <div class="bannner">
-          <div style="height: 300px;">
-            <ul>
-              <li v-for="event in courses" style="height: 300px;" @click="selectedPlan(course)">
-                <div class="fc-title"></div>
-                <p>
-                  {{ event.external_id }} <br>
-                  {{ event.title }}
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div> 
-        <div class="hr-breif">    
-          <div class="col100">
-            <ul>
-              <p> </p>
-            </ul>  
-          </div>  
-          <div class="col100">
-            <ul>
-              <p>1hr</p>
-            </ul>  
-          </div>  
-          <div class="col100">
-           <ul>
-              <p>2hr</p>
-            </ul>  
-         </div>  
-         <div class="col100">
-            <ul>
-               <p>3hr</p>
-           </ul>  
-          </div>  
-         <div class="col100">
-            <ul>
-             <p>4hr</p>
-           </ul>  
-          </div>  
-          <div class="col100">
-            <ul>
-               <p>5hr</p>
-            </ul>  
+      <div v-for="(courses, year, index) in courses">
+        <strong v-if="index == 0 || index == 1">{{ year }}</strong>
+        <div class="yearly-calendar" v-if="index == 0 || index == 1">
+          <div class="bannner">
+            <div style="height: 300px;">
+              <ul>
+                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)">
+                  <div class="fc-title"></div>
+                  <p>
+                    {{ event.external_id }} <br>
+                    {{ event.title }}
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div> 
+          <div class="hr-breif">    
+            <div class="col100">
+              <ul>
+                <p> </p>
+              </ul>  
+            </div>  
+            <div class="col100">
+              <ul>
+                <p>1hr</p>
+              </ul>  
+            </div>  
+            <div class="col100">
+             <ul>
+                <p>2hr</p>
+              </ul>  
+           </div>  
+           <div class="col100">
+              <ul>
+                 <p>3hr</p>
+             </ul>  
+            </div>  
+           <div class="col100">
+              <ul>
+               <p>4hr</p>
+             </ul>  
+            </div>  
+            <div class="col100">
+              <ul>
+                 <p>5hr</p>
+              </ul>  
+            </div>
           </div>
         </div>
-      </div>
+      </div>  
      </div> 
     <div class="col-md-3" v-if="trayVisible">
       <div class="your-tray-parent">
@@ -137,6 +91,7 @@ import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanDescription from 'components/plan/plan-description'
+import moment from 'moment'
 import axios from 'axios'
 // var events_arr = [];
 
@@ -161,18 +116,18 @@ export default {
     }
   },
   mounted () {  
-    const course_url = '/courses/fullsearch?term=Fall_2017&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
+    const course_url = '/courses/user_courses'
     const category_url = '/courses/categories'
 
     axios
       .get(course_url)
       .then((response) => {
-        this.courses = response.data
+        this.user_courses = response.data
+        this.courses = this.user_courses.multi_year
+        this.filterCategories()
+        this.getCoursesByDate()
+        this.getCoursesByYear()
       })
-
-    this.getCoursesByDate()
-    this.getCoursesByYear()
-
   },
   methods: {
     selectView (type) {
@@ -192,34 +147,43 @@ export default {
     },
 
     getCoursesByDate(filter){
-      let url = '/courses/courses_by_day'
       if((filter != undefined) && (Object.keys(filter).length > 0)){
+        this.events = {};
         const semester = filter.value.split(" ")
-        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
-      }
-
-      axios
-        .get(url)
-        .then((response) => {
-          this.events = response.data
+        _.forEach(this.user_courses.semester, (day, key) => {
+          this.events[key] = day.filter((item) => {
+            if (filter.name === 'term_name'){
+              return item.term_name ==  semester[0] && item.term_year == semester[1]
+            }
+            else{
+              return item[filter.name] == filter.value
+            }
+          })
         })
+      }else{
+        this.events = this.user_courses.semester
+      }
     },
 
     getCoursesByYear(filter){
-      let url = '/courses/courses_by_year'
-
       if((filter != undefined) && (Object.keys(filter).length > 0)){
+        this.yearlyEvents = {};
         const semester = filter.value.split(" ")
-        url = url + '?term_name=' + semester[0] + '&term_year=' + semester[1]
-      }
-
-      axios
-        .get(url)
-        .then((response) => {
-          // this.courses = response.data
-          this.yearlyEvents = response.data
+        _.forEach(this.user_courses.multi_year, (day, key) => {
+          this.yearlyEvents[key] = day.filter((item) => {
+            if (filter.name === 'term_name'){
+              return item.term_name ==  semester[0] && item.term_year == semester[1]
+            }
+            else{
+              return item[filter.name] == filter.value
+            }
+          })
         })
+      }else{
+        this.yearlyEvents = this.user_courses.multi_year
+      }
     },
+
     selectedPlan (course) {
       this.event = course
     },
@@ -233,8 +197,14 @@ export default {
         this.getCoursesByYear(filter)
       }
     },
-    height(){
-      Math.floor(Math.random() * 2)
+    height(course){
+      if(course && course.meeting){
+        const start_time  = moment(course.meeting.meeting_time_start)
+        const end_time  = moment(course.meeting.meeting_time_end)
+        end_time.diff(start_time, 'hours') * 72 + 'px'
+      }else{
+        '100px'
+      }
     }
   }
 }

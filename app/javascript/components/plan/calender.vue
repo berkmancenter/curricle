@@ -155,23 +155,22 @@
       },
 
       getCoursesByYear(filter){
-        this.yearlyEvents = []
-        // if((filter != undefined) && (Object.keys(filter).length > 0)){
-        //   this.yearlyEvents = {};
-        //   const semester = filter.value.split(" ")
-        //   _.forEach(this.user_courses.semester, (day, key) => {
-        //     this.events[key] = day.filter((item) => {
-        //       if (filter.name === 'term_name'){
-        //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-        //       }
-        //       else{
-        //         return item[filter.name] == filter.value
-        //       }
-        //     })
-        //   })
-        // }else{
-        //   this.yearlyEvents = this.user_courses.multi_year
-        // }
+        if((filter != undefined) && (Object.keys(filter).length > 0)){
+          this.yearlyEvents = {};
+          const semester = filter.value.split(" ")
+          _.forEach(this.user_courses.multi_year, (day, key) => {
+            this.yearlyEvents[key] = day.filter((item) => {
+              if (filter.name === 'term_name'){
+                return item.term_name ==  semester[0] && item.term_year == semester[1]
+              }
+              else{
+                return item[filter.name] == filter.value
+              }
+            })
+          })
+        }else{
+          this.yearlyEvents = this.user_courses.multi_year
+        }
       },
 
       removeEvents(){
@@ -200,6 +199,7 @@
         }
 
         if(this.sideBarview == 'list-view'){
+          this.courses = this.user_courses.tray
           this.courses = this.courses.filter(item => {
             if (filter.name === 'term_name'){
               const semester = filter.value.split(" ")
