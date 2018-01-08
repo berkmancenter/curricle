@@ -36,11 +36,11 @@
           </p>
         </div>
         <div class= "annonation-tag">
-          <ul>
-            <li>
-              Tag1 <span class=""/>
-            </li>
-          </ul>
+          <tags
+            :active-tags="course.user_tags"
+            :tag="tag"
+            :course-id="course.id"
+            @deactivateTag="deactivateTag($event)" />
         </div>
       </div>
     </div>
@@ -48,8 +48,18 @@
 </template>
 
 <script type="text/javascript">
+import Tags from './tags.vue'
+
 export default {
-  props: ['course']
+  props: ['course'],
+  components: {
+    Tags,
+  },
+  data () {
+    return {
+      tag: ''
+    }
+  }
 }
 </script>
 

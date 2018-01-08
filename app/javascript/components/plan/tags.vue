@@ -1,0 +1,91 @@
+<template>
+  <div class="row">
+    <div class="col-md-12">
+      <span
+        class="active-keyword border border-dark rounded"
+        v-for="(tag, index) of activeTags"
+        v-on:click="deactivateTag(index, tag.name)">
+        {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
+      </span>
+      <span
+        <input
+          class="input-tag"
+          placeholder="Enter Tag"
+          v-model="tag"
+          @keyup.enter="addActiveTag()">
+      </span>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
+export default {
+  components: {
+    FontAwesomeIcon
+  },
+  data: function () {
+    return { tag: '' }
+  },
+  props: {
+    courseId: 0,
+    activeTags: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
+  methods: {
+    deactivateTag (index, tagName) {
+      axios.delete('/tags/remove', { data: {
+          course_id: this.courseId,
+          name: tagName
+        }})
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        this.activeTags.splice(index, 1);
+    },
+    addActiveTag () {
+      if (this.tag) {
+        axios.post('/tags', {
+            course_id: this.courseId,
+            name: this.tag
+          })
+          .then(function (response) {
+            console.log(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          this.activeTags.push({name: this.tag, course_id: this.courseId})
+        this.tag = ''
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.active-keyword {
+  cursor: pointer;
+  margin: 5px 5px 0px 0px;
+  padding: 5px 10px;
+  display: inline-block;
+  border: 2px solid !important;
+
+  &:hover {
+    background-color: #eee;
+  }
+}
+.input-tag {
+  margin: 5px 0px;
+  border: none;
+}
+</style>
