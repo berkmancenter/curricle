@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
       paginate page: 1, per_page: 50
     end
     @courses = search.results
-    render json: @courses
+    render json: @courses, methods: %i[meeting instructor user_tags]
   end
 
   def index
