@@ -10,6 +10,13 @@ class User < ApplicationRecord
   has_many :courses, through: :user_courses
   has_many :path_meeting_patterns, through: :user_courses, source: :course_meeting_pattern
 
+  def self.current
+    Thread.current[:user]
+  end
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
+
   def added?(course_id)
     courses.find_by(id: course_id)
   end
