@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   has_many :course_meeting_patterns
   has_many :course_instructors
   has_many :course_readings
+  has_many :tags
 
   searchable do
     integer :id
@@ -142,6 +143,12 @@ class Course < ApplicationRecord
       term_name: term_name,
       term_year: term_year,
       class_section: class_section
+    )
+  end
+
+  def user_tags
+    tags.where(
+      user_id: User.current
     )
   end
 

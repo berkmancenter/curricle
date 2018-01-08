@@ -4,6 +4,7 @@ class CoursesController < ApplicationController
   before_action :authenticate_user!
   #TODO Clean up after session and token implementation at frontend
   skip_before_action :verify_authenticity_token
+  before_action :set_current_user
 
   # TODO: demo purpose
   def search
@@ -92,7 +93,7 @@ class CoursesController < ApplicationController
     else
       @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
-    render json: @matching_courses, methods: %i[meeting instructor]
+    render json: @matching_courses, methods: %i[meeting instructor user_tags]
   end
 
   def clear_search
@@ -173,9 +174,9 @@ class CoursesController < ApplicationController
     end
 
     user_courses = {
-      :tray => JSON.parse(tray.to_json(methods: %i[meeting instructor])),
-      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting instructor])),
-			:multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting instructor]))
+      :tray => JSON.parse(tray.to_json(methods: %i[meeting instructor user_tags])),
+      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting instructor user_tags])),
+      :multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting instructor user_tags]))
     }
     render json: user_courses
   end
