@@ -56,10 +56,6 @@ class CoursesController < ApplicationController
     ]
     render json: courses
   end
-  
-  def events_by_date
-    Course.where(created_at: @selected_date.beginning_of_day..@selected_date.end_of_day)
-  end
 
   def fullsearch
     query_filters = {
@@ -156,21 +152,18 @@ class CoursesController < ApplicationController
 
     # organize the existing courses into days of the week
     @meeting_patterns_per_day = {
-      monday: current_user.patterns_for_all_courses( by_day: :monday).to_a,
-      tuesday: current_user.patterns_for_all_courses( by_day: :tuesday).to_a,
-      wednesday: current_user.patterns_for_all_courses( by_day: :wednesday).to_a,
-      thursday: current_user.patterns_for_all_courses( by_day: :thursday).to_a,
-      friday: current_user.patterns_for_all_courses( by_day: :friday).to_a
+      Monday: current_user.patterns_for_all_courses( by_day: :monday).to_a,
+      Tuesday: current_user.patterns_for_all_courses( by_day: :tuesday).to_a,
+      Wednesday: current_user.patterns_for_all_courses( by_day: :wednesday).to_a,
+      Thursday: current_user.patterns_for_all_courses( by_day: :thursday).to_a,
+      Friday: current_user.patterns_for_all_courses( by_day: :friday).to_a
     }
 
     # organize the existing courses into years/semesters
-    @meeting_patterns_per_year = []
-    semester_map.each do |year|
-      column = {}
-      year.each do |sem|
-        column[:"#{sem}"] = current_user.patterns_for_all_courses(by_term: sem).to_a
-      end
-      @meeting_patterns_per_year << column
+    @meeting_patterns_per_year = {}
+
+    semester_map.flatten.each do |year|      
+      @meeting_patterns_per_year[:"#{year}"] = current_user.patterns_for_all_courses(by_term: year).to_a
     end
 
     user_courses = {
