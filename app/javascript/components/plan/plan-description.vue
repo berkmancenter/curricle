@@ -78,54 +78,14 @@ import axios from 'axios'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
+  props: ['course'],
   components: {
     FontAwesomeIcon,
     Tags
   },
-
-  props: ['course'],
-
   data () {
     return {
-      editableAnnotations: false,
-      editableAnnotationsText: "",
-      annotationTags: [],
-      tag: ""
-    }
-  },
-
-  watch: {
-    course: function () {
-      this.editableAnnotationsText = this.course.course_reading.annotation
-      this.annotationTags = this.course.tags
-    }
-  },
-
-  methods: {
-    OpenAnnotationsForm(){
-      this.editableAnnotations = !this.editableAnnotations
-    },
-
-    updateAnnotations(){
-      const data = { course_reading: { annotation: this.editableAnnotationsText } }
-
-      axios.patch(`/course_readings/${this.course.course_reading.id}`, data).then((response) => {
-        this.course.course_reading = response.data
-        this.editableAnnotations = !this.editableAnnotations
-        this.tag = ""
-      })
-    },
-
-    addTags() {
-      if (this.tag) {
-        this.annotationTags.push(this.tag)
-      }
-
-      this.tag = ''
-    },
-
-    removeTags(index){
-      this.annotationTags.splice(index, 1)
+      tag: ''
     }
   }
 }
