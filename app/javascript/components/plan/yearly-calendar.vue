@@ -17,10 +17,10 @@
               <ul>
                 <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)">
                   <div class="fc-title"></div>
-                  <p>
-                    {{ event.external_id }} <br>
-                    {{ event.title }}
-                  </p>
+                  <p>{{ event.external_course_id }}</p>
+                  <p>{{ event.title }}</p>
+                  <p><b>{{ event.academic_group }}</b></p>
+                  <p><b>{{ event.subject }}</b></p>
                 </li>
               </ul>
             </div>
@@ -262,7 +262,15 @@ export default {
     width: calc(100% / 10 - 20px);
     float: left;
     margin-right: 13px;
-    text-align: center;
+    width: 142px;
+    font-size: 13px;
+  }
+  .bannner ul li p{
+    margin-bottom: 5px;
+    padding: 0 5px;
+  }
+  .bannner ul li p:nth-last-child(2), .bannner ul li p:nth-last-child(1){
+    margin-bottom: 0px;
   }
   .bannner ul li:hover {
     background-color: #C0C0C0;

@@ -125,9 +125,11 @@
           displayEventTime: false,
           slotDuration: '00:60:00',
           columnFormat: 'ddd',
+          weekends: false,
           events: this.events_arr,
           eventRender: function(event, element) { 
-            element.find('.fc-title').after("<div class='event-description'>" + event.description + "</div>" + "<div class='event-description'>" + event.academic_group + "</div>" + "<div class='event-description'>" + event.subject + "</div>"); 
+            console.log(event, 'event')
+            element.find('.fc-title').after("<div class='event-description'>" + "<p>" + event.course.external_course_id   + "</p>" + "<p>" + event.description + "</p>" + "<p>" + "<b>" + event.course.academic_group + "</b>" + "</p>"+ "<p>" + "<b>" + event.course.subject + "</b>" + "</p>" + "</div>"); 
           },
           eventClick: function(calEvent, jsEvent, view) {
             calEvent.self.selectedPlan(calEvent.course)
@@ -271,5 +273,23 @@
   .event-description .green{
     background-color: #cecece;
     color: #000;
+  }
+  .event-description {
+    background: #EFEFEF;
+    padding: 0 5px;
+    padding-bottom: 10px;
+  }
+  .event-description:hover {
+    background: #C4C4C4;
+    cursor: pointer;
+  }
+  .event-description p {
+    margin-bottom: 5px;
+  }
+  .event-description p:nth-last-child(2), .event-description p:nth-last-child(1) {
+    margin-bottom: 0;
+  }
+  a.fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end {
+    border-radius: 0;
   }
 </style>
