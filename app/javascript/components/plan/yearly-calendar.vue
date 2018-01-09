@@ -80,8 +80,23 @@
         <calendar-sidebar :calenderEvents="yearlyEvents" v-if="sideBarview=='multi-year'"></calendar-sidebar>
       </div>
       <div class="row margin-none">
-        <plan-description :course="event" v-if="sideBarview=='list-view'"></plan-description>
-      </div>  
+        <course-list :courses = "results" v-if="sideBarview=='list-view'"
+        />
+      </div>
+    </div>
+    <div class="col-md-3" v-else>
+      <div> <p class ="select-course">Selected Course</p>
+        <hr>
+        <div class="row actions margin-none">
+          <i class="fa fa-folder-open"/>
+          <i class="fa fa-clock-o" />
+          <i class="fa fa-share-alt" />
+          <div class="pull-right"> See Course History</div>
+        </div>
+        <div class="row margin-none">
+          <plan-description :course="event"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -91,6 +106,7 @@ import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanDescription from 'components/plan/plan-description'
+import CourseList from 'components/tray/list.vue'
 import moment from 'moment'
 import axios from 'axios'
 // var events_arr = [];
@@ -99,7 +115,8 @@ export default {
   components: {
     CalendarSidebar,
     PlanFilter,
-    PlanDescription
+    PlanDescription,
+    CourseList
   },
   props: ['selectedView', 'trayVisible'],
   data () {
@@ -109,10 +126,11 @@ export default {
       categories: [],
       course: {},
       filteredCourses: [],
-      sideBarview: 'list-view',
+      sideBarview: 'multi-year',
       events: [],
       yearlyEvents: [],
-      currentFilter: {}
+      currentFilter: {},
+      results: []
     }
   },
   mounted () {  
@@ -124,6 +142,7 @@ export default {
       .then((response) => {
         this.user_courses = response.data
         this.courses = this.user_courses.multi_year
+        this.results = this.user_courses.tray
         this.filterCategories()
         this.getCoursesByDate()
         this.getCoursesByYear()

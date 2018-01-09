@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
     header
-      navbar(:trayToggle="trayToggle")
+      navbar(:trayToggle="trayToggle" :trayVisible="trayVisible")
 
     router-view(:trayVisible="trayVisible")
 </template>

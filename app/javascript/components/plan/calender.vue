@@ -26,15 +26,26 @@
       .row.margin-none
         calendar-sidebar(:calenderEvents="yearlyEvents", v-if="sideBarview=='multi-year'")  
       .row.margin-none
-        plan-description(:course="course", v-if="sideBarview=='list-view'")
+        course-list(:courses='results', v-if="sideBarview=='list-view'")
+    .col-md-3(v-else='')
+      div
+        p.select-course Selected Course
+        hr
+        .row.actions.margin-none
+          i.fa.fa-folder-open
+          i.fa.fa-clock-o
+          i.fa.fa-share-alt
+          .pull-right  See Course History
+        .row.margin-none
+          plan-description(:course='course')      
 </template>
 
 <script type="text/javascript">
-  import lodash from 'lodash'
   import fullCalendar from 'fullcalendar'
   import CalendarSidebar from 'components/plan/calendar-sidebar'
   import PlanFilter from 'components/plan/plan-filter'
   import PlanDescription from 'components/plan/plan-description'
+  import CourseList from 'components/tray/list.vue'
   import axios from 'axios'
   import _ from 'lodash'
   // var events_arr = [];
@@ -43,7 +54,8 @@
     components: {
       CalendarSidebar,
       PlanFilter,
-      PlanDescription
+      PlanDescription,
+      CourseList
     },
     props: ['selectedView', 'trayVisible'],
     data () {
@@ -54,10 +66,11 @@
         categories: [],
         course: {},
         filteredCourses: [],
-        sideBarview: 'list-view',
+        sideBarview: 'semester',
         events: [],
         yearlyEvents: [],
-        currentFilter: {}
+        currentFilter: {},
+        results: []
       }
     },
     mounted () {
@@ -69,11 +82,15 @@
         .then((response) => {
           this.user_courses = response.data
           this.courses = this.user_courses.tray
+          this.results = this.user_courses.tray
+          this.events = this.user_courses.semester
+          this.yearlyEvents = this.user_courses.multi_year
           this.getEventData(this.courses)
           this.setEvent()
           this.filterCategories()
-          this.getCoursesByDate()
-          this.getCoursesByYear()
+          // Filter Not Reenabled
+          // this.getCoursesByDate()
+          // this.getCoursesByYear()
         })
     },
     methods: {
@@ -128,7 +145,6 @@
           weekends: false,
           events: this.events_arr,
           eventRender: function(event, element) { 
-            console.log(event, 'event')
             element.find('.fc-title').after("<div class='event-description'>" + "<p>" + event.course.external_course_id   + "</p>" + "<p>" + event.description + "</p>" + "<p>" + "<b>" + event.course.academic_group + "</b>" + "</p>"+ "<p>" + "<b>" + event.course.subject + "</b>" + "</p>" + "</div>"); 
           },
           eventClick: function(calEvent, jsEvent, view) {
@@ -138,41 +154,43 @@
       },
 
       getCoursesByDate(filter){
-        if((filter != undefined) && (Object.keys(filter).length > 0)){
-          this.events = {};
-          const semester = filter.value.split(" ")
-          _.forEach(this.user_courses.semester, (day, key) => {
-            this.events[key] = day.filter((item) => {
-              if (filter.name === 'term_name'){
-                return item.term_name ==  semester[0] && item.term_year == semester[1]
-              }
-              else{
-                return item[filter.name] == filter.value
-              }
-            })
-          })
-        }else{
-          this.events = this.user_courses.semester
-        }
+        // Not Required Here
+        // if((filter != undefined) && (Object.keys(filter).length > 0)){
+        //   this.events = {};
+        //   const semester = filter.value.split(" ")
+        //   _.forEach(this.user_courses.semester, (day, key) => {
+        //     this.events[key] = day.filter((item) => {
+        //       if (filter.name === 'term_name'){
+        //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+        //       }
+        //       else{
+        //         return item[filter.name] == filter.value
+        //       }
+        //     })
+        //   })
+        // }else{
+        //   this.events = this.user_courses.semester
+        // }
       },
 
       getCoursesByYear(filter){
-        if((filter != undefined) && (Object.keys(filter).length > 0)){
-          this.yearlyEvents = {};
-          const semester = filter.value.split(" ")
-          _.forEach(this.user_courses.multi_year, (day, key) => {
-            this.yearlyEvents[key] = day.filter((item) => {
-              if (filter.name === 'term_name'){
-                return item.term_name ==  semester[0] && item.term_year == semester[1]
-              }
-              else{
-                return item[filter.name] == filter.value
-              }
-            })
-          })
-        }else{
-          this.yearlyEvents = this.user_courses.multi_year
-        }
+        // Not Required Here
+        // if((filter != undefined) && (Object.keys(filter).length > 0)){
+        //   this.yearlyEvents = {};
+        //   const semester = filter.value.split(" ")
+        //   _.forEach(this.user_courses.multi_year, (day, key) => {
+        //     this.yearlyEvents[key] = day.filter((item) => {
+        //       if (filter.name === 'term_name'){
+        //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+        //       }
+        //       else{
+        //         return item[filter.name] == filter.value
+        //       }
+        //     })
+        //   })
+        // }else{
+        //   this.yearlyEvents = this.user_courses.multi_year
+        // }
       },
 
       removeEvents(){
