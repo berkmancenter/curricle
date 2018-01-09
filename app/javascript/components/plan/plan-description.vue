@@ -85,7 +85,10 @@ export default {
   },
   data () {
     return {
-      tag: ''
+      tag: '',
+      editableAnnotations: false,
+      editableAnnotationsText: '',
+      annotationTags: []
     }
   }
 }
