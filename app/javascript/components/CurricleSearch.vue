@@ -53,6 +53,9 @@ export default {
     },
     isMeetingBelongsToUser: {
       type: Function
+    },
+    searchedResults: {
+      type: Function
     }
   },
   data () {
@@ -100,6 +103,7 @@ export default {
             this.results = response.data.courses
             this.searchComplete = true
             this.getResults(this.results)
+            this.searchedResults(this.results)
           })
       } else {
         this.results = []

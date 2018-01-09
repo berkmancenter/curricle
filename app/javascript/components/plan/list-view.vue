@@ -72,14 +72,24 @@ export default {
     CalendarSidebar,
     CourseList
   },
-  props: ['selectedView', 'trayVisible'],
+  props: ['selectedView', 'trayVisible', 'resultSet'],
 
   mounted () {
-    const search_url = '/courses/fullsearch?term=Fall_2018&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
+    const search_url = '/courses/user_courses'
 
+    // this.course = this.resultSet
+    // this.filteredCourses = this.resultSet
+
+    // using Fall Courses
+    // axios.get(search_url).then((response) => {
+    //   this.courses = response.data
+    //   this.filteredCourses = response.data
+    // })
+
+    // using User courses
     axios.get(search_url).then((response) => {
-      this.courses = response.data
-      this.filteredCourses = response.data
+      this.courses = response.data.tray
+      this.filteredCourses = response.data.tray
     })
 
     axios.get('/courses/categories').then((response) => {

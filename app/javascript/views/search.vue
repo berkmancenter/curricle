@@ -72,7 +72,7 @@ export default {
     CalendarSidebar
   },
 
-  props: ['trayVisible', 'trayToggle'],
+  props: ['trayVisible', 'trayToggle', 'searchedResults'],
 
   mounted () {
     this.filterCategories()

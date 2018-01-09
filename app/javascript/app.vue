@@ -3,7 +3,7 @@
     header
       navbar(:trayToggle="trayToggle" :trayVisible="trayVisible")
 
-    router-view(:trayVisible="trayVisible")
+    router-view(:trayVisible="trayVisible" :searchedResults="searchedResults" :resultSet="results")
 </template>
 
 <script>
@@ -15,13 +15,18 @@ export default {
   },
   data(){
     return {
-      trayVisible: false
+      trayVisible: false,
+      results: []
+
     }  
   },
 
   methods: {
     trayToggle(){
       this.trayVisible = !this.trayVisible
+    },
+    searchedResults(results){
+      this.results = results
     }
   }
 
