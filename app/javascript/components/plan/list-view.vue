@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="row margin-none">
-        <course-list :courses = "results" v-if="sideBarview=='list-view'"
+        <course-list :isMeetingBelongsToUser="isMeetingBelongsToUser" :courses = "results" v-if="sideBarview=='list-view'"
         />
       </div>
       <div class="row margin-none">
@@ -198,8 +198,6 @@ export default {
     },
     fetchUserCourses(){
       const course_url = '/courses/user_courses'
-
-      console.log("asdf")
       axios
         .get(course_url)
         .then((response) => {
