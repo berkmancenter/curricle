@@ -118,17 +118,16 @@ export default {
         })
       }
     },
-    addRemoveSchedule (courseId) {
-      const url = "/courses/add_to_schedule"
-      if(this.isMeetingBelongsToUser(this.id)){
+    addRemoveSchedule (meetingId) {
+      if(this.isMeetingBelongsToUser(meetingId)){
         axios
-        .delete("/courses/remove_from_tray", {params: {id: courseId} })
+        .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
         .then((response) => {
           this.getUserCourses()
         })
       }else{
         axios
-        .post("/courses/add_to_schedule", {id: courseId})
+        .post("/courses/add_to_schedule", {pattern_id: meetingId})
         .then((response) => {
           this.getUserCourses()
         })

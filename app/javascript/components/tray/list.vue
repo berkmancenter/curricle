@@ -5,7 +5,7 @@
       <tr v-for="course in courses">
         <td>{{ course.external_course_id }}</td>
         <td>{{ course.title }}</td>            
-        <td style="border-right: 5px solid #000;"><i class= "fa fa-clock-o" v-if="course.meeting && isMeetingBelongsToUser(course.meeting.id)"></i></td>
+        <td style="border-right: 5px solid #000;"><i class= "fa fa-clock-o" v-if="course.user_schedule[0].course_meeting_pattern_id && isMeetingBelongsToUser(course.user_schedule[0].course_meeting_pattern_id)"></i></td>
       </tr>
     </tbody>
   </table>

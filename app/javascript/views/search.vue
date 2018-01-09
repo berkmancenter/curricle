@@ -196,7 +196,7 @@ export default {
           this.filteredResults = this.userCourses.tray
           this.getCoursesByDate(this.currentFilter)
           this.userCoursesIds = this.userCourses.tray.map(item => { return item.id })
-          this.userCoursesScheduleIds = this.userCourses.tray.filter(item => !!item.meeting).map(item => { return item.id })
+          this.userCoursesScheduleIds = this.userCourses.tray.filter(item => !!item.user_schedule[0]).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
       })
     },
     isBelongsToUser(id){

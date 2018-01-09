@@ -19,6 +19,7 @@
         :isBelongsToUser="isBelongsToUser"
         :isMeetingBelongsToUser="isMeetingBelongsToUser"
         :meeting="result.meeting"
+        :userSchedule="result.user_schedule"
       />
     </div>
   </div>
