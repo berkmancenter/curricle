@@ -15,7 +15,7 @@
             <br>
             <span>W<img src=""></span>
           </td>          
-          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o"></i></td>
+          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(list.meeting.id) }" v-if="list.meeting" @click="addRemoveSchedule(list.meeting.id)"></i></td>
           <span class= "check_box"><input type= "checkbox" name ="" value= ""></span>
         </tr>
       </tbody>
@@ -24,14 +24,30 @@
 </template>
 
 <script type="text/javascript">
-export default {
-  props: ['selectedPlan', 'lists'],
-  methods: {
-    selectItem: function (value) {
-      this.selectedPlan(value)
+  import axios from 'axios'
+  export default {
+    props: ['selectedPlan', 'lists', 'isMeetingBelongsToUser', "fetchUserCourses"],
+    methods: {
+      selectItem: function (value) {
+        this.selectedPlan(value)
+      },
+      addRemoveSchedule: function(meetingId){
+        if(this.isMeetingBelongsToUser(meetingId)){
+          axios
+          .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
+          .then((response) => {
+            this.fetchUserCourses()
+          })
+        }else{
+          axios
+          .post("/courses/add_to_schedule", {pattern_id: meetingId})
+          .then((response) => {
+            this.fetchUserCourses()
+          })
+        }
+      }
     }
   }
-}
 </script>
 
 <style type="text/css">
@@ -64,5 +80,8 @@ export default {
   }
   .table td {
     vertical-align: middle !important;
+  }
+  .user-schedule{
+    color: gray;
   }
 </style>

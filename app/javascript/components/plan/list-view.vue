@@ -10,7 +10,7 @@
           <plan-filter :title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name"/>
         </div>
         <div class="plan">
-          <plan-list-item :lists="filteredCourses" :selected-plan="selectedPlan"/>
+          <plan-list-item :lists="filteredCourses" :selected-plan="selectedPlan" :isMeetingBelongsToUser="isMeetingBelongsToUser" :fetchUserCourses="fetchUserCourses"/>
         </div>
       </div>
     </div>
@@ -32,10 +32,10 @@
         />
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="events" v-if="sideBarview=='semester'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="events" :fetchUserCourses="fetchUserCourses" v-if="sideBarview=='semester'"></calendar-sidebar>
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="yearlyEvents" v-if="sideBarview=='multi-year'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="yearlyEvents" :fetchUserCourses="fetchUserCourses" v-if="sideBarview=='multi-year'"></calendar-sidebar>
       </div>
     </div>
     <div class="col-md-3" v-else>
@@ -75,8 +75,9 @@ export default {
   props: ['selectedView', 'trayVisible'],
 
   mounted () {
-    const course_url = '/courses/user_courses'
-    axios.get('/courses/search').then((response) => {
+    const search_url = '/courses/fullsearch?term=Fall_2018&keywords[0]=&keyword_options[0][]=title&keyword_options[0][]=description&keyword_weights[0]=47&monday_min=any&monday_max=any&tuesday_min=any&tuesday_max=any&wednesday_min=any&wednesday_max=any&thursday_min=any&thursday_max=any&friday_min=any&friday_max=any&school=all&department=all&subject=all&type=all&units_min=any&units_max=any'
+
+    axios.get(search_url).then((response) => {
       this.courses = response.data
       this.filteredCourses = response.data
     })
@@ -85,16 +86,7 @@ export default {
       this.categories = response.data
     })
 
-    axios
-        .get(course_url)
-        .then((response) => {
-          this.user_courses = response.data
-          this.courses = this.user_courses.tray
-          this.results = this.user_courses.tray
-          this.getCoursesByDate()
-          this.getCoursesByYear()
-        })
-
+    this.fetchUserCourses()
   },
   data () {
     return {
@@ -109,6 +101,7 @@ export default {
       planView: 'list-view',
       sideBarToggle: false,
       user_courses: [],
+      userCoursesScheduleIds: []
     }
   },
   methods: {
@@ -189,6 +182,24 @@ export default {
           }
         })
       } 
+    },
+    isMeetingBelongsToUser(id){
+      return this.userCoursesScheduleIds.includes(id)    
+    },
+    fetchUserCourses(){
+      const course_url = '/courses/user_courses'
+
+      console.log("asdf")
+      axios
+        .get(course_url)
+        .then((response) => {
+          this.user_courses = response.data
+          this.courses = this.user_courses.tray
+          this.results = this.user_courses.tray
+          this.getCoursesByDate()
+          this.getCoursesByYear()
+          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+        })
     }
   }
 }

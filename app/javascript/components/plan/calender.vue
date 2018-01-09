@@ -122,7 +122,7 @@
 
       getEventData(data){
         this.events_arr = data
-          .filter(item => !!item.meeting)
+          .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
           .map(item => {
             return { 
               title  : " ",
