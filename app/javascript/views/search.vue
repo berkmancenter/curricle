@@ -2,9 +2,9 @@
   <div>
     <div class="row">
       <div class="col-md-8">
-        <basic-search @keywordUpdated="keyword = $event"/>
+        <basic-search @keywordsUpdated="keywords = $event"/>
         <br>
-        <curricle-search :keyword="keyword"/>
+        <curricle-search :keywords="keywords"/>
       </div>
       <div class="col-md-4"/>
     </div>
@@ -22,7 +22,7 @@ export default {
   },
   data () {
     return {
-      keyword: ''
+      keywords: []
     }
   }
 }

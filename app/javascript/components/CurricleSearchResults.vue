@@ -47,10 +47,10 @@ export default {
     },
     description: {
       type: String,
-      required: true
+      default: ''
     },
     id: {
-      type: Number,
+      type: String,
       required: true
     },
     subject: {
@@ -71,7 +71,7 @@ export default {
     },
     units_maximum: {
       type: Number,
-      required: true
+      default: 0
     }
   },
   computed: {

@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 ruby '2.3.6'
 
 gem 'devise', '~> 4.3'
+gem 'graphql', '~> 1.7.7'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 0.21'
@@ -25,6 +26,7 @@ end
 group :development do
   gem 'brakeman', '~> 4.0'
   gem 'drg', '~> 1.5'
+  gem 'graphiql-rails', '~> 1.4'
   gem 'listen', '~> 3.1'
   gem 'rubocop', '~> 0.52'
   gem 'rubocop-rspec', '~> 1.20'

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <span>
     <span
       id="search-field-dropdown"
       class="pointer">
@@ -17,7 +17,7 @@
         />
       </b-popover>
     </span>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -28,22 +28,32 @@ export default {
   components: {
     FontAwesomeIcon
   },
+  props: {
+    applyTo: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
-      selected: ['Title', 'Description', 'Instructor', 'Readings', 'Course ID'],
+      selected: this.applyTo,
       options: [
         { text: 'Title', value: 'Title' },
         { text: 'Description', value: 'Description' },
-        { text: 'Instructor', value: 'Instructor' },
-        { text: 'Readings', value: 'Readings' },
-        { text: 'Course ID', value: 'Course ID' }
+        { text: 'Instructor', value: 'Instructor', disabled: true },
+        { text: 'Readings', value: 'Readings', disabled: true },
+        { text: 'Course ID', value: 'Course ID', disabled: true }
       ]
     }
   },
   computed: {
     dropdownTitle () {
       switch (this.selected.length) {
-        case this.options.length:
+        // TODO: revert this once all search fields are available
+        // case this.options.length:
+        case 2:
           return 'All'
         case 0:
           return 'None'
@@ -51,6 +61,9 @@ export default {
           return this.selected.join(', ')
       }
     }
+  },
+  watch: {
+    selected: function () { this.$emit('applyFilterChange', this.selected) }
   }
 }
 </script>

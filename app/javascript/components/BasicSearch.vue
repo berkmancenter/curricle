@@ -11,7 +11,15 @@
             @keyup.enter="addActiveKeyword">
         </div>
         <div class="col-md-7 text-right">
-          <basic-search-field-dropdown/>
+          <basic-search-field-dropdown
+           :applyTo="applyTo"
+           @applyFilterChange="applyTo = $event"
+          />
+          &nbsp;
+          <basic-search-field-weight-dropdown
+           @weightChange="weight = $event"
+           :weight="weight"
+          />
         </div>
         <div class="col-md-2 text-right">
           <span
@@ -42,6 +50,7 @@
 <script>
 import BasicSearchActiveKeywords from './BasicSearchActiveKeywords.vue'
 import BasicSearchFieldDropdown from './BasicSearchFieldDropdown.vue'
+import BasicSearchFieldWeightDropdown from './BasicSearchFieldWeightDropdown.vue'
 import BasicSearchInactiveKeywords from './BasicSearchInactiveKeywords.vue'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
@@ -50,12 +59,15 @@ export default {
   components: {
     BasicSearchActiveKeywords,
     BasicSearchFieldDropdown,
+    BasicSearchFieldWeightDropdown,
     BasicSearchInactiveKeywords,
     FontAwesomeIcon
   },
   data () {
     return {
       keyword: '',
+      weight: 5,
+      applyTo: ['Title', 'Description'],
       activeKeywords: [],
       inactiveKeywords: []
     }
@@ -63,7 +75,7 @@ export default {
   methods: {
     addActiveKeyword () {
       if (this.keyword) {
-        this.activeKeywords.push(this.keyword)
+        this.activeKeywords.push({ text: this.keyword, weight: this.weight, applyTo: this.applyTo })
       }
 
       this.keyword = ''
@@ -76,7 +88,7 @@ export default {
       this.inactiveKeywords.splice(index, 1)
     },
     performSearch () {
-      this.$emit('keywordUpdated', this.activeKeywords[0])
+      this.$emit('keywordsUpdated', this.activeKeywords)
     }
   }
 }
