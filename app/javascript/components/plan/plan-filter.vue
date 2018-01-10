@@ -1,5 +1,8 @@
 <template lang="pug">
-  <b-dropdown :text="text" class="m-md-2">
+  <b-dropdown text="Spring 2018" class="m-md-2" v-if="name=='Semester'">
+    <b-dropdown-item>Spring 2018</b-dropdown-item>
+  </b-dropdown>
+  <b-dropdown :text="text" class="m-md-2" v-else>
     <b-dropdown-item v-for="item in items"  @click="selectItem(item)" >{{ item }}</b-dropdown-item>
   </b-dropdown>
 </template>
