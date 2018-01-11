@@ -3,8 +3,11 @@
 source 'https://rubygems.org'
 ruby '2.3.6'
 
+gem 'batch-loader', '~> 1.2'
 gem 'devise', '~> 4.3'
 gem 'graphql', '~> 1.7.7'
+#gem 'graphql-batch', '~> 0.3'
+#gem 'graphql-preload', '~> 1.0'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 0.21'

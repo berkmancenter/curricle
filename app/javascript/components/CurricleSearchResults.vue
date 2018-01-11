@@ -23,6 +23,13 @@
       Grading Basis:
       <br>
       Instructor:
+      <span
+        v-for="instructor in course_instructors"
+        :key="instructor.id">
+        <strong>
+          {{ instructor.display_name }}
+        </strong>
+      </span>
     </div>
     <div class="col-md-6">
       <h5>{{ title }}</h5>
@@ -50,6 +57,12 @@ export default {
     component: {
       default: '',
       type: String
+    },
+    course_instructors: {
+      type: Array,
+      default () {
+        return []
+      }
     },
     description: {
       type: String,

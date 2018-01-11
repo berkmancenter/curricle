@@ -8,6 +8,7 @@
         :academic_group="result.academic_group"
         :catalog_number="result.catalog_number"
         :component="result.component"
+        :course_instructors="result.course_instructors"
         :description="result.course_description_long"
         :id="result.id"
         :subject="result.subject"
@@ -95,6 +96,10 @@ export default {
                 term_year
                 title
                 units_maximum
+                course_instructors {
+                  display_name
+                  id
+                }
               }
             }
           `,
