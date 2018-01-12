@@ -22,11 +22,11 @@
           .pull-right See Course History
 
       .row.margin-none
-        calendar-sidebar(:calenderEvents="events", v-if="sideBarview=='semester'")
+        calendar-sidebar(:calenderEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'")
       .row.margin-none
-        calendar-sidebar(:calenderEvents="yearlyEvents", v-if="sideBarview=='multi-year'")  
+        calendar-sidebar(:calenderEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'")
       .row.margin-none
-        course-list(:courses='results', v-if="sideBarview=='list-view'")
+        course-list(:courses='results' :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" :v-if="sideBarview=='list-view'")
     .col-md-3(v-else='')
       div
         p.select-course Selected Course
@@ -70,28 +70,13 @@
         events: [],
         yearlyEvents: [],
         currentFilter: {},
-        results: []
+        results: [],
+        userCoursesScheduleIds: []
       }
     },
     mounted () {
-      const course_url = '/courses/user_courses'
       const category_url = '/courses/categories'
-
-      axios
-        .get(course_url)
-        .then((response) => {
-          this.user_courses = response.data
-          this.courses = this.user_courses.tray
-          this.results = this.user_courses.tray
-          this.events = this.user_courses.semester
-          this.yearlyEvents = this.user_courses.multi_year
-          this.getEventData(this.courses)
-          this.setEvent()
-          this.filterCategories()
-          // Filter Not Reenabled
-          // this.getCoursesByDate()
-          // this.getCoursesByYear()
-        })
+      this.getUserCourses()
     },
     methods: {
       selectView (type) {
@@ -230,6 +215,28 @@
             }
           })
         } 
+      },
+      isMeetingBelongsToUser(id){
+        return this.userCoursesScheduleIds.includes(id)    
+      },
+      getUserCourses(){
+        const course_url = '/courses/user_courses'
+        axios
+          .get(course_url)
+          .then((response) => {
+            this.user_courses = response.data
+            this.courses = this.user_courses.tray
+            this.results = this.user_courses.tray
+            this.events = this.user_courses.semester
+            this.yearlyEvents = this.user_courses.multi_year
+            this.getEventData(this.courses)
+            this.setEvent()
+            this.filterCategories()
+            this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+            // Filter Not Reenabled
+            // this.getCoursesByDate()
+            // this.getCoursesByYear()
+          })
       }
     }
   }

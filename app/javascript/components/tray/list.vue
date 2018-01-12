@@ -23,20 +23,20 @@ export default {
   props: ['courses', 'isMeetingBelongsToUser', 'getUserCourses'],
   methods: {
     addRemoveSchedule (meetingId) {
-    if(this.isMeetingBelongsToUser(meetingId)){
-      axios
-      .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
-      .then((response) => {
-        this.getUserCourses()
-      })
-    }else{
-      axios
-      .post("/courses/add_to_schedule", {pattern_id: meetingId})
-      .then((response) => {
-        this.getUserCourses()
-      })
-    }
-  },
+      if(this.isMeetingBelongsToUser(meetingId)){
+        axios
+        .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
+        .then((response) => {
+          this.getUserCourses()
+        })
+      }else{
+        axios
+        .post("/courses/add_to_schedule", {pattern_id: meetingId})
+        .then((response) => {
+          this.getUserCourses()
+        })
+      }
+    },
   }
 }
 </script>

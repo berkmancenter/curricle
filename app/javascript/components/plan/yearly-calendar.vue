@@ -15,7 +15,7 @@
           <div class="bannner">
             <div style="height: 300px;">
               <ul>
-                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" >
+                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" v-if="isMeetingBelongsToUser(event.meeting.id)">
                   <div class="fc-title"></div>
                   <p>{{ event.external_course_id }}</p>
                   <p>{{ event.title }}</p>
@@ -74,13 +74,13 @@
         </div>
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="events" v-if="sideBarview=='semester'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'"></calendar-sidebar>
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="yearlyEvents" v-if="sideBarview=='multi-year'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'"></calendar-sidebar>
       </div>
       <div class="row margin-none">
-        <course-list :courses = "results" v-if="sideBarview=='list-view'"
+        <course-list :courses = "results" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='list-view'"
         />
       </div>
     </div>
@@ -130,23 +130,12 @@ export default {
       events: [],
       yearlyEvents: [],
       currentFilter: {},
-      results: []
+      results: [],
+      userCoursesScheduleIds: []
     }
   },
   mounted () {  
-    const course_url = '/courses/user_courses'
-    const category_url = '/courses/categories'
-
-    axios
-      .get(course_url)
-      .then((response) => {
-        this.user_courses = response.data
-        this.courses = this.user_courses.multi_year
-        this.results = this.user_courses.tray
-        this.filterCategories()
-        this.getCoursesByDate()
-        this.getCoursesByYear()
-      })
+    this.getUserCourses()
   },
   methods: {
     selectView (type) {
@@ -224,6 +213,23 @@ export default {
       }else{
         '100px'
       }
+    },
+    isMeetingBelongsToUser(id){
+      return this.userCoursesScheduleIds.includes(id)    
+    },
+    getUserCourses(){
+      const course_url = '/courses/user_courses'
+      axios
+      .get(course_url)
+      .then((response) => {
+        this.user_courses = response.data
+        this.courses = this.user_courses.multi_year
+        this.results = this.user_courses.tray
+        this.filterCategories()
+        this.getCoursesByDate()
+        this.getCoursesByYear()
+        this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+      })
     }
   }
 }

@@ -32,10 +32,10 @@
         />
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="events" :getUserCourses="getUserCourses" v-if="sideBarview=='semester'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'"></calendar-sidebar>
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="yearlyEvents" :getUserCourses="getUserCourses" v-if="sideBarview=='multi-year'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'"></calendar-sidebar>
       </div>
     </div>
     <div class="col-md-3" v-else>
