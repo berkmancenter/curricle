@@ -15,7 +15,7 @@
           <div class="bannner">
             <div style="height: 300px;">
               <ul>
-                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" v-if="isMeetingBelongsToUser(event.meeting.id)">
+                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" v-if="event.meeting && isMeetingBelongsToUser(event.meeting.id)">
                   <div class="fc-title"></div>
                   <p>{{ event.external_course_id }}</p>
                   <p>{{ event.title }}</p>
