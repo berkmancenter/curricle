@@ -133,11 +133,16 @@ class Course < ApplicationRecord
   end
 
   def meeting
-    course_meeting_patterns.find_by(
-      term_name: term_name,
-      term_year: term_year,
-      class_section: class_section
-    )
+    course_meeting_patterns.first
+  end
+
+  def meeting_with_tods
+    return if meeting.blank?
+
+    cmp_hash = meeting.attributes
+    cmp_hash['meeting_time_start_tod'] = meeting.meeting_time_start_tod
+    cmp_hash['meeting_time_end_tod'] = meeting.meeting_time_end_tod
+    cmp_hash
   end
 
   def instructor

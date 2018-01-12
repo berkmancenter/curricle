@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
       paginate page: 1, per_page: 50
     end
     @courses = search.results
-    render json: @courses, methods: %i[meeting instructor user_tags user_annotations user_schedule]
+    render json: @courses, methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule]
   end
 
   def index
@@ -89,7 +89,7 @@ class CoursesController < ApplicationController
     else
       @keyword_filters = [{ keywords: '', keyword_options: '' }]
     end
-    render json: @matching_courses, methods: %i[meeting instructor]
+    render json: @matching_courses, methods: %i[meeting_with_tods instructor]
   end
 
   def clear_search
@@ -167,9 +167,9 @@ class CoursesController < ApplicationController
     end
 
     user_courses = {
-      :tray => JSON.parse(tray.to_json(methods: %i[meeting instructor user_tags user_annotations user_schedule])),
-      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting instructor user_tags user_annotations user_schedule])),
-      :multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting instructor user_tags user_annotations user_schedule]))
+      :tray => JSON.parse(tray.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule])),
+      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule])),
+      :multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule]))
     }
     render json: user_courses
   end
