@@ -14,7 +14,7 @@
                   class= "fa fa-clock-o"
                   v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(course.meeting.id) }"
                   @click="addRemoveSchedule(course.meeting.id)"
-				  v-if="course.meeting"
+				          v-if="course.meeting"
                   >
                 </i>
               </td>

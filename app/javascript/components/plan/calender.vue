@@ -137,7 +137,6 @@
           }
         })
       },
-
       getCoursesByDate(filter){
         // Not Required Here
         // if((filter != undefined) && (Object.keys(filter).length > 0)){
@@ -229,9 +228,11 @@
             this.results = this.user_courses.tray
             this.events = this.user_courses.semester
             this.yearlyEvents = this.user_courses.multi_year
+            this.removeEvents()
             this.getEventData(this.courses)
             this.setEvent()
             this.filterCategories()
+            this.addEvents()
             this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
             // Filter Not Reenabled
             // this.getCoursesByDate()
