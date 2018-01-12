@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import module from './modules'
+import user from './modules/user'
+import search from './modules/search'
+import plan from './modules/plan'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    '_curricle': module
+    user,
+    search,
+    plan,
   }
 })

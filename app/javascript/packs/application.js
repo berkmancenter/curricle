@@ -9,6 +9,7 @@
 
 import Vue from 'vue/dist/vue.esm'
 import router from '../router'
+import store from '../store'
 import BootstrapVue from 'bootstrap-vue'
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
@@ -26,6 +27,7 @@ Vue.use(BootstrapVue)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
