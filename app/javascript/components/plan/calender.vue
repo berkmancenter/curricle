@@ -218,7 +218,7 @@
       isMeetingBelongsToUser(id){
         return this.userCoursesScheduleIds.includes(id)    
       },
-      getUserCourses(){
+      getUserCourses(update){
         const course_url = '/courses/user_courses'
         axios
           .get(course_url)
@@ -232,7 +232,9 @@
             this.getEventData(this.courses)
             this.setEvent()
             this.filterCategories()
-            this.addEvents()
+            if(update){
+              this.addEvents()
+            }
             this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
             // Filter Not Reenabled
             // this.getCoursesByDate()

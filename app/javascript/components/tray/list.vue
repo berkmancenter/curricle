@@ -28,13 +28,13 @@ export default {
         axios
         .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
         .then((response) => {
-          this.getUserCourses()
+          this.getUserCourses(true)
         })
       }else{
         axios
         .post("/courses/add_to_schedule", {pattern_id: meetingId})
         .then((response) => {
-          this.getUserCourses()
+          this.getUserCourses(true)
         })
       }
     },
