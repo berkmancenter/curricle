@@ -10,7 +10,7 @@
           <plan-filter :title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name"/>
         </div>
         <div class="plan">
-          <plan-list-item :lists="filteredCourses" :selected-plan="selectedPlan" :isMeetingBelongsToUser="isMeetingBelongsToUser" :fetchUserCourses="fetchUserCourses"/>
+          <plan-list-item :lists="filteredCourses" :selected-plan="selectedPlan" :isMeetingBelongsToUser="isMeetingBelongsToUser" :getUserCourses="getUserCourses"/>
         </div>
       </div>
     </div>
@@ -28,14 +28,14 @@
         </div>
       </div>
       <div class="row margin-none">
-        <course-list :isMeetingBelongsToUser="isMeetingBelongsToUser" :courses = "results" v-if="sideBarview=='list-view'"
+        <course-list :isMeetingBelongsToUser="isMeetingBelongsToUser" :courses="results" v-if="sideBarview=='list-view'" :getUserCourses="getUserCourses"
         />
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="events" :fetchUserCourses="fetchUserCourses" v-if="sideBarview=='semester'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="events" :getUserCourses="getUserCourses" v-if="sideBarview=='semester'"></calendar-sidebar>
       </div>
       <div class="row margin-none">
-        <calendar-sidebar :calenderEvents="yearlyEvents" :fetchUserCourses="fetchUserCourses" v-if="sideBarview=='multi-year'"></calendar-sidebar>
+        <calendar-sidebar :calenderEvents="yearlyEvents" :getUserCourses="getUserCourses" v-if="sideBarview=='multi-year'"></calendar-sidebar>
       </div>
     </div>
     <div class="col-md-3" v-else>
@@ -96,7 +96,7 @@ export default {
       this.categories = response.data
     })
 
-    this.fetchUserCourses()
+    this.getUserCourses()
   },
   data () {
     return {
@@ -147,7 +147,6 @@ export default {
             }
           })
         })
-        console.log(this.events, 'this.events')
       }else{
         this.events = this.user_courses.semester
       }
@@ -196,7 +195,7 @@ export default {
     isMeetingBelongsToUser(id){
       return this.userCoursesScheduleIds.includes(id)    
     },
-    fetchUserCourses(){
+    getUserCourses(){
       const course_url = '/courses/user_courses'
       axios
         .get(course_url)

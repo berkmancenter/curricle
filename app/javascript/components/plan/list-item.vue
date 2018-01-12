@@ -29,7 +29,7 @@
   import axios from 'axios'
   import truncate from 'vue-truncate-collapsed';
   export default {
-    props: ['selectedPlan', 'lists', 'isMeetingBelongsToUser', "fetchUserCourses"],
+    props: ['selectedPlan', 'lists', 'isMeetingBelongsToUser', "getUserCourses"],
     components: {
       'truncate': truncate
     },
@@ -42,13 +42,13 @@
           axios
           .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
           .then((response) => {
-            this.fetchUserCourses()
+            this.getUserCourses()
           })
         }else{
           axios
           .post("/courses/add_to_schedule", {pattern_id: meetingId})
           .then((response) => {
-            this.fetchUserCourses()
+            this.getUserCourses()
           })
         }
       }

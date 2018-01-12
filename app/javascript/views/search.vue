@@ -36,6 +36,7 @@
             :courses = "filteredResults"
             v-if="sideBarview=='list-view'"
             :isMeetingBelongsToUser="isMeetingBelongsToUser"
+            :getUserCourses="getUserCourses"
           />
         </div>
         <div class="row margin-none">
