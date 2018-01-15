@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
 import user from './modules/user.js'
 import search from './modules/search.js'
@@ -14,4 +14,4 @@ const store = new Vuex.Store({
   }
 })
 
-export default { store };
+export default store;
