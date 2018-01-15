@@ -45,7 +45,7 @@
         <div
           class= "annonation-tag"
           v-if="isExpand">
-          <div v-if="!editableAnnotations">
+          <div v-if="!editableAnnotations" style="word-wrap: break-word;">
             <p>
               {{ editableAnnotationsText }}
             </p>
@@ -101,7 +101,6 @@ export default {
     FontAwesomeIcon,
     Tags
   },
-  props: ['course'],
   data () {
     return {
       tag: '',
@@ -117,7 +116,14 @@ export default {
   },
   watch: {
     course () {
-      this.fetchAnnotations()
+      this.fetchAnnotation()
+      this.isPresent = !lodash(this.course)
+      if (this.isPresent) {
+        this.isExpand = false
+        this.editableAnnotation = false
+        this.hideDownCaret = false
+        this.editableText = false
+      }
     },
     editableText (newStr) {
       this.editableTextlength = newStr.length
@@ -148,13 +154,15 @@ export default {
       this.editableAnnotations = !this.editableAnnotations
       this.hideDownCaret = !this.hideDownCaret
     },
-    fetchAnnotations () {
+    fetchAnnotation () {
       axios
         .get('/annotations/get_annotations?course_id=' + this.course.id).then((response) => {
           if (response.data) {
             this.editableAnnotationsText = response.data.annotation
-            this.editableText = this.editableAnnotationsText
+          } else {
+            this.editableAnnotationsText = ""
           }
+          this.editableText = this.editableAnnotationsText
         })
     }
   },
