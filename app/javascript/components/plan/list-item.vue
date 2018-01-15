@@ -17,7 +17,7 @@
             <br>
             <span>W<img src=""></span>
           </td>          
-          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(list.meeting.id) }" v-if="list.meeting" @click="addRemoveSchedule(list.meeting.id)"></i></td>
+          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(list.meeting_with_tods.id) }" v-if="list.meeting_with_tods" @click="addRemoveSchedule(list.meeting_with_tods.id)"></i></td>
           <span class= "check_box"><input type= "checkbox" name ="" value= ""></span>
         </tr>
       </tbody>

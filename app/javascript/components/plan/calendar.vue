@@ -111,8 +111,8 @@
           .map(item => {
             return { 
               title  : " ",
-              start  : item.meeting.meeting_time_start,
-              end    : item.meeting.meeting_time_end,
+              start  : item.meeting_with_tods.meeting_time_start,
+              end    : item.meeting_with_tods.meeting_time_end,
               description: item.subject_description,
               course : item,
               self   : this

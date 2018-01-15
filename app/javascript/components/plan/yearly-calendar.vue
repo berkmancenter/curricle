@@ -15,7 +15,7 @@
           <div class="bannner">
             <div style="height: 300px;">
               <ul>
-                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" v-if="event.meeting && isMeetingBelongsToUser(event.meeting.id)">
+                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
                   <div class="fc-title"></div>
                   <p>{{ event.external_course_id }}</p>
                   <p>{{ event.title }}</p>
@@ -206,9 +206,9 @@ export default {
       }
     },
     height(course){
-      if(course && course.meeting){
-        const start_time  = moment(course.meeting.meeting_time_start)
-        const end_time  = moment(course.meeting.meeting_time_end)
+      if(course && course.meeting_with_tods){
+        const start_time  = moment(course.meeting_with_tods.meeting_time_start)
+        const end_time  = moment(course.meeting_with_tods.meeting_time_end)
         end_time.diff(start_time, 'hours') * 72 + 'px'
       }else{
         '100px'

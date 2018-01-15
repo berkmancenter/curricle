@@ -19,7 +19,7 @@
         :getUserCourses="getUserCourses"
         :isBelongsToUser="isBelongsToUser"
         :isMeetingBelongsToUser="isMeetingBelongsToUser"
-        :meeting="result.meeting"
+        :meeting="result.meeting_with_tods"
         :userSchedule="result.user_schedule"
       />
     </div>

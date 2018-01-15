@@ -8,9 +8,9 @@
         <td style="border-right: 5px solid #000;">
           <i
             class= "fa fa-clock-o"
-            v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(course.meeting.id) }"
-            @click="addRemoveSchedule(course.meeting.id)"
-            v-if="course.meeting"
+            v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(course.meeting_with_tods.id) }"
+            @click="addRemoveSchedule(course.meeting_with_tods.id)"
+            v-if="course.meeting_with_tods"
             >
           </i>
         </td>
