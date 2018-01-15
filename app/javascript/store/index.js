@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import user from './modules/user'
-import search from './modules/search'
-import plan from './modules/plan'
+import user from './modules/user.js'
+import search from './modules/search.js'
+import plan from './modules/plan.js'
 
 Vue.use(Vuex)
 
