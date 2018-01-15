@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 module Resolvers
+  # Return collections of courses based on query arguments
   class CoursesResolver
     # TODO: enable search for additional fields
     FIELD_MAPPING = {
-      #'Course ID' => :course_id,
+      # 'Course ID' => :course_id,
       'Description' => :course_description_long,
-      #'Instructor' => :instructor,
-      #'Readings' => :readings,
+      # 'Instructor' => :instructor,
+      # 'Readings' => :readings,
       'Title' => :title
     }.freeze
 

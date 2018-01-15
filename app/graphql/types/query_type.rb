@@ -12,4 +12,12 @@ Types::QueryType = GraphQL::ObjectType.define do
 
     resolve Resolvers::CoursesResolver.new
   end
+
+  field :count_courses_by_department, !types[Types::CoursesByDepartmentType] do
+    description 'Return counts of courses by department'
+
+    argument :academic_group, !types.String, 'Academic group'
+
+    resolve Resolvers::CoursesByDepartmentResolver.new
+  end
 end
