@@ -8,6 +8,7 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import Vue from 'vue/dist/vue.esm'
+import Vuex from 'vuex'
 import router from '../router'
 import store from '../store'
 import BootstrapVue from 'bootstrap-vue'
@@ -22,6 +23,7 @@ window.$ = window.jQuery = require('jquery')
 fontawesome.library.add(solid)
 
 Vue.use(BootstrapVue)
+Vue.use(Vuex)
 
 /* eslint-disable no-new */
 new Vue({

@@ -6,10 +6,12 @@ import plan from './modules/plan'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     user,
     search,
     plan,
   }
 })
+
+export default { store };
