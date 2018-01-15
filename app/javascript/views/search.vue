@@ -41,7 +41,7 @@
         </div>
         <div class="row margin-none">
           <calendar-sidebar 
-            :calenderEvents="events"
+            :calendarEvents="events"
             v-if="sideBarview=='semester'"
             :isMeetingBelongsToUser="isMeetingBelongsToUser"
             :getUserCourses="getUserCourses"
@@ -49,7 +49,7 @@
         </div>
         <div class="row margin-none">
           <calendar-sidebar 
-            :calenderEvents="yearlyEvents"
+            :calendarEvents="yearlyEvents"
             v-if="sideBarview=='multi-year'"
             :isMeetingBelongsToUser="isMeetingBelongsToUser"
             :getUserCourses="getUserCourses"

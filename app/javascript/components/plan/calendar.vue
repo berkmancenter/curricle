@@ -22,9 +22,9 @@
           .pull-right See Course History
 
       .row.margin-none
-        calendar-sidebar(:calenderEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'")
+        calendar-sidebar(:calendarEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'")
       .row.margin-none
-        calendar-sidebar(:calenderEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'")
+        calendar-sidebar(:calendarEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'")
       .row.margin-none
         course-list(:courses='results' :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" :v-if="sideBarview=='list-view'")
     .col-md-3(v-else='')

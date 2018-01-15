@@ -1,6 +1,6 @@
 <template>
   <div class="calendar-sidebar">
-    <div v-for="(courses, day) in calenderEvents">
+    <div v-for="(courses, day) in calendarEvents">
       <strong>{{ day }}</strong>
       <div class="table-responsive">
         <table class="course-list-iltem table">
@@ -29,7 +29,7 @@
 <script type="text/javascript">
   import axios from 'axios'
   export default {
-    props: ['calenderEvents', 'getUserCourses', 'isMeetingBelongsToUser'],
+    props: ['calendarEvents', 'getUserCourses', 'isMeetingBelongsToUser'],
     methods: {
       addRemoveSchedule (meetingId) {
         if(this.isMeetingBelongsToUser(meetingId)){
