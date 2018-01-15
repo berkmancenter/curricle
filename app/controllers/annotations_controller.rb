@@ -16,7 +16,8 @@ class AnnotationsController < ApplicationController
   # find course's annotations for current user
   def get_annotations
     course = Course.find(params["course_id"])
-    annotations = Annotation.where(user_id: current_user.id, course_id: course.id)
+    # For Now always having 1 annotations
+    annotations = Annotation.where(user_id: current_user.id, course_id: course.id).first
 
     render json: annotations
   end

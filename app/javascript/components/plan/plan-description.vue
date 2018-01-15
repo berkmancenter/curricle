@@ -28,54 +28,63 @@
       <p>Reading</p>
       <div class="annotation-border">
         <div class="annotations">
-          <p>
+          <p class="annotations-up-arrow">
+            <i
+              class="fa fa-caret-up"
+              v-if="!isExpand"
+              @click="expand()"/>
+          </p>
+          <p
+          :class="{ 'annotations-margin-top': isExpand }">
             <span
-              class="fa fa-pencil"
-              @click="OpenAnnotationsForm()"
-            />
+              class="fa fa-pencil edit-annotation"
+              @click="OpenAnnotationsForm()"/>
             <b>Annotations</b>
           </p>
         </div>
-        <div class= "annonation-tag">
-          <tags
-            :active-tags="course.user_tags"
-            :tag="tag"
-            :course-id="course.id"
-            @deactivateTag="deactivateTag($event)" />
+        <div
+          class= "annonation-tag"
+          v-if="isExpand">
           <div v-if="!editableAnnotations">
             <p>
               {{ editableAnnotationsText }}
             </p>
-            <div class= "annonation-tag">
-              <ul>
-                <li
-                  v-for="(text, index) of annotationTags"
-                  :key="index">
-                  {{ text }} <span class=""/>
-                </li>
-              </ul>
-            </div>
+            <tags
+              :active-tags="course.user_tags"
+              :tag="tag"
+              :course-id="course.id"
+              @deactivateTag="deactivateTag($event)" />
           </div>
           <div v-else>
             <p>
               <textarea
                 rows="10"
                 style="width: 100%"
-                v-model="editableAnnotationsText"/>
-              <input
-                placeholder="Enter Tag"
-                v-model="tag"
-                @keyup.enter="addTags">
+                maxlength="500"
+                v-model="editableText"/>
+              <span class="word-count">{{ editableTextlength }} / {{ maxLength }} characters</span>
               <span
                 class=""
                 v-for="(text, index) of annotationTags"
-                :key="index"
-                @click="removeTags(index)">
+                @click="removeTags(index)"
+                :key="index">
                 {{ text }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
               </span>
-              <button @click="updateAnnotations">Save</button>
             </p>
+            <div class="save-btn">
+              <button @click="updateAnnotations">Update</button>
+              <button @click="cancelAnnotations">Cancel</button>
+            </div>
           </div>
+        </div>
+        <div>
+          <p class="annotations-down-arrow">
+            <i
+              class="fa fa-caret-down"
+              :class="{ 'hide-down-caret': hideDownCaret }"
+              v-if="isExpand"
+              @click="expand()"/>
+          </p>
         </div>
       </div>
     </div>
@@ -92,12 +101,61 @@ export default {
     FontAwesomeIcon,
     Tags
   },
+  props: ['course'],
   data () {
     return {
       tag: '',
       editableAnnotations: false,
       editableAnnotationsText: '',
-      annotationTags: []
+      editableText: '',
+      annotationTags: [],
+      isExpand: false,
+      hideDownCaret: false,
+      maxLength: 500,
+      editableTextlength: 0
+    }
+  },
+  watch: {
+    course () {
+      this.fetchAnnotations()
+    },
+    editableText (newStr) {
+      this.editableTextlength = newStr.length
+    }
+  },
+  methods: {
+    OpenAnnotationsForm () {
+      if (this.isExpand) {
+        this.editableAnnotations = !this.editableAnnotations
+        this.hideDownCaret = !this.hideDownCaret
+        this.editableText = this.editableAnnotationsText
+      }
+    },
+    expand () {
+      this.isExpand = !this.isExpand
+    },
+    updateAnnotations () {
+      axios
+        .post('annotations', {course_id: this.course.id, annotation: this.editableText}).then((response) => {
+          this.editableAnnotationsText = response.data.annotation
+          this.editableAnnotations = !this.editableAnnotations
+          this.hideDownCaret = !this.hideDownCaret
+        })
+    },
+    cancelAnnotations () {
+      this.annotationTags = []
+      this.editableText = ''
+      this.editableAnnotations = !this.editableAnnotations
+      this.hideDownCaret = !this.hideDownCaret
+    },
+    fetchAnnotations () {
+      axios
+        .get('/annotations/get_annotations?course_id=' + this.course.id).then((response) => {
+          if (response.data) {
+            this.editableAnnotationsText = response.data.annotation
+            this.editableText = this.editableAnnotationsText
+          }
+        })
     }
   },
   computed: {
@@ -165,12 +223,12 @@ export default {
     display: inline-block;
     text-align: left;
     float: left;
-    font-size: 25px;
-    color: #ff00ff;
+    font-size: 20px;
+    color: #0030FF;
   }
   .annotation-border {
     border: 1px solid #000;
-    padding: 20px;
+    padding: 0 20px;
     border-radius: 5px;
   }
   .annotation-para p {
@@ -181,6 +239,50 @@ export default {
   }
   .reading p:nth-child(1) {
     margin-bottom: 0px;
-    margin-top:
+    margin-top: 10px;
+  }
+  .annotation-border p:nth-child(2){
+    margin-bottom: 0px;
+  }
+  .annotations-up-arrow i, .annotations-down-arrow i {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .annotations-down-arrow {
+    text-align: center;
+  }
+  .annotations-margin-top {
+    margin-top: 10px;
+  }
+  .tags{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .save-btn button{
+    background-color: inherit;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .hide-down-caret{
+    display: none;
+  }
+  .annotations textarea{
+    resize: none !important;
+  }
+  .word-count{
+    position: relative;
+    color: gray;
+    bottom: 25px;
+    left: 100px;
+    font-size: 10px;
+  }
+  .edit-annotation{
+    cursor: pointer;
   }
 </style>
