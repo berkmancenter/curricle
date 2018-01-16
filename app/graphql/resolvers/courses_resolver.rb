@@ -7,7 +7,7 @@ module Resolvers
     FIELD_MAPPING = {
       # 'Course ID' => :course_id,
       'Description' => :course_description_long,
-      # 'Instructor' => :instructor,
+      'Instructor' => %i[first_name last_name],
       # 'Readings' => :readings,
       'Title' => :title
     }.freeze
@@ -36,8 +36,8 @@ module Resolvers
     def deluxe_keyword_search(keywords)
       search = Course.search do
         keywords.each do |keyword|
-          fulltext keyword[:text] do
-            fields(*parse_fields(keyword[:fields], keyword[:weight]))
+          any do
+            fulltext keyword[:text], fields: parse_fields(keyword[:fields])
           end
         end
 
@@ -49,17 +49,11 @@ module Resolvers
       search.results
     end
 
-    def parse_fields(fields, weight)
-      weighted_fields = {}
-
+    def parse_fields(fields)
       # sanitize field input against expected field values
-      search_fields = FIELD_MAPPING.keys & fields
+      valid_keys = FIELD_MAPPING.keys & fields
 
-      search_fields.each do |field|
-        weighted_fields[FIELD_MAPPING[field]] = weight
-      end
-
-      [weighted_fields]
+      valid_keys.map { |key| FIELD_MAPPING[key] }.flatten
     end
   end
 end

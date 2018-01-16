@@ -67,7 +67,7 @@ export default {
     return {
       keyword: '',
       weight: 5,
-      applyTo: ['Title', 'Description'],
+      applyTo: ['Title', 'Description', 'Instructor'],
       activeKeywords: [],
       inactiveKeywords: []
     }

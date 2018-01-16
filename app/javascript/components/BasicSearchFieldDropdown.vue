@@ -42,7 +42,7 @@ export default {
       options: [
         { text: 'Title', value: 'Title' },
         { text: 'Description', value: 'Description' },
-        { text: 'Instructor', value: 'Instructor', disabled: true },
+        { text: 'Instructor', value: 'Instructor' },
         { text: 'Readings', value: 'Readings', disabled: true },
         { text: 'Course ID', value: 'Course ID', disabled: true }
       ]
@@ -53,7 +53,7 @@ export default {
       switch (this.selected.length) {
         // TODO: revert this once all search fields are available
         // case this.options.length:
-        case 2:
+        case 3:
           return 'All'
         case 0:
           return 'None'
