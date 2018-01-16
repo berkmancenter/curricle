@@ -8,7 +8,21 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :catalog_number, !types.Int, 'Catalog number'
   field :component, types.String, 'Component'
   field :course_description_long, types.String, 'Extended description'
+
+  field :course_meeting_patterns, types[Types::CourseMeetingPatternType], 'List of course meeting patterns' do
+    resolve(
+      lambda do |course, _args, _ctx|
+        BatchLoader.for(course.id).batch(default_value: []) do |course_ids, loader|
+          CourseMeetingPattern.where(course_id: course_ids).each do |course_meeting_pattern|
+            loader.call(course_meeting_pattern.course_id) { |memo| memo << course_meeting_pattern }
+          end
+        end
+      end
+    )
+  end
+
   field :id, !types.ID, 'Unique ID'
+
   field :course_instructors, types[Types::CourseInstructorType], 'List of course instructors' do
     resolve(
       lambda do |course, _args, _ctx|
@@ -20,6 +34,7 @@ Types::CourseType = GraphQL::ObjectType.define do
       end
     )
   end
+
   field :subject, !types.String, 'Subject'
   field :term_name, !types.String, 'Term name'
   field :term_year, !types.Int, 'Term year'

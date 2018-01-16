@@ -7,6 +7,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
+    - 'app/graphql/**/*'
     - 'db/schema.rb'
 Metrics/LineLength:
   Enabled: false
