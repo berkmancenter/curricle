@@ -16,6 +16,7 @@ b-navbar(toggleable="md" type="light" variant="light")
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import axios from 'axios'
 import BasicSearchSemesterRange from './BasicSearchSemesterRange.vue'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
@@ -25,8 +26,11 @@ export default {
     BasicSearchSemesterRange,
     FontAwesomeIcon
   },
-  props: ['trayToggle', 'trayVisible'],
+  computed: {
+    ...mapState('app',['trayVisible'])
+  },
   methods: {
+    trayToggle () { this.$store.commit('app/TOGGLE_TRAY') },
     logout () {
       axios.get('/users/sign_out')
         .then(response => {

@@ -1,9 +1,9 @@
 <template lang="pug">
   #app
     header
-      navbar(:trayToggle="trayToggle" :trayVisible="trayVisible")
+      navbar
 
-    router-view(:trayVisible="trayVisible" :resultSet="results")
+    router-view(:resultSet="results")
 </template>
 
 <script>
@@ -15,17 +15,9 @@ export default {
   },
   data(){
     return {
-      trayVisible: false,
       results: []
 
     }  
   },
-
-  methods: {
-    trayToggle(){
-      this.trayVisible = !this.trayVisible
-    }
-  }
-
 }
 </script>

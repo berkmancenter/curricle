@@ -56,6 +56,7 @@
 </template>
 
 <script type="text/javascript">
+import { mapState } from 'vuex'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'
 import PlanDescription from 'components/plan/plan-description'
@@ -72,8 +73,13 @@ export default {
     CalendarSidebar,
     CourseList
   },
-  props: ['selectedView', 'trayVisible', 'resultSet'],
-
+  props: ['resultSet'],
+  computed: {
+      ...mapState('app',{
+        trayVisible: 'trayVisible',
+        selectedView: 'viewmode',
+      })
+  },
   mounted () {
     const search_url = '/courses/user_courses'
 
@@ -128,10 +134,10 @@ export default {
       this.course = course
     },
     selectView (type) {
-      this.selectedView(type)
+      this.$store.commit("app/CHOOSE_SIDEBAR_VIEW",type)
     },
-    selectSideBarView(view){
-      this.sideBarview = view
+    selectSideBarView(type){
+      this.$store.commit("app/CHOOSE_SIDEBAR_VIEW",type)
     },
     getCoursesByDate(filter){
       if((filter != undefined) && (Object.keys(filter).length > 0)){

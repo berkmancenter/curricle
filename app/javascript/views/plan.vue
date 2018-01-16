@@ -6,6 +6,7 @@
 </template>
 
 <script type="text/javascript">
+import { mapState } from 'vuex'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'
 import PlanDescription from 'components/plan/plan-description'
@@ -23,18 +24,17 @@ export default {
     ListView
   },
 
-  props: ['trayVisible', 'resultSet'],
-
-  data () {
-    return {
-      planView: 'list-view'
-    }
+  computed: {
+      ...mapState('app', {
+        trayVisible: 'trayVisible',
+        planView: 'viewmode'
+      })
   },
+  
+  props: [ 'resultSet'],
 
   methods: {
-    selectedView (type) {
-      this.planView = type
-    }
+    selectedView: type => this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
   }
 }
 </script>
