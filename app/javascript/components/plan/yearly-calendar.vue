@@ -101,6 +101,7 @@
   </div>
 </template>
 <script type="text/javascript">
+import { mapState } from 'vuex'
 import lodash from 'lodash'
 import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
@@ -118,7 +119,12 @@ export default {
     PlanDescription,
     CourseList
   },
-  props: ['selectedView', 'trayVisible'],
+  computed: {
+      ...mapState('app', {
+        trayVisible: 'trayVisible',
+        selectedView: 'viewmode',
+      }),
+  },
   data () {
     return {
       courses: [],

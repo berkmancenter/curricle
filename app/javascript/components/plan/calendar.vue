@@ -41,6 +41,7 @@
 </template>
 
 <script type="text/javascript">
+  import { mapState } from 'vuex'
   import fullCalendar from 'fullcalendar'
   import CalendarSidebar from 'components/plan/calendar-sidebar'
   import PlanFilter from 'components/plan/plan-filter'
@@ -57,7 +58,6 @@
       PlanDescription,
       CourseList
     },
-    props: ['selectedView', 'trayVisible'],
     data () {
       return {
         user_courses: [],
