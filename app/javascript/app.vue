@@ -2,8 +2,8 @@
   #app
     header
       navbar
-
-    router-view(:resultSet="results")
+    keep-alive
+      router-view
 </template>
 
 <script>
