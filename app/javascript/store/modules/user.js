@@ -6,7 +6,8 @@ import _ from 'lodash'
 const state = {
   courses: {},
   filter: {},
-  userCoursesScheduleIds: []
+  userCoursesScheduleIds: [],
+  currentCourse: {}
 }
 
 const getters = {
@@ -105,6 +106,9 @@ const mutations = {
     state.userCoursesScheduleIds = value.tray
       .filter(item => !!item.user_schedule)
       .map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+  },
+  SET_CURRENT_COURSE: (state, value) => {
+    state.currentCourse = value
   }
 }
 

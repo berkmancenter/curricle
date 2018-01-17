@@ -8,7 +8,7 @@
       <p class="pull-left"><b>{{ course.term_name }}</b></p>
       <p class="pull-right">Grading basis: <span><b>{{ course.grading_basis_description }}</b></span></p>
     </div>
-<!--     <div class="row margin-none">
+    <!--     <div class="row margin-none">
       <p class="pull-left"><b>{{ course.external_course_id }}</b></p>
       <p class="pull-right">Instructor: <span><b>{{ course.instructor.first_name }}</b></span></p>
     </div> -->
@@ -28,7 +28,13 @@
       <p>Reading</p>
       <div class="annotation-border">
         <div class="annotations">
-          <p><span class="fa fa-pencil" @click="OpenAnnotationsForm()"/><b>Annotations</b></p>
+          <p>
+            <span
+              class="fa fa-pencil"
+              @click="OpenAnnotationsForm()"
+            />
+            <b>Annotations</b>
+          </p>
         </div>
         <div class= "annonation-tag">
           <tags
@@ -38,11 +44,13 @@
             @deactivateTag="deactivateTag($event)" />
           <div v-if="!editableAnnotations">
             <p>
-              {{editableAnnotationsText}}
+              {{ editableAnnotationsText }}
             </p>
             <div class= "annonation-tag">
               <ul>
-                <li v-for="(text, index) of annotationTags">
+                <li
+                  v-for="(text, index) of annotationTags"
+                  :key="index">
                   {{ text }} <span class=""/>
                 </li>
               </ul>
@@ -50,8 +58,10 @@
           </div>
           <div v-else>
             <p>
-              <textarea rows="10" style="width: 100%"  v-model="editableAnnotationsText">
-              </textarea>
+              <textarea
+                rows="10"
+                style="width: 100%"
+                v-model="editableAnnotationsText"/>
               <input
                 placeholder="Enter Tag"
                 v-model="tag"
@@ -59,13 +69,13 @@
               <span
                 class=""
                 v-for="(text, index) of annotationTags"
+                :key="index"
                 @click="removeTags(index)">
                 {{ text }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
               </span>
-
               <button @click="updateAnnotations">Save</button>
             </p>
-          </div>    
+          </div>
         </div>
       </div>
     </div>
@@ -73,12 +83,11 @@
 </template>
 
 <script type="text/javascript">
+import { mapState } from 'vuex'
 import Tags from './tags.vue'
-import axios from 'axios'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
-  props: ['course'],
   components: {
     FontAwesomeIcon,
     Tags
@@ -90,6 +99,11 @@ export default {
       editableAnnotationsText: '',
       annotationTags: []
     }
+  },
+  computed: {
+    ...mapState('user', {
+      course: 'currentCourse'
+    })
   }
 }
 </script>
