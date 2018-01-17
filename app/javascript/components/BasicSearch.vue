@@ -35,15 +35,9 @@
         </div>
       </div>
     </div>
-    <basic-search-active-keywords
-      :active-keywords="activeKeywords"
-      @deactivateKeyword="deactivateKeyword($event)"
-    />
+    <basic-search-active-keywords/>
     <br>
-    <basic-search-inactive-keywords
-      :inactive-keywords="inactiveKeywords"
-      @removeKeyword="removeKeyword($event)"
-    />
+    <basic-search-inactive-keywords/>
   </div>
 </template>
 
@@ -67,15 +61,13 @@ export default {
     return {
       keyword: '',
       weight: 5,
-      applyTo: ['Title', 'Description', 'Instructor'],
-      activeKeywords: [],
-      inactiveKeywords: []
+      applyTo: ['Title', 'Description', 'Instructor']
     }
   },
   methods: {
     addActiveKeyword () {
       if (this.keyword) {
-        this.activeKeywords.push({ text: this.keyword, weight: this.weight, applyTo: this.applyTo })
+        this.$store.dispatch('search/addKeyword', { text: this.keyword, weight: this.weight, applyTo: this.applyTo, active: true })
       }
 
       this.keyword = ''
