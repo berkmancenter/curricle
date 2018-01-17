@@ -13,6 +13,10 @@ export default {
   components: {
     Navbar
   },
+  mounted () {
+    // load initial data
+    this.$store.dispatch("user/getCourses")
+  },
   data(){
     return {
       results: []
