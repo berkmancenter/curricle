@@ -16,9 +16,6 @@
         :term_year="result.term_year"
         :title="result.title"
         :units_maximum="result.units_maximum"
-        :getUserCourses="getUserCourses"
-        :isBelongsToUser="isBelongsToUser"
-        :isMeetingBelongsToUser="isMeetingBelongsToUser"
         :meeting="result.meeting_with_tods"
         :userSchedule="result.user_schedule"
       />
@@ -43,9 +40,6 @@ export default {
       default () {
         return []
       }
-    },
-    getResults: {
-      type: Function
     },
     getUserCourses: {
       type: Function
@@ -105,7 +99,6 @@ export default {
           .then(response => {
             this.results = response.data.courses
             this.searchComplete = true
-            this.getResults(this.results)
           })
       } else {
         this.results = []

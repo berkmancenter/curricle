@@ -3,8 +3,14 @@
     class="row curricle-search-result"
     :style="borderStyle">
     <div class="col-md-1">
-      <i class="fa fa-folder" @click="addRemoveCourse(id)"  v-bind:class="{ usercourse:   !isBelongsToUser(id)}"/><br>
-      <i class="fa fa-clock-o" @click="addRemoveSchedule(meeting.id)"  v-bind:class="{ userschedule: !isMeetingBelongsToUser(meeting.id)}" v-if="meeting"/>
+      <i 
+        class="fa fa-folder"
+        @click="addRemoveCourse(id)"
+        v-bind:class="{ usercourse: !userCourseIds.includes(id)}"/><br>
+      <i
+        class="fa fa-clock-o"
+        @click="addRemoveSchedule(meeting.id)"
+        v-bind:class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}" v-if="meeting"/>
     </div>
     <div class="col-md-2">
       <strong>
@@ -43,7 +49,7 @@
 
 <script>
 import axios from 'axios'
-
+import { mapState, mapGetters } from 'vuex'
 export default {
   props: {
     academic_group: {
@@ -94,15 +100,6 @@ export default {
     },
     meeting: {
       type: Object
-    },
-    getUserCourses: {
-      type: Function
-    },
-    isBelongsToUser: {
-      type: Function
-    },
-    isMeetingBelongsToUser: {
-      type: Function
     }
   },
   computed: {
@@ -113,39 +110,19 @@ export default {
       return {
         'border-left-color': ('#' + randomColor)
       }
-    }
+    },
+    ...mapState('user', {
+      userCoursesScheduleIds: 'userCoursesScheduleIds',
+      userCourseIds: 'userCourseIds'
+    })
   },
   methods: {
     addRemoveCourse (courseId) {
-      if(this.isBelongsToUser(this.id)){
-        axios
-        .delete("/courses/remove_from_tray", {params: {id: courseId} })
-        .then((response) => {
-          this.getUserCourses()
-        })
-      }else{
-        axios
-        .post("/courses/add_to_tray", {id: courseId})
-        .then((response) => {
-          this.getUserCourses()
-        })
-      }
+      this.$store.dispatch('user/addRemoveUserCourse', courseId)
     },
-    addRemoveSchedule (meetingId) {
-      if(this.isMeetingBelongsToUser(meetingId)){
-        axios
-        .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
-        .then((response) => {
-          this.getUserCourses()
-        })
-      }else{
-        axios
-        .post("/courses/add_to_schedule", {pattern_id: meetingId})
-        .then((response) => {
-          this.getUserCourses()
-        })
-      }
-    },
+    addRemoveSchedule: function(meetingId){
+      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
+    }
   }
 }
 </script>

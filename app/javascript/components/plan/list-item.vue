@@ -17,7 +17,7 @@
             <br>
             <span>W<img src=""></span>
           </td>          
-          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" v-bind:class="{ 'user-schedule': !isMeetingBelongsToUser(list.meeting_with_tods.id) }" v-if="list.meeting_with_tods" @click="addRemoveSchedule(list.meeting_with_tods.id)"></i></td>
+          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" v-bind:class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}" v-if="list.meeting_with_tods" @click="addRemoveSchedule(list.meeting_with_tods.id)"></i></td>
           <span class= "check_box"><input type= "checkbox" name ="" value= ""></span>
         </tr>
       </tbody>
@@ -27,30 +27,26 @@
 
 <script type="text/javascript">
   import axios from 'axios'
+  import { mapState, mapGetters } from 'vuex'
   import truncate from 'vue-truncate-collapsed';
   export default {
-    props: ['selectedPlan', 'lists', 'isMeetingBelongsToUser', "getUserCourses"],
     components: {
       'truncate': truncate
     },
+    computed: {
+      ...mapGetters('user', {
+        lists: 'trayCourses',
+      }),
+      ...mapState('user', {
+        userCoursesScheduleIds: 'userCoursesScheduleIds'
+      })
+    },  
     methods: {
       selectItem: function (value) {
-        this.selectedPlan(value)
+        this.$store.commit('user/SET_CURRENT_COURSE', value);
       },
       addRemoveSchedule: function(meetingId){
-        if(this.isMeetingBelongsToUser(meetingId)){
-          axios
-          .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
-          .then((response) => {
-            this.getUserCourses()
-          })
-        }else{
-          axios
-          .post("/courses/add_to_schedule", {pattern_id: meetingId})
-          .then((response) => {
-            this.getUserCourses()
-          })
-        }
+        this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
       }
     }
   }

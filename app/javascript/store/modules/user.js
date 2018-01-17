@@ -7,7 +7,8 @@ const state = {
   courses: {},
   filter: {},
   userCoursesScheduleIds: [],
-  currentCourse: {}
+  currentCourse: {},
+  userCourseIds: []
 }
 
 const getters = {
@@ -71,6 +72,7 @@ const actions = {
       .then((response) => {
         commit('SET_COURSES', response.data)
         commit('SET_USER_SCHEDULE', response.data)
+        commit('SET_USER_COURSE', response.data)
       })
   },
   addToUserSchedule ({ commit, dispatch }, meetingId) {
@@ -95,6 +97,29 @@ const actions = {
     } else {
       dispatch('addToUserSchedule', meetingId)
     }
+  },
+  addCourseToUser ({ commit, dispatch, state }, courseId) {
+    const addCourseUrl = '/courses/add_to_tray'
+    axios
+      .post(addCourseUrl, {id: courseId})
+      .then((response) => {
+        dispatch('getCourses')
+      })
+  },
+  RemoveFromUserCourse ({ commit, dispatch, state }, courseId) {
+    const removeCourseUrl = '/courses/remove_from_tray'
+    axios
+      .delete("/courses/remove_from_tray", {params: {id: courseId} })
+      .then((response) => {
+        dispatch('getCourses')
+      })
+  },
+  addRemoveUserCourse ({ commit, dispatch, state }, courseId) {
+    if (state.userCourseIds.includes(courseId)) {
+      dispatch('RemoveFromUserCourse', courseId)
+    } else {
+      dispatch('addCourseToUser', courseId)
+    }
   }
 }
 
@@ -106,6 +131,9 @@ const mutations = {
     state.userCoursesScheduleIds = value.tray
       .filter(item => !!item.user_schedule)
       .map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+  },
+  SET_USER_COURSE: (state, value) => {
+    state.userCourseIds = value.tray.map(item => { return item.id.toString() })
   },
   SET_CURRENT_COURSE: (state, value) => {
     state.currentCourse = value
