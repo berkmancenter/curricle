@@ -5,8 +5,8 @@
         <hr>
         <div class="drop-down actions">
           <i class="fa fa-list-ul" @click="selectView('list-view')"/>
-          <i class="fa fa-calendar" @click="selectView('month-view')"/>
-          <i class="fa fa-square" @click="selectView('year-view')"/>
+          <i class="fa fa-calendar" @click="selectView('semester')"/>
+          <i class="fa fa-square" @click="selectView('multi-year')"/>
           <plan-filter :title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name"/>
         </div>
         <div class="plan">
@@ -15,28 +15,7 @@
       </div>
     </div>
     <div class="col-md-3" v-if="trayVisible">
-      <div class="your-tray-parent">
-        <p class="your-tray"> Your Tray
-          <span class="fa fa-close"></span>
-        </p>
-        <hr>
-        <div class="row actions margin-none">
-          <i class="fa fa-list-ul" @click="selectSideBarView('list-view')"/>
-          <i class="fa fa-calendar" @click="selectSideBarView('semester')"/>
-          <i class="fa fa-square" @click="selectSideBarView('multi-year')"/>
-          <div class="pull-right">See Course History</div>
-        </div>
-      </div>
-      <div class="row margin-none">
-        <course-list :isMeetingBelongsToUser="isMeetingBelongsToUser" :courses="results" v-if="sideBarview=='list-view'" :getUserCourses="getUserCourses"
-        />
-      </div>
-      <div class="row margin-none">
-        <calendar-sidebar :calendarEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'"></calendar-sidebar>
-      </div>
-      <div class="row margin-none">
-        <calendar-sidebar :calendarEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'"></calendar-sidebar>
-      </div>
+      <tray/>
     </div>
     <div class="col-md-3" v-else>
       <div> <p class ="select-course">Selected Course</p>
@@ -57,6 +36,7 @@
 
 <script type="text/javascript">
 import { mapState } from 'vuex'
+import Tray from 'components/tray/tray'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'
 import PlanDescription from 'components/plan/plan-description'
@@ -71,7 +51,8 @@ export default {
     PlanListItem,
     PlanDescription,
     CalendarSidebar,
-    CourseList
+    CourseList,
+    Tray,
   },
   props: ['resultSet'],
   computed: {

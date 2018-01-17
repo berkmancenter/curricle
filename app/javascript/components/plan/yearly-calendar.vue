@@ -5,8 +5,8 @@
         <hr>
         <div class="drop-down actions">
           <i class="fa fa-list-ul" @click="selectView('list-view')"/>
-          <i class="fa fa-calendar" @click="selectView('month-view')"/>
-          <i class="fa fa-square" @click="selectView('year-view')"/>
+          <i class="fa fa-calendar" @click="selectView('semester')"/>
+          <i class="fa fa-square" @click="selectView('multi-year')"/>
         </div>
       </div>
       <div v-for="(courses, year, index) in courses">
@@ -61,28 +61,7 @@
       </div>  
      </div> 
     <div class="col-md-3" v-if="trayVisible">
-      <div class="your-tray-parent">
-        <p class="your-tray"> Your Tray
-          <span class="fa fa-close"></span>
-        </p>
-        <hr>
-        <div class="row actions margin-none">
-          <i class="fa fa-list-ul" @click="selectSideBarView('list-view')"/>
-          <i class="fa fa-calendar" @click="selectSideBarView('semester')"/>
-          <i class="fa fa-square" @click="selectSideBarView('multi-year')"/>
-          <div class="pull-right">See Course History</div>
-        </div>
-      </div>
-      <div class="row margin-none">
-        <calendar-sidebar :calendarEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'"></calendar-sidebar>
-      </div>
-      <div class="row margin-none">
-        <calendar-sidebar :calendarEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'"></calendar-sidebar>
-      </div>
-      <div class="row margin-none">
-        <course-list :courses = "results" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='list-view'"
-        />
-      </div>
+      <tray/>
     </div>
     <div class="col-md-3" v-else>
       <div> <p class ="select-course">Selected Course</p>
@@ -100,6 +79,7 @@
     </div>
   </div>
 </template>
+
 <script type="text/javascript">
 import { mapState } from 'vuex'
 import lodash from 'lodash'
@@ -108,6 +88,7 @@ import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanDescription from 'components/plan/plan-description'
 import CourseList from 'components/tray/list.vue'
+import Tray from 'components/tray/tray.vue'
 import moment from 'moment'
 import axios from 'axios'
 // var events_arr = [];
@@ -117,7 +98,8 @@ export default {
     CalendarSidebar,
     PlanFilter,
     PlanDescription,
-    CourseList
+    CourseList,
+    Tray
   },
   computed: {
       ...mapState('app', {
@@ -145,7 +127,7 @@ export default {
   },
   methods: {
     selectView (type) {
-      this.selectedView(type)
+      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type);
     },
 
     selectSideBarView(view){

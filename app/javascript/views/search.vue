@@ -7,60 +7,15 @@
         <curricle-search :keywords="keywords" :getResults="getResults" :getUserCourses="getUserCourses" :isBelongsToUser="isBelongsToUser" :isMeetingBelongsToUser="isMeetingBelongsToUser"/>
       </div>
       <div class="col-md-4 sidebar" v-if="trayVisible">
-        <div class=".your-tray-parent">
-          <p class="your-tray">
-            Your Tray
-            <span class="fa fa-close">
-            </span>
-          </p>
-          <hr>
-          <div class="row actions margin-none">
-            <i class="fa fa-list-ul" @click="selectSideBarView('list-view')"/>
-            <i class="fa fa-calendar" @click="selectSideBarView('semester')"/>
-            <i class="fa fa-square" @click="selectSideBarView('multi-year')"/>
-            <div class="pull-right"> See Course History</div>
-          </div>
-        </div>
-        <div class="row margin-none">
-          <plan-filter
-            :title="category.name"
-            :items="category.options"
-            :field="category.field"
-            v-for="category in categories"
-            :selected-filter="selectedFilter"
-            :name="category.name" 
-          />
-        </div>
-        <div class="row margin-none">
-          <course-list 
-            :courses = "filteredResults"
-            v-if="sideBarview=='list-view'"
-            :isMeetingBelongsToUser="isMeetingBelongsToUser"
-            :getUserCourses="getUserCourses"
-          />
-        </div>
-        <div class="row margin-none">
-          <calendar-sidebar 
-            :calendarEvents="events"
-            v-if="sideBarview=='semester'"
-            :isMeetingBelongsToUser="isMeetingBelongsToUser"
-            :getUserCourses="getUserCourses"
-          />
-        </div>
-        <div class="row margin-none">
-          <calendar-sidebar 
-            :calendarEvents="yearlyEvents"
-            v-if="sideBarview=='multi-year'"
-            :isMeetingBelongsToUser="isMeetingBelongsToUser"
-            :getUserCourses="getUserCourses"
-          />
-        </div>
+        <tray/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import Tray from '../components/tray/tray.vue'
 import BasicSearch from '../components/BasicSearch.vue'
 import CurricleSearch from '../components/CurricleSearch.vue'
 import CourseList from '../components/tray/list.vue'
@@ -75,9 +30,13 @@ export default {
     CourseList,
     PlanFilter,
     CalendarSidebar
+    Tray,
   },
 
-  props: ['trayVisible', 'trayToggle', 'searchedResults'],
+  computed: {
+    ...mapState('app',['trayVisible'])
+  },
+  props: [ 'searchedResults'],
 
   mounted () {
     this.filterCategories()

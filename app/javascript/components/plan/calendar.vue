@@ -5,28 +5,13 @@
       hr
       .drop-down.actions
         i.fa.fa-list-ul(@click="selectView('list-view')")
-        i.fa.fa-calendar(@click="selectView('month-view')")
-        i.fa.fa-square(@click="selectView('year-view')")
+        i.fa.fa-calendar(@click="selectView('semester')")
+        i.fa.fa-square(@click="selectView('multi-year')")
         plan-filter(:title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name") Filter By :
       .full-calendar
       .full-calendar1
     .col-md-3(v-if="trayVisible")
-      .your-tray-parent
-        p.your-tray Your Tray 
-          span.fa.fa-close
-        hr
-        .row.actions.margin-none
-          i.fa.fa-list-ul(@click="selectSideBarView('list-view')")
-          i.fa.fa-calendar(@click="selectSideBarView('semester')")
-          i.fa.fa-square(@click="selectSideBarView('multi-year')")
-          .pull-right See Course History
-
-      .row.margin-none
-        calendar-sidebar(:calendarEvents="events" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='semester'")
-      .row.margin-none
-        calendar-sidebar(:calendarEvents="yearlyEvents" :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" v-if="sideBarview=='multi-year'")
-      .row.margin-none
-        course-list(:courses='results' :getUserCourses="getUserCourses" :isMeetingBelongsToUser="isMeetingBelongsToUser" :v-if="sideBarview=='list-view'")
+      tray
     .col-md-3(v-else='')
       div
         p.select-course Selected Course
@@ -47,6 +32,7 @@
   import PlanFilter from 'components/plan/plan-filter'
   import PlanDescription from 'components/plan/plan-description'
   import CourseList from 'components/tray/list.vue'
+  import Tray from 'components/tray/tray.vue'
   import axios from 'axios'
   import _ from 'lodash'
   // var events_arr = [];
@@ -56,7 +42,11 @@
       CalendarSidebar,
       PlanFilter,
       PlanDescription,
-      CourseList
+      CourseList,
+      Tray
+    },
+    computed: {
+        ...mapState('app',['trayVisible'])
     },
     data () {
       return {
@@ -80,7 +70,7 @@
     },
     methods: {
       selectView (type) {
-        this.selectedView(type)
+        this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type);
       },
 
       selectSideBarView(view){
