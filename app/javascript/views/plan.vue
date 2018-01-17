@@ -1,8 +1,8 @@
 <template lang="pug">
   .abc
-    list-view(:selectedView="selectedView" :trayVisible="trayVisible" :resultSet="resultSet" v-if="planView=='list-view'")
-    calendar(:selectedView="selectedView" :trayVisible="trayVisible" :resultSet="resultSet" v-if="planView=='month-view'", )
-    yearly-calendar(:selectedView="selectedView" :trayVisible="trayVisible" :resultSet="resultSet" v-if="planView=='year-view'")
+    list-view(:resultSet="resultSet" v-if="planView=='list-view'")
+    calendar( :resultSet="resultSet" v-if="planView=='semester'", )
+    yearly-calendar(:resultSet="resultSet" v-if="planView=='multi-year'")
 </template>
 
 <script type="text/javascript">
@@ -38,6 +38,7 @@ export default {
   }
 }
 </script>
+
 <style type="text/css">
   .plan .list-group-item, .calendar-sidebar .list-group-item{
     background: #E4E4E4;
