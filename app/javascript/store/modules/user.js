@@ -61,6 +61,7 @@ const getters = {
     } else {
       yearlyEvents = state.courses.multi_year
     }
+    return yearlyEvents
   }
 }
 

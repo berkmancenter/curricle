@@ -14,11 +14,11 @@
   </div>
   <div class="row margin-none">
     <calendar-sidebar
-       v-if="viewmode=='semester' || viewmode=='multi-year'"
-       />
+      v-if="viewmode=='semester' || viewmode=='multi-year'"
+      />
     <course-list
-       v-if="viewmode=='list-view'"
-       />
+      v-if="viewmode=='list-view'"
+      />
   </div>
 </div>
 </template>
