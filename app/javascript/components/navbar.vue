@@ -44,7 +44,7 @@ export default {
   .tray-li:last-child a{
     padding: 5px 25px !important;
   }
-  .tray-active .nav-link{
+  .tray-active .nav-link, .active.nav-link{
     color: #FFF !important;
     background-color: #000;
     border-radius: 2px;
