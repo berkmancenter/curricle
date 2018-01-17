@@ -8,7 +8,7 @@
         <td style="border-right: 5px solid #000;">
           <i
             class= "fa fa-clock-o"
-            v-bind:class="{ 'user-schedule': !courseIds[course.meeting_with_tods.id] }"
+            v-bind:class="{ 'user-schedule': !userCoursesScheduleIds.includes(course.meeting_with_tods.id) }"
             @click="addRemoveSchedule(course.meeting_with_tods.id)"
             v-if="course.meeting_with_tods"
             >
@@ -20,34 +20,17 @@
 </template>
 <script type="text/javascript">
 import axios from 'axios'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   computed: {
-      ...mapState('user',['trayCourses', 'courseIds']),
-  },
-  watch: {
-    trayCourses () {
-      console.log(this.trayCourses)
-      console.log(this.courseIds)
-    }
+    ...mapState('user',['userCoursesScheduleIds']),
+    ...mapGetters('user', ['trayCourses']),
   },
   methods: {
-    addRemoveSchedule (meetingId) {
-      if(this.courseIds[meetingId]){
-        axios
-        .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
-        .then((response) => {
-          this.$store.dispatch("user/getCourses");
-        })
-      }else{
-        axios
-        .post("/courses/add_to_schedule", {pattern_id: meetingId})
-        .then((response) => {
-          this.$store.dispatch("user/getCourses");
-        })
-      }
-    },
+    addRemoveSchedule: function(meetingId){
+      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
+    }
   }
 }
 </script>
