@@ -9,6 +9,16 @@ const state = {
 }
 
 const getters = {
+  trayCourses (state) {
+    return state.courses.tray
+  },
+  courseIds (state) {
+    var ids = {}
+
+    _.forEach(state.courses.tray,x => ids[x.external_course_id] = x.external_course_id)
+
+    return ids
+  },
   coursesByDate (state) {
     var filter = state.filter
     var events = {}
@@ -56,12 +66,12 @@ const getters = {
 }
 
 const actions = {
-  get_user_courses ({ commit }) {
+  getCourses ({ commit }) {
       const course_url = '/courses/user_courses'
       axios
       .get(course_url)
       .then((response) => {
-        commit('user/SET_COURSES', response.data)
+        commit('SET_COURSES', response.data)
       })
   },
 }
