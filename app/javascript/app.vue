@@ -15,7 +15,7 @@ export default {
   },
   mounted () {
     // load initial data
-    this.$store.dispatch("user/getCourses")
-  },
+    this.$store.dispatch('user/getCourses')
+  }
 }
 </script>

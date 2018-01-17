@@ -1,7 +1,7 @@
 <template>
   <div class="table-responsive">
     <table class="course-list-iltem table">
-      <thead></thead>
+      <thead/>
       <tbody>
         <tr v-for="list in lists" @click="selectItem(list)">
           <td>{{ list.external_course_id }}</td>
@@ -9,15 +9,15 @@
           <td>{{ list.academic_group }} <br> {{ list.subject }}</td>
           <td>{{ list.term_name }} <br> {{ list.units_maximum }} units</td>
           <td style = "width: 16em; text-align: justify;">
-            <truncate class="course_description"  clamp="..." :length="50" less="Show Less" type="html" :text="list.course_description_long" v-if="list.course_description_long"></truncate>
+            <truncate class="course_description" clamp="..." :length="50" less="Show Less" type="html" :text="list.course_description_long" v-if="list.course_description_long"/>
           </td>
           <td>4 pm to 6pm<br> 9 am to 10 pm</td>
           <td>
             <span>M<img src=""></span>
             <br>
             <span>W<img src=""></span>
-          </td>          
-          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" v-bind:class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}" v-if="list.meeting_with_tods" @click="addRemoveSchedule(list.meeting_with_tods.id)"></i></td>
+          </td>
+          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" :class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}" v-if="list.meeting_with_tods" @click="addRemoveSchedule(list.meeting_with_tods.id)"/></td>
           <span class= "check_box"><input type= "checkbox" name ="" value= ""></span>
         </tr>
       </tbody>
@@ -26,30 +26,30 @@
 </template>
 
 <script type="text/javascript">
-  import axios from 'axios'
-  import { mapState, mapGetters } from 'vuex'
-  import truncate from 'vue-truncate-collapsed';
-  export default {
-    components: {
-      'truncate': truncate
+import axios from 'axios'
+import { mapState, mapGetters } from 'vuex'
+import truncate from 'vue-truncate-collapsed'
+export default {
+  components: {
+    'truncate': truncate
+  },
+  computed: {
+    ...mapGetters('user', {
+      lists: 'trayCourses'
+    }),
+    ...mapState('user', {
+      userCoursesScheduleIds: 'userCoursesScheduleIds'
+    })
+  },
+  methods: {
+    selectItem: function (value) {
+      this.$store.commit('user/SET_CURRENT_COURSE', value)
     },
-    computed: {
-      ...mapGetters('user', {
-        lists: 'trayCourses',
-      }),
-      ...mapState('user', {
-        userCoursesScheduleIds: 'userCoursesScheduleIds'
-      })
-    },  
-    methods: {
-      selectItem: function (value) {
-        this.$store.commit('user/SET_CURRENT_COURSE', value);
-      },
-      addRemoveSchedule: function(meetingId){
-        this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
-      }
+    addRemoveSchedule: function (meetingId) {
+      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
     }
   }
+}
 </script>
 
 <style type="text/css">
@@ -77,7 +77,7 @@
     position: absolute;
     right: 0px;
   }
-  .course-list-iltem tbody { 
+  .course-list-iltem tbody {
     border-top: 2px solid #C0C0C0;
   }
   .table td {

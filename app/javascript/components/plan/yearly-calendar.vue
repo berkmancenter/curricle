@@ -15,8 +15,8 @@
           <div class="bannner">
             <div style="height: 300px;">
               <ul>
-                <li v-for="event in courses" v-bind:style="{height: height(event)}" @click="selectedPlan(event)" v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
-                  <div class="fc-title"></div>
+                <li v-for="event in courses" :style="{height: height(event)}" @click="selectedPlan(event)" v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
+                  <div class="fc-title"/>
                   <p>{{ event.external_course_id }}</p>
                   <p>{{ event.title }}</p>
                   <p><b>{{ event.academic_group }}</b></p>
@@ -24,42 +24,42 @@
                 </li>
               </ul>
             </div>
-          </div> 
-          <div class="hr-breif">    
+          </div>
+          <div class="hr-breif">
             <div class="col100">
               <ul>
-                <p> </p>
-              </ul>  
-            </div>  
+                <p/>
+              </ul>
+            </div>
             <div class="col100">
               <ul>
                 <p>1hr</p>
-              </ul>  
-            </div>  
+              </ul>
+            </div>
             <div class="col100">
-             <ul>
+              <ul>
                 <p>2hr</p>
-              </ul>  
-           </div>  
-           <div class="col100">
-              <ul>
-                 <p>3hr</p>
-             </ul>  
-            </div>  
-           <div class="col100">
-              <ul>
-               <p>4hr</p>
-             </ul>  
-            </div>  
+              </ul>
+            </div>
             <div class="col100">
               <ul>
-                 <p>5hr</p>
-              </ul>  
+                <p>3hr</p>
+              </ul>
+            </div>
+            <div class="col100">
+              <ul>
+                <p>4hr</p>
+              </ul>
+            </div>
+            <div class="col100">
+              <ul>
+                <p>5hr</p>
+              </ul>
             </div>
           </div>
         </div>
-      </div>  
-     </div> 
+      </div>
+    </div>
     <div class="col-md-3" v-if="trayVisible">
       <tray/>
     </div>
@@ -102,10 +102,10 @@ export default {
     Tray
   },
   computed: {
-      ...mapState('app', {
-        trayVisible: 'trayVisible',
-        selectedView: 'viewmode',
-      }),
+    ...mapState('app', {
+      trayVisible: 'trayVisible',
+      selectedView: 'viewmode'
+    })
   },
   data () {
     return {
@@ -122,60 +122,58 @@ export default {
       userCoursesScheduleIds: []
     }
   },
-  mounted () {  
+  mounted () {
     this.getUserCourses()
   },
   methods: {
     selectView (type) {
-      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type);
+      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
     },
 
-    selectSideBarView(view){
+    selectSideBarView (view) {
       this.sideBarview = view
       this.filterData(this.currentFilter)
     },
 
-    filterCategories(){
+    filterCategories () {
       axios.get('/courses/categories').then((response) => {
         this.categories = response.data
-        .filter(item => item.name == 'Semester')
+          .filter(item => item.name == 'Semester')
       })
     },
 
-    getCoursesByDate(filter){
-      if((filter != undefined) && (Object.keys(filter).length > 0)){
-        this.events = {};
-        const semester = filter.value.split(" ")
+    getCoursesByDate (filter) {
+      if ((filter != undefined) && (Object.keys(filter).length > 0)) {
+        this.events = {}
+        const semester = filter.value.split(' ')
         _.forEach(this.user_courses.semester, (day, key) => {
           this.events[key] = day.filter((item) => {
-            if (filter.name === 'term_name'){
-              return item.term_name ==  semester[0] && item.term_year == semester[1]
-            }
-            else{
+            if (filter.name === 'term_name') {
+              return item.term_name == semester[0] && item.term_year == semester[1]
+            } else {
               return item[filter.name] == filter.value
             }
           })
         })
-      }else{
+      } else {
         this.events = this.user_courses.semester
       }
     },
 
-    getCoursesByYear(filter){
-      if((filter != undefined) && (Object.keys(filter).length > 0)){
-        this.yearlyEvents = {};
-        const semester = filter.value.split(" ")
+    getCoursesByYear (filter) {
+      if ((filter != undefined) && (Object.keys(filter).length > 0)) {
+        this.yearlyEvents = {}
+        const semester = filter.value.split(' ')
         _.forEach(this.user_courses.multi_year, (day, key) => {
           this.yearlyEvents[key] = day.filter((item) => {
-            if (filter.name === 'term_name'){
-              return item.term_name ==  semester[0] && item.term_year == semester[1]
-            }
-            else{
+            if (filter.name === 'term_name') {
+              return item.term_name == semester[0] && item.term_year == semester[1]
+            } else {
               return item[filter.name] == filter.value
             }
           })
         })
-      }else{
+      } else {
         this.yearlyEvents = this.user_courses.multi_year
       }
     },
@@ -185,39 +183,39 @@ export default {
     },
 
     filterData (filter) {
-      if(this.sideBarview == 'semester'){
+      if (this.sideBarview == 'semester') {
         this.getCoursesByDate(filter)
       }
 
-      if(this.sideBarview == 'multi-year'){
+      if (this.sideBarview == 'multi-year') {
         this.getCoursesByYear(filter)
       }
     },
-    height(course){
-      if(course && course.meeting_with_tods){
-        const start_time  = moment(course.meeting_with_tods.meeting_time_start)
-        const end_time  = moment(course.meeting_with_tods.meeting_time_end)
+    height (course) {
+      if (course && course.meeting_with_tods) {
+        const start_time = moment(course.meeting_with_tods.meeting_time_start)
+        const end_time = moment(course.meeting_with_tods.meeting_time_end)
         end_time.diff(start_time, 'hours') * 72 + 'px'
-      }else{
+      } else {
         '100px'
       }
     },
-    isMeetingBelongsToUser(id){
-      return this.userCoursesScheduleIds.includes(id)    
+    isMeetingBelongsToUser (id) {
+      return this.userCoursesScheduleIds.includes(id)
     },
-    getUserCourses(){
+    getUserCourses () {
       const course_url = '/courses/user_courses'
       axios
-      .get(course_url)
-      .then((response) => {
-        this.user_courses = response.data
-        this.courses = this.user_courses.multi_year
-        this.results = this.user_courses.tray
-        this.filterCategories()
-        this.getCoursesByDate()
-        this.getCoursesByYear()
-        this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-      })
+        .get(course_url)
+        .then((response) => {
+          this.user_courses = response.data
+          this.courses = this.user_courses.multi_year
+          this.results = this.user_courses.tray
+          this.filterCategories()
+          this.getCoursesByDate()
+          this.getCoursesByYear()
+          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+        })
     }
   }
 }
@@ -228,25 +226,25 @@ export default {
   .yearly-view table, .yearly-view table tbody {
     display: inline-block;
     width: 100%;
-  }  
+  }
   .yearly-view table tbody tr {
     display: inline-table;
     width: 100%;
     height: 50px;
   }
-  .col100{    
+  .col100{
     display: table;
     width: 100%;
     height: 70px;
   }
   .col100 ul{
-    display: table; 
-    width: 100%; 
-    padding: 0px; 
-    margin: 0px; 
+    display: table;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
     border-top: 1px solid #000;
   }
-  .col100 ul li{    
+  .col100 ul li{
     display: table;
     width: calc(100% / 10 - 10px);
     float: left;
@@ -259,7 +257,7 @@ export default {
   .bannner{
     position: absolute;
     height: 100%;
-    left: 50px; 
+    left: 50px;
     z-index: 99;
   }
   .bannner ul{
@@ -267,9 +265,9 @@ export default {
     width: 100%;
     height: 100%;
     padding: 0px;
-    margin: 0px;    
+    margin: 0px;
   }
-  .bannner ul li{    
+  .bannner ul li{
     display: table;
     background: #dcdcdc;
     width: calc(100% / 10 - 20px);

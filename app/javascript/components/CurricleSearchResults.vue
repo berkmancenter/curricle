@@ -3,14 +3,14 @@
     class="row curricle-search-result"
     :style="borderStyle">
     <div class="col-md-1">
-      <i 
+      <i
         class="fa fa-folder"
         @click="addRemoveCourse(id)"
-        v-bind:class="{ usercourse: !userCourseIds.includes(id)}"/><br>
+        :class="{ usercourse: !userCourseIds.includes(id)}"/><br>
       <i
         class="fa fa-clock-o"
         @click="addRemoveSchedule(meeting.id)"
-        v-bind:class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}" v-if="meeting"/>
+        :class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}" v-if="meeting"/>
     </div>
     <div class="col-md-2">
       <strong>
@@ -120,7 +120,7 @@ export default {
     addRemoveCourse (courseId) {
       this.$store.dispatch('user/addRemoveUserCourse', courseId)
     },
-    addRemoveSchedule: function(meetingId){
+    addRemoveSchedule: function (meetingId) {
       this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
     }
   }

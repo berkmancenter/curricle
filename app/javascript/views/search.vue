@@ -24,29 +24,29 @@ export default {
   components: {
     BasicSearch,
     CurricleSearch,
-    Tray,
+    Tray
   },
 
   computed: {
-    ...mapState('app',['trayVisible'])
+    ...mapState('app', ['trayVisible'])
   },
   props: [ 'searchedResults'],
 
   mounted () {
-    //this.filterCategories()
-    //this.getCoursesByDate()
-    //this.getCoursesByYear()
-    //this.getUserCourses()
+    // this.filterCategories()
+    // this.getCoursesByDate()
+    // this.getCoursesByYear()
+    // this.getUserCourses()
   },
 
   data () {
     return {
       keywords: [],
       results: [],
-      //filteredResults: [],
-      categories: [],
+      // filteredResults: [],
+      categories: []
     }
-  },
+  }
 
 }
 </script>

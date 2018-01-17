@@ -110,7 +110,7 @@ const actions = {
   RemoveFromUserCourse ({ commit, dispatch, state }, courseId) {
     const removeCourseUrl = '/courses/remove_from_tray'
     axios
-      .delete("/courses/remove_from_tray", {params: {id: courseId} })
+      .delete('/courses/remove_from_tray', {params: {id: courseId} })
       .then((response) => {
         dispatch('getCourses')
       })

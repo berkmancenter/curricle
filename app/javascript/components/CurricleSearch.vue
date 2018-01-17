@@ -17,7 +17,7 @@
         :title="result.title"
         :units_maximum="result.units_maximum"
         :meeting="result.meeting_with_tods"
-        :userSchedule="result.user_schedule"
+        :user-schedule="result.user_schedule"
       />
     </div>
   </div>

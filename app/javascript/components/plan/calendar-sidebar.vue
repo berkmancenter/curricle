@@ -4,19 +4,18 @@
       <strong>{{ day }}</strong>
       <div class="table-responsive">
         <table class="course-list-iltem table">
-          <thead></thead>
+          <thead/>
           <tbody>
             <tr v-for="course in courses">
               <td>{{ course.external_course_id }}</td>
-              <td>{{ course.title }}</td>            
+              <td>{{ course.title }}</td>
               <td style="border-right: 5px solid #000;">
                 <i
                   class= "fa fa-clock-o"
-                  v-bind:class="{ 'user-schedule': !userCoursesScheduleIds.includes(course.meeting_with_tods.id) }"
+                  :class="{ 'user-schedule': !userCoursesScheduleIds.includes(course.meeting_with_tods.id) }"
                   @click="addRemoveSchedule(course.meeting_with_tods.id)"
-				          v-if="course.meeting_with_tods"
-                  >
-                </i>
+                  v-if="course.meeting_with_tods"
+                />
               </td>
             </tr>
           </tbody>
@@ -32,20 +31,20 @@ import { mapState, mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('app',['viewmode']),
+    ...mapState('app', ['viewmode']),
     ...mapState('user', ['userCoursesScheduleIds']),
-    ...mapGetters('user',['coursesByDate', 'coursesByYear', 'courseIds']),
+    ...mapGetters('user', ['coursesByDate', 'coursesByYear', 'courseIds']),
     calendarEvents () { return this.viewmode == 'multi-year' ? this.coursesByYear : this.coursesByDate }
   },
   methods: {
-    addRemoveSchedule: function(meetingId){
+    addRemoveSchedule: function (meetingId) {
       this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
     }
   }
 }
 </script>
 
-<style type="text/css">  
+<style type="text/css">
    .course-list-iltem tbody tr {
     margin-bottom: 5px;
     display: table;
@@ -60,8 +59,8 @@ export default {
     display: table-caption;
     width: 100%;
   }
-  
-  .course-list-iltem tbody { 
+
+  .course-list-iltem tbody {
     border-top: 2px solid #C0C0C0;
   }
   .table td {
@@ -77,8 +76,8 @@ export default {
   .actions {
     margin-bottom: 40px;
   }
-   
-  /*.fc-head-container div table thead tr th:nth-child(2), 
+
+  /*.fc-head-container div table thead tr th:nth-child(2),
   .fc-head-container div table thead tr th:nth-child(8) {
     display: none;
   }*/

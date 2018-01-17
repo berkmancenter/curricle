@@ -4,16 +4,15 @@
       <span
         class="active-keyword border border-dark rounded"
         v-for="(tag, index) of activeTags"
-        v-on:click="deactivateTag(index, tag.name)">
+        @click="deactivateTag(index, tag.name)">
         {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
       </span>
       <span
         <input
-          class="input-tag"
-          placeholder="Enter Tag"
-          v-model="tag"
-          @keyup.enter="addActiveTag()">
-      </span>
+        class="input-tag"
+        placeholder="Enter Tag"
+        v-model="tag"
+        @keyup.enter="addActiveTag()"/>
     </div>
   </div>
 </template>
@@ -41,30 +40,30 @@ export default {
   methods: {
     deactivateTag (index, tagName) {
       axios.delete('/tags/remove', { data: {
-          course_id: this.courseId,
-          name: tagName
-        }})
+        course_id: this.courseId,
+        name: tagName
+      }})
         .then(function (response) {
-          console.log(response);
+          console.log(response)
         })
         .catch(function (error) {
-          console.log(error);
-        });
-        this.activeTags.splice(index, 1);
+          console.log(error)
+        })
+      this.activeTags.splice(index, 1)
     },
     addActiveTag () {
       if (this.tag) {
         axios.post('/tags', {
-            course_id: this.courseId,
-            name: this.tag
-          })
+          course_id: this.courseId,
+          name: this.tag
+        })
           .then(function (response) {
-            console.log(response.data);
+            console.log(response.data)
           })
           .catch(function (error) {
-            console.log(error);
-          });
-          this.activeTags.push({name: this.tag, course_id: this.courseId})
+            console.log(error)
+          })
+        this.activeTags.push({name: this.tag, course_id: this.courseId})
         this.tag = ''
       }
     }

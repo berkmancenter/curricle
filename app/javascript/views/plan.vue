@@ -25,12 +25,12 @@ export default {
   },
 
   computed: {
-      ...mapState('app', {
-        trayVisible: 'trayVisible',
-        planView: 'viewmode'
-      })
+    ...mapState('app', {
+      trayVisible: 'trayVisible',
+      planView: 'viewmode'
+    })
   },
-  
+
   methods: {
     selectedView: type => this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
   }

@@ -12,8 +12,8 @@ const store = new Vuex.Store({
     app,
     user,
     search,
-    plan,
+    plan
   }
 })
 
-export default store;
+export default store

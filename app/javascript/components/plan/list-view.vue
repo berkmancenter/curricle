@@ -7,14 +7,14 @@
           <i class="fa fa-list-ul" @click="selectView('list-view')"/>
           <i class="fa fa-calendar" @click="selectView('semester')"/>
           <i class="fa fa-square" @click="selectView('multi-year')"/>
-          <plan-filter 
+          <plan-filter
             :title="category.name"
             :items="category.options"
             :field="category.field"
             v-for="category in categories"
             :name="category.name"
             :key="category.id"
-            />
+          />
         </div>
         <div class="plan">
           <plan-list-item/>
@@ -59,13 +59,13 @@ export default {
     PlanDescription,
     CalendarSidebar,
     CourseList,
-    Tray,
+    Tray
   },
   computed: {
-    ...mapState('app',{
+    ...mapState('app', {
       trayVisible: 'trayVisible',
       selectedView: 'viewmode'
-    }),
+    })
   },
   mounted () {
     this.$store.dispatch('user/getCourses')
@@ -90,11 +90,11 @@ export default {
   },
   methods: {
     selectView (type) {
-      this.$store.commit("app/CHOOSE_SIDEBAR_VIEW",type)
+      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
     },
-    selectSideBarView(type){
-      this.$store.commit("app/CHOOSE_SIDEBAR_VIEW",type)
-    },
+    selectSideBarView (type) {
+      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
+    }
   }
 }
 </script>
@@ -118,12 +118,12 @@ export default {
   .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
     background-color: inherit !important;
     color: #000 !important;
-    border: none !important; 
+    border: none !important;
     box-shadow: inherit !important;
   }
   hr {
     border-color: #000 !important;
     border-width: 2px !important;
-    margin-top: 0px !important; 
+    margin-top: 0px !important;
   }
 </style>

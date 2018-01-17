@@ -12,13 +12,13 @@
         </div>
         <div class="col-md-7 text-right">
           <basic-search-field-dropdown
-           :applyTo="applyTo"
-           @applyFilterChange="applyTo = $event"
+            :apply-to="applyTo"
+            @applyFilterChange="applyTo = $event"
           />
           &nbsp;
           <basic-search-field-weight-dropdown
-           @weightChange="weight = $event"
-           :weight="weight"
+            @weightChange="weight = $event"
+            :weight="weight"
           />
         </div>
         <div class="col-md-2 text-right">

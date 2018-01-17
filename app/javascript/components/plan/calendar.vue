@@ -1,6 +1,6 @@
 <template lang="pug">
   .row.margin-none
-    .col-md-9      
+    .col-md-9
       p.your-tray Your Tray
       hr
       .drop-down.actions
@@ -22,217 +22,216 @@
           i.fa.fa-share-alt
           .pull-right  See Course History
         .row.margin-none
-          plan-description(:course='course')      
+          plan-description(:course='course')
 </template>
 
 <script type="text/javascript">
-  import { mapState } from 'vuex'
-  import fullCalendar from 'fullcalendar'
-  import CalendarSidebar from 'components/plan/calendar-sidebar'
-  import PlanFilter from 'components/plan/plan-filter'
-  import PlanDescription from 'components/plan/plan-description'
-  import CourseList from 'components/tray/list.vue'
-  import Tray from 'components/tray/tray.vue'
-  import axios from 'axios'
-  import _ from 'lodash'
-  // var events_arr = [];
+import { mapState } from 'vuex'
+import fullCalendar from 'fullcalendar'
+import CalendarSidebar from 'components/plan/calendar-sidebar'
+import PlanFilter from 'components/plan/plan-filter'
+import PlanDescription from 'components/plan/plan-description'
+import CourseList from 'components/tray/list.vue'
+import Tray from 'components/tray/tray.vue'
+import axios from 'axios'
+import _ from 'lodash'
+// var events_arr = [];
 
-  export default {
-    components: {
-      CalendarSidebar,
-      PlanFilter,
-      PlanDescription,
-      CourseList,
-      Tray
+export default {
+  components: {
+    CalendarSidebar,
+    PlanFilter,
+    PlanDescription,
+    CourseList,
+    Tray
+  },
+  computed: {
+    ...mapState('app', ['trayVisible'])
+  },
+  data () {
+    return {
+      user_courses: [],
+      courses: [],
+      events_arr: [],
+      categories: [],
+      course: {},
+      filteredCourses: [],
+      sideBarview: 'semester',
+      events: [],
+      yearlyEvents: [],
+      currentFilter: {},
+      results: [],
+      userCoursesScheduleIds: []
+    }
+  },
+  mounted () {
+    const category_url = '/courses/categories'
+    this.getUserCourses()
+  },
+  methods: {
+    selectView (type) {
+      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
     },
-    computed: {
-        ...mapState('app',['trayVisible'])
-    },
-    data () {
-      return {
-        user_courses: [],
-        courses: [],
-        events_arr: [],
-        categories: [],
-        course: {},
-        filteredCourses: [],
-        sideBarview: 'semester',
-        events: [],
-        yearlyEvents: [],
-        currentFilter: {},
-        results: [],
-        userCoursesScheduleIds: []
-      }
-    },
-    mounted () {
-      const category_url = '/courses/categories'
-      this.getUserCourses()
-    },
-    methods: {
-      selectView (type) {
-        this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type);
-      },
 
-      selectSideBarView(view){
-        this.sideBarview = view
-        this.filterData(this.currentFilter)
-      },
+    selectSideBarView (view) {
+      this.sideBarview = view
+      this.filterData(this.currentFilter)
+    },
 
-      filterCategories(){
-        axios.get('/courses/categories').then((response) => {
-          this.categories = response.data
+    filterCategories () {
+      axios.get('/courses/categories').then((response) => {
+        this.categories = response.data
           .filter(item => item.name == 'Semester')
-        })
-      },
+      })
+    },
 
-      selectedFilter (filter, name) {
-        this.currentFilter = filter
-        this.removeEvents()
-        if (filter.value != 'none') {
-          this.filterData(this.currentFilter)
-        }
-        this.getEventData(this.courses)
-        this.addEvents()
-      },
+    selectedFilter (filter, name) {
+      this.currentFilter = filter
+      this.removeEvents()
+      if (filter.value != 'none') {
+        this.filterData(this.currentFilter)
+      }
+      this.getEventData(this.courses)
+      this.addEvents()
+    },
 
-      getEventData(data){
-        this.events_arr = data
-          .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
-          .map(item => {
-            return { 
-              title  : " ",
-              start  : item.meeting_with_tods.meeting_time_start,
-              end    : item.meeting_with_tods.meeting_time_end,
-              description: item.subject_description,
-              course : item,
-              self   : this
-            }
-          })
-      },
-
-      setEvent () {
-        $('.full-calendar').fullCalendar({
-          defaultView: 'agendaWeek',
-          allDaySlot: false,
-          displayEventTime: false,
-          slotDuration: '00:60:00',
-          columnFormat: 'ddd',
-          weekends: false,
-          events: this.events_arr,
-          eventRender: function(event, element) { 
-            element.find('.fc-title').after("<div class='event-description'>" + "<p>" + event.course.external_course_id   + "</p>" + "<p>" + event.description + "</p>" + "<p>" + "<b>" + event.course.academic_group + "</b>" + "</p>"+ "<p>" + "<b>" + event.course.subject + "</b>" + "</p>" + "</div>"); 
-          },
-          eventClick: function(calEvent, jsEvent, view) {
-            calEvent.self.selectedPlan(calEvent.course)
+    getEventData (data) {
+      this.events_arr = data
+        .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
+        .map(item => {
+          return {
+            title: ' ',
+            start: item.meeting_with_tods.meeting_time_start,
+            end: item.meeting_with_tods.meeting_time_end,
+            description: item.subject_description,
+            course: item,
+            self: this
           }
         })
-      },
-      getCoursesByDate(filter){
-        // Not Required Here
-        // if((filter != undefined) && (Object.keys(filter).length > 0)){
-        //   this.events = {};
-        //   const semester = filter.value.split(" ")
-        //   _.forEach(this.user_courses.semester, (day, key) => {
-        //     this.events[key] = day.filter((item) => {
-        //       if (filter.name === 'term_name'){
-        //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-        //       }
-        //       else{
-        //         return item[filter.name] == filter.value
-        //       }
-        //     })
-        //   })
-        // }else{
-        //   this.events = this.user_courses.semester
-        // }
-      },
+    },
 
-      getCoursesByYear(filter){
-        // Not Required Here
-        // if((filter != undefined) && (Object.keys(filter).length > 0)){
-        //   this.yearlyEvents = {};
-        //   const semester = filter.value.split(" ")
-        //   _.forEach(this.user_courses.multi_year, (day, key) => {
-        //     this.yearlyEvents[key] = day.filter((item) => {
-        //       if (filter.name === 'term_name'){
-        //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-        //       }
-        //       else{
-        //         return item[filter.name] == filter.value
-        //       }
-        //     })
-        //   })
-        // }else{
-        //   this.yearlyEvents = this.user_courses.multi_year
-        // }
-      },
-
-      removeEvents(){
-        $('.full-calendar').fullCalendar('clientEvents').map(function(event) {
-          $('.full-calendar').fullCalendar('removeEvents', event._id);
-        });
-      },
-
-      addEvents(){
-        this.events_arr.map(function(event){
-          $('.full-calendar').fullCalendar('renderEvent', event)
-        });
-      },
-
-      selectedPlan (course) {
-        this.course = course
-      },
-
-      filterData (filter) {
-        if(this.sideBarview == 'semester'){
-          this.getCoursesByDate(filter)
+    setEvent () {
+      $('.full-calendar').fullCalendar({
+        defaultView: 'agendaWeek',
+        allDaySlot: false,
+        displayEventTime: false,
+        slotDuration: '00:60:00',
+        columnFormat: 'ddd',
+        weekends: false,
+        events: this.events_arr,
+        eventRender: function (event, element) {
+          element.find('.fc-title').after("<div class='event-description'>" + '<p>' + event.course.external_course_id + '</p>' + '<p>' + event.description + '</p>' + '<p>' + '<b>' + event.course.academic_group + '</b>' + '</p>' + '<p>' + '<b>' + event.course.subject + '</b>' + '</p>' + '</div>')
+        },
+        eventClick: function (calEvent, jsEvent, view) {
+          calEvent.self.selectedPlan(calEvent.course)
         }
+      })
+    },
+    getCoursesByDate (filter) {
+      // Not Required Here
+      // if((filter != undefined) && (Object.keys(filter).length > 0)){
+      //   this.events = {};
+      //   const semester = filter.value.split(" ")
+      //   _.forEach(this.user_courses.semester, (day, key) => {
+      //     this.events[key] = day.filter((item) => {
+      //       if (filter.name === 'term_name'){
+      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+      //       }
+      //       else{
+      //         return item[filter.name] == filter.value
+      //       }
+      //     })
+      //   })
+      // }else{
+      //   this.events = this.user_courses.semester
+      // }
+    },
 
-        if(this.sideBarview == 'multi-year'){
-          this.getCoursesByYear(filter)
-        }
+    getCoursesByYear (filter) {
+      // Not Required Here
+      // if((filter != undefined) && (Object.keys(filter).length > 0)){
+      //   this.yearlyEvents = {};
+      //   const semester = filter.value.split(" ")
+      //   _.forEach(this.user_courses.multi_year, (day, key) => {
+      //     this.yearlyEvents[key] = day.filter((item) => {
+      //       if (filter.name === 'term_name'){
+      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+      //       }
+      //       else{
+      //         return item[filter.name] == filter.value
+      //       }
+      //     })
+      //   })
+      // }else{
+      //   this.yearlyEvents = this.user_courses.multi_year
+      // }
+    },
 
-        if(this.sideBarview == 'list-view'){
-          this.courses = this.user_courses.tray
-          this.courses = this.courses.filter(item => {
-            if (filter.name === 'term_name'){
-              const semester = filter.value.split(" ")
-              return item.term_name ==  semester[0] && item.term_year == semester[1]
-            }
-            else{
-              return item[filter.name] == filter.value
-            }
-          })
-        } 
-      },
-      isMeetingBelongsToUser(id){
-        return this.userCoursesScheduleIds.includes(id)    
-      },
-      getUserCourses(update){
-        const course_url = '/courses/user_courses'
-        axios
-          .get(course_url)
-          .then((response) => {
-            this.user_courses = response.data
-            this.courses = this.user_courses.tray
-            this.results = this.user_courses.tray
-            this.events = this.user_courses.semester
-            this.yearlyEvents = this.user_courses.multi_year
-            this.removeEvents()
-            this.getEventData(this.courses)
-            this.setEvent()
-            this.filterCategories()
-            if(update){
-              this.addEvents()
-            }
-            this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-            // Filter Not Reenabled
-            // this.getCoursesByDate()
-            // this.getCoursesByYear()
-          })
+    removeEvents () {
+      $('.full-calendar').fullCalendar('clientEvents').map(function (event) {
+        $('.full-calendar').fullCalendar('removeEvents', event._id)
+      })
+    },
+
+    addEvents () {
+      this.events_arr.map(function (event) {
+        $('.full-calendar').fullCalendar('renderEvent', event)
+      })
+    },
+
+    selectedPlan (course) {
+      this.course = course
+    },
+
+    filterData (filter) {
+      if (this.sideBarview == 'semester') {
+        this.getCoursesByDate(filter)
       }
+
+      if (this.sideBarview == 'multi-year') {
+        this.getCoursesByYear(filter)
+      }
+
+      if (this.sideBarview == 'list-view') {
+        this.courses = this.user_courses.tray
+        this.courses = this.courses.filter(item => {
+          if (filter.name === 'term_name') {
+            const semester = filter.value.split(' ')
+            return item.term_name == semester[0] && item.term_year == semester[1]
+          } else {
+            return item[filter.name] == filter.value
+          }
+        })
+      }
+    },
+    isMeetingBelongsToUser (id) {
+      return this.userCoursesScheduleIds.includes(id)
+    },
+    getUserCourses (update) {
+      const course_url = '/courses/user_courses'
+      axios
+        .get(course_url)
+        .then((response) => {
+          this.user_courses = response.data
+          this.courses = this.user_courses.tray
+          this.results = this.user_courses.tray
+          this.events = this.user_courses.semester
+          this.yearlyEvents = this.user_courses.multi_year
+          this.removeEvents()
+          this.getEventData(this.courses)
+          this.setEvent()
+          this.filterCategories()
+          if (update) {
+            this.addEvents()
+          }
+          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+          // Filter Not Reenabled
+          // this.getCoursesByDate()
+          // this.getCoursesByYear()
+        })
     }
   }
+}
 </script>
 <style>
   .fc-event, .fc-event-dot {
@@ -244,32 +243,32 @@
     height: 60px;
   }
 
-  .fc-title {    
+  .fc-title {
     color: #fff;
     background-color: #000;
-    height: 10px;    
+    height: 10px;
   }
-  .fc-title .black{    
+  .fc-title .black{
     color: #fff;
     background-color: #000;
-    height: 10px;    
+    height: 10px;
   }
-  .fc-title .red{    
+  .fc-title .red{
     color: #fff;
     background-color: #ff0000;
-    height: 10px;    
+    height: 10px;
   }
-  .fc-title .green{    
+  .fc-title .green{
     color: #fff;
     background-color: #008000;
-    height: 10px;    
+    height: 10px;
   }
-  .fc-title .purple{    
+  .fc-title .purple{
     color: #fff;
     background-color: #800080;
-    height: 10px;    
+    height: 10px;
   }
-  
+
   .full-calendar table tbody tr td, .full-calendar table thead tr th {
     border: none !important;
     border-bottom: 1px solid gray !important;

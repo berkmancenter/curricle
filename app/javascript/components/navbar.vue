@@ -27,7 +27,7 @@ export default {
     FontAwesomeIcon
   },
   computed: {
-    ...mapState('app',['trayVisible'])
+    ...mapState('app', ['trayVisible'])
   },
   methods: {
     trayToggle () { this.$store.commit('app/TOGGLE_TRAY') },
