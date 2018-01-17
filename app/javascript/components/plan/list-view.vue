@@ -7,7 +7,14 @@
           <i class="fa fa-list-ul" @click="selectView('list-view')"/>
           <i class="fa fa-calendar" @click="selectView('semester')"/>
           <i class="fa fa-square" @click="selectView('multi-year')"/>
-          <plan-filter :title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name"/>
+          <plan-filter 
+            :title="category.name"
+            :items="category.options"
+            :field="category.field"
+            v-for="category in categories"
+            :name="category.name"
+            :key="category.id"
+            />
         </div>
         <div class="plan">
           <plan-list-item/>
@@ -67,8 +74,6 @@ export default {
     axios.get('/courses/categories').then((response) => {
       this.categories = response.data
     })
-
-    this.getUserCourses()
   },
   data () {
     return {
@@ -85,57 +90,12 @@ export default {
     }
   },
   methods: {
-    selectedFilter (filter, name) {
-    },
     selectView (type) {
       this.$store.commit("app/CHOOSE_SIDEBAR_VIEW",type)
     },
     selectSideBarView(type){
       this.$store.commit("app/CHOOSE_SIDEBAR_VIEW",type)
     },
-    getCoursesByDate(filter){
-    },
-
-    getCoursesByYear(filter){
-    },
-    filterData (filter) {
-      if(this.sideBarview == 'semester'){
-        this.getCoursesByDate(filter)
-      }
-
-      if(this.sideBarview == 'multi-year'){
-        this.getCoursesByYear(filter)
-      }
-
-      if(this.sideBarview == 'list-view'){
-        this.courses = this.user_courses.tray
-        this.courses = this.courses.filter(item => {
-          if (filter.name === 'term_name'){
-            const semester = filter.value.split(" ")
-            return item.term_name ==  semester[0] && item.term_year == semester[1]
-          }
-          else{
-            return item[filter.name] == filter.value
-          }
-        })
-      } 
-    },
-    isMeetingBelongsToUser(id){
-      return this.userCoursesScheduleIds.includes(id)    
-    },
-    getUserCourses(){
-      const course_url = '/courses/user_courses'
-      axios
-        .get(course_url)
-        .then((response) => {
-          this.user_courses = response.data
-          this.courses = this.user_courses.tray
-          this.results = this.user_courses.tray
-          this.getCoursesByDate()
-          this.getCoursesByYear()
-          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-        })
-    }
   }
 }
 </script>
