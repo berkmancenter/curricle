@@ -27,27 +27,34 @@
 </template>
 
 <script type="text/javascript">
-  import axios from 'axios'
-  export default {
-    props: ['calendarEvents', 'getUserCourses', 'isMeetingBelongsToUser'],
-    methods: {
-      addRemoveSchedule (meetingId) {
-        if(this.isMeetingBelongsToUser(meetingId)){
-          axios
+import axios from 'axios'
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+      ...mapState('app',['viewmode']),
+      ...mapState('user',['coursesByDate', 'coursesByYear', 'courseIds']),
+    calendarEvents () { this.viewmode == 'multi-year' ? this.coursesByYear : this.coursesByDate }
+  },
+  methods: {
+    addRemoveSchedule (meetingId) {
+      if (this.courseIds[meetingId]){
+        axios
           .delete("/courses/remove_from_schedule", {params: {pattern_id: meetingId} })
           .then((response) => {
-            this.getUserCourses(true)
+            this.$store.dispatch("user/getCourses");
           })
-        }else{
-          axios
+      }
+      else {
+        axios
           .post("/courses/add_to_schedule", {pattern_id: meetingId})
           .then((response) => {
-            this.getUserCourses(true)
+            this.$store.dispatch("user/getCourses");
           })
-        }
-      },
-    }
+      }
+    },
   }
+}
 </script>
 
 <style type="text/css">  
