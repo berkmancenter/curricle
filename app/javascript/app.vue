@@ -17,11 +17,5 @@ export default {
     // load initial data
     this.$store.dispatch("user/getCourses")
   },
-  data(){
-    return {
-      results: []
-
-    }  
-  },
 }
 </script>

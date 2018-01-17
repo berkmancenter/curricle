@@ -61,7 +61,6 @@ export default {
     CourseList,
     Tray,
   },
-  props: ['resultSet'],
   computed: {
     ...mapState('app',{
       trayVisible: 'trayVisible',

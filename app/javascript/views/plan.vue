@@ -1,8 +1,8 @@
 <template lang="pug">
   .abc
-    list-view(:resultSet="resultSet" v-if="planView=='list-view'")
-    calendar( :resultSet="resultSet" v-if="planView=='semester'", )
-    yearly-calendar(:resultSet="resultSet" v-if="planView=='multi-year'")
+    list-view(v-if="planView=='list-view'")
+    calendar(v-if="planView=='semester'", )
+    yearly-calendar(v-if="planView=='multi-year'")
 </template>
 
 <script type="text/javascript">
@@ -31,8 +31,6 @@ export default {
       })
   },
   
-  props: [ 'resultSet'],
-
   methods: {
     selectedView: type => this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
   }
