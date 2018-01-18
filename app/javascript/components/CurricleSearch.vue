@@ -31,17 +31,6 @@ export default {
   components: {
     CurricleSearchResults
   },
-  props: {
-    getUserCourses: {
-      type: Function
-    },
-    isBelongsToUser: {
-      type: Function
-    },
-    isMeetingBelongsToUser: {
-      type: Function
-    }
-  },
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
     ...mapState('search', ['searchComplete', 'results']),
