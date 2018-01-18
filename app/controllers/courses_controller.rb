@@ -148,7 +148,7 @@ class CoursesController < ApplicationController
 
   # get user's course data
   def user_courses
-    tray = current_user.courses
+    tray = current_user.courses.order(created_at: :desc)
 
     # organize the existing courses into days of the week
     @meeting_patterns_per_day = {
