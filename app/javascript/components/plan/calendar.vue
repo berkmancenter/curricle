@@ -205,9 +205,52 @@ export default {
           if (filter.name === 'term_name') {
             const semester = filter.value.split(' ')
             return item.term_name == semester[0] && item.term_year == semester[1]
-          } else {
-            return item[filter.name] == filter.value
-          }
+            } else {
+              return item[filter.name] == filter.value
+            }
+          })
+        } 
+      },
+      isMeetingBelongsToUser(id){
+        return this.userCoursesScheduleIds.includes(id)    
+      },
+      getUserCourses(update){
+        const course_url = '/courses/user_courses'
+        axios
+          .get(course_url)
+          .then((response) => {
+            this.user_courses = response.data
+            this.courses = this.user_courses.tray
+            this.results = this.user_courses.tray
+            this.getUserScheduleCourseByDate()
+            this.getUserScheduleCourseByYear()
+            this.removeEvents()
+            this.getEventData(this.courses)
+            this.setEvent()
+            this.filterCategories()
+            if(update){
+              this.addEvents()
+            }
+            this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+            // Filter Not Reenabled
+            // this.getCoursesByDate()
+            // this.getCoursesByYear()
+          })
+      },
+      getUserScheduleCourseByDate () {
+        this.events = {};        
+        _.forEach(this.user_courses.semester, (day, key) => {
+          this.events[key] = day.filter(item =>
+            !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
+          )
+        })
+      },
+      getUserScheduleCourseByYear () {
+        this.yearlyEvents = {};        
+        _.forEach(this.user_courses.multi_year, (day, key) => {
+          this.yearlyEvents[key] = day.filter(item =>
+            !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
+          )
         })
       }
     },

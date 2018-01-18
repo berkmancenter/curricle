@@ -128,41 +128,42 @@ export default {
           .filter(item => item.name == 'Semester')
       })
     },
-
-    getCoursesByDate (filter) {
-      if ((filter != undefined) && (Object.keys(filter).length > 0)) {
-        this.events = {}
-        const semester = filter.value.split(' ')
-        _.forEach(this.user_courses.semester, (day, key) => {
-          this.events[key] = day.filter((item) => {
-            if (filter.name === 'term_name') {
-              return item.term_name == semester[0] && item.term_year == semester[1]
-            } else {
-              return item[filter.name] == filter.value
-            }
-          })
-        })
-      } else {
-        this.events = this.user_courses.semester
-      }
+    getCoursesByDate(filter){
+      // if((filter != undefined) && (Object.keys(filter).length > 0)){
+      //   this.events = {};
+      //   const semester = filter.value.split(" ")
+      //   _.forEach(this.user_courses.semester, (day, key) => {
+      //     this.events[key] = day.filter((item) => {
+      //       if (filter.name === 'term_name'){
+      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+      //       }
+      //       else{
+      //         return item[filter.name] == filter.value
+      //       }
+      //     })
+      //   })
+      // }else{
+      //   this.events = this.user_courses.semester
+      // }
     },
 
-    getCoursesByYear (filter) {
-      if ((filter != undefined) && (Object.keys(filter).length > 0)) {
-        this.yearlyEvents = {}
-        const semester = filter.value.split(' ')
-        _.forEach(this.user_courses.multi_year, (day, key) => {
-          this.yearlyEvents[key] = day.filter((item) => {
-            if (filter.name === 'term_name') {
-              return item.term_name == semester[0] && item.term_year == semester[1]
-            } else {
-              return item[filter.name] == filter.value
-            }
-          })
-        })
-      } else {
-        this.yearlyEvents = this.user_courses.multi_year
-      }
+    getCoursesByYear(filter){
+      // if((filter != undefined) && (Object.keys(filter).length > 0)){
+      //   this.yearlyEvents = {};
+      //   const semester = filter.value.split(" ")
+      //   _.forEach(this.user_courses.multi_year, (day, key) => {
+      //     this.yearlyEvents[key] = day.filter((item) => {
+      //       if (filter.name === 'term_name'){
+      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+      //       }
+      //       else{
+      //         return item[filter.name] == filter.value
+      //       }
+      //     })
+      //   })
+      // }else{
+      //   this.yearlyEvents = this.user_courses.multi_year
+      // }
     },
 
     selectedPlan (course) {
@@ -193,16 +194,32 @@ export default {
     getUserCourses () {
       const course_url = '/courses/user_courses'
       axios
-        .get(course_url)
-        .then((response) => {
-          this.user_courses = response.data
-          this.courses = this.user_courses.multi_year
-          this.results = this.user_courses.tray
-          this.filterCategories()
-          this.getCoursesByDate()
-          this.getCoursesByYear()
-          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-        })
+      .get(course_url)
+      .then((response) => {
+        this.user_courses = response.data
+        this.courses = this.user_courses.multi_year
+        this.results = this.user_courses.tray
+        this.filterCategories()
+        this.getUserScheduleCourseByDate()
+        this.getUserScheduleCourseByYear()
+        this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+      })
+    },
+    getUserScheduleCourseByDate () {
+      this.events = {};        
+      _.forEach(this.user_courses.semester, (day, key) => {
+        this.events[key] = day.filter(item =>
+          !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
+        )
+      })
+    },
+    getUserScheduleCourseByYear () {
+      this.yearlyEvents = {};        
+      _.forEach(this.user_courses.multi_year, (day, key) => {
+        this.yearlyEvents[key] = day.filter(item =>
+          !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
+        )
+      })
     }
   }
 }

@@ -81,6 +81,102 @@ export default {
     },
     selectSideBarView (type) {
       this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
+    },
+    selectSideBarView(view){
+      this.sideBarview = view
+    },
+    getCoursesByDate(filter){
+      // if((filter != undefined) && (Object.keys(filter).length > 0)){
+      //   this.events = {};
+      //   const semester = filter.value.split(" ")
+      //   _.forEach(this.user_courses.semester, (day, key) => {
+      //     this.events[key] = day.filter((item) => {
+      //       if (filter.name === 'term_name'){
+      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+      //       }
+      //       else{
+      //         return item[filter.name] == filter.value
+      //       }
+      //     })
+      //   })
+      // }else{
+      //   this.events = this.user_courses.semester
+      // }
+    },
+
+    getCoursesByYear(filter){
+      // if((filter != undefined) && (Object.keys(filter).length > 0)){
+      //   this.yearlyEvents = {};
+      //   const semester = filter.value.split(" ")
+      //   _.forEach(this.user_courses.multi_year, (day, key) => {
+      //     this.yearlyEvents[key] = day.filter((item) => {
+      //       if (filter.name === 'term_name'){
+      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
+      //       }
+      //       else{
+      //         return item[filter.name] == filter.value
+      //       }
+      //     })
+      //   })
+      // }else{
+      //   this.yearlyEvents = this.user_courses.multi_year
+      // }
+    },
+    filterData (filter) {
+      if(this.sideBarview == 'semester'){
+        this.getCoursesByDate(filter)
+      }
+
+      if(this.sideBarview == 'multi-year'){
+        this.getCoursesByYear(filter)
+      }
+
+      if(this.sideBarview == 'list-view'){
+        this.courses = this.user_courses.tray
+        this.courses = this.courses.filter(item => {
+          if (filter.name === 'term_name'){
+            const semester = filter.value.split(" ")
+            return item.term_name ==  semester[0] && item.term_year == semester[1]
+          }
+          else{
+            return item[filter.name] == filter.value
+          }
+        })
+      } 
+    },
+    isMeetingBelongsToUser(id){
+      return this.userCoursesScheduleIds.includes(id)    
+    },
+    getUserCourses(){
+      const course_url = '/courses/user_courses'
+      axios
+        .get(course_url)
+        .then((response) => {
+          this.user_courses = response.data
+          this.courses = this.user_courses.tray
+          this.results = this.user_courses.tray
+          // this.getCoursesByDate()
+          // this.getCoursesByYear()
+          this.getUserScheduleCourseByDate()
+          this.getUserScheduleCourseByYear()
+          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+        })
+    },
+    getUserScheduleCourseByDate () {
+      this.events = {};        
+      _.forEach(this.user_courses.semester, (day, key) => {
+        this.events[key] = day.filter(item =>
+          !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
+        )
+      })
+    },
+    getUserScheduleCourseByYear () {
+      this.yearlyEvents = {};        
+      _.forEach(this.user_courses.multi_year, (day, key) => {
+        this.yearlyEvents[key] = day.filter(item =>
+          !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
+        )
+      })
     }
   }
 }
