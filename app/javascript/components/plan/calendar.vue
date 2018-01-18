@@ -38,10 +38,16 @@
         <p class="select-course">Selected Course</p>
         <hr>
         <div class="row actions margin-none">
-          i.fa.fa-folder-open
-          i.fa.fa-clock-o
-          i.fa.fa-share-alt
-          .pull-right  See Course History
+          <i
+            class="fa fa-folder-open"
+          />
+          <i
+            class="fa fa-clock-o"
+          />
+          <i
+            class="fa fa-share-alt"
+          />
+          <div class="pull-right">See Course History</div>
         </div>
         <div class="row margin-none">
           <plan-description :course="course"/>
