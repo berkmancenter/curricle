@@ -1,8 +1,9 @@
-<template lang="pug">
-  .abc
-    list-view(v-if="planView=='list-view'")
-    calendar(v-if="planView=='semester'", )
-    yearly-calendar(v-if="planView=='multi-year'")
+<template>
+  <div>
+    <list-view v-if="planView === 'list-view'"/>
+    <calendar v-if="planView === 'semester'"/>
+    <yearly-calendar v-if="planView === 'multi-year'"/>
+  </div>
 </template>
 
 <script type="text/javascript">

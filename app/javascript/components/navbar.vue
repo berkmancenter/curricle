@@ -1,18 +1,36 @@
-<template lang="pug">
-b-navbar(toggleable="md" type="light" variant="light")
-  b-navbar-toggle(target="nav-collapse")
-  b-navbar-brand
-    b-navbar-nav
-      span The Catalog
-      basic-search-semester-range
-  b-collapse#nav-collapse(is-nav)
-    b-navbar-nav.ml-auto
-      b-nav-item(to='search') Search
-      b-nav-item(to='explore') Explore
-      b-nav-item(to='plan') Plan
-    b-navbar-nav.ml-auto.tray-li
-      b-nav-item(@click='logout') Logout
-      b-nav-item(href='' @click="trayToggle" v-bind:class="{'tray-active': trayVisible}") Tray
+<template>
+  <b-navbar
+    toggleable="md"
+    type="light"
+    variant="light">
+    <b-navbar-toggle target="nav-collapse"/>
+    <b-navbar-brand>
+      <b-navbar-nav>
+        <span>The Catalog</span>
+        <basic-search-semester-range/>
+      </b-navbar-nav>
+    </b-navbar-brand>
+
+    <b-collapse
+      id="nav-collapse"
+      is-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item to="search">Search</b-nav-item>
+        <b-nav-item to="explore">Explore</b-nav-item>
+        <b-nav-item to="plan">Plan</b-nav-item>
+      </b-navbar-nav>
+
+      <b-navbar-nav class="ml-auto tray-li">
+        <b-nav-item @click="logout">Logout</b-nav-item>
+        <b-nav-item
+          href=""
+          @click="trayToggle"
+          :class="{'tray-active': trayVisible}">
+          Tray
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
 </template>
 
 <script>

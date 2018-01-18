@@ -1,28 +1,54 @@
-<template lang="pug">
-  .row.margin-none
-    .col-md-9
-      p.your-tray Your Tray
-      hr
-      .drop-down.actions
-        i.fa.fa-list-ul(@click="selectView('list-view')")
-        i.fa.fa-calendar(@click="selectView('semester')")
-        i.fa.fa-square(@click="selectView('multi-year')")
-        plan-filter(:title="category.name" :items="category.options" :field="category.field" v-for="category in categories" :selected-filter="selectedFilter" :name="category.name") Filter By :
-      .full-calendar
-      .full-calendar1
-    .col-md-3(v-if="trayVisible")
-      tray
-    .col-md-3(v-else='')
-      div
-        p.select-course Selected Course
-        hr
-        .row.actions.margin-none
+<template>
+  <div class="row margin-none">
+    <div class="col-md-9">
+      <p class="your-tray">Your Tray</p>
+      <hr>
+      <div class="drop-down actions">
+        <i
+          class="fa fa-list-ul"
+          @click="selectView('list-view')"/>
+        <i
+          class="fa fa-calendar"
+          @click="selectView('semester')"/>
+        <i
+          class="fa fa-square"
+          @click="selectView('multi-year')"/>
+        <plan-filter
+          :title="category.name"
+          :items="category.options"
+          :field="category.field"
+          v-for="category in categories"
+          :selected-filter="selectedFilter"
+          :name="category.name">
+          Filter By :
+        </plan-filter>
+      </div>
+      <div class="full-calendar"/>
+      <div class="full-calendar1"/>
+    </div>
+    <div
+      class="col-md-3"
+      v-if="trayVisible">
+      <tray/>
+    </div>
+    <div
+      class="col-md-3"
+      v-else>
+      <div>
+        <p class="select-course">Selected Course</p>
+        <hr>
+        <div class="row actions margin-none">
           i.fa.fa-folder-open
           i.fa.fa-clock-o
           i.fa.fa-share-alt
           .pull-right  See Course History
-        .row.margin-none
-          plan-description(:course='course')
+        </div>
+        <div class="row margin-none">
+          <plan-description :course="course"/>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script type="text/javascript">

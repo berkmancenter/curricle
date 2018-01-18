@@ -1,9 +1,12 @@
-<template lang="pug">
-  #app
-    header
-      navbar
-    keep-alive
-      router-view
+<template>
+  <div id="app">
+    <header>
+      <navbar/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
+    </header>
+  </div>
 </template>
 
 <script>
