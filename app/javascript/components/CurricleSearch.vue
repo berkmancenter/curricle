@@ -24,23 +24,14 @@
 </template>
 
 <script>
-import ApolloClient from 'apollo-client-preset'
+import { mapGetters, mapState } from 'vuex'
 import CurricleSearchResults from './CurricleSearchResults.vue'
-import gql from 'graphql-tag'
-
-const client = new ApolloClient()
 
 export default {
   components: {
     CurricleSearchResults
   },
   props: {
-    keywords: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
     getUserCourses: {
       type: Function
     },
@@ -51,58 +42,11 @@ export default {
       type: Function
     }
   },
-  data () {
-    return {
-      results: [],
-      searchComplete: false
-    }
-  },
   computed: {
+    ...mapGetters('search', { keywords: 'activeKeywords' }),
+    ...mapState('search', ['searchComplete', 'results']),
     keywordTexts () {
       return this.keywords.map(k => k['text'])
-    }
-  },
-  watch: {
-    keywords () {
-      this.searchByKeywords()
-    }
-  },
-  methods: {
-    searchByKeywords () {
-      // TODO: Add error handling for failed API calls
-      if (this.keywords && this.keywords.length) {
-        this.searchComplete = false
-
-        client.query({
-          query: gql`
-            query CourseSearch($deluxeKeywords: [DeluxeKeywordInput]) {
-              courses(deluxe_keywords: $deluxeKeywords) {
-                academic_group
-                catalog_number
-                component
-                course_description_long
-                id
-                subject
-                term_name
-                term_year
-                title
-                units_maximum
-                course_instructors {
-                  display_name
-                  id
-                }
-              }
-            }
-          `,
-          variables: { deluxeKeywords: this.keywords }
-        })
-          .then(response => {
-            this.results = response.data.courses
-            this.searchComplete = true
-          })
-      } else {
-        this.results = []
-      }
     }
   }
 }

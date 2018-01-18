@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import BasicSearchActiveKeywords from './BasicSearchActiveKeywords.vue'
 import BasicSearchFieldDropdown from './BasicSearchFieldDropdown.vue'
 import BasicSearchFieldWeightDropdown from './BasicSearchFieldWeightDropdown.vue'
@@ -72,15 +73,8 @@ export default {
 
       this.keyword = ''
     },
-    deactivateKeyword (index) {
-      this.inactiveKeywords.push(this.activeKeywords[index])
-      this.activeKeywords.splice(index, 1)
-    },
-    removeKeyword (index) {
-      this.inactiveKeywords.splice(index, 1)
-    },
     performSearch () {
-      this.$emit('keywordsUpdated', this.activeKeywords)
+      this.$store.dispatch('search/runSearch')
     }
   }
 }

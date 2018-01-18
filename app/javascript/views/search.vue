@@ -2,9 +2,9 @@
   <div>
     <div class="row">
       <div class="col-md-8">
-        <basic-search @keywordsUpdated="keywords = $event"/>
+        <basic-search />
         <br>
-        <curricle-search :keywords="keywords" />
+        <curricle-search />
       </div>
       <div class="col-md-4 sidebar" v-if="trayVisible">
         <tray/>
@@ -41,8 +41,6 @@ export default {
 
   data () {
     return {
-      keywords: [],
-      results: [],
       // filteredResults: [],
       categories: []
     }
