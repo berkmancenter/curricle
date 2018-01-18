@@ -120,7 +120,7 @@ export default {
     addRemoveCourse (courseId) {
       this.$store.dispatch('user/addRemoveUserCourse', courseId)
     },
-    addRemoveSchedule: function (meetingId) {
+    addRemoveSchedule (meetingId) {
       this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
     }
   }
