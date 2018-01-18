@@ -1,5 +1,5 @@
 <template >
-  <div class="description">
+  <div class="description" v-if="isPresent">
     <div class="row margin-none">
       <p class="pull-left"><b>{{ course.academic_group }}</b></p>
       <p class="pull-right">Component: <span><b>{{ course.component }}</b></span></p>
@@ -89,11 +89,18 @@
       </div>
     </div>
   </div>
+  <div class="description" v-else>
+    <p>
+      Please select a course to display
+    </p>
+  </div>
 </template>
 
 <script type="text/javascript">
 import { mapState } from 'vuex'
 import Tags from './tags.vue'
+import axios from 'axios'
+import lodash from 'lodash/isEmpty'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
@@ -111,7 +118,8 @@ export default {
       isExpand: false,
       hideDownCaret: false,
       maxLength: 500,
-      editableTextlength: 0
+      editableTextlength: 0,
+      isPresent: false
     }
   },
   watch: {
