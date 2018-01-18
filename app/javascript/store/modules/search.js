@@ -9,8 +9,16 @@ const state = {
 }
 
 const getters = {
-  activeKeywords: state => state.keywords.filter(kw => kw.active),
-  inactiveKeywords: state => state.keywords.filter(kw => !kw.active)
+  activeKeywords (state) {
+    var kws = state.keywords.filter(kw => kw.active).map(k => _.clone(k))
+    _.forEach(kws, k => delete k.active)
+    return kws
+  },
+  inactiveKeywords (state) {
+    var kws = state.keywords.filter(kw => !kw.active).map(k => _.clone(k))
+    _.forEach(kws, k => delete k.active)
+    return kws
+  }
 }
 
 const actions = {
