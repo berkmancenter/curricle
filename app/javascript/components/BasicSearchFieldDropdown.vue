@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
@@ -38,17 +39,11 @@ export default {
   },
   data () {
     return {
-      selected: this.applyTo,
-      options: [
-        { text: 'Title', value: 'Title' },
-        { text: 'Description', value: 'Description' },
-        { text: 'Instructor', value: 'Instructor' },
-        { text: 'Readings', value: 'Readings', disabled: true },
-        { text: 'Course ID', value: 'Course ID', disabled: true }
-      ]
+      selected: this.applyTo
     }
   },
   computed: {
+    ...mapState('search', { options: 'applyToOptions' }),
     dropdownTitle () {
       switch (this.selected.length) {
         // TODO: revert this once all search fields are available
