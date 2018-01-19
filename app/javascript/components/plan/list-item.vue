@@ -3,7 +3,7 @@
     <table class="course-list-iltem table">
       <thead/>
       <tbody>
-        <tr v-for="list in lists" @click="selectItem(list)">
+        <tr v-for="list in lists" @click="selectCourse(list)">
           <td>{{ list.external_course_id }}</td>
           <td style = "width: 12em;">{{ list.course_description }}</td>
           <td>{{ list.academic_group }} <br> {{ list.subject }}</td>
@@ -27,7 +27,7 @@
 
 <script type="text/javascript">
 import axios from 'axios'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 export default {
   components: {
@@ -42,12 +42,7 @@ export default {
     })
   },
   methods: {
-    selectItem: function (value) {
-      this.$store.commit('user/SET_CURRENT_COURSE', value)
-    },
-    addRemoveSchedule: function (meetingId) {
-      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
-    }
+    ...mapActions('user', ['selectCourse', 'addRemoveUserSchedule'])
   }
 }
 </script>
