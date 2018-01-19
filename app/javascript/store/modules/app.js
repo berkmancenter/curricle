@@ -10,7 +10,7 @@ const getters = {
 }
 
 const actions = {
-
+  hideTray ({commit}) { commit('HIDE_TRAY') }
 }
 
 const mutations = {
