@@ -10,7 +10,14 @@ const state = {
   // list of objects with { text, weight, applyTo, active }
   keywords: [],
   results: [],
-  searchComplete: false
+  searchComplete: false,
+  applyToOptions: [
+    { text: 'Title', value: 'Title' },
+    { text: 'Description', value: 'Description' },
+    { text: 'Instructor', value: 'Instructor' },
+    { text: 'Readings', value: 'Readings', disabled: true },
+    { text: 'Course ID', value: 'Course ID', disabled: true }
+  ]
 }
 
 const getters = {
