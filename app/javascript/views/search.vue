@@ -6,19 +6,19 @@
         <br>
         <curricle-search />
       </div>
-      <div class="col-md-4 sidebar" v-if="trayVisible">
-        <tray/>
+      <div class="col-md-4 sidebar">
+        <tray v-if="trayVisible" />
+        <selected-course v-if="validCourseSelected" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Tray from '../components/tray/tray.vue'
 import BasicSearch from '../components/BasicSearch.vue'
 import CurricleSearch from '../components/CurricleSearch.vue'
-import axios from 'axios'
 
 export default {
   components: {
@@ -28,24 +28,9 @@ export default {
   },
 
   computed: {
-    ...mapState('app', ['trayVisible'])
-  },
-  props: [ 'searchedResults'],
-
-  mounted () {
-    // this.filterCategories()
-    // this.getCoursesByDate()
-    // this.getCoursesByYear()
-    // this.getUserCourses()
-  },
-
-  data () {
-    return {
-      // filteredResults: [],
-      categories: []
-    }
+    ...mapState('app', ['trayVisible']),
+    ...mapGetters('user', ['validCourseSelected'])
   }
-
 }
 </script>
 
