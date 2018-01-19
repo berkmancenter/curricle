@@ -79,6 +79,10 @@ const actions = {
         commit('SET_USER_COURSE', response.data)
       })
   },
+  selectCourse ({commit, dispatch}, course) {
+    dispatch('app/hideTray', null, { root: true })
+    commit('SET_CURRENT_COURSE', course)
+  },
   addToUserSchedule ({ commit, dispatch }, meetingId) {
     const addScheduleUrl = '/courses/add_to_schedule'
     axios
