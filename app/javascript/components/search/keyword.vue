@@ -2,14 +2,27 @@
   <span
     :class="keywordClass"
     :key="keyword.text"
-    @click="keywordClick">
-    <span>{{ keyword.applyTo }}</span>
+    :id="kwId"
+  >
+    <span>{{ keywordApplyTo }}</span>
     <span :class="'wt-' + keyword.weight">{{ keyword.weight }}</span>
-    {{ keyword.text }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
+    {{ keyword.text }}&nbsp;&nbsp;<font-awesome-icon icon="times" @click="closeClick"/>
+    <b-popover
+      :target="kwId"
+      triggers="click blur"
+      placement="bottom">
+      <b-form-checkbox-group
+        stacked
+        v-model="selected"
+        name="search-fields"
+        :options="options"
+      />
+    </b-popover>
   </span>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
@@ -22,14 +35,32 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      selected: this.keyword.applyTo
+    }
+  },
   computed: {
+    ...mapState('search', { options: 'applyToOptions'}),
     keywordClass () {
       return (this.keyword.active ? 'active' : 'inactive') + '-keyword border border-dark rounded'
+    },
+    kwId () {
+      return 'keyword-elem-' + this.keyword.text
+    },
+    keywordApplyTo () {
+      return this.selected
+    }
+  },
+  watch: {
+    selected () {
+      console.log('keyword applyTo changed!')
     }
   },
   methods: {
-    keywordClick () {
+    closeClick () {
       var act = this.keyword.active ? 'search/deactivateKeyword' : 'search/removeKeyword'
+      console.log('keywordClick: chose action: ' + act)
       this.$store.dispatch(act, this.keyword)
     }
   }
