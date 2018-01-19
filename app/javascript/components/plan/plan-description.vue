@@ -168,7 +168,7 @@ export default {
           if (response.data) {
             this.editableAnnotationsText = response.data.annotation
           } else {
-            this.editableAnnotationsText = ""
+            this.editableAnnotationsText = ''
           }
           this.editableText = this.editableAnnotationsText
         })

@@ -128,7 +128,7 @@ export default {
           .filter(item => item.name == 'Semester')
       })
     },
-    getCoursesByDate(filter){
+    getCoursesByDate (filter) {
       // if((filter != undefined) && (Object.keys(filter).length > 0)){
       //   this.events = {};
       //   const semester = filter.value.split(" ")
@@ -147,7 +147,7 @@ export default {
       // }
     },
 
-    getCoursesByYear(filter){
+    getCoursesByYear (filter) {
       // if((filter != undefined) && (Object.keys(filter).length > 0)){
       //   this.yearlyEvents = {};
       //   const semester = filter.value.split(" ")
@@ -194,19 +194,19 @@ export default {
     getUserCourses () {
       const course_url = '/courses/user_courses'
       axios
-      .get(course_url)
-      .then((response) => {
-        this.user_courses = response.data
-        this.courses = this.user_courses.multi_year
-        this.results = this.user_courses.tray
-        this.filterCategories()
-        this.getUserScheduleCourseByDate()
-        this.getUserScheduleCourseByYear()
-        this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-      })
+        .get(course_url)
+        .then((response) => {
+          this.user_courses = response.data
+          this.courses = this.user_courses.multi_year
+          this.results = this.user_courses.tray
+          this.filterCategories()
+          this.getUserScheduleCourseByDate()
+          this.getUserScheduleCourseByYear()
+          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
+        })
     },
     getUserScheduleCourseByDate () {
-      this.events = {};        
+      this.events = {}
       _.forEach(this.user_courses.semester, (day, key) => {
         this.events[key] = day.filter(item =>
           !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
@@ -214,7 +214,7 @@ export default {
       })
     },
     getUserScheduleCourseByYear () {
-      this.yearlyEvents = {};        
+      this.yearlyEvents = {}
       _.forEach(this.user_courses.multi_year, (day, key) => {
         this.yearlyEvents[key] = day.filter(item =>
           !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id

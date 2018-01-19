@@ -82,10 +82,10 @@ export default {
     selectSideBarView (type) {
       this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
     },
-    selectSideBarView(view){
+    selectSideBarView (view) {
       this.sideBarview = view
     },
-    getCoursesByDate(filter){
+    getCoursesByDate (filter) {
       // if((filter != undefined) && (Object.keys(filter).length > 0)){
       //   this.events = {};
       //   const semester = filter.value.split(" ")
@@ -104,7 +104,7 @@ export default {
       // }
     },
 
-    getCoursesByYear(filter){
+    getCoursesByYear (filter) {
       // if((filter != undefined) && (Object.keys(filter).length > 0)){
       //   this.yearlyEvents = {};
       //   const semester = filter.value.split(" ")
@@ -123,31 +123,30 @@ export default {
       // }
     },
     filterData (filter) {
-      if(this.sideBarview == 'semester'){
+      if (this.sideBarview == 'semester') {
         this.getCoursesByDate(filter)
       }
 
-      if(this.sideBarview == 'multi-year'){
+      if (this.sideBarview == 'multi-year') {
         this.getCoursesByYear(filter)
       }
 
-      if(this.sideBarview == 'list-view'){
+      if (this.sideBarview == 'list-view') {
         this.courses = this.user_courses.tray
         this.courses = this.courses.filter(item => {
-          if (filter.name === 'term_name'){
-            const semester = filter.value.split(" ")
-            return item.term_name ==  semester[0] && item.term_year == semester[1]
-          }
-          else{
+          if (filter.name === 'term_name') {
+            const semester = filter.value.split(' ')
+            return item.term_name == semester[0] && item.term_year == semester[1]
+          } else {
             return item[filter.name] == filter.value
           }
         })
-      } 
+      }
     },
-    isMeetingBelongsToUser(id){
-      return this.userCoursesScheduleIds.includes(id)    
+    isMeetingBelongsToUser (id) {
+      return this.userCoursesScheduleIds.includes(id)
     },
-    getUserCourses(){
+    getUserCourses () {
       const course_url = '/courses/user_courses'
       axios
         .get(course_url)
@@ -163,7 +162,7 @@ export default {
         })
     },
     getUserScheduleCourseByDate () {
-      this.events = {};        
+      this.events = {}
       _.forEach(this.user_courses.semester, (day, key) => {
         this.events[key] = day.filter(item =>
           !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
@@ -171,7 +170,7 @@ export default {
       })
     },
     getUserScheduleCourseByYear () {
-      this.yearlyEvents = {};        
+      this.yearlyEvents = {}
       _.forEach(this.user_courses.multi_year, (day, key) => {
         this.yearlyEvents[key] = day.filter(item =>
           !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
