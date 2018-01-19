@@ -64,18 +64,7 @@
       <tray/>
     </div>
     <div class="col-md-3" v-else>
-      <div> <p class ="select-course">Selected Course</p>
-        <hr>
-        <div class="row actions margin-none">
-          <i class="fa fa-folder-open"/>
-          <i class="fa fa-clock-o" />
-          <i class="fa fa-share-alt" />
-          <div class="pull-right"> See Course History</div>
-        </div>
-        <div class="row margin-none">
-          <plan-description :course="event"/>
-        </div>
-      </div>
+      <selected-course/>
     </div>
   </div>
 </template>
@@ -86,8 +75,7 @@ import lodash from 'lodash'
 import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
-import PlanDescription from 'components/plan/plan-description'
-import CourseList from 'components/tray/list.vue'
+import SelectedCourse from 'components/plan/selected-course'
 import Tray from 'components/tray/tray.vue'
 import moment from 'moment'
 import axios from 'axios'
@@ -97,8 +85,7 @@ export default {
   components: {
     CalendarSidebar,
     PlanFilter,
-    PlanDescription,
-    CourseList,
+    SelectedCourse,
     Tray
   },
   computed: {

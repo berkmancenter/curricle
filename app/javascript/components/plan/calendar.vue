@@ -34,25 +34,7 @@
     <div
       class="col-md-3"
       v-else>
-      <div>
-        <p class="select-course">Selected Course</p>
-        <hr>
-        <div class="row actions margin-none">
-          <i
-            class="fa fa-folder-open"
-          />
-          <i
-            class="fa fa-clock-o"
-          />
-          <i
-            class="fa fa-share-alt"
-          />
-          <div class="pull-right">See Course History</div>
-        </div>
-        <div class="row margin-none">
-          <plan-description :course="course"/>
-        </div>
-      </div>
+      <selected-course/>
     </div>
   </div>
 </template>
@@ -60,21 +42,14 @@
 <script type="text/javascript">
 import { mapState } from 'vuex'
 import fullCalendar from 'fullcalendar'
-import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
-import PlanDescription from 'components/plan/plan-description'
-import CourseList from 'components/tray/list.vue'
-import Tray from 'components/tray/tray.vue'
-import axios from 'axios'
-import _ from 'lodash'
-// var events_arr = [];
+import SelectedCourse from 'components/plan/selected-course'
+import Tray from 'components/tray/tray'
 
 export default {
   components: {
-    CalendarSidebar,
     PlanFilter,
-    PlanDescription,
-    CourseList,
+    SelectedCourse,
     Tray
   },
   computed: {
