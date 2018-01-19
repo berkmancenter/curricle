@@ -62,6 +62,9 @@ const getters = {
       yearlyEvents = state.courses.multi_year
     }
     return yearlyEvents
+  },
+  validCourseSelected (state) {
+    return state.currentCourse && state.currentCourse.id
   }
 }
 
