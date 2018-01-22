@@ -36,7 +36,7 @@
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
-import BasicSearchSemesterRange from './BasicSearchSemesterRange.vue'
+import BasicSearchSemesterRange from 'components/BasicSearchSemesterRange'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 export default {
   name: 'NavBar',

@@ -76,7 +76,7 @@ import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
-import Tray from 'components/tray/tray.vue'
+import Tray from 'components/tray/tray'
 import moment from 'moment'
 import axios from 'axios'
 // var events_arr = [];

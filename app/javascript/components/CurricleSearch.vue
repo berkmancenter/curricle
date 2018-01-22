@@ -25,7 +25,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import CurricleSearchResults from './CurricleSearchResults.vue'
+import CurricleSearchResults from 'components/CurricleSearchResults'
 
 export default {
   components: {

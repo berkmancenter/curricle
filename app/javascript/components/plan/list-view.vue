@@ -36,7 +36,7 @@ import Tray from 'components/tray/tray'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'
 import SelectedCourse from 'components/plan/selected-course'
-import CourseList from 'components/tray/list.vue'
+import CourseList from 'components/tray/list'
 import _ from 'lodash'
 import axios from 'axios'
 

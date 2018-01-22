@@ -43,10 +43,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import BasicSearchActiveKeywords from './BasicSearchActiveKeywords.vue'
-import BasicSearchFieldDropdown from './BasicSearchFieldDropdown.vue'
-import BasicSearchFieldWeightDropdown from './BasicSearchFieldWeightDropdown.vue'
-import BasicSearchInactiveKeywords from './BasicSearchInactiveKeywords.vue'
+import BasicSearchActiveKeywords from 'components/BasicSearchActiveKeywords'
+import BasicSearchFieldDropdown from 'components/BasicSearchFieldDropdown'
+import BasicSearchFieldWeightDropdown from 'components/BasicSearchFieldWeightDropdown'
+import BasicSearchInactiveKeywords from 'components/BasicSearchInactiveKeywords'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {

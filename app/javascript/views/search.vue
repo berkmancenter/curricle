@@ -16,9 +16,10 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import Tray from '../components/tray/tray.vue'
-import BasicSearch from '../components/BasicSearch.vue'
-import CurricleSearch from '../components/CurricleSearch.vue'
+import Tray from 'components/tray/tray'
+import BasicSearch from 'components/BasicSearch'
+import CurricleSearch from 'components/CurricleSearch'
+import SelectedCourse from 'components/plan/selected-course'
 
 export default {
   components: {

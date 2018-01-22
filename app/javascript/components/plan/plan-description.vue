@@ -98,7 +98,7 @@
 
 <script type="text/javascript">
 import { mapState } from 'vuex'
-import Tags from './tags.vue'
+import Tags from 'components/plan/tags'
 import axios from 'axios'
 import lodash from 'lodash/isEmpty'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
