@@ -25,6 +25,7 @@ export default {
   components: {
     BasicSearch,
     CurricleSearch,
+    SelectedCourse,
     Tray
   },
 
