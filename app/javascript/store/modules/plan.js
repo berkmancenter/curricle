@@ -64,7 +64,9 @@ const actions = {
       $('.full-calendar').fullCalendar('removeEvents', event._id)
     })
   },
-  setEvent () {
+  setEvent ({getters}) {
+    var events = getters.eventData
+
     $('.full-calendar').fullCalendar({
       defaultView: 'agendaWeek',
       allDaySlot: false,
@@ -72,7 +74,7 @@ const actions = {
       slotDuration: '00:60:00',
       columnFormat: 'ddd',
       weekends: false,
-      events: this.events_arr,
+      events: events,
       eventRender: function (event, element) {
         element.find('.fc-title').after("<div class='event-description'>" + '<p>' + event.course.external_course_id + '</p>' + '<p>' + event.description + '</p>' + '<p>' + '<b>' + event.course.academic_group + '</b>' + '</p>' + '<p>' + '<b>' + event.course.subject + '</b>' + '</p>' + '</div>')
       },
