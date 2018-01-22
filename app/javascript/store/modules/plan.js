@@ -15,8 +15,7 @@ const state = {
       field: 'semester',
       title: 'Semester'
     }
-  ],
-  selectedCourse: {}
+  ]
 }
 
 const getters = {
