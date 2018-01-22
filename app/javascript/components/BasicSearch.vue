@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import BasicSearchActiveKeywords from 'components/BasicSearchActiveKeywords'
 import BasicSearchFieldDropdown from 'components/BasicSearchFieldDropdown'
 import BasicSearchFieldWeightDropdown from 'components/BasicSearchFieldWeightDropdown'

@@ -18,6 +18,7 @@
           :items="category.options"
           :field="category.field"
           v-for="category in categories"
+          :key="category.name"
           :name="category.name">
           Filter By :
         </plan-filter>
@@ -38,9 +39,8 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { mapState, mapGetters } from 'vuex'
-import fullCalendar from 'fullcalendar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
 import Tray from 'components/tray/tray'
@@ -64,6 +64,11 @@ export default {
       ]
     }
   },
+  watch: {
+    eventData () {
+      this.$store.dispatch('plan/populateEvents')
+    }
+  },
   mounted () {
     this.$store.dispatch('plan/setEvent')
   },
@@ -71,14 +76,10 @@ export default {
     selectView (type) {
       this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
     }
-  },
-  watch: {
-    eventData () {
-      this.$store.dispatch('plan/populateEvents')
-    }
   }
 }
 </script>
+
 <style>
   .fc-event, .fc-event-dot {
     background-color: inherit !important;

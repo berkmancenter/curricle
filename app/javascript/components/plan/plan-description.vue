@@ -1,5 +1,7 @@
 <template >
-  <div class="description" v-if="isPresent">
+  <div
+    class="description"
+    v-if="isPresent">
     <div class="row margin-none">
       <p class="pull-left"><b>{{ course.academic_group }}</b></p>
       <p class="pull-right">Component: <span><b>{{ course.component }}</b></span></p>
@@ -45,7 +47,9 @@
         <div
           class= "annonation-tag"
           v-if="isExpand">
-          <div v-if="!editableAnnotations" style="word-wrap: break-word;">
+          <div
+            v-if="!editableAnnotations"
+            style="word-wrap: break-word;">
             <p>
               {{ editableAnnotationsText }}
             </p>
@@ -89,14 +93,16 @@
       </div>
     </div>
   </div>
-  <div class="description" v-else>
+  <div
+    class="description"
+    v-else>
     <p>
       Please select a course to display
     </p>
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { mapState } from 'vuex'
 import Tags from 'components/plan/tags'
 import axios from 'axios'
@@ -121,6 +127,11 @@ export default {
       editableTextlength: 0,
       isPresent: false
     }
+  },
+  computed: {
+    ...mapState('user', {
+      course: 'currentCourse'
+    })
   },
   watch: {
     course () {
@@ -173,11 +184,6 @@ export default {
           this.editableText = this.editableAnnotationsText
         })
     }
-  },
-  computed: {
-    ...mapState('user', {
-      course: 'currentCourse'
-    })
   }
 }
 </script>

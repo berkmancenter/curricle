@@ -1,6 +1,5 @@
 // Manipulation of plan-related data
 
-import { mapGetters } from 'vuex'
 import _ from 'lodash'
 import $ from 'jquery'
 
@@ -87,7 +86,7 @@ const actions = {
 
 const mutations = {
   SET_FILTER (state, {name, value}) {
-    if (value == '') {
+    if (value === '') {
       delete state.filters[name]
     } else {
       state.filters[name] = value

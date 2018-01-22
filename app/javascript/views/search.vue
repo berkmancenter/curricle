@@ -28,7 +28,6 @@ export default {
     SelectedCourse,
     Tray
   },
-
   computed: {
     ...mapState('app', ['trayVisible']),
     ...mapGetters('user', ['validCourseSelected'])

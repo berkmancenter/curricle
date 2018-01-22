@@ -20,7 +20,9 @@
     @click="bodyClick">
       {{ keyword.text }}
     </span>&nbsp;&nbsp;
-    <font-awesome-icon icon="times" @click="closeClick"/>
+    <font-awesome-icon
+      icon="times"
+      @click="closeClick"/>
     <b-popover
       :target="kwId+'-applyTo'"
       triggers="click blur"
@@ -49,6 +51,7 @@
 <script>
 import { mapState } from 'vuex'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import _ from 'lodash'
 
 export default {
   components: {
@@ -67,7 +70,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('search', { options: 'applyToOptions', weightOptions: 'weightOptions'}),
+    ...mapState('search', { options: 'applyToOptions', weightOptions: 'weightOptions' }),
     keywordClass () {
       return (this.keyword.active ? 'active' : 'inactive') + '-keyword border border-dark rounded'
     },
@@ -75,10 +78,10 @@ export default {
       return 'keyword-elem-' + this.keyword.text
     },
     keywordApplyTo () {
-      if (this.selected.length == this.options.length - _.filter(this.options, { 'disabled': true }).length) {
+      if (this.selected.length === this.options.length - _.filter(this.options, { 'disabled': true }).length) {
         return 'a'
       }
-      if (this.selected.length == 1) {
+      if (this.selected.length === 1) {
         return this.selected[0].charAt(0).toLowerCase()
       }
       return '*'

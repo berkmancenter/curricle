@@ -10,7 +10,8 @@
       <i
         class="fa fa-clock-o"
         @click="addRemoveSchedule(meeting.id)"
-        :class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}" v-if="meeting"/>
+        :class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}"
+        v-if="meeting"/>
     </div>
     <div class="col-md-2">
       <strong>
@@ -48,8 +49,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   props: {
     academic_group: {
@@ -99,7 +99,8 @@ export default {
       required: true
     },
     meeting: {
-      type: Object
+      type: Object,
+      default () {}
     }
   },
   computed: {

@@ -4,9 +4,15 @@
       <div> <p class= "your-tray">Your Tray</p>
         <hr>
         <div class="drop-down actions">
-          <i class="fa fa-list-ul" @click="selectView('list-view')"/>
-          <i class="fa fa-calendar" @click="selectView('semester')"/>
-          <i class="fa fa-square" @click="selectView('multi-year')"/>
+          <i
+            class="fa fa-list-ul"
+            @click="selectView('list-view')"/>
+          <i
+            class="fa fa-calendar"
+            @click="selectView('semester')"/>
+          <i
+            class="fa fa-square"
+            @click="selectView('multi-year')"/>
           <plan-filter
             :title="category.name"
             :items="category.options"
@@ -21,17 +27,21 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" v-if="trayVisible">
+    <div
+      class="col-md-3"
+      v-if="trayVisible">
       <tray/>
     </div>
-    <div class="col-md-3" v-else>
+    <div
+      class="col-md-3"
+      v-else>
       <selected-course/>
     </div>
   </div>
 </template>
 
-<script type="text/javascript">
-import { mapState, mapGetters } from 'vuex'
+<script>
+import { mapState } from 'vuex'
 import Tray from 'components/tray/tray'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'
@@ -48,19 +58,6 @@ export default {
     CourseList,
     Tray
   },
-  computed: {
-    ...mapState('app', {
-      trayVisible: 'trayVisible',
-      selectedView: 'viewmode'
-    })
-  },
-  mounted () {
-    this.$store.dispatch('user/getCourses')
-
-    axios.get('/courses/categories').then((response) => {
-      this.categories = response.data
-    })
-  },
   data () {
     return {
       categories: [],
@@ -75,15 +72,22 @@ export default {
       userCoursesScheduleIds: []
     }
   },
+  computed: {
+    ...mapState('app', {
+      trayVisible: 'trayVisible',
+      selectedView: 'viewmode'
+    })
+  },
+  mounted () {
+    this.$store.dispatch('user/getCourses')
+
+    axios.get('/courses/categories').then((response) => {
+      this.categories = response.data
+    })
+  },
   methods: {
     selectView (type) {
       this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
-    },
-    selectSideBarView (type) {
-      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
-    },
-    selectSideBarView (view) {
-      this.sideBarview = view
     },
     getCoursesByDate (filter) {
       // if((filter != undefined) && (Object.keys(filter).length > 0)){
@@ -123,22 +127,22 @@ export default {
       // }
     },
     filterData (filter) {
-      if (this.sideBarview == 'semester') {
+      if (this.sideBarview === 'semester') {
         this.getCoursesByDate(filter)
       }
 
-      if (this.sideBarview == 'multi-year') {
+      if (this.sideBarview === 'multi-year') {
         this.getCoursesByYear(filter)
       }
 
-      if (this.sideBarview == 'list-view') {
+      if (this.sideBarview === 'list-view') {
         this.courses = this.user_courses.tray
         this.courses = this.courses.filter(item => {
           if (filter.name === 'term_name') {
             const semester = filter.value.split(' ')
-            return item.term_name == semester[0] && item.term_year == semester[1]
+            return item.term_name === semester[0] && item.term_year === semester[1]
           } else {
-            return item[filter.name] == filter.value
+            return item[filter.name] === filter.value
           }
         })
       }
@@ -147,9 +151,9 @@ export default {
       return this.userCoursesScheduleIds.includes(id)
     },
     getUserCourses () {
-      const course_url = '/courses/user_courses'
+      const courseUrl = '/courses/user_courses'
       axios
-        .get(course_url)
+        .get(courseUrl)
         .then((response) => {
           this.user_courses = response.data
           this.courses = this.user_courses.tray

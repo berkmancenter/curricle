@@ -4,15 +4,15 @@
       <span
         class="active-keyword border border-dark rounded"
         v-for="(tag, index) of activeTags"
+        :key="tag.id"
         @click="deactivateTag(index, tag.name)">
         {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
       </span>
-      <span
-        <input
+      <input
         class="input-tag"
         placeholder="Enter Tag"
         v-model="tag"
-        @keyup.enter="addActiveTag()"/>
+        @keyup.enter="addActiveTag()">
     </div>
   </div>
 </template>
@@ -25,17 +25,20 @@ export default {
   components: {
     FontAwesomeIcon
   },
-  data: function () {
-    return { tag: '' }
-  },
   props: {
-    courseId: 0,
+    courseId: {
+      type: Number,
+      default: 0
+    },
     activeTags: {
       type: Array,
       default: function () {
         return []
       }
     }
+  },
+  data: function () {
+    return { tag: '' }
   },
   methods: {
     deactivateTag (index, tagName) {

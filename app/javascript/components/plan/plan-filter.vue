@@ -15,26 +15,38 @@
     </b-dropdown-item>
     <b-dropdown-item
       v-for="item in items"
+      :key="item"
       @click="selectItem(item)">
       {{ item }}
     </b-dropdown-item>
   </b-dropdown>
 </template>
 
-<script type="text/javascript">
-import { mapGetters } from 'vuex'
-
+<script>
 export default {
-  props: ['title', 'items', 'field', 'name'],
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    items: {
+      type: Array,
+      required: true
+    },
+    field: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return { text: this.title }
   },
   methods: {
     selectItem (value) {
-      const sort = {
-        name: this.field,
-        value: value
-      }
       if (value === null) {
         this.text = this.title
       } else {

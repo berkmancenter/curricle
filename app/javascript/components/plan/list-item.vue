@@ -3,13 +3,23 @@
     <table class="course-list-iltem table">
       <thead/>
       <tbody>
-        <tr v-for="list in lists" @click="selectCourse(list)">
+        <tr
+          v-for="list in lists"
+          :key="list.id"
+          @click="selectCourse(list)">
           <td>{{ list.external_course_id }}</td>
           <td style = "width: 12em;">{{ list.course_description }}</td>
           <td>{{ list.academic_group }} <br> {{ list.subject }}</td>
           <td>{{ list.term_name }} <br> {{ list.units_maximum }} units</td>
           <td style = "width: 16em; text-align: justify;">
-            <truncate class="course_description" clamp="..." :length="50" less="Show Less" type="html" :text="list.course_description_long" v-if="list.course_description_long"/>
+            <truncate
+              class="course_description"
+              clamp="..."
+              :length="50"
+              less="Show Less"
+              type="html"
+              :text="list.course_description_long"
+              v-if="list.course_description_long"/>
           </td>
           <td>4 pm to 6pm<br> 9 am to 10 pm</td>
           <td>
@@ -17,16 +27,26 @@
             <br>
             <span>W<img src=""></span>
           </td>
-          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;"><i class= "fa fa-clock-o" :class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}" v-if="list.meeting_with_tods" @click="addRemoveSchedule(list.meeting_with_tods.id)"/></td>
-          <span class= "check_box"><input type= "checkbox" name ="" value= ""></span>
+          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;">
+            <i
+              class= "fa fa-clock-o"
+              :class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}"
+              v-if="list.meeting_with_tods"
+              @click="addRemoveSchedule(list.meeting_with_tods.id)"/>
+          </td>
+          <span class= "check_box">
+            <input
+              type="checkbox"
+              name=""
+              value="">
+          </span>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 
-<script type="text/javascript">
-import axios from 'axios'
+<script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 export default {

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 class BaseApi {
   static getBaseUrl () {
-    throw 'Base resource url is undefined'
+    throw new Error('Base resource URL is undefined')
   }
 
   static create (data) {

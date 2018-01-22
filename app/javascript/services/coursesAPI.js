@@ -2,8 +2,7 @@ import axios from 'axios'
 
 class CoursesAPI {
   static getBaseUrl () {
-  	var url = '/courses'
-    return axios.get(url)
+    return axios.get('/courses')
   }
 }
 

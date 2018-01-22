@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script language="text/javascript">
+<script>
 import { mapGetters } from 'vuex'
 import PlanDescription from 'components/plan/plan-description'
 

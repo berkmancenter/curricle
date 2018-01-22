@@ -2,7 +2,9 @@
   <table class="course-list-iltem table">
     <thead/>
     <tbody>
-      <tr v-for="course in trayCourses">
+      <tr
+        v-for="course in trayCourses"
+        :key="course.id">
         <td>{{ course.external_course_id }}</td>
         <td>{{ course.title }}</td>
         <td style="border-right: 5px solid #000;">
@@ -17,8 +19,8 @@
     </tbody>
   </table>
 </template>
-<script type="text/javascript">
-import axios from 'axios'
+
+<script>
 import { mapState, mapGetters } from 'vuex'
 
 export default {

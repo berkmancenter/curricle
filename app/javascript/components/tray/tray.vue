@@ -6,9 +6,15 @@
       </p>
       <hr>
       <div class="row actions margin-none">
-        <i class="fa fa-list-ul" @click="selectViewMode('list-view')"/>
-        <i class="fa fa-calendar" @click="selectViewMode('semester')"/>
-        <i class="fa fa-square" @click="selectViewMode('multi-year')"/>
+        <i
+          class="fa fa-list-ul"
+          @click="selectViewMode('list-view')"/>
+        <i
+          class="fa fa-calendar"
+          @click="selectViewMode('semester')"/>
+        <i
+          class="fa fa-square"
+          @click="selectViewMode('multi-year')"/>
         <div class="pull-right">See Course History</div>
       </div>
     </div>

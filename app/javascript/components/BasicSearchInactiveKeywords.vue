@@ -9,6 +9,7 @@
         <span class="inactive">Inactive</span>
         <keyword
           v-for="keyword in inactiveKeywords"
+          :key="keyword.text"
           :keyword="keyword"
         />
       </b-alert>

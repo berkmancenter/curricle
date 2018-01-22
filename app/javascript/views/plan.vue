@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { mapState } from 'vuex'
 import PlanFilter from 'components/plan/plan-filter'
 import PlanListItem from 'components/plan/list-item'

@@ -3,6 +3,7 @@
     <div class="col-md-12">
       <keyword
         v-for="keyword in activeKeywords"
+        :key="keyword.text"
         :keyword="keyword"
       />
     </div>

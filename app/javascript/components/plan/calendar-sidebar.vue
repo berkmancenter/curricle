@@ -1,12 +1,16 @@
 <template>
   <div class="calendar-sidebar">
-    <div v-for="(courses, day) in calendarEvents">
+    <div
+      v-for="(courses, day) in calendarEvents"
+      :key="day">
       <strong>{{ day }}</strong>
       <div class="table-responsive">
         <table class="course-list-iltem table">
           <thead/>
           <tbody>
-            <tr v-for="course in courses">
+            <tr
+              v-for="course in courses"
+              :key="course.id">
               <td>{{ course.external_course_id }}</td>
               <td>{{ course.title }}</td>
               <td style="border-right: 5px solid #000;">
@@ -25,8 +29,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
-import axios from 'axios'
+<script>
 import { mapState, mapGetters } from 'vuex'
 
 export default {
@@ -34,7 +37,7 @@ export default {
     ...mapState('app', ['viewmode']),
     ...mapState('user', ['userCoursesScheduleIds']),
     ...mapGetters('user', ['coursesByDate', 'coursesByYear', 'courseIds']),
-    calendarEvents () { return this.viewmode == 'multi-year' ? this.coursesByYear : this.coursesByDate }
+    calendarEvents () { return this.viewmode === 'multi-year' ? this.coursesByYear : this.coursesByDate }
   },
   methods: {
     addRemoveSchedule: function (meetingId) {

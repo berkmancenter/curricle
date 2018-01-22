@@ -41,20 +41,20 @@ const actions = {
     commit('ADD_KEYWORD', keyword)
   },
   deactivateKeyword ({commit, state}, keyword) {
-    var idx = _.findIndex(state.keywords, k => k.text == keyword.text)
-    if (idx != -1) {
+    var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
+    if (idx !== -1) {
       commit('DEACTIVATE_KEYWORD', idx)
     }
   },
   activateKeyword ({commit, state}, keyword) {
-    var idx = _.findIndex(state.keywords, k => k.text == keyword.text)
-    if (idx != -1) {
+    var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
+    if (idx !== -1) {
       commit('ACTIVATE_KEYWORD', idx)
     }
   },
   removeKeyword ({commit, state}, keyword) {
-    var idx = _.findIndex(state.keywords, k => k.text == keyword.text)
-    if (idx != -1) {
+    var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
+    if (idx !== -1) {
       commit('DELETE_KEYWORD', keyword)
     }
   },
@@ -100,7 +100,7 @@ const actions = {
 
 const mutations = {
   ADD_KEYWORD (state, keyword) {
-    if (!state.keywords.filter(k => k.text == keyword.text).length) {
+    if (!state.keywords.filter(k => k.text === keyword.text).length) {
       state.keywords.push(keyword)
     }
   },

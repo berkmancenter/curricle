@@ -4,18 +4,33 @@
       <div> <p class= "your-tray">Your Tray</p>
         <hr>
         <div class="drop-down actions">
-          <i class="fa fa-list-ul" @click="selectView('list-view')"/>
-          <i class="fa fa-calendar" @click="selectView('semester')"/>
-          <i class="fa fa-square" @click="selectView('multi-year')"/>
+          <i
+            class="fa fa-list-ul"
+            @click="selectView('list-view')"/>
+          <i
+            class="fa fa-calendar"
+            @click="selectView('semester')"/>
+          <i
+            class="fa fa-square"
+            @click="selectView('multi-year')"/>
         </div>
       </div>
-      <div v-for="(courses, year, index) in courses">
-        <strong v-if="index == 0 || index == 1">{{ year }}</strong>
-        <div class="yearly-calendar" v-if="index == 0 || index == 1">
+      <div
+        v-for="(courses, year, index) in courses"
+        :key="year">
+        <strong v-if="index === 0 || index === 1">{{ year }}</strong>
+        <div
+          class="yearly-calendar"
+          v-if="index === 0 || index === 1">
           <div class="bannner">
             <div style="height: 300px;">
               <ul>
-                <li v-for="event in courses" :style="{height: height(event)}" @click="selectedPlan(event)" v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
+                <li
+                  v-for="event in courses"
+                  :key="event.id"
+                  :style="{height: height(event)}"
+                  @click="selectedPlan(event)"
+                  v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
                   <div class="fc-title"/>
                   <p>{{ event.external_course_id }}</p>
                   <p>{{ event.title }}</p>
@@ -60,26 +75,28 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3" v-if="trayVisible">
+    <div
+      class="col-md-3"
+      v-if="trayVisible">
       <tray/>
     </div>
-    <div class="col-md-3" v-else>
+    <div
+      class="col-md-3"
+      v-else>
       <selected-course/>
     </div>
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { mapState } from 'vuex'
-import lodash from 'lodash'
-import fullCalendar from 'fullcalendar'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
 import Tray from 'components/tray/tray'
 import moment from 'moment'
 import axios from 'axios'
-// var events_arr = [];
+import _ from 'lodash'
 
 export default {
   components: {
@@ -87,12 +104,6 @@ export default {
     PlanFilter,
     SelectedCourse,
     Tray
-  },
-  computed: {
-    ...mapState('app', {
-      trayVisible: 'trayVisible',
-      selectedView: 'viewmode'
-    })
   },
   data () {
     return {
@@ -108,6 +119,12 @@ export default {
       results: [],
       userCoursesScheduleIds: []
     }
+  },
+  computed: {
+    ...mapState('app', {
+      trayVisible: 'trayVisible',
+      selectedView: 'viewmode'
+    })
   },
   mounted () {
     this.getUserCourses()
@@ -125,7 +142,7 @@ export default {
     filterCategories () {
       axios.get('/courses/categories').then((response) => {
         this.categories = response.data
-          .filter(item => item.name == 'Semester')
+          .filter(item => item.name === 'Semester')
       })
     },
     getCoursesByDate (filter) {
@@ -171,30 +188,31 @@ export default {
     },
 
     filterData (filter) {
-      if (this.sideBarview == 'semester') {
+      if (this.sideBarview === 'semester') {
         this.getCoursesByDate(filter)
       }
 
-      if (this.sideBarview == 'multi-year') {
+      if (this.sideBarview === 'multi-year') {
         this.getCoursesByYear(filter)
       }
     },
     height (course) {
       if (course && course.meeting_with_tods) {
-        const start_time = moment(course.meeting_with_tods.meeting_time_start)
-        const end_time = moment(course.meeting_with_tods.meeting_time_end)
-        end_time.diff(start_time, 'hours') * 72 + 'px'
+        const startTime = moment(course.meeting_with_tods.meeting_time_start)
+        const endTime = moment(course.meeting_with_tods.meeting_time_end)
+
+        return endTime.diff(startTime, 'hours') * 72 + 'px'
       } else {
-        '100px'
+        return '100px'
       }
     },
     isMeetingBelongsToUser (id) {
       return this.userCoursesScheduleIds.includes(id)
     },
     getUserCourses () {
-      const course_url = '/courses/user_courses'
+      const courseUrl = '/courses/user_courses'
       axios
-        .get(course_url)
+        .get(courseUrl)
         .then((response) => {
           this.user_courses = response.data
           this.courses = this.user_courses.multi_year
