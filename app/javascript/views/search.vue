@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-9">
         <basic-search />
         <br>
         <curricle-search />
       </div>
-      <div class="col-md-4 sidebar">
+      <div class="col-md-3 sidebar">
         <tray v-if="trayVisible" />
         <selected-course v-if="validCourseSelected" />
       </div>
