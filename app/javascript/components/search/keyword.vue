@@ -4,11 +4,11 @@
     :key="keyword.text"
     :id="kwId"
   >
-    <span>{{ keywordApplyTo }}</span>
-    <span :class="'wt-' + keyword.weight">{{ keyword.weight }}</span>
     {{ keyword.text }}&nbsp;&nbsp;<font-awesome-icon icon="times" @click="closeClick"/>
+    <span @click="applyToClick" :id="kwId+'-applyTo'">{{ keywordApplyTo }}</span>
+    <span :class="'wt-' + keyword.weight" :id="kwId+'-weight'" @click="weightClick">{{ keyword.weight }}</span>
     <b-popover
-      :target="kwId"
+      :target="kwId+'-applyTo'"
       triggers="click blur"
       placement="bottom">
       <b-form-checkbox-group
@@ -16,6 +16,17 @@
         v-model="selected"
         name="search-fields"
         :options="options"
+      />
+    </b-popover>
+    <b-popover
+      :target="kwId+'-weight'"
+      triggers="click blur"
+      placement="bottom">
+      <b-form-checkbox-group
+        stacked
+        v-model="selectedWeight"
+        name="search-fields-weight"
+        :options="weightOptions"
       />
     </b-popover>
   </span>
@@ -37,11 +48,12 @@ export default {
   },
   data () {
     return {
-      selected: this.keyword.applyTo
+      selected: this.keyword.applyTo,
+      selectedWeight: this.keyword.weight
     }
   },
   computed: {
-    ...mapState('search', { options: 'applyToOptions'}),
+    ...mapState('search', { options: 'applyToOptions', weightOptions: 'weightOptions'}),
     keywordClass () {
       return (this.keyword.active ? 'active' : 'inactive') + '-keyword border border-dark rounded'
     },
@@ -52,15 +64,9 @@ export default {
       return this.selected
     }
   },
-  watch: {
-    selected () {
-      console.log('keyword applyTo changed!')
-    }
-  },
   methods: {
     closeClick () {
       var act = this.keyword.active ? 'search/deactivateKeyword' : 'search/removeKeyword'
-      console.log('keywordClick: chose action: ' + act)
       this.$store.dispatch(act, this.keyword)
     }
   }
