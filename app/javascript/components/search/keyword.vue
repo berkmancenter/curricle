@@ -4,9 +4,9 @@
     :key="keyword.text"
     :id="kwId"
   >
-    {{ keyword.text }}&nbsp;&nbsp;<font-awesome-icon icon="times" @click="closeClick"/>
     <span @click="applyToClick" :id="kwId+'-applyTo'">{{ keywordApplyTo }}</span>
     <span :class="'wt-' + keyword.weight" :id="kwId+'-weight'" @click="weightClick">{{ keyword.weight }}</span>
+    <span @click="bodyClick"> {{ keyword.text }} </span>&nbsp;&nbsp;<font-awesome-icon icon="times" @click="closeClick"/>
     <b-popover
       :target="kwId+'-applyTo'"
       triggers="click blur"
@@ -68,6 +68,11 @@ export default {
     closeClick () {
       var act = this.keyword.active ? 'search/deactivateKeyword' : 'search/removeKeyword'
       this.$store.dispatch(act, this.keyword)
+    },
+    bodyClick () {
+      if (!this.keyword.active) {
+        this.$store.dispatch('search/activateKeyword', this.keyword)
+      }
     }
   }
 }
