@@ -25,7 +25,11 @@ const getters = {
   },
   // this is to import the vuex user.trayCourses and use locally as dependent
   trayCourses (state, getters, rootState, rootGetters) {
-    return rootGetters['user/trayCourses']
+    var courses = rootGetters['user/trayCourses']
+    if (!courses) {
+      return []
+    }
+    return courses
   },
   departmentsInTray (state, getters) {
     return _.uniq(getters.trayCourses.map(k => k.department).sort)
