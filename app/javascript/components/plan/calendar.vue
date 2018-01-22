@@ -39,7 +39,7 @@
 </template>
 
 <script type="text/javascript">
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import fullCalendar from 'fullcalendar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
@@ -52,232 +52,29 @@ export default {
     Tray
   },
   computed: {
-    ...mapState('app', ['trayVisible'])
-  },
-  data () {
-    return {
-      user_courses: [],
-      courses: [],
-      events_arr: [],
-      categories: [],
-      course: {},
-      filteredCourses: [],
-      sideBarview: 'semester',
-      events: [],
-      yearlyEvents: [],
-      currentFilter: {},
-      results: [],
-      userCoursesScheduleIds: []
+    ...mapState('app', ['trayVisible']),
+    ...mapState('plan', ['filters']),
+    ...mapGetters('user', ['coursesByYear', 'coursesByDate']),
+    ...mapGetters('plan', ['filteredCourses', 'departmentsInTray', 'semestersInTray', 'eventData']),
+    categories () {
+      var filters = this.filters
+      return [
+        { name: 'semesters', title: 'Semester', options: this.semestersInTray, field: filters.semester },
+        { name: 'department', title: 'Department', options: this.departmentsInTray, field: filters.department }
+      ]
     }
   },
   mounted () {
-    const category_url = '/courses/categories'
-    this.getUserCourses()
+    this.$store.dispatch('plan/setEvent')
   },
   methods: {
     selectView (type) {
       this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
     },
-
-    selectSideBarView (view) {
-      this.sideBarview = view
-      this.filterData(this.currentFilter)
-    },
-
-    filterCategories () {
-      axios.get('/courses/categories').then((response) => {
-        this.categories = response.data
-          .filter(item => item.name == 'Semester')
-      })
-    },
-
-    selectedFilter (filter, name) {
-      this.currentFilter = filter
-      this.removeEvents()
-      if (filter.value != 'none') {
-        this.filterData(this.currentFilter)
-      }
-      this.getEventData(this.courses)
-      this.addEvents()
-    },
-
-    getEventData (data) {
-      this.events_arr = data
-        .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
-        .map(item => {
-          return {
-            title: ' ',
-            start: item.meeting_with_tods.meeting_time_start,
-            end: item.meeting_with_tods.meeting_time_end,
-            description: item.subject_description,
-            course: item,
-            self: this
-          }
-        })
-    },
-
-    setEvent () {
-      $('.full-calendar').fullCalendar({
-        defaultView: 'agendaWeek',
-        allDaySlot: false,
-        displayEventTime: false,
-        slotDuration: '00:60:00',
-        columnFormat: 'ddd',
-        weekends: false,
-        events: this.events_arr,
-        eventRender: function (event, element) {
-          element.find('.fc-title').after("<div class='event-description'>" + '<p>' + event.course.external_course_id + '</p>' + '<p>' + event.description + '</p>' + '<p>' + '<b>' + event.course.academic_group + '</b>' + '</p>' + '<p>' + '<b>' + event.course.subject + '</b>' + '</p>' + '</div>')
-        },
-        eventClick: function (calEvent, jsEvent, view) {
-          calEvent.self.selectedPlan(calEvent.course)
-        }
-      })
-    },
-    getCoursesByDate (filter) {
-      // Not Required Here
-      // if((filter != undefined) && (Object.keys(filter).length > 0)){
-      //   this.events = {};
-      //   const semester = filter.value.split(" ")
-      //   _.forEach(this.user_courses.semester, (day, key) => {
-      //     this.events[key] = day.filter((item) => {
-      //       if (filter.name === 'term_name'){
-      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-      //       }
-      //       else{
-      //         return item[filter.name] == filter.value
-      //       }
-      //     })
-      //   })
-      // }else{
-      //   this.events = this.user_courses.semester
-      // }
-    },
-
-    getCoursesByYear (filter) {
-      // Not Required Here
-      // if((filter != undefined) && (Object.keys(filter).length > 0)){
-      //   this.yearlyEvents = {};
-      //   const semester = filter.value.split(" ")
-      //   _.forEach(this.user_courses.multi_year, (day, key) => {
-      //     this.yearlyEvents[key] = day.filter((item) => {
-      //       if (filter.name === 'term_name'){
-      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-      //       }
-      //       else{
-      //         return item[filter.name] == filter.value
-      //       }
-      //     })
-      //   })
-      // }else{
-      //   this.yearlyEvents = this.user_courses.multi_year
-      // }
-    },
-
-    removeEvents () {
-      $('.full-calendar').fullCalendar('clientEvents').map(function (event) {
-        $('.full-calendar').fullCalendar('removeEvents', event._id)
-      })
-    },
-
-    addEvents () {
-      this.events_arr.map(function (event) {
-        $('.full-calendar').fullCalendar('renderEvent', event)
-      })
-    },
-
-    selectedPlan (course) {
-      this.course = course
-    },
-
-    filterData (filter) {
-      if (this.sideBarview == 'semester') {
-        this.getCoursesByDate(filter)
-      }
-
-      if (this.sideBarview == 'multi-year') {
-        this.getCoursesByYear(filter)
-      }
-
-      if (this.sideBarview == 'list-view') {
-        this.courses = this.user_courses.tray
-        this.courses = this.courses.filter(item => {
-          if (filter.name === 'term_name') {
-            const semester = filter.value.split(' ')
-            return item.term_name == semester[0] && item.term_year == semester[1]
-            } else {
-              return item[filter.name] == filter.value
-            }
-          })
-        } 
-      },
-      isMeetingBelongsToUser(id){
-        return this.userCoursesScheduleIds.includes(id)    
-      },
-      getUserCourses(update){
-        const course_url = '/courses/user_courses'
-        axios
-          .get(course_url)
-          .then((response) => {
-            this.user_courses = response.data
-            this.courses = this.user_courses.tray
-            this.results = this.user_courses.tray
-            this.getUserScheduleCourseByDate()
-            this.getUserScheduleCourseByYear()
-            this.removeEvents()
-            this.getEventData(this.courses)
-            this.setEvent()
-            this.filterCategories()
-            if(update){
-              this.addEvents()
-            }
-            this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-            // Filter Not Reenabled
-            // this.getCoursesByDate()
-            // this.getCoursesByYear()
-          })
-      },
-      getUserScheduleCourseByDate () {
-        this.events = {};        
-        _.forEach(this.user_courses.semester, (day, key) => {
-          this.events[key] = day.filter(item =>
-            !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
-          )
-        })
-      },
-      getUserScheduleCourseByYear () {
-        this.yearlyEvents = {};        
-        _.forEach(this.user_courses.multi_year, (day, key) => {
-          this.yearlyEvents[key] = day.filter(item =>
-            !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
-          )
-        })
-      }
-    },
-    isMeetingBelongsToUser (id) {
-      return this.userCoursesScheduleIds.includes(id)
-    },
-    getUserCourses (update) {
-      const course_url = '/courses/user_courses'
-      axios
-        .get(course_url)
-        .then((response) => {
-          this.user_courses = response.data
-          this.courses = this.user_courses.tray
-          this.results = this.user_courses.tray
-          this.events = this.user_courses.semester
-          this.yearlyEvents = this.user_courses.multi_year
-          this.removeEvents()
-          this.getEventData(this.courses)
-          this.setEvent()
-          this.filterCategories()
-          if (update) {
-            this.addEvents()
-          }
-          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-          // Filter Not Reenabled
-          // this.getCoursesByDate()
-          // this.getCoursesByYear()
-        })
+  },
+  watch: {
+    eventData () {
+      this.$store.dispatch('plan/populateEvents')
     }
   }
 }
