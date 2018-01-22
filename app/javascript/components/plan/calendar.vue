@@ -18,7 +18,6 @@
           :items="category.options"
           :field="category.field"
           v-for="category in categories"
-          :selected-filter="selectedFilter"
           :name="category.name">
           Filter By :
         </plan-filter>
