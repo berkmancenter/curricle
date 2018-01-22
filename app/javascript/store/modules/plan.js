@@ -2,6 +2,7 @@
 
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
+import $ from 'jquery'
 
 const state = {
   filters: {},
@@ -28,7 +29,6 @@ const getters = {
     return rootGetters['user/trayCourses']
   },
   departmentsInTray (state, getters) {
-    console.log(getters.trayCourses)
     return _.uniq(getters.trayCourses.map(k => k.department).sort)
   },
   semestersInTray (state, getters) {
@@ -74,7 +74,6 @@ const actions = {
         element.find('.fc-title').after("<div class='event-description'>" + '<p>' + event.course.external_course_id + '</p>' + '<p>' + event.description + '</p>' + '<p>' + '<b>' + event.course.academic_group + '</b>' + '</p>' + '<p>' + '<b>' + event.course.subject + '</b>' + '</p>' + '</div>')
       },
       eventClick: function (calEvent, jsEvent, view) {
-        console.log('XXX - need click event handler')
         // calEvent.self.selectedPlan(calEvent.course)
       }
     })
