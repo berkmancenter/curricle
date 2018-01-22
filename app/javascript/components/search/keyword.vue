@@ -4,9 +4,23 @@
     :key="keyword.text"
     :id="kwId"
   >
-    <span @click="applyToClick" :id="kwId+'-applyTo'">{{ keywordApplyTo }}</span>
-    <span :class="'wt-' + keyword.weight" :id="kwId+'-weight'" @click="weightClick">{{ keyword.weight }}</span>
-    <span @click="bodyClick"> {{ keyword.text }} </span>&nbsp;&nbsp;<font-awesome-icon icon="times" @click="closeClick"/>
+    <span
+      :id="kwId+'-applyTo'"
+      class="applyTo"
+    >
+      {{ keywordApplyTo }}
+    </span>
+    <span
+      :id="kwId+'-weight'"
+      :class="'wt-' + selectedWeight"
+    >
+      {{ selectedWeight }}
+    </span>
+    <span
+    @click="bodyClick">
+      {{ keyword.text }}
+    </span>&nbsp;&nbsp;
+    <font-awesome-icon icon="times" @click="closeClick"/>
     <b-popover
       :target="kwId+'-applyTo'"
       triggers="click blur"
@@ -61,7 +75,13 @@ export default {
       return 'keyword-elem-' + this.keyword.text
     },
     keywordApplyTo () {
-      return this.selected
+      if (this.selected.length == this.options.length - _.filter(this.options, { 'disabled': true }).length) {
+        return 'a'
+      }
+      if (this.selected.length == 1) {
+        return this.selected[0].charAt(0).toLowerCase()
+      }
+      return '*'
     }
   },
   methods: {
@@ -89,7 +109,7 @@ export default {
     background-color: #eee;
   }
 
-  .wt {
+  .applyTo, .wt {
     display: inline;
     width: 1em;
     height: 1em;
@@ -111,5 +131,10 @@ export default {
       background-color: rgb(255 - $k * 25, 255 - $k * 25, 255 - $k * 25);
     }
   }
+}
+
+.applyTo {
+  background-color: black;
+  color: white;
 }
 </style>
