@@ -32,10 +32,10 @@ const getters = {
     return courses
   },
   departmentsInTray (state, getters) {
-    return _.uniq(getters.trayCourses.map(k => k.department).sort)
+    return _.uniq(getters.trayCourses.map(k => k.academic_group_description).sort())
   },
   semestersInTray (state, getters) {
-    return _.uniq(getters.trayCourses.map(k => k.semester).sort)
+    return _.uniq(getters.trayCourses.map(k => k.semester).sort())
   },
   eventData (state, getters) {
     return getters.trayCourses
