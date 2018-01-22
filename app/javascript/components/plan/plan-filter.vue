@@ -10,6 +10,10 @@
     class="m-md-2"
     v-else>
     <b-dropdown-item
+    @click="selectItem(null)">
+      All {{ name }}
+    </b-dropdown-item>
+    <b-dropdown-item
       v-for="item in items"
       @click="selectItem(item)">
       {{ item }}
@@ -18,8 +22,10 @@
 </template>
 
 <script type="text/javascript">
+import { mapGetters } from 'vuex'
+
 export default {
-  props: ['title', 'items', 'selectedFilter', 'field', 'name'],
+  props: ['title', 'items', 'field', 'name'],
   data () {
     return { text: this.title }
   },
@@ -29,8 +35,11 @@ export default {
         name: this.field,
         value: value
       }
-      this.text = value
-      this.selectedFilter(sort, this.name)
+      if (value === null) {
+        this.text = this.title
+      } else {
+        this.text = value
+      }
     }
   }
 }
