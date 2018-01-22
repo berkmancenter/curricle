@@ -21,16 +21,8 @@ const state = {
 }
 
 const getters = {
-  activeKeywords (state) {
-    var kws = state.keywords.filter(kw => kw.active).map(k => _.clone(k))
-    _.forEach(kws, k => delete k.active)
-    return kws
-  },
-  inactiveKeywords (state) {
-    var kws = state.keywords.filter(kw => !kw.active).map(k => _.clone(k))
-    _.forEach(kws, k => delete k.active)
-    return kws
-  }
+  activeKeywords: state => state.keywords.filter(kw => kw.active),
+  inactiveKeywords: state => state.keywords.filter(kw => !kw.active)
 }
 
 const actions = {
@@ -56,7 +48,9 @@ const actions = {
     }
   },
   runSearch ({commit, state, getters}) {
-    var kw = getters.activeKeywords
+    var kw = getters.activeKeywords.map(k => _.clone(k))
+    _.forEach(kw, k => delete k.active)
+
     if (kw && kw.length) {
       state.searchComplete = false
 
