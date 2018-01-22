@@ -70,7 +70,7 @@ export default {
   methods: {
     selectView (type) {
       this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
-    },
+    }
   },
   watch: {
     eventData () {
