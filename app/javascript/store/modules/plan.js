@@ -18,6 +18,12 @@ function extractSchedule (courses) {
     _.filter(courses, e => e.meeting_with_tods !== null),
     c => {
       var m = c.meeting_with_tods
+      var courseMeetingInfo = [
+        m.meeting_time_start_tod,
+        m.meeting_time_end_tod,
+        calcDuration(m.meeting_time_start_tod, m.meeting_time_end_tod)
+      ]
+
       return {
         course_id: c.id,
         semester: c.term_name + ' ' + c.term_year,
@@ -25,13 +31,13 @@ function extractSchedule (courses) {
         term_year: c.term_year,
         title: c.title,
         days: [
-          m.meets_on_sunday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
-          m.meets_on_monday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
-          m.meets_on_tuesday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
-          m.meets_on_wednesday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
-          m.meets_on_thursday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
-          m.meets_on_friday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
-          m.meets_on_saturday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined
+          m.meets_on_monday ? courseMeetingInfo : undefined,
+          m.meets_on_tuesday ? courseMeetingInfo : undefined,
+          m.meets_on_wednesday ? courseMeetingInfo : undefined,
+          m.meets_on_thursday ? courseMeetingInfo : undefined,
+          m.meets_on_friday ? courseMeetingInfo : undefined,
+          m.meets_on_saturday ? courseMeetingInfo : undefined,
+          m.meets_on_sunday ? courseMeetingInfo : undefined
         ]
       }
     }
