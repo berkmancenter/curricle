@@ -3,6 +3,31 @@
 import _ from 'lodash'
 import $ from 'jquery'
 
+function extractSchedule (courses) {
+  return _.map(
+    _.filter(courses, e => e.meeting_with_tods !== null),
+    c => {
+      var m = c.meeting_with_tods
+      return {
+        course_id: c.id,
+        semester: c.term_name + ' ' + c.term_year,
+        term_name: c.term_name,
+        term_year: c.term_year,
+        title: c.title,
+        days: [
+          m.meets_on_sunday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
+          m.meets_on_monday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
+          m.meets_on_tuesday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
+          m.meets_on_wednesday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
+          m.meets_on_thursday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
+          m.meets_on_friday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined,
+          m.meets_on_saturday ? [ m.meeting_time_start_tod, m.meeting_time_end_tod ] : undefined
+        ]
+      }
+    }
+  )
+}
+
 const state = {
   filters: {},
   filterCategories: [
@@ -48,6 +73,14 @@ const getters = {
           course: item
         }
       })
+  },
+  // returns all courses which are currently scheduled in the tray ()
+  scheduledCourses (state, getters) {
+    return getters.trayCourses
+      .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
+  },
+  scheduledCoursesBySemester (state, getters) {
+    return _.groupBy(extractSchedule(getters.scheduledCourses), 'semester')
   }
 }
 
