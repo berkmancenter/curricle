@@ -99,9 +99,6 @@ export default {
     ViewSelector,
     Tray
   },
-  computed: {
-    ...mapState('app', ['trayVisible'])
-  },
   data () {
     return {
       courses: [],
@@ -118,10 +115,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('app', {
-      trayVisible: 'trayVisible',
-      selectedView: 'viewmode'
-    })
+    ...mapState('app', ['trayVisible'])
   },
   mounted () {
     this.getUserCourses()

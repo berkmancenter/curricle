@@ -43,6 +43,11 @@ export default {
     ViewSelector,
     Tray
   },
+  data () {
+    return {
+      categories: []
+    }
+  },
   computed: {
     ...mapState('app', ['trayVisible']),
     ...mapState('user', ['validCourseSelected'])
@@ -51,11 +56,6 @@ export default {
     axios.get('/courses/categories').then((response) => {
       this.categories = response.data
     })
-  },
-  data () {
-    return {
-      categories: []
-    }
   }
 }
 </script>

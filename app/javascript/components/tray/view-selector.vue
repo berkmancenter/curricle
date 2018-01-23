@@ -19,11 +19,11 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
-  methods: {
-    ...mapActions('app', ['selectView'])
-  },
   computed: {
     ...mapState('app', ['viewmode'])
+  },
+  methods: {
+    ...mapActions('app', ['selectView'])
   }
 }
 </script>

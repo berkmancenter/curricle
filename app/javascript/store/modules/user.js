@@ -18,7 +18,7 @@ const getters = {
   courseIds (state) {
     var ids = {}
 
-    _.forEach(state.courses.tray, x => ids[x.external_course_id] = x.external_course_id)
+    _.forEach(state.courses.tray, x => { ids[x.external_course_id] = x.external_course_id })
 
     return ids
   },
@@ -49,7 +49,7 @@ const getters = {
     if ((filter !== undefined) && (Object.keys(filter).length > 0)) {
       yearlyEvents = {}
       const semester = filter.value.split(' ')
-      _.forEach(courses.multi_year, (day, key) => {
+      _.forEach(state.courses.multi_year, (day, key) => {
         yearlyEvents[key] = day.filter((item) => {
           if (filter.name === 'term_name') {
             return item.term_name === semester[0] && item.term_year === semester[1]
@@ -117,7 +117,7 @@ const actions = {
   RemoveFromUserCourse ({ commit, dispatch, state }, courseId) {
     const removeCourseUrl = '/courses/remove_from_tray'
     axios
-      .delete('/courses/remove_from_tray', {params: {id: courseId} })
+      .delete(removeCourseUrl, {id: courseId})
       .then((response) => {
         dispatch('getCourses')
       })

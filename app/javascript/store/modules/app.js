@@ -20,9 +20,9 @@ const mutations = {
       state.viewmode = view
     }
   },
-  TOGGLE_TRAY: state => state.trayVisible = !state.trayVisible,
-  SHOW_TRAY: state => state.trayVisible = 1,
-  HIDE_TRAY: state => state.trayVisible = 0
+  TOGGLE_TRAY: state => { state.trayVisible = !state.trayVisible },
+  SHOW_TRAY: state => { state.trayVisible = 1 },
+  HIDE_TRAY: state => { state.trayVisible = 0 }
 }
 
 export default {
