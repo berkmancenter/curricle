@@ -6,15 +6,7 @@
       </p>
       <hr>
       <div class="row actions margin-none">
-        <i
-          class="fa fa-list-ul"
-          @click="selectViewMode('list-view')"/>
-        <i
-          class="fa fa-calendar"
-          @click="selectViewMode('semester')"/>
-        <i
-          class="fa fa-square"
-          @click="selectViewMode('multi-year')"/>
+        <view-selector/>
         <div class="pull-right">See Course History</div>
       </div>
     </div>
@@ -32,20 +24,17 @@
 <script>
 import { mapState } from 'vuex'
 import CourseList from 'components/tray/list'
+import ViewSelector from 'components/tray/view-selector'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 
 export default {
   components: {
     CourseList,
-    CalendarSidebar
+    CalendarSidebar,
+    ViewSelector
   },
   computed: {
     ...mapState('app', ['viewmode'])
-  },
-  methods: {
-    selectViewMode (view) {
-      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', view)
-    }
   }
 }
 </script>

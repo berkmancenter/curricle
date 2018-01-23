@@ -4,15 +4,7 @@
       <p class="your-tray">Your Tray</p>
       <hr>
       <div class="drop-down actions">
-        <i
-          class="fa fa-list-ul"
-          @click="selectView('list-view')"/>
-        <i
-          class="fa fa-calendar"
-          @click="selectView('semester')"/>
-        <i
-          class="fa fa-square"
-          @click="selectView('multi-year')"/>
+        <view-selector/>
         <plan-filter
           :title="category.name"
           :items="category.options"
@@ -43,12 +35,14 @@
 import { mapState, mapGetters } from 'vuex'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
+import ViewSelector from 'components/tray/view-selector'
 import Tray from 'components/tray/tray'
 
 export default {
   components: {
     PlanFilter,
     SelectedCourse,
+    ViewSelector,
     Tray
   },
   computed: {
@@ -71,11 +65,6 @@ export default {
   },
   mounted () {
     this.$store.dispatch('plan/setEvent')
-  },
-  methods: {
-    selectView (type) {
-      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
-    }
   }
 }
 </script>

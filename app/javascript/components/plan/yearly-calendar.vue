@@ -4,15 +4,7 @@
       <div> <p class= "your-tray">Your Tray</p>
         <hr>
         <div class="drop-down actions">
-          <i
-            class="fa fa-list-ul"
-            @click="selectView('list-view')"/>
-          <i
-            class="fa fa-calendar"
-            @click="selectView('semester')"/>
-          <i
-            class="fa fa-square"
-            @click="selectView('multi-year')"/>
+          <view-selector/>
         </div>
       </div>
       <div
@@ -93,6 +85,7 @@ import { mapState } from 'vuex'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
+import ViewSelector from 'components/tray/view-selector'
 import Tray from 'components/tray/tray'
 import moment from 'moment'
 import axios from 'axios'
@@ -103,7 +96,11 @@ export default {
     CalendarSidebar,
     PlanFilter,
     SelectedCourse,
+    ViewSelector,
     Tray
+  },
+  computed: {
+    ...mapState('app', ['trayVisible'])
   },
   data () {
     return {

@@ -10,7 +10,8 @@ const getters = {
 }
 
 const actions = {
-  hideTray ({commit}) { commit('HIDE_TRAY') }
+  hideTray ({commit}) { commit('HIDE_TRAY') },
+  selectView ({commit}, view) { commit('CHOOSE_SIDEBAR_VIEW', view) }
 }
 
 const mutations = {
