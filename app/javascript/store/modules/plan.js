@@ -28,6 +28,26 @@ function extractSchedule (courses) {
   )
 }
 
+function sortedSemesters (sems) {
+  const semOrder = ['Spring', 'Summer', 'Fall']
+
+  if (!sems) return []
+  return sems.sort((a, b) => {
+    if (a === b) {
+      return 0
+    }
+
+    var aPart = a.split(' ')
+    var bPart = b.split(' ')
+
+    if (aPart[1] !== bPart[1]) {
+      return Math.sign(aPart[1] - bPart[1])
+    }
+
+    return Math.sign(semOrder.indexOf(aPart[0]) - semOrder.indexOf(bPart[0]))
+  })
+}
+
 const state = {
   filters: {},
   filterCategories: [
@@ -81,6 +101,9 @@ const getters = {
   },
   scheduledCoursesBySemester (state, getters) {
     return _.groupBy(extractSchedule(getters.scheduledCourses), 'semester')
+  },
+  sortedSemestersInSchedule (state, getters) {
+    return sortedSemesters(_.keys(getters.scheduledCoursesBySemester))
   }
 }
 
