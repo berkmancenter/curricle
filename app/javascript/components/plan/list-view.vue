@@ -19,15 +19,9 @@
         </div>
       </div>
     </div>
-    <div
-      class="col-md-3"
-      v-if="trayVisible">
-      <tray/>
-    </div>
-    <div
-      class="col-md-3"
-      v-else>
-      <selected-course/>
+    <div class="col-md-3">
+      <tray v-if="trayVisible"/>
+      <selected-course v-if="validCourseSelected"/>
     </div>
   </div>
 </template>
@@ -50,7 +44,8 @@ export default {
     Tray
   },
   computed: {
-    ...mapState('app', ['trayVisible'])
+    ...mapState('app', ['trayVisible']),
+    ...mapState('user', ['validCourseSelected'])
   },
   mounted () {
     axios.get('/courses/categories').then((response) => {
@@ -63,7 +58,7 @@ export default {
     }
   }
 }
-   </script>
+</script>
 
 <style type="text/css">
   #app header .navbar-light .navbar-nav a {
