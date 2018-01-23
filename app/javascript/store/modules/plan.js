@@ -3,6 +3,16 @@
 import _ from 'lodash'
 import $ from 'jquery'
 
+function calcDuration (start, end) {
+  var startPart = start.split(':')
+  var endPart = end.split(':')
+
+  var hours = endPart[0] - startPart[0]
+  var mins = endPart[1] - startPart[1]
+
+  return hours + Math.ceil(mins / 5) / 12
+}
+
 function extractSchedule (courses) {
   return _.map(
     _.filter(courses, e => e.meeting_with_tods !== null),
