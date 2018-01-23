@@ -1,39 +1,68 @@
 <template>
-  <div>
-    <list-view v-if="planView === 'list-view'"/>
-    <calendar v-if="planView === 'semester'"/>
-    <yearly-calendar v-if="planView === 'multi-year'"/>
+  <div class="row margin-none">
+    <div class="col-md-9">
+      <div> <p class= "your-tray">Your Tray</p>
+        <hr>
+        <div class="drop-down actions">
+          <view-selector/>
+          <plan-filter
+            :title="category.name"
+            :items="category.options"
+            :field="category.field"
+            v-for="category in categories"
+            :name="category.name"
+            :key="category.id"
+          />
+        </div>
+        <div>
+          <plan-list-view v-if="viewmode === 'list-view'"/>
+          <plan-semester-view v-if="viewmode === 'semester'"/>
+          <plan-year-view v-if="viewmode === 'multi-year'"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <tray v-if="trayVisible"/>
+      <selected-course v-if="validCourseSelected"/>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import axios from 'axios'
+
 import PlanFilter from 'components/plan/plan-filter'
-import PlanListItem from 'components/plan/list-item'
-import PlanDescription from 'components/plan/plan-description'
-import Calendar from 'components/plan/calendar'
-import YearlyCalendar from 'components/plan/yearly-calendar'
-import ListView from 'components/plan/list-view'
+import PlanListView from 'components/plan/list-view'
+import PlanYearView from 'components/plan/yearly-calendar'
+import PlanSemesterView from 'components/plan/calendar'
+import SelectedCourse from 'components/plan/selected-course'
+import Tray from 'components/tray/tray'
+import ViewSelector from 'components/tray/view-selector'
 
 export default {
   components: {
     PlanFilter,
-    PlanListItem,
-    PlanDescription,
-    Calendar,
-    YearlyCalendar,
-    ListView
+    PlanListView,
+    PlanYearView,
+    PlanSemesterView,
+    SelectedCourse,
+    Tray,
+    ViewSelector
   },
-
+  data () {
+    return {
+      categories: []
+    }
+  },
   computed: {
-    ...mapState('app', {
-      trayVisible: 'trayVisible',
-      planView: 'viewmode'
-    })
+    ...mapState('app', ['trayVisible', 'viewmode']),
+    ...mapState('user', ['validCourseSelected'])
   },
-
-  methods: {
-    selectedView: type => this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
+  mounted () {
+    axios.get('/courses/categories').then((response) => {
+      this.categories = response.data
+    })
   }
 }
 </script>

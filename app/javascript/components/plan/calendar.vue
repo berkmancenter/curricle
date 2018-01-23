@@ -1,57 +1,17 @@
 <template>
-  <div class="row margin-none">
-    <div class="col-md-9">
-      <p class="your-tray">Your Tray</p>
-      <hr>
-      <div class="drop-down actions">
-        <view-selector/>
-        <plan-filter
-          :title="category.name"
-          :items="category.options"
-          :field="category.field"
-          v-for="category in categories"
-          :key="category.name"
-          :name="category.name">
-          Filter By :
-        </plan-filter>
-      </div>
-      <div class="full-calendar"/>
-      <div class="full-calendar1"/>
-    </div>
-    <div
-      class="col-md-3"
-      v-if="trayVisible">
-      <tray/>
-    </div>
-    <div
-      class="col-md-3"
-      v-else>
-      <selected-course/>
-    </div>
-  </div>
+  <div class="full-calendar"/>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import FullCalendar from 'fullcalendar'
-import PlanFilter from 'components/plan/plan-filter'
-import SelectedCourse from 'components/plan/selected-course'
-import ViewSelector from 'components/tray/view-selector'
-import Tray from 'components/tray/tray'
 
 export default {
   components: {
-    PlanFilter,
-    SelectedCourse,
-    ViewSelector,
-    FullCalendar,
-    Tray
+    FullCalendar
   },
   computed: {
-    ...mapState('app', ['trayVisible']),
-    ...mapState('plan', ['filters']),
-    ...mapGetters('user', ['coursesByYear', 'coursesByDate']),
-    ...mapGetters('plan', ['filteredCourses', 'departmentsInTray', 'semestersInTray', 'eventData']),
+    ...mapGetters('plan', ['eventData']),
     categories () {
       var filters = this.filters
       return [

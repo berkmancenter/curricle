@@ -1,61 +1,15 @@
 <template>
-  <div class="row margin-none">
-    <div class="col-md-9">
-      <div> <p class= "your-tray">Your Tray</p>
-        <hr>
-        <div class="drop-down actions">
-          <view-selector/>
-          <plan-filter
-            :title="category.name"
-            :items="category.options"
-            :field="category.field"
-            v-for="category in categories"
-            :name="category.name"
-            :key="category.id"
-          />
-        </div>
-        <div class="plan">
-          <plan-list-item/>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <tray v-if="trayVisible"/>
-      <selected-course v-if="validCourseSelected"/>
-    </div>
+  <div class="plan">
+    <plan-list-item/>
   </div>
 </template>
 
-<script type="text/javascript">
-import { mapState } from 'vuex'
-import Tray from 'components/tray/tray'
-import ViewSelector from 'components/tray/view-selector'
-import PlanFilter from 'components/plan/plan-filter'
+<script>
 import PlanListItem from 'components/plan/list-item'
-import SelectedCourse from 'components/plan/selected-course'
-import axios from 'axios'
 
 export default {
   components: {
-    PlanFilter,
-    PlanListItem,
-    SelectedCourse,
-    ViewSelector,
-    Tray
-  },
-  data () {
-    return {
-      categories: []
-    }
-  },
-  computed: {
-    ...mapState('app', ['trayVisible']),
-    ...mapState('user', ['validCourseSelected'])
-  },
-  mounted () {
-    axios.get('/courses/categories').then((response) => {
-      this.categories = response.data
-    })
+    PlanListItem
   }
 }
 </script>

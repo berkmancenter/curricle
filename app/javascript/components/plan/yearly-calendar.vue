@@ -1,87 +1,69 @@
 <template>
-  <div class="row margin-none">
-    <div class="col-md-9">
-      <div> <p class= "your-tray">Your Tray</p>
-        <hr>
-        <div class="drop-down actions">
-          <view-selector/>
-        </div>
-      </div>
+  <div>
+    <div
+      v-for="(courses, year, index) in courses"
+      :key="year">
+      <strong v-if="index === 0 || index === 1">{{ year }}</strong>
       <div
-        v-for="(courses, year, index) in courses"
-        :key="year">
-        <strong v-if="index === 0 || index === 1">{{ year }}</strong>
-        <div
-          class="yearly-calendar"
-          v-if="index === 0 || index === 1">
-          <div class="bannner">
-            <div style="height: 300px;">
-              <ul>
-                <li
-                  v-for="event in courses"
-                  :key="event.id"
-                  :style="{height: height(event)}"
-                  @click="selectedPlan(event)"
-                  v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
-                  <div class="fc-title"/>
-                  <p>{{ event.external_course_id }}</p>
-                  <p>{{ event.title }}</p>
-                  <p><b>{{ event.academic_group }}</b></p>
-                  <p><b>{{ event.subject }}</b></p>
-                </li>
-              </ul>
-            </div>
+        class="yearly-calendar"
+        v-if="index === 0 || index === 1">
+        <div class="bannner">
+          <div style="height: 300px;">
+            <ul>
+              <li
+                v-for="event in courses"
+                :key="event.id"
+                :style="{height: height(event)}"
+                @click="selectedPlan(event)"
+                v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
+                <div class="fc-title"/>
+                <p>{{ event.external_course_id }}</p>
+                <p>{{ event.title }}</p>
+                <p><b>{{ event.academic_group }}</b></p>
+                <p><b>{{ event.subject }}</b></p>
+              </li>
+            </ul>
           </div>
-          <div class="hr-breif">
-            <div class="col100">
-              <ul>
-                <p/>
-              </ul>
-            </div>
-            <div class="col100">
-              <ul>
-                <p>1hr</p>
-              </ul>
-            </div>
-            <div class="col100">
-              <ul>
-                <p>2hr</p>
-              </ul>
-            </div>
-            <div class="col100">
-              <ul>
-                <p>3hr</p>
-              </ul>
-            </div>
-            <div class="col100">
-              <ul>
-                <p>4hr</p>
-              </ul>
-            </div>
-            <div class="col100">
-              <ul>
-                <p>5hr</p>
-              </ul>
-            </div>
+        </div>
+        <div class="hr-breif">
+          <div class="col100">
+            <ul>
+              <p/>
+            </ul>
+          </div>
+          <div class="col100">
+            <ul>
+              <p>1hr</p>
+            </ul>
+          </div>
+          <div class="col100">
+            <ul>
+              <p>2hr</p>
+            </ul>
+          </div>
+          <div class="col100">
+            <ul>
+              <p>3hr</p>
+            </ul>
+          </div>
+          <div class="col100">
+            <ul>
+              <p>4hr</p>
+            </ul>
+          </div>
+          <div class="col100">
+            <ul>
+              <p>5hr</p>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="col-md-3"
-      v-if="trayVisible">
-      <tray/>
-    </div>
-    <div
-      class="col-md-3"
-      v-else>
-      <selected-course/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
@@ -115,78 +97,22 @@ export default {
     }
   },
   computed: {
-    ...mapState('app', ['trayVisible'])
+    ...mapGetters('user', ['trayCourses'])
   },
   mounted () {
     this.getUserCourses()
   },
   methods: {
-    selectView (type) {
-      this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', type)
-    },
-
-    selectSideBarView (view) {
-      this.sideBarview = view
-      this.filterData(this.currentFilter)
-    },
-
     filterCategories () {
       axios.get('/courses/categories').then((response) => {
         this.categories = response.data
           .filter(item => item.name === 'Semester')
       })
     },
-    getCoursesByDate (filter) {
-      // if((filter != undefined) && (Object.keys(filter).length > 0)){
-      //   this.events = {};
-      //   const semester = filter.value.split(" ")
-      //   _.forEach(this.user_courses.semester, (day, key) => {
-      //     this.events[key] = day.filter((item) => {
-      //       if (filter.name === 'term_name'){
-      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-      //       }
-      //       else{
-      //         return item[filter.name] == filter.value
-      //       }
-      //     })
-      //   })
-      // }else{
-      //   this.events = this.user_courses.semester
-      // }
-    },
-
-    getCoursesByYear (filter) {
-      // if((filter != undefined) && (Object.keys(filter).length > 0)){
-      //   this.yearlyEvents = {};
-      //   const semester = filter.value.split(" ")
-      //   _.forEach(this.user_courses.multi_year, (day, key) => {
-      //     this.yearlyEvents[key] = day.filter((item) => {
-      //       if (filter.name === 'term_name'){
-      //         return item.term_name ==  semester[0] && item.term_year == semester[1]
-      //       }
-      //       else{
-      //         return item[filter.name] == filter.value
-      //       }
-      //     })
-      //   })
-      // }else{
-      //   this.yearlyEvents = this.user_courses.multi_year
-      // }
-    },
-
     selectedPlan (course) {
       this.event = course
     },
 
-    filterData (filter) {
-      if (this.sideBarview === 'semester') {
-        this.getCoursesByDate(filter)
-      }
-
-      if (this.sideBarview === 'multi-year') {
-        this.getCoursesByYear(filter)
-      }
-    },
     height (course) {
       if (course && course.meeting_with_tods) {
         const startTime = moment(course.meeting_with_tods.meeting_time_start)
