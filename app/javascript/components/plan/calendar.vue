@@ -33,6 +33,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import FullCalendar from 'fullcalendar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
 import ViewSelector from 'components/tray/view-selector'
@@ -43,6 +44,7 @@ export default {
     PlanFilter,
     SelectedCourse,
     ViewSelector,
+    FullCalendar,
     Tray
   },
   computed: {
