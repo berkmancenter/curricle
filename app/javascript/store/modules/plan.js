@@ -1,7 +1,6 @@
 // Manipulation of plan-related data
 
 import _ from 'lodash'
-import $ from 'jquery'
 
 function calcDuration (start, end) {
   var startPart = start.split(':')
@@ -65,6 +64,7 @@ function sortedSemesters (sems) {
 }
 
 const state = {
+  semester: '',
   filters: {},
   filterCategories: [
     {
@@ -120,6 +120,27 @@ const getters = {
   },
   sortedSemestersInSchedule (state, getters) {
     return sortedSemesters(_.keys(getters.scheduledCoursesBySemester))
+  },
+  currentSchedule (state, getters) {
+    return getters.scheduledCoursesBySemester[state.semester] || []
+  },
+  currentScheduleByDay (state, getters) {
+    var days = []
+    _.each(getters.currentSchedule, course => {
+      var courseCopy = _.clone(course)
+      delete courseCopy.days
+      course.days.forEach((d, i) => {
+        if (d) {
+          var obj = _.clone(courseCopy)
+          obj.day = d
+          if (!days[i]) {
+            days[i] = []
+          }
+          days[i].push(obj)
+        }
+      })
+    })
+    return days
   }
 }
 
@@ -127,32 +148,8 @@ const actions = {
   setFilter ({commit}, filter) {
     commit('SET_FILTER', filter)
   },
-  populateEvents ({state}) {
-    _.each(state.eventData, event => $('.full-calendar').fullCalendar('renderEvent', event))
-  },
-  removeEvents () {
-    $('.full-calendar').fullCalendar('clientEvents').map(function (event) {
-      $('.full-calendar').fullCalendar('removeEvents', event._id)
-    })
-  },
-  setEvent ({getters}) {
-    var events = getters.eventData
-
-    $('.full-calendar').fullCalendar({
-      defaultView: 'agendaWeek',
-      allDaySlot: false,
-      displayEventTime: false,
-      slotDuration: '00:60:00',
-      columnFormat: 'ddd',
-      weekends: false,
-      events: events,
-      eventRender: function (event, element) {
-        element.find('.fc-title').after("<div class='event-description'>" + '<p>' + event.course.external_course_id + '</p>' + '<p>' + event.description + '</p>' + '<p>' + '<b>' + event.course.academic_group + '</b>' + '</p>' + '<p>' + '<b>' + event.course.subject + '</b>' + '</p>' + '</div>')
-      },
-      eventClick: function (calEvent, jsEvent, view) {
-        // calEvent.self.selectedPlan(calEvent.course)
-      }
-    })
+  setSemester ({commit}, semester) {
+    commit('SET_SEMESTER', semester)
   }
 }
 
@@ -163,6 +160,9 @@ const mutations = {
     } else {
       state.filters[name] = value
     }
+  },
+  SET_SEMESTER (state, semester) {
+    state.semester = semester
   }
 }
 
