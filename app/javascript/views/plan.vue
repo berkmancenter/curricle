@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import axios from 'axios'
 
 import PlanFilter from 'components/plan/plan-filter'
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapState('app', ['trayVisible', 'viewmode']),
-    ...mapState('user', ['validCourseSelected'])
+    ...mapGetters('user', ['validCourseSelected'])
   },
   mounted () {
     axios.get('/courses/categories').then((response) => {
