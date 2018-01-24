@@ -17,6 +17,6 @@ Inputs::DeluxeKeywordInput = GraphQL::InputObjectType.define do
   description 'An input object representing arguments for a course'
 
   argument :text, !types.String, 'Keyword text'
-  argument :applyTo, types[ApplyToEnum], 'Fields that the keyword search should be applied to', as: :fields
+  argument :applyTo, !types[ApplyToEnum], 'Fields that the keyword search should be applied to', as: :fields
   argument :weight, types.Int, 'Weight of the keyword search'
 end
