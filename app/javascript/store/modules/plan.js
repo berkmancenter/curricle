@@ -3,6 +3,9 @@
 import _ from 'lodash'
 
 function calcDuration (start, end) {
+  if (!(start && end)) {
+    return 0
+  }
   var startPart = start.split(':')
   var endPart = end.split(':')
 
