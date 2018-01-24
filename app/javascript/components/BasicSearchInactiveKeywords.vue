@@ -8,8 +8,9 @@
         variant="secondary">
         <span class="inactive">Inactive</span>
         <keyword
-          v-for="keyword in inactiveKeywords"
-          :key="keyword.text"
+          v-for="(keyword,idx) in inactiveKeywords"
+          :key="idx"
+          :keyword-idx="idx"
           :keyword="keyword"
         />
       </b-alert>
