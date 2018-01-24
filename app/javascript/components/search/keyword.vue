@@ -24,26 +24,34 @@
       icon="times"
       @click="closeClick"/>
     <b-popover
-      :target="kwId+'-applyTo'"
+      v-if="keyword.active"
+      :target="kwId"
       triggers="click blur"
       placement="bottom">
-      <b-form-checkbox-group
-        stacked
-        v-model="selected"
-        name="search-fields"
-        :options="applyToOptions"
-      />
-    </b-popover>
-    <b-popover
-      :target="kwId+'-weight'"
-      triggers="click blur"
-      placement="bottom">
-      <b-form-checkbox-group
-        stacked
-        v-model="selectedWeight"
-        name="search-fields-weight"
-        :options="weightOptions"
-      />
+      <b-form-input
+      v-model="keyword.text"/>
+      <b-form-group
+        label="Apply To"
+      >
+        <b-form-checkbox-group
+          stacked
+          v-model="selected"
+          name="search-fields"
+          :options="applyToOptions"
+          :target="kwId+'-weight'"
+          triggers="click blur"
+          placement="bottom"
+        />
+      </b-form-group>
+      <b-form-group
+      label="Weight">
+        <b-form-checkbox-group
+          stacked
+          v-model="selectedWeight"
+          name="search-fields-weight"
+          :options="weightOptions"
+        />
+      </b-form-group>
     </b-popover>
   </span>
 </template>
