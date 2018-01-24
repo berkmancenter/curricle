@@ -133,15 +133,16 @@ export default {
       course: 'currentCourse'
     })
   },
-  mounted () {
-    this.fetchAnnotation()
-    this.isPresent = !lodash(this.course)
-    if (this.isPresent) {
-      this.isExpand = false
-      this.editableAnnotation = false
-      this.hideDownCaret = false
-      this.editableText = false
+  watch: {
+    course () {
+      this.setCourse()
+    },
+    editableText (newStr) {
+      this.editableTextlength = newStr.length
     }
+  },
+  mounted () {
+    this.setCourse()
   },
   methods: {
     OpenAnnotationsForm () {
@@ -178,6 +179,16 @@ export default {
           }
           this.editableText = this.editableAnnotationsText
         })
+    },
+    setCourse () {
+      this.fetchAnnotation()
+      this.isPresent = !lodash(this.course || {})
+      if (this.isPresent) {
+        this.isExpand = false
+        this.editableAnnotation = false
+        this.hideDownCaret = false
+        this.editableText = false
+      }
     }
   }
 }
