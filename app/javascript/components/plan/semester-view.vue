@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     ...mapState('plan', ['semester']),
-    ...mapGetters('plan', ['scheduledCoursesBySemester', 'sortedSemestersInSchedule', 'currentSchedule', 'currentScheduleByDay']),
+    ...mapGetters('plan', ['sortedSemestersInSchedule', 'currentScheduleByDay']),
     earliestIdx () {
       var earliest = 24
       _.each(
