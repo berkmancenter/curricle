@@ -5,11 +5,11 @@
     <div class="col-md-1">
       <i
         class="fa fa-folder"
-        @click="addRemoveCourse(id)"
+        @click="addRemoveUserCourse(id)"
         :class="{ usercourse: !userCourseIds.includes(id)}"/><br>
       <i
         class="fa fa-clock-o"
-        @click="addRemoveSchedule(meeting.id)"
+        @click="addRemoveUserSchedule(meeting.id)"
         :class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}"
         v-if="meeting"/>
     </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   props: {
     academic_group: {
@@ -118,12 +118,7 @@ export default {
     })
   },
   methods: {
-    addRemoveCourse (courseId) {
-      this.$store.dispatch('user/addRemoveUserCourse', courseId)
-    },
-    addRemoveSchedule (meetingId) {
-      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
-    }
+    ...mapActions('user', ['addRemoveUserCourse', 'addRemoveUserSchedule'])
   }
 }
 </script>
