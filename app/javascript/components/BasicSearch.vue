@@ -61,7 +61,7 @@ export default {
     return {
       keyword: '',
       weight: 5,
-      applyTo: ['Title', 'Description', 'Instructor']
+      applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID']
     }
   },
   methods: {

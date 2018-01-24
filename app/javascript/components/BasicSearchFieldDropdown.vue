@@ -48,12 +48,12 @@ export default {
       switch (this.selected.length) {
         // TODO: revert this once all search fields are available
         // case this.options.length:
-        case 3:
+        case 4:
           return 'All'
         case 0:
           return 'None'
         default:
-          return this.selected.join(', ')
+          return this.selected.join(', ') // TODO: Return human-readable versions of the field names
       }
     }
   },

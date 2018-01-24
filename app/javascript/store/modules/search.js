@@ -12,11 +12,11 @@ const state = {
   results: [],
   searchComplete: false,
   applyToOptions: [
-    { text: 'Title', value: 'Title' },
-    { text: 'Description', value: 'Description' },
-    { text: 'Instructor', value: 'Instructor' },
-    { text: 'Readings', value: 'Readings', disabled: true },
-    { text: 'Course ID', value: 'Course ID', disabled: true }
+    { text: 'Title', value: 'TITLE' },
+    { text: 'Description', value: 'DESCRIPTION' },
+    { text: 'Instructor', value: 'INSTRUCTOR' },
+    { text: 'Readings', value: 'READINGS', disabled: true },
+    { text: 'Course ID', value: 'COURSE_ID' }
   ],
   weightOptions: [
     { text: '1', value: 1 },
