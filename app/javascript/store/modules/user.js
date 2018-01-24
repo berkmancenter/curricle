@@ -81,7 +81,15 @@ const actions = {
   },
   selectCourse ({commit, dispatch}, course) {
     dispatch('app/hideTray', null, { root: true })
-    commit('SET_CURRENT_COURSE', course)
+    if (typeof course !== 'object') {
+      dispatch('lookupCourse', course).then(
+        obj => {
+          commit('SET_CURRENT_COURSE', obj)
+        }
+      )
+    } else {
+      commit('SET_CURRENT_COURSE', course)
+    }
   },
   addToUserSchedule ({ commit, dispatch }, meetingId) {
     const addScheduleUrl = '/courses/add_to_schedule'
@@ -128,6 +136,15 @@ const actions = {
     } else {
       dispatch('addCourseToUser', courseId)
     }
+  },
+  lookupCourse ({ state }, courseId) {
+    if (state.courses && state.courses.tray) {
+      var course = _.find(state.courses.tray, c => c.id === courseId)
+      if (course) {
+        return course
+      }
+    }
+    return {}
   }
 }
 
