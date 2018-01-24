@@ -14,7 +14,7 @@
                 v-for="event in courses"
                 :key="event.id"
                 :style="{height: height(event)}"
-                @click="selectedPlan(event)"
+                @click="selectCourse(event)"
                 v-if="event.meeting_with_tods && isMeetingBelongsToUser(event.meeting_with_tods.id)">
                 <div class="fc-title"/>
                 <p>{{ event.external_course_id }}</p>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/plan/selected-course'
@@ -103,6 +103,7 @@ export default {
     this.getUserCourses()
   },
   methods: {
+    ...mapActions('user', ['selectCourse']),
     filterCategories () {
       axios.get('/courses/categories').then((response) => {
         this.categories = response.data

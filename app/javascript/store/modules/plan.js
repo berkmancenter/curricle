@@ -26,6 +26,7 @@ function extractSchedule (courses) {
 
       return {
         course_id: c.id,
+        id: c.id,
         semester: c.term_name + ' ' + c.term_year,
         term_name: c.term_name,
         term_year: c.term_year,
