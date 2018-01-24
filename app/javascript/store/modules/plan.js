@@ -20,6 +20,7 @@ function extractSchedule (courses) {
       var courseMeetingInfo = [
         m.meeting_time_start_tod,
         m.meeting_time_end_tod,
+        calcDuration('0:00', m.meeting_time_start_tod),
         calcDuration(m.meeting_time_start_tod, m.meeting_time_end_tod)
       ]
 
