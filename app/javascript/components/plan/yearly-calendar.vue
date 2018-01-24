@@ -110,9 +110,6 @@ export default {
           .filter(item => item.name === 'Semester')
       })
     },
-    selectedPlan (course) {
-      this.event = course
-    },
 
     height (course) {
       if (course && course.meeting_with_tods) {
