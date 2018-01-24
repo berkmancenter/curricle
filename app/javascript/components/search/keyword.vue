@@ -31,7 +31,7 @@
         stacked
         v-model="selected"
         name="search-fields"
-        :options="options"
+        :options="applyToOptions"
       />
     </b-popover>
     <b-popover
@@ -70,7 +70,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('search', { options: 'applyToOptions', weightOptions: 'weightOptions' }),
+    ...mapState('search', ['applyToOptions', 'weightOptions']),
     keywordClass () {
       return (this.keyword.active ? 'active' : 'inactive') + '-keyword border border-dark rounded'
     },
@@ -78,7 +78,7 @@ export default {
       return 'keyword-elem-' + this.keyword.text
     },
     keywordApplyTo () {
-      if (this.selected.length === this.options.length - _.filter(this.options, { 'disabled': true }).length) {
+      if (this.selected.length === this.applyToOptions.length - _.filter(this.applyToOptions, { 'disabled': true }).length) {
         return 'a'
       }
       if (this.selected.length === 1) {
