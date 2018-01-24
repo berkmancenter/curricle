@@ -13,7 +13,7 @@
             <span
               v-for="(time,index) in times"
               :key="time"
-              :style="{ display: 'block', position: 'absolute', top: index * 30 + 'px', width: '600%', 'border-bottom': '2px solid black' }"
+              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '600%', 'border-bottom': '2px solid black' }"
             >
               {{ time }}
             </span>
@@ -34,7 +34,8 @@
             v-for="item in currentScheduleByDay[index]"
             :item="item"
             :key="item.course_id"
-            :scale="30"
+            :scale="scale"
+            :offset="earliestIdx"
           />
         </b-row>
       </b-col>
@@ -44,6 +45,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import _ from 'lodash'
 
 import CalendarItem from 'components/plan/calendar-item'
 
@@ -51,12 +53,44 @@ export default {
   components: {
     CalendarItem
   },
+  data () {
+    return {
+      scale: 40
+    }
+  },
   computed: {
     ...mapState('plan', ['semester']),
     ...mapGetters('plan', ['scheduledCoursesBySemester', 'sortedSemestersInSchedule', 'currentSchedule', 'currentScheduleByDay']),
+    earliestIdx () {
+      var earliest = 24
+      _.each(
+        _.flatMap(
+          _.filter(
+            this.currentScheduleByDay,
+            a => a !== undefined
+          )
+        ),
+        k => { earliest = Math.min(earliest, k.day[2]) }
+      )
+      return Math.floor(earliest - 1)
+    },
+    latestIdx () {
+      var latest = 0
+      _.each(
+        _.flatMap(
+          _.filter(
+            this.currentScheduleByDay,
+            a => a !== undefined
+          )
+        ),
+        k => { latest = Math.max(latest, k.day[2] + k.day[3]) }
+      )
+      return Math.ceil(latest)
+    },
     times () {
       return ['1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
         '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm', '12am' ]
+        .slice(this.earliestIdx, this.latestIdx)
     }
   },
   watch: {

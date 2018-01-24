@@ -19,13 +19,17 @@ export default {
     scale: {
       type: Number,
       required: true
+    },
+    offset: {
+      type: Number,
+      default: 0
     }
   },
   computed: {
     computedStyle () {
       return {
         height: this.scale * this.item.day[3] + 'px',
-        top: this.scale * this.item.day[2] + 'px'
+        top: this.scale * Math.max(this.item.day[2] - this.offset, 0) + 'px'
       }
     }
   },
