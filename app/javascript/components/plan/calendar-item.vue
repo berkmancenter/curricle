@@ -2,7 +2,7 @@
   <div
     class="calendar-item"
     :style="computedStyle"
-    @click="selectCourse(item)">
+    @click="selectCourse(item.id)">
     {{ item.title }}
   </div>
 </template>
