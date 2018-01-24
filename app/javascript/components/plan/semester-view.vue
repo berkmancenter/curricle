@@ -2,6 +2,24 @@
   <div>
     <p>Semester View</p>
     <b-row>
+      <b-col>
+        <b-row>
+          <b-col>
+            Time
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <span
+              v-for="(time,index) in times"
+              :key="time"
+              :style="{ display: 'block', position: 'absolute', top: index * 30 + 'px', width: '600%', 'border-bottom': '2px solid black' }"
+            >
+              {{ time }}
+            </span>
+          </b-col>
+        </b-row>
+      </b-col>
       <b-col
         v-for="(day,index) in ['Monday','Tuesday','Wednesday','Thursday','Friday']"
         :key="index"
@@ -35,7 +53,11 @@ export default {
   },
   computed: {
     ...mapState('plan', ['semester']),
-    ...mapGetters('plan', ['scheduledCoursesBySemester', 'sortedSemestersInSchedule', 'currentSchedule', 'currentScheduleByDay'])
+    ...mapGetters('plan', ['scheduledCoursesBySemester', 'sortedSemestersInSchedule', 'currentSchedule', 'currentScheduleByDay']),
+    times () {
+      return ['1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
+        '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm', '12am' ]
+    }
   },
   watch: {
     sortedSemestersInSchedule () {
