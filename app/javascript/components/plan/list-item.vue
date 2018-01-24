@@ -32,7 +32,7 @@
               class= "fa fa-clock-o"
               :class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}"
               v-if="list.meeting_with_tods"
-              @click="addRemoveSchedule(list.meeting_with_tods.id)"/>
+              @click="addRemoveUserSchedule(list.meeting_with_tods.id)"/>
           </td>
           <span class= "check_box">
             <input
