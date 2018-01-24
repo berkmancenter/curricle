@@ -133,19 +133,14 @@ export default {
       course: 'currentCourse'
     })
   },
-  watch: {
-    course () {
-      this.fetchAnnotation()
-      this.isPresent = !lodash(this.course)
-      if (this.isPresent) {
-        this.isExpand = false
-        this.editableAnnotation = false
-        this.hideDownCaret = false
-        this.editableText = false
-      }
-    },
-    editableText (newStr) {
-      this.editableTextlength = newStr.length
+  mounted () {
+    this.fetchAnnotation()
+    this.isPresent = !lodash(this.course)
+    if (this.isPresent) {
+      this.isExpand = false
+      this.editableAnnotation = false
+      this.hideDownCaret = false
+      this.editableText = false
     }
   },
   methods: {

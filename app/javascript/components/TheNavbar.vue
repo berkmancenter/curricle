@@ -48,7 +48,12 @@ export default {
     ...mapState('app', ['trayVisible'])
   },
   methods: {
-    trayToggle () { this.$store.commit('app/TOGGLE_TRAY') },
+    trayToggle () {
+      this.$store.commit('app/TOGGLE_TRAY')
+      if (!this.trayVisible) {
+        this.$store.commit('user/SET_CURRENT_COURSE', {})
+      }
+    },
     logout () {
       axios.get('/users/sign_out')
         .then(response => {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="validCourseSelected">
+    <div v-if="!trayVisible && validCourseSelected">
       <p class="select-course">Selected Course</p>
       <hr>
       <div class="row actions margin-none">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import PlanDescription from 'components/plan/plan-description'
 
 export default {
@@ -31,7 +31,8 @@ export default {
     PlanDescription
   },
   computed: {
-    ...mapGetters('user', ['validCourseSelected'])
+    ...mapGetters('user', ['validCourseSelected']),
+    ...mapState('app', ['trayVisible'])
   }
 }
 </script>
