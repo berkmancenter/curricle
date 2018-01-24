@@ -83,6 +83,18 @@ const actions = {
                   display_name
                   id
                 }
+                course_meeting_patterns {
+                  id
+                  meeting_time_start_tod
+                  meeting_time_end_tod
+                  meets_on_monday
+                  meets_on_tuesday
+                  meets_on_wednesday
+                  meets_on_thursday
+                  meets_on_friday
+                  meets_on_saturday
+                  meets_on_sunday
+                }
               }
             }
           `,
