@@ -13,6 +13,7 @@
             :name="category.name"
             :key="category.id"
           />
+          <semester-selector/>
         </div>
         <div>
           <plan-list-view v-if="viewmode === 'list-view'"/>
@@ -37,6 +38,7 @@ import PlanListView from 'components/plan/list-view'
 import PlanYearView from 'components/plan/yearly-calendar'
 import PlanSemesterView from 'components/plan/semester-view'
 import SelectedCourse from 'components/plan/selected-course'
+import SemesterSelector from 'components/plan/semester-selector'
 import Tray from 'components/tray/tray'
 import ViewSelector from 'components/tray/view-selector'
 
@@ -47,6 +49,7 @@ export default {
     PlanYearView,
     PlanSemesterView,
     SelectedCourse,
+    SemesterSelector,
     Tray,
     ViewSelector
   },
@@ -61,7 +64,7 @@ export default {
   },
   mounted () {
     axios.get('/courses/categories').then((response) => {
-      this.categories = response.data
+      this.categories = [response.data[0]]
     })
   }
 }
