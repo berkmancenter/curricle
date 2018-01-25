@@ -1,16 +1,16 @@
 <template>
   <span>
     <i
-      :class="{ fa: true, 'fa-list-ul': true, active: viewmode =='list-view'}"
-      @click="selectView('list-view')"
+      :class="{ fa: true, 'fa-list-ul': true, active: viewmode[type] == 'list-view'}"
+      @click="selectView({ view: 'list-view', type })"
     />
     <i
-      :class="{ fa: true, 'fa-calendar': true, active: viewmode =='semester'} "
-      @click="selectView('semester')"
+      :class="{ fa: true, 'fa-calendar': true, active: viewmode[type] == 'semester'} "
+      @click="selectView({ view: 'semester', type })"
     />
     <i
-      :class="{ fa: true, 'fa-square': true, active: viewmode == 'multi-year' }"
-      @click="selectView('multi-year')"
+      :class="{ fa: true, 'fa-square': true, active: viewmode[type] == 'multi-year'}"
+      @click="selectView({ view: 'multi-year', type })"
     />
   </span>
 </template>
@@ -19,6 +19,12 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
+  props: {
+    type: {
+      type: String,
+      default: 'tray'
+    }
+  },
   computed: {
     ...mapState('app', ['viewmode'])
   },

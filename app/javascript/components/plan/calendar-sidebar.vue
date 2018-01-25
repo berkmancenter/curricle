@@ -37,7 +37,7 @@ export default {
     ...mapState('app', ['viewmode']),
     ...mapState('user', ['userCoursesScheduleIds']),
     ...mapGetters('user', ['coursesByDate', 'coursesByYear', 'courseIds']),
-    calendarEvents () { return this.viewmode === 'multi-year' ? this.coursesByYear : this.coursesByDate }
+    calendarEvents () { return this.viewmode.tray === 'multi-year' ? this.coursesByYear : this.coursesByDate }
   },
   methods: {
     addRemoveSchedule: function (meetingId) {

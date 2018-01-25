@@ -12,10 +12,10 @@
     </div>
     <div class="row margin-none">
       <calendar-sidebar
-        v-if="viewmode=='semester' || viewmode=='multi-year'"
+        v-if="viewmode.tray=='semester' || viewmode.tray=='multi-year'"
       />
       <course-list
-        v-if="viewmode=='list-view'"
+        v-if="viewmode.tray=='list-view'"
       />
     </div>
   </div>

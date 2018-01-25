@@ -1,7 +1,10 @@
 // Manipulation of generic application state
 
 const state = {
-  viewmode: 'list-view',
+  viewmode: {
+    tray: 'list-view',
+    plan: 'list-view'
+  },
   trayVisible: 0
 }
 
@@ -15,9 +18,12 @@ const actions = {
 }
 
 const mutations = {
-  CHOOSE_SIDEBAR_VIEW: (state, view) => {
-    if (['semester', 'multi-year', 'list-view'].includes(view)) {
-      state.viewmode = view
+  CHOOSE_SIDEBAR_VIEW: (state, obj) => {
+    if (typeof obj === 'object') {
+      var { type, view } = obj
+      if (['semester', 'multi-year', 'list-view'].includes(view)) {
+        state.viewmode[type] = view
+      }
     }
   },
   TOGGLE_TRAY: state => { state.trayVisible = !state.trayVisible },

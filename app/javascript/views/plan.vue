@@ -4,7 +4,9 @@
       <div> <p class= "your-tray">Your Tray</p>
         <hr>
         <div class="drop-down actions">
-          <view-selector/>
+          <view-selector
+            type="plan"
+          />
           <plan-filter
             :title="category.name"
             :items="category.options"
@@ -16,9 +18,9 @@
           <semester-selector/>
         </div>
         <div>
-          <plan-list-view v-if="viewmode === 'list-view'"/>
-          <plan-semester-view v-if="viewmode === 'semester'"/>
-          <plan-year-view v-if="viewmode === 'multi-year'"/>
+          <plan-list-view v-if="viewmode.plan === 'list-view'"/>
+          <plan-semester-view v-if="viewmode.plan === 'semester'"/>
+          <plan-year-view v-if="viewmode.plan === 'multi-year'"/>
         </div>
       </div>
     </div>
