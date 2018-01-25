@@ -184,7 +184,7 @@ const actions = {
   removeFromUserSchedule ({ commit, dispatch }, id) {
     const removeScheduleUrl = '/courses/remove_from_schedule'
     axios
-      .delete(removeScheduleUrl, { id })
+      .delete(removeScheduleUrl, { params: { id } })
       .then((response) => {
         commit('SET_USER_FLAG', { type: 'schedule', value: false, course: id })
       })
@@ -207,7 +207,7 @@ const actions = {
   removeFromUserCourse ({ commit, dispatch }, id) {
     const removeCourseUrl = '/courses/remove_from_tray'
     axios
-      .delete(removeCourseUrl, {id})
+      .delete(removeCourseUrl, { params: {id} })
       .then((response) => {
         commit('SET_USER_FLAG', { type: 'tray', value: false, course: id })
       })
