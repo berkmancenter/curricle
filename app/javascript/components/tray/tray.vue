@@ -2,7 +2,10 @@
   <div>
     <div class="your-tray-parent">
       <p class="your-tray"> Your Tray
-        <span class="fa fa-close"/>
+        <span
+          class="fa fa-close"
+          @click="hideTray"
+        />
       </p>
       <hr>
       <div class="row actions margin-none">
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import CourseList from 'components/tray/list'
 import ViewSelector from 'components/tray/view-selector'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
@@ -35,6 +38,9 @@ export default {
   },
   computed: {
     ...mapState('app', ['viewmode'])
+  },
+  methods: {
+    ...mapActions('app', ['hideTray'])
   }
 }
 </script>
