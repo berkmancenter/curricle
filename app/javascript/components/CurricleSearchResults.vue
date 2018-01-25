@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 
 export default {
@@ -141,7 +141,7 @@ export default {
         'border-left-color': ('#' + randomColor)
       }
     },
-    ...mapState('user', {
+    ...mapGetters('user', {
       userCoursesScheduleIds: 'userCoursesScheduleIds',
       userCourseIds: 'userCourseIds'
     })

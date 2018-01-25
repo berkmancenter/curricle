@@ -11,16 +11,17 @@ const state = {
     annotated: {},
     tagged: {}
   },
-  filter: {},
-  userCoursesScheduleIds: [],
-  currentCourse: {},
-  userCourseIds: []
+
+  // placeholder for selected course; TODO: move to app
+  currentCourse: {}
 }
 
 const getters = {
+  // computed trayCourses
   trayCourses (state) {
-    return state.courses.tray
+    return state.courses
   },
+
   courseIds (state) {
     var ids = {}
 
@@ -71,6 +72,22 @@ const getters = {
   },
   validCourseSelected (state) {
     return state.currentCourse && state.currentCourse.id
+  },
+
+  // return a list of course ids in the tray
+  userCourseIds (state) {
+    return _.filter(
+      _.keys(state.courseflags.tray),
+      k => state.courseflags.tray[k]
+    )
+  },
+
+  // return a list of course ids in the schedule
+  userCoursesScheduleIds (state) {
+    return _.filter(
+      _.keys(state.courseflags.schedule),
+      k => state.courseflags.schedule[k]
+    )
   }
 }
 
