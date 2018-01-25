@@ -108,7 +108,15 @@ const actions = {
     _.each(courses, course => { if (state.courses[course]) { obj[course] = state.courses[course] } })
 
     return obj
+  },
+
+  /*
+   * Return information from a single course by id from the registry
+   */
+  getCourseById ({ state }, course) {
+    return state.courses[course]
   }
+
 }
 
 const mutations = {
