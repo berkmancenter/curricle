@@ -33,11 +33,13 @@ export default {
       types: {
         tray: {
           icon: 'fa-folder',
+          clickable: true,
           activeTooltip: 'Click to remove from your tray',
           inactiveTooltip: 'Click to add to your tray'
         },
         schedule: {
           icon: 'fa-clock-o',
+          clickable: true,
           activeTooltip: 'Click to remove from your schedule',
           inactiveTooltip: 'Click to add to your schedule'
         },
@@ -55,6 +57,7 @@ export default {
         },
         shareable: {
           icon: 'fa-share-alt',
+          clickable: false,
           activeTooltip: 'Click to share this course',
           inactiveTooltip: ''
         }
@@ -84,7 +87,7 @@ export default {
   methods: {
     ...mapActions('user', ['courseHasStatus', 'toggleCourseStatus']),
     click () {
-      if (this.clickable !== false) {
+      if (this.config.clickable || this.clickHandler) {
         if (this.clickHandler) {
           this.clickHandler({ type: this.type, course: this.course })
         } else {
