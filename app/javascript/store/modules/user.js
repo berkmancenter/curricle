@@ -5,6 +5,12 @@ import _ from 'lodash'
 
 const state = {
   courses: {},
+  courseflags: {
+    tray: {},
+    schedule: {},
+    annotated: {},
+    tagged: {}
+  },
   filter: {},
   userCoursesScheduleIds: [],
   currentCourse: {},
@@ -145,6 +151,33 @@ const actions = {
       }
     }
     return {}
+  },
+
+  /*
+   * courseHasStatus checks a given course id and returns true if the
+   * state type is true for the user in question.  This is related to
+   * the course-action component, so consolidating any checks here.
+
+   * If you need to add more types you will need to add the checker
+   * here and adjust the course-action component as well to add the
+   * icons/actions used.
+   */
+  courseHasStatus ({ state, getters }, { course, type }) {
+    if (type === 'shareable') {
+      return true
+    }
+
+    return state.courseflags[type][course]
+  },
+
+  /*
+   * setCourseStatus does whatever is needed (web requests, etc) in
+   * order to change the status of the course information.  In all
+   * likelihood this will dispatch to other actions/handlers.
+   */
+
+  toggleCourseStatus ({ state, getters, dispatch }, { course, type }) {
+    state.courseflags[type][course] = !state.courseflags[type][course]
   }
 }
 
