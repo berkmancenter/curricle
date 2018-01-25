@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import _ from 'lodash'
+import Vue from 'vue/dist/vue.esm'
 
 /*
  * Represent user-specific data; courses are ids for the most part,
@@ -150,50 +151,50 @@ const actions = {
     }
   },
 
-  addToUserSchedule ({ commit, dispatch }, meetingId) {
+  addToUserSchedule ({ commit, dispatch }, id) {
     const addScheduleUrl = '/courses/add_to_schedule'
     axios
-      .post(addScheduleUrl, {pattern_id: meetingId})
+      .post(addScheduleUrl, { id })
       .then((response) => {
-        dispatch('getCourses')
+        commit('SET_USER_FLAG', { type: 'schedule', value: true, course: id })
       })
   },
-  removeFromUserSchedule ({ commit, dispatch }, meetingId) {
+  removeFromUserSchedule ({ commit, dispatch }, id) {
     const removeScheduleUrl = '/courses/remove_from_schedule'
     axios
-      .delete(removeScheduleUrl, {params: {pattern_id: meetingId}})
+      .delete(removeScheduleUrl, { id })
       .then((response) => {
-        dispatch('getCourses')
+        commit('SET_USER_FLAG', { type: 'schedule', value: false, course: id })
       })
   },
-  addRemoveUserSchedule ({ commit, dispatch, state }, meetingId) {
-    if (state.userCoursesScheduleIds.includes(meetingId)) {
-      dispatch('removeFromUserSchedule', meetingId)
+  addRemoveUserSchedule ({ commit, dispatch, getters }, id) {
+    if (getters.userCoursesScheduleIds.includes(id)) {
+      dispatch('removeFromUserSchedule', id)
     } else {
-      dispatch('addToUserSchedule', meetingId)
+      dispatch('addToUserSchedule', id)
     }
   },
-  addCourseToUser ({ commit, dispatch, state }, courseId) {
+  addCourseToUser ({ commit, dispatch }, id) {
     const addCourseUrl = '/courses/add_to_tray'
     axios
-      .post(addCourseUrl, {id: courseId})
+      .post(addCourseUrl, {id})
       .then((response) => {
-        dispatch('getCourses')
+        commit('SET_USER_FLAG', { type: 'tray', value: true, course: id })
       })
   },
-  RemoveFromUserCourse ({ commit, dispatch, state }, courseId) {
+  removeFromUserCourse ({ commit, dispatch }, id) {
     const removeCourseUrl = '/courses/remove_from_tray'
     axios
-      .delete(removeCourseUrl, {id: courseId})
+      .delete(removeCourseUrl, {id})
       .then((response) => {
-        dispatch('getCourses')
+        commit('SET_USER_FLAG', { type: 'tray', value: false, course: id })
       })
   },
-  addRemoveUserCourse ({ commit, dispatch, state }, courseId) {
-    if (state.userCourseIds.includes(courseId)) {
-      dispatch('RemoveFromUserCourse', courseId)
+  addRemoveUserCourse ({ commit, dispatch, getters }, id) {
+    if (getters.userCourseIds.includes(id)) {
+      dispatch('removeFromUserCourse', id)
     } else {
-      dispatch('addCourseToUser', courseId)
+      dispatch('addCourseToUser', id)
     }
   },
 
@@ -220,9 +221,22 @@ const actions = {
    * likelihood this will dispatch to other actions/handlers.
    */
 
-  toggleCourseStatus ({ state, getters, dispatch }, { course, type }) {
+  toggleCourseStatus ({ state, commit, dispatch }, { course, type }) {
     if (type && course) {
-      state.courseflags[type][course] = !state.courseflags[type][course]
+      var act
+
+      if (type === 'tray') {
+        act = 'addRemoveUserCourse'
+      }
+      if (type === 'schedule') {
+        act = 'addRemoveUserSchedule'
+      }
+
+      if (act) {
+        dispatch(act, course)
+      } else {
+        commit('SET_USER_FLAG', { type, course, value: !state.courseflags[type][course] })
+      }
     }
   }
 }
@@ -230,6 +244,10 @@ const actions = {
 const mutations = {
   SET_COURSES: (state, value) => {
     state.courses = value
+  },
+  SET_USER_FLAG: (state, { type, course, value }) => {
+    // required due to reactivity requirements
+    Vue.set(state.courseflags[type], course, value)
   },
   SET_USER_SCHEDULE: (state, value) => {
     state.userCoursesScheduleIds = value.tray

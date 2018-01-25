@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   props: {
@@ -61,11 +61,17 @@ export default {
           activeTooltip: 'Click to share this course',
           inactiveTooltip: ''
         }
-      },
-      active: false
+      }
     }
   },
   computed: {
+    ...mapState('user', ['courseflags']),
+    active () {
+      if (this.type === 'shareable') {
+        return true
+      }
+      return !!this.courseflags[this.type][this.course]
+    },
     tooltip () {
       return this.active ? this.config.activeTooltip : this.config.inactiveTooltip
     },
@@ -80,9 +86,6 @@ export default {
     }
   },
   mounted () {
-    this.courseHasStatus({ type: this.type, course: this.course }).then(
-      ret => { this.active = ret }
-    )
   },
   methods: {
     ...mapActions('user', ['courseHasStatus', 'toggleCourseStatus']),
@@ -91,12 +94,7 @@ export default {
         if (this.clickHandler) {
           this.clickHandler({ type: this.type, course: this.course })
         } else {
-          // default toggleable click handler
-          this.toggleCourseStatus({ type: this.type, course: this.course }).then(
-            () => this.courseHasStatus({ type: this.type, course: this.course }).then(
-              ret => { this.active = ret }
-            )
-          )
+          this.toggleCourseStatus({ type: this.type, course: this.course })
         }
       }
     }
