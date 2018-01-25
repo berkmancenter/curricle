@@ -171,7 +171,7 @@ const actions = {
   },
 
   /*
-   * setCourseStatus does whatever is needed (web requests, etc) in
+   * toggleCourseStatus does whatever is needed (web requests, etc) in
    * order to change the status of the course information.  In all
    * likelihood this will dispatch to other actions/handlers.
    */
