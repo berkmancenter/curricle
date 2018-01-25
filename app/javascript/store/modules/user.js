@@ -4,7 +4,8 @@ import axios from 'axios'
 import _ from 'lodash'
 
 const state = {
-  courses: {},
+  // holds canonical courses in tray
+  courses: [],
   courseflags: {
     tray: {},
     schedule: {},
