@@ -3,13 +3,24 @@
 import axios from 'axios'
 import _ from 'lodash'
 
+/*
+ * Represent user-specific data; courses are ids for the most part,
+ * but are resolved to objects in the getters.
+ */
+
 const state = {
   // holds canonical courses in tray
   courses: [],
+
+  // local state of courses
   courseflags: {
+    // id -> bool; keys with true values are in the tray; can exists with false ones
     tray: {},
+    // id -> bool; keys with true values are in the schedule; can exist with false ones
     schedule: {},
+    // id -> ['list', 'of', 'annotations']; empty if not annotated
     annotated: {},
+    // id ->
     tagged: {}
   },
 
@@ -23,6 +34,7 @@ const getters = {
     return state.courses
   },
 
+  // NOTE: candidate for removal
   courseIds (state) {
     var ids = {}
 
@@ -30,6 +42,8 @@ const getters = {
 
     return ids
   },
+
+  // NOTE: candidate for removal
   coursesByDate (state) {
     var filter = state.filter
     var events = {}
@@ -50,6 +64,8 @@ const getters = {
     }
     return events
   },
+
+  // NOTE: candidate for removal
   coursesByYear (state) {
     var filter = state.filter
     var yearlyEvents
@@ -71,6 +87,9 @@ const getters = {
     }
     return yearlyEvents
   },
+
+  // return true if we have a selected course
+  // TODO: convert to using internal course id instead of an object
   validCourseSelected (state) {
     return state.currentCourse && state.currentCourse.id
   },
