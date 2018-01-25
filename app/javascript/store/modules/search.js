@@ -58,7 +58,7 @@ const actions = {
       commit('DELETE_KEYWORD', keyword)
     }
   },
-  runSearch ({commit, state, getters}) {
+  runSearch ({commit, state, getters, dispatch}) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
 
@@ -104,6 +104,7 @@ const actions = {
         .then(response => {
           state.results = response.data.courses
           state.searchComplete = true
+          dispatch('courses/registerCourses', response.data.courses, { root: true })
         })
     } else {
       state.results = []
