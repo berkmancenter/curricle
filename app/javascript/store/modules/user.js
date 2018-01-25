@@ -103,10 +103,25 @@ const actions = {
         commit('SET_USER_COURSE', response.data)
       })
   },
+
+  /* Populate the tray with the contents of the course lists */
+  refreshCourses ({ commit, dispatch, getters }) {
+    // this assumes that everything in the schedule is also in the
+    // tray; that might be an incorrect assumption; if not, build a
+    // list of all non-false keys in either tray *or* schedule so
+    // these are all represented here
+
+    dispatch(
+      'courses/resolveCourses',
+      getters.userCourseIds
+    ).then(res => commit('SET_COURSES', res))
+  },
+
+  /* Select a course so we can see on the sidebar */
   selectCourse ({commit, dispatch}, course) {
     dispatch('app/hideTray', null, { root: true })
     if (typeof course !== 'object') {
-      dispatch('lookupCourse', course).then(
+      dispatch('courses/getCourseById', course, { root: true }).then(
         obj => {
           commit('SET_CURRENT_COURSE', obj)
         }
@@ -115,6 +130,7 @@ const actions = {
       commit('SET_CURRENT_COURSE', course)
     }
   },
+
   addToUserSchedule ({ commit, dispatch }, meetingId) {
     const addScheduleUrl = '/courses/add_to_schedule'
     axios
@@ -160,15 +176,6 @@ const actions = {
     } else {
       dispatch('addCourseToUser', courseId)
     }
-  },
-  lookupCourse ({ state }, courseId) {
-    if (state.courses && state.courses.tray) {
-      var course = _.find(state.courses.tray, c => c.id === courseId)
-      if (course) {
-        return course
-      }
-    }
-    return {}
   },
 
   /*
