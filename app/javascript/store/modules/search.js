@@ -65,6 +65,7 @@ const actions = {
     if (kw && kw.length) {
       state.searchComplete = false
 
+      // need to keep this structure in sync with the one in courses.js
       client.query({
         query: gql`
             query CourseSearch($deluxeKeywords: [DeluxeKeywordInput]) {
