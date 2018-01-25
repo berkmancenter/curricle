@@ -12,6 +12,30 @@
         @click="addRemoveUserSchedule(meeting.id)"
         :class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}"
         v-if="meeting"/>
+      <course-action
+        type="tray"
+        :course="id"
+      />
+      <br>
+      <course-action
+        type="schedule"
+        :course="id"
+      />
+      <br>
+      <course-action
+        type="annotated"
+        :course="id"
+      />
+      <br>
+      <course-action
+        type="tagged"
+        :course="id"
+      />
+      <br>
+      <course-action
+        type="shareable"
+        :course="id"
+      />
     </div>
     <div class="col-md-2">
       <strong>
@@ -50,7 +74,12 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import CourseAction from 'components/shared/course-action'
+
 export default {
+  components: {
+    CourseAction
+  },
   props: {
     academic_group: {
       type: String,
