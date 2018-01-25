@@ -113,14 +113,36 @@ const getters = {
 }
 
 const actions = {
-  getCourses ({ commit }) {
+  getCourses (context) {
+    console.error("Don't use this entry point any more (change caller!)")
+  },
+
+  /* Here we do a fresh state reset and pull user's information from
+   * API.  We are converting inefficiently here because we will be
+   * using a new GraphQL endpoint which will just return this specific
+   * data in the format we're converting to here, so making everything
+   * work relative to this new data format.
+   */
+  getUserData ({ commit }) {
     const courseUrl = '/courses/user_courses'
     axios
       .get(courseUrl)
       .then((response) => {
-        commit('SET_COURSES', response.data)
-        commit('SET_USER_SCHEDULE', response.data)
-        commit('SET_USER_COURSE', response.data)
+        _.each(
+          response.data.tray,
+          t => {
+            commit('SET_USER_FLAG', { type: 'tray', course: t.id, value: true })
+            if (t.user_schedule && t.user_schedule.length && t.user_schedule[0].include_in_path) {
+              commit('SET_USER_FLAG', { type: 'schedule', course: t.id, value: true })
+            }
+            if (t.user_annotations && t.user_annotations.length) {
+              commit('SET_USER_FLAG', { type: 'annotated', course: t.id, value: t.user_annotations })
+            }
+            if (t.user_tags && t.user_tags.length) {
+              commit('SET_USER_FLAG', { type: 'tagged', course: t.id, value: t.user_tags })
+            }
+          }
+        )
       })
   },
 
@@ -248,14 +270,6 @@ const mutations = {
   SET_USER_FLAG: (state, { type, course, value }) => {
     // required due to reactivity requirements
     Vue.set(state.courseflags[type], course, value)
-  },
-  SET_USER_SCHEDULE: (state, value) => {
-    state.userCoursesScheduleIds = value.tray
-      .filter(item => !!item.user_schedule)
-      .map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-  },
-  SET_USER_COURSE: (state, value) => {
-    state.userCourseIds = value.tray.map(item => { return item.id.toString() })
   },
   SET_CURRENT_COURSE: (state, value) => {
     state.currentCourse = value
