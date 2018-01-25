@@ -117,15 +117,12 @@ class CoursesController < ApplicationController
 
   # add course meeting pattern to current user's schedule
   def add_to_schedule
-    pattern = CourseMeetingPattern.find(params[:pattern_id])
-
     user_course = UserCourse.find_or_initialize_by(
       user_id: current_user.id,
-      course_id: pattern.course_id,
-      course_meeting_pattern_id: [nil, pattern.id]
+      course_id: params["id"]
     )
 
-    user_course.course_meeting_pattern_id = pattern.id
+    user_course.course_meeting_pattern_id = nil
     user_course.include_in_path = true
     user_course.save
 
@@ -135,9 +132,7 @@ class CoursesController < ApplicationController
 
   # remove course meeting pattern from current user's schedule
   def remove_from_schedule
-    pattern = CourseMeetingPattern.find(params[:pattern_id])
-
-    if (user_course = UserCourse.find_by(user_id: current_user.id, course_meeting_pattern_id: pattern.id))
+    if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: params["id"]))
       user_course.course_meeting_pattern_id = nil
       user_course.include_in_path = false
       user_course.save
