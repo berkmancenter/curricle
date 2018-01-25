@@ -177,7 +177,9 @@ const actions = {
    */
 
   toggleCourseStatus ({ state, getters, dispatch }, { course, type }) {
-    state.courseflags[type][course] = !state.courseflags[type][course]
+    if (type && course) {
+      state.courseflags[type][course] = !state.courseflags[type][course]
+    }
   }
 }
 
