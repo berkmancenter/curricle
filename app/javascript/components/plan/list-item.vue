@@ -48,9 +48,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
+import CourseAction from 'components/shared/course-action'
+
 export default {
   components: {
-    'truncate': truncate
+    truncate,
+    CourseAction
   },
   computed: {
     ...mapGetters('user', ['trayCourses'])
