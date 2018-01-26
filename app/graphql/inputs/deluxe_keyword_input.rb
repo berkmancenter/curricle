@@ -10,6 +10,7 @@ ApplyToEnum = GraphQL::EnumType.define do
   value('INSTRUCTOR', 'Instructor')
   value('READINGS', 'Readings')
   value('TITLE', 'Title')
+  value('ID', 'Internal ID')
 end
 
 Inputs::DeluxeKeywordInput = GraphQL::InputObjectType.define do

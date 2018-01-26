@@ -33,6 +33,8 @@ module Resolvers
       sunspot.instance_eval do
         if keyword[:fields].include?('COURSE_ID') && course_id?(keyword[:text])
           search_by_course_id(self, keyword)
+        elsif keyword[:fields] == ['ID'] && keyword[:text] =~ /\A\d+\z/
+          with :id, keyword[:text].to_i
         elsif keyword[:fields] != ['COURSE_ID']
           search_by_fulltext(self, keyword)
         else
