@@ -245,19 +245,28 @@ const actions = {
 
   toggleCourseStatus ({ state, commit, dispatch }, { course, type }) {
     if (type && course) {
-      var act
+      var removing, origState
 
-      if (type === 'tray') {
-        act = 'addRemoveUserCourse'
-      }
-      if (type === 'schedule') {
-        act = 'addRemoveUserSchedule'
-      }
+      removing = origState = !!state.courseflags[type][course]
 
-      if (act) {
-        dispatch(act, course)
+      if (['tray', 'schedule'].includes(type)) {
+        // optimistic setting for ideal UI responsiveness
+        commit('SET_USER_FLAG', { type, course, value: !origState })
+
+        var url = '/courses/' + (removing ? 'remove_from_' : 'add_to_') + type
+        var promise = removing ? axios.delete(url, { params: { id: course } }) : axios.post(url, { id: course })
+
+        // all handlers are the same, basically optimize for success case and set back if we need to...
+        promise.then(
+          // success case: notify success?
+          () => {},
+          // failure case: rollback optimistic change
+          () => {
+            commit('SET_USER_FLAG', { type, course, value: origState })
+          }
+        )
       } else {
-        commit('SET_USER_FLAG', { type, course, value: !state.courseflags[type][course] })
+        commit('SET_USER_FLAG', { type, course, value: !origState })
       }
     }
   }
