@@ -74,7 +74,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .active-keyword {
   cursor: pointer;
   margin: 5px 5px 0px 0px;
@@ -86,6 +86,7 @@ export default {
     background-color: #eee;
   }
 }
+
 .input-tag {
   margin: 5px 0px;
   border: none;

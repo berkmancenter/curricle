@@ -17,6 +17,7 @@
       </div>
       <div class="row margin-none">
         <selected-course-details/>
+        <selected-course-annotations/>
       </div>
     </div>
   </div>
@@ -24,10 +25,12 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
+import SelectedCourseAnnotations from './SelectedCourseAnnotations'
+import SelectedCourseDetails from './SelectedCourseDetails'
 
 export default {
   components: {
+    SelectedCourseAnnotations,
     SelectedCourseDetails
   },
   computed: {
