@@ -123,7 +123,7 @@ const actions = {
    * data in the format we're converting to here, so making everything
    * work relative to this new data format.
    */
-  getUserData ({ commit }) {
+  getUserData ({ commit, dispatch }) {
     const courseUrl = '/courses/user_courses'
     axios
       .get(courseUrl)
@@ -143,6 +143,8 @@ const actions = {
             }
           }
         )
+        // now actually update the courses
+        dispatch('refreshCourses')
       })
   },
 
@@ -155,7 +157,8 @@ const actions = {
 
     dispatch(
       'courses/resolveCourses',
-      getters.userCourseIds
+      getters.userCourseIds,
+      { root: true }
     ).then(res => commit('SET_COURSES', res))
   },
 
