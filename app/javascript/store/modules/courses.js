@@ -87,7 +87,7 @@ const actions = {
 
   resolveCourses ({ dispatch, state }, courses) {
     // find the missing ids, add 'em and return the results
-    var missing = _.difference(_.keys(state.courses), courses)
+    var missing = _.difference(courses, _.keys(state.courses))
 
     if (missing) {
       dispatch('lookupCourses', missing).then(() => {
