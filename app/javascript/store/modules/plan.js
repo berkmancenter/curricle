@@ -17,9 +17,9 @@ function calcDuration (start, end) {
 
 function extractSchedule (courses) {
   return _.map(
-    _.filter(courses, e => e.course_meeting_pattern && e.course_meeting_pattern.length),
+    _.filter(courses, e => e.course_meeting_patterns && e.course_meeting_patterns.length),
     c => {
-      var m = _.find(c.course_meeting_pattern, p => p.meeting_time_start_tod) || {}
+      var m = _.find(c.course_meeting_patterns, p => p.meeting_time_start_tod) || {}
       var courseMeetingInfo = [
         m.meeting_time_start_tod,
         m.meeting_time_end_tod,
