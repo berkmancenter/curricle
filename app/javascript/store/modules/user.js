@@ -11,7 +11,7 @@ import Vue from 'vue/dist/vue.esm'
 
 const state = {
   // holds canonical courses in tray
-  courses: [],
+  courses: {},
 
   // local state of courses
   courseflags: {
@@ -32,7 +32,21 @@ const state = {
 const getters = {
   // computed trayCourses
   trayCourses (state) {
-    return state.courses
+    var ids = _.filter(
+      _.keys(state.courseflags.tray),
+      k => state.courseflags.tray[k]
+    )
+    var courses = ids.map(i => state.courses[i]) || []
+    return courses.filter(e => !_.isUndefined(e))
+  },
+
+  scheduledCourses (state) {
+    var ids = _.filter(
+      _.keys(state.courseflags.schedule),
+      k => state.courseflags.schedule[k]
+    )
+    var courses = ids.map(i => state.courses[i]) || []
+    return courses.filter(e => !_.isUndefined(e))
   },
 
   // return true if we have a selected course
@@ -71,12 +85,16 @@ const actions = {
    */
   getUserData ({ commit, dispatch }) {
     const courseUrl = '/courses/user_courses'
+    var ids = []
+
     axios
       .get(courseUrl)
       .then((response) => {
         _.each(
           response.data.tray,
           t => {
+            ids.push(t.id)
+
             commit('SET_USER_FLAG', { type: 'tray', course: t.id, value: true })
             if (t.user_schedule && t.user_schedule.length && t.user_schedule[0].include_in_path) {
               commit('SET_USER_FLAG', { type: 'schedule', course: t.id, value: true })
@@ -89,23 +107,17 @@ const actions = {
             }
           }
         )
-        // now actually update the courses
-        dispatch('refreshCourses')
+
+        if (ids.length) {
+          // now actually update the courses
+          dispatch('courses/resolveCourses', ids, { root: true })
+        }
       })
   },
 
-  /* Populate the tray with the contents of the course lists */
-  refreshCourses ({ commit, dispatch, getters }) {
-    // this assumes that everything in the schedule is also in the
-    // tray; that might be an incorrect assumption; if not, build a
-    // list of all non-false keys in either tray *or* schedule so
-    // these are all represented here
-
-    dispatch(
-      'courses/resolveCourses',
-      getters.userCourseIds,
-      { root: true }
-    ).then(res => commit('SET_COURSES', res))
+  /* appends an object mapping of course ids to course objects to the local course cache. */
+  appendCourses ({ commit }, obj) {
+    commit('APPEND_COURSES', obj)
   },
 
   /* Select a course so we can see on the sidebar */
@@ -175,8 +187,8 @@ const actions = {
 }
 
 const mutations = {
-  SET_COURSES: (state, value) => {
-    state.courses = value
+  APPEND_COURSES: (state, obj) => {
+    _.each(obj, (course, id) => Vue.set(state.courses, id, course))
   },
   SET_USER_FLAG: (state, { type, course, value }) => {
     // required due to reactivity requirements

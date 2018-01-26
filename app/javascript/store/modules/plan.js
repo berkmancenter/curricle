@@ -115,9 +115,8 @@ const getters = {
       })
   },
   // returns all courses which are currently scheduled in the tray ()
-  scheduledCourses (state, getters) {
-    return getters.trayCourses
-      .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
+  scheduledCourses (state, getters, rootState, rootGetters) {
+    return rootGetters['user/scheduledCourses']
   },
   scheduledCoursesBySemester (state, getters) {
     return _.groupBy(extractSchedule(getters.scheduledCourses), 'semester')

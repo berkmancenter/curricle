@@ -36,81 +36,87 @@ const actions = {
    * Lookup course information given a list of course ids and populate
    * in the registry.  Will replace anything in the existing registry.
    */
-  lookupCourses ({ commit, state }, courses) {
-    var courseSearchSpec = courses.map(c => { return { applyTo: ['ID'], text: c, weight: 5 } })
-
-    // NOTE: need to keep this structure in sync with the one in search.js
-    client.query({
-      query: gql`
-        query CourseSearch($deluxeKeywords: [DeluxeKeywordInput]) {
-          courses(deluxe_keywords: $deluxeKeywords) {
-            academic_group
-            catalog_number
-            component
-            course_description_long
-            id
-            subject
-            term_name
-            term_year
-            title
-            units_maximum
-            course_instructors {
-              display_name
-              id
+  lookupCourses ({ commit, dispatch }, courses) {
+    if (courses && courses.length) {
+      // NOTE: need to keep this structure in sync with the one in search.js
+      client.query({
+        query: gql`
+            query CourseSearch($courseIds: [Int]) {
+              courses(course_ids: $courseIds) {
+                academic_group
+                catalog_number
+                component
+                course_description_long
+                id
+                subject
+                term_name
+                term_year
+                title
+                units_maximum
+                course_instructors {
+                  display_name
+                  id
+                }
+                course_meeting_patterns {
+                  id
+                  meeting_time_start_tod
+                  meeting_time_end_tod
+                  meets_on_monday
+                  meets_on_tuesday
+                  meets_on_wednesday
+                  meets_on_thursday
+                  meets_on_friday
+                  meets_on_saturday
+                  meets_on_sunday
+                }
+              }
             }
-            course_meeting_patterns {
-              id
-              meeting_time_start_tod
-              meeting_time_end_tod
-              meets_on_monday
-              meets_on_tuesday
-              meets_on_wednesday
-              meets_on_thursday
-              meets_on_friday
-              meets_on_saturday
-              meets_on_sunday
-            }
-          }
-        }
-      `,
-      variables: { deluxeKeywords: [courseSearchSpec[0]] }
-    })
-      .then(response => {
-        commit('ADD_COURSES', response.data.courses)
+          `,
+        variables: { courseIds: courses }
       })
+        .then(response => {
+          commit('ADD_COURSES', response.data.courses)
+          dispatch('getCourses', courses)
+        })
+    }
   },
 
   /*
    * Return an object of course objects from the registry given a list
    * of course ids, looking up as required for any missing objects
+   * Call the corresponding action with found data
    */
 
   resolveCourses ({ dispatch, state }, courses) {
     // find the missing ids, add 'em and return the results
     var missing = _.difference(courses, _.keys(state.courses))
+    var present = _.difference(courses, missing)
 
-    if (missing) {
-      dispatch('lookupCourses', missing).then(() => {
-        dispatch('getCourses', courses).then(
-          c => c
-        )
-      })
-    } else {
-      dispatch('getCourses')
+
+    if (missing && missing.length) {
+      dispatch('lookupCourses', missing)
+    }
+    if (present && present.length) {
+      dispatch('getCourses', present)
     }
   },
 
   /*
-   * Return an object of objects indexed by id from the registry.
+   * Retrieves a list of courses from the course cache and commits to the user's state.
    * Skips missing.
    */
 
-  getCourses ({ state }, courses) {
-    var obj
+  getCourses ({ state, dispatch }, courses) {
+    var obj = {}
 
-    _.each(courses, course => { if (state.courses[course]) { obj[course] = state.courses[course] } })
+    _.each(courses, course => {
+      if (state.courses[course]) {
+        obj[course] = state.courses[course]
+      }
+    })
 
-    return obj
+
+    dispatch('user/appendCourses', obj, { root: true })
   },
 
   /*
