@@ -97,19 +97,6 @@ const getters = {
   semestersInTray (state, getters) {
     return _.uniq(getters.trayCourses.map(k => k.semester).sort())
   },
-  eventData (state, getters) {
-    return getters.trayCourses
-      .filter(item => !!item.user_schedule[0].course_meeting_pattern_id)
-      .map(item => {
-        return {
-          title: ' ',
-          start: item.meeting_with_tods.meeting_time_start,
-          end: item.meeting_with_tods.meeting_time_end,
-          description: item.subject_description,
-          course: item
-        }
-      })
-  },
   // returns all courses which are currently scheduled in the tray ()
   scheduledCourses (state, getters, rootState, rootGetters) {
     return rootGetters['user/scheduledCourses']
