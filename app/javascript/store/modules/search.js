@@ -58,57 +58,84 @@ const actions = {
       commit('DELETE_KEYWORD', keyword)
     }
   },
-  runSearch ({commit, state, getters, dispatch}) {
+  runKeywordSearch ({commit, state, getters, dispatch}) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
 
     if (kw && kw.length) {
       state.searchComplete = false
 
-      // need to keep this structure in sync with the one in courses.js
-      client.query({
-        query: gql`
-            query CourseSearch($deluxeKeywords: [DeluxeKeywordInput]) {
-              courses(deluxe_keywords: $deluxeKeywords) {
-                academic_group
-                catalog_number
-                component
-                course_description_long
-                id
-                subject
-                term_name
-                term_year
-                title
-                units_maximum
-                course_instructors {
-                  display_name
-                  id
-                }
-                course_meeting_patterns {
-                  id
-                  meeting_time_start_tod
-                  meeting_time_end_tod
-                  meets_on_monday
-                  meets_on_tuesday
-                  meets_on_wednesday
-                  meets_on_thursday
-                  meets_on_friday
-                  meets_on_saturday
-                  meets_on_sunday
-                }
-              }
-            }
-          `,
-        variables: { deluxeKeywords: kw }
-      })
-        .then(response => {
-          state.results = response.data.courses
-          state.searchComplete = true
-          dispatch('courses/registerCourses', response.data.courses, { root: true })
+      dispatch(
+        'runSearch',
+        {
+          keywords: kw,
+          handler: response => {
+            state.results = response.data.courses
+            state.searchComplete = true
+            dispatch('courses/registerCourses', response.data.courses, { root: true })
+          }
         })
     } else {
       state.results = []
     }
+  },
+  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
+    var vars = {}
+    var typespec, queryspec
+    console.log('runSearch', keywords, ids, handler)
+
+    if (ids && ids.length) {
+      console.log('runSearch: got ids')
+      vars.courseIds = ids
+      typespec = '$courseIds: [Int]'
+      queryspec = 'course_ids: $courseIds'
+    } else if (keywords && keywords.length) {
+      console.log('runSearch: got keywords')
+      vars.deluxeKeywords = keywords
+      typespec = '$deluxeKeywords: [DeluxeKeywordInput]'
+      queryspec = 'deluxe_keywords: $deluxeKeywords'
+    } else {
+      console.error('runSearch: param errors')
+      return
+    }
+
+    var promise = client.query({
+      query: gql`
+        query CourseSearch(${typespec}) {
+          courses(${queryspec}) {
+            academic_group
+            catalog_number
+            component
+            course_description_long
+            id
+            subject
+            term_name
+            term_year
+            title
+            units_maximum
+            course_instructors {
+              display_name
+              id
+            }
+            course_meeting_patterns {
+              id
+              meeting_time_start_tod
+              meeting_time_end_tod
+              meets_on_monday
+              meets_on_tuesday
+              meets_on_wednesday
+              meets_on_thursday
+              meets_on_friday
+              meets_on_saturday
+              meets_on_sunday
+            }
+          }
+        }
+      `,
+      variables: vars
+    })
+
+    promise.then(handler)
   }
 }
 

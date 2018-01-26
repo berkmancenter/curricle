@@ -3,11 +3,6 @@
 import Vue from 'vue/dist/vue.esm'
 import _ from 'lodash'
 
-import ApolloClient from 'apollo-client-preset'
-import gql from 'graphql-tag'
-
-const client = new ApolloClient()
-
 /*
  * This basic idea behind this module is to provide a location to
  * store full course data for all courses we've seen in a consistent
@@ -38,46 +33,15 @@ const actions = {
    */
   lookupCourses ({ commit, dispatch }, courses) {
     if (courses && courses.length) {
-      // NOTE: need to keep this structure in sync with the one in search.js
-      client.query({
-        query: gql`
-            query CourseSearch($courseIds: [Int]) {
-              courses(course_ids: $courseIds) {
-                academic_group
-                catalog_number
-                component
-                course_description_long
-                id
-                subject
-                term_name
-                term_year
-                title
-                units_maximum
-                course_instructors {
-                  display_name
-                  id
-                }
-                course_meeting_patterns {
-                  id
-                  meeting_time_start_tod
-                  meeting_time_end_tod
-                  meets_on_monday
-                  meets_on_tuesday
-                  meets_on_wednesday
-                  meets_on_thursday
-                  meets_on_friday
-                  meets_on_saturday
-                  meets_on_sunday
-                }
-              }
-            }
-          `,
-        variables: { courseIds: courses }
-      })
-        .then(response => {
+      dispatch('search/runSearch', { ids: courses,
+        handler:
+        response => {
           commit('ADD_COURSES', response.data.courses)
           dispatch('getCourses', courses)
-        })
+        }
+      },
+      { root: true }
+      )
     }
   },
 

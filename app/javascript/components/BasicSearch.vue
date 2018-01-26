@@ -73,7 +73,7 @@ export default {
       this.keyword = ''
     },
     performSearch () {
-      this.$store.dispatch('search/runSearch')
+      this.$store.dispatch('search/runKeywordSearch')
     }
   }
 }
