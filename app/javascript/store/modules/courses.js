@@ -1,5 +1,6 @@
 // Manipulation of non-course-related course-specific data
 
+import Vue from 'vue/dist/vue.esm'
 import _ from 'lodash'
 
 import ApolloClient from 'apollo-client-preset'
@@ -123,7 +124,9 @@ const actions = {
 
 const mutations = {
   ADD_COURSES: (state, courses) => {
-    _.each(courses, course => { state.courses[ course.id ] = course })
+    _.each(courses, course => {
+      Vue.set(state.courses, course.id, course)
+    })
   }
 }
 
