@@ -73,7 +73,7 @@ const actions = {
           }
         }
       `,
-      variables: { deluxeKeywords: courseSearchSpec }
+      variables: { deluxeKeywords: [courseSearchSpec[0]] }
     })
       .then(response => {
         commit('ADD_COURSES', response.data.courses)
