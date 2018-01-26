@@ -8,11 +8,9 @@
         <td>{{ course.external_course_id }}</td>
         <td>{{ course.title }}</td>
         <td style="border-right: 5px solid #000;">
-          <i
-            class= "fa fa-clock-o"
-            :class="{ 'user-schedule': !userCoursesScheduleIds.includes(course.meeting_with_tods.id) }"
-            @click="addRemoveSchedule(course.meeting_with_tods.id)"
-            v-if="course.meeting_with_tods"
+          <course-action
+            type="schedule"
+            :course="course.id"
           />
         </td>
       </tr>
@@ -21,17 +19,15 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import CourseAction from 'components/shared/course-action'
 
 export default {
-  computed: {
-    ...mapState('user', ['userCoursesScheduleIds']),
-    ...mapGetters('user', ['trayCourses'])
+  components: {
+    CourseAction
   },
-  methods: {
-    addRemoveSchedule: function (meetingId) {
-      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
-    }
+  computed: {
+    ...mapGetters('user', ['trayCourses'])
   }
 }
 </script>

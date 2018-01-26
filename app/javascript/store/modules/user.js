@@ -173,53 +173,6 @@ const actions = {
     }
   },
 
-  addToUserSchedule ({ commit, dispatch }, id) {
-    const addScheduleUrl = '/courses/add_to_schedule'
-    axios
-      .post(addScheduleUrl, { id })
-      .then((response) => {
-        commit('SET_USER_FLAG', { type: 'schedule', value: true, course: id })
-      })
-  },
-  removeFromUserSchedule ({ commit, dispatch }, id) {
-    const removeScheduleUrl = '/courses/remove_from_schedule'
-    axios
-      .delete(removeScheduleUrl, { params: { id } })
-      .then((response) => {
-        commit('SET_USER_FLAG', { type: 'schedule', value: false, course: id })
-      })
-  },
-  addRemoveUserSchedule ({ commit, dispatch, getters }, id) {
-    if (getters.userCoursesScheduleIds.includes(id)) {
-      dispatch('removeFromUserSchedule', id)
-    } else {
-      dispatch('addToUserSchedule', id)
-    }
-  },
-  addCourseToUser ({ commit, dispatch }, id) {
-    const addCourseUrl = '/courses/add_to_tray'
-    axios
-      .post(addCourseUrl, {id})
-      .then((response) => {
-        commit('SET_USER_FLAG', { type: 'tray', value: true, course: id })
-      })
-  },
-  removeFromUserCourse ({ commit, dispatch }, id) {
-    const removeCourseUrl = '/courses/remove_from_tray'
-    axios
-      .delete(removeCourseUrl, { params: {id} })
-      .then((response) => {
-        commit('SET_USER_FLAG', { type: 'tray', value: false, course: id })
-      })
-  },
-  addRemoveUserCourse ({ commit, dispatch, getters }, id) {
-    if (getters.userCourseIds.includes(id)) {
-      dispatch('removeFromUserCourse', id)
-    } else {
-      dispatch('addCourseToUser', id)
-    }
-  },
-
   /*
    * courseHasStatus checks a given course id and returns true if the
    * state type is true for the user in question.  This is related to

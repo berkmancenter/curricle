@@ -3,15 +3,6 @@
     class="row curricle-search-result"
     :style="borderStyle">
     <div class="col-md-1">
-      <i
-        class="fa fa-folder"
-        @click="addRemoveUserCourse(id)"
-        :class="{ usercourse: !userCourseIds.includes(id)}"/><br>
-      <i
-        class="fa fa-clock-o"
-        @click="addRemoveUserSchedule(meeting.id)"
-        :class="{ userschedule: !userCoursesScheduleIds.includes(meeting.id)}"
-        v-if="meeting"/>
       <course-action
         type="tray"
         :course="id"
@@ -73,7 +64,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 
 export default {
@@ -145,9 +136,6 @@ export default {
       userCoursesScheduleIds: 'userCoursesScheduleIds',
       userCourseIds: 'userCourseIds'
     })
-  },
-  methods: {
-    ...mapActions('user', ['addRemoveUserCourse', 'addRemoveUserSchedule'])
   }
 }
 </script>

@@ -14,11 +14,9 @@
               <td>{{ course.external_course_id }}</td>
               <td>{{ course.title }}</td>
               <td style="border-right: 5px solid #000;">
-                <i
-                  class= "fa fa-clock-o"
-                  :class="{ 'user-schedule': !userCoursesScheduleIds.includes(course.meeting_with_tods.id) }"
-                  @click="addRemoveSchedule(course.meeting_with_tods.id)"
-                  v-if="course.meeting_with_tods"
+                <course-action
+                  type="schedule"
+                  :course="course.id"
                 />
               </td>
             </tr>
@@ -31,18 +29,16 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import CourseAction from 'components/shared/course-action'
 
 export default {
+  components: {
+    CourseAction
+  },
   computed: {
     ...mapState('app', ['viewmode']),
-    ...mapState('user', ['userCoursesScheduleIds']),
-    ...mapGetters('user', ['coursesByDate', 'coursesByYear', 'courseIds']),
+    ...mapGetters('user', ['coursesByDate', 'coursesByYear']),
     calendarEvents () { return this.viewmode.tray === 'multi-year' ? this.coursesByYear : this.coursesByDate }
-  },
-  methods: {
-    addRemoveSchedule: function (meetingId) {
-      this.$store.dispatch('user/addRemoveUserSchedule', meetingId)
-    }
   }
 }
 </script>

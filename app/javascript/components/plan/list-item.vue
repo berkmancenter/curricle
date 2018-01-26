@@ -4,7 +4,7 @@
       <thead/>
       <tbody>
         <tr
-          v-for="list in lists"
+          v-for="list in trayCourses"
           :key="list.id"
           @click="selectCourse(list)">
           <td>{{ list.external_course_id }}</td>
@@ -28,11 +28,10 @@
             <span>W<img src=""></span>
           </td>
           <td style="border-right: 5px solid #000; position: relative; font-size: 24px;">
-            <i
-              class= "fa fa-clock-o"
-              :class="{ 'user-schedule': !userCoursesScheduleIds.includes(list.meeting_with_tods.id)}"
-              v-if="list.meeting_with_tods"
-              @click="addRemoveUserSchedule(list.meeting_with_tods.id)"/>
+            <course-action
+              type="schedule"
+              :course="list.id"
+            />
           </td>
           <span class= "check_box">
             <input
@@ -47,22 +46,17 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 export default {
   components: {
     'truncate': truncate
   },
   computed: {
-    ...mapGetters('user', {
-      lists: 'trayCourses'
-    }),
-    ...mapState('user', {
-      userCoursesScheduleIds: 'userCoursesScheduleIds'
-    })
+    ...mapGetters('user', ['trayCourses'])
   },
   methods: {
-    ...mapActions('user', ['selectCourse', 'addRemoveUserSchedule'])
+    ...mapActions('user', ['selectCourse'])
   }
 }
 </script>
