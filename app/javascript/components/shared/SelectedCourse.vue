@@ -16,7 +16,7 @@
         <div class="pull-right">See Course History</div>
       </div>
       <div class="row margin-none">
-        <plan-description/>
+        <selected-course-details/>
       </div>
     </div>
   </div>
@@ -24,11 +24,11 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import PlanDescription from 'components/plan/plan-description'
+import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
 
 export default {
   components: {
-    PlanDescription
+    SelectedCourseDetails
   },
   computed: {
     ...mapGetters('user', ['validCourseSelected']),

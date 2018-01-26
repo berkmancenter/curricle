@@ -26,7 +26,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import Tray from 'components/tray/tray'
-import SelectedCourse from 'components/plan/selected-course'
+import SelectedCourse from 'components/shared/SelectedCourse'
 
 export default {
   components: {

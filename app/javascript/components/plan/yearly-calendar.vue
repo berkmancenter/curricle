@@ -66,7 +66,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 import PlanFilter from 'components/plan/plan-filter'
-import SelectedCourse from 'components/plan/selected-course'
+import SelectedCourse from 'components/shared/SelectedCourse'
 import ViewSelector from 'components/tray/view-selector'
 import Tray from 'components/tray/tray'
 import moment from 'moment'
