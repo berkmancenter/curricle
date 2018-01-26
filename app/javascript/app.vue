@@ -6,15 +6,18 @@
         <router-view/>
       </keep-alive>
     </header>
+    <course-observer/>
   </div>
 </template>
 
 <script>
 import Navbar from 'components/TheNavbar'
+import CourseObserver from 'components/course-observer'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    CourseObserver
   },
   mounted () {
     // load initial data
