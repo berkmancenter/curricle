@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 
 export default {
@@ -117,10 +116,6 @@ export default {
     units_maximum: {
       type: Number,
       required: true
-    },
-    meeting: {
-      type: Object,
-      default () {}
     }
   },
   computed: {
@@ -131,11 +126,7 @@ export default {
       return {
         'border-left-color': ('#' + randomColor)
       }
-    },
-    ...mapGetters('user', {
-      userCoursesScheduleIds: 'userCoursesScheduleIds',
-      userCourseIds: 'userCourseIds'
-    })
+    }
   }
 }
 </script>

@@ -16,7 +16,6 @@
         :term_year="result.term_year"
         :title="result.title"
         :units_maximum="result.units_maximum"
-        :meeting="result.meeting_with_tods"
         :user-schedule="result.user_schedule"
       />
     </div>
