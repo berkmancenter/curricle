@@ -37,13 +37,13 @@ class CourseMeetingPattern < ApplicationRecord
   def meeting_time_start_tod
     return if meeting_time_start.blank?
 
-    meeting_time_start.strftime("%H:%M")
+    meeting_time_start.strftime('%H:%M')
   end
 
   def meeting_time_end_tod
     return if meeting_time_end.blank?
 
-    meeting_time_end.strftime("%H:%M")
+    meeting_time_end.strftime('%H:%M')
   end
 
   def self.hours_range

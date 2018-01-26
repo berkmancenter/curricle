@@ -2,7 +2,7 @@
 
 class CoursesController < ApplicationController
   before_action :authenticate_user!
-  #TODO Clean up after session and token implementation at frontend
+  # TODO: Clean up after session and token implementation at frontend
   skip_before_action :verify_authenticity_token
   before_action :set_current_user
 
@@ -99,14 +99,14 @@ class CoursesController < ApplicationController
 
   # add course to current user's tray
   def add_to_tray
-    course = Course.find(params["id"])
+    course = Course.find(params['id'])
     user_course = UserCourse.find_or_create_by(user_id: current_user.id, course_id: course.id)
     render json: user_course
   end
 
   # remove course from current user's tray
   def remove_from_tray
-    course = Course.find(params["id"])
+    course = Course.find(params['id'])
 
     if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: course.id))
       user_course.destroy
@@ -119,7 +119,7 @@ class CoursesController < ApplicationController
   def add_to_schedule
     user_course = UserCourse.find_or_initialize_by(
       user_id: current_user.id,
-      course_id: params["id"]
+      course_id: params['id']
     )
 
     user_course.course_meeting_pattern_id = nil
@@ -127,12 +127,11 @@ class CoursesController < ApplicationController
     user_course.save
 
     render json: user_course
-
   end
 
   # remove course meeting pattern from current user's schedule
   def remove_from_schedule
-    if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: params["id"]))
+    if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: params['id']))
       user_course.course_meeting_pattern_id = nil
       user_course.include_in_path = false
       user_course.save
@@ -147,24 +146,24 @@ class CoursesController < ApplicationController
 
     # organize the existing courses into days of the week
     @meeting_patterns_per_day = {
-      Monday: current_user.patterns_for_all_courses( by_day: :monday).to_a,
-      Tuesday: current_user.patterns_for_all_courses( by_day: :tuesday).to_a,
-      Wednesday: current_user.patterns_for_all_courses( by_day: :wednesday).to_a,
-      Thursday: current_user.patterns_for_all_courses( by_day: :thursday).to_a,
-      Friday: current_user.patterns_for_all_courses( by_day: :friday).to_a
+      Monday: current_user.patterns_for_all_courses(by_day: :monday).to_a,
+      Tuesday: current_user.patterns_for_all_courses(by_day: :tuesday).to_a,
+      Wednesday: current_user.patterns_for_all_courses(by_day: :wednesday).to_a,
+      Thursday: current_user.patterns_for_all_courses(by_day: :thursday).to_a,
+      Friday: current_user.patterns_for_all_courses(by_day: :friday).to_a
     }
 
     # organize the existing courses into years/semesters
     @meeting_patterns_per_year = {}
 
-    semester_map.flatten.each do |year|      
+    semester_map.flatten.each do |year|
       @meeting_patterns_per_year[:"#{year}"] = current_user.patterns_for_all_courses(by_term: year).to_a
     end
 
     user_courses = {
-      :tray => JSON.parse(tray.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule])),
-      :semester => JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule])),
-      :multi_year => JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule]))
+      tray: JSON.parse(tray.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule])),
+      semester: JSON.parse(@meeting_patterns_per_day.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule])),
+      multi_year: JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule]))
     }
     render json: user_courses
   end
