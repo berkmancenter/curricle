@@ -35,60 +35,6 @@ const getters = {
     return state.courses
   },
 
-  // NOTE: candidate for removal
-  courseIds (state) {
-    var ids = {}
-
-    _.forEach(state.courses.tray, x => { ids[x.external_course_id] = x.external_course_id })
-
-    return ids
-  },
-
-  // NOTE: candidate for removal
-  coursesByDate (state) {
-    var filter = state.filter
-    var events = {}
-
-    if ((filter !== undefined) && (Object.keys(filter).length > 0)) {
-      const semester = filter.value.split(' ')
-      _.forEach(state.courses.semester, (day, key) => {
-        events[key] = day.filter((item) => {
-          if (filter.name === 'term_name') {
-            return item.term_name === semester[0] && item.term_year === semester[1]
-          } else {
-            return item[filter.name] === filter.value
-          }
-        })
-      })
-    } else {
-      events = state.courses.semester
-    }
-    return events
-  },
-
-  // NOTE: candidate for removal
-  coursesByYear (state) {
-    var filter = state.filter
-    var yearlyEvents
-
-    if ((filter !== undefined) && (Object.keys(filter).length > 0)) {
-      yearlyEvents = {}
-      const semester = filter.value.split(' ')
-      _.forEach(state.courses.multi_year, (day, key) => {
-        yearlyEvents[key] = day.filter((item) => {
-          if (filter.name === 'term_name') {
-            return item.term_name === semester[0] && item.term_year === semester[1]
-          } else {
-            return item[filter.name] === filter.value
-          }
-        })
-      })
-    } else {
-      yearlyEvents = state.courses.multi_year
-    }
-    return yearlyEvents
-  },
-
   // return true if we have a selected course
   // TODO: convert to using internal course id instead of an object
   validCourseSelected (state) {
