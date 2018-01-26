@@ -12,14 +12,31 @@ module Resolvers
     }.freeze
 
     def call(_obj, args, _ctx)
-      search = Course.search do
-        args[:deluxe_keywords].each { |keyword| add_keyword_to_search(self, keyword) }
+      search =
+        if args[:course_ids] && args[:course_ids].any?
+          search_by_ids(args[:course_ids])
+        elsif args[:deluxe_keywords] && args[:deluxe_keywords].any?
+          search_by_keywords(args[:deluxe_keywords])
+        end
 
+      if search
+        search.results
+      end
+    end
+
+    def search_by_keywords(keywords)
+      return Course.search do
+        keywords.each { |keyword| add_keyword_to_search(self, keyword) }
         order_by(:term_year, :desc)
         paginate page: 1, per_page: 50
       end
+    end
 
-      search.results
+    def search_by_ids(course_ids)
+      return Course.search do
+        with :id, course_ids
+        paginate page: 1, per_page: course_ids.length
+      end
     end
 
     private

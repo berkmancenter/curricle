@@ -8,6 +8,7 @@ Types::QueryType = GraphQL::ObjectType.define do
     description 'Queries that return lists of courses'
 
     argument :deluxe_keywords, types[Inputs::DeluxeKeywordInput], 'List of objects for a weighted, field-specific search'
+    argument :course_ids, types[types.Int], 'List of course IDs'
 
     resolve Resolvers::CoursesResolver.new
   end
