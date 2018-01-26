@@ -92,7 +92,6 @@ const actions = {
     var missing = _.difference(courses, _.keys(state.courses))
     var present = _.difference(courses, missing)
 
-
     if (missing && missing.length) {
       dispatch('lookupCourses', missing)
     }
@@ -114,7 +113,6 @@ const actions = {
         obj[course] = state.courses[course]
       }
     })
-
 
     dispatch('user/appendCourses', obj, { root: true })
   },
