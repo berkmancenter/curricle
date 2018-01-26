@@ -69,9 +69,7 @@ import PlanFilter from 'components/plan/plan-filter'
 import SelectedCourse from 'components/shared/SelectedCourse'
 import ViewSelector from 'components/tray/view-selector'
 import Tray from 'components/tray/tray'
-import moment from 'moment'
 import axios from 'axios'
-import _ from 'lodash'
 
 export default {
   components: {
@@ -92,15 +90,11 @@ export default {
       events: [],
       yearlyEvents: [],
       currentFilter: {},
-      results: [],
-      userCoursesScheduleIds: []
+      results: []
     }
   },
   computed: {
-    ...mapGetters('user', ['trayCourses'])
-  },
-  mounted () {
-    this.getUserCourses()
+    ...mapGetters('user', ['trayCourses', 'userCoursesScheduleIds'])
   },
   methods: {
     ...mapActions('user', ['selectCourse']),
@@ -112,47 +106,10 @@ export default {
     },
 
     height (course) {
-      if (course && course.meeting_with_tods) {
-        const startTime = moment(course.meeting_with_tods.meeting_time_start)
-        const endTime = moment(course.meeting_with_tods.meeting_time_end)
-
-        return endTime.diff(startTime, 'hours') * 72 + 'px'
-      } else {
-        return '100px'
-      }
+      return '100px'
     },
     isMeetingBelongsToUser (id) {
       return this.userCoursesScheduleIds.includes(id)
-    },
-    getUserCourses () {
-      const courseUrl = '/courses/user_courses'
-      axios
-        .get(courseUrl)
-        .then((response) => {
-          this.user_courses = response.data
-          this.courses = this.user_courses.multi_year
-          this.results = this.user_courses.tray
-          this.filterCategories()
-          this.getUserScheduleCourseByDate()
-          this.getUserScheduleCourseByYear()
-          this.userCoursesScheduleIds = this.user_courses.tray.filter(item => !!item.user_schedule).map(item => { return item.user_schedule[0].course_meeting_pattern_id })
-        })
-    },
-    getUserScheduleCourseByDate () {
-      this.events = {}
-      _.forEach(this.user_courses.semester, (day, key) => {
-        this.events[key] = day.filter(item =>
-          !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
-        )
-      })
-    },
-    getUserScheduleCourseByYear () {
-      this.yearlyEvents = {}
-      _.forEach(this.user_courses.multi_year, (day, key) => {
-        this.yearlyEvents[key] = day.filter(item =>
-          !!item.user_schedule && !!item.user_schedule[0].course_meeting_pattern_id
-        )
-      })
     }
   }
 }
