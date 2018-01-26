@@ -36,11 +36,13 @@ const actions = {
    * in the registry.  Will replace anything in the existing registry.
    */
   lookupCourses ({ commit, state }, courses) {
+    var courseSearchSpec = courses.map(c => { return { applyTo: ['ID'], text: c, weight: 5 } })
+
     // NOTE: need to keep this structure in sync with the one in search.js
     client.query({
       query: gql`
-        query CourseSearch(id: [$ids]) {
-          courses(id: [$ids]) {
+        query CourseSearch($deluxeKeywords: [DeluxeKeywordInput]) {
+          courses(deluxe_keywords: $deluxeKeywords) {
             academic_group
             catalog_number
             component
@@ -70,7 +72,7 @@ const actions = {
           }
         }
       `,
-      variables: { ids: courses }
+      variables: { deluxeKeywords: courseSearchSpec }
     })
       .then(response => {
         commit('ADD_COURSES', response.data.courses)
