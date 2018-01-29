@@ -108,7 +108,7 @@ export default {
   computed: {
     /* turns the input params into the more sensible data structure for use by this component */
     week () {
-      var abbrev = ['M', 'T', 'W', 'T', 'F']
+      var abbrev = this.condensed ? ['M', 'Tu', 'W', 'Th', 'F'] : ['M', 'T', 'W', 'T', 'F']
 
       return _.zipWith(
         abbrev,
