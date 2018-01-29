@@ -26,7 +26,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import CourseList from 'components/tray/list'
+import CourseList from 'components/shared/course-list'
 import ViewSelector from 'components/tray/view-selector'
 import CalendarSidebar from 'components/plan/calendar-sidebar'
 
