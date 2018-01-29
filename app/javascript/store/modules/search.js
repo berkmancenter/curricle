@@ -152,6 +152,7 @@ const actions = {
         query CourseSearch(${typespec}) {
           courses(${queryspec}) {
             academic_group
+            academic_group_description
             catalog_number
             component
             course_description
