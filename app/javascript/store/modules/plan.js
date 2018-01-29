@@ -26,22 +26,18 @@ function sortedSemesters (sems) {
 const state = {
   semester: '',
   filters: {},
-  filterCategories: [
-    {
-      field: 'department',
-      title: 'Department'
-    },
-    {
-      field: 'semester',
-      title: 'Semester'
-    }
-  ]
+  filterFieldMap: {
+    department: 'academic_group_description',
+    semester: 'semester'
+  }
 }
 
 const getters = {
   filteredCourses (state, getters) {
     // per lodash docs, empty object is true for all
-    return _.filter(getters.trayCourses, state.filters)
+    return _.filter(getters.trayCourses, _.mapKeys(state.filters, (v, k) => {
+      return state.filterFieldMap[k] || k
+    }))
   },
   // this is to import the vuex user.trayCourses and use locally as dependent
   trayCourses (state, getters, rootState, rootGetters) {
