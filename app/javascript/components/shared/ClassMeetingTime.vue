@@ -1,6 +1,6 @@
 <template>
   <span>
-    <table>
+    <table v-if="hasData">
       <tr
         v-for="(day,index) in week"
         :key="index"
@@ -16,6 +16,13 @@
         </td>
         <td>
           (timebar)
+        </td>
+      </tr>
+    </table>
+    <table v-else>
+      <tr>
+        <td>
+          Schedule TBD
         </td>
       </tr>
     </table>
@@ -46,12 +53,29 @@
 
 import _ from 'lodash'
 
-function timeFormat (start, end) {
+function prettyTime (time) {
+  // hours or fraction of hours
+
+  var hours = Math.floor(time)
+  var mins = 60 * (time - hours)
+  var isPm = hours >= 12
+  var ret = isPm ? hours - 12 : hours
+
+  if (mins) {
+    ret += ':' + mins
+  }
+
+  ret += isPm ? 'pm' : 'am'
+
+  return ret
+}
+
+function timeFormat (start, duration) {
   // this will turn things prettier, like "3pm - 4pm"
 
   // for now, just pass-thru
 
-  return start + ' - ' + end
+  return prettyTime(start) + '-' + prettyTime(start + duration)
 }
 
 export default {
@@ -88,12 +112,13 @@ export default {
 
           return {
             abbrev: ab,
-            timePretty: hasTime ? timeFormat(day[0], day[1]) : '',
+            timePretty: hasTime ? timeFormat(day[2], day[3]) : '',
             timeBar: hasTime ? [day[2], day[3]] : undefined
           }
         }
       )
-    }
+    },
+    hasData () { return this.days && this.days.length }
   }
 }
 </script>
