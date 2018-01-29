@@ -39,7 +39,7 @@ export default {
   methods: {
     ...mapActions('user', ['selectCourse']),
     calcStyle (course) {
-      return 'border-right: 5px solid ' + course.department_color || '#000'
+      return 'border-right: 5px solid ' + (course.department_color || '#000')
     }
   }
 }
