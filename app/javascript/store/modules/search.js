@@ -106,7 +106,9 @@ const actions = {
             academic_group
             catalog_number
             component
+            course_description
             course_description_long
+            external_course_id
             id
             subject
             term_name
