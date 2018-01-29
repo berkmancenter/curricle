@@ -31,7 +31,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import CourseList from 'components/shared/course-list'
-import ViewSelector from 'components/tray/view-selector'
+import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
 import SemesterSidebar from 'components/tray/semester-sidebar'
 

@@ -40,7 +40,7 @@ import SelectedCourse from 'components/shared/SelectedCourse'
 import DepartmentSelector from 'components/plan/department-selector'
 import SemesterSelector from 'components/plan/semester-selector'
 import Tray from 'components/tray/tray'
-import ViewSelector from 'components/tray/view-selector'
+import ViewSelector from 'components/shared/view-selector'
 
 export default {
   components: {
