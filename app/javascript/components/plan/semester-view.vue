@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Semester View</p>
     <b-row>
       <b-col>
         <b-row>
