@@ -36,7 +36,7 @@ const actions = {
       dispatch('search/runSearch', { ids: courses,
         handler:
         response => {
-          commit('ADD_COURSES', response.data.courses)
+          commit('ADD_COURSES', response)
           dispatch('getCourses', courses)
         }
       },

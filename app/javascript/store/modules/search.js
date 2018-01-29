@@ -19,40 +19,43 @@ function calcDuration (start, end) {
   return hours + Math.ceil(mins / 5) / 12
 }
 
-function extractSchedule (courses) {
-  return _.map(
-    _.filter(courses, e => e.course_meeting_patterns && e.course_meeting_patterns.length),
-    c => {
-      var m = _.find(c.course_meeting_patterns, p => p.meeting_time_start_tod) || {}
-      var courseMeetingInfo = [
-        m.meeting_time_start_tod,
-        m.meeting_time_end_tod,
-        calcDuration('0:00', m.meeting_time_start_tod),
-        calcDuration(m.meeting_time_start_tod, m.meeting_time_end_tod)
-      ]
+/* transform the core course data into the expected days structure for other times */
+function transformSchedule (c) {
+  if (c && c.course_meeting_patterns && c.course_meeting_patterns.length) {
+    // We are currently only pulling the first non-null records here.
+    // We will need to revisit this to support different meeting times on
+    // different days
 
-      return {
-        id: c.id,
-        semester: c.term_name + ' ' + c.term_year,
-        term_name: c.term_name,
-        term_year: c.term_year,
-        title: c.title,
-        days: [
-          m.meets_on_monday ? courseMeetingInfo : undefined,
-          m.meets_on_tuesday ? courseMeetingInfo : undefined,
-          m.meets_on_wednesday ? courseMeetingInfo : undefined,
-          m.meets_on_thursday ? courseMeetingInfo : undefined,
-          m.meets_on_friday ? courseMeetingInfo : undefined,
-          m.meets_on_saturday ? courseMeetingInfo : undefined,
-          m.meets_on_sunday ? courseMeetingInfo : undefined
-        ]
-      }
+    var m = _.find(c.course_meeting_patterns, p => p.meeting_time_start_tod)
+
+    if (!m) {
+      return []
     }
-  )
-}
 
-function transformCourseData (data) {
-  return data
+    // NOTE: this structure is currently shared; might need to make clones of this in
+    // the future, but is conceptually read-only data should be fine
+    // for now.
+
+    var courseMeetingInfo = [
+      m.meeting_time_start_tod,
+      m.meeting_time_end_tod,
+      calcDuration('0:00', m.meeting_time_start_tod),
+      calcDuration(m.meeting_time_start_tod, m.meeting_time_end_tod)
+    ]
+
+    return [
+      m.meets_on_monday ? courseMeetingInfo : undefined,
+      m.meets_on_tuesday ? courseMeetingInfo : undefined,
+      m.meets_on_wednesday ? courseMeetingInfo : undefined,
+      m.meets_on_thursday ? courseMeetingInfo : undefined,
+      m.meets_on_friday ? courseMeetingInfo : undefined,
+      m.meets_on_saturday ? courseMeetingInfo : undefined,
+      m.meets_on_sunday ? courseMeetingInfo : undefined
+    ]
+  } else {
+    // return empty array for no scheduled day/times
+    return []
+  }
 }
 
 const state = {
@@ -121,7 +124,6 @@ const actions = {
           handler: response => {
             state.results = response.data.courses
             state.searchComplete = true
-            dispatch('courses/registerCourses', response.data.courses, { root: true })
           }
         })
     } else {
@@ -184,6 +186,20 @@ const actions = {
         }
       `,
       variables: vars
+    }).then(response => {
+      // standard transforms
+      var courses = _.map(
+        response.data.courses,
+        c => {
+          var o = _.clone(c)
+          o.days = transformSchedule(o)
+          return o
+        })
+
+      // store in registry
+      return dispatch('courses/registerCourses', courses, { root: true })
+
+      // finally run any user hanlder
     })
 
     promise.then(handler)
