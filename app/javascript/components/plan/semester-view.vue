@@ -12,7 +12,7 @@
             <span
               v-for="(time,index) in times"
               :key="time"
-              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '600%', 'border-top': '1px solid lightgray' }"
+              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '575%', 'border-top': '1px solid lightgray' }"
             >
               {{ time }}
             </span>
@@ -20,7 +20,7 @@
         </b-row>
       </b-col>
       <b-col
-        v-for="(day,index) in ['Monday','Tuesday','Wednesday','Thursday','Friday']"
+        v-for="(day,index) in ['Mon','Tue','Wed','Thu','Fri']"
         :key="index"
         class="day-column"
       >
@@ -71,7 +71,7 @@ export default {
         ),
         k => { earliest = Math.min(earliest, k.day[2]) }
       )
-      return Math.floor(earliest - 1)
+      return Math.floor(earliest)
     },
     latestIdx () {
       var latest = 0
@@ -84,7 +84,7 @@ export default {
         ),
         k => { latest = Math.max(latest, k.day[2] + k.day[3]) }
       )
-      return Math.ceil(latest)
+      return Math.ceil(latest + 1)
     },
     times () {
       return ['1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
