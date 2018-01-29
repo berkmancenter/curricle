@@ -4,6 +4,7 @@
       <tr
         v-for="day in week"
         :key="day"
+        v-if="!condensed || day.timeBar"
       >
         <td>
           {{ day.timePretty }}
@@ -63,6 +64,10 @@ export default {
       type: Array,
       required: false,
       default: () => []
+    },
+    condensed: {
+      type: Boolean,
+      default: false
     },
     scaleWidth: {
       type: Number,
