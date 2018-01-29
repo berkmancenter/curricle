@@ -1,5 +1,6 @@
 // Manipulation of plan-related data
 
+import Vue from 'vue/dist/vue.esm'
 import _ from 'lodash'
 
 function sortedSemesters (sems) {
@@ -96,10 +97,10 @@ const actions = {
 
 const mutations = {
   SET_FILTER (state, {name, value}) {
-    if (value === '') {
-      delete state.filters[name]
+    if (value) {
+      Vue.set(state.filters, name, value)
     } else {
-      state.filters[name] = value
+      Vue.delete(state.filters, name)
     }
   },
   SET_SEMESTER (state, semester) {
