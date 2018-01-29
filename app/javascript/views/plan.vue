@@ -7,7 +7,9 @@
           <view-selector
             type="plan"
           />
-          <department-selector/>
+          <department-selector
+            v-if="viewmode.plan == 'list-view'"
+          />
           <semester-selector/>
         </div>
         <div>
