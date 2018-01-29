@@ -94,7 +94,9 @@ export default {
   },
   watch: {
     sortedSemestersInSchedule () {
-      this.setSemester(this.sortedSemestersInSchedule[0])
+      if (!this.sortedSemestersInSchedule.include(this.semester)) {
+        this.setSemester(this.sortedSemestersInSchedule[0])
+      }
     }
   },
   mounted () {
