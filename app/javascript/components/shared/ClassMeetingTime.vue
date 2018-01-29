@@ -2,8 +2,8 @@
   <span>
     <table>
       <tr
-        v-for="day in week"
-        :key="day"
+        v-for="(day,index) in week"
+        :key="index"
         v-if="!condensed || day.timeBar"
       >
         <td>
