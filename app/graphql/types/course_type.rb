@@ -7,6 +7,19 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :academic_group, types.String, 'Academic group'
   field :academic_group_description, types.String, 'Academic group description'
   field :academic_year, types.Int, 'Academic year'
+
+  field :annotation, Types::AnnotationType, 'Annotation added by the current user' do
+    resolve(
+      lambda do |course, _args, context|
+        BatchLoader.for(course.id).batch do |course_ids, loader|
+          Annotation.where(course: course_ids, user: context[:current_user]).each do |annotation|
+            loader.call(annotation.course_id, annotation)
+          end
+        end
+      end
+    )
+  end
+
   field :catalog_number, types.Int, 'Catalog number'
   field :class_academic_org_description, types.String, 'Class academic organization description'
   field :class_section, types.String, 'Class section'

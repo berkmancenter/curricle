@@ -1,14 +1,13 @@
 <template>
-  <div class="annotation-border">
-    <div class="annotations">
+  <div class="annotation-container">
+    <div class="annotations text-center">
       <p class="annotations-up-arrow">
         <i
           class="fa fa-caret-up"
           v-if="!isExpand"
           @click="expand()"/>
       </p>
-      <p
-      :class="{ 'annotations-margin-top': isExpand }">
+      <p>
         <span
           class="fa fa-pencil edit-annotation"
           @click="OpenAnnotationsForm()"/>
@@ -31,13 +30,6 @@
             maxlength="500"
             v-model="editableText"/>
           <span class="word-count">{{ editableTextlength }} / {{ maxLength }} characters</span>
-          <span
-            class=""
-            v-for="(text, index) of annotationTags"
-            @click="removeTags(index)"
-            :key="index">
-            {{ text }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
-          </span>
         </p>
         <div class="save-btn">
           <button @click="updateAnnotations">Update</button>
@@ -48,12 +40,9 @@
         :active-tags="course.user_tags"
         :course-id="course.id"
         @deactivateTag="deactivateTag($event)" />
-    </div>
-    <div>
-      <p class="annotations-down-arrow">
+      <p class="annotations-down-arrow text-center">
         <i
           class="fa fa-caret-down"
-          :class="{ 'hide-down-caret': hideDownCaret }"
           v-if="isExpand"
           @click="expand()"/>
       </p>
@@ -63,9 +52,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import axios from 'axios'
+import gql from 'graphql-tag'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import lodash from 'lodash/isEmpty'
 import Tagging from './SelectedCourseAnnotationsTagging'
 
 export default {
@@ -76,9 +64,8 @@ export default {
   data () {
     return {
       editableAnnotations: false,
-      editableAnnotationsText: '',
+      editableAnnotationText: '',
       editableText: '',
-      annotationTags: [],
       isExpand: false,
       hideDownCaret: false,
       maxLength: 500,
@@ -92,12 +79,12 @@ export default {
     })
   },
   watch: {
-    course () {
-      this.setCourse()
-    },
     editableText (newStr) {
       this.editableTextlength = newStr.length
     }
+  },
+  mounted () {
+    this.editableAnnotationsText = this.course.annotation.text
   },
   methods: {
     OpenAnnotationsForm () {
@@ -111,42 +98,29 @@ export default {
       this.isExpand = !this.isExpand
     },
     updateAnnotations () {
-      axios
-        .post('annotations', {course_id: this.course.id, annotation: this.editableText}).then((response) => {
-          this.editableAnnotationsText = response.data.annotation
-          this.editableAnnotations = !this.editableAnnotations
-          this.hideDownCaret = !this.hideDownCaret
-        })
+      this.$apollo.provider.defaultClient.mutate({
+        mutation: gql`
+          mutation addAnnotation($text: String!, $course_id: ID!){
+            addAnnotation(text: $text, course_id: $course_id) {
+              text
+              id
+            }
+          }
+        `,
+        variables: {
+          text: this.editableText,
+          course_id: this.course.id
+        }
+      }).then(response => {
+        this.editableAnnotationsText = response.data.addAnnotation.text
+        this.editableAnnotations = !this.editableAnnotations
+        this.hideDownCaret = !this.hideDownCaret
+      })
     },
     cancelAnnotations () {
-      this.annotationTags = []
       this.editableText = ''
       this.editableAnnotations = !this.editableAnnotations
       this.hideDownCaret = !this.hideDownCaret
-    },
-    fetchAnnotation () {
-      axios
-        .get('/annotations/get_annotations?course_id=' + this.course.id).then((response) => {
-          if (response.data) {
-            this.editableAnnotationsText = response.data.annotation
-          } else {
-            this.editableAnnotationsText = ''
-          }
-          this.editableText = this.editableAnnotationsText
-        })
-    },
-    setCourse () {
-      this.fetchAnnotation()
-      this.isPresent = !lodash(this.course || {})
-      if (this.isPresent) {
-        this.isExpand = false
-        this.editableAnnotation = false
-        this.hideDownCaret = false
-        this.editableText = false
-      }
-    },
-    mounted () {
-      this.setCourse()
     }
   }
 }
@@ -156,7 +130,6 @@ export default {
   .annotations {
     display: inline-block;
     width: 100%;
-    text-align: center;
   }
   .annotations p span {
     display: inline-block;
@@ -165,33 +138,25 @@ export default {
     font-size: 20px;
     color: #0030FF;
   }
-  .annotation-border {
+  .annotation-container {
+    background-color: white;
     border: 2px solid #000;
+    bottom: 0;
     padding: 0 20px;
-  }
-  .annotation-para p {
-    text-align: justify;
-  }
-  .annotation-border p:nth-child(2){
-    margin-bottom: 0px;
+    position: absolute;
+    width: 100%;
   }
   .annotations-up-arrow i, .annotations-down-arrow i {
     font-size: 30px;
     cursor: pointer;
   }
-  .annotations-down-arrow {
-    text-align: center;
-  }
-  .annotations-margin-top {
-    margin-top: 10px;
-  }
-  .tags{
+  .tags {
     display: inline-block;
     width: 100%;
     text-align: center;
     margin: 20px 0;
   }
-  .save-btn button{
+  .save-btn button {
     background-color: inherit;
     border: 2px solid #000;
     border-radius: 5px;
@@ -199,9 +164,6 @@ export default {
     margin-top: 20px;
     margin-bottom: 20px;
     cursor: pointer;
-  }
-  .hide-down-caret{
-    display: none;
   }
   .annotations textarea{
     resize: none !important;

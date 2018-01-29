@@ -15,3 +15,6 @@
 
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'
+
+    :javascript
+      localStorage.setItem('curricle_api_token', '#{current_user.api_token}')

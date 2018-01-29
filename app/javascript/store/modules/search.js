@@ -1,10 +1,31 @@
 // Manipulation of search-related data
 
 import _ from 'lodash'
-import ApolloClient from 'apollo-client-preset'
+import { ApolloClient } from 'apollo-client'
+import { createHttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 
-const client = new ApolloClient()
+const httpLink = createHttpLink({
+  uri: '/graphql'
+})
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('curricle_api_token')
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : null
+    }
+  }
+})
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+})
 
 function calcDuration (start, end) {
   if (!(start && end)) {
@@ -179,6 +200,9 @@ const actions = {
               meets_on_friday
               meets_on_saturday
               meets_on_sunday
+            }
+            annotation {
+              text
             }
           }
         }
