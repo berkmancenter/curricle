@@ -65,7 +65,7 @@ function prettyTime (time) {
   var hours = Math.floor(time)
   var mins = 60 * (time - hours)
   var isPm = hours >= 12
-  var ret = isPm ? hours - 12 : hours
+  var ret = hours > 12 ? hours - 12 : hours
 
   if (mins) {
     ret += ':' + mins
