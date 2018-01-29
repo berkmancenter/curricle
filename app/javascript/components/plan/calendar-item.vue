@@ -29,7 +29,8 @@ export default {
     computedStyle () {
       return {
         height: this.scale * this.item.day[3] + 'px',
-        top: this.scale * Math.max(this.item.day[2] - this.offset, 0) + 'px'
+        top: (this.scale * Math.max(this.item.day[2] - this.offset, 0) - 15) + 'px',
+        'border-top': '10px solid ' + (this.item.department_color || '#000')
       }
     }
   },
@@ -43,9 +44,12 @@ export default {
 .calendar-item {
   position: absolute;
   background-color: lightgray;
-  border: 1px solid black;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-left: .5em;
+  padding-right: .5em;
+  font-size: 12px;
+  width: 90%;
 }
 
 .calendar-item:hover {

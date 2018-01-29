@@ -4,7 +4,7 @@
     <b-row>
       <b-col>
         <b-row>
-          <b-col>
+          <b-col class="header">
             Time
           </b-col>
         </b-row>
@@ -13,7 +13,7 @@
             <span
               v-for="(time,index) in times"
               :key="time"
-              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '600%', 'border-bottom': '2px solid black' }"
+              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '600%', 'border-top': '1px solid lightgray' }"
             >
               {{ time }}
             </span>
@@ -26,7 +26,7 @@
         class="day-column"
       >
         <b-row>
-          <b-col>{{ day }}
+          <b-col class="header">{{ day }}
           </b-col>
         </b-row>
         <b-row>
@@ -55,7 +55,7 @@ export default {
   },
   data () {
     return {
-      scale: 40
+      scale: 80
     }
   },
   computed: {
@@ -107,8 +107,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .day-column {
 
+}
+
+.header {
+    font-weight: bold;
+    text-align: left;
 }
 </style>
