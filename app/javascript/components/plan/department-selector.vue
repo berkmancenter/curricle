@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -26,7 +26,11 @@ export default {
     }
   },
   computed: {
+    ...mapState('plan', ['filters']),
     ...mapGetters('plan', ['departmentsInTray'])
+  },
+  mounted () {
+    this.setDepartment(this.filters.department)
   },
   methods: {
     ...mapActions('plan', ['setFilter']),
