@@ -21,11 +21,11 @@
               :text="list.course_description_long"
               v-if="list.course_description_long"/>
           </td>
-          <td>4 pm to 6pm<br> 9 am to 10 pm</td>
           <td>
-            <span>M<img src=""></span>
-            <br>
-            <span>W<img src=""></span>
+            <class-meeting-time
+              :days="list.days"
+              :condensed="true"
+            />
           </td>
           <td style="border-right: 5px solid #000; position: relative; font-size: 24px;">
             <course-action
@@ -49,11 +49,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 import CourseAction from 'components/shared/course-action'
+import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 
 export default {
   components: {
     truncate,
-    CourseAction
+    CourseAction,
+    ClassMeetingTime
   },
   computed: {
     ...mapGetters('user', ['trayCourses'])

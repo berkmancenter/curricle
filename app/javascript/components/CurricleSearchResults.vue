@@ -53,22 +53,24 @@
         </strong>
       </span>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <h5>{{ course.title }}</h5>
       <span v-html="course.course_description_long"/>
     </div>
     <div class="col-md-2">
-      Schedule
+      <class-meeting-time :days="course.days" />
     </div>
   </div>
 </template>
 
 <script>
 import CourseAction from 'components/shared/course-action'
+import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 
 export default {
   components: {
-    CourseAction
+    CourseAction,
+    ClassMeetingTime
   },
   props: {
     course: {
