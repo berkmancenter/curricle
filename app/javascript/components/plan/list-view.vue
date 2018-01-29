@@ -3,7 +3,7 @@
     <table class="course-list-iltem table">
       <tbody>
         <tr
-          v-for="course in trayCourses"
+          v-for="course in filteredCourses"
           :key="course.id"
           @click="selectCourse(course)"
         >
@@ -58,7 +58,7 @@ export default {
     ClassMeetingTime
   },
   computed: {
-    ...mapGetters('user', ['trayCourses'])
+    ...mapGetters('plan', ['filteredCourses'])
   },
   methods: {
     ...mapActions('user', ['selectCourse'])

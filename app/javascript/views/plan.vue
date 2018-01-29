@@ -7,14 +7,7 @@
           <view-selector
             type="plan"
           />
-          <plan-filter
-            :title="category.name"
-            :items="category.options"
-            :field="category.field"
-            v-for="category in categories"
-            :name="category.name"
-            :key="category.id"
-          />
+          <department-selector/>
           <semester-selector/>
         </div>
         <div>
@@ -35,18 +28,18 @@
 import { mapState, mapGetters } from 'vuex'
 import axios from 'axios'
 
-import PlanFilter from 'components/plan/plan-filter'
 import PlanListView from 'components/plan/list-view'
 import PlanYearView from 'components/plan/yearly-calendar'
 import PlanSemesterView from 'components/plan/semester-view'
 import SelectedCourse from 'components/shared/SelectedCourse'
+import DepartmentSelector from 'components/plan/department-selector'
 import SemesterSelector from 'components/plan/semester-selector'
 import Tray from 'components/tray/tray'
 import ViewSelector from 'components/tray/view-selector'
 
 export default {
   components: {
-    PlanFilter,
+    DepartmentSelector,
     PlanListView,
     PlanYearView,
     PlanSemesterView,
