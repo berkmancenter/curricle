@@ -122,7 +122,7 @@ const actions = {
         {
           keywords: kw,
           handler: response => {
-            state.results = response.data.courses
+            state.results = response
             state.searchComplete = true
           }
         })
@@ -195,8 +195,9 @@ const actions = {
         })
 
       // store in registry
-      return dispatch('courses/registerCourses', courses, { root: true })
+      dispatch('courses/registerCourses', courses, { root: true })
 
+      return courses
       // finally run any user hanlder
     })
 
