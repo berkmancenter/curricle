@@ -3,7 +3,16 @@
     class="calendar-item"
     :style="computedStyle"
     @click="selectCourse(item.id)">
+    <strong>{{ item.id }}</strong>
+    <br>
     {{ item.title }}
+    <p>
+      <strong>
+        {{ item.academic_group }}
+        <br>
+        {{ item.subject }} {{ item.catalog_number }}
+      </strong>
+    </p>
   </div>
 </template>
 
