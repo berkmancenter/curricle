@@ -5,48 +5,48 @@
     <div class="col-md-1">
       <course-action
         type="tray"
-        :course="id"
+        :course="course.id"
       />
       <br>
       <course-action
         type="schedule"
-        :course="id"
+        :course="course.id"
       />
       <br>
       <course-action
         type="annotated"
-        :course="id"
+        :course="course.id"
       />
       <br>
       <course-action
         type="tagged"
-        :course="id"
+        :course="course.id"
       />
       <br>
       <course-action
         type="shareable"
-        :course="id"
+        :course="course.id"
       />
     </div>
     <div class="col-md-2">
       <strong>
-        {{ academic_group }}
+        {{ course.academic_group }}
         <br>
-        {{ subject }} {{ catalog_number }}
+        {{ course.subject }} {{ course.catalog_number }}
         <br>
-        {{ term_name }} {{ term_year }}
+        {{ course.semester }}
         <br>
-        {{ units_maximum }} Units
+        {{ course.units_maximum }} Units
       </strong>
     </div>
     <div class="col-md-2">
-      Component: <strong>{{ component }}</strong>
+      Component: <strong>{{ course.component }}</strong>
       <br>
       Grading Basis:
       <br>
       Instructor:
       <span
-        v-for="instructor in course_instructors"
+        v-for="instructor in course.course_instructors"
         :key="instructor.id">
         <strong>
           {{ instructor.display_name }}
@@ -54,8 +54,8 @@
       </span>
     </div>
     <div class="col-md-6">
-      <h5>{{ title }}</h5>
-      <span v-html="description"/>
+      <h5>{{ course.title }}</h5>
+      <span v-html="course.course_description_long"/>
     </div>
     <div class="col-md-2">
       Schedule
@@ -71,50 +71,8 @@ export default {
     CourseAction
   },
   props: {
-    academic_group: {
-      type: String,
-      required: true
-    },
-    catalog_number: {
-      type: Number,
-      required: true
-    },
-    component: {
-      default: '',
-      type: String
-    },
-    course_instructors: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
-    description: {
-      type: String,
-      default: ''
-    },
-    id: {
-      type: String,
-      required: true
-    },
-    subject: {
-      type: String,
-      required: true
-    },
-    term_name: {
-      type: String,
-      required: true
-    },
-    term_year: {
-      type: Number,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    units_maximum: {
-      type: Number,
+    course: {
+      type: Object,
       required: true
     }
   },

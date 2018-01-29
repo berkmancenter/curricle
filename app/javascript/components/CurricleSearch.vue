@@ -5,18 +5,7 @@
       <curricle-search-results
         v-for="result of results"
         :key="result.id"
-        :academic_group="result.academic_group"
-        :catalog_number="result.catalog_number"
-        :component="result.component"
-        :course_instructors="result.course_instructors"
-        :description="result.course_description_long"
-        :id="result.id"
-        :subject="result.subject"
-        :term_name="result.term_name"
-        :term_year="result.term_year"
-        :title="result.title"
-        :units_maximum="result.units_maximum"
-        :user-schedule="result.user_schedule"
+        :course="result"
       />
     </div>
   </div>
