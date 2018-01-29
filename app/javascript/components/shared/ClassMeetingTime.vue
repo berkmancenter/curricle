@@ -1,31 +1,37 @@
 <template>
   <span>
-    <table v-if="hasData">
-      <tr
+    <div
+      class="t"
+      v-if="hasData">
+      <div
+        class="tr"
         v-for="(day,index) in week"
         :key="index"
         v-if="!condensed || day.timeBar"
       >
-        <td>
+        <div class="td">
           {{ day.timePretty }}
-        </td>
-        <td
+        </div>
+        <div
+          class="td"
           :style="{ active: day.timeBar }"
         >
           {{ day.abbrev }}
-        </td>
-        <td>
+        </div>
+        <div class="td">
           (timebar)
-        </td>
-      </tr>
-    </table>
-    <table v-else>
-      <tr>
-        <td>
+        </div>
+      </div>
+    </div>
+    <div
+      class="t"
+      v-else>
+      <div class="tr">
+        <div class="td">
           Schedule TBD
-        </td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
   </span>
 </template>
 
@@ -123,5 +129,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .t { display: table; }
+  .tr { display: table-row; }
+  .td { display: table-cell; }
 </style>
