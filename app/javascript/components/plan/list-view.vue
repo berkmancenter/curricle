@@ -27,7 +27,7 @@
               :condensed="true"
             />
           </td>
-          <td style="border-right: 5px solid #000; position: relative; font-size: 24px;">
+          <td :style="'border-right: 5px solid ' + course.department_color + '; position: relative; font-size: 24px;'">
             <course-action
               type="schedule"
               :course="course.id"
