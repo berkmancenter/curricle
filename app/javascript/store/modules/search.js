@@ -133,15 +133,12 @@ const actions = {
   runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
     var vars = {}
     var typespec, queryspec
-    console.log('runSearch', keywords, ids, handler)
 
     if (ids && ids.length) {
-      console.log('runSearch: got ids')
       vars.courseIds = ids
       typespec = '$courseIds: [Int]'
       queryspec = 'course_ids: $courseIds'
     } else if (keywords && keywords.length) {
-      console.log('runSearch: got keywords')
       vars.deluxeKeywords = keywords
       typespec = '$deluxeKeywords: [DeluxeKeywordInput]'
       queryspec = 'deluxe_keywords: $deluxeKeywords'
