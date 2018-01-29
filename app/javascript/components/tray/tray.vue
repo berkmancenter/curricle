@@ -14,30 +14,37 @@
       </div>
     </div>
     <div class="row margin-none">
-      <calendar-sidebar
-        v-if="viewmode.tray=='semester' || viewmode.tray=='multi-year'"
+      <semester-sidebar
+        v-if="viewmode.tray=='semester'"
+      />
+      <multi-year-sidebar
+        v-if="viewmode.tray=='multi-year'"
       />
       <course-list
         v-if="viewmode.tray=='list-view'"
+        :courses="trayCourses"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import CourseList from 'components/shared/course-list'
 import ViewSelector from 'components/tray/view-selector'
-import CalendarSidebar from 'components/plan/calendar-sidebar'
+import MultiYearSidebar from 'components/tray/multi-year-sidebar'
+import SemesterSidebar from 'components/tray/semester-sidebar'
 
 export default {
   components: {
     CourseList,
-    CalendarSidebar,
+    MultiYearSidebar,
+    SemesterSidebar,
     ViewSelector
   },
   computed: {
-    ...mapState('app', ['viewmode'])
+    ...mapState('app', ['viewmode']),
+    ...mapGetters('user', ['trayCourses'])
   },
   methods: {
     ...mapActions('app', ['hideTray'])
