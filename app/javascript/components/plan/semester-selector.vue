@@ -1,6 +1,6 @@
 <template>
   <b-dropdown
-    :text="semester"
+    :text="semester ? 'Semester: ' + semester : 'Choose Semester'"
     class="m-md-2"
   >
     <b-dropdown-item
