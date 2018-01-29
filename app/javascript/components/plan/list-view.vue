@@ -9,7 +9,7 @@
         >
           <td>{{ course.external_course_id }}</td>
           <td style = "width: 12em;">{{ course.course_description }}</td>
-          <td>{{ course.academic_group }} <br> {{ course.subject }}</td>
+          <td>{{ course.academic_group }} <br> {{ course.subject }} {{ course.catalog_number }}</td>
           <td>{{ course.term_name }} <br> {{ course.units_maximum }} units</td>
           <td style = "width: 16em; text-align: justify;">
             <truncate
