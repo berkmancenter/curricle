@@ -193,6 +193,7 @@ const actions = {
         c => {
           var o = _.clone(c)
           o.days = transformSchedule(o)
+          o.semester = o.term_name + ' ' + o.term_year
           return o
         })
 
