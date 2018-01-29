@@ -80,11 +80,8 @@ export default {
   },
   computed: {
     borderStyle () {
-      // TODO: map course color to data
-      const randomColor = Math.floor((Math.random() * (999 - 599)) + 600)
-
       return {
-        'border-left-color': ('#' + randomColor)
+        'border-left-color': this.course.department_color || '#000'
       }
     }
   }
