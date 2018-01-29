@@ -10,7 +10,10 @@
           <department-selector
             v-if="viewmode.plan == 'list-view'"
           />
-          <semester-selector/>
+          <semester-selector
+            :mode="viewmode.plan == 'list-view' ? 'filter' : 'state'"
+            :source="viewmode.plan == 'list-view' ? 'tray' : 'schedule'"
+          />
         </div>
         <div>
           <plan-list-view v-if="viewmode.plan === 'list-view'"/>

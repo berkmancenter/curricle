@@ -59,6 +59,9 @@ const getters = {
   sortedSemestersInSchedule (state, getters) {
     return sortedSemesters(_.keys(getters.scheduledCoursesBySemester))
   },
+  sortedSemestersInTray (state, getters) {
+    return sortedSemesters(getters.semestersInTray)
+  },
   currentSchedule (state, getters) {
     return getters.scheduledCoursesBySemester[state.semester] || []
   },
