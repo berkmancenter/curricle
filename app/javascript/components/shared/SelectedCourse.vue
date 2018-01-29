@@ -4,14 +4,17 @@
       <p class="select-course">Selected Course</p>
       <hr>
       <div class="row actions margin-none">
-        <i
-          class="fa fa-folder-open"
+        <course-action
+          type="tray"
+          :course="currentCourse.id"
         />
-        <i
-          class="fa fa-clock-o"
+        <course-action
+          type="schedule"
+          :course="currentCourse.id"
         />
-        <i
-          class="fa fa-share-alt"
+        <course-action
+          type="shareable"
+          :course="currentCourse.id"
         />
         <div class="pull-right">See Course History</div>
       </div>
@@ -25,15 +28,18 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import CourseAction from 'components/shared/course-action'
 import SelectedCourseAnnotations from './SelectedCourseAnnotations'
 import SelectedCourseDetails from './SelectedCourseDetails'
 
 export default {
   components: {
     SelectedCourseAnnotations,
-    SelectedCourseDetails
+    SelectedCourseDetails,
+    CourseAction
   },
   computed: {
+    ...mapState('user', ['currentCourse']),
     ...mapGetters('user', ['validCourseSelected']),
     ...mapState('app', ['trayVisible'])
   }
