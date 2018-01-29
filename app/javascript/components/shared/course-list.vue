@@ -4,7 +4,7 @@
       <thead/>
       <tbody>
         <tr
-          v-for="course in theCourses"
+          v-for="course in courses"
           :key="course.id"
           @click="selectCourse(course)"
         >
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 
 export default {
@@ -33,14 +33,7 @@ export default {
   props: {
     courses: {
       type: Array,
-      required: false,
-      default: () => null
-    }
-  },
-  computed: {
-    ...mapGetters('user', ['trayCourses']),
-    theCourses () {
-      return this.courses || this.trayCourses
+      required: true
     }
   },
   methods: {
