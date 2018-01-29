@@ -1,6 +1,6 @@
 <template>
   <div class="plan">
-    <table class="course-list-iltem">
+    <table class="course-list-iltem table">
       <tbody>
         <tr
           v-for="course in trayCourses"
