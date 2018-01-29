@@ -57,7 +57,7 @@ const getters = {
     return rootGetters['user/scheduledCourses']
   },
   scheduledCoursesBySemester (state, getters) {
-    return _.groupBy(extractSchedule(getters.scheduledCourses), 'semester')
+    return _.groupBy(getters.scheduledCourses, 'semester')
   },
   sortedSemestersInSchedule (state, getters) {
     return sortedSemesters(_.keys(getters.scheduledCoursesBySemester))
