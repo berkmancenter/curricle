@@ -2,51 +2,6 @@
 
 import _ from 'lodash'
 
-function calcDuration (start, end) {
-  if (!(start && end)) {
-    return 0
-  }
-  var startPart = start.split(':')
-  var endPart = end.split(':')
-
-  var hours = endPart[0] - startPart[0]
-  var mins = endPart[1] - startPart[1]
-
-  return hours + Math.ceil(mins / 5) / 12
-}
-
-function extractSchedule (courses) {
-  return _.map(
-    _.filter(courses, e => e.course_meeting_patterns && e.course_meeting_patterns.length),
-    c => {
-      var m = _.find(c.course_meeting_patterns, p => p.meeting_time_start_tod) || {}
-      var courseMeetingInfo = [
-        m.meeting_time_start_tod,
-        m.meeting_time_end_tod,
-        calcDuration('0:00', m.meeting_time_start_tod),
-        calcDuration(m.meeting_time_start_tod, m.meeting_time_end_tod)
-      ]
-
-      return {
-        id: c.id,
-        semester: c.term_name + ' ' + c.term_year,
-        term_name: c.term_name,
-        term_year: c.term_year,
-        title: c.title,
-        days: [
-          m.meets_on_monday ? courseMeetingInfo : undefined,
-          m.meets_on_tuesday ? courseMeetingInfo : undefined,
-          m.meets_on_wednesday ? courseMeetingInfo : undefined,
-          m.meets_on_thursday ? courseMeetingInfo : undefined,
-          m.meets_on_friday ? courseMeetingInfo : undefined,
-          m.meets_on_saturday ? courseMeetingInfo : undefined,
-          m.meets_on_sunday ? courseMeetingInfo : undefined
-        ]
-      }
-    }
-  )
-}
-
 function sortedSemesters (sems) {
   const semOrder = ['Spring', 'Summer', 'Fall']
 
