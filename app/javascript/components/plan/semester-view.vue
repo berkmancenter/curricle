@@ -34,7 +34,8 @@
             :item="item"
             :key="item.course_id"
             :scale="scale"
-            :offset="earliestIdx"
+            :offset="item.day[2] - earliestIdx"
+            :height="item.day[3]"
           />
         </b-row>
       </b-col>
