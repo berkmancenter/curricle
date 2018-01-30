@@ -79,7 +79,6 @@ export default {
   },
   methods: {
     toggleEditDay (day) {
-      console.log('toggleEditDay', day, this.isEditing)
       this.isEditing[day] = !this.isEditing[day]
     }
   }

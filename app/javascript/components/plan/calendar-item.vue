@@ -45,7 +45,6 @@ export default {
   computed: {
     computedStyle () {
       var top = this.scale * this.offset + 25 + this.nudge
-      console.log('got top', top)
       return {
         height: this.scale * this.height + 'px',
         top: top + 'px',
