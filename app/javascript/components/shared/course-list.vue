@@ -15,6 +15,10 @@
               :course="course.id"
               v-show="editable"
             />
+            <course-action
+              type="annotated"
+              :course="course.id"
+              v-show="editable"/>
           </td>
         </tr>
       </tbody>

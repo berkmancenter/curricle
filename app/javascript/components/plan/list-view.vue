@@ -32,6 +32,9 @@
               type="schedule"
               :course="course.id"
             />
+            <course-action
+              type="annotated"
+              :course="course.id"/>
           </td>
           <span class= "check_box">
             <input
