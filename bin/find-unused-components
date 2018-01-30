@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+# -*-cperl-*-
+
+use strict;
+use warnings;
+use v5.10;
+
+use FindBin qw($RealBin);
+
+chdir("$RealBin/..");
+
+my @lines = qx(find app/javascript -name '*.vue');
+
+for my $path (@lines) {
+  chomp $path;
+
+  unless (-f $path) {
+    say "Path doesn't exist! WTF!?";
+    next;
+  }
+
+  (my $short_path = $path) =~ s(^app/javascript/)();
+  $short_path =~ s/\.vue$//;
+
+  my $component_part = [split /\// => $short_path]->[-1];
+  $component_part =~ s/\.vue$//;
+
+  system("cd app/javascript; git grep -qi \"import.*$component_part'\" || echo $path ");
+
+
+}
