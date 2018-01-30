@@ -55,7 +55,14 @@
     </div>
     <div class="col-md-5">
       <h5>{{ course.title }}</h5>
-      <span v-html="course.course_description_long"/>
+      <truncate
+        class="course_description"
+        clamp="..."
+        :length="250"
+        less="Show Less"
+        type="html"
+        :text="course.course_description_long"
+        v-if="course.course_description_long"/>
     </div>
     <div class="col-md-2">
       <class-meeting-time :days="course.days" />
@@ -66,11 +73,13 @@
 <script>
 import CourseAction from 'components/shared/course-action'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
+import truncate from 'vue-truncate-collapsed'
 
 export default {
   components: {
     CourseAction,
-    ClassMeetingTime
+    ClassMeetingTime,
+    truncate
   },
   props: {
     course: {
