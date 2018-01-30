@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import gql from 'graphql-tag'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import Tagging from './SelectedCourseAnnotationsTagging'
@@ -60,6 +59,12 @@ export default {
   components: {
     FontAwesomeIcon,
     Tagging
+  },
+  props: {
+    course: {
+      type: Object,
+      required: true
+    }
   },
   data () {
     return {
@@ -72,11 +77,6 @@ export default {
       editableTextlength: 0,
       isPresent: false
     }
-  },
-  computed: {
-    ...mapState('user', {
-      course: 'currentCourse'
-    })
   },
   watch: {
     editableText (newStr) {

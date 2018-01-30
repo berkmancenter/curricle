@@ -23,8 +23,12 @@
         <p class="course-history pull-right text-right">See course history</p>
       </div>
 
-      <selected-course-details/>
-      <selected-course-annotations/>
+      <selected-course-details
+        :course="currentCourse"
+      />
+      <selected-course-annotations
+        :course="currentCourse"
+      />
     </div>
   </div>
 </template>

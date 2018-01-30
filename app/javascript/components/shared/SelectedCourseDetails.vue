@@ -42,13 +42,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import truncate from 'vue-truncate-collapsed'
 
 export default {
+  components: {
+    truncate
+  },
+  props: {
+    course: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
-    ...mapState('user', {
-      course: 'currentCourse'
-    }),
     firstInstructor () {
       if (this.course.course_instructors.length) {
         return this.course.course_instructors[0].display_name
