@@ -1,38 +1,36 @@
 <template>
-  <span>
+  <div
+    class="t"
+    v-if="hasData">
     <div
-      class="t"
-      v-if="hasData">
+      class="tr"
+      v-for="(day,index) in week"
+      :key="index"
+      v-if="!condensed || day.timeBar"
+    >
+      <div class="td">
+        {{ day.timePretty }}
+      </div>
       <div
-        class="tr"
-        v-for="(day,index) in week"
-        :key="index"
-        v-if="!condensed || day.timeBar"
+        class="td"
+        :style="{ active: day.timeBar }"
       >
-        <div class="td">
-          {{ day.timePretty }}
-        </div>
-        <div
-          class="td"
-          :style="{ active: day.timeBar }"
-        >
-          {{ day.abbrev }}
-        </div>
-        <div class="td">
-          (timebar)
-        </div>
+        {{ day.abbrev }}
+      </div>
+      <div class="td">
+        (timebar)
       </div>
     </div>
-    <div
-      class="t"
-      v-else>
-      <div class="tr">
-        <div class="td">
-          Schedule TBD
-        </div>
+  </div>
+  <div
+    class="t"
+    v-else>
+    <div class="tr">
+      <div class="td">
+        Schedule TBD
       </div>
     </div>
-  </span>
+  </div>
 </template>
 
 <script>

@@ -29,7 +29,7 @@
       />
     </div>
     <div
-      class="col-md-2"
+      class="col-md-2 pointer"
       @click="selectCourse(course)"
     >
       <strong>
@@ -43,7 +43,7 @@
       </strong>
     </div>
     <div
-      class="col-md-2"
+      class="col-md-2 pointer"
       @click="selectCourse(course)"
     >
       Component: <strong>{{ course.component }}</strong>
@@ -60,7 +60,7 @@
       </span>
     </div>
     <div
-      class="col-md-5"
+      class="col-md-5 pointer"
       @click="selectCourse(course)"
     >
       <h5>{{ course.title }}</h5>
@@ -73,7 +73,7 @@
         :text="course.course_description_long"
         v-if="course.course_description_long"/>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 px-0">
       <class-meeting-time :days="course.days" />
     </div>
   </div>
@@ -111,19 +111,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.curricle-search-result {
-  font-size: 13px;
-  border-left-width: 10px;
-  border-left-style: solid;
-  border-top: 1px solid #ccc;
-  margin-left: 0;
-  padding-top: 10px;
+  .curricle-search-result {
+    font-size: 13px;
+    border-left-width: 10px;
+    border-left-style: solid;
+    border-top: 1px solid #ccc;
+    margin-left: 0;
+    padding-top: 10px;
 
-  h5 {
-    font-size: 16px;
+    h5 {
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
   }
-}
-.usercourse, .userschedule {
-  color: gray;
-}
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  .usercourse, .userschedule {
+    color: gray;
+  }
 </style>
