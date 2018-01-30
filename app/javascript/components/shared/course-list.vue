@@ -6,10 +6,9 @@
         <tr
           v-for="course in courses"
           :key="course.id"
-          @click="selectCourse(course)"
         >
           <td>{{ course.external_course_id }}</td>
-          <td>{{ course.title }}</td>
+          <td @click="!editable && selectCourse(course)">{{ course.title }}</td>
           <td :style="calcStyle(course)">
             <course-action
               type="schedule"
