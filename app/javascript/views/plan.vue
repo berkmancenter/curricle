@@ -1,6 +1,6 @@
 <template>
-  <div class="row margin-none">
-    <div class="col-md-9">
+  <div class="row mx-0">
+    <div class="col-md-9 top-header">
       <div> <p class= "your-tray">Your Tray</p>
         <hr>
         <div class="drop-down actions">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 top-header">
       <tray v-if="trayVisible"/>
       <selected-course v-if="validCourseSelected"/>
     </div>
@@ -83,8 +83,7 @@ export default {
     font-size: 20px;
     padding-right: 15px;
   }
-  .margin-none{
-    margin-right: 0px !important;
-    margin-left: 0px !important;
+  .top-header {
+    margin-top: 28px;
   }
 </style>

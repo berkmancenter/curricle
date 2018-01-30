@@ -1,10 +1,10 @@
 <template >
   <div class="description">
-    <div class="row margin-none">
+    <div class="row margin-none mx-0">
       <p class="pull-left"><b>{{ course.academic_group }}</b></p>
       <p class="pull-right">Component: <span><b>{{ course.component }}</b></span></p>
     </div>
-    <div class="row margin-none">
+    <div class="row margin-none mx-0">
       <p class="pull-left"><b>{{ course.term_name }}</b></p>
       <p class="pull-right">Grading basis: <span><b>{{ course.grading_basis_description }}</b></span></p>
     </div>

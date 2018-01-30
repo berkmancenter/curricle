@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-md-9">
-        <hr>
-        <b-jumbotron
-          header="Explore"
-          lead="View Template">
-          <p>Paragraph</p>
+  <div class="row mx-0">
+    <div class="col-md-9">
+      <hr>
+      <b-jumbotron
+        header="Explore"
+        lead="View Template">
+        <p>Paragraph</p>
 
-          <b-btn
-            variant="primary"
-            href="#">
-            Button
-          </b-btn>
-        </b-jumbotron>
-      </div>
-      <div class="col-md-3 sidebar">
-        <tray v-if="trayVisible" />
-        <selected-course v-if="validCourseSelected" />
-      </div>
+        <b-btn
+          variant="primary"
+          href="#">
+          Button
+        </b-btn>
+      </b-jumbotron>
+    </div>
+    <div class="col-md-3 top-header">
+      <tray v-if="trayVisible" />
+      <selected-course v-if="validCourseSelected" />
     </div>
   </div>
 </template>
@@ -42,7 +40,7 @@ export default {
 </script>
 
 <style type="text/css">
-  .sidebar{
+  .top-header {
     margin-top: 28px;
   }
 </style>

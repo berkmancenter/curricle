@@ -3,7 +3,7 @@
     <div v-if="!trayVisible && validCourseSelected">
       <p class="select-course">Selected Course</p>
       <hr>
-      <div class="row actions margin-none">
+      <div class="row actions mx-0">
         <course-action
           type="tray"
           :course="currentCourse.id"
@@ -18,7 +18,7 @@
         />
         <div class="pull-right">See Course History</div>
       </div>
-      <div class="row margin-none">
+      <div class="row mx-0">
         <selected-course-details/>
         <selected-course-annotations/>
       </div>

@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-md-9">
-        <basic-search />
-        <br>
-        <curricle-search />
-      </div>
-      <div class="col-md-3 sidebar">
-        <tray v-if="trayVisible" />
-        <selected-course v-if="validCourseSelected" />
-      </div>
+  <div class="row mx-0">
+    <div class="col-md-9">
+      <basic-search />
+      <br>
+      <curricle-search />
+    </div>
+    <div class="col-md-3 top-header">
+      <tray v-if="trayVisible" />
+      <selected-course v-if="validCourseSelected" />
     </div>
   </div>
 </template>
@@ -36,7 +34,7 @@ export default {
 </script>
 
 <style type="text/css">
-  .sidebar{
+  .top-header {
     margin-top: 28px;
   }
 </style>

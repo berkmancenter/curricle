@@ -8,12 +8,12 @@
         />
       </p>
       <hr>
-      <div class="row actions margin-none">
+      <div class="row actions mx-0">
         <view-selector/>
         <div class="pull-right">See Course History</div>
       </div>
     </div>
-    <div class="row margin-none">
+    <div class="row mx-0">
       <semester-sidebar
         v-if="viewmode.tray=='semester'"
       />
@@ -51,9 +51,3 @@ export default {
   }
 }
 </script>
-
-<style type="text/css">
-  .sidebar{
-    margin-top: 28px;
-  }
-</style>
