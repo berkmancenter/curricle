@@ -95,7 +95,7 @@ export default {
   },
   watch: {
     sortedSemestersInSchedule () {
-      if (!this.sortedSemestersInSchedule.include(this.semester)) {
+      if (!this.sortedSemestersInSchedule.includes(this.semester)) {
         this.setSemester(this.sortedSemestersInSchedule[0])
       }
     }
