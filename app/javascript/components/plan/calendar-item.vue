@@ -31,14 +31,24 @@ export default {
     },
     offset: {
       type: Number,
+      required: true
+    },
+    height: {
+      type: Number,
+      default: 0
+    },
+    nudge: {
+      type: Number,
       default: 0
     }
   },
   computed: {
     computedStyle () {
+      var top = this.scale * this.offset + 25 + this.nudge
+      console.log('got top', top)
       return {
-        height: this.scale * this.item.day[3] + 'px',
-        top: (this.scale * Math.max(this.item.day[2] - this.offset, 0) - 15) + 'px',
+        height: this.scale * this.height + 'px',
+        top: top + 'px',
         'border-top': '10px solid ' + (this.item.department_color || '#000')
       }
     }
