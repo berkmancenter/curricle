@@ -16,10 +16,10 @@
     </div>
     <div v-if="isExpand">
       <div
-        v-if="!editableAnnotations"
+        v-if="!editableAnnotation"
         style="word-wrap: break-word;">
         <p>
-          {{ editableAnnotationsText }}
+          {{ editableAnnotationText }}
         </p>
       </div>
       <div v-else>
@@ -63,7 +63,7 @@ export default {
   },
   data () {
     return {
-      editableAnnotations: false,
+      editableAnnotation: false,
       editableAnnotationText: '',
       editableText: '',
       isExpand: false,
@@ -84,14 +84,16 @@ export default {
     }
   },
   mounted () {
-    this.editableAnnotationsText = this.course.annotation.text
+    if (this.course.annotation) {
+      this.editableAnnotationText = this.course.annotation.text
+    }
   },
   methods: {
     OpenAnnotationsForm () {
       if (this.isExpand) {
-        this.editableAnnotations = !this.editableAnnotations
+        this.editableAnnotation = !this.editableAnnotation
         this.hideDownCaret = !this.hideDownCaret
-        this.editableText = this.editableAnnotationsText
+        this.editableText = this.editableAnnotationText
       }
     },
     expand () {
@@ -112,14 +114,14 @@ export default {
           course_id: this.course.id
         }
       }).then(response => {
-        this.editableAnnotationsText = response.data.addAnnotation.text
-        this.editableAnnotations = !this.editableAnnotations
+        this.editableAnnotationText = response.data.addAnnotation.text
+        this.editableAnnotation = !this.editableAnnotation
         this.hideDownCaret = !this.hideDownCaret
       })
     },
     cancelAnnotations () {
       this.editableText = ''
-      this.editableAnnotations = !this.editableAnnotations
+      this.editableAnnotation = !this.editableAnnotation
       this.hideDownCaret = !this.hideDownCaret
     }
   }
