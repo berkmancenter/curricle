@@ -35,7 +35,7 @@ import { mapState, mapGetters } from 'vuex'
 import axios from 'axios'
 
 import PlanListView from 'components/plan/list-view'
-import PlanYearView from 'components/plan/yearly-calendar'
+import PlanYearView from 'components/plan/multi-year-view'
 import PlanSemesterView from 'components/plan/semester-view'
 import SelectedCourse from 'components/shared/SelectedCourse'
 import DepartmentSelector from 'components/plan/department-selector'
