@@ -5,7 +5,10 @@ const state = {
     tray: 'list-view',
     plan: 'list-view'
   },
-  trayVisible: 0
+  trayVisible: 0,
+  // TODO: make these detectable/generated from data?
+  catalogYearStart: 1990,
+  catalogYearEnd: 2020
 }
 
 const getters = {
