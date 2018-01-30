@@ -11,13 +11,13 @@
       :key="day">
       <strong>{{ day }}</strong>
       <div
-        v-if="coursesByDay[day] && coursesByDay[day].length"
+        v-if="trayCoursesByDay[day] && trayCoursesByDay[day].length"
         v-text="isEditing[day] ? 'Done' : 'Edit'"
         @click="toggleEditDay(day)"
         class="pull-right"
       />
       <course-list
-        :courses="coursesByDay[day] || []"
+        :courses="isEditing[day] ? trayCoursesByDay[day] : coursesByDay[day]"
         :editable="isEditing[day]"
       />
     </div>
@@ -41,9 +41,18 @@ export default {
   },
   computed: {
     ...mapState('app', ['viewmode']),
-    ...mapGetters('plan', ['scheduledCoursesBySemester', 'sortedSemestersInSchedule']),
+    ...mapGetters('plan', ['scheduledCoursesBySemester', 'trayCoursesBySemester', 'sortedSemestersInSchedule']),
     coursesByDay () {
       var courses = this.scheduledCoursesBySemester[this.semester] || []
+      var myDays = {}
+
+      _.each(this.days, (day, idx) => {
+        myDays[day] = _.filter(courses, c => c.days[idx] && c.days[idx].length)
+      })
+      return myDays
+    },
+    trayCoursesByDay () {
+      var courses = this.trayCoursesBySemester[this.semester] || []
       var myDays = {}
 
       _.each(this.days, (day, idx) => {

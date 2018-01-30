@@ -56,6 +56,9 @@ const getters = {
   scheduledCoursesBySemester (state, getters) {
     return _.groupBy(getters.scheduledCourses, 'semester')
   },
+  trayCoursesBySemester (state, getters) {
+    return _.groupBy(getters.trayCourses, 'semester')
+  },
   sortedSemestersInSchedule (state, getters) {
     return sortedSemesters(_.keys(getters.scheduledCoursesBySemester))
   },
