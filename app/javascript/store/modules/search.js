@@ -56,6 +56,8 @@ function transformSchedule (c) {
   }
 }
 
+const thisYear = (new Date()).getUTCFullYear()
+
 const state = {
   // list of objects with { text, weight, applyTo, active }
   keywords: [],
@@ -78,7 +80,12 @@ const state = {
     { text: '7', value: 7 },
     { text: '8', value: 8 },
     { text: '9', value: 9 }
-  ]
+  ],
+  searchTermStart: 'Fall',
+  searchTermEnd: 'Spring',
+  searchYearStart: thisYear,
+  searchYearEnd: thisYear + 1,
+  searchTermUseRange: false
 }
 
 const getters = {
