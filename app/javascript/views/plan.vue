@@ -11,6 +11,7 @@
             v-if="viewmode.plan == 'list-view'"
           />
           <semester-selector
+            v-if="viewmode.plan !== 'multi-year'"
             :mode="viewmode.plan == 'list-view' ? 'filter' : 'state'"
             :source="viewmode.plan == 'list-view' ? 'tray' : 'schedule'"
           />
