@@ -17,7 +17,13 @@
 
     <div class="description">
       <p class="heading">Description</p>
-      <p v-html="course.course_description_long"/>
+      <truncate
+        :length="250"
+        :text="course.course_description_long"
+        clamp="..."
+        less="Close"
+        type="html"
+      />
     </div>
 
     <div class="instructors">
