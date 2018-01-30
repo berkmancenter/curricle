@@ -14,6 +14,7 @@
             <course-action
               type="schedule"
               :course="course.id"
+              v-show="editable"
             />
           </td>
         </tr>
@@ -34,6 +35,10 @@ export default {
     courses: {
       type: Array,
       required: true
+    },
+    editable: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
