@@ -103,12 +103,16 @@ export default {
 
 </script>
 
-<style>
-.course-action {
-    color: gray;
-}
+<style scoped>
+  .course-action {
+      color: gray;
+  }
 
-.course-action .active {
-    color: black;
-}
+  .course-action .active {
+      color: black;
+  }
+
+  i.fa {
+    cursor: pointer;
+  }
 </style>

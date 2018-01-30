@@ -163,6 +163,7 @@ const actions = {
             course_description
             course_description_long
             external_course_id
+            grading_basis_description
             id
             subject
             term_name

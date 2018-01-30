@@ -143,7 +143,7 @@ export default {
   .annotation-container {
     background-color: white;
     border: 2px solid #000;
-    bottom: 0;
+    bottom: -100px;
     padding: 0 20px;
     position: absolute;
     width: 100%;

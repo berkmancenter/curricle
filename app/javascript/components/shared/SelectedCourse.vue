@@ -1,27 +1,30 @@
 <template>
   <div>
-    <div v-if="!trayVisible && validCourseSelected">
+    <div
+      class="selected-course"
+      v-if="!trayVisible && validCourseSelected">
       <p class="select-course">Selected Course</p>
       <hr>
-      <div class="row actions mx-0">
-        <course-action
-          type="tray"
-          :course="currentCourse.id"
-        />
-        <course-action
-          type="schedule"
-          :course="currentCourse.id"
-        />
-        <course-action
-          type="shareable"
-          :course="currentCourse.id"
-        />
-        <div class="pull-right">See Course History</div>
+      <div class="actions mb-0">
+        <p class="pull-left">
+          <course-action
+            type="tray"
+            :course="currentCourse.id"
+          />
+          <course-action
+            type="schedule"
+            :course="currentCourse.id"
+          />
+          <course-action
+            type="shareable"
+            :course="currentCourse.id"
+          />
+        </p>
+        <p class="course-history pull-right text-right">See course history</p>
       </div>
-      <div class="row mx-0">
-        <selected-course-details/>
-        <selected-course-annotations/>
-      </div>
+
+      <selected-course-details/>
+      <selected-course-annotations/>
     </div>
   </div>
 </template>
@@ -45,3 +48,20 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .actions {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .selected-course {
+    position: relative;
+  }
+
+  p.course-history {
+    font-size: 13px;
+    font-weight: bold;
+    cursor: not-allowed;
+  }
+</style>
