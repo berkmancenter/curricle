@@ -6,7 +6,6 @@
     <b-navbar-toggle target="nav-collapse"/>
     <b-navbar-brand>
       <b-navbar-nav>
-        <span>The Catalog</span>
         <basic-search-semester-range/>
       </b-navbar-nav>
     </b-navbar-brand>
