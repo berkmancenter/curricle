@@ -28,7 +28,10 @@
         :course="course.id"
       />
     </div>
-    <div class="col-md-2">
+    <div
+      class="col-md-2"
+      @click="selectCourse(course)"
+    >
       <strong>
         {{ course.academic_group }}
         <br>
@@ -39,7 +42,10 @@
         {{ course.units_maximum }} Units
       </strong>
     </div>
-    <div class="col-md-2">
+    <div
+      class="col-md-2"
+      @click="selectCourse(course)"
+    >
       Component: <strong>{{ course.component }}</strong>
       <br>
       Grading Basis:
@@ -53,7 +59,10 @@
         </strong>
       </span>
     </div>
-    <div class="col-md-5">
+    <div
+      class="col-md-5"
+      @click="selectCourse(course)"
+    >
       <h5>{{ course.title }}</h5>
       <truncate
         class="course_description"
@@ -71,6 +80,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 import truncate from 'vue-truncate-collapsed'
@@ -93,6 +103,9 @@ export default {
         'border-left-color': this.course.department_color || '#000'
       }
     }
+  },
+  methods: {
+    ...mapActions('user', ['selectCourse'])
   }
 }
 </script>
