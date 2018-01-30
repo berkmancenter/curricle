@@ -1,14 +1,22 @@
 <template >
   <div class="course-details">
     <div class="header mx-0">
-      <p class="pull-left">
+      <p class="pull-left mb-0">
         <strong>{{ course.academic_group }}</strong><br>
+      </p>
+      <p class="pull-right text-right mb-0">
+        Component: <strong>{{ course.component || '&mdash;' }}</strong><br>
+      </p>
+      <p class="pull-left mb-0">
         <strong>{{ `${course.subject} ${course.catalog_number}` }}</strong><br>
+      </p>
+      <p class="pull-right text-right mb-0">
+        Grading basis: <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
+      </p>
+      <p class="pull-left mb-0">
         <strong>{{ `${course.term_name} ${course.term_year}` }}</strong>
       </p>
-      <p class="pull-right text-right">
-        Component: <strong>{{ course.component || '&mdash;' }}</strong><br>
-        Grading basis: <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
+      <p class="pull-right text-right mb-0">
         Instructor: <strong>{{ firstInstructor || '&mdash;' }}</strong>
       </p>
     </div>
@@ -67,7 +75,16 @@ export default {
     .header {
       display: inline-block;
       line-height: 16px;
+      margin-bottom: 20px;
       width: 100%;
+
+      p.pull-left {
+        clear: left;
+      }
+
+      p.pull-right {
+        clear: right;
+      }
     }
 
     h3.course-title {
