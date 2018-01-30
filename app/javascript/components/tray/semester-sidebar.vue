@@ -10,8 +10,15 @@
       v-for="day in days"
       :key="day">
       <strong>{{ day }}</strong>
+      <div
+        v-if="coursesByDay[day] && coursesByDay[day].length"
+        v-text="isEditing[day] ? 'Done' : 'Edit'"
+        @click="toggleEditDay(day)"
+        class="pull-right"
+      />
       <course-list
-        :courses="coursesByDay[day] || [] "
+        :courses="coursesByDay[day] || []"
+        :editable="isEditing[day]"
       />
     </div>
   </div>
@@ -28,7 +35,8 @@ export default {
   },
   data () {
     return {
-      semester: ''
+      semester: '',
+      isEditing: {}
     }
   },
   computed: {
@@ -58,6 +66,13 @@ export default {
   },
   mounted () {
     this.semester = this.sortedSemestersInSchedule && this.sortedSemestersInSchedule[0]
+    _.each(this.days, d => { this.$set(this.isEditing, d, false) })
+  },
+  methods: {
+    toggleEditDay (day) {
+      console.log('toggleEditDay', day, this.isEditing)
+      this.isEditing[day] = !this.isEditing[day]
+    }
   }
 }
 </script>
