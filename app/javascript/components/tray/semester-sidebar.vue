@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar-sidebar">
+  <div class="semester-sidebar">
     <select v-model="semester">
       <option
         v-for="sem in sortedSemestersInSchedule"
