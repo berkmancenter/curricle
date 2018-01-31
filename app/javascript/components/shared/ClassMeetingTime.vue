@@ -102,6 +102,13 @@ export default {
   },
   computed: {
     /* turns the input params into the more sensible data structure for use by this component */
+    days () {
+      // handling only the 'simple' schedule type; add logic for split schedules and the like here
+      if (this.schedule.type === 'simple') {
+        return this.schedule.data
+      }
+      return []
+    },
     week () {
       var abbrev = this.condensed ? ['M', 'Tu', 'W', 'Th', 'F'] : ['M', 'T', 'W', 'T', 'F']
 
@@ -113,8 +120,8 @@ export default {
 
           return {
             abbrev: ab,
-            timePretty: hasTime ? timeFormat(day[2], day[3]) : '',
-            timeBar: hasTime ? [day[2], day[3]] : undefined
+            timePretty: hasTime ? _.map(day, mtg => timeFormat(mtg[0], mtg[1])).join(',') : '',
+            timeBar: day
           }
         }
       )
