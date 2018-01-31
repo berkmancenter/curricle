@@ -21,7 +21,7 @@
         </b-row>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row v-if="hasCourses">
       <b-col>
         <b-row>
           <b-col class="header">
@@ -85,6 +85,13 @@ export default {
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
     courses () {
       return _.filter(this.scheduledCourses, { semester: this.semester })
+    },
+    hasCourses () {
+      return this.coursesByMeetingTime &&
+        _.find(
+          _.pick(this.coursesByMeetingTime, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
+          list => list && list.length > 1
+        )
     },
     currentScheduleByDay () {
       return [
