@@ -31,11 +31,11 @@
         <b-row>
           <calendar-item
             v-for="item in currentScheduleByDay[index]"
-            :item="item"
-            :key="item.course_id"
+            :item="item.course"
+            :key="item.course.id"
             :scale="scale"
-            :offset="item.day[2] - earliestIdx"
-            :height="item.day[3]"
+            :offset="item.meetingTime[0] - earliestIdx"
+            :height="item.meetingTime[1]"
           />
         </b-row>
       </b-col>
@@ -46,6 +46,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
+import { partitionCoursesByMeetingTime } from 'lib/util'
 
 import CalendarItem from 'components/plan/calendar-item'
 
@@ -60,32 +61,46 @@ export default {
   },
   computed: {
     ...mapState('plan', ['semester']),
-    ...mapGetters('plan', ['sortedSemestersInSchedule', 'currentScheduleByDay']),
+    ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
+    courses () {
+      return _.filter(this.scheduledCourses, { semester: this.semester })
+    },
+    currentScheduleByDay () {
+      return [
+        this.coursesByMeetingTime.Monday,
+        this.coursesByMeetingTime.Tuesday,
+        this.coursesByMeetingTime.Wednesday,
+        this.coursesByMeetingTime.Thursday,
+        this.coursesByMeetingTime.Friday
+      ]
+    },
+    coursesTBD () {
+      return this.coursesByMeetingTime.TBD
+    },
+    coursesByMeetingTime () {
+      return partitionCoursesByMeetingTime(this.courses)
+    },
     earliestIdx () {
-      var earliest = 24
-      _.each(
-        _.flatMap(
-          _.filter(
-            this.currentScheduleByDay,
-            a => a !== undefined
+      return Math.floor(Math.min(
+        24,
+        ..._.map(
+          this.currentScheduleByDay,
+          days => Math.min(
+            ..._.map(days, day => day.meetingTime[0])
           )
-        ),
-        k => { earliest = Math.min(earliest, k.day[2]) }
-      )
-      return Math.floor(earliest)
+        )
+      ))
     },
     latestIdx () {
-      var latest = 0
-      _.each(
-        _.flatMap(
-          _.filter(
-            this.currentScheduleByDay,
-            a => a !== undefined
+      return Math.ceil(1 + Math.max(
+        0,
+        ..._.map(
+          this.currentScheduleByDay,
+          days => Math.max(
+            ..._.map(days, day => day.meetingTime[0] + day.meetingTime[1])
           )
-        ),
-        k => { latest = Math.max(latest, k.day[2] + k.day[3]) }
-      )
-      return Math.ceil(latest + 1)
+        )
+      ))
     },
     times () {
       return ['1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
@@ -101,7 +116,9 @@ export default {
     }
   },
   mounted () {
-    this.setSemester(this.sortedSemestersInSchedule[0])
+    if (this.sortedSemestersInSchedule && !this.sortedSemestersInSchedule.includes(this.semester)) {
+      this.setSemester(this.sortedSemestersInSchedule[0])
+    }
   },
   methods: {
     ...mapActions('plan', ['setSemester'])
