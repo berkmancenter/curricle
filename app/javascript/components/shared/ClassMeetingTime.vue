@@ -76,16 +76,13 @@ function prettyTime (time) {
 
 function timeFormat (start, duration) {
   // this will turn things prettier, like "3pm - 4pm"
-
-  // for now, just pass-thru
-
   return prettyTime(start) + '-' + prettyTime(start + duration)
 }
 
 export default {
   props: {
-    days: {
-      type: Array,
+    schedule: {
+      type: Object,
       required: true
     },
     conflicts: {

@@ -149,7 +149,7 @@ const actions = {
         response.data.courses,
         c => {
           var o = _.clone(c)
-          o.days = transformSchedule(o)
+          o.schedule = transformSchedule(o)
           o.semester = o.term_name + ' ' + o.term_year
 
           // TODO: Get from data; random for now

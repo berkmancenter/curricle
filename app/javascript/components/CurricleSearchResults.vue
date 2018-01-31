@@ -74,7 +74,7 @@
         v-if="course.course_description_long"/>
     </div>
     <div class="col-md-2 px-0">
-      <class-meeting-time :days="course.days" />
+      <class-meeting-time :schedule="course.schedule" />
     </div>
   </div>
 </template>

@@ -23,7 +23,7 @@
           </td>
           <td>
             <class-meeting-time
-              :days="course.days"
+              :schedule="course.schedule"
               :condensed="true"
             />
           </td>
