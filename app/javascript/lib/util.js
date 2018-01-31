@@ -92,7 +92,7 @@ function partitionCoursesByMeetingTime (courses) {
 
         if (course.schedule && course.schedule.type === 'simple') {
           results.push(
-            _.map(
+            ..._.map( // spread required to unpack and not push the whole array
               course.schedule.data[idx],
               meetingTime => {
                 return {
