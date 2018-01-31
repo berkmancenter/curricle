@@ -167,17 +167,4 @@ class CoursesController < ApplicationController
     }
     render json: user_courses
   end
-
-  # private
-
-  # # remove course from current user's tray
-  # def remove_from_tray
-  #   course = Course.find(params["id"])
-
-  #   if (user_course = UserCourse.find_by(user_id: current_user.id, course_id: course.id))
-  #     user_course.destroy
-  #   end
-
-  #   render json: user_course
-  # end
 end
