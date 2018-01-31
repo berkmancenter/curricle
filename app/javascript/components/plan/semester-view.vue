@@ -4,7 +4,7 @@
       <b-col style="height: 150px;">
         <b-row>
           <b-col class="md-1">
-            <strong>Schedule TDB:</strong>
+            <strong>Schedule TBD:</strong>
           </b-col>
         </b-row>
         <b-row>
