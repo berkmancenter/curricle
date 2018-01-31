@@ -202,6 +202,72 @@ function sortedSemesters (sems) {
 }
 
 export { sortedSemesters }
+
+/* This routine returns an opaque (to the caller) descriptor of
+ * courses in the schedule, to be passed into further calls to
+ * courseConflictsWithSchedule().  Intended to minimize the
+ * recalculations inherent in any sort of repeated checks on things
+ * like the existing schedule or search results, etc.  */
+
+function scheduleMakeDescriptor (courses) {
+  var obj = _.partition(
+    _.deepClone(
+      _.map(
+        _.filter(courses, c => c && c.id && c.schedule && c.schedule.type === 'simple'), // basic sanity check
+        c => {
+          return {
+            cid: c.id,
+            sch: c.schedule
+          }
+        }
+      )
+    ),
+    'semester'
+  )
+
+  /* some more post-processing things here, expanding out non-simple
+   * schedules, etc; for now, make a flag that indicates if all
+   * courses are simple (they should be for now).  Since semester is
+   * required, we're effectively partitioning and handling everything
+   * in a semester-by-semester basis. */
+
+  return _.mapValues(obj, _scheduleProcessOneSemester)
+}
+
+export { scheduleMakeDescriptor }
+
+/* This internal routine will process a single semester, aggregating
+ * all clist entries into a single list of lists per day.  We will
+ * merge overlapping ranges (i.e., no checking) so there is the
+ * minimum number of ranges per type, leaving a single array per day,
+ * each made up of zero or more time entries.  In the future, we will
+ * need to teach this routine about how to handle split schedules, but
+ * for now we just assume they are simple.
+ */
+
+function _scheduleProcessOneSemester (clist) {
+  return clist
+}
+
+/* (internal-only: no export) */
+
+/* This routine return true if the given course would conflict with
+ * the specific schedule descriptor.  We take a number of short-paths
+ * here, so this is intended to be as fast as is reasonable possible.
+ * In cases which are provably true or false we return as quickly as
+ * possible.  This routine cannot and should not modify the "schedule"
+ * object. */
+
+function courseConflictsWithSchedule (course, schedule) {
+  // short path 1: no conflicts if course's semester does not exist in
+  // the schedule or if course is TBD
+  if (!schedule[course.semester] || !courseCanSchedule(course)) {
+    return false
+  }
+}
+
+export { courseConflictsWithSchedule }
+
 /* routine to consolidate checks for whether the give course can be scheduled */
 
 function courseCanSchedule (course) {
