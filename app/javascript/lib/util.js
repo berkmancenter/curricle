@@ -26,7 +26,7 @@ function partitionCoursesByDay (courses) {
   }
 
   _.each(courses, c => {
-    if (c.schedule && c.schedule.type === 'simple' && c.schedule.data.length) {
+    if (courseCanSchedule(c)) {
       _.each(c.schedule.data, (dat, idx) => {
         /* logic here is to add the course the corresponding day index
          * if it contains valid data, specifically one or more courses
@@ -202,3 +202,11 @@ function sortedSemesters (sems) {
 }
 
 export { sortedSemesters }
+/* routine to consolidate checks for whether the give course can be scheduled */
+
+function courseCanSchedule (course) {
+  return course && course.schedule && course.schedule.type === 'simple' &&
+    course.schedule.data && course.schedule.data.length
+}
+
+export { courseCanSchedule }
