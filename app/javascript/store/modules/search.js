@@ -4,57 +4,7 @@ import _ from 'lodash'
 import apolloClient from 'api'
 import gql from 'graphql-tag'
 
-function calcDuration (start, end) {
-  if (!(start && end)) {
-    return 0
-  }
-  var startPart = start.split(':')
-  var endPart = end.split(':')
-
-  var hours = endPart[0] - startPart[0]
-  var mins = endPart[1] - startPart[1]
-
-  return hours + Math.ceil(mins / 5) / 12
-}
-
-/* transform the core course data into the expected days structure for other times */
-function transformSchedule (c) {
-  if (c && c.course_meeting_patterns && c.course_meeting_patterns.length) {
-    // We are currently only pulling the first non-null records here.
-    // We will need to revisit this to support different meeting times on
-    // different days
-
-    var m = _.find(c.course_meeting_patterns, p => p.meeting_time_start_tod)
-
-    if (!m) {
-      return []
-    }
-
-    // NOTE: this structure is currently shared; might need to make clones of this in
-    // the future, but is conceptually read-only data should be fine
-    // for now.
-
-    var courseMeetingInfo = [
-      m.meeting_time_start_tod,
-      m.meeting_time_end_tod,
-      calcDuration('0:00', m.meeting_time_start_tod),
-      calcDuration(m.meeting_time_start_tod, m.meeting_time_end_tod)
-    ]
-
-    return [
-      m.meets_on_monday ? courseMeetingInfo : undefined,
-      m.meets_on_tuesday ? courseMeetingInfo : undefined,
-      m.meets_on_wednesday ? courseMeetingInfo : undefined,
-      m.meets_on_thursday ? courseMeetingInfo : undefined,
-      m.meets_on_friday ? courseMeetingInfo : undefined,
-      m.meets_on_saturday ? courseMeetingInfo : undefined,
-      m.meets_on_sunday ? courseMeetingInfo : undefined
-    ]
-  } else {
-    // return empty array for no scheduled day/times
-    return []
-  }
-}
+import { transformSchedule } from 'lib/util'
 
 const thisYear = (new Date()).getUTCFullYear()
 
