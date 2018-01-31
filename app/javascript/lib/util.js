@@ -46,6 +46,70 @@ function partitionCoursesByDay (courses) {
 
 export { partitionCoursesByDay }
 
+/* Similar to partitionCoursesByDay, partitionCoursesByMeetingTime
+ * returns a structure of partitioned data, however there is
+ * additional context here for the use in the actual calendar meeting
+ * time; each individual meeting event appears in conjunction with its
+ * time and duration at a top level, with the course object referenced
+ * as a sub-object.
+ *
+ * Object data structures are intentionally shared.
+ *
+ * Example return value, given an input course with one meeting time on Monday
+ * { Monday: [[start: 8, duration: 1.5, course: {...}], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], TBD: [] }
+ */
+
+function partitionCoursesByMeetingTime (courses) {
+  // we leave TBD alone as a straight array of courses; the others we
+  // need to invert for all of the meeting times
+  const dayIdx = { Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4 }
+
+  return _.mapValues(
+    partitionCoursesByDay(courses),
+    (dayCourses, key) => {
+      if (key === 'TBD') {
+        return dayCourses
+      }
+
+      var idx = dayIdx[key]
+
+      if (_.isUndefined(idx)) {
+        console.error('got unmapped key index as input', key)
+        return dayCourses
+      }
+
+      var results = []
+
+      _.each(dayCourses, course => {
+        /* We are only implementing for simple schedules; this will
+         * need to be taught about split schedules.  There should be
+         * no cases of this since our data source already sticks these
+         * into TBD category, but check anyway.  We also get to assume
+         * that since this course appears in the day list then there
+         * are already events on this day, so no duplicated checks
+         * here.
+         */
+
+        if (course.schedule && course.schedule.type === 'simple') {
+          results.push(
+            _.map(
+              course.schedule.data[idx],
+              meetingTime => {
+                return {
+                  meetingTime,
+                  course
+                }
+              }
+            )
+          )
+        }
+      })
+      return results
+    })
+}
+
+export { partitionCoursesByMeetingTime }
+
 /** ********          Schedule-specific functions          **********/
 
 function calcDuration (start, end) {
