@@ -28,6 +28,7 @@
 import { mapState, mapGetters } from 'vuex'
 import CourseList from 'components/shared/course-list'
 import _ from 'lodash'
+import { partitionCoursesByDay } from 'lib/util'
 
 export default {
   components: {
@@ -44,21 +45,11 @@ export default {
     ...mapGetters('plan', ['scheduledCoursesBySemester', 'trayCoursesBySemester', 'sortedSemestersInSchedule']),
     coursesByDay () {
       var courses = this.scheduledCoursesBySemester[this.semester] || []
-      var myDays = {}
-
-      _.each(this.days, (day, idx) => {
-        myDays[day] = _.filter(courses, c => c.days[idx] && c.days[idx].length)
-      })
-      return myDays
+      return partitionCoursesByDay(courses)
     },
     trayCoursesByDay () {
       var courses = this.trayCoursesBySemester[this.semester] || []
-      var myDays = {}
-
-      _.each(this.days, (day, idx) => {
-        myDays[day] = _.filter(courses, c => c.days[idx] && c.days[idx].length)
-      })
-      return myDays
+      return partitionCoursesByDay(courses)
     },
     days: () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
   },
