@@ -45,27 +45,6 @@ const getters = {
   },
   sortedSemestersInTray (state, getters) {
     return sortedSemesters(getters.semestersInTray)
-  },
-  currentSchedule (state, getters) {
-    return getters.scheduledCoursesBySemester[state.semester] || []
-  },
-  currentScheduleByDay (state, getters) {
-    var days = []
-    _.each(getters.currentSchedule, course => {
-      var courseCopy = _.clone(course)
-      delete courseCopy.days
-      course.days.forEach((d, i) => {
-        if (d) {
-          var obj = _.clone(courseCopy)
-          obj.day = d
-          if (!days[i]) {
-            days[i] = []
-          }
-          days[i].push(obj)
-        }
-      })
-    })
-    return days
   }
 }
 
