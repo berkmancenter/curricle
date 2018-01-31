@@ -110,8 +110,8 @@ function partitionCoursesByMeetingTime (courses) {
 
 export { partitionCoursesByMeetingTime }
 
-/** ********          Schedule-specific functions          **********/
-
+/* calculate duration given two strings of relative times, i.e.,
+ * '8:00' and '10:00'.  Rounds up to the nearest 5 minutes */
 function calcDuration (start, end) {
   if (!(start && end)) {
     return 0
@@ -122,6 +122,7 @@ function calcDuration (start, end) {
   var hours = endPart[0] - startPart[0]
   var mins = endPart[1] - startPart[1]
 
+  /* round up to the nearest 5 minutes */
   return hours + Math.ceil(mins / 5) / 12
 }
 
