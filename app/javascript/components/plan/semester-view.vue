@@ -1,5 +1,26 @@
 <template>
   <div>
+    <b-row v-if="coursesTBD && coursesTBD.length">
+      <b-col style="height: 150px;">
+        <b-row>
+          <b-col class="md-1">
+            <strong>Schedule TDB:</strong>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col
+            v-for="course in coursesTBD"
+            :key="course.id">
+            <calendar-item
+              :item="course"
+              :scale="scale"
+              :offset="0"
+              :height="1"
+            />
+          </b-col>
+        </b-row>
+      </b-col>
+    </b-row>
     <b-row>
       <b-col>
         <b-row>
