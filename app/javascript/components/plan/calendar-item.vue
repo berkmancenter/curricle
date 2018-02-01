@@ -1,6 +1,6 @@
 <template>
   <div
-    class="calendar-item"
+    :class="{'calendar-item': true, provisional }"
     :style="computedStyle"
     @click="selectCourse(item.id)">
     <strong>{{ item.external_course_id }}</strong>
@@ -24,6 +24,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    provisional: {
+      type: Boolean,
+      default: false
     },
     scale: {
       type: Number,
@@ -71,6 +75,11 @@ export default {
 }
 
 .calendar-item:hover {
-    background-color: gray;
+  background-color: gray;
+}
+
+.calendar-item.provisional {
+  opacity: 0.5;
+  z-index: 5;
 }
 </style>
