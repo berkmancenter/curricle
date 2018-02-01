@@ -6,7 +6,7 @@
         <tr
           v-for="course in courses"
           :key="course.id"
-          @mouseover="addProvisionalCourse(course)"
+          @mouseenter="addProvisionalCourse(course)"
           @mouseleave="removeProvisionalCourse(course)"
         >
           <td>{{ course.external_course_id }}</td>
