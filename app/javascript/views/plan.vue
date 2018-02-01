@@ -8,24 +8,24 @@
             type="plan"
           />
           <department-selector
-            v-if="viewmode.plan == 'list-view'"
+            v-show="viewmode.plan == 'list-view'"
           />
           <semester-selector
-            v-if="viewmode.plan !== 'multi-year'"
+            v-show="viewmode.plan !== 'multi-year'"
             :mode="viewmode.plan == 'list-view' ? 'filter' : 'state'"
             :source="viewmode.plan == 'list-view' ? 'tray' : 'schedule'"
           />
         </div>
         <div>
-          <plan-list-view v-if="viewmode.plan === 'list-view'"/>
-          <plan-semester-view v-if="viewmode.plan === 'semester'"/>
-          <plan-year-view v-if="viewmode.plan === 'multi-year'"/>
+          <plan-list-view v-show="viewmode.plan === 'list-view'"/>
+          <plan-semester-view v-show="viewmode.plan === 'semester'"/>
+          <plan-year-view v-show="viewmode.plan === 'multi-year'"/>
         </div>
       </div>
     </div>
     <div class="col-md-3 top-header">
-      <tray v-if="trayVisible"/>
-      <selected-course v-if="validCourseSelected"/>
+      <tray v-show="trayVisible"/>
+      <selected-course v-show="validCourseSelected"/>
     </div>
   </div>
 </template>

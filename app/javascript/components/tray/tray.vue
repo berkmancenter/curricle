@@ -15,13 +15,13 @@
     </div>
     <div class="row mx-0">
       <semester-sidebar
-        v-if="viewmode.tray=='semester'"
+        v-show="viewmode.tray=='semester'"
       />
       <multi-year-sidebar
-        v-if="viewmode.tray=='multi-year'"
+        v-show="viewmode.tray=='multi-year'"
       />
       <course-list
-        v-if="viewmode.tray=='list-view'"
+        v-show="viewmode.tray=='list-view'"
         :courses="trayCourses"
       />
     </div>

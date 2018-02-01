@@ -19,7 +19,7 @@
               less="Show Less"
               type="html"
               :text="course.course_description_long"
-              v-if="course.course_description_long"/>
+              v-show="course.course_description_long"/>
           </td>
           <td>
             <class-meeting-time

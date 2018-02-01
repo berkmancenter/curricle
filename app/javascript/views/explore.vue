@@ -15,8 +15,8 @@
       </b-jumbotron>
     </div>
     <div class="col-md-3 top-header">
-      <tray v-if="trayVisible" />
-      <selected-course v-if="validCourseSelected" />
+      <tray v-show="trayVisible" />
+      <selected-course v-show="validCourseSelected" />
     </div>
   </div>
 </template>

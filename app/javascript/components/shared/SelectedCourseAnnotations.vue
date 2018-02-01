@@ -4,7 +4,7 @@
       <p class="annotations-up-arrow">
         <i
           class="fa fa-caret-up"
-          v-if="!isExpand"
+          v-show="!isExpand"
           @click="expand()"/>
       </p>
       <p>
@@ -14,7 +14,7 @@
         <b>Annotations</b>
       </p>
     </div>
-    <div v-if="isExpand">
+    <div v-show="isExpand">
       <div
         v-if="!editableAnnotation"
         style="word-wrap: break-word;">
@@ -43,7 +43,7 @@
       <p class="annotations-down-arrow text-center">
         <i
           class="fa fa-caret-down"
-          v-if="isExpand"
+          v-show="isExpand"
           @click="expand()"/>
       </p>
     </div>

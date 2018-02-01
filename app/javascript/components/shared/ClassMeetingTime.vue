@@ -6,7 +6,7 @@
       class="tr"
       v-for="(day,index) in week"
       :key="index"
-      v-if="!condensed || day.timeBar"
+      v-show="!condensed || day.timeBar"
     >
       <div class="td">
         {{ day.timePretty }}

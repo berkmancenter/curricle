@@ -71,7 +71,7 @@
         less="Show Less"
         type="html"
         :text="course.course_description_long"
-        v-if="course.course_description_long"/>
+        v-show="course.course_description_long"/>
     </div>
     <div class="col-md-2 px-0">
       <class-meeting-time :schedule="course.schedule" />

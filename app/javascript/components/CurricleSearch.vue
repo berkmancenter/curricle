@@ -1,5 +1,5 @@
 <template>
-  <div v-if="keywords && searchComplete">
+  <div v-show="keywords && searchComplete">
     <strong>{{ results.length }} Results</strong>
     <div class="results-container">
       <curricle-search-results

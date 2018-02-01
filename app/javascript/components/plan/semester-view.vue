@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row v-if="coursesTBD && coursesTBD.length">
+    <b-row v-show="coursesTBD && coursesTBD.length">
       <b-col style="height: 150px;">
         <b-row>
           <b-col class="md-1">
@@ -22,7 +22,7 @@
         </b-row>
       </b-col>
     </b-row>
-    <b-row v-if="hasCourses">
+    <b-row v-show="hasCourses">
       <b-col>
         <b-row>
           <b-col class="header">

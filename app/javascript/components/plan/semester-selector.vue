@@ -5,7 +5,7 @@
   >
     <b-dropdown-item
       @click="setSemester(null)"
-      v-if="mode !== 'state'">
+      v-show="mode !== 'state'">
       All Semesters
     </b-dropdown-item>
     <b-dropdown-item

@@ -2,7 +2,7 @@
   <b-dropdown
     text="Spring 2018"
     class="m-md-2"
-    v-if="name === 'Semester'">
+    v-show="name === 'Semester'">
     <b-dropdown-item>Spring 2018</b-dropdown-item>
   </b-dropdown>
   <b-dropdown

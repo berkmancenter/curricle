@@ -24,7 +24,7 @@
       icon="times"
       @click="closeClick"/>
     <b-popover
-      v-if="keyword.active"
+      v-show="keyword.active"
       :target="kwId"
       triggers="click blur"
       placement="bottom">
