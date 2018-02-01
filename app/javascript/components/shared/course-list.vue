@@ -59,7 +59,6 @@ export default {
 <style>
 .course-list-iltem tbody tr {
     margin-bottom: 5px;
-    display: table;
     width: 100%;
     vertical-align: middle;
     background: #DCDCDC;
