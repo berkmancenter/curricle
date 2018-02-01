@@ -65,18 +65,22 @@ export default {
 <style>
 .calendar-item {
   position: absolute;
-  background-color: lightgray;
+  background-color: #DCDCDC;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-left: .5em;
   padding-right: .5em;
   font-size: 12px;
   width: 90%;
+  border-radius: 5px;
+  border: 1px solid rgba(0,0,0,0.3);
+  background-clip: padding-box;
 }
 
 .calendar-item:hover {
-  background-color: gray;
+  background-color: #C0C0C0;
   z-index: 10;
+  box-shadow: 0 0 15px black;
 }
 
 .calendar-item.provisional {
