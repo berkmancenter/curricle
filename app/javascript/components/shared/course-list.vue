@@ -6,6 +6,8 @@
         <tr
           v-for="course in courses"
           :key="course.id"
+          @mouseover="addProvisionalCourse(course)"
+          @mouseleave="removeProvisionalCourse(course)"
         >
           <td>{{ course.external_course_id }}</td>
           <td @click="!editable && selectCourse(course)">{{ course.title }}</td>
@@ -46,6 +48,7 @@ export default {
   },
   methods: {
     ...mapActions('user', ['selectCourse']),
+    ...mapActions('plan', ['addProvisionalCourse', 'removeProvisionalCourse']),
     calcStyle (course) {
       return 'border-right: 5px solid ' + (course.department_color || '#000')
     }
