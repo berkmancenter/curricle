@@ -71,6 +71,8 @@ import { partitionCoursesByMeetingTime } from 'lib/util'
 
 import CalendarItem from 'components/plan/calendar-item'
 
+const daylist = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
 export default {
   components: {
     CalendarItem
@@ -89,18 +91,12 @@ export default {
     hasCourses () {
       return this.coursesByMeetingTime &&
         _.find(
-          _.pick(this.coursesByMeetingTime, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
+          _.at(this.coursesByMeetingTime, daylist),
           list => list && list.length > 1
         )
     },
     currentScheduleByDay () {
-      return [
-        this.coursesByMeetingTime.Monday,
-        this.coursesByMeetingTime.Tuesday,
-        this.coursesByMeetingTime.Wednesday,
-        this.coursesByMeetingTime.Thursday,
-        this.coursesByMeetingTime.Friday
-      ]
+      return _.at(this.coursesByMeetingTime, daylist)
     },
     coursesTBD () {
       return this.coursesByMeetingTime.TBD
