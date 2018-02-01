@@ -110,7 +110,7 @@ export default {
         ..._.map(
           this.currentScheduleByDay,
           days => Math.min(
-            ..._.map(days, day => day.meetingTime[0])
+            ..._.map(days, 'meetingTime[0]')
           )
         )
       ))
