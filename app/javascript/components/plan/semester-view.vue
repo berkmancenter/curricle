@@ -16,6 +16,7 @@
               :scale="scale"
               :offset="0"
               :height="1"
+              :provisional="provisionalCourseIds.includes(course.id)"
             />
           </b-col>
         </b-row>
@@ -57,6 +58,7 @@
             :scale="scale"
             :offset="item.meetingTime[0] - earliestIdx"
             :height="item.meetingTime[1]"
+            :provisional="provisionalCourseIds.includes(item.course.id)"
           />
         </b-row>
       </b-col>
@@ -83,10 +85,16 @@ export default {
     }
   },
   computed: {
-    ...mapState('plan', ['semester']),
+    ...mapState('plan', ['semester', 'provisionalCourses']),
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
     courses () {
-      return _.filter(this.scheduledCourses, { semester: this.semester })
+      return _.uniqBy(
+        _.filter(
+          _.concat(this.scheduledCourses, _.values(this.provisionalCourses)),
+          { semester: this.semester }
+        ),
+        'id'
+      )
     },
     hasCourses () {
       return this.coursesByMeetingTime &&
@@ -130,6 +138,13 @@ export default {
       return ['1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
         '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm', '12am' ]
         .slice(this.earliestIdx, this.latestIdx)
+    },
+    provisionalCourseIds () {
+      /* exclude ids in case there are already scheduled ones */
+      return _.without(
+        _.keys(this.provisionalCourses),
+        _.map(this.scheduledCourses, 'id')
+      )
     }
   },
   watch: {
