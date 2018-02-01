@@ -3,16 +3,17 @@
     :class="{'calendar-item': true, provisional }"
     :style="computedStyle"
     @click="selectCourse(item.id)">
-    <strong>{{ item.external_course_id }}</strong>
-    <br>
-    {{ item.title }}
-    <p>
+    <span :style="{ height: scale * height }">
+      <strong>{{ item.external_course_id }}</strong>
+      <br>
+      {{ item.title }}
+      <br>
       <strong>
         {{ item.academic_group }}
         <br>
         {{ item.subject }} {{ item.catalog_number }}
       </strong>
-    </p>
+    </span>
   </div>
 </template>
 
@@ -81,6 +82,7 @@ export default {
   background-color: #C0C0C0;
   z-index: 10;
   box-shadow: 0 0 15px black;
+  height: auto !important;
 }
 
 .calendar-item.provisional {
