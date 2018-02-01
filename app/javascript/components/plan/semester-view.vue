@@ -17,6 +17,7 @@
               :offset="0"
               :height="1"
               :provisional="provisionalCourseIds.includes(course.id)"
+              :selected="currentCourse && currentCourse.id == course.id"
             />
           </b-col>
         </b-row>
@@ -59,6 +60,7 @@
             :offset="item.meetingTime[0] - earliestIdx"
             :height="item.meetingTime[1]"
             :provisional="provisionalCourseIds.includes(item.course.id)"
+            :selected="currentCourse && currentCourse.id == item.course.id"
           />
         </b-row>
       </b-col>
@@ -80,6 +82,7 @@ export default {
     CalendarItem
   },
   computed: {
+    ...mapState('user', ['currentCourse']),
     ...mapState('plan', ['semester', 'provisionalCourses']),
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
     courses () {

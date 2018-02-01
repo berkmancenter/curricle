@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{'calendar-item': true, provisional }"
+    :class="{'calendar-item': true, provisional, selected }"
     :style="computedStyle"
     @click="selectCourse(item.id)">
     <strong>{{ item.external_course_id }}</strong>
@@ -25,6 +25,10 @@ export default {
       required: true
     },
     provisional: {
+      type: Boolean,
+      default: false
+    },
+    selected: {
       type: Boolean,
       default: false
     },
@@ -87,6 +91,15 @@ export default {
   z-index: 10;
   box-shadow: 0 0 15px black;
   height: auto;
+}
+
+.calendar-item.selected {
+  background-color: #f5f7de;
+  box-shadow: 0 0 15px #4f6477;
+}
+
+.calendar-item.selected:hover {
+  background-color: #b0b29e;
 }
 
 .calendar-item.provisional {
