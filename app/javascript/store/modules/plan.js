@@ -10,7 +10,8 @@ const state = {
   filterFieldMap: {
     department: 'academic_group_description',
     semester: 'semester'
-  }
+  },
+  provisionalCourses: {}
 }
 
 const getters = {
@@ -54,6 +55,12 @@ const actions = {
   },
   setSemester ({commit}, semester) {
     commit('SET_SEMESTER', semester)
+  },
+  addProvisionalCourse ({commit}, course) {
+    commit('ADD_PROVISIONAL_COURSE', course)
+  },
+  removeProvisionalCourse ({commit}, course) {
+    commit('DEL_PROVISIONAL_COURSE', course)
   }
 }
 
@@ -67,6 +74,16 @@ const mutations = {
   },
   SET_SEMESTER (state, semester) {
     state.semester = semester
+  },
+  ADD_PROVISIONAL_COURSE (state, course) {
+    if (course && course.id) {
+      Vue.set(state.provisionalCourses, course.id, course)
+    }
+  },
+  DEL_PROVISIONAL_COURSE (state, course) {
+    if (course && course.id) {
+      Vue.delete(state.provisionalCourses, course.id)
+    }
   }
 }
 
