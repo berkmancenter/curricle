@@ -79,11 +79,6 @@ export default {
   components: {
     CalendarItem
   },
-  data () {
-    return {
-      scale: 80
-    }
-  },
   computed: {
     ...mapState('plan', ['semester', 'provisionalCourses']),
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
@@ -95,6 +90,9 @@ export default {
         ),
         'id'
       )
+    },
+    scale () {
+      return (this.latestIdx - this.earliestIdx) > 7 ? 50 : 80
     },
     hasCourses () {
       return this.coursesByMeetingTime &&
