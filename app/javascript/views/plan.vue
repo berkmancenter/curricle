@@ -32,7 +32,6 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import axios from 'axios'
 
 import PlanListView from 'components/plan/list-view'
 import PlanYearView from 'components/plan/multi-year-view'
@@ -54,31 +53,14 @@ export default {
     Tray,
     ViewSelector
   },
-  data () {
-    return {
-      categories: []
-    }
-  },
   computed: {
     ...mapState('app', ['trayVisible', 'viewmode']),
     ...mapGetters('user', ['validCourseSelected'])
-  },
-  mounted () {
-    axios.get('/courses/categories').then((response) => {
-      this.categories = [response.data[0]]
-    })
   }
 }
 </script>
 
 <style type="text/css">
-  .plan .list-group-item, .calendar-sidebar .list-group-item{
-    background: #E4E4E4;
-    margin-bottom: 4px;
-  }
-  .plan .list-group-item:hover, .calendar-sidebar .list-group-item:hover{
-    background: gray;
-  }
   .actions i{
     font-size: 20px;
     padding-right: 15px;
