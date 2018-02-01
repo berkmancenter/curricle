@@ -76,6 +76,7 @@ export default {
 
 .calendar-item:hover {
   background-color: gray;
+  z-index: 10;
 }
 
 .calendar-item.provisional {
