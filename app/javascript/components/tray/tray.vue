@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="your-tray-parent">
-      <p class="your-tray"> Your Tray
+      <p class="your-tray">Your Tray
         <span
-          class="fa fa-close"
+          class="fa fa-close pull-right"
           @click="hideTray"
         />
       </p>
@@ -51,3 +51,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fa.fa-close {
+  padding-right: 0.5em;
+}
+
+.fa.fa-close:hover {
+  color: gray;
+}
+</style>
