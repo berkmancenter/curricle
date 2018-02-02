@@ -128,6 +128,26 @@ function calcDuration (start, end) {
 
 export { calcDuration }
 
+/* format a float as a pretty time; example: 8.5 for 8:30; only shows minutes if not a whole number */
+function prettyTime (time) {
+  // hours or fraction of hours
+
+  var hours = Math.floor(time)
+  var mins = Math.ceil(60 * (time - hours))
+  var isPm = hours >= 12
+  var ret = hours > 12 ? hours - 12 : hours
+
+  if (mins) {
+    ret += ':' + mins
+  }
+
+  ret += isPm ? 'pm' : 'am'
+
+  return ret
+}
+
+export { prettyTime }
+
 /* transform the core course data into the expected days structure for other times */
 function transformSchedule (c) {
   if (c && c.course_meeting_patterns && c.course_meeting_patterns.length) {

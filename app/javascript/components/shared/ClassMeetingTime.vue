@@ -56,23 +56,7 @@
  */
 
 import _ from 'lodash'
-
-function prettyTime (time) {
-  // hours or fraction of hours
-
-  var hours = Math.floor(time)
-  var mins = 60 * (time - hours)
-  var isPm = hours >= 12
-  var ret = hours > 12 ? hours - 12 : hours
-
-  if (mins) {
-    ret += ':' + mins
-  }
-
-  ret += isPm ? 'pm' : 'am'
-
-  return ret
-}
+import { prettyTime } from 'lib/util'
 
 function timeFormat (start, duration) {
   // this will turn things prettier, like "3pm - 4pm"
