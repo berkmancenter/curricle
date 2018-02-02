@@ -1,7 +1,7 @@
 // Manipulation of search-related data
 
 import _ from 'lodash'
-import apolloClient from 'api'
+import apolloClient from 'apollo'
 import gql from 'graphql-tag'
 
 import { transformSchedule } from 'lib/util'
