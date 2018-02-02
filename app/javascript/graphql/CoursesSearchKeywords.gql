@@ -1,7 +1,0 @@
-#import "./CourseFragment.gql"
-
-query CourseSearch($deluxeKeywords: [DeluxeKeywordInput]) {
-  courses(deluxe_keywords: $deluxeKeywords) {
-    ...Course
-  }
-}

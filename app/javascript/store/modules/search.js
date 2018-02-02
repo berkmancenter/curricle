@@ -2,8 +2,7 @@
 
 import _ from 'lodash'
 import apolloClient from 'apollo'
-import COURSES_SEARCH_IDS_QUERY from '../../graphql/CoursesSearchIds.gql'
-import COURSES_SEARCH_KEYWORDS_QUERY from '../../graphql/CoursesSearchKeywords.gql'
+import COURSES_SEARCH_QUERY from '../../graphql/CoursesSearch.gql'
 
 import { transformSchedule } from 'lib/util'
 
@@ -88,13 +87,10 @@ const actions = {
   },
   runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
     var vars = {}
-    let query = ''
 
     if (ids && ids.length) {
-      query = COURSES_SEARCH_IDS_QUERY
       vars.ids = ids
     } else if (keywords && keywords.length) {
-      query = COURSES_SEARCH_KEYWORDS_QUERY
       vars.deluxeKeywords = keywords
     } else {
       console.error('runSearch: param errors')
@@ -102,7 +98,7 @@ const actions = {
     }
 
     var promise = apolloClient.query({
-      query: query,
+      query: COURSES_SEARCH_QUERY,
       variables: vars
     }).then(response => {
       // standard transforms

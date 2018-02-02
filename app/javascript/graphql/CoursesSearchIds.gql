@@ -1,7 +1,0 @@
-#import "./CourseFragment.gql"
-
-query CourseSearch($ids: [ID!]) {
-  courses(ids: $ids) {
-    ...Course
-  }
-}
