@@ -6,6 +6,7 @@
           v-for="course in filteredCourses"
           :key="course.id"
           @click="selectCourse(course)"
+          :class="{ selected: currentCourse && currentCourse.id == course.id }"
         >
           <td>{{ course.external_course_id }}</td>
           <td style = "width: 12em;">{{ course.course_description }}</td>
@@ -49,7 +50,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 import CourseAction from 'components/shared/course-action'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
@@ -61,6 +62,7 @@ export default {
     ClassMeetingTime
   },
   computed: {
+    ...mapState('user', ['currentCourse']),
     ...mapGetters('plan', ['filteredCourses'])
   },
   methods: {
@@ -100,6 +102,13 @@ export default {
     font-size: 12px;
     cursor: pointer;
   }
+  .course-list-iltem tbody tr.selected {
+    background-color: #f5f7de;
+  }
+  .course-list-iltem tbody tr.selected:hover {
+    background-color: #b0b29e;
+  }
+
   .course-list-iltem tbody tr:hover {
     background: #C0C0C0;
   }

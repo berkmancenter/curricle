@@ -8,6 +8,7 @@
           :key="course.id"
           @mouseenter="addProvisionalCourse(course)"
           @mouseleave="removeProvisionalCourse(course)"
+          :class="{ selected: currentCourse && currentCourse.id == course.id }"
         >
           <td>{{ course.external_course_id }}</td>
           <td @click="!editable && selectCourse(course)">{{ course.title }}</td>
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 
 export default {
@@ -45,6 +46,9 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  computed: {
+    ...mapState('user', ['currentCourse'])
   },
   methods: {
     ...mapActions('user', ['selectCourse']),
