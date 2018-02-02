@@ -12,13 +12,15 @@
         {{ day.timePretty }}
       </div>
       <div
-        class="td"
-        :style="{ active: day.timeBar }"
+        :class="{ td: true, inactive: !(day.timeBar && day.timeBar.length) }"
       >
         {{ day.abbrev }}
       </div>
-      <div class="td">
-        (timebar)
+      <div class="td vertical-center">
+        <time-bar
+          v-if="day.timeBar && day.timeBar.length"
+          :bars="day.timeBar"
+        />
       </div>
     </div>
   </div>
@@ -57,13 +59,12 @@
 
 import _ from 'lodash'
 import { prettyTime } from 'lib/util'
-
-function timeFormat (start, duration) {
-  // this will turn things prettier, like "3pm - 4pm"
-  return prettyTime(start) + '-' + prettyTime(start + duration)
-}
+import TimeBar from 'components/shared/time-bar'
 
 export default {
+  components: {
+    TimeBar
+  },
   props: {
     schedule: {
       type: Object,
@@ -104,7 +105,9 @@ export default {
 
           return {
             abbrev: ab,
-            timePretty: hasTime ? _.map(day, mtg => timeFormat(mtg[0], mtg[1])).join(',') : '',
+            timePretty: hasTime ? _.map(day, mtg => {
+              return prettyTime(mtg[0]) + '-' + prettyTime(mtg[0] + mtg[1])
+            }).join(',') : '',
             timeBar: day
           }
         }
@@ -116,7 +119,15 @@ export default {
 </script>
 
 <style scoped>
-  .t { display: table; }
-  .tr { display: table-row; }
-  .td { display: table-cell; }
+.t { display: table; }
+.tr { display: table-row; }
+.td { display: table-cell; }
+.inactive {
+  color: gray;
+}
+.vertical-center {
+  display: flex;
+  align-items: center;
+  max-height: 100vh;
+}
 </style>
