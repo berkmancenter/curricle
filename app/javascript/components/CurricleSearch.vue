@@ -6,6 +6,7 @@
         v-for="result of results"
         :key="result.id"
         :course="result"
+        :selected="currentCourse && currentCourse.id === result.id"
       />
     </div>
   </div>
@@ -22,6 +23,7 @@ export default {
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
     ...mapState('search', ['searchComplete', 'results']),
+    ...mapState('user', ['currentCourse']),
     keywordTexts () {
       return this.keywords.map(k => k['text'])
     }

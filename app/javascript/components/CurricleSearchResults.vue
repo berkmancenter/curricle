@@ -1,6 +1,6 @@
 <template>
   <div
-    class="row curricle-search-result"
+    :class="{ row: true, 'curricle-search-result': true, selected }"
     :style="borderStyle">
     <div class="col-md-1">
       <course-action
@@ -95,6 +95,10 @@ export default {
     course: {
       type: Object,
       required: true
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -118,6 +122,13 @@ export default {
     border-top: 1px solid #ccc;
     margin-left: 0;
     padding-top: 10px;
+
+    &.selected {
+      background-color: #f5f7de;
+    }
+    &.selected:hover {
+      background-color: #b0b29e;
+    }
 
     h5 {
       font-size: 16px;
