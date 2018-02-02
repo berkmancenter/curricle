@@ -121,7 +121,6 @@ export default {
         y => { return { value: y, text: y } }
       )
     _.each(searchProps, p => { this['selected' + _.upperFirst(p)] = this[p] })
-    console.log(this.selectedSearchTermStart)
   }
 }
 </script>
