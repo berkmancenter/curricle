@@ -19,7 +19,7 @@
         v-if="!editableAnnotation"
         style="word-wrap: break-word;">
         <p>
-          {{ editableAnnotationText }}
+          {{ course.annotation ? course.annotation.text : '' }}
         </p>
       </div>
       <div v-else>
@@ -83,11 +83,6 @@ export default {
       this.editableTextlength = newStr.length
     }
   },
-  mounted () {
-    if (this.course.annotation) {
-      this.editableAnnotationText = this.course.annotation.text
-    }
-  },
   methods: {
     OpenAnnotationsForm () {
       if (this.isExpand) {
@@ -102,8 +97,8 @@ export default {
     updateAnnotations () {
       this.$apollo.provider.defaultClient.mutate({
         mutation: gql`
-          mutation addAnnotation($text: String!, $course_id: ID!){
-            addAnnotation(text: $text, course_id: $course_id) {
+          mutation setAnnotation($text: String!, $course_id: ID!, $id: ID){
+            setAnnotation(text: $text, course_id: $course_id, id: $id) {
               text
               id
             }
@@ -111,10 +106,11 @@ export default {
         `,
         variables: {
           text: this.editableText,
-          course_id: this.course.id
+          course_id: this.course.id,
+          id: this.course.annotation && this.course.annotation.id
         }
       }).then(response => {
-        this.editableAnnotationText = response.data.addAnnotation.text
+        this.editableAnnotationText = response.data.setAnnotation.text
         this.editableAnnotation = !this.editableAnnotation
         this.hideDownCaret = !this.hideDownCaret
       })

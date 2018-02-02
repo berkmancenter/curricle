@@ -90,9 +90,9 @@ const actions = {
     var typespec, queryspec
 
     if (ids && ids.length) {
-      vars.courseIds = ids
-      typespec = '$courseIds: [Int]'
-      queryspec = 'course_ids: $courseIds'
+      vars.ids = ids
+      typespec = '$ids: [Int]'
+      queryspec = 'ids: $ids'
     } else if (keywords && keywords.length) {
       vars.deluxeKeywords = keywords
       typespec = '$deluxeKeywords: [DeluxeKeywordInput]'
@@ -137,6 +137,7 @@ const actions = {
               meets_on_sunday
             }
             annotation {
+              id
               text
             }
           }
