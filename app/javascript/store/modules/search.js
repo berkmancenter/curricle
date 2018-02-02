@@ -91,7 +91,7 @@ const actions = {
 
     if (ids && ids.length) {
       vars.ids = ids
-      typespec = '$ids: [Int]'
+      typespec = '$ids: [ID!]'
       queryspec = 'ids: $ids'
     } else if (keywords && keywords.length) {
       vars.deluxeKeywords = keywords
