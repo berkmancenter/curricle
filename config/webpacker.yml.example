@@ -16,6 +16,8 @@ default: &default
   extensions:
     - .coffee
     - .erb
+    - .gql
+    - .graphql
     - .js
     - .jsx
     - .ts

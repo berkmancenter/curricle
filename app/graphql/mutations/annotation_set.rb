@@ -2,7 +2,7 @@
 
 module Mutations
   # Mutation function for adding or updating a course annotation
-  class SetAnnotation < GraphQL::Function
+  class AnnotationSet < GraphQL::Function
     description 'Adds or updates an annotation'
 
     type Types::AnnotationType

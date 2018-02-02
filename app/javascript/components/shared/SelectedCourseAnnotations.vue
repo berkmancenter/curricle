@@ -51,9 +51,9 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import Tagging from './SelectedCourseAnnotationsTagging'
+import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
 
 export default {
   components: {
@@ -96,21 +96,14 @@ export default {
     },
     updateAnnotations () {
       this.$apollo.provider.defaultClient.mutate({
-        mutation: gql`
-          mutation setAnnotation($text: String!, $course_id: ID!, $id: ID){
-            setAnnotation(text: $text, course_id: $course_id, id: $id) {
-              text
-              id
-            }
-          }
-        `,
+        mutation: ANNOTATION_SET_MUTATION,
         variables: {
           text: this.editableText,
           course_id: this.course.id,
           id: this.course.annotation && this.course.annotation.id
         }
       }).then(response => {
-        this.editableAnnotationText = response.data.setAnnotation.text
+        this.editableAnnotationText = response.data.annotationSet.text
         this.editableAnnotation = !this.editableAnnotation
         this.hideDownCaret = !this.hideDownCaret
       })

@@ -2,7 +2,8 @@
 
 import _ from 'lodash'
 import apolloClient from 'apollo'
-import gql from 'graphql-tag'
+import COURSES_SEARCH_IDS_QUERY from '../../graphql/CoursesSearchIds.gql'
+import COURSES_SEARCH_KEYWORDS_QUERY from '../../graphql/CoursesSearchKeywords.gql'
 
 import { transformSchedule } from 'lib/util'
 
@@ -87,62 +88,21 @@ const actions = {
   },
   runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
     var vars = {}
-    var typespec, queryspec
+    let query = ''
 
     if (ids && ids.length) {
+      query = COURSES_SEARCH_IDS_QUERY
       vars.ids = ids
-      typespec = '$ids: [ID!]'
-      queryspec = 'ids: $ids'
     } else if (keywords && keywords.length) {
+      query = COURSES_SEARCH_KEYWORDS_QUERY
       vars.deluxeKeywords = keywords
-      typespec = '$deluxeKeywords: [DeluxeKeywordInput]'
-      queryspec = 'deluxe_keywords: $deluxeKeywords'
     } else {
       console.error('runSearch: param errors')
       return
     }
 
     var promise = apolloClient.query({
-      query: gql`
-        query CourseSearch(${typespec}) {
-          courses(${queryspec}) {
-            academic_group
-            academic_group_description
-            catalog_number
-            component
-            course_description
-            course_description_long
-            external_course_id
-            grading_basis_description
-            id
-            subject
-            term_name
-            term_year
-            title
-            units_maximum
-            course_instructors {
-              display_name
-              id
-            }
-            course_meeting_patterns {
-              id
-              meeting_time_start_tod
-              meeting_time_end_tod
-              meets_on_monday
-              meets_on_tuesday
-              meets_on_wednesday
-              meets_on_thursday
-              meets_on_friday
-              meets_on_saturday
-              meets_on_sunday
-            }
-            annotation {
-              id
-              text
-            }
-          }
-        }
-      `,
+      query: query,
       variables: vars
     }).then(response => {
       // standard transforms

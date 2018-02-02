@@ -3,5 +3,5 @@
 Types::MutationType = GraphQL::ObjectType.define do
   name 'Mutation'
 
-  field :setAnnotation, function: Mutations::SetAnnotation.new
+  field :annotationSet, function: Mutations::AnnotationSet.new
 end

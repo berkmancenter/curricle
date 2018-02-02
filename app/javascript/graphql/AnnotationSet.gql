@@ -1,0 +1,7 @@
+#import "./AnnotationFragment.gql"
+
+mutation annotationSet($text: String!, $course_id: ID!, $id: ID) {
+  annotationSet(text: $text, course_id: $course_id, id: $id) {
+    ...Annotation
+  }
+}

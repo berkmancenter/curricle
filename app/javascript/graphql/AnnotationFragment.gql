@@ -1,0 +1,4 @@
+fragment Annotation on Annotation {
+  id
+  text
+}
