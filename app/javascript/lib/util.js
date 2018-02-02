@@ -104,7 +104,7 @@ function partitionCoursesByMeetingTime (courses) {
           )
         }
       })
-      return results
+      return _.sortBy(results, 'meetingTime[0]')
     })
 }
 
