@@ -24,7 +24,8 @@ course_instructors = SmarterCSV.process(Rails.root.join('lib', 'seeds', 'course_
     course = Course.find_by(
       external_course_id: ci.external_course_id,
       term_name: ci.term_name,
-      term_year: ci.term_year
+      term_year: ci.term_year,
+      class_section: ci.class_section
     )
 
     if course.nil?

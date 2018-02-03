@@ -29,7 +29,8 @@ course_meeting_patterns = SmarterCSV.process(Rails.root.join('lib', 'seeds', 'co
     course = Course.find_by(
       external_course_id: cmp.external_course_id,
       term_name: cmp.term_name,
-      term_year: cmp.term_year
+      term_year: cmp.term_year,
+      class_section: cmp.class_section
     )
 
     if course.nil?
