@@ -24,7 +24,7 @@
         <b-nav-item
           href=""
           @click="trayToggle"
-          :class="{'tray-active': trayVisible}">
+          :class="{'tray-active': isTrayVisible}">
           Tray
         </b-nav-item>
       </b-navbar-nav>
@@ -33,26 +33,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
 import BasicSearchSemesterRange from 'components/BasicSearchSemesterRange'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
 export default {
   name: 'NavBar',
   components: {
-    BasicSearchSemesterRange,
-    FontAwesomeIcon
+    BasicSearchSemesterRange
   },
   computed: {
-    ...mapState('app', ['trayVisible'])
+    ...mapGetters('app', ['isTrayVisible'])
   },
   methods: {
-    trayToggle () {
-      this.$store.commit('app/TOGGLE_TRAY')
-      if (!this.trayVisible) {
-        this.$store.commit('user/SET_CURRENT_COURSE', {})
-      }
-    },
+    ...mapActions('app', ['trayToggle']),
     logout () {
       axios.get('/users/sign_out')
         .then(response => {
