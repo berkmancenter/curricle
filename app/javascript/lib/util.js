@@ -230,28 +230,13 @@ export { sortedSemesters }
  * like the existing schedule or search results, etc.  */
 
 function scheduleMakeDescriptor (courses) {
-  var obj = _.partition(
-    _.deepClone(
-      _.map(
-        _.filter(courses, c => c && c.id && c.schedule && c.schedule.type === 'simple'), // basic sanity check
-        c => {
-          return {
-            cid: c.id,
-            sch: c.schedule
-          }
-        }
-      )
-    ),
-    'semester'
-  )
-
-  /* some more post-processing things here, expanding out non-simple
-   * schedules, etc; for now, make a flag that indicates if all
-   * courses are simple (they should be for now).  Since semester is
-   * required, we're effectively partitioning and handling everything
-   * in a semester-by-semester basis. */
-
-  return _.mapValues(obj, _scheduleProcessOneSemester)
+  return _(courses)
+    .filter(courseCanSchedule)
+    .map(c => { return { cid: c.id, sch: c.schedule } })
+    .deepClone()
+    .partition('semester')
+    .mapValues(_scheduleProcessOneSemester)
+    .value()
 }
 
 export { scheduleMakeDescriptor }
