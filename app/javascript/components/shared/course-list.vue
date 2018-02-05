@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import CourseAction from 'components/shared/course-action'
 
 export default {
@@ -48,10 +48,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('user', ['currentCourse'])
+    ...mapGetters('app', ['currentCourse'])
   },
   methods: {
-    ...mapActions('user', ['selectCourse']),
+    ...mapActions('app', ['selectCourse']),
     ...mapActions('plan', ['addProvisionalCourse', 'removeProvisionalCourse']),
     calcStyle (course) {
       return 'border-right: 5px solid ' + (course.department_color || '#000')

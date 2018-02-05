@@ -23,7 +23,7 @@ export default {
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
     ...mapState('search', ['searchComplete', 'results']),
-    ...mapState('user', ['currentCourse']),
+    ...mapGetters('app', ['currentCourse']),
     keywordTexts () {
       return this.keywords.map(k => k['text'])
     }

@@ -109,7 +109,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['selectCourse'])
+    ...mapActions('app', ['selectCourse'])
   }
 }
 </script>

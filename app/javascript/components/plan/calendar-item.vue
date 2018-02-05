@@ -64,7 +64,7 @@ export default {
     style.setProperty('--height', (this.scale * this.height) + 'px')
   },
   methods: {
-    ...mapActions('user', ['selectCourse'])
+    ...mapActions('app', ['selectCourse'])
   }
 }
 </script>

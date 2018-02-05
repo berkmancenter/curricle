@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 import CourseAction from 'components/shared/course-action'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
@@ -62,11 +62,11 @@ export default {
     ClassMeetingTime
   },
   computed: {
-    ...mapState('user', ['currentCourse']),
+    ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['filteredCourses'])
   },
   methods: {
-    ...mapActions('user', ['selectCourse'])
+    ...mapActions('app', ['selectCourse'])
   }
 }
 </script>

@@ -82,7 +82,7 @@ export default {
     CalendarItem
   },
   computed: {
-    ...mapState('user', ['currentCourse']),
+    ...mapGetters('app', ['currentCourse']),
     ...mapState('plan', ['semester', 'provisionalCourses']),
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
     courses () {
