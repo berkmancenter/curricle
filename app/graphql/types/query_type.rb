@@ -7,6 +7,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   field :courses, !types[Types::CourseType] do
     description 'Queries that return lists of courses'
 
+    argument :semester_range, Inputs::SemesterRangeInput, 'Range of semesters to search'
     argument :deluxe_keywords, types[!Inputs::DeluxeKeywordInput], 'List of objects for a weighted, field-specific search'
     argument :ids, types[!types.ID], 'List of course IDs'
 

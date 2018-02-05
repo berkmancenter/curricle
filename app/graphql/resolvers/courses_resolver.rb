@@ -14,16 +14,18 @@ module Resolvers
     def call(_obj, args, _ctx)
       return Course.find(args[:ids]) if args[:ids].present?
 
-      search = search_by_keywords(args[:deluxe_keywords])
+      search = search_by_keywords(args[:deluxe_keywords], args[:semester_range])
 
       return if search.blank?
 
       search.results
     end
 
-    def search_by_keywords(keywords)
+    def search_by_keywords(keywords, semester_range)
       Course.search do
         keywords.each { |keyword| add_keyword_to_search(self, keyword) }
+
+        semester_range_scope(self, semester_range)
         order_by(:term_year, :desc)
         paginate page: 1, per_page: 50
       end
@@ -66,6 +68,61 @@ module Resolvers
 
           fulltext keyword[:text], fields: fields
         end
+      end
+    end
+
+    # FIXME: find a way to refactor this into smaller methods by passing sunspot instance around
+    def semester_range_scope(sunspot, semester_range)
+      return if semester_range.blank?
+
+      sunspot.instance_eval do
+        if semester_range.end.blank?
+          with :term_name, semester_range.start.term_name
+          with :term_year, semester_range.start.term_year
+        else
+          intermediate_years = (semester_range.start.term_year..semester_range.end.term_year).to_a[1...-1]
+
+          any_of do
+            all_of do
+              with :term_name, start_year_term_scope(semester_range.start.term_name)
+              with :term_year, semester_range.start.term_year
+            end
+
+            all_of do
+              with :term_name, end_year_term_scope(semester_range.end.term_name)
+              with :term_year, semester_range.end.term_year
+            end
+
+            if intermediate_years.any?
+              all_of do
+                with :term_name, TermNameEnum.values.values.map(&:value)
+                with :term_year, intermediate_years
+              end
+            end
+          end
+        end
+      end
+    end
+
+    def start_year_term_scope(term_name)
+      case term_name
+      when 'Spring'
+        %w[Spring Summer Fall]
+      when 'Summer'
+        %w[Summer Fall]
+      when 'Fall'
+        %w[Fall]
+      end
+    end
+
+    def end_year_term_scope(term_name)
+      case term_name
+      when 'Spring'
+        %w[Spring]
+      when 'Summer'
+        %w[Spring Summer]
+      when 'Fall'
+        %w[Spring Summer Fall]
       end
     end
   end
