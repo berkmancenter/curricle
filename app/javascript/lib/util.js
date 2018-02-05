@@ -223,7 +223,86 @@ function sortedSemesters (sems) {
 
 export { sortedSemesters }
 
-/* This routine returns an opaque (to the caller) descriptor of
+/* ============================================================ *
+
+Some notes about the data structure in use for the schedule detection
+code:
+
+The basic data structure mirrors largely the data structure used for
+an individual course, which has two basic cases:
+
+- "simple" -- all courses here meet at the same time or times per week.
+
+- "split" -- at least one of the courses has a split schedule; i.e.,
+  the course meets at different times depending on the week.
+
+When a schedule is "simple", we just treat the schedule as a list of
+lists, with the individual offset being the day number, followed by
+zero or more three-element arrays for the start time, course duration,
+and course id.  These are given as floats relative to eastern time.
+The 0'th day is Monday, 1st Tueday, etc, with 5 and 6 being the
+relatively infrequent Saturday and Sunday courses.  (Full support is
+not yet here for Saturday and Sunday, to be fleshed out after MVP.)
+
+An example structure is here:
+
+[
+  [                             // Monday's schedule
+    [8, 1.5, 12345],            // course 12345 meets at 8 AM for 1.5 hour
+    [9.5, 2.5, 54321],          // course 54321 meets at 9:30 AM for 2.5 hour
+    [15.5, 2, 56789]            // course 56789 meets at 3:30 PM for 2 hours
+  ],
+  undefined,                    // no courses on Tuesday
+  [                             // Wednesday; much like Monday but meets at different times
+    [8, 1.5, 12345],            // course 12345 meets at 8 AM for 1.5 hour
+    [11.5, 2.5, 54321],         // course 54321 meets at 11:30 AM for 2.5 hour
+    [15.5, 2, 56789]            // course 56789 meets at 3:30 PM for 2 hours
+  ]
+]                               // no Thursday or Friday, coasting!
+
+This structure makes up the bones of the schedule, and most routines
+that expect to operate on schedules will deal with something along
+these lines.  Of note, days can be missing or contain empty arrays, so
+anything processing these should be expecting this.  Each day's
+individual events should be sorted by start time.  We assume that
+events are exclusive of end time and inclusive of start time, so if
+two events are back-to-back there is no conflict (though it'd be hard
+to teleport between locations, so practically speaking we might want
+some sort of padding here).
+
+This structure is only a single week, however; in the split schedule
+case, we need a way to generate the given schedule for a particular
+week and return this basic structure.  Since the vast majority of
+courses are simple, we don't need the overhead of calculating each
+week when these will be duplicated *until* we hit a course with the
+split schedule.
+
+At a high level, conflicts are tested to see if there are any overlaps
+between a course's schedule and the user's existing schedule.  If
+either the course or the schedule has "split" courses we need to check
+for conflicts on a week-by-week basis, otherwise we can just check for
+conflicts on the template week.  The first time we add a split course
+to a schedule, we transform the template week into a series of weeks
+which make up the semester.  Once converted, we will not attempt to
+unconvert, even if we remove the offending split course from the
+schedule.
+
+Since these can be potentially costly checks, particularly when
+checking multiple courses at the same time (think search results) we
+calculate things once and reuse this data structure against these
+standard routines so checks should at least be faster.  We also make
+it possible to incrementally update this schedule object when
+adding/removing schedule items.
+
+Events are always distinct by semester, so we end up treating the
+schedule as an object mapping semesters into the schedule-related data
+structures.  Most external routines are wrappers which map to internal
+routines which assume the individual list of courses are already
+vetted to belong to the same semester.
+
+* ============================================================ */
+
+/* this routine returns an opaque (to the caller) descriptor of
  * courses in the schedule, to be passed into further calls to
  * courseConflictsWithSchedule().  Intended to minimize the
  * recalculations inherent in any sort of repeated checks on things
