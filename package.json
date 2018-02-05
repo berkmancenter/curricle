@@ -42,5 +42,8 @@
     "stylelint": "^8.4.0",
     "stylelint-config-standard": "^18.0.0",
     "webpack-dev-server": "^2.9.7"
+  },
+  "scripts": {
+    "gen_weekly_semesters": "bin/gen_weekly_semesters > app/javascript/lib/semester-weeks.json"
   }
 }

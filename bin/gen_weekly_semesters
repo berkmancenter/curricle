@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+# -*-cperl-*-
+
+use strict;
+use warnings;
+
+use POSIX qw(strftime);
+use DBI;
+use JSON qw(to_json);
+
+my ($campno) = ($ENV{PWD} =~ /camp(\d+)/);
+
+my $port = 8900 + $campno;
+my $dbh = DBI->connect("dbi:Pg:host=localhost;dbname=curricle_development;port=$port", 'curricledev');
+
+my $query = <<EOQ;
+SELECT
+    term_name,
+    term_year,
+    array_agg(week::date ORDER BY week) as weeks
+FROM (
+    SELECT
+    term_name,
+    term_year,
+    generate_series(
+        min(date_trunc('week',start_date)),
+        max(date_trunc('week',end_date + interval '1 week') - interval '1 day'),
+        interval '1 week') week
+    FROM
+        course_meeting_patterns
+    WHERE
+        end_date - start_date <= 140
+    GROUP BY 1,2
+) q
+WHERE term_name IN ('Spring','Summer','Fall') AND term_year >= 1990
+GROUP BY 1,2
+ORDER BY term_year, term_name
+EOQ
+
+my $obj = { VERSION => (strftime '%Y%m%d', localtime)};
+
+for my $row (@{$dbh->selectall_arrayref($query) || [] }) {
+  $obj->{"$row->[0] $row->[1]"} = $row->[2];
+}
+
+print to_json($obj);
