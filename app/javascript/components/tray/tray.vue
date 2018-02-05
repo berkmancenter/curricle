@@ -4,7 +4,7 @@
       <p class="your-tray">Your Tray
         <span
           class="fa fa-close pull-right"
-          @click="hideTray"
+          @click="closeSidebar"
         />
       </p>
       <hr>
@@ -47,7 +47,7 @@ export default {
     ...mapGetters('user', ['trayCourses'])
   },
   methods: {
-    ...mapActions('app', ['hideTray'])
+    ...mapActions('app', ['closeSidebar'])
   }
 }
 </script>
