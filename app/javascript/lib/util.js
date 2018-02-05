@@ -352,7 +352,7 @@ function courseConflictsWithSchedule (course, schedule) {
 
 export { courseConflictsWithSchedule }
 
-/* routine to consolidate checks for whether the give course can be scheduled */
+/* routine to consolidate validity checks for whether the give course can be scheduled */
 
 function courseCanSchedule (course) {
   return course && course.schedule && course.schedule.type === 'simple' &&
