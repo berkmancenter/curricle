@@ -12,36 +12,36 @@
         <p class="pull-left">
           <course-action
             type="tray"
-            :course="course.id"
+            :course="theCourse.id"
           />
           <course-action
             type="schedule"
-            :course="course.id"
+            :course="theCourse.id"
           />
           <course-action
             type="shareable"
-            :course="course.id"
+            :course="theCourse.id"
           />
         </p>
         <p class="course-history pull-right text-right">See course history</p>
       </div>
 
       <selected-course-details
-        :course="course"
+        :course="theCourse"
       />
       <selected-course-annotations
-        :course="course"
+        :course="theCourse"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 import CourseAction from 'components/shared/course-action'
-import SelectedCourseAnnotations from './SelectedCourseAnnotations'
-import SelectedCourseDetails from './SelectedCourseDetails'
+import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
+import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
 
 export default {
   components: {
@@ -51,8 +51,18 @@ export default {
   },
   props: {
     course: {
-      type: Object,
+      type: [String, Number, Object],
       required: true
+    }
+  },
+  computed: {
+    ...mapState('courses', ['courses']),
+    theCourse () {
+      console.log('finding course object for ', this.course)
+      if (typeof this.course === 'object') {
+        return this.course
+      }
+      return this.courses[this.course]
     }
   },
   methods: {
