@@ -58,7 +58,6 @@ export default {
   computed: {
     ...mapState('courses', ['courses']),
     theCourse () {
-      console.log('finding course object for ', this.course)
       if (typeof this.course === 'object') {
         return this.course
       }
