@@ -24,22 +24,19 @@
       </div>
     </div>
     <div class="col-md-3 top-header">
-      <tray v-show="trayVisible"/>
-      <selected-course v-show="validCourseSelected"/>
+      <the-sidebar />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-
+import { mapState } from 'vuex'
 import PlanListView from 'components/plan/list-view'
 import PlanYearView from 'components/plan/multi-year-view'
 import PlanSemesterView from 'components/plan/semester-view'
-import SelectedCourse from 'components/shared/SelectedCourse'
 import DepartmentSelector from 'components/plan/department-selector'
 import SemesterSelector from 'components/plan/semester-selector'
-import Tray from 'components/tray/tray'
+import TheSidebar from 'components/TheSidebar'
 import ViewSelector from 'components/shared/view-selector'
 
 export default {
@@ -48,14 +45,12 @@ export default {
     PlanListView,
     PlanYearView,
     PlanSemesterView,
-    SelectedCourse,
     SemesterSelector,
-    Tray,
+    TheSidebar,
     ViewSelector
   },
   computed: {
-    ...mapState('app', ['trayVisible', 'viewmode']),
-    ...mapGetters('user', ['validCourseSelected'])
+    ...mapState('app', ['viewmode'])
   }
 }
 </script>

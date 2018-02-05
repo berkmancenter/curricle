@@ -6,29 +6,21 @@
       <curricle-search />
     </div>
     <div class="col-md-3 top-header">
-      <tray v-show="trayVisible" />
-      <selected-course v-show="validCourseSelected" />
+      <the-sidebar />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
-import Tray from 'components/tray/tray'
 import BasicSearch from 'components/BasicSearch'
 import CurricleSearch from 'components/CurricleSearch'
-import SelectedCourse from 'components/shared/SelectedCourse'
+import TheSidebar from 'components/TheSidebar'
 
 export default {
   components: {
     BasicSearch,
     CurricleSearch,
-    SelectedCourse,
-    Tray
-  },
-  computed: {
-    ...mapState('app', ['trayVisible']),
-    ...mapGetters('user', ['validCourseSelected'])
+    TheSidebar
   }
 }
 </script>
