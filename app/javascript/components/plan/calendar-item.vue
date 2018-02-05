@@ -2,7 +2,7 @@
   <div
     :class="{'calendar-item': true, provisional, selected }"
     :style="computedStyle"
-    @click="selectCourse(item.id)">
+    @click="selectCourse(item)">
     <strong>{{ item.external_course_id }}</strong>
     <br>
     {{ item.title }}
