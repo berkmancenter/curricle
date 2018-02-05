@@ -1,7 +1,7 @@
 <template>
   <div>
     <tray
-      v-if="sidebarCurrentType==='tray'"
+      v-show="sidebarCurrentType==='tray'"
     />
     <selected-course
       v-if="sidebarCurrentType==='course'"
