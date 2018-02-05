@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div
-      class="selected-course"
-      v-if="!trayVisible && validCourseSelected">
+    <div class="selected-course">
       <p class="select-course">Selected Course
         <i
           class="fa fa-close pull-right"
-          @click="selectCourse(null)"
+          @click="closeSidebar"
         />
       </p>
       <hr>
@@ -14,32 +12,33 @@
         <p class="pull-left">
           <course-action
             type="tray"
-            :course="currentCourse.id"
+            :course="course.id"
           />
           <course-action
             type="schedule"
-            :course="currentCourse.id"
+            :course="course.id"
           />
           <course-action
             type="shareable"
-            :course="currentCourse.id"
+            :course="course.id"
           />
         </p>
         <p class="course-history pull-right text-right">See course history</p>
       </div>
 
       <selected-course-details
-        :course="currentCourse"
+        :course="course"
       />
       <selected-course-annotations
-        :course="currentCourse"
+        :course="course"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
+
 import CourseAction from 'components/shared/course-action'
 import SelectedCourseAnnotations from './SelectedCourseAnnotations'
 import SelectedCourseDetails from './SelectedCourseDetails'
@@ -50,13 +49,14 @@ export default {
     SelectedCourseDetails,
     CourseAction
   },
-  computed: {
-    ...mapState('user', ['currentCourse']),
-    ...mapGetters('user', ['validCourseSelected']),
-    ...mapState('app', ['trayVisible'])
+  props: {
+    course: {
+      type: Object,
+      required: true
+    }
   },
   methods: {
-    ...mapActions('user', ['selectCourse'])
+    ...mapActions('app', ['closeSidebar'])
   }
 }
 </script>
