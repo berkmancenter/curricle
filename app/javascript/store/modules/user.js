@@ -23,10 +23,7 @@ const state = {
     annotated: {},
     // id ->
     tagged: {}
-  },
-
-  // placeholder for selected course; TODO: move to app
-  currentCourse: {}
+  }
 }
 
 const getters = {
@@ -47,12 +44,6 @@ const getters = {
     )
     var courses = ids.map(i => state.courses[i]) || []
     return courses.filter(e => !_.isUndefined(e))
-  },
-
-  // return true if we have a selected course
-  // TODO: convert to using internal course id instead of an object
-  validCourseSelected (state) {
-    return state.currentCourse && state.currentCourse.id
   },
 
   // return a list of course ids in the tray
@@ -120,20 +111,6 @@ const actions = {
     commit('APPEND_COURSES', obj)
   },
 
-  /* Select a course so we can see on the sidebar */
-  selectCourse ({commit, dispatch}, course) {
-    dispatch('app/hideTray', null, { root: true })
-    if (typeof course !== 'object') {
-      dispatch('courses/getCourseById', course, { root: true }).then(
-        obj => {
-          commit('SET_CURRENT_COURSE', obj)
-        }
-      )
-    } else {
-      commit('SET_CURRENT_COURSE', course)
-    }
-  },
-
   /*
    * courseHasStatus checks a given course id and returns true if the
    * state type is true for the user in question.  This is related to
@@ -193,9 +170,6 @@ const mutations = {
   SET_USER_FLAG: (state, { type, course, value }) => {
     // required due to reactivity requirements
     Vue.set(state.courseflags[type], course, value)
-  },
-  SET_CURRENT_COURSE: (state, value) => {
-    state.currentCourse = value
   }
 }
 
