@@ -426,3 +426,9 @@ function courseGetWeeklySchedule (course, week) {
 
 export { courseGetWeeklySchedule }
 
+/* Returns the official list of weeks for a specific semester that we can iterate through */
+
+function _calculateWeeksInSemester (semester) {
+  return SemesterWeeks[semester]
+}
+
