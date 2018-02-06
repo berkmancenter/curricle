@@ -398,3 +398,9 @@ function _getWeekRange (obj, semester) {
   console.error('Unknown object type')
 }
 
+function courseGetWeekRange (course) {
+  return _getWeekRange(course.schedule, course.semester)
+}
+
+export { courseGetWeekRange }
+
