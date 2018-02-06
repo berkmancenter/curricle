@@ -2,6 +2,7 @@ fragment Course on Course {
   academic_group
   academic_group_description
   catalog_number
+  class_section
   component
   course_description
   course_description_long

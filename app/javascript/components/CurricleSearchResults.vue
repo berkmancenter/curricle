@@ -40,6 +40,8 @@
         {{ course.semester }}
         <br>
         {{ course.units_maximum }} Units
+        <br>
+        Section {{ course.class_section }}
       </strong>
     </div>
     <div
