@@ -13,8 +13,9 @@
     .container
       #app
 
+    - if current_user.present?
+      :javascript
+        localStorage.setItem('curricle_api_token', '#{current_user.api_token}')
+
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'
-
-    :javascript
-      localStorage.setItem('curricle_api_token', '#{current_user.api_token}')

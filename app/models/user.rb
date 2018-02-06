@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :path_meeting_patterns, through: :user_courses, source: :course_meeting_pattern
 
   has_secure_token :api_token
+  has_secure_token :schedule_token
 
   def self.current
     Thread.current[:user]

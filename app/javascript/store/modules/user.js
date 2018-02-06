@@ -10,6 +10,8 @@ import Vue from 'vue/dist/vue.esm'
  */
 
 const state = {
+  apiToken: '',
+
   // holds canonical courses in tray
   courses: {},
 
@@ -60,6 +62,9 @@ const getters = {
       _.keys(state.courseflags.schedule),
       k => state.courseflags.schedule[k]
     )
+  },
+  userAuthenticated (state) {
+    return Boolean(state.apiToken)
   }
 }
 
@@ -74,7 +79,13 @@ const actions = {
    * data in the format we're converting to here, so making everything
    * work relative to this new data format.
    */
-  getUserData ({ commit, dispatch }) {
+  getUserData ({ commit, state, dispatch }) {
+    commit('SET_API_TOKEN')
+
+    if (!state.apiToken) {
+      return
+    }
+
     const courseUrl = '/courses/user_courses'
     var ids = []
 
@@ -170,6 +181,13 @@ const mutations = {
   SET_USER_FLAG: (state, { type, course, value }) => {
     // required due to reactivity requirements
     Vue.set(state.courseflags[type], course, value)
+  },
+  SET_API_TOKEN (state) {
+    state.apiToken = localStorage.getItem('curricle_api_token')
+  },
+  CLEAR_API_TOKEN (state) {
+    localStorage.removeItem('curricle_api_token')
+    state.apiToken = null
   }
 }
 

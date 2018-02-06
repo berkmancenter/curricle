@@ -13,18 +13,30 @@
     <b-collapse
       id="nav-collapse"
       is-nav>
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav
+        class="ml-auto"
+        v-if="userAuthenticated">
         <b-nav-item to="search">Search</b-nav-item>
         <b-nav-item to="explore">Explore</b-nav-item>
         <b-nav-item to="plan">Plan</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto tray-li">
-        <b-nav-item @click="logout">Logout</b-nav-item>
+        <b-nav-item
+          href="/users/sign_in"
+          v-if="!userAuthenticated">
+          Sign in
+        </b-nav-item>
+        <b-nav-item
+          @click="logout"
+          v-if="userAuthenticated">
+          Logout
+        </b-nav-item>
         <b-nav-item
           href=""
           @click="trayToggle"
-          :class="{'tray-active': isTrayVisible}">
+          :class="{'tray-active': isTrayVisible}"
+          v-if="userAuthenticated">
           Tray
         </b-nav-item>
       </b-navbar-nav>
@@ -38,20 +50,19 @@ import axios from 'axios'
 import BasicSearchSemesterRange from 'components/BasicSearchSemesterRange'
 
 export default {
-  name: 'NavBar',
   components: {
     BasicSearchSemesterRange
   },
   computed: {
-    ...mapGetters('app', ['isTrayVisible'])
+    ...mapGetters('app', ['isTrayVisible']),
+    ...mapGetters('user', ['userAuthenticated'])
   },
   methods: {
     ...mapActions('app', ['trayToggle']),
     logout () {
+      this.$store.commit('user/CLEAR_API_TOKEN')
+
       axios.get('/users/sign_out')
-        .then(response => {
-          this.$router.go('/users/sign_in')
-        })
     }
   }
 }
