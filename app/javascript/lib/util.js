@@ -6,6 +6,7 @@
  * group. */
 
 import _ from 'lodash'
+import SemesterWeeks from 'lib/semester-weeks.json'
 
 /** ********           Course-list related functions          **********/
 
