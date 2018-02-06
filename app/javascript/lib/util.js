@@ -476,13 +476,12 @@ function _simpleScheduleOverlaps (sched1, sched2) {
   // sched1, sched2 are arrays of array (or undefined)
 
   return _.some(
-    _.zip(sched1,sched2),
+    _.zip(sched1, sched2),
     (s1, s2) => {
       if (!(s1 && s2 && s1.length && s2.length)) {
         // if any of the days are missing then we know there's no conflict here
         return false
-      }
-      else {
+      } else {
         /* s1, s2 are sorted lists of day schedules, so we can iterate
          * over the lowest indexes of each until we run into a
          * conflict, then return true in that case */
@@ -493,16 +492,16 @@ function _simpleScheduleOverlaps (sched1, sched2) {
          * side-consequence, this will detect any overlaps in the
          * source data itself. */
 
-        var end = 0             // state var to track the highest time we've encountered
+        var end = 0 // state var to track the highest time we've encountered
 
-        return -1 !== _(s1)
-          .concat(s2)           // concatenate the two arrays and then sort by first index
+        return _(s1)
+          .concat(s2) // concatenate the two arrays and then sort by first index
           .sortBy('[0]')
           .findIndex(e => {
             var ret = e[0] < end // it's a conflict if the start time is before highest end time
-            end = e[0] + e[1]    // calculate new end time
-            return ret           // if this is true then we short-circuit
-          })
+            end = e[0] + e[1] // calculate new end time
+            return ret // if this is true then we short-circuit
+          }) !== -1
       }
     }
   )
