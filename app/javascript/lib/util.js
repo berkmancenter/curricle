@@ -404,3 +404,19 @@ function courseGetWeekRange (course) {
 
 export { courseGetWeekRange }
 
+/* Returns the schedule for the course for the given week.  It is
+ * assumed that the "week" param is returned by the courseGetWeekRange
+ * function. */
+
+function _getWeeklySchedule (obj, week) {
+  if (obj.type === 'simple') {
+    return obj.data
+  }
+  if (obj.type === 'split') {
+    // currently assuming it's all split or all simple; might move to
+    // mixed for efficiency in representation
+    return obj.data[week]
+  }
+  console.log('Error: unknown schedule type')
+}
+
