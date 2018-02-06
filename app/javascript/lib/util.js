@@ -378,3 +378,23 @@ function _semesterScheduleCurrentConflicts (semesterSchedule) {
 }
 
 /* internal only, no export */
+
+/* Returns an array of weeks for this specific course, to be used to
+ * iterate over the weekly schedules available.  It is the
+ * responsibility of the schedule parser to ensure that the weeks in a
+ * particular semesters are returned the same way for any/all courses
+ * mapped in this way.  Format of weeks are YYYY-MM-DD, each week
+ * starting on the earliest Monday.  Scheduled weeks are assumed to be
+ * an entire week in duration.  */
+
+function _getWeekRange (obj, semester) {
+  // we need to ensure that simple courses return valid week ranges here
+  if (obj.type === 'split') {
+    return _.keys(obj.data)
+  }
+  if (obj.type === 'simple') {
+    return _calculateWeeksInSemester(semester)
+  }
+  console.error('Unknown object type')
+}
+
