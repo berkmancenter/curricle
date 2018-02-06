@@ -420,3 +420,9 @@ function _getWeeklySchedule (obj, week) {
   console.log('Error: unknown schedule type')
 }
 
+function courseGetWeeklySchedule (course, week) {
+  return _getWeeklySchedule(course.schedule, week)
+}
+
+export { courseGetWeeklySchedule }
+
