@@ -360,3 +360,21 @@ function courseCanSchedule (course) {
 }
 
 export { courseCanSchedule }
+
+/* Returns an object of arrays of any course ids with conflicts in the
+ * current schedule object, indexed by semester.  If no conflicts returns
+ * an empty array for the semester in question.  By necessity, there will
+ * always be at least two courses returned for a conflict, or there would
+ * be no conflict.  */
+
+function scheduleCurrentConflicts (schedule) {
+  return _.mapValues(schedule, _semesterScheduleCurrentConflicts)
+}
+
+export { scheduleCurrentConflicts }
+
+function _semesterScheduleCurrentConflicts (semesterSchedule) {
+  return []
+}
+
+/* internal only, no export */
