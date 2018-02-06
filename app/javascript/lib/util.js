@@ -358,6 +358,33 @@ function courseConflictsWithSchedule (course, schedule) {
   if (!schedule[course.semester] || !courseCanSchedule(course)) {
     return false
   }
+  if (course.schedule.type === 'simple' && schedule.type === 'simple') {
+    // easy path; compare conflict
+    return _simpleScheduleOverlaps(course.schedule.data, schedule.data)
+  } else {
+    /* we only care about weeks which are in common for complex cases;
+     * we can't conflict on weeks which are disjoint, so look at the
+     * intersecting weeks only. */
+
+    var semester = course.semester
+
+    var weeks = _.intersection(
+      _getWeekRange(course.schedule, semester),
+      _getWeekRange(schedule, semester)
+    )
+    /* could probably improve things here as well by also using
+     * existing "template" weeks for any simple schedule and first
+     * checking explicitly the split weeks instead of always using the
+     * expanded weeks for all. */
+
+    return _(weeks)
+      .some(
+        w => _simpleScheduleOverlaps(
+          _getWeeklySchedule(course.schedule, w),
+          _getWeeklySchedule(schedule, w)
+        )
+      )
+  }
 }
 
 export { courseConflictsWithSchedule }
