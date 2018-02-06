@@ -174,7 +174,8 @@ function transformSchedule (c) {
       pat => {
         var durs = [
           calcDuration('0:00', pat.meeting_time_start_tod),
-          calcDuration(pat.meeting_time_start_tod, pat.meeting_time_end_tod)
+          calcDuration(pat.meeting_time_start_tod, pat.meeting_time_end_tod),
+          c.id
         ]
         _.each(
           dayFields,
