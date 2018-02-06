@@ -12,10 +12,11 @@
         <view-selector/>
         <p class="share pull-right text-right">
           Share
-          <font-awesome-icon icon="share" />
+          <font-awesome-icon icon="share"/>
         </p>
       </div>
     </div>
+    <div class="clearfix"/>
     <div class="mx-0">
       <semester-sidebar
         v-show="viewmode.tray=='semester'"
