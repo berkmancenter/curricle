@@ -335,6 +335,16 @@ function _scheduleProcessOneSemester (clist) {
 
 /* (internal-only: no export) */
 
+/* This routine will add a new course to an existing schedule object
+ * incrementally, to prevent the need to rebuild the entire schedule
+ * object when adding a single course. */
+
+function scheduleAddCourse (schedule, course) {
+  return false
+}
+
+export { scheduleAddCourse }
+
 /* This routine return true if the given course would conflict with
  * the specific schedule descriptor.  We take a number of short-paths
  * here, so this is intended to be as fast as is reasonable possible.
