@@ -311,9 +311,8 @@ vetted to belong to the same semester.
 function scheduleMakeDescriptor (courses) {
   return _(courses)
     .filter(courseCanSchedule)
-    .map(c => { return { cid: c.id, sch: c.schedule } })
-    .deepClone()
-    .partition('semester')
+    .map(c => { return { semester: c.semester, cid: c.id, sch: c.schedule } })
+    .groupBy('semester')
     .mapValues(_scheduleProcessOneSemester)
     .value()
 }
