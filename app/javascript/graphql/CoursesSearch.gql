@@ -1,7 +1,7 @@
 #import "./CourseFragment.gql"
 
-query CoursesSearch($ids: [ID!], $deluxeKeywords: [DeluxeKeywordInput!]) {
-  courses(ids: $ids, deluxe_keywords: $deluxeKeywords) {
+query CoursesSearch($ids: [ID!], $deluxeKeywords: [DeluxeKeywordInput!], $semesterRange: SemesterRangeInput) {
+  courses(ids: $ids, deluxe_keywords: $deluxeKeywords, semester_range: $semesterRange) {
     ...Course
   }
 }

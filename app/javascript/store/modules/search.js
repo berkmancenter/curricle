@@ -31,7 +31,7 @@ const state = {
     { text: '8', value: 8 },
     { text: '9', value: 9 }
   ],
-  searchTermStart: 'Fall',
+  searchTermStart: 'Spring',
   searchTermEnd: 'Spring',
   searchYearStart: thisYear,
   searchYearEnd: thisYear + 1,
@@ -88,6 +88,20 @@ const actions = {
   runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
     var vars = {}
 
+    vars.semesterRange = {
+      start: {
+        term_name: state.searchTermStart.toUpperCase(),
+        term_year: state.searchYearStart
+      }
+    }
+
+    if (state.searchTermUseRange) {
+      vars.semesterRange.end = {
+        term_name: state.searchTermEnd.toUpperCase(),
+        term_year: state.searchYearEnd
+      }
+    }
+
     if (ids && ids.length) {
       vars.ids = ids
     } else if (keywords && keywords.length) {
@@ -139,6 +153,21 @@ const mutations = {
   },
   DELETE_KEYWORD (state, idx) {
     state.keywords.splice(idx, 1)
+  },
+  SET_SEARCH_TERM_START (state, termName) {
+    state.searchTermStart = termName
+  },
+  SET_SEARCH_YEAR_START (state, termYear) {
+    state.searchYearStart = termYear
+  },
+  SET_SEARCH_TERM_USE_RANGE (state, useRange) {
+    state.searchTermUseRange = useRange
+  },
+  SET_SEARCH_TERM_END (state, termName) {
+    state.searchTermEnd = termName
+  },
+  SET_SEARCH_YEAR_END (state, termYear) {
+    state.searchYearEnd = termYear
   }
 }
 

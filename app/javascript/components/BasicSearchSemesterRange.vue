@@ -4,7 +4,7 @@
     <span
       id="search-semester-range"
       class="pointer">
-      &nbsp;{{ optionsTermYearRange }}&nbsp;<font-awesome-icon icon="caret-down"/>
+      &nbsp;{{ rangeLabel }}&nbsp;<font-awesome-icon icon="caret-down"/>
 
       <b-popover
         target="search-semester-range"
@@ -17,7 +17,7 @@
             <b-col class="justify-content-md-left">
               <b-form-radio-group
                 stacked
-                v-model="selectedSearchTermStart"
+                v-model="searchTermStart"
                 name="search-start-term"
                 :options="optionsTermName"
               />
@@ -25,36 +25,32 @@
             <b-col class="justify-content-md-left">
               <b-form-select
                 class="year-select"
-                v-model="selectedSearchYearStart"
+                v-model="searchYearStart"
                 :options="optionsTermYear" />
             </b-col>
             <b-col class="justify-content-md-left">
-              <b-form-checkbox
-                id="checkbox1"
-                v-model="selectedSearchUseRange"
-                :value="1"
-                :unchecked-value="0">
+              <b-form-checkbox v-model="searchTermUseRange">
                 to
               </b-form-checkbox>
             </b-col>
             <b-col
-              v-show="selectedSearchUseRange"
+              v-show="searchTermUseRange"
               class="justify-content-md-left"
             >
               <b-form-radio-group
                 stacked
-                v-model="selectedSearchTermEnd"
+                v-model="searchTermEnd"
                 name="search-end-term"
                 :options="optionsTermName"
               />
             </b-col>
             <b-col
-              v-show="selectedSearchUseRange"
+              v-show="searchTermUseRange"
               class="justify-content-md-left"
             >
               <b-form-select
                 class="year-select"
-                v-model="selectedSearchYearEnd"
+                v-model="searchYearEnd"
                 :options="optionsTermYearEnd" />
             </b-col>
           </b-row>
@@ -69,8 +65,6 @@ import { mapState } from 'vuex'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import _ from 'lodash'
 
-const searchProps = ['searchTermStart', 'searchTermEnd', 'searchYearStart', 'searchYearEnd', 'searchUseRange']
-
 export default {
   name: 'BasicSearchSemesterRange',
   components: {
@@ -78,11 +72,6 @@ export default {
   },
   data () {
     return {
-      selectedSearchTermStart: '',
-      selectedSearchTermEnd: '',
-      selectedSearchYearStart: '',
-      selectedSearchYearEnd: '',
-      selectedSearchUseRange: false,
       optionsTermName: [
         { text: 'Spring', value: 'Spring' },
         { text: 'Summer', value: 'Summer' },
@@ -92,12 +81,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('search', searchProps),
     ...mapState('app', ['catalogYearStart', 'catalogYearEnd']),
-    optionsTermYearRange () {
-      var from = this.selectedSearchTermStart + ' ' + this.selectedSearchYearStart
-      var to = this.selectedSearchTermEnd + ' ' + this.selectedSearchYearEnd
-      if (this.selectedSearchUseRange) {
+    rangeLabel () {
+      var from = this.searchTermStart + ' ' + this.searchYearStart
+      var to = this.searchTermEnd + ' ' + this.searchYearEnd
+
+      if (this.searchTermUseRange) {
         return from + ' - ' + to
       } else {
         return from
@@ -107,11 +96,51 @@ export default {
       return _.filter(
         this.optionsTermYear,
         o => {
-          return this.selectedSearchTermStart === 'Fall'
-            ? o.value > this.selectedSearchYearStart
-            : o.value >= this.selectedSearchYearStart
+          return this.searchTermStart === 'Fall'
+            ? o.value > this.searchYearStart
+            : o.value >= this.searchYearStart
         }
       )
+    },
+    searchTermStart: {
+      get () {
+        return this.$store.state.search.searchTermStart
+      },
+      set (value) {
+        this.$store.commit('search/SET_SEARCH_TERM_START', value)
+      }
+    },
+    searchYearStart: {
+      get () {
+        return this.$store.state.search.searchYearStart
+      },
+      set (value) {
+        this.$store.commit('search/SET_SEARCH_YEAR_START', value)
+      }
+    },
+    searchTermUseRange: {
+      get () {
+        return this.$store.state.search.searchTermUseRange
+      },
+      set (value) {
+        this.$store.commit('search/SET_SEARCH_TERM_USE_RANGE', value)
+      }
+    },
+    searchTermEnd: {
+      get () {
+        return this.$store.state.search.searchTermEnd
+      },
+      set (value) {
+        this.$store.commit('search/SET_SEARCH_TERM_END', value)
+      }
+    },
+    searchYearEnd: {
+      get () {
+        return this.$store.state.search.searchYearEnd
+      },
+      set (value) {
+        this.$store.commit('search/SET_SEARCH_YEAR_END', value)
+      }
     }
   },
   mounted () {
@@ -120,7 +149,6 @@ export default {
         _.range(this.catalogYearStart, this.catalogYearEnd + 1),
         y => { return { value: y, text: y } }
       )
-    _.each(searchProps, p => { this['selected' + _.upperFirst(p)] = this[p] })
   }
 }
 </script>
