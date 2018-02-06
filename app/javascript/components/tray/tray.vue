@@ -8,12 +8,15 @@
         />
       </p>
       <hr>
-      <div class="row actions mx-0">
+      <div class="actions mx-0">
         <view-selector/>
-        <div class="pull-right">See Course History</div>
+        <p class="share pull-right text-right">
+          Share
+          <font-awesome-icon icon="share" />
+        </p>
       </div>
     </div>
-    <div class="row mx-0">
+    <div class="mx-0">
       <semester-sidebar
         v-show="viewmode.tray=='semester'"
       />
@@ -30,6 +33,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import CourseList from 'components/shared/course-list'
 import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
@@ -38,6 +42,7 @@ import SemesterSidebar from 'components/tray/semester-sidebar'
 export default {
   components: {
     CourseList,
+    FontAwesomeIcon,
     MultiYearSidebar,
     SemesterSidebar,
     ViewSelector
@@ -59,5 +64,10 @@ export default {
 
 .fa.fa-close:hover {
   color: gray;
+}
+
+p.share {
+  font-size: 13px;
+  font-weight: bold;
 }
 </style>

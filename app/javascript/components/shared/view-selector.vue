@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <p class="pull-left">
     <i
       :class="{ fa: true, 'fa-list-ul': true, active: viewmode[type] == 'list-view'}"
       @click="selectView({ view: 'list-view', type })"
@@ -12,7 +12,7 @@
       :class="{ fa: true, 'fa-square': true, active: viewmode[type] == 'multi-year'}"
       @click="selectView({ view: 'multi-year', type })"
     />
-  </span>
+  </p>
 </template>
 
 <script>
