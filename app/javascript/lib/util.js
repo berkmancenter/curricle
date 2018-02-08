@@ -331,7 +331,37 @@ export { scheduleMakeDescriptor }
  */
 
 function _scheduleProcessOneSemester (clist) {
-  return clist
+  var ret = {}
+
+  // split the input into simple/split types
+  var [simple, split] = _.partition(clist, c => c.sch.type === 'simple')
+
+  var simpleWeeks = _mergeDaysMultiple(_.map(simple, 'sch.data'))
+
+  if (!split.length) {
+    ret.type = 'simple'
+    ret.data = simpleWeeks
+  } else {
+    console.error('no full support for split weeks')
+    // merge all of the weeks currently in use by the other split schedules
+    var weekStore = {}
+
+    _(split)
+      .each(c => {
+        _.each(
+          c.sch.data,
+          (days, week) => {
+            if (!weekStore[week]) {
+              weekStore[week] = []
+            }
+            weekStore[week].push([days, c.id]) // stash the days and the courseid
+          }
+        )
+      }
+      )
+  }
+
+  return ret
 }
 
 /* (internal-only: no export) */
