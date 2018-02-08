@@ -366,12 +366,89 @@ function _scheduleProcessOneSemester (clist) {
 
 /* (internal-only: no export) */
 
+/* combine a list of courses with individual schedules into one larger
+ * schedule structure.  This routine will ensure the merged structures
+ * are sorted per day, plus stash the course id for the course in
+ * question as the 2'th offset of the resulting array
+ *
+ * Essentially, this turns a 4-dimensionsal array into a 3-dimensional one, so:
+ *
+ * [[[[start, duration, course]]]] -> [[[start, duration, course]]]
+ *
+ * with the first level of the array being the offest schedule by day
+ * 0..6 for Monday..Sunday, the second level being the sorted list of
+ * events by day, and the third being the individual event data. */
+
+/* takes days1 array to add the events from days2; sorts the
+ * days events in question and returns the result */
+
+function _mergeDayArrays (days1, days2) {
+  if (!(days2 && days2.length)) {
+    return days1
+  }
+  return _(days1)
+    .zip(days2)
+    .map(([di, df]) => {
+      return _([...(di || [])])
+        .concat(df || [])
+        .filter(_.isArray)
+        .sortBy('[0]')
+        .value()
+    })
+    .value()
+}
+
+/* takes days1 array to add the events from days2; does not sort, as
+ * this is used for reduce(), and we'll sort 'em after all are added.
+ */
+
+function _mergeDayArraysNosort (days1, days2) {
+  // console.log('_mergeDatArraysNosort', days1, days2)
+  if (!(days2 && days2.length)) {
+    return days1
+  }
+  return _(days1)
+    .zip(days2)
+    .map(([di, df]) => {
+      return _([...(di || [])])
+        .concat(df || [])
+        .filter(_.isArray)
+        .value()
+    })
+    .value()
+}
+
+function _mergeDaysMultiple (daysArray) {
+  if (daysArray.length <= 1) {
+    return daysArray[0] || []
+  }
+  if (daysArray.length === 2) {
+    return _mergeDayArrays(...daysArray)
+  }
+  var ret = _.reduce(daysArray, _mergeDayArraysNosort, [])
+  // items will be merged but unsorted, so sort now...
+  return _.map(ret, e => _.sortBy(e, '[0]'))
+}
+
 /* This routine will add a new course to an existing schedule object
  * incrementally, to prevent the need to rebuild the entire schedule
  * object when adding a single course. */
 
 function scheduleAddCourse (schedule, course) {
-  return false
+  if (!courseCanSchedule(course)) {
+    // do we want to add to the TBD list instead of skipping?
+    return false
+  }
+  if (!schedule[course.semester]) {
+    // take advantage of the fact that a course.schedule struct is the
+    // same as an individual schedule; will inherit type and data from there
+    schedule[course.semester] = _.cloneDeep(course.schedule)
+    return true
+  }
+  if (schedule[course.semester].type === 'simple' &&
+      course.schedule.type === 'simple') {
+    schedule[course.semester].data = _mergeDayArrays(schedule[course.semester].data, course.schedule.data)
+  }
 }
 
 export { scheduleAddCourse }
