@@ -1,11 +1,13 @@
 <template>
-  <div class="bar-bg">
-    <span
-      class="bar-display"
-      v-for="(bar,idx) in bars"
-      :key="idx"
-      :style="computedStyle(bar)"
-    />
+  <div class="timebar-container">
+    <div class="bar-bg">
+      <span
+        class="bar-display"
+        v-for="(bar,idx) in bars"
+        :key="idx"
+        :style="computedStyle(bar)"
+      />
+    </div>
   </div>
 </template>
 
@@ -30,7 +32,7 @@ export default {
   },
   methods: {
     computedStyle (bar) {
-      if (bar && bar.length === 2) {
+      if (bar && bar.length >= 2) {
         var left = Math.max(bar[0] - this.startTime, 0)
         var width = bar[1] - Math.max(this.startTime - bar[0], 0)
         var style = {
@@ -45,6 +47,10 @@ export default {
 </script>
 
 <style>
+.timebar-container {
+  width: 40px;
+}
+
 .bar-bg {
   margin-top: 9px;
   margin-left: 8px;
