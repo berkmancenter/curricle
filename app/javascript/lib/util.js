@@ -517,6 +517,52 @@ function courseConflictsWithSchedule (course, schedule) {
 
 export { courseConflictsWithSchedule }
 
+/* This routine return an array of booleans, one per day, to indicate
+ * which days this course has conflicts on.  Because this has to
+ * iterate over all days, there is no short-circuiting possible.  This
+ * function can return less than the total number of days, in which
+ * case the caller should assume that there is no conflict for any
+ * non-represented day.  This routine cannot and should not modify the
+ * "schedule" object. */
+
+function courseConflictsWithScheduleByDay (course, schedule) {
+  // short path 1: no conflicts if course's semester does not exist in
+  // the schedule or if course is TBD
+  if (!(schedule && course && schedule[course.semester] && courseCanSchedule(course))) {
+    // console.log('short path for aborting with no conflicts', course, schedule)
+    return []
+  }
+  var semSchedule = schedule[course.semester]
+  if (semSchedule.courses && semSchedule.courses[course.id]) {
+    // course is already in the schedule; can't conflict with itself
+    return []
+  }
+  if (course.schedule.type === 'simple' && semSchedule.type === 'simple') {
+    // easy path; compare conflict
+    return _simpleScheduleOverlapsByDay(course.schedule.data, semSchedule.data)
+  } else {
+    console.error('Error: other types not implemented')
+
+    /*
+    var semester = course.semester
+
+    var weeks = _.intersection(
+      _getWeekRange(course.schedule, semester),
+      _getWeekRange(semSchedule, semester)
+    )
+
+    return _(weeks)
+      .some(
+        w => _simpleScheduleOverlaps(
+          _getWeeklySchedule(course.schedule, w),
+          _getWeeklySchedule(semSchedule, w)
+        )
+      ) */
+  }
+}
+
+export { courseConflictsWithScheduleByDay }
+
 /* routine to consolidate validity checks for whether the give course can be scheduled */
 
 function courseCanSchedule (course) {
