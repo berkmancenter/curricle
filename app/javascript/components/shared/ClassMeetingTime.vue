@@ -3,16 +3,16 @@
     class="t"
     v-if="hasData">
     <div
-      class="tr"
       v-for="(day,index) in week"
       :key="index"
+      :class="{ tr: true, conflicted: conflicts[index] }"
       v-show="!condensed || day.timeBar"
     >
       <div class="td">
         {{ day.timePretty }}
       </div>
       <div
-        :class="{ td: true, inactive: !(day.timeBar && day.timeBar.length), conflicted: conflicts[index] }"
+        :class="{ td: true, inactive: !(day.timeBar && day.timeBar.length) }"
       >
         {{ day.abbrev }}
       </div>
