@@ -1,5 +1,5 @@
 <template>
-  <div class="timebar-container">
+  <div :class="{ 'timebar-container': true, conflicted }">
     <div class="bar-bg">
       <span
         class="bar-display"
@@ -25,6 +25,10 @@ export default {
     endTime: {
       type: Number,
       default: 17
+    },
+    conflicted: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -68,7 +72,7 @@ export default {
   /* border: 1px solid black; */
 }
 
-.conflicted .bar-bg:after {
+.conflicted > .bar-bg:after {
   content: "";
   position: absolute;
   width: 3px;
