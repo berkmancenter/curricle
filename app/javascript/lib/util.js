@@ -560,7 +560,7 @@ function _getWeekRange (obj, semester) {
   if (obj.type === 'simple') {
     return _calculateWeeksInSemester(semester)
   }
-  console.error('Unknown object type')
+  console.error('Unknown object type', obj, semester)
 }
 
 function courseGetWeekRange (course) {
