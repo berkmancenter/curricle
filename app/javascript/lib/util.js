@@ -602,10 +602,9 @@ function _calculateWeeksInSemester (semester) {
 
 function _simpleScheduleOverlaps (sched1, sched2) {
   // sched1, sched2 are arrays of array (or undefined)
-
   return _.some(
     _.zip(sched1, sched2),
-    (s1, s2) => {
+    ([s1, s2]) => {
       if (!(s1 && s2 && s1.length && s2.length)) {
         // if any of the days are missing then we know there's no conflict here
         return false
