@@ -333,6 +333,10 @@ export { scheduleMakeDescriptor }
 function _scheduleProcessOneSemester (clist) {
   var ret = {}
 
+  // populate the list of course ids in this semester
+  ret.courses = {}
+  _.each(clist, c => { ret.courses[c.cid] = c.cid })
+
   // split the input into simple/split types
   var [simple, split] = _.partition(clist, c => c.sch.type === 'simple')
 
@@ -443,12 +447,22 @@ function scheduleAddCourse (schedule, course) {
     // take advantage of the fact that a course.schedule struct is the
     // same as an individual schedule; will inherit type and data from there
     schedule[course.semester] = _.cloneDeep(course.schedule)
+    schedule[course.semester].courses = {}
+    schedule[course.semester].courses[course.id] = course.id
     return true
   }
-  if (schedule[course.semester].type === 'simple' &&
+  var semSemester = schedule[course.semester]
+  if (semSemester.type === 'simple' &&
       course.schedule.type === 'simple') {
-    schedule[course.semester].data = _mergeDayArrays(schedule[course.semester].data, course.schedule.data)
+    semSemester.data = _mergeDayArrays(semSemester.data, course.schedule.data)
+    if (!semSemester.courses) {
+      semSemester.courses = {}
+    }
+    semSemester.courses[course.id] = course.id
+    return true
   }
+  console.error('scheduleAddCourse: unknown type combo')
+  return false
 }
 
 export { scheduleAddCourse }
@@ -463,12 +477,18 @@ export { scheduleAddCourse }
 function courseConflictsWithSchedule (course, schedule) {
   // short path 1: no conflicts if course's semester does not exist in
   // the schedule or if course is TBD
-  if (!schedule[course.semester] || !courseCanSchedule(course)) {
+  if (!(schedule && course && schedule[course.semester] && courseCanSchedule(course))) {
+    // console.log('short path for aborting with no conflicts', course, schedule)
     return false
   }
-  if (course.schedule.type === 'simple' && schedule.type === 'simple') {
+  var semSchedule = schedule[course.semester]
+  if (semSchedule.courses && semSchedule.courses[course.id]) {
+    // course is already in the schedule; can't conflict with itself
+    return false
+  }
+  if (course.schedule.type === 'simple' && semSchedule.type === 'simple') {
     // easy path; compare conflict
-    return _simpleScheduleOverlaps(course.schedule.data, schedule.data)
+    return _simpleScheduleOverlaps(course.schedule.data, semSchedule.data)
   } else {
     /* we only care about weeks which are in common for complex cases;
      * we can't conflict on weeks which are disjoint, so look at the
