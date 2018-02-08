@@ -498,7 +498,7 @@ function courseConflictsWithSchedule (course, schedule) {
 
     var weeks = _.intersection(
       _getWeekRange(course.schedule, semester),
-      _getWeekRange(schedule, semester)
+      _getWeekRange(semSchedule, semester)
     )
     /* could probably improve things here as well by also using
      * existing "template" weeks for any simple schedule and first
@@ -509,7 +509,7 @@ function courseConflictsWithSchedule (course, schedule) {
       .some(
         w => _simpleScheduleOverlaps(
           _getWeeklySchedule(course.schedule, w),
-          _getWeeklySchedule(schedule, w)
+          _getWeeklySchedule(semSchedule, w)
         )
       )
   }
