@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ row: true, 'curricle-search-result': true, selected }"
+    :class="{ row: true, 'curricle-search-result': true, selected, conflicted }"
     :style="borderStyle">
     <div class="col-md-1">
       <course-action
@@ -101,6 +101,10 @@ export default {
     selected: {
       type: Boolean,
       default: false
+    },
+    conflicted: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -130,6 +134,10 @@ export default {
     }
     &.selected:hover {
       background-color: #b0b29e;
+    }
+
+    &.conflicted {
+      background-color: red;
     }
 
     h5 {
