@@ -12,7 +12,7 @@
         {{ day.timePretty }}
       </div>
       <div
-        :class="{ td: true, inactive: !(day.timeBar && day.timeBar.length) }"
+        :class="{ td: true, inactive: !(day.timeBar && day.timeBar.length), conflicted: conflicts[index] }"
       >
         {{ day.abbrev }}
       </div>
@@ -20,6 +20,7 @@
         <time-bar
           v-if="day.timeBar && day.timeBar.length"
           :bars="day.timeBar"
+          :conflicted="conflicts[index]"
         />
       </div>
     </div>
@@ -73,7 +74,7 @@ export default {
     conflicts: {
       type: Array,
       required: false,
-      default: () => []
+      default: () => { return [] }
     },
     condensed: {
       type: Boolean,
@@ -124,6 +125,9 @@ export default {
 .td { display: table-cell; }
 .inactive {
   color: gray;
+}
+.conflicted {
+  color: darkred;
 }
 .vertical-center {
   display: flex;
