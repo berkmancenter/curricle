@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <tray
-      v-show="sidebarCurrentType==='tray'"
-    />
-    <selected-course
-      v-if="sidebarCurrentType==='course'"
-      :course="sidebarCurrentContext"
-    />
+  <div id="sidebar">
+    <div class="sidebar-inner">
+      <tray
+        v-show="sidebarCurrentType==='tray'"
+      />
+      <selected-course
+        v-if="sidebarCurrentType==='course'"
+        :course="sidebarCurrentContext"
+      />
+    </div>
   </div>
 </template>
 
@@ -25,3 +27,18 @@ export default {
   }
 }
 </script>
+
+<style>
+#sidebar {
+  position: fixed;
+  margin-right: 2em;
+  margin-left: 2em;
+  height: 700px;
+  width: 300px;
+  overflow: hidden;
+}
+.sidebar-inner {
+  overflow-y: auto;
+  height: 100%;
+}
+</style>
