@@ -1,6 +1,11 @@
 <template>
   <div v-show="keywords && searchComplete">
-    <strong>{{ results.length }} Results</strong>
+    <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
+    <span class="pull-right">
+      <b-form-checkbox v-model="showConflicts">
+        Show Results with Conflicts ({{ conflictCount }})
+      </b-form-checkbox>
+    </span>
     <div class="results-container">
       <curricle-search-results
         v-for="result of results"
@@ -8,7 +13,8 @@
         :course="result"
         :selected="currentCourse && currentCourse.id === result.id"
         :conflicts="courseConflicts[result.id] ? courseConflicts[result.id].conflicts : []"
-        :is-conflicted="courseConflicts[result.id]? courseConflicts[result.id].hasConflict : false"
+        :is-conflicted="courseConflicts[result.id] ? courseConflicts[result.id].hasConflict : false"
+        v-show="showConflicts || !(courseConflicts[result.id] ? courseConflicts[result.id].hasConflict : false)"
       />
     </div>
   </div>
@@ -23,6 +29,11 @@ import { scheduleMakeDescriptor, courseConflictsWithScheduleByDay } from 'lib/ut
 export default {
   components: {
     CurricleSearchResults
+  },
+  data () {
+    return {
+      showConflicts: false
+    }
   },
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
@@ -44,6 +55,13 @@ export default {
           return o
         },
         {} // empty object for accumulator
+      )
+    },
+    conflictCount () {
+      return _.reduce(
+        this.courseConflicts,
+        (tot, obj) => tot + obj.hasConflict,
+        0
       )
     },
     keywordTexts () {
