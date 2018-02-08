@@ -562,7 +562,7 @@ function _getWeeklySchedule (obj, week) {
     // mixed for efficiency in representation
     return obj.data[week]
   }
-  console.log('Error: unknown schedule type')
+  console.error('Unknown schedule type')
 }
 
 function courseGetWeeklySchedule (course, week) {
