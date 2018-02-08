@@ -67,4 +67,17 @@ export default {
   border-radius: 1px;
   /* border: 1px solid black; */
 }
+
+.conflicted .bar-bg:after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 20px;
+  top: -8px;
+  display: block;
+  background: darkred;
+  left: 50%;
+  transform: translate(-50%, 0) rotate(45deg);
+}
+
 </style>
