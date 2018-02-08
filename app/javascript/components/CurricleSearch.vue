@@ -7,8 +7,8 @@
         :key="result.id"
         :course="result"
         :selected="currentCourse && currentCourse.id === result.id"
-        :conflicts="courseConflicts[result.id].conflicts"
-        :is-conflicted="courseConflicts[result.id].hasConflict"
+        :conflicts="courseConflicts[result.id] ? courseConflicts[result.id].conflicts : []"
+        :is-conflicted="courseConflicts[result.id]? courseConflicts[result.id].hasConflict : false"
       />
     </div>
   </div>
@@ -35,9 +35,9 @@ export default {
     courseConflicts () {
       return _.reduce(
         this.results,
-        (o, v, k) => {
+        (o, v) => {
           var conflictArray = courseConflictsWithScheduleByDay(v, this.currentSchedule)
-          o[k] = {
+          o[v.id] = {
             conflicts: conflictArray,
             hasConflict: _.some(conflictArray)
           }
