@@ -146,7 +146,10 @@ export default {
     }
 
     &.conflicted {
-      background-color: red;
+      background-color: #ffc0cb;
+      &.selected, &:hover {
+        background-color: #ff91a4;
+      }
     }
 
     h5 {
