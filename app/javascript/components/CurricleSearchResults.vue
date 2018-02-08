@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ row: true, 'curricle-search-result': true, selected, conflicted }"
+    :class="{ row: true, 'curricle-search-result': true, selected, conflicted: isConflicted }"
     :style="borderStyle">
     <div class="col-md-1">
       <course-action
@@ -76,7 +76,10 @@
         v-if="course.course_description_long"/>
     </div>
     <div class="col-md-2 px-0">
-      <class-meeting-time :schedule="course.schedule" />
+      <class-meeting-time
+        :schedule="course.schedule"
+        :conflicts="conflicts"
+      />
     </div>
   </div>
 </template>
@@ -102,7 +105,13 @@ export default {
       type: Boolean,
       default: false
     },
-    conflicted: {
+    conflicts: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    isConflicted: {
       type: Boolean,
       default: false
     }

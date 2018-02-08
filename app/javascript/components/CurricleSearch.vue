@@ -7,7 +7,8 @@
         :key="result.id"
         :course="result"
         :selected="currentCourse && currentCourse.id === result.id"
-        :conflicted="hasConflict(result, currentSchedule)"
+        :conflicts="courseConflicts[result.id].conflicts"
+        :is-conflicted="courseConflicts[result.id].hasConflict"
       />
     </div>
   </div>
@@ -15,8 +16,9 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import _ from 'lodash'
 import CurricleSearchResults from 'components/CurricleSearchResults'
-import { scheduleMakeDescriptor, courseConflictsWithSchedule } from 'lib/util'
+import { scheduleMakeDescriptor, courseConflictsWithScheduleByDay } from 'lib/util'
 
 export default {
   components: {
@@ -30,12 +32,23 @@ export default {
     currentSchedule () {
       return scheduleMakeDescriptor(this.scheduledCourses)
     },
+    courseConflicts () {
+      return _.reduce(
+        this.results,
+        (o, v, k) => {
+          var conflictArray = courseConflictsWithScheduleByDay(v, this.currentSchedule)
+          o[k] = {
+            conflicts: conflictArray,
+            hasConflict: _.some(conflictArray)
+          }
+          return o
+        },
+        {} // empty object for accumulator
+      )
+    },
     keywordTexts () {
       return this.keywords.map(k => k['text'])
     }
-  },
-  methods: {
-    hasConflict: (course, schedule) => courseConflictsWithSchedule(course, schedule)
   }
 }
 </script>
