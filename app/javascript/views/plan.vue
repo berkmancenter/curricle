@@ -16,6 +16,7 @@
             :source="viewmode.plan == 'list-view' ? 'tray' : 'schedule'"
           />
         </div>
+        <div class="clearfix"/>
         <div>
           <plan-list-view v-show="viewmode.plan === 'list-view'"/>
           <plan-semester-view v-show="viewmode.plan === 'semester'"/>
