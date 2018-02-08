@@ -15,7 +15,7 @@
             <span
               v-for="(hr,index) in hours"
               :key="hr"
-              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '575%', 'border-top': '1px solid lightgray' }"
+              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '802px', 'border-top': '1px solid lightgray' }"
             >
               {{ hr }}
             </span>
