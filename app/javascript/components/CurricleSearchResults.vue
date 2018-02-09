@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ row: true, 'curricle-search-result': true, selected, conflicted: isConflicted }"
+    :class="{ row: true, 'curricle-search-result': true, selected, conflicted: isConflicted, hiddenConflict }"
     :style="borderStyle">
     <div class="col-md-1">
       <course-action
@@ -114,6 +114,10 @@ export default {
     isConflicted: {
       type: Boolean,
       default: false
+    },
+    showConflicts: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -121,6 +125,9 @@ export default {
       return {
         'border-left-color': this.course.department_color || '#000'
       }
+    },
+    hiddenConflict () {
+      return this.isConflicted && !this.showConflicts
     }
   },
   methods: {
@@ -163,6 +170,12 @@ export default {
 
   .pointer {
     cursor: pointer;
+  }
+
+  .hiddenConflict {
+    height: 0px;
+    display: none;
+    transition: height 2s;
   }
 
   .usercourse, .userschedule {

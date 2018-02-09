@@ -14,7 +14,7 @@
         :selected="currentCourse && currentCourse.id === result.id"
         :conflicts="courseConflicts[result.id] ? courseConflicts[result.id].conflicts : []"
         :is-conflicted="courseConflicts[result.id] ? courseConflicts[result.id].hasConflict : false"
-        v-show="showConflicts || !(courseConflicts[result.id] ? courseConflicts[result.id].hasConflict : false)"
+        :show-conflicts="showConflicts"
       />
     </div>
   </div>
