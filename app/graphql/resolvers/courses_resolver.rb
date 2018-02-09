@@ -24,7 +24,7 @@ module Resolvers
     def search_by_keywords(keywords, semester_range)
       Course.search do
         keywords.each { |keyword| add_keyword_to_search(self, keyword) }
-
+        with :class_section, '1' # all class_sections should be 1
         semester_range_scope(self, semester_range)
         order_by(:term_year, :desc)
         paginate page: 1, per_page: 50
