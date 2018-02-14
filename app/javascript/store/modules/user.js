@@ -11,6 +11,8 @@ import Vue from 'vue/dist/vue.esm'
 
 const state = {
   apiToken: '',
+  scheduleToken: '',
+  sharedScheduleToken: '',
 
   // holds canonical courses in tray
   courses: {},
@@ -81,12 +83,18 @@ const actions = {
    */
   getUserData ({ commit, state, dispatch }) {
     commit('SET_API_TOKEN')
+    commit('SET_SCHEDULE_TOKEN')
 
-    if (!state.apiToken) {
+    if (!state.apiToken && !state.sharedScheduleToken) {
       return
     }
 
-    const courseUrl = '/courses/user_courses'
+    var courseUrl = '/courses/user_courses'
+
+    if (state.sharedScheduleToken) {
+      courseUrl += `?schedule_token=${state.sharedScheduleToken}`
+    }
+
     var ids = []
 
     axios
@@ -171,6 +179,11 @@ const actions = {
         commit('SET_USER_FLAG', { type, course, value: !origState })
       }
     }
+  },
+
+  clearTokens ({ commit }) {
+    commit('CLEAR_API_TOKEN')
+    commit('CLEAR_SCHEDULE_TOKEN')
   }
 }
 
@@ -188,6 +201,16 @@ const mutations = {
   CLEAR_API_TOKEN (state) {
     localStorage.removeItem('curricle_api_token')
     state.apiToken = null
+  },
+  SET_SCHEDULE_TOKEN (state) {
+    state.scheduleToken = localStorage.getItem('curricle_schedule_token')
+  },
+  SET_SHARED_SCHEDULE_TOKEN (state, token) {
+    state.sharedScheduleToken = token
+  },
+  CLEAR_SCHEDULE_TOKEN (state) {
+    localStorage.removeItem('curricle_schedule_token')
+    state.scheduleToken = null
   }
 }
 

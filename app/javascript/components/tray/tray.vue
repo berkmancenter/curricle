@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="your-tray-parent">
+    <div class="your-tray-parent clearfix">
       <p class="your-tray">Your Tray
         <span
           class="fa fa-close pull-right"
@@ -10,13 +10,10 @@
       <hr>
       <div class="actions mx-0">
         <view-selector/>
-        <p class="share pull-right text-right">
-          Share
-          <font-awesome-icon icon="share"/>
-        </p>
+        <share-link/>
       </div>
     </div>
-    <div class="clearfix"/>
+
     <div class="mx-0">
       <semester-sidebar
         v-show="viewmode.tray=='semester'"
@@ -34,19 +31,19 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import CourseList from 'components/shared/course-list'
 import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
 import SemesterSidebar from 'components/tray/semester-sidebar'
+import ShareLink from 'components/tray/TrayShareLink'
 
 export default {
   components: {
     CourseList,
-    FontAwesomeIcon,
     MultiYearSidebar,
     SemesterSidebar,
-    ViewSelector
+    ViewSelector,
+    ShareLink
   },
   computed: {
     ...mapState('app', ['viewmode']),
@@ -65,10 +62,5 @@ export default {
 
 .fa.fa-close:hover {
   color: gray;
-}
-
-p.share {
-  font-size: 13px;
-  font-weight: bold;
 }
 </style>

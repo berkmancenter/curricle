@@ -2,13 +2,9 @@
   <div id="app">
     <header>
       <navbar/>
-      <keep-alive v-if="userAuthenticated">
+      <keep-alive>
         <router-view/>
       </keep-alive>
-      <div v-if="!userAuthenticated">
-        <br>
-        Please use the "Sign in" link in the navbar.
-      </div>
     </header>
     <course-observer/>
   </div>

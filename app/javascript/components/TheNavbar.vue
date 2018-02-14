@@ -60,7 +60,7 @@ export default {
   methods: {
     ...mapActions('app', ['trayToggle']),
     logout () {
-      this.$store.commit('user/CLEAR_API_TOKEN')
+      this.$store.dispatch('user/clearTokens')
 
       axios.get('/users/sign_out')
     }

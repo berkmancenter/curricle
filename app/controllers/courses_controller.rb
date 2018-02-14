@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  before_action :authenticate_user!
   # TODO: Clean up after session and token implementation at frontend
   skip_before_action :verify_authenticity_token
   before_action :set_current_user
@@ -142,22 +141,26 @@ class CoursesController < ApplicationController
 
   # get user's course data
   def user_courses
-    tray = current_user.courses.order(created_at: :desc)
+    user = User.current
+
+    return if user.blank?
+
+    tray = user.courses.order(created_at: :desc)
 
     # organize the existing courses into days of the week
     @meeting_patterns_per_day = {
-      Monday: current_user.patterns_for_all_courses(by_day: :monday).to_a,
-      Tuesday: current_user.patterns_for_all_courses(by_day: :tuesday).to_a,
-      Wednesday: current_user.patterns_for_all_courses(by_day: :wednesday).to_a,
-      Thursday: current_user.patterns_for_all_courses(by_day: :thursday).to_a,
-      Friday: current_user.patterns_for_all_courses(by_day: :friday).to_a
+      Monday: user.patterns_for_all_courses(by_day: :monday).to_a,
+      Tuesday: user.patterns_for_all_courses(by_day: :tuesday).to_a,
+      Wednesday: user.patterns_for_all_courses(by_day: :wednesday).to_a,
+      Thursday: user.patterns_for_all_courses(by_day: :thursday).to_a,
+      Friday: user.patterns_for_all_courses(by_day: :friday).to_a
     }
 
     # organize the existing courses into years/semesters
     @meeting_patterns_per_year = {}
 
     semester_map.flatten.each do |year|
-      @meeting_patterns_per_year[:"#{year}"] = current_user.patterns_for_all_courses(by_term: year).to_a
+      @meeting_patterns_per_year[:"#{year}"] = user.patterns_for_all_courses(by_term: year).to_a
     end
 
     user_courses = {
@@ -166,5 +169,16 @@ class CoursesController < ApplicationController
       multi_year: JSON.parse(@meeting_patterns_per_year.to_json(methods: %i[meeting_with_tods instructor user_tags user_annotations user_schedule]))
     }
     render json: user_courses
+  end
+
+  private
+
+  def set_current_user
+    User.current =
+      if params[:schedule_token]
+        User.find_by(schedule_token: params[:schedule_token])
+      else
+        current_user
+      end
   end
 end

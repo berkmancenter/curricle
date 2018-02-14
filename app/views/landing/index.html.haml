@@ -16,6 +16,7 @@
     - if current_user.present?
       :javascript
         localStorage.setItem('curricle_api_token', '#{current_user.api_token}')
+        localStorage.setItem('curricle_schedule_token', '#{current_user.schedule_token}')
 
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'

@@ -85,6 +85,7 @@ export default {
   border: 1px solid rgba(0,0,0,0.3);
   background-clip: padding-box;
   box-shadow: 0 0 10px rgba(32,32,32,0.5);
+  cursor: pointer;
 }
 
 .calendar-item:hover {

@@ -8,7 +8,9 @@
         />
       </p>
       <hr>
-      <div class="actions mb-0">
+      <div
+        class="actions mb-0"
+        v-if="userAuthenticated">
         <p class="pull-left">
           <course-action
             type="tray"
@@ -31,13 +33,14 @@
       />
       <selected-course-annotations
         :course="theCourse"
+        v-if="userAuthenticated"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 import CourseAction from 'components/shared/course-action'
 import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
@@ -57,6 +60,7 @@ export default {
   },
   computed: {
     ...mapState('courses', ['courses']),
+    ...mapGetters('user', ['userAuthenticated']),
     theCourse () {
       if (typeof this.course === 'object') {
         return this.course
