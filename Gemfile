@@ -29,6 +29,7 @@ group :development do
   gem 'drg', '~> 1.5'
   gem 'graphiql-rails', '~> 1.4'
   gem 'listen', '~> 3.1'
+  gem 'rack-cors', '~> 1.0'
   gem 'rubocop', '~> 0.52'
   gem 'rubocop-rspec', '~> 1.20'
   gem 'spring', '~> 2.0'
