@@ -10,6 +10,8 @@ Types::QueryType = GraphQL::ObjectType.define do
     argument :semester_range, Inputs::SemesterRangeInput, 'Range of semesters to search'
     argument :deluxe_keywords, types[!Inputs::DeluxeKeywordInput], 'List of objects for a weighted, field-specific search'
     argument :ids, types[!types.ID], 'List of course IDs'
+    argument :per_page, types.Int, 'Number of courses to return'
+    argument :page, types.Int, 'Pagination page'
 
     resolve Resolvers::CoursesResolver.new
   end

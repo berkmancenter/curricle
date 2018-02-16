@@ -14,20 +14,20 @@ module Resolvers
     def call(_obj, args, _ctx)
       return Course.find(args[:ids]) if args[:ids].present?
 
-      search = search_by_keywords(args[:semester_range], args[:deluxe_keywords])
+      search = search_by_keywords(args)
 
       return if search.blank?
 
       search.results
     end
 
-    def search_by_keywords(semester_range, keywords)
+    def search_by_keywords(args)
       Course.search do
-        keywords&.each { |keyword| add_keyword_to_search(self, keyword) }
+        args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
         with :class_section, '1' # all class_sections should be 1
-        semester_range_scope(self, semester_range)
+        semester_range_scope(self, args[:semester_range])
         order_by(:term_year, :desc)
-        paginate page: 1, per_page: 50
+        paginate page: (args[:page] || 1), per_page: (args[:per_page] || 50)
       end
     end
 
