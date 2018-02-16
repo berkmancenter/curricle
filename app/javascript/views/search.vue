@@ -1,6 +1,6 @@
 <template>
   <div class="row mx-0">
-    <div class="col-md-9">
+    <div class="col-md-9 d-flex flex-column">
       <basic-search />
       <br>
       <curricle-search />
@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
   .top-header {
     margin-top: 28px;
   }

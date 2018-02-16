@@ -1,12 +1,19 @@
 <template>
-  <div v-show="keywords && searchComplete">
-    <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
-    <span class="pull-right">
-      <b-form-checkbox v-model="showConflicts">
-        Show Results with Conflicts ({{ conflictCount }})
-      </b-form-checkbox>
-    </span>
-    <div class="results-container">
+  <div
+    class="results-container"
+    v-show="keywords && searchComplete">
+    <div class="clearfix">
+      <div class="pull-left">
+        <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
+      </div>
+      <div class="pull-right text-right">
+        <b-form-checkbox v-model="showConflicts">
+          Show Results with Conflicts ({{ conflictCount }})
+        </b-form-checkbox>
+      </div>
+    </div>
+
+    <div class="results">
       <curricle-search-results
         v-for="result of results"
         :key="result.id"
@@ -73,6 +80,11 @@ export default {
 
 <style scoped>
 .results-container {
-  margin-top: 10px;
+  flex-flow: column;
+  display: flex;
+}
+
+.results {
+  overflow: auto;
 }
 </style>

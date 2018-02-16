@@ -2,10 +2,10 @@
   <div id="app">
     <header>
       <navbar/>
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
     </header>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
     <course-observer/>
   </div>
 </template>
