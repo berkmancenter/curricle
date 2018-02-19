@@ -38,6 +38,26 @@
     <basic-search-active-keywords/>
     <br>
     <basic-search-inactive-keywords/>
+    <br>
+    <div v-show="showAdvanced">
+      <table style="width: 100%">
+        <tr
+          v-for="day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']"
+          :key="day"
+        >
+          <td style="width: 100px" >
+            <b-checkbox
+              v-model="enabled[day]"
+            >
+              {{ day }}
+            </b-checkbox>
+          </td>
+          <td>
+            <time-selector :enabled="enabled[day]"/>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -46,6 +66,7 @@ import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywor
 import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
 import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
 import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
+import TimeSelector from 'components/search/TimeSelector'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
@@ -55,13 +76,23 @@ export default {
     BasicSearchFieldDropdown,
     BasicSearchFieldWeightDropdown,
     BasicSearchInactiveKeywords,
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    TimeSelector
   },
   data () {
     return {
       keyword: '',
       weight: 5,
-      applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID']
+      applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID'],
+      showAdvanced: true,
+      advanced: [],
+      enabled: {
+        Monday: true,
+        Tuesday: true,
+        Wednesday: true,
+        Thursday: true,
+        Friday: true
+      }
     }
   },
   methods: {
