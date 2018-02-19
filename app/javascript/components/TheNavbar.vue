@@ -47,7 +47,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
-import BasicSearchSemesterRange from 'components/BasicSearchSemesterRange'
+import BasicSearchSemesterRange from 'components/search/BasicSearchSemesterRange'
 
 export default {
   components: {

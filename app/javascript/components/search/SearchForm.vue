@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import BasicSearchActiveKeywords from 'components/BasicSearchActiveKeywords'
-import BasicSearchFieldDropdown from 'components/BasicSearchFieldDropdown'
-import BasicSearchFieldWeightDropdown from 'components/BasicSearchFieldWeightDropdown'
-import BasicSearchInactiveKeywords from 'components/BasicSearchInactiveKeywords'
+import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywords'
+import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
+import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
+import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {

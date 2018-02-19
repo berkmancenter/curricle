@@ -1,9 +1,9 @@
 <template>
   <div class="row mx-0">
     <div class="col-md-9 d-flex flex-column">
-      <basic-search />
+      <search-form />
       <br>
-      <curricle-search />
+      <search-results />
     </div>
     <div class="col-md-3 top-header">
       <the-sidebar />
@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import BasicSearch from 'components/BasicSearch'
-import CurricleSearch from 'components/CurricleSearch'
+import SearchForm from 'components/search/SearchForm'
+import SearchResults from 'components/search/SearchResults'
 import TheSidebar from 'components/TheSidebar'
 
 export default {
   components: {
-    BasicSearch,
-    CurricleSearch,
+    SearchForm,
+    SearchResults,
     TheSidebar
   }
 }

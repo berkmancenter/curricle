@@ -14,7 +14,7 @@
     </div>
 
     <div class="results">
-      <curricle-search-results
+      <search-result-row
         v-for="result of results"
         :key="result.id"
         :course="result"
@@ -41,12 +41,12 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
-import CurricleSearchResults from 'components/CurricleSearchResults'
+import SearchResultRow from 'components/search/SearchResultRow'
 import { scheduleMakeDescriptor, courseConflictsWithScheduleByDay } from 'lib/util'
 
 export default {
   components: {
-    CurricleSearchResults
+    SearchResultRow
   },
   data () {
     return {
