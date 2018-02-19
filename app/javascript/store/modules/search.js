@@ -12,6 +12,9 @@ const state = {
   // list of objects with { text, weight, applyTo, active }
   keywords: [],
   results: [],
+  resultsPage: 1,
+  resultsPerPage: 50,
+  resultsMoreAvailable: false,
   searchComplete: false,
   applyToOptions: [
     { text: 'Title', value: 'TITLE' },
@@ -71,6 +74,7 @@ const actions = {
 
     if (kw && kw.length) {
       state.searchComplete = false
+      commit('RESET_RESULTS_PAGE')
 
       dispatch(
         'runSearch',
@@ -78,7 +82,28 @@ const actions = {
           keywords: kw,
           handler: response => {
             state.results = response
+            state.resultsMoreAvailable = (response.length === state.resultsPerPage)
             state.searchComplete = true
+          }
+        })
+    } else {
+      state.results = []
+    }
+  },
+  runKeywordSearchAgain ({commit, state, getters, dispatch}) {
+    var kw = getters.activeKeywords.map(k => _.clone(k))
+    _.forEach(kw, k => delete k.active)
+
+    if (kw && kw.length) {
+      commit('INCREMENT_RESULTS_PAGE')
+
+      dispatch(
+        'runSearch',
+        {
+          keywords: kw,
+          handler: response => {
+            state.results = state.results.concat(response)
+            state.resultsMoreAvailable = (response.length === state.resultsPerPage)
           }
         })
     } else {
@@ -87,6 +112,9 @@ const actions = {
   },
   runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
     var vars = {}
+
+    vars.page = state.resultsPage
+    vars.per_page = state.resultsPerPage
 
     vars.semesterRange = {
       start: {
@@ -168,6 +196,12 @@ const mutations = {
   },
   SET_SEARCH_YEAR_END (state, termYear) {
     state.searchYearEnd = termYear
+  },
+  INCREMENT_RESULTS_PAGE (state) {
+    state.resultsPage += 1
+  },
+  RESET_RESULTS_PAGE (state) {
+    state.resultsPage = 1
   }
 }
 

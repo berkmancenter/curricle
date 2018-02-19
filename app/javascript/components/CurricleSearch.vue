@@ -23,6 +23,17 @@
         :is-conflicted="courseConflicts[result.id] ? courseConflicts[result.id].hasConflict : false"
         :show-conflicts="showConflicts"
       />
+
+      <div
+        class="text-center my-4"
+        v-show="resultsMoreAvailable">
+        <b-button
+          class="pointer"
+          variant="secondary"
+          @click="searchAgain">
+          More Results
+        </b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +55,7 @@ export default {
   },
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
-    ...mapState('search', ['searchComplete', 'results']),
+    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable']),
     ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['scheduledCourses']),
     currentSchedule () {
@@ -74,6 +85,11 @@ export default {
     keywordTexts () {
       return this.keywords.map(k => k['text'])
     }
+  },
+  methods: {
+    searchAgain () {
+      this.$store.dispatch('search/runKeywordSearchAgain')
+    }
   }
 }
 </script>
@@ -86,5 +102,9 @@ export default {
 
 .results {
   overflow: auto;
+}
+
+.pointer {
+  cursor: pointer;
 }
 </style>
