@@ -26,6 +26,7 @@
     "vue-apollo": "^3.0.0-alpha.3",
     "vue-loader": "^13.5.0",
     "vue-router": "^3.0.1",
+    "vue-slider-component": "^2.5.4",
     "vue-template-compiler": "^2.5.9",
     "vue-truncate-collapsed": "^1.2.0",
     "vuex": "^3.0.1"
