@@ -26,7 +26,7 @@ module Resolvers
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
         with :class_section, '1' # all class_sections should be 1
         semester_range_scope(self, args[:semester_range])
-        order_by(:term_year, :desc)
+        sort_order(self, args[:sort_by])
         paginate page: (args[:page] || 1), per_page: (args[:per_page] || 50)
       end
     end
@@ -123,6 +123,15 @@ module Resolvers
         %w[Spring Summer]
       when 'Fall'
         %w[Spring Summer Fall]
+      end
+    end
+
+    def sort_order(sunspot, sort_by)
+      sunspot.instance_eval do
+        sort_by&.each do |sort_method|
+          sort_order = sort_method == :score ? :desc : :asc
+          order_by(sort_method, sort_order)
+        end
       end
     end
   end

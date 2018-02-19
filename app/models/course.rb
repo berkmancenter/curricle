@@ -11,7 +11,13 @@ class Course < ApplicationRecord
   searchable do
     integer :id
     integer :external_course_id
-    text :title
+    text :title, boost: 5
+
+    # Need text version of title for searching and string version for sorting
+    string :title_sortable do
+      title
+    end
+
     string :term_name
     integer :term_year
     integer :academic_year

@@ -38,7 +38,16 @@ const state = {
   searchTermEnd: 'Spring',
   searchYearStart: thisYear,
   searchYearEnd: thisYear + 1,
-  searchTermUseRange: false
+  searchTermUseRange: false,
+  sortBy: 'RELEVANCE',
+  sortByOptions: [
+    { text: 'Relevance', value: 'RELEVANCE' },
+    { text: 'Title', value: 'TITLE' },
+    { text: 'School', value: 'SCHOOL' },
+    { text: 'Semester', value: 'SEMESTER' },
+    { text: 'Department', value: 'DEPARTMENT' },
+    { text: 'Course ID', value: 'COURSE_ID' }
+  ]
 }
 
 const getters = {
@@ -73,7 +82,6 @@ const actions = {
     _.forEach(kw, k => delete k.active)
 
     if (kw && kw.length) {
-      state.searchComplete = false
       commit('RESET_RESULTS_PAGE')
 
       dispatch(
@@ -114,7 +122,8 @@ const actions = {
     var vars = {}
 
     vars.page = state.resultsPage
-    vars.per_page = state.resultsPerPage
+    vars.perPage = state.resultsPerPage
+    vars.sortBy = state.sortBy
 
     vars.semesterRange = {
       start: {
@@ -164,6 +173,12 @@ const actions = {
     })
 
     promise.then(handler)
+  },
+  changeSortBy ({commit, state, dispatch}, value) {
+    if (state.sortBy !== value) {
+      commit('SET_SORT_BY', value)
+      dispatch('runKeywordSearch')
+    }
   }
 }
 
@@ -202,6 +217,9 @@ const mutations = {
   },
   RESET_RESULTS_PAGE (state) {
     state.resultsPage = 1
+  },
+  SET_SORT_BY (state, value) {
+    state.sortBy = value
   }
 }
 

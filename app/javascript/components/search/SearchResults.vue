@@ -3,8 +3,13 @@
     class="results-container"
     v-show="keywords && searchComplete">
     <div class="clearfix">
-      <div class="pull-left">
+      <div
+        class="pull-left"
+        style="width: 28%;">
         <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
+      </div>
+      <div class="pull-left">
+        <search-results-sort/>
       </div>
       <div class="pull-right text-right">
         <b-form-checkbox v-model="showConflicts">
@@ -42,11 +47,13 @@
 import { mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
 import SearchResultRow from 'components/search/SearchResultRow'
+import SearchResultsSort from 'components/search/SearchResultsSort'
 import { scheduleMakeDescriptor, courseConflictsWithScheduleByDay } from 'lib/util'
 
 export default {
   components: {
-    SearchResultRow
+    SearchResultRow,
+    SearchResultsSort
   },
   data () {
     return {
