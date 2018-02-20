@@ -46,7 +46,13 @@ export default {
     return {
       showAdvanced: false,
       useAdvanced: false,
-      advanced: [],
+      timeRanges: {
+        Mon: [7, 20],
+        Tue: [7, 20],
+        Wed: [7, 20],
+        Thu: [7, 20],
+        Fri: [7, 20]
+      },
       requireDay: {
         Mon: true,
         Tue: true,
