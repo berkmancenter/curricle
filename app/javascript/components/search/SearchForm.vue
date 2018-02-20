@@ -39,61 +39,33 @@
     <br>
     <basic-search-inactive-keywords/>
     <br>
-    <div v-show="showAdvanced">
-      <table style="width: 100%">
-        <tr
-          v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
-          :key="day"
-        >
-          <td style="width: 100px" >
-            <b-checkbox
-              v-model="requireDay[day]"
-            >
-              {{ day }}
-            </b-checkbox>
-          </td>
-          <td>
-            <time-selector v-show="requireDay[day]"/>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <advanced-search/>
   </div>
 </template>
 
 <script>
+import AdvancedSearch from 'components/search/AdvancedSearch'
 import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywords'
 import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
 import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
 import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
-import TimeSelector from 'components/search/TimeSelector'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'BasicSearch',
   components: {
+    AdvancedSearch,
     BasicSearchActiveKeywords,
     BasicSearchFieldDropdown,
     BasicSearchFieldWeightDropdown,
     BasicSearchInactiveKeywords,
-    FontAwesomeIcon,
-    TimeSelector
+    FontAwesomeIcon
   },
   data () {
     return {
       keyword: '',
       weight: 5,
-      applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID'],
-      showAdvanced: true,
-      useAdvanced: false,
-      advanced: [],
-      requireDay: {
-        Mon: true,
-        Tue: true,
-        Wed: true,
-        Thu: true,
-        Fri: true
-      }
+      applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID']
     }
   },
   methods: {
