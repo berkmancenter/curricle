@@ -61,7 +61,10 @@ export default {
 </script>
 
 <style>
-.time-selector {
-  width: 100%;
+.vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-top .vue-slider-tooltip:before {
+  display: none;
+}
+.vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-top {
+  top: 20px;
 }
 </style>
