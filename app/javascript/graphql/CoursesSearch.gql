@@ -1,7 +1,7 @@
 #import "./CourseFragment.gql"
 
-query CoursesSearch($ids: [ID!], $deluxeKeywords: [DeluxeKeywordInput!], $semesterRange: SemesterRangeInput, $page: Int, $perPage: Int, $sortBy: SortByEnum) {
-  courses(ids: $ids, deluxe_keywords: $deluxeKeywords, semester_range: $semesterRange, page: $page, per_page: $perPage, sort_by: $sortBy) {
+query CoursesSearch($ids: [ID!], $deluxeKeywords: [DeluxeKeywordInput!], $semesterRange: SemesterRangeInput, $page: Int, $perPage: Int, $sortBy: SortByEnum, $timeRanges: [TimeRangeInput!]) {
+  courses(ids: $ids, deluxe_keywords: $deluxeKeywords, semester_range: $semesterRange, page: $page, per_page: $perPage, sort_by: $sortBy, time_ranges: $timeRanges) {
     ...Course
   }
 }
