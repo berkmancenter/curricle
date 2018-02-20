@@ -142,11 +142,11 @@ const actions = {
 
     if (state.timeRanges) {
       const dayLkup = {
-        Mon: 'Monday',
-        Tue: 'Tuesday',
-        Wed: 'Wednesday',
-        Thu: 'Thursday',
-        Fri: 'Friday'
+        Mon: 'MONDAY',
+        Tue: 'TUESDAY',
+        Wed: 'WEDNESDAY',
+        Thu: 'THURSDAY',
+        Fri: 'FRIDAY'
       }
 
       vars.timeRanges = []
