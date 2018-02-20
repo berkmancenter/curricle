@@ -66,7 +66,23 @@ export default {
     }
   },
   computed: {
-    advancedSelectedDays () { return _.filter(this.requireDay).length }
+    advancedSelectedDays () { return _.filter(this.requireDay).length },
+    activeTimeRanges () {
+      if (this.useAdvanced) {
+        var keys = []
+        _.each(
+          this.requireDay,
+          (v, k) => { if (v) { keys.push(k) } }
+        )
+        return _.pick(this.timeRanges, keys)
+      }
+      return undefined
+    }
+  },
+  watch: {
+    activeTimeRanges (r) {
+      console.log('activeTimeRanges', r)
+    }
   }
 }
 </script>
