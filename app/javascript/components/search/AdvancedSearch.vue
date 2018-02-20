@@ -15,7 +15,10 @@
               </b-checkbox>
             </td>
             <td>
-              <time-selector v-show="requireDay[day]"/>
+              <time-selector
+                v-show="requireDay[day]"
+                @updatedRange="(arg) => timeRanges[day] = arg"
+              />
             </td>
           </tr>
         </table>

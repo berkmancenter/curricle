@@ -50,6 +50,11 @@ export default {
       return _.range(this.rangestart, this.rangeend + 1)
     }
   },
+  watch: {
+    selrange (r) {
+      this.$emit('updatedRange', r)
+    }
+  },
   mounted () {
     this.selrange[0] = this.rangestart
     this.selrange[1] = this.rangeend
