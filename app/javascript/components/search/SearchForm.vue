@@ -42,18 +42,18 @@
     <div v-show="showAdvanced">
       <table style="width: 100%">
         <tr
-          v-for="day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']"
+          v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
           :key="day"
         >
           <td style="width: 100px" >
             <b-checkbox
-              v-model="enabled[day]"
+              v-model="requireDay[day]"
             >
               {{ day }}
             </b-checkbox>
           </td>
           <td>
-            <time-selector :enabled="enabled[day]"/>
+            <time-selector v-show="requireDay[day]"/>
           </td>
         </tr>
       </table>
@@ -85,13 +85,14 @@ export default {
       weight: 5,
       applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID'],
       showAdvanced: true,
+      useAdvanced: false,
       advanced: [],
-      enabled: {
-        Monday: true,
-        Tuesday: true,
-        Wednesday: true,
-        Thursday: true,
-        Friday: true
+      requireDay: {
+        Mon: true,
+        Tue: true,
+        Wed: true,
+        Thu: true,
+        Fri: true
       }
     }
   },
