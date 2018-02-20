@@ -3,6 +3,7 @@
     <i
       :class="{ fa: true, 'fa-list-ul': true, active: viewmode[type] == 'list-view'}"
       @click="selectView({ view: 'list-view', type })"
+      v-show="showListView"
     />
     <i
       :class="{ fa: true, 'fa-calendar': true, active: viewmode[type] == 'semester'} "
@@ -23,6 +24,10 @@ export default {
     type: {
       type: String,
       default: 'tray'
+    },
+    showListView: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
