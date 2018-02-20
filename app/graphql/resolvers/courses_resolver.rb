@@ -29,6 +29,7 @@ module Resolvers
       Course.search do
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
         apply_filters(self, args)
+        apply_time_ranges(args[:time_ranges]) if args[:time_ranges]
         semester_range_scope(self, args[:semester_range])
         sort_order(self, args[:sort_by])
         paginate page: (args[:page] || 1), per_page: (args[:per_page] || 50)
@@ -155,6 +156,41 @@ module Resolvers
       annotated_course_ids = current_user.annotations.pluck(:course_id)
 
       courses.select { |course| course.id.in?(annotated_course_ids) }
+    end
+
+    def apply_time_ranges(times)
+      return unless times.any?
+
+      # times is an array of days of week and start/end values for
+      # valid meeting times.
+
+      # per definition, if a day is not included in this search, we
+      # *must* exclude anything which meets on this particular day.
+
+      # so for each day, we must either include it in the search or
+      # explicitly exclude it from the search.
+
+      # convert to a more useful format...
+      lkup = Hash[times.collect { |t| [t[:day_name], [t[:time_start], t[:time_end]]] }]
+      days = %w(monday tuesday wednesday thursday friday)
+      sunspot.instance_eval do
+        days.each do |d|
+          meets_on = "meets_on_#{d}"
+          if range = lkup[d]
+          # check for this day's meeting time
+            all_of do
+              with meets_on, true
+              with :meeting_time_start.greater_than_or_equal_to(range[0])
+              with :meeting_time_end.less_than_or_equal_to(range[1])
+            end
+          else
+            # no defined range, so we need to make sure the meeting
+            # times *don't* include this day
+
+            with meets_on, false
+          end
+        end
+      end
     end
   end
 end
