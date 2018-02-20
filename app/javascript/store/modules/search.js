@@ -140,6 +140,27 @@ const actions = {
       }
     }
 
+    if (state.timeRanges) {
+      const dayLkup = {
+        Mon: 'Monday',
+        Tue: 'Tuesday',
+        Wed: 'Wednesday',
+        Thu: 'Thursday',
+        Fri: 'Friday'
+      }
+
+      vars.timeRanges = []
+
+      _.each(
+        state.timeRanges,
+        (v, k) => {
+          if (dayLkup[k]) {
+            vars.timeRanges.push([dayLkup[k], ...v])
+          }
+        }
+      )
+    }
+
     if (ids && ids.length) {
       vars.ids = ids
     } else if (keywords && keywords.length) {
