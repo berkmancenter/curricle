@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import _ from 'lodash'
 import TimeSelector from 'components/search/TimeSelector'
 
@@ -81,8 +82,11 @@ export default {
   },
   watch: {
     activeTimeRanges (r) {
-      console.log('activeTimeRanges', r)
+      this.setTimeRanges(r)
     }
+  },
+  methods: {
+    ...mapActions('search', ['setTimeRanges'])
   }
 }
 </script>

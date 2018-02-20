@@ -47,7 +47,8 @@ const state = {
     { text: 'Semester', value: 'SEMESTER' },
     { text: 'Department', value: 'DEPARTMENT' },
     { text: 'Course ID', value: 'COURSE_ID' }
-  ]
+  ],
+  timeRanges: undefined
 }
 
 const getters = {
@@ -179,6 +180,9 @@ const actions = {
       commit('SET_SORT_BY', value)
       dispatch('runKeywordSearch')
     }
+  },
+  setTimeRanges ({commit}, r) {
+    commit('SET_TIME_RANGES', r)
   }
 }
 
@@ -220,6 +224,9 @@ const mutations = {
   },
   SET_SORT_BY (state, value) {
     state.sortBy = value
+  },
+  SET_TIME_RANGES (state, r) {
+    state.timeRanges = r
   }
 }
 
