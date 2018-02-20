@@ -29,7 +29,7 @@ module Resolvers
       Course.search do
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
         apply_filters(self, args)
-        apply_time_ranges(args[:time_ranges]) if args[:time_ranges]
+        apply_time_ranges(self, args[:time_ranges]) if args[:time_ranges]
         semester_range_scope(self, args[:semester_range])
         sort_order(self, args[:sort_by])
         paginate page: (args[:page] || 1), per_page: (args[:per_page] || 50)
@@ -158,7 +158,7 @@ module Resolvers
       courses.select { |course| course.id.in?(annotated_course_ids) }
     end
 
-    def apply_time_ranges(times)
+    def apply_time_ranges(sunspot, times)
       return unless times.any?
 
       # times is an array of days of week and start/end values for
