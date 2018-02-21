@@ -11,20 +11,24 @@ module Resolvers
       'TITLE' => :title
     }.freeze
 
-    def call(_obj, args, _ctx)
+    def call(_obj, args, ctx)
       return Course.find(args[:ids]) if args[:ids].present?
 
       search = search_by_keywords(args)
 
       return if search.blank?
 
-      search.results
+      if args[:annotated].present?
+        filter_by_annotation(search.results, ctx[:current_user])
+      else
+        search.results
+      end
     end
 
     def search_by_keywords(args)
       Course.search do
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
-        with :class_section, '1' # all class_sections should be 1
+        apply_filters(self, args)
         semester_range_scope(self, args[:semester_range])
         sort_order(self, args[:sort_by])
         paginate page: (args[:page] || 1), per_page: (args[:per_page] || 50)
@@ -133,6 +137,24 @@ module Resolvers
           order_by(sort_method, sort_order)
         end
       end
+    end
+
+    def apply_filters(sunspot, args)
+      sunspot.instance_eval do
+        with :class_section, '1' # all class_sections should be 1
+        with :academic_group, Array(args[:schools])
+        with :class_academic_org_description, Array(args[:departments])
+        with :subject, Array(args[:subjects])
+        with :component, Array(args[:components])
+      end
+    end
+
+    def filter_by_annotation(courses, current_user)
+      return courses if current_user.blank?
+
+      annotated_course_ids = current_user.annotations.pluck(:course_id)
+
+      courses.select { |course| course.id.in?(annotated_course_ids) }
     end
   end
 end

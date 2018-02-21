@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+def format_as_constant(str)
+  str.gsub(%r{[\s\-\/\.]}, '_').gsub(/[^a-zA-Z0-9\_]/, '').upcase
+end
+
+def generate_enum_values(attr)
+  strs = Course.distinct.pluck(attr).compact.sort
+
+  strs.each { |str| value(format_as_constant(str), str, value: str) }
+end
+
 SortByEnum = GraphQL::EnumType.define do
   name 'SortByEnum'
 
@@ -9,6 +19,30 @@ SortByEnum = GraphQL::EnumType.define do
   value('SCHOOL', 'School', value: %i[academic_group])
   value('SEMESTER', 'Semester', value: %i[academic_year term_name])
   value('TITLE', 'Title', value: %i[title_sortable])
+end
+
+SchoolEnum = GraphQL::EnumType.define do
+  name 'SchoolEnum'
+
+  generate_enum_values(:academic_group)
+end
+
+DepartmentEnum = GraphQL::EnumType.define do
+  name 'DepartmentEnum'
+
+  generate_enum_values(:class_academic_org_description)
+end
+
+SubjectEnum = GraphQL::EnumType.define do
+  name 'SubjectEnum'
+
+  generate_enum_values(:subject)
+end
+
+ComponentEnum = GraphQL::EnumType.define do
+  name 'ComponentEnum'
+
+  generate_enum_values(:component)
 end
 
 Types::QueryType = GraphQL::ObjectType.define do
@@ -24,6 +58,11 @@ Types::QueryType = GraphQL::ObjectType.define do
     argument :per_page, types.Int, 'Number of courses to return'
     argument :page, types.Int, 'Pagination page'
     argument :sort_by, SortByEnum, 'Sort method for search results'
+    argument :schools, types[!SchoolEnum], 'Filter results by school'
+    argument :departments, types[!DepartmentEnum], 'Filter results by department'
+    argument :subjects, types[!SubjectEnum], 'Filter results by subject'
+    argument :components, types[!ComponentEnum], 'Filter results by component'
+    argument :annotated, types.Boolean, 'Only return courses annotated by current user'
 
     resolve Resolvers::CoursesResolver.new
   end
