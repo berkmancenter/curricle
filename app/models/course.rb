@@ -92,10 +92,6 @@ class Course < ApplicationRecord
     end
   end
 
-  def self.courses_by_day_and_term(day, term_name, term_year)
-    Course.joins(:course_meeting_patterns).select('courses.id, courses.external_course_id as external_id, title').where("lower(courses.term_name) = ? and courses.term_year = ? and course_meeting_patterns.#{day} = ?", term_name.downcase, term_year, true).distinct
-  end
-
   def subject_descriptions
     where.not(subject_description: [nil, '']).order(:subject_description).distinct.pluck(:subject_description)
   end
