@@ -5,33 +5,28 @@
     <div class="col-md-1">
       <course-action
         type="tray"
-        :course="course.id"
-      />
+        :course="course.id"/>
       <br>
       <course-action
         type="schedule"
-        :course="course.id"
-      />
+        :course="course.id"/>
       <br>
       <course-action
         type="annotated"
-        :course="course.id"
-      />
+        :course="course.id"/>
       <br>
       <course-action
         type="tagged"
-        :course="course.id"
-      />
+        :course="course.id"/>
       <br>
       <course-action
         type="shareable"
-        :course="course.id"
-      />
+        :course="course.id"/>
     </div>
+
     <div
       class="col-md-2 pointer"
-      @click="selectCourse(course)"
-    >
+      @click="selectCourse(course)">
       <strong>
         {{ course.academic_group }}
         <br>
@@ -44,10 +39,10 @@
         Section {{ course.class_section }}
       </strong>
     </div>
+
     <div
       class="col-md-2 pointer"
-      @click="selectCourse(course)"
-    >
+      @click="selectCourse(course)">
       Component: <strong>{{ course.component }}</strong>
       <br>
       Grading Basis:
@@ -61,10 +56,10 @@
         </strong>
       </span>
     </div>
+
     <div
       class="col-md-5 pointer"
-      @click="selectCourse(course)"
-    >
+      @click="selectCourse(course)">
       <h5>{{ course.title }}</h5>
       <truncate
         class="course_description"
@@ -75,11 +70,11 @@
         :text="course.course_description_long"
         v-if="course.course_description_long"/>
     </div>
+
     <div class="col-md-2 px-0">
       <class-meeting-time
         :schedule="course.schedule"
-        :conflicts="conflicts"
-      />
+        :conflicts="conflicts"/>
     </div>
   </div>
 </template>
@@ -143,6 +138,7 @@ export default {
     border-left-style: solid;
     border-top: 1px solid #ccc;
     margin-left: 0;
+    margin-right: 25px;
     padding-top: 10px;
 
     &.selected {
