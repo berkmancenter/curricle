@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-# Pull current user from Rails environment and pass its token to API
-GraphiQL::Rails.config.headers['Authorization'] = lambda do |context|
-  current_user = context.request.env['warden'].user
+if Rails.env.development?
+  # Pull current user from Rails environment and pass its token to API
+  GraphiQL::Rails.config.headers['Authorization'] = lambda do |context|
+    current_user = context.request.env['warden'].user
 
-  return if current_user.blank?
+    return if current_user.blank?
 
-  "Bearer #{current_user.api_token}"
+    "Bearer #{current_user.api_token}"
+  end
 end
