@@ -41,6 +41,9 @@ Curricle uses a Rails 5.1 backend running in API mode to serve a GraphQL API and
 
 1. Create databases and populate with seed data:
     * `bin/rails db:setup`
+    
+1. Create the initial Solr search index:
+    * `bin/rails sunspot:reindex`
 
 1. Start Rails application server:
     * `bin/rails s`
