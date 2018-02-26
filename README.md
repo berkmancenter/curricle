@@ -20,14 +20,14 @@ Curricle uses a Rails 5.1 backend running in API mode to serve a GraphQL API and
 1. Install JavaScript dependencies:
     * `yarn install`
 
-1. Build Vue.js application:
-    * `bin/webpack`
-
 1. Set up host-specific configuration files and edit as needed:
     * `cp config/database.yml.example config/database.yml`
     * `cp config/puma.rb.example config/puma.rb`
     * `cp config/sunspot.yml.example config/sunspot.yml`
     * `cp config/webpacker.yml.example config/webpacker.yml`
+
+1. Build Vue.js application:
+    * `bin/webpack`
 
 1. Place seed files in filesystem:
    * Obtain these files and place them in `lib/seeds/`:
