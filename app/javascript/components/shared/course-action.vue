@@ -10,7 +10,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
+import USER_COURSE_REMOVE_MUTATION from '../../graphql/UserCourseRemove.gql'
+import USER_COURSE_SET_MUTATION from '../../graphql/UserCourseSet.gql'
 
 export default {
   props: {
@@ -21,11 +23,6 @@ export default {
     course: {
       type: String,
       required: true
-    },
-    clickHandler: {
-      type: Function,
-      required: false,
-      default: null
     }
   },
   data () {
@@ -85,22 +82,48 @@ export default {
       return theClass
     }
   },
-  mounted () {
-  },
   methods: {
-    ...mapActions('user', ['courseHasStatus', 'toggleCourseStatus']),
     click () {
-      if (this.config.clickable || this.clickHandler) {
-        if (this.clickHandler) {
-          this.clickHandler({ type: this.type, course: this.course })
-        } else {
-          this.toggleCourseStatus({ type: this.type, course: this.course })
-        }
+      if (!this.config.clickable) { return }
+
+      if (this.type === 'tray' && this.courseflags[this.type][this.course]) {
+        this.removeUserCourse()
+      } else {
+        this.setUserCourse()
       }
+    },
+    setUserCourse () {
+      var includeInPath = false
+
+      if (this.type === 'schedule') {
+        includeInPath = !this.courseflags[this.type][this.course]
+      }
+
+      this.$apollo.provider.defaultClient.mutate({
+        mutation: USER_COURSE_SET_MUTATION,
+        variables: {
+          courseId: this.course,
+          includeInPath: includeInPath
+        }
+      }).then(
+        this.toggleCourseStatus()
+      )
+    },
+    removeUserCourse () {
+      this.$apollo.provider.defaultClient.mutate({
+        mutation: USER_COURSE_REMOVE_MUTATION,
+        variables: {
+          courseId: this.course
+        }
+      }).then(
+        this.toggleCourseStatus()
+      )
+    },
+    toggleCourseStatus () {
+      this.$store.dispatch('user/toggleCourseStatus', { type: this.type, course: this.course })
     }
   }
 }
-
 </script>
 
 <style scoped>

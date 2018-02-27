@@ -1,8 +1,9 @@
 // Manipulation of user-related data
 
-import axios from 'axios'
 import _ from 'lodash'
 import Vue from 'vue/dist/vue.esm'
+import apolloClient from 'apollo'
+import USER_COURSES_QUERY from '../../graphql/UserCourses.gql'
 
 /*
  * Represent user-specific data; courses are ids for the most part,
@@ -75,12 +76,6 @@ const actions = {
     console.error("Don't use this entry point any more (change caller!)")
   },
 
-  /* Here we do a fresh state reset and pull user's information from
-   * API.  We are converting inefficiently here because we will be
-   * using a new GraphQL endpoint which will just return this specific
-   * data in the format we're converting to here, so making everything
-   * work relative to this new data format.
-   */
   getUserData ({ commit, state, dispatch }) {
     commit('SET_API_TOKEN')
     commit('SET_SCHEDULE_TOKEN')
@@ -89,40 +84,31 @@ const actions = {
       return
     }
 
-    var courseUrl = '/courses/user_courses'
+    apolloClient.query({
+      query: USER_COURSES_QUERY,
+      variables: { scheduleToken: state.sharedScheduleToken }
+    }).then(response => {
+      const userCourses = response.data.user_courses
 
-    if (state.sharedScheduleToken) {
-      courseUrl += `?schedule_token=${state.sharedScheduleToken}`
-    }
-
-    var ids = []
-
-    axios
-      .get(courseUrl)
-      .then((response) => {
+      if (userCourses.length) {
         _.each(
-          response.data.tray,
-          t => {
-            ids.push(t.id)
+          userCourses,
+          course => {
+            commit('SET_USER_FLAG', { type: 'tray', course: course.id, value: true })
 
-            commit('SET_USER_FLAG', { type: 'tray', course: t.id, value: true })
-            if (t.user_schedule && t.user_schedule.length && t.user_schedule[0].include_in_path) {
-              commit('SET_USER_FLAG', { type: 'schedule', course: t.id, value: true })
+            if (course.annotation) {
+              commit('SET_USER_FLAG', { type: 'annotated', course: course.id, value: true })
             }
-            if (t.user_annotations && t.user_annotations.length) {
-              commit('SET_USER_FLAG', { type: 'annotated', course: t.id, value: t.user_annotations })
-            }
-            if (t.user_tags && t.user_tags.length) {
-              commit('SET_USER_FLAG', { type: 'tagged', course: t.id, value: t.user_tags })
+
+            if (course.user_course.include_in_path) {
+              commit('SET_USER_FLAG', { type: 'schedule', course: course.id, value: true })
             }
           }
         )
-
-        if (ids.length) {
-          // now actually update the courses
-          dispatch('courses/resolveCourses', ids, { root: true })
-        }
-      })
+        // now actually update the courses
+        dispatch('courses/resolveCourses', _.map(userCourses, 'id'), { root: true })
+      }
+    })
   },
 
   /* appends an object mapping of course ids to course objects to the local course cache. */
@@ -147,36 +133,18 @@ const actions = {
     return state.courseflags[type][course]
   },
 
-  /*
-   * toggleCourseStatus does whatever is needed (web requests, etc) in
-   * order to change the status of the course information.  In all
-   * likelihood this will dispatch to other actions/handlers.
-   */
-
   toggleCourseStatus ({ state, commit, dispatch }, { course, type }) {
     if (type && course) {
-      var removing, origState
+      var origState = !!state.courseflags[type][course]
 
-      removing = origState = !!state.courseflags[type][course]
+      commit('SET_USER_FLAG', { type, course, value: !origState })
 
-      if (['tray', 'schedule'].includes(type)) {
-        // optimistic setting for ideal UI responsiveness
-        commit('SET_USER_FLAG', { type, course, value: !origState })
+      if (type === 'tray' && origState === true) {
+        commit('SET_USER_FLAG', { type: 'schedule', course, value: false })
+      }
 
-        var url = '/courses/' + (removing ? 'remove_from_' : 'add_to_') + type
-        var promise = removing ? axios.delete(url, { params: { id: course } }) : axios.post(url, { id: course })
-
-        // all handlers are the same, basically optimize for success case and set back if we need to...
-        promise.then(
-          // success case: notify success?
-          () => {},
-          // failure case: rollback optimistic change
-          () => {
-            commit('SET_USER_FLAG', { type, course, value: origState })
-          }
-        )
-      } else {
-        commit('SET_USER_FLAG', { type, course, value: !origState })
+      if (type === 'schedule' && origState === false) {
+        commit('SET_USER_FLAG', { type: 'tray', course, value: true })
       }
     }
   },

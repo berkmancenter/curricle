@@ -1,0 +1,12 @@
+query UserCourses($scheduleToken: String) {
+  user_courses(schedule_token: $scheduleToken) {
+    id
+    annotation {
+      id
+    }
+    user_course {
+      id
+      include_in_path
+    }
+  }
+}

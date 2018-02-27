@@ -1,0 +1,7 @@
+#import "./UserCourseFragment.gql"
+
+mutation userCourseSet($courseId: ID!, $includeInPath: Boolean) {
+    userCourseSet(course_id: $courseId, include_in_path: $includeInPath) {
+        ...UserCourse
+    }
+}

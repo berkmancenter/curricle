@@ -11,16 +11,6 @@ Rails.application.routes.draw do
 
   post '/graphql', to: 'graphql#execute'
 
-  resources :courses do
-    collection do
-      post :add_to_tray
-      delete :remove_from_tray
-      post :add_to_schedule
-      delete :remove_from_schedule
-      get :user_courses
-    end
-  end
-
   resources :tags do
     collection do
       get :search

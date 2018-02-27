@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Course < ApplicationRecord
-  has_many :course_meeting_patterns
-  has_many :course_instructors
-  has_many :course_readings
-  has_many :tags
-  has_many :user_courses
-  has_many :annotations
+  has_many :course_meeting_patterns, dependent: :destroy
+  has_many :course_instructors, dependent: :destroy
+  has_many :course_readings, dependent: :destroy
+  has_many :tags, dependent: :destroy
+  has_many :user_courses, dependent: :destroy
+  has_many :users, through: :user_courses, inverse_of: :courses
+  has_many :annotations, dependent: :destroy
 
   searchable do
     integer :id
@@ -69,43 +70,6 @@ class Course < ApplicationRecord
 
   before_save :set_division
 
-  def for_day(_day, query_params = {})
-    query_params[:id] = CourseMeetingPattern.select(:course_id).where('meets_on_#{day}': true)
-    Course.where(query_params).distinct
-  end
-
-  def groups(query = nil)
-    query.pluck(:division_description).uniq
-  end
-
-  def schools
-    where.not(academic_group: [nil, '']).order(:academic_group).distinct.pluck(:academic_group)
-  end
-
-  def self.departments
-    where.not(class_academic_org_description: [nil, '']).order(:class_academic_org_description).distinct.pluck(:class_academic_org_description)
-  end
-
-  def self.semesters
-    select('DISTINCT on (term_name,term_year) term_name, term_year').order(term_year: :asc, term_name: :desc).map do |term|
-      "#{term.term_name} #{term.term_year}"
-    end
-  end
-
-  def subject_descriptions
-    where.not(subject_description: [nil, '']).order(:subject_description).distinct.pluck(:subject_description)
-  end
-
-  def component_types
-    where.not(component: [nil, '']).order(:component).distinct.pluck(:component)
-  end
-
-  def terms
-    select('DISTINCT on (term_name,term_year) term_name, term_year').where('term_year >= ?', Time.zone.today.year).order(term_year: :asc, term_name: :desc).map do |term|
-      "#{term.term_name}_#{term.term_year}"
-    end
-  end
-
   def set_division
     mapping = DivisionMapping.find_by(
       academic_group: academic_group,
@@ -134,111 +98,9 @@ class Course < ApplicationRecord
     save
   end
 
-  def meeting
-    course_meeting_patterns.first
-  end
-
-  def meeting_with_tods
-    return if meeting.blank?
-
-    cmp_hash = meeting.attributes
-    cmp_hash['meeting_time_start_tod'] = meeting.meeting_time_start_tod
-    cmp_hash['meeting_time_end_tod'] = meeting.meeting_time_end_tod
-    cmp_hash
-  end
-
-  def instructor
-    course_instructors.find_by(
-      term_name: term_name,
-      term_year: term_year,
-      class_section: class_section
-    )
-  end
-
   def user_tags
     tags.where(
       user_id: User.current
     )
-  end
-
-  def user_annotations
-    annotations.where(
-      user_id: User.current
-    )
-  end
-
-  def user_schedule
-    user_courses.where(
-      user_id: User.current
-    )
-  end
-
-  def subject_and_catalog
-    "#{subject} #{catalog_number}"
-  end
-
-  # Users can select from a set of keyword options to query against. This is a map of those
-  # options, their metadata, and their related fields in the database
-  def self.keyword_options_map
-    {
-      title: {
-        display: 'Title',
-        default: true,
-        db_field: {
-          table: :courses,
-          columns: %i[title]
-        }
-      },
-      description: {
-        display: 'Description',
-        default: true,
-        db_field: {
-          table: :courses,
-          columns: %i[course_description_long]
-        }
-      },
-      instructor: {
-        display: 'Instructor',
-        default: false,
-        db_field: {
-          table: :course_instructors,
-          columns: %i[first_name last_name]
-        }
-      },
-      library: {
-        display: 'Course Readings',
-        default: false,
-        db_field: {
-          table: :course_readings,
-          columns: %i[reading_title author_last_name author_first_name]
-        }
-      }
-    }
-  end
-
-  # Used to setup and optionally populate the schedule mapping used in the schedule filter
-  def self.schedule_filter_map(values = {})
-    {
-      monday: {
-        min: values['monday_min'],
-        max: values['monday_max']
-      },
-      tuesday: {
-        min: values['tuesday_min'],
-        max: values['tuesday_max']
-      },
-      wednesday: {
-        min: values['wednesday_min'],
-        max: values['wednesday_max']
-      },
-      thursday: {
-        min: values['thursday_min'],
-        max: values['thursday_max']
-      },
-      friday: {
-        min: values['friday_min'],
-        max: values['friday_max']
-      }
-    }
   end
 end

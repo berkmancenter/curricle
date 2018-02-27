@@ -1,0 +1,4 @@
+fragment UserCourse on UserCourse {
+  id
+  include_in_path
+}

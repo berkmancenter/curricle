@@ -82,4 +82,12 @@ Types::QueryType = GraphQL::ObjectType.define do
 
     resolve ->(_obj, args, _ctx) { Course.find(args[:id]) }
   end
+
+  field :user_courses, !types[Types::CourseType] do
+    description "Return user's selected courses"
+
+    argument :schedule_token, types.String, 'Token for looking up a shared schedule'
+
+    resolve Resolvers::UserCoursesResolver.new
+  end
 end

@@ -69,4 +69,16 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :title, types.String, 'Title'
   field :units_maximum, types.Int, 'Maximum units'
   field :updated_at, !types.String, 'Updated at'
+
+  field :user_course, Types::UserCourseType, "Metadata about the user's course selection" do
+    resolve(
+      lambda do |course, _args, context|
+        BatchLoader.for(course.id).batch do |course_ids, loader|
+          UserCourse.where(course: course_ids, user: context[:current_user]).each do |user_course|
+            loader.call(user_course.course_id, user_course)
+          end
+        end
+      end
+    )
+  end
 end
