@@ -173,22 +173,39 @@ module Resolvers
       # convert to a more useful format...
       lkup = Hash[times.collect { |t| [t[:day_name], [t[:time_start], t[:time_end]]] }]
       days = %w(monday tuesday wednesday thursday friday)
-      sunspot.instance_eval do
-        days.each do |d|
-          meets_on = "meets_on_#{d}"
-          if range = lkup[d]
-          # check for this day's meeting time
-            all_of do
-              with meets_on, true
-              with :meeting_time_start.greater_than_or_equal_to(range[0])
-              with :meeting_time_end.less_than_or_equal_to(range[1])
-            end
-          else
-            # no defined range, so we need to make sure the meeting
-            # times *don't* include this day
 
-            with meets_on, false
-          end
+      excludes = []
+      includes = []
+
+      days.each do |d|
+        if lkup[d.capitalize]
+          includes.push(d)
+        else
+          excludes.push(d)
+        end
+      end
+
+      sunspot.instance_eval do
+        excludes.each{ |d| with "meets_on_#{d}", false }
+        any_of do
+          includes.each{
+            |d|
+            any_of do
+              with "meets_on_#{d}", false
+              all_of do
+                range = lkup[d.capitalize]
+                with "meets_on_#{d}", true
+                with(:meeting_time_start).greater_than_or_equal_to(range[0])
+                with(:meeting_time_end).less_than_or_equal_to(range[1])
+                # any_of do
+                #   (range[0]..24).to_a.each{|a| with(:meeting_time_start, a) }
+                # end
+                # any_of do
+                #   (0..range[1]).to_a.each{|a| with(:meeting_time_end, a) }
+                # end
+              end
+            end
+          }
         end
       end
     end
