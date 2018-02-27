@@ -8,6 +8,9 @@ import { transformSchedule } from 'lib/util'
 
 const thisYear = (new Date()).getUTCFullYear()
 
+/* NOTE: any search state that affects the search results needs to be
+ * taught to serializeSearch() and deserializeSearch() */
+
 const state = {
   // list of objects with { text, weight, applyTo, active }
   keywords: [],
