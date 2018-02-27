@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>
-      <div v-if="showAdvanced">
+      <div
+        v-if="showAdvanced"
+        class="advanced-search">
         <table style="width: 100%">
           <tr
             v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
@@ -24,13 +26,16 @@
         </table>
       </div>
     </div>
-    <div>
+    <div class="advanced-search-tabs">
       <span
         @click="useAdvanced = true; showAdvanced = !showAdvanced"
+        :class="{'advanced-search-tab': true, selected: showAdvanced}"
       >
         Advanced Search <span v-show="useAdvanced">({{ advancedSelectedDays }})</span>
       </span>
-      <span>
+      <span
+        :class="{'advanced-search-tab': true, selected: false}"
+      >
         Filter Results (0)
       </span>
     </div>
@@ -92,5 +97,24 @@ export default {
 </script>
 
 <style>
+.advanced-search {
+  background-color: #EEE;
+  padding: 1em 2em 1em 1em;
+}
 
+.advanced-search-tabs {
+  margin: auto;
+  width: 300px;
+}
+
+.advanced-search-tab {
+  background-color: #CCC;
+  padding: .5em;
+  padding-top: 3px;
+  margin: 0;
+}
+
+.advanced-search-tab.selected {
+  background-color: #EEE;
+}
 </style>
