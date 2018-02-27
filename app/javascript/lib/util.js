@@ -696,3 +696,106 @@ function _overlapOneDay ([s1, s2]) {
       }) !== -1
   }
 }
+
+/* routines to serialize/deserialize search object state from a URL.
+ * This might get ugly... */
+
+function deserializeSearch (route) {
+  var obj = {}
+  var p = route.params[0]
+
+  /* first pull the semester range to search the catalog */
+  var s = /^(Spring|Summer|Fall)(\d+)(?:-(Spring|Summer|Fall)(\d+))?\/(.*)/.exec(p)
+
+  /* minimum requirements for continuing */
+  if (s[1] && s[2]) {
+    obj.searchTermStart = s[1]
+    obj.searchYearStart = s[2]
+    obj.searchTermUseRange = !!s[4]
+    obj.searchTermEnd = s[3]
+    obj.searchYearEnd = s[4]
+
+    p = s[5]
+
+    var tokens = {}
+    /* gather keywords */
+    _.each(
+      p.split('/'),
+      e => {
+        if (e) {
+          var res = /^([a-z]):(.*)/.exec(e)
+          var [ , type, rest ] = res
+          if (type) {
+            if (!tokens[type]) { tokens[type] = [] }
+            tokens[type].push(rest)
+          }
+        }
+      }
+    )
+
+    /* handle keywords */
+    if (tokens.k) {
+      var kw = []
+      _.each(
+        tokens.k,
+        k => {
+          // format is type, optional weight, colon, encoded search term
+          var res = /^([atdirc]+)(\d*):(.*)$/.exec(k)
+          if (res) {
+            var [ , types, weight, term ] = res
+            kw.push({ applyTo: searchTypes(types), weight, text: decodeURI(term) })
+          }
+        }
+      )
+      obj.keywords = kw
+    }
+
+    /* handle sort by */
+    if (tokens.s && tokens.s.length === 1) {
+      obj.sortBy = tokens.s[0]
+    }
+
+    /* handle time ranges */
+    if (tokens.r && tokens.r.length === 1) {
+      var ranges = []
+      _.each(
+        tokens.r[0].split(':'),
+        r => {
+          // format is either empty (i.e., disabled) or \d+-\d+
+          var res = /^(\d+)-(\d+)$/.exec(r)
+          if (res) {
+            ranges.push([res[1], res[2]])
+          } else {
+            ranges.push(undefined)
+          }
+        }
+      )
+      obj.timeRanges = ranges
+    }
+  } else {
+    console.error('couldn\'t parse catalog range')
+  }
+  return obj
+}
+
+function searchTypes (str) {
+  // special-case:
+  if (str === 'a') {
+    str = 'tdirc'
+  }
+  const lkup = {
+    t: 'TITLE',
+    d: 'DESCRIPTION',
+    i: 'INSTRUCTOR',
+    r: 'READINGS',
+    c: 'COURSE_ID'
+  }
+  var types =
+      _(str.split(''))
+        .uniq()
+        .sort()
+        .value()
+  return _(lkup).pick(types).values().value()
+}
+
+export {deserializeSearch}
