@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div v-show="showAdvanced">
+      <div v-if="showAdvanced">
         <table style="width: 100%">
           <tr
             v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"

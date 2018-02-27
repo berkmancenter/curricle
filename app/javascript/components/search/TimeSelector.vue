@@ -10,7 +10,7 @@
       :min="1"
       :max="24"
       :interval="1"
-      :show="true"
+      :show="enabled"
       :disabled="!enabled"
       :formatter="formatTime"
     />
