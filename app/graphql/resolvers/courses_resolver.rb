@@ -195,14 +195,14 @@ module Resolvers
               all_of do
                 range = lkup[d.capitalize]
                 with "meets_on_#{d}", true
-                with(:meeting_time_start).greater_than_or_equal_to(range[0])
-                with(:meeting_time_end).less_than_or_equal_to(range[1])
-                # any_of do
-                #   (range[0]..24).to_a.each{|a| with(:meeting_time_start, a) }
-                # end
-                # any_of do
-                #   (0..range[1]).to_a.each{|a| with(:meeting_time_end, a) }
-                # end
+                # with(:meeting_time_start).greater_than_or_equal_to(range[0])
+                # with(:meeting_time_end).less_than_or_equal_to(range[1])
+                any_of do
+                  (range[0]..24).to_a.each{|a| with(:meeting_time_start, a) }
+                end
+                any_of do
+                  (0..range[1]).to_a.each{|a| with(:meeting_time_end, a) }
+                end
               end
             end
           }
