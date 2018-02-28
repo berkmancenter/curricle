@@ -44,12 +44,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AdvancedSearch from 'components/search/AdvancedSearch'
 import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywords'
 import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
 import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
 import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
+import { serializeSearch } from 'lib/util'
 
 export default {
   name: 'BasicSearch',
@@ -68,6 +71,12 @@ export default {
       applyTo: ['TITLE', 'DESCRIPTION', 'INSTRUCTOR', 'COURSE_ID']
     }
   },
+  computed: {
+    ...mapGetters('search', ['searchSnapshot']),
+    serSearch () {
+      return serializeSearch(this.searchSnapshot)
+    }
+  },
   methods: {
     addActiveKeyword () {
       if (this.keyword) {
@@ -77,6 +86,7 @@ export default {
       this.keyword = ''
     },
     performSearch () {
+      this.$router.push('/search/' + this.serSearch)
       this.$store.dispatch('search/runKeywordSearch')
     }
   }
