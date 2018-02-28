@@ -54,9 +54,25 @@ const state = {
   timeRanges: undefined
 }
 
+const snapshotProps = [
+  'searchTermStart',
+  'searchYearStart',
+  'searchTermEnd',
+  'searchYearEnd',
+  'searchTermUseRange',
+  'keywords',
+  'sortBy',
+  'timeRanges'
+]
+
 const getters = {
   activeKeywords: state => state.keywords.filter(kw => kw.active),
-  inactiveKeywords: state => state.keywords.filter(kw => !kw.active)
+  inactiveKeywords: state => state.keywords.filter(kw => !kw.active),
+  searchSnapshot (state) {
+    var obj = _.cloneDeep(_.pick(state, snapshotProps))
+    _.remove(obj.keywords, '!active')
+    return obj
+  }
 }
 
 const actions = {
