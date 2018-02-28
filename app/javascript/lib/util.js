@@ -710,10 +710,10 @@ function deserializeSearch (route) {
   /* minimum requirements for continuing */
   if (s[1] && s[2]) {
     obj.searchTermStart = s[1]
-    obj.searchYearStart = s[2]
+    obj.searchYearStart = s[2] | 0 // force numeric
     obj.searchTermUseRange = !!s[4]
     obj.searchTermEnd = s[3]
-    obj.searchYearEnd = s[4]
+    obj.searchYearEnd = s[4] ? (s[4] | 0) : undefined // force numeric
 
     p = s[5]
 
@@ -748,7 +748,7 @@ function deserializeSearch (route) {
           var res = /^([atdirc]+)(\d*):(.*)$/.exec(k)
           if (res) {
             var [ , types, weight, term ] = res
-            kw.push({ applyTo: searchTypes(types), weight, text: decodeURI(term) })
+            kw.push({ applyTo: searchTypes(types), weight: weight | 0, text: decodeURI(term) })
           }
         }
       )
