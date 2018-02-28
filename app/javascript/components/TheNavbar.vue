@@ -16,9 +16,9 @@
       <b-navbar-nav
         class="ml-auto"
         v-if="userAuthenticated">
-        <b-nav-item to="search">Search</b-nav-item>
-        <b-nav-item to="explore">Explore</b-nav-item>
-        <b-nav-item to="plan">Plan</b-nav-item>
+        <b-nav-item to="/search">Search</b-nav-item>
+        <b-nav-item to="/explore">Explore</b-nav-item>
+        <b-nav-item to="/plan">Plan</b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto tray-li">
