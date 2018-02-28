@@ -74,7 +74,7 @@ const actions = {
   removeKeyword ({commit, state}, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
-      commit('DELETE_KEYWORD', keyword)
+      commit('DELETE_KEYWORD', idx)
     }
   },
   runKeywordSearch ({commit, state, getters, dispatch}) {
