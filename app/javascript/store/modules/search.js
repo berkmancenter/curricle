@@ -223,6 +223,9 @@ const actions = {
   },
   setTimeRanges ({commit}, r) {
     commit('SET_TIME_RANGES', r)
+  },
+  populateSearchState ({commit}, obj) {
+    commit('SET_SEARCH_STATE', obj)
   }
 }
 
@@ -267,6 +270,21 @@ const mutations = {
   },
   SET_TIME_RANGES (state, r) {
     state.timeRanges = r
+  },
+  SET_SEARCH_STATE (state, o) {
+    // unpack the search state object from the state here
+    // should probably be more validation but assuming this was done upstream
+
+    _.each(
+      snapshotProps,
+      p => { state[p] = o[p] }
+    )
+
+    // special handling for keywords to add the active flag
+    if (o.keywords) {
+      // we know we just replaced state.keywords in whole, so only keywords will be active here
+      _.each(state.keywords, k => { k.active = true })
+    }
   }
 }
 
