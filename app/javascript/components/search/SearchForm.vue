@@ -86,6 +86,7 @@ export default {
       this.keyword = ''
     },
     performSearch () {
+      this.$store.dispatch('search/saveSearchInHistory')
       this.$router.push('/search/' + this.serSearch)
       this.$store.dispatch('search/runKeywordSearch')
     }
