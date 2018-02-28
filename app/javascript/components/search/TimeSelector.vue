@@ -37,11 +37,11 @@ export default {
     },
     selstart: {
       type: Number,
-      required: true
+      default: 7
     },
     selend: {
       type: Number,
-      required: true
+      default: 20
     },
     enabled: {
       type: Boolean,
