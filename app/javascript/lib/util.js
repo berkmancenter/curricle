@@ -799,3 +799,55 @@ function searchTypes (str) {
 }
 
 export {deserializeSearch}
+
+function serializeSearch (obj) {
+  // TODO: sanity-checks?
+
+  var cat = obj.searchTermStart + obj.searchYearStart
+  if (obj.searchTermUseRange) {
+    cat += '-' + obj.searchTermEnd + obj.searchYearEnd
+  }
+
+  var elems = {}
+
+  /* keywords */
+  if (obj.keywords) {
+    elems.k = _.map(
+      obj.keywords,
+      ({text, applyTo, weight}) => applyToString(applyTo) + weight + ':' + encodeURI(text)
+    )
+  }
+
+  /* sortBy */
+  if (obj.sortBy) {
+    elems.s = [obj.sortBy]
+  }
+
+  /* time ranges */
+  if (obj.timeRanges) {
+    elems.r = [_.at(obj.timeRanges, ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']).map(a => a ? a[0] + '-' + a[1] : '').join(':')]
+  }
+
+  var rest = []
+  _.each(
+    elems,
+    (v, k) => _.each(v, e => rest.push(k + ':' + e))
+  )
+  return [cat, ...rest].join('/')
+}
+
+function applyToString (arr) {
+  var str =
+      _(arr)
+        .map(e => e.charAt(0).toLowerCase())
+        .uniq()
+        .filter(/^[tdlir]/)
+        .join('')
+  // since Readings is disabled we have a special-case category here
+  if (str.length === 4 + (str.match(/r/) ? 1 : 0)) {
+    str = 'a'
+  }
+  return str
+}
+
+export {serializeSearch}
