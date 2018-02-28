@@ -762,16 +762,19 @@ function deserializeSearch (route) {
 
     /* handle time ranges */
     if (tokens.r && tokens.r.length === 1) {
-      var ranges = []
+      var ranges = {}
+      var lkup = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+
       _.each(
-        tokens.r[0].split(':'),
-        r => {
+        _.zip(
+          lkup,
+          tokens.r[0].split(':')
+        ),
+        ([day, r]) => {
           // format is either empty (i.e., disabled) or \d+-\d+
           var res = /^(\d+)-(\d+)$/.exec(r)
-          if (res) {
-            ranges.push([res[1], res[2]])
-          } else {
-            ranges.push(undefined)
+          if (day && res) {
+            ranges[day] = [res[1] | 0, res[2] | 0]
           }
         }
       )
