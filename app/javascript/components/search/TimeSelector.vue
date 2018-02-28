@@ -35,6 +35,14 @@ export default {
       type: Number,
       default: 20
     },
+    selstart: {
+      type: Number,
+      required: true
+    },
+    selend: {
+      type: Number,
+      required: true
+    },
     enabled: {
       type: Boolean,
       default: true
@@ -53,11 +61,17 @@ export default {
   watch: {
     selrange (r) {
       this.$emit('updatedRange', r)
+    },
+    selstart (s) {
+      this.selrange[0] = s
+    },
+    selend (s) {
+      this.selrange[1] = s
     }
   },
   mounted () {
-    this.selrange[0] = this.rangestart
-    this.selrange[1] = this.rangeend
+    this.selrange[0] = this.selstart || this.rangestart
+    this.selrange[1] = this.selend || this.rangeend
   },
   methods: {
     formatTime: (t) => prettyTime(t)
