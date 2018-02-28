@@ -33,7 +33,7 @@ export default {
   position: fixed;
   margin-right: 2em;
   margin-left: 2em;
-  height: 700px;
+  height: calc(100% - 100px); /* Fix to prevent annotation container from being cut off */
   width: 300px;
   overflow: hidden;
 }
