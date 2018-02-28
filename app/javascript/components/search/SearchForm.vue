@@ -72,10 +72,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['searchSnapshot']),
-    serSearch () {
-      return serializeSearch(this.searchSnapshot)
-    }
+    ...mapGetters('search', ['searchSnapshot'])
   },
   methods: {
     addActiveKeyword () {
@@ -87,7 +84,7 @@ export default {
     },
     performSearch () {
       this.$store.dispatch('search/saveSearchInHistory')
-      this.$router.push('/search/' + this.serSearch)
+      this.$router.push('/search/' + serializeSearch(this.searchSnapshot))
       this.$store.dispatch('search/runKeywordSearch')
     }
   }
