@@ -724,11 +724,16 @@ function deserializeSearch (route) {
       e => {
         if (e) {
           var res = /^([a-z]):(.*)/.exec(e)
-          var [ , type, rest ] = res
-          if (type) {
-            if (!tokens[type]) { tokens[type] = [] }
-            tokens[type].push(rest)
+          if (res) {
+            var [ , type, rest ] = res
+            if (type) {
+              if (!tokens[type]) { tokens[type] = [] }
+              tokens[type].push(rest)
+            }
           }
+        } else {
+          // console.log('unexpected token', e)
+          // probably blank line
         }
       }
     )
