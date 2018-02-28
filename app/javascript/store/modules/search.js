@@ -51,7 +51,8 @@ const state = {
     { text: 'Department', value: 'DEPARTMENT' },
     { text: 'Course ID', value: 'COURSE_ID' }
   ],
-  timeRanges: undefined
+  timeRanges: undefined,
+  searchHistory: []
 }
 
 const snapshotProps = [
@@ -224,6 +225,9 @@ const actions = {
   setTimeRanges ({commit}, r) {
     commit('SET_TIME_RANGES', r)
   },
+  saveSearchInHistory ({commit, getters}) {
+    commit('PUSH_SEARCH_HISTORY', getters.searchSnapshot)
+  },
   populateSearchState ({commit}, obj) {
     commit('SET_SEARCH_STATE', obj)
   }
@@ -270,6 +274,11 @@ const mutations = {
   },
   SET_TIME_RANGES (state, r) {
     state.timeRanges = r
+  },
+  PUSH_SEARCH_HISTORY (state, o) {
+    state.searchHistory.unshift(o)
+    // keep 5 elems in the search history
+    state.searchHistory.splice(5)
   },
   SET_SEARCH_STATE (state, o) {
     // unpack the search state object from the state here
