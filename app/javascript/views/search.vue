@@ -13,6 +13,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { deserializeSearch } from 'lib/util'
+
 import SearchForm from 'components/search/SearchForm'
 import SearchResults from 'components/search/SearchResults'
 import TheSidebar from 'components/TheSidebar'
@@ -25,6 +27,14 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated'])
+  },
+  mounted () {
+    if (this.$route.params[0]) {
+      var obj = deserializeSearch(this.$route)
+      if (obj) {
+        this.$store.dispatch('search/populateSearchState', obj)
+      }
+    }
   }
 }
 </script>
