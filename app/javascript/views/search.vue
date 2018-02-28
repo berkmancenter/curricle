@@ -33,6 +33,9 @@ export default {
       var obj = deserializeSearch(this.$route)
       if (obj) {
         this.$store.dispatch('search/populateSearchState', obj)
+          .then(
+            () => this.$store.dispatch('search/runKeywordSearch')
+          )
       }
     }
   }
