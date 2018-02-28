@@ -19,6 +19,8 @@
             <td>
               <time-selector
                 v-show="requireDay[day]"
+                :selstart="timeRanges[day][0]||7"
+                :selend="timeRanges[day][1]||20"
                 @updatedRange="(arg) => timeRanges[day] = arg"
               />
             </td>
@@ -43,7 +45,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import _ from 'lodash'
 import TimeSelector from 'components/search/TimeSelector'
 
@@ -72,6 +74,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('search', { _times: 'timeRanges' }),
     advancedSelectedDays () { return _.filter(this.requireDay).length },
     activeTimeRanges () {
       if (this.useAdvanced) {
@@ -88,6 +91,21 @@ export default {
   watch: {
     activeTimeRanges (r) {
       this.setTimeRanges(r)
+    }
+  },
+  mounted () {
+    // populate default from vuex state
+    if (this._times) {
+      this.useAdvanced = true
+      _.each(
+        _.keys(this.requireDay),
+        day => {
+          this.requireDay[day] = !!this._times[day]
+          if (this._times[day]) {
+            this.timeRanges[day] = this._times[day]
+          }
+        }
+      )
     }
   },
   methods: {
