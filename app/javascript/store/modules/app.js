@@ -7,6 +7,7 @@ const state = {
     tray: 'list-view',
     plan: 'list-view'
   },
+  semester: '',
   // TODO: make these detectable/generated from data?
   catalogYearStart: 1990,
   catalogYearEnd: 2020,
@@ -73,6 +74,9 @@ const mutations = {
   ADD_SIDEBAR_ELEM: (state, { type, payload }) => {
     // prepends the matching element and includes the payload as an optional second context param
     state.sidebarStack.unshift([type, payload])
+  },
+  SET_SEMESTER: (state, s) => {
+    state.semester = s
   }
 }
 
