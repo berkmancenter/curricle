@@ -22,6 +22,7 @@ const state = {
   resultsPerPage: 50,
   resultsMoreAvailable: false,
   searchComplete: false,
+  searchRunning: false,
   applyToOptions: [
     { text: 'Title', value: 'TITLE' },
     { text: 'Description', value: 'DESCRIPTION' },
@@ -135,6 +136,7 @@ const actions = {
 
     if (kw && kw.length) {
       commit('RESET_RESULTS_PAGE')
+      state.searchRunning = true
 
       dispatch(
         'runSearch',
@@ -144,6 +146,7 @@ const actions = {
             state.results = response
             state.resultsMoreAvailable = (response.length === state.resultsPerPage)
             state.searchComplete = true
+            state.searchRunning = false
           }
         })
     } else {
@@ -156,6 +159,7 @@ const actions = {
 
     if (kw && kw.length) {
       commit('INCREMENT_RESULTS_PAGE')
+      state.searchRunning = true
 
       dispatch(
         'runSearch',
@@ -164,6 +168,7 @@ const actions = {
           handler: response => {
             state.results = state.results.concat(response)
             state.resultsMoreAvailable = (response.length === state.resultsPerPage)
+            state.searchRunning = false
           }
         })
     } else {
