@@ -3,6 +3,8 @@
 import _ from 'lodash'
 import apolloClient from 'apollo'
 import COURSES_SEARCH_QUERY from '../../graphql/CoursesSearch.gql'
+import USER_COURSES_SEARCH_QUERY from '../../graphql/UserCoursesSearch.gql'
+import Vue from 'vue/dist/vue.esm'
 
 import { transformSchedule } from 'lib/util'
 
@@ -13,6 +15,7 @@ const thisYear = (new Date()).getUTCFullYear()
 
 const state = {
   // list of objects with { text, weight, applyTo, active }
+  facets: {},
   keywords: [],
   results: [],
   resultsPage: 1,
@@ -73,6 +76,34 @@ const getters = {
     var obj = _.cloneDeep(_.pick(state, snapshotProps))
     _.remove(obj.keywords, '!active')
     return obj
+  },
+
+  selectedFilters: (state) => (facet) => {
+    if (!state.facets[facet]) {
+      return
+    }
+
+    const values = _(state.facets[facet]).filter('selected').map('value').value()
+
+    // Format string values to match expected values of GraphQL enums
+    return _.map(
+      values,
+      value => value.replace(/[\s\-/.]/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toUpperCase()
+    )
+  },
+
+  selectedFilterCount (state) {
+    return _.reduce(
+      state.facets,
+      (count, facet) => {
+        return count + _.filter(facet, 'selected').length
+      },
+      0
+    )
+  },
+
+  sortedFilters: (state) => (facet) => {
+    return _.orderBy(state.facets[facet], ['selected', 'value'], ['desc', 'asc'])
   }
 }
 
@@ -139,8 +170,13 @@ const actions = {
       state.results = []
     }
   },
-  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler}) {
+  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler, userCoursesSearch}, searchOptions) {
     var vars = {}
+    var query = COURSES_SEARCH_QUERY
+
+    if (userCoursesSearch) {
+      query = USER_COURSES_SEARCH_QUERY
+    }
 
     vars.page = state.resultsPage
     vars.perPage = state.resultsPerPage
@@ -190,15 +226,20 @@ const actions = {
       return
     }
 
+    vars.schools = getters.selectedFilters('academic_groups')
+    vars.departments = getters.selectedFilters('departments')
+    vars.subjects = getters.selectedFilters('subjects')
+    vars.components = getters.selectedFilters('components')
+
     var promise = apolloClient.query({
-      query: COURSES_SEARCH_QUERY,
+      query: query,
       variables: vars
     }).then(response => {
       // standard transforms
       var courses = _.map(
-        response.data.courses,
+        response.data.coursesConnection.edges,
         c => {
-          var o = _.clone(c)
+          var o = _.clone(c.node)
           o.schedule = transformSchedule(o)
           o.semester = o.term_name + ' ' + o.term_year
 
@@ -206,6 +247,10 @@ const actions = {
           o.department_color = '#' + Math.floor((Math.random() * (999 - 599)) + 600)
           return o
         })
+
+      if (!userCoursesSearch) {
+        dispatch('populateFacets', { facets: response.data.coursesConnection })
+      }
 
       // store in registry
       dispatch('courses/registerCourses', courses, { root: true })
@@ -230,6 +275,44 @@ const actions = {
   },
   populateSearchState ({commit}, obj) {
     commit('SET_SEARCH_STATE', obj)
+  },
+  facetSetAllItemSelections ({ commit, state }, { facet, selected }) {
+    Object.keys(state.facets[facet]).forEach(
+      (itemId) => {
+        commit(
+          'FACET_SET_ITEM_SELECTION',
+          {
+            facet: facet,
+            itemId: itemId,
+            selected: selected
+          }
+        )
+      }
+    )
+  },
+  populateFacets ({ state }, { facets }) {
+    const facetNames = ['academic_groups', 'components', 'departments', 'subjects']
+
+    facetNames.forEach(
+      (facetName) => {
+        Vue.set(state.facets, facetName, {})
+
+        facets[facetName].forEach(
+          (item, i) => {
+            Vue.set(
+              state.facets[facetName],
+              i,
+              {
+                id: i,
+                value: item.value,
+                count: item.count,
+                selected: true
+              }
+            )
+          }
+        )
+      }
+    )
   }
 }
 
@@ -294,6 +377,9 @@ const mutations = {
       // we know we just replaced state.keywords in whole, so only keywords will be active here
       _.each(state.keywords, k => { k.active = true })
     }
+  },
+  FACET_SET_ITEM_SELECTION (state, { facet, itemId, selected }) {
+    Vue.set(state.facets[facet][itemId], 'selected', selected)
   }
 }
 

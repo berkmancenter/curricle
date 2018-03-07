@@ -2,7 +2,7 @@
 
 module Resolvers
   # Return collections of courses based on query arguments
-  class CoursesResolver
+  class CoursesConnectionResolver
     # TODO: enable search for additional fields
     FIELD_MAPPING = {
       'DESCRIPTION' => :course_description_long,
@@ -12,8 +12,6 @@ module Resolvers
     }.freeze
 
     def call(_obj, args, ctx)
-      return Course.find(args[:ids]) if args[:ids].present?
-
       search = search_by_keywords(args)
 
       return if search.blank?
@@ -21,12 +19,13 @@ module Resolvers
       if args[:annotated].present?
         filter_by_annotation(search.results, ctx[:current_user])
       else
-        search.results
+        search
       end
     end
 
     def search_by_keywords(args)
       Course.search do
+        with :id, args[:ids] if args[:ids].present?
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
         apply_filters(self, args)
         apply_time_ranges(self, args[:time_ranges]) if args[:time_ranges]

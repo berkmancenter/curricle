@@ -1,0 +1,4 @@
+fragment Facet on Facet {
+  value
+  count
+}

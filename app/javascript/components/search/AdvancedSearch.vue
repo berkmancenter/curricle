@@ -28,34 +28,46 @@
         </table>
       </div>
     </div>
+
+    <div
+      v-if="showFilters"
+      class="advanced-search">
+      <advanced-search-filters/>
+    </div>
+
     <div class="advanced-search-tabs">
       <span
-        @click="useAdvanced = true; showAdvanced = !showAdvanced"
+        @click="toggleAdvancedSearch"
         :class="{'advanced-search-tab': true, selected: showAdvanced}"
       >
         Advanced Search <span v-show="useAdvanced">({{ advancedSelectedDays }})</span>
       </span>
       <span
-        :class="{'advanced-search-tab': true, selected: false}"
-      >
-        Filter Results (0)
+        v-if="$store.state.search.searchComplete"
+        @click="toggleSearchFilters"
+        class="advanced-search-tab"
+        :class="{ selected: showFilters }">
+        Filter Results ({{ selectedFilterCount }})
       </span>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import _ from 'lodash'
 import TimeSelector from 'components/search/TimeSelector'
+import AdvancedSearchFilters from 'components/search/AdvancedSearchFilters'
 
 export default {
   components: {
+    AdvancedSearchFilters,
     TimeSelector
   },
   data () {
     return {
       showAdvanced: false,
+      showFilters: false,
       useAdvanced: false,
       timeRanges: {
         Mon: [7, 20],
@@ -75,6 +87,7 @@ export default {
   },
   computed: {
     ...mapState('search', { _times: 'timeRanges' }),
+    ...mapGetters('search', ['selectedFilterCount']),
     advancedSelectedDays () { return _.filter(this.requireDay).length },
     activeTimeRanges () {
       if (this.useAdvanced) {
@@ -109,7 +122,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions('search', ['setTimeRanges'])
+    ...mapActions('search', ['setTimeRanges']),
+    toggleAdvancedSearch () {
+      this.useAdvanced = true
+      this.showAdvanced = !this.showAdvanced
+      this.showFilters = false
+    },
+    toggleSearchFilters () {
+      this.showFilters = !this.showFilters
+      this.showAdvanced = false
+    }
   }
 }
 </script>
@@ -127,6 +149,7 @@ export default {
 
 .advanced-search-tab {
   background-color: #CCC;
+  cursor: pointer;
   padding: .5em;
   padding-top: 3px;
   margin: 0;

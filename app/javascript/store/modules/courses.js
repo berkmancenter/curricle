@@ -33,14 +33,17 @@ const actions = {
    */
   lookupCourses ({ commit, dispatch }, courses) {
     if (courses && courses.length) {
-      dispatch('search/runSearch', { ids: courses,
-        handler:
-        response => {
-          commit('ADD_COURSES', response)
-          dispatch('getCourses', courses)
-        }
-      },
-      { root: true }
+      dispatch(
+        'search/runSearch',
+        {
+          ids: courses,
+          handler: response => {
+            commit('ADD_COURSES', response)
+            dispatch('getCourses', courses)
+          },
+          userCoursesSearch: true
+        },
+        { root: true }
       )
     }
   },

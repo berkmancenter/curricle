@@ -1,7 +1,48 @@
 #import "./CourseFragment.gql"
+#import "./FacetFragment.gql"
 
-query CoursesSearch($ids: [ID!], $deluxeKeywords: [DeluxeKeywordInput!], $semesterRange: SemesterRangeInput, $page: Int, $perPage: Int, $sortBy: SortByEnum, $timeRanges: [TimeRangeInput!]) {
-  courses(ids: $ids, deluxe_keywords: $deluxeKeywords, semester_range: $semesterRange, page: $page, per_page: $perPage, sort_by: $sortBy, time_ranges: $timeRanges) {
-    ...Course
+query CoursesSearch(
+  $ids: [ID!],
+  $deluxeKeywords: [DeluxeKeywordInput!],
+  $semesterRange: SemesterRangeInput,
+  $page: Int,
+  $perPage: Int,
+  $sortBy: SortByEnum,
+  $timeRanges: [TimeRangeInput!],
+  $schools: [SchoolEnum!],
+  $departments: [DepartmentEnum!],
+  $subjects: [SubjectEnum!],
+  $components: [ComponentEnum!]
+) {
+    coursesConnection(
+      ids: $ids,
+      deluxe_keywords: $deluxeKeywords,
+      semester_range: $semesterRange,
+      page: $page,
+      per_page: $perPage,
+      sort_by: $sortBy,
+      time_ranges: $timeRanges,
+      schools: $schools,
+      departments: $departments,
+      subjects: $subjects,
+      components: $components
+    ) {
+        edges {
+          node {
+            ...Course
+          }
+        }
+        subjects {
+          ...Facet
+        }
+        academic_groups {
+          ...Facet
+        }
+        components {
+          ...Facet
+        }
+        departments {
+          ...Facet
+        }
+      }
   }
-}

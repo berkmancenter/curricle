@@ -1,0 +1,11 @@
+#import "./CourseFragment.gql"
+
+query UserCoursesSearch($ids: [ID!]) {
+  coursesConnection(ids: $ids) {
+    edges {
+      node {
+        ...Course
+      }
+    }
+  }
+}
