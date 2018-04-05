@@ -77,6 +77,15 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve Resolvers::CoursesByDepartmentResolver.new
   end
 
+  field :course_counts, !types[Types::CourseCountType] do
+    description 'Return course counts'
+
+    argument :component, ComponentEnum
+    argument :department, DepartmentEnum
+
+    resolve Resolvers::CourseCountsResolver.new
+  end
+
   field :course, Types::CourseType do
     description 'Find a course'
 
