@@ -1,6 +1,9 @@
 <template>
   <div>
-    <span id="the-catalog"><strong>The Catalog</strong></span>
+    <router-link to="/home">
+      <strong>The Catalog</strong>
+    </router-link>
+
     <span
       id="search-semester-range"
       class="pointer">
