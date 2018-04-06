@@ -33,7 +33,7 @@ module Resolvers
         sort_order(self, args[:sort_by])
         paginate page: (args[:page] || 1), per_page: (args[:per_page] || 50)
         facet :academic_group
-        facet :class_academic_org_description
+        facet :subject_academic_org_description
         facet :component
         facet :subject
       end
@@ -147,7 +147,7 @@ module Resolvers
       sunspot.instance_eval do
         with :class_section, '1' # all class_sections should be 1
         with :academic_group, Array(args[:schools])
-        with :class_academic_org_description, Array(args[:departments])
+        with :subject_academic_org_description, Array(args[:departments])
         with :subject, Array(args[:subjects])
         with :component, Array(args[:components])
       end

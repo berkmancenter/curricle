@@ -29,6 +29,7 @@ class Course < ApplicationRecord
     text :subject_description
     string :subject_description
     text :subject_academic_org_description
+    string :subject_academic_org_description
     text :academic_group
     string :academic_group
     text :academic_group_description

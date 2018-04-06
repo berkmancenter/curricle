@@ -30,7 +30,7 @@ end
 DepartmentEnum = GraphQL::EnumType.define do
   name 'DepartmentEnum'
 
-  generate_enum_values(:class_academic_org_description)
+  generate_enum_values(:subject_academic_org_description)
 end
 
 SubjectEnum = GraphQL::EnumType.define do

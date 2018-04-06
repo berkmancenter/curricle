@@ -42,7 +42,7 @@ Connections::CoursesConnection = Types::CourseType.define_connection do
   field :departments do
     type types[Types::FacetType]
 
-    resolve ->(search, _args, _ctx) { search.facet(:class_academic_org_description).rows }
+    resolve ->(search, _args, _ctx) { search.facet(:subject_academic_org_description).rows }
   end
 
   field :subjects do
