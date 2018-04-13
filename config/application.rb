@@ -21,5 +21,7 @@ module Curricle
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
+
+    config.middleware.use BatchLoader::Middleware
   end
 end
