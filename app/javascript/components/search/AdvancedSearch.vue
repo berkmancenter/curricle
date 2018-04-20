@@ -19,6 +19,7 @@
             <td>
               <time-selector
                 v-show="requireDay[day]"
+                :enabled="requireDay[day]"
                 :selstart="timeRanges[day][0]||7"
                 :selend="timeRanges[day][1]||20"
                 @updatedRange="(arg) => timeRanges[day] = arg"
