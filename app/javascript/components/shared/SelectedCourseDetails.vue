@@ -29,9 +29,9 @@
     <div class="instructors">
       <p class="heading">Instructors</p>
       <div
-        class="instructor mb-0"
         v-for="instructor in course.course_instructors"
-        :key="instructor.id">
+        :key="instructor.id"
+        class="instructor mb-0">
         <p class="pull-left mb-0">
           <strong>{{ instructor.display_name }}</strong>
         </p>

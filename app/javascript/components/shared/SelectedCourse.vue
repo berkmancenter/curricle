@@ -9,21 +9,18 @@
       </p>
       <hr>
       <div
-        class="actions mb-0"
-        v-if="userAuthenticated">
+        v-if="userAuthenticated"
+        class="actions mb-0">
         <p class="pull-left">
           <course-action
-            type="tray"
             :course="theCourse.id"
-          />
+            type="tray"/>
           <course-action
-            type="schedule"
             :course="theCourse.id"
-          />
+            type="schedule"/>
           <course-action
-            type="shareable"
             :course="theCourse.id"
-          />
+            type="shareable"/>
         </p>
         <p class="course-history pull-right text-right">See course history</p>
       </div>
@@ -32,9 +29,8 @@
         :course="theCourse"
       />
       <selected-course-annotations
-        :course="theCourse"
         v-if="userAuthenticated"
-      />
+        :course="theCourse"/>
     </div>
   </div>
 </template>

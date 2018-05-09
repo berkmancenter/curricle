@@ -6,17 +6,17 @@
     <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
 
     <b-popover
-      placement="bottom"
       ref="popover"
+      placement="bottom"
       target="sort-by-dropdown"
       triggers="click blur">
       <b-form-radio-group
+        v-model="selected"
+        :options="sortByOptions"
         buttons
         button-variant="outline-dark"
         stacked
-        v-model="selected"
-        name="sort-fields"
-        :options="sortByOptions"/>
+        name="sort-fields"/>
     </b-popover>
   </span>
 </template>

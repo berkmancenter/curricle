@@ -5,22 +5,21 @@
         <tr
           v-for="course in filteredCourses"
           :key="course.id"
-          @click="selectCourse(course)"
           :class="{ selected: currentCourse && currentCourse.id == course.id }"
-        >
+          @click="selectCourse(course)">
           <td>{{ course.external_course_id }}</td>
           <td style = "width: 12em;">{{ course.course_description }}</td>
           <td>{{ course.academic_group }} <br> {{ course.subject }} {{ course.catalog_number }}</td>
           <td>{{ course.term_name }} <br> {{ course.units_maximum }} units</td>
           <td style = "width: 16em; text-align: justify;">
             <truncate
+              v-show="course.course_description_long"
+              :length="50"
+              :text="course.course_description_long"
               class="course_description"
               clamp="..."
-              :length="50"
               less="Show Less"
-              type="html"
-              :text="course.course_description_long"
-              v-show="course.course_description_long"/>
+              type="html"/>
           </td>
           <td>
             <class-meeting-time
@@ -30,12 +29,11 @@
           </td>
           <td :style="'border-right: 5px solid ' + course.department_color + '; position: relative; font-size: 24px;'">
             <course-action
-              type="schedule"
               :course="course.id"
-            />
+              type="schedule"/>
             <course-action
-              type="annotated"
-              :course="course.id"/>
+              :course="course.id"
+              type="annotated"/>
           </td>
           <span class= "check_box">
             <input

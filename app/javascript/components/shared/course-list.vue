@@ -6,22 +6,21 @@
         <tr
           v-for="course in courses"
           :key="course.id"
+          :class="{ selected: currentCourse && currentCourse.id == course.id }"
           @mouseenter="addProvisionalCourse(course)"
           @mouseleave="removeProvisionalCourse(course)"
-          :class="{ selected: currentCourse && currentCourse.id == course.id }"
         >
           <td>{{ course.external_course_id }}</td>
           <td @click="!editable && selectCourse(course)">{{ course.title }}</td>
           <td :style="calcStyle(course)">
             <course-action
-              type="schedule"
-              :course="course.id"
               v-show="editable"
-            />
-            <course-action
-              type="annotated"
               :course="course.id"
-              v-show="editable"/>
+              type="schedule"/>
+            <course-action
+              v-show="editable"
+              :course="course.id"
+              type="annotated"/>
           </td>
         </tr>
       </tbody>

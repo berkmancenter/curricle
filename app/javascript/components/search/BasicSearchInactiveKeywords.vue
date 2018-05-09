@@ -1,7 +1,7 @@
 <template>
   <div
-    class="row"
-    v-show="inactiveKeywords.length > 0">
+    v-show="inactiveKeywords.length > 0"
+    class="row">
     <div class="col-md-12">
       <b-alert
         show

@@ -1,10 +1,10 @@
 <template>
   <span class="course-action">
     <i
-      :class="calcClass"
-      @click="click"
       v-b-tooltip.hover="true"
+      :class="calcClass"
       :title="tooltip"
+      @click="click"
     />
   </span>
 </template>

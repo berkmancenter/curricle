@@ -4,9 +4,9 @@
 
     <div class="row">
       <div
-        class="col-md-3"
         v-for="facet in facets"
-        :key="facet.key">
+        :key="facet.key"
+        class="col-md-3">
         <advanced-search-filters-facet :facet="facet"/>
       </div>
     </div>

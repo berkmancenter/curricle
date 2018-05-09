@@ -5,9 +5,9 @@
       :key="semester">
       <strong>{{ semester }}</strong>
       <div
-        v-text="isEditing[semester] ? 'Done' : 'Edit'"
-        @click="toggleEditSemester(semester)"
         class="pull-right"
+        @click="toggleEditSemester(semester)"
+        v-text="isEditing[semester] ? 'Done' : 'Edit'"
       />
       <course-list
         :courses="(isEditing[semester] ? trayCoursesBySemester[semester] : scheduledCoursesBySemester[semester]) || []"

@@ -4,15 +4,15 @@
 
     <div class="facet-list mb-2">
       <div
-        class="facet-item clearfix"
         v-for="item in items"
-        :key="item.id">
+        :key="item.id"
+        class="facet-item clearfix">
         <div class="pull-left">
           <label class="mb-1">
             <input
-              type="checkbox"
               :value="item.id"
               :checked="item.selected"
+              type="checkbox"
               @change="toggleCheckbox">
             {{ truncate(item.value) }}
           </label>

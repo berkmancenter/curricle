@@ -2,16 +2,16 @@
   <div class="row">
     <div class="col-md-12">
       <span
-        class="active-keyword border border-dark rounded"
         v-for="(tag, index) of activeTags"
         :key="tag.id"
+        class="active-keyword border border-dark rounded"
         @click="deactivateTag(index, tag.name)">
         {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
       </span>
       <input
+        v-model="tag"
         class="input-tag"
         placeholder="Enter Tag"
-        v-model="tag"
         @keyup.enter="addActiveTag()">
     </div>
   </div>
@@ -74,7 +74,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .active-keyword {
   cursor: pointer;
   margin: 5px 5px 0px 0px;

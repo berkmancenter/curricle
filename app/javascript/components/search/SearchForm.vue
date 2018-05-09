@@ -5,9 +5,9 @@
         <div class="col-md-3">
           <font-awesome-icon icon="search"/>
           <input
+            v-model="keyword"
             class="search"
             placeholder="Enter Keyword"
-            v-model="keyword"
             @keyup.enter="addActiveKeyword">
         </div>
         <div class="col-md-7 text-right">
@@ -17,8 +17,8 @@
           />
           &nbsp;
           <basic-search-field-weight-dropdown
-            @weightChange="weight = $event"
             :weight="weight"
+            @weightChange="weight = $event"
           />
         </div>
         <div class="col-md-2 text-right">

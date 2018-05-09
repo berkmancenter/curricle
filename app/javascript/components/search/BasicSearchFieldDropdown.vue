@@ -10,10 +10,10 @@
         triggers="click blur"
         placement="bottom">
         <b-form-checkbox-group
-          stacked
           v-model="selected"
-          name="search-fields"
           :options="options"
+          stacked
+          name="search-fields"
         />
       </b-popover>
     </span>

@@ -38,16 +38,15 @@
 
     <div class="advanced-search-tabs">
       <span
-        @click="toggleAdvancedSearch"
         :class="{'advanced-search-tab': true, selected: showAdvanced}"
-      >
+        @click="toggleAdvancedSearch">
         Advanced Search <span v-show="useAdvanced">({{ advancedSelectedDays }})</span>
       </span>
       <span
         v-if="$store.state.search.searchComplete"
-        @click="toggleSearchFilters"
+        :class="{ selected: showFilters }"
         class="advanced-search-tab"
-        :class="{ selected: showFilters }">
+        @click="toggleSearchFilters">
         Filter Results ({{ selectedFilterCount }})
       </span>
     </div>

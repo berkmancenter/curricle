@@ -14,8 +14,8 @@
       id="nav-collapse"
       is-nav>
       <b-navbar-nav
-        class="ml-auto"
-        v-if="userAuthenticated">
+        v-if="userAuthenticated"
+        class="ml-auto">
         <b-nav-item to="/search">Search</b-nav-item>
         <b-nav-item to="/explore">Explore</b-nav-item>
         <b-nav-item to="/plan">Plan</b-nav-item>
@@ -23,20 +23,20 @@
 
       <b-navbar-nav class="ml-auto tray-li">
         <b-nav-item
-          href="/users/sign_in"
-          v-if="!userAuthenticated">
+          v-if="!userAuthenticated"
+          href="/users/sign_in">
           Sign in
         </b-nav-item>
         <b-nav-item
-          @click="logout"
-          v-if="userAuthenticated">
+          v-if="userAuthenticated"
+          @click="logout">
           Logout
         </b-nav-item>
         <b-nav-item
-          href=""
-          @click="trayToggle"
+          v-if="userAuthenticated"
           :class="{'tray-active': isTrayVisible}"
-          v-if="userAuthenticated">
+          href=""
+          @click="trayToggle">
           Tray
         </b-nav-item>
       </b-navbar-nav>

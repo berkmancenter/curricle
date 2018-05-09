@@ -3,8 +3,8 @@
     <div class="annotations text-center">
       <p class="annotations-up-arrow">
         <i
-          class="fa fa-caret-up"
           v-show="!isExpand"
+          class="fa fa-caret-up"
           @click="expand()"/>
       </p>
       <p>
@@ -25,10 +25,10 @@
       <div v-else>
         <p>
           <textarea
+            v-model="editableText"
             rows="10"
             style="width: 100%"
-            maxlength="500"
-            v-model="editableText"/>
+            maxlength="500"/>
           <span class="word-count">{{ editableTextlength }} / {{ maxLength }} characters</span>
         </p>
         <div class="save-btn">
@@ -42,8 +42,8 @@
         @deactivateTag="deactivateTag($event)" />
       <p class="annotations-down-arrow text-center">
         <i
-          class="fa fa-caret-down"
           v-show="isExpand"
+          class="fa fa-caret-down"
           @click="expand()"/>
       </p>
     </div>
@@ -123,7 +123,6 @@ export default {
     width: 100%;
   }
   .annotations p span {
-    display: inline-block;
     text-align: left;
     float: left;
     font-size: 20px;

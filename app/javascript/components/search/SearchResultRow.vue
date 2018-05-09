@@ -4,24 +4,24 @@
     :style="borderStyle">
     <div class="col-md-1">
       <course-action
-        type="tray"
-        :course="course.id"/>
+        :course="course.id"
+        type="tray"/>
       <br>
       <course-action
-        type="schedule"
-        :course="course.id"/>
+        :course="course.id"
+        type="schedule"/>
       <br>
       <course-action
-        type="annotated"
-        :course="course.id"/>
+        :course="course.id"
+        type="annotated"/>
       <br>
       <course-action
-        type="tagged"
-        :course="course.id"/>
+        :course="course.id"
+        type="tagged"/>
       <br>
       <course-action
-        type="shareable"
-        :course="course.id"/>
+        :course="course.id"
+        type="shareable"/>
     </div>
 
     <div
@@ -62,13 +62,13 @@
       @click="selectCourse(course)">
       <h5>{{ course.title }}</h5>
       <truncate
+        v-if="course.course_description_long"
+        :length="250"
+        :text="course.course_description_long"
         class="course_description"
         clamp="..."
-        :length="250"
         less="Show Less"
-        type="html"
-        :text="course.course_description_long"
-        v-if="course.course_description_long"/>
+        type="html"/>
     </div>
 
     <div class="col-md-2 px-0">

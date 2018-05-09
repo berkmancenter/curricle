@@ -2,7 +2,6 @@
   <div class="time-selector">
     <vue-slider
       v-model="selrange"
-      tooltip="always"
       :height="4"
       :lazy="true"
       :piecewise="true"
@@ -13,7 +12,7 @@
       :show="enabled"
       :disabled="!enabled"
       :formatter="formatTime"
-    />
+      tooltip="always"/>
   </div>
 </template>
 

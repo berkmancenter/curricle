@@ -4,8 +4,8 @@
     class="m-md-2"
   >
     <b-dropdown-item
-      @click="setSemester(null)"
-      v-show="mode !== 'state'">
+      v-show="mode !== 'state'"
+      @click="setSemester(null)">
       All Semesters
     </b-dropdown-item>
     <b-dropdown-item

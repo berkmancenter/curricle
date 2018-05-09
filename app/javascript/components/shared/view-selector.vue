@@ -1,9 +1,9 @@
 <template>
   <p class="pull-left">
     <i
+      v-show="showListView"
       :class="{ fa: true, 'fa-list-ul': true, active: viewmode[type] == 'list-view'}"
       @click="selectView({ view: 'list-view', type })"
-      v-show="showListView"
     />
     <i
       :class="{ fa: true, 'fa-calendar': true, active: viewmode[type] == 'semester'} "

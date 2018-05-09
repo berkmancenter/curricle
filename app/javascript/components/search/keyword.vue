@@ -17,7 +17,7 @@
       {{ selectedWeight }}
     </span>
     <span
-    @click="bodyClick">
+      @click="bodyClick">
       {{ keyword.text }}
     </span>&nbsp;&nbsp;
     <font-awesome-icon
@@ -29,28 +29,26 @@
       triggers="click blur"
       placement="bottom">
       <b-form-input
-      v-model="keyword.text"/>
+        v-model="keyword.text"/>
       <b-form-group
         label="Apply To"
       >
         <b-form-checkbox-group
-          stacked
           v-model="selected"
-          name="search-fields"
           :options="applyToOptions"
           :target="kwId+'-weight'"
+          name="search-fields"
           triggers="click blur"
           placement="bottom"
-        />
+          stacked/>
       </b-form-group>
       <b-form-group
-      label="Weight">
+        label="Weight">
         <b-form-checkbox-group
-          stacked
           v-model="selectedWeight"
-          name="search-fields-weight"
           :options="weightOptions"
-        />
+          name="search-fields-weight"
+          stacked/>
       </b-form-group>
     </b-popover>
   </span>
@@ -126,8 +124,6 @@ export default {
 
   .applyTo, .wt {
     display: inline;
-    width: 1em;
-    height: 1em;
     font-size: .75em;
     padding: 2px;
   }

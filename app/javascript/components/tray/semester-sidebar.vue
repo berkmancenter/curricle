@@ -14,9 +14,9 @@
       <strong>{{ day }}</strong>
       <div
         v-show="trayCoursesByDay[day] && trayCoursesByDay[day].length"
-        v-text="isEditing[day] ? 'Done' : 'Edit'"
-        @click="toggleEditDay(day)"
         class="pull-right"
+        @click="toggleEditDay(day)"
+        v-text="isEditing[day] ? 'Done' : 'Edit'"
       />
       <course-list
         :courses="isEditing[day] ? trayCoursesByDay[day] : coursesByDay[day]"

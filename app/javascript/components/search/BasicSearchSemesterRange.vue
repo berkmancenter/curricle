@@ -19,17 +19,17 @@
           <b-row>
             <b-col class="justify-content-md-left">
               <b-form-radio-group
-                stacked
                 v-model="searchTermStart"
-                name="search-start-term"
                 :options="optionsTermName"
+                stacked
+                name="search-start-term"
               />
             </b-col>
             <b-col class="justify-content-md-left">
               <b-form-select
-                class="year-select"
                 v-model="searchYearStart"
-                :options="optionsTermYear" />
+                :options="optionsTermYear"
+                class="year-select"/>
             </b-col>
             <b-col class="justify-content-md-left">
               <b-form-checkbox v-model="searchTermUseRange">
@@ -41,20 +41,19 @@
               class="justify-content-md-left"
             >
               <b-form-radio-group
-                stacked
                 v-model="searchTermEnd"
-                name="search-end-term"
                 :options="optionsTermName"
-              />
+                name="search-end-term"
+                stacked/>
             </b-col>
             <b-col
               v-show="searchTermUseRange"
               class="justify-content-md-left"
             >
               <b-form-select
-                class="year-select"
                 v-model="searchYearEnd"
-                :options="optionsTermYearEnd" />
+                :options="optionsTermYearEnd"
+                class="year-select"/>
             </b-col>
           </b-row>
         </b-form>

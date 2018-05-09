@@ -19,8 +19,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from '../app'
 
-window.$ = window.jQuery = require('jquery')
-
 // TODO: import only needed icons instead of the entire FA library
 fontawesome.library.add(solid)
 
@@ -36,7 +34,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  apolloProvider,
+  provide: apolloProvider.provide(),
   components: { App },
   template: '<App/>'
 })

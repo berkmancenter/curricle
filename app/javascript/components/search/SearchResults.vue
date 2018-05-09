@@ -1,7 +1,7 @@
 <template>
   <div
-    class="results-container"
-    v-show="keywords && searchComplete">
+    v-show="keywords && searchComplete"
+    class="results-container">
     <div class="clearfix">
       <div
         class="pull-left"
@@ -30,8 +30,8 @@
       />
 
       <div
-        class="text-center my-4"
-        v-show="resultsMoreAvailable">
+        v-show="resultsMoreAvailable"
+        class="text-center my-4">
         <b-button
           class="pointer"
           variant="secondary"
