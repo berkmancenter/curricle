@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-0">
     <div class="col-md-9">
-      <h1 class="my-3">Explore</h1>
+      <h1 class="my-3"><b-link to="/explore">Explore</b-link></h1>
 
       <router-view/>
     </div>
@@ -25,5 +25,9 @@ export default {
 <style type="text/css">
   .top-header {
     margin-top: 28px;
+  }
+
+  h1 a.active {
+    color: black;
   }
 </style>
