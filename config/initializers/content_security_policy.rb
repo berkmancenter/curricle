@@ -19,7 +19,7 @@ Rails.application.config.content_security_policy do |policy|
   # https://github.com/rails/webpacker#vue
   # https://vuejs.org/v2/guide/installation.html#CSP-environments
   if Rails.env.development?
-    policy.script_src :self, :https, :unsafe_eval
+    policy.script_src :self, :https, :unsafe_eval, :unsafe_inline
   else
     policy.script_src :self, :https
   end
