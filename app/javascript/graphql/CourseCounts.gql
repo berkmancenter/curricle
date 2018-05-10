@@ -1,0 +1,7 @@
+query CourseCounts {
+  course_counts {
+    component
+    department
+    count
+  }
+}

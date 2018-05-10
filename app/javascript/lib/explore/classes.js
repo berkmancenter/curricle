@@ -1,5 +1,7 @@
 import * as d3 from 'd3'
 import apolloClient from 'apollo'
+import COURSE_COUNTS_QUERY from '../../graphql/CourseCounts.gql'
+import DEPT_COURSES_QUERY from '../../graphql/DeptCourses.gql'
 
 var colorLeft = '#D10F84'
 var colorRight = '#00ADF0'
@@ -386,10 +388,13 @@ function loadClassData (data) {
 
   var searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
 
-  var jsonQuery = '{ courses(departments: [' + searchDepartment + '], components: [' + searchComponent + '], per_page: 500) { id title component } }'
-
-  apolloClient.query(jsonQuery)
-    .done(function (response) {
+  apolloClient.query({
+    query: DEPT_COURSES_QUERY,
+    variables: {
+      searchDepartment, searchComponent
+    }
+  })
+    .then(function (response) {
       classVisualization(response.data.courses)
     })
 }

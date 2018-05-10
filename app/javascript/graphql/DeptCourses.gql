@@ -1,0 +1,14 @@
+query DeptCourses(
+  $searchDepartments: [DepartmentEnum!],
+  $searchComponent: [ComponentEnum!]
+) {
+  courses(
+    departments: $searchDepartments,
+    components: $searchComponent,
+    per_page: 500
+  ) {
+    id
+    title
+    component
+  }
+}
