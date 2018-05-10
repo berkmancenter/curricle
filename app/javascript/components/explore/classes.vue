@@ -9,10 +9,12 @@
 <script>
 import 'd3'
 import 'jquery'
-import 'lib/explore/classes'
+import { initSetup } from 'lib/explore/classes'
 
 export default {
-
+  mounted () {
+    initSetup()
+  }
 }
 </script>
 

@@ -11,23 +11,7 @@ var margin = {top: 40, right: 1, bottom: 10, left: 1}
 var width = documentWidth / 2 - margin.left - margin.right
 var height = 100 - margin.top - margin.bottom
 
-var courseTypeSvg = d3.select('#courseTypeVis').append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
-  .append('g')
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
-var departmentSvg = d3.select('#departmentVis').append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
-  .append('g')
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
-var classSvg = d3.select('#classVis').append('svg')
-  .attr('width', width * 2)
-  .attr('height', 0)
-  .append('g')
-  .attr('transform', 'translate(' + 0 + ',' + 40 + ')')
+var courseTypeSvg, departmentSvg, classSvg
 
 var courseTypeTextScale = d3.scaleLinear()
   .range([12, 16])
@@ -45,38 +29,56 @@ var departmentBarScale = d3.scaleLinear()
 
 var departmentAxis = d3.axisTop(departmentBarScale).ticks(5)
 
-var departmentTextScaleMax, nestedCourseTypeDataMax
+var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departmentGradient
 
 var fullData
 
-var courseTypeGradient = courseTypeSvg.append('defs')
-  .append('linearGradient')
-  .attr('id', 'courseTypeGradient')
+function initSetup () {
+  courseTypeSvg = d3.select('#courseTypeVis').append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-courseTypeGradient.append('stop')
-  .attr('stop-color', '#fff')
-  .attr('offset', '0')
+  departmentSvg = d3.select('#departmentVis').append('svg')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom)
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-courseTypeGradient.append('stop')
-  .attr('stop-color', colorLeft)
-  .attr('offset', '1')
+  classSvg = d3.select('#classVis').append('svg')
+    .attr('width', width * 2)
+    .attr('height', 0)
+    .append('g')
+    .attr('transform', 'translate(' + 0 + ',' + 40 + ')')
 
-var departmentGradient = departmentSvg.append('defs')
-  .append('linearGradient')
-  .attr('id', 'departmentGradient')
+  courseTypeGradient = courseTypeSvg.append('defs')
+    .append('linearGradient')
+    .attr('id', 'courseTypeGradient')
 
-departmentGradient.append('stop')
-  .attr('stop-color', colorRight)
-  .attr('offset', '0')
+  courseTypeGradient.append('stop')
+    .attr('stop-color', '#fff')
+    .attr('offset', '0')
 
-departmentGradient.append('stop')
-  .attr('stop-color', '#fff')
-  .attr('offset', '1')
+  courseTypeGradient.append('stop')
+    .attr('stop-color', colorLeft)
+    .attr('offset', '1')
+
+  departmentGradient = departmentSvg.append('defs')
+    .append('linearGradient')
+    .attr('id', 'departmentGradient')
+
+  departmentGradient.append('stop')
+    .attr('stop-color', colorRight)
+    .attr('offset', '0')
+
+  departmentGradient.append('stop')
+    .attr('stop-color', '#fff')
+    .attr('offset', '1')
+}
 
 function loadFullData () {
-  var jsonQuery = '{ course_counts { component department count } }'
-
-  apolloClient.query(jsonQuery).done(function (response) {
+  apolloClient.query({ query: COURSE_COUNTS_QUERY }).then(function (response) {
     fullData = response.data.course_counts
     appendAxis()
     setDepartmentData(response.data.course_counts)
@@ -418,3 +420,5 @@ function classVisualization (data) {
     .duration(500)
     .style('opacity', 1)
 }
+
+export { initSetup }
