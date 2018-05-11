@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.3.6'
+ruby '2.4.1'
 
 gem 'batch-loader', '~> 1.2'
 gem 'bootsnap', '~> 1.3', require: false
