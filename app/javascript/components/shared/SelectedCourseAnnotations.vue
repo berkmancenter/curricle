@@ -2,15 +2,19 @@
   <div class="annotation-container">
     <div class="annotations text-center">
       <p class="annotations-up-arrow">
-        <i
+        <font-awesome-icon
           v-show="!isExpand"
-          class="fa fa-caret-up"
+          class="pointer"
+          icon="caret-up"
           @click="expand()"/>
       </p>
       <p>
-        <span
-          class="fa fa-pencil edit-annotation"
-          @click="OpenAnnotationsForm()"/>
+        <span class="pencil">
+          <font-awesome-icon
+            class="pointer"
+            icon="pencil-alt"
+            @click="OpenAnnotationsForm()"/>
+        </span>
         <b>Annotations</b>
       </p>
     </div>
@@ -41,9 +45,10 @@
         :course-id="course.id"
         @deactivateTag="deactivateTag($event)" />
       <p class="annotations-down-arrow text-center">
-        <i
+        <font-awesome-icon
           v-show="isExpand"
-          class="fa fa-caret-down"
+          class="pointer"
+          icon="caret-down"
           @click="expand()"/>
       </p>
     </div>
@@ -122,7 +127,7 @@ export default {
     display: inline-block;
     width: 100%;
   }
-  .annotations p span {
+  span.pencil {
     text-align: left;
     float: left;
     font-size: 20px;
@@ -165,7 +170,7 @@ export default {
     left: 100px;
     font-size: 10px;
   }
-  .edit-annotation{
+  .pointer {
     cursor: pointer;
   }
 </style>

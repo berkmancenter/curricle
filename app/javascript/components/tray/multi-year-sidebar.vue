@@ -5,7 +5,7 @@
       :key="semester">
       <strong>{{ semester }}</strong>
       <div
-        class="pull-right"
+        class="float-right"
         @click="toggleEditSemester(semester)"
         v-text="isEditing[semester] ? 'Done' : 'Edit'"
       />

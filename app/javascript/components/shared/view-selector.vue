@@ -1,16 +1,21 @@
 <template>
-  <p class="pull-left">
-    <i
+  <p class="float-left">
+    <font-awesome-icon
       v-show="showListView"
-      :class="{ fa: true, 'fa-list-ul': true, active: viewmode[type] == 'list-view'}"
+      :class="{ active: viewmode[type] == 'list-view'}"
+      class="mr-2"
+      icon="list"
       @click="selectView({ view: 'list-view', type })"
     />
-    <i
-      :class="{ fa: true, 'fa-calendar': true, active: viewmode[type] == 'semester'} "
+    <font-awesome-icon
+      :class="{ active: viewmode[type] == 'semester'} "
+      class="mr-2"
+      icon="calendar-alt"
       @click="selectView({ view: 'semester', type })"
     />
-    <i
-      :class="{ fa: true, 'fa-square': true, active: viewmode[type] == 'multi-year'}"
+    <font-awesome-icon
+      :class="{ active: viewmode[type] == 'multi-year'}"
+      icon="square"
       @click="selectView({ view: 'multi-year', type })"
     />
   </p>
@@ -18,8 +23,12 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     type: {
       type: String,
@@ -39,12 +48,12 @@ export default {
 }
 </script>
 
-<style type="text/css">
-.actions .fa {
+<style scoped>
+svg {
   color: gray;
 }
 
-.actions .fa.active {
+svg.active {
   color: black;
 }
 </style>

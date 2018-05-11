@@ -1,12 +1,12 @@
 <template >
   <div class="course-details">
     <div class="header mx-0">
-      <p class="pull-left mb-0">
+      <p class="float-left mb-0">
         <strong>{{ course.academic_group }}</strong><br>
         <strong>{{ `${course.subject} ${course.catalog_number}` }}</strong><br>
         <strong>{{ `${course.term_name} ${course.term_year}` }}</strong>
       </p>
-      <p class="pull-right text-right mb-0">
+      <p class="float-right text-right mb-0">
         Component: <strong>{{ course.component || '&mdash;' }}</strong><br>
         Grading basis: <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
         Instructor: <strong>{{ firstInstructor || '&mdash;' }}</strong>
@@ -32,10 +32,10 @@
         v-for="instructor in course.course_instructors"
         :key="instructor.id"
         class="instructor mb-0">
-        <p class="pull-left mb-0">
+        <p class="float-left mb-0">
           <strong>{{ instructor.display_name }}</strong>
         </p>
-        <p class="pull-right text-right mb-0">
+        <p class="float-right text-right mb-0">
           More courses
         </p>
       </div>
@@ -82,12 +82,12 @@ export default {
       margin-bottom: 20px;
       width: 100%;
 
-      p.pull-left {
+      p.float-left {
         clear: left;
         width: 40%;
       }
 
-      p.pull-right {
+      p.float-right {
         clear: right;
         width: 60%;
       }

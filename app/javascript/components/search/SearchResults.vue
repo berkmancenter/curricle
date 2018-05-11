@@ -4,14 +4,14 @@
     class="results-container">
     <div class="clearfix">
       <div
-        class="pull-left"
+        class="float-left"
         style="width: 28%;">
         <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
       </div>
-      <div class="pull-left">
+      <div class="float-left">
         <search-results-sort/>
       </div>
-      <div class="pull-right text-right">
+      <div class="float-right text-right">
         <b-form-checkbox v-model="showConflicts">
           Show Results with Conflicts ({{ conflictCount }})
         </b-form-checkbox>

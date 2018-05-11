@@ -2,27 +2,24 @@
   <div>
     <div class="selected-course">
       <p class="select-course">Selected Course
-        <i
-          class="fa fa-close pull-right"
-          @click="closeSidebar"
-        />
+        <font-awesome-icon
+          class="pointer float-right"
+          icon="times"
+          @click="closeSidebar"/>
       </p>
       <hr>
       <div
         v-if="userAuthenticated"
         class="actions mb-0">
-        <p class="pull-left">
+        <p class="float-left">
           <course-action
             :course="theCourse.id"
             type="tray"/>
           <course-action
             :course="theCourse.id"
             type="schedule"/>
-          <course-action
-            :course="theCourse.id"
-            type="shareable"/>
         </p>
-        <p class="course-history pull-right text-right">See course history</p>
+        <p class="course-history float-right text-right">See course history</p>
       </div>
 
       <selected-course-details
@@ -39,6 +36,7 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 
 import CourseAction from 'components/shared/course-action'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
 import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
 
@@ -46,7 +44,8 @@ export default {
   components: {
     SelectedCourseAnnotations,
     SelectedCourseDetails,
-    CourseAction
+    CourseAction,
+    FontAwesomeIcon
   },
   props: {
     course: {
@@ -86,11 +85,7 @@ export default {
     cursor: not-allowed;
   }
 
-  .fa.fa-close {
-    padding-right: 0.5em;
-  }
-
-  .fa.fa-close:hover {
-    color: gray;
+  .pointer {
+    cursor: pointer;
   }
 </style>

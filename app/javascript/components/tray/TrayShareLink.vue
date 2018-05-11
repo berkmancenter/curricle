@@ -1,5 +1,5 @@
 <template>
-  <p class="tray-share pull-right text-right">
+  <p class="tray-share float-right text-right">
     <span
       id="share-dropdown"
       class="pointer">

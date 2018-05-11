@@ -14,7 +14,7 @@
       <strong>{{ day }}</strong>
       <div
         v-show="trayCoursesByDay[day] && trayCoursesByDay[day].length"
-        class="pull-right"
+        class="float-right"
         @click="toggleEditDay(day)"
         v-text="isEditing[day] ? 'Done' : 'Edit'"
       />

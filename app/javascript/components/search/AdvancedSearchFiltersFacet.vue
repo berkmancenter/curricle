@@ -7,7 +7,7 @@
         v-for="item in items"
         :key="item.id"
         class="facet-item clearfix">
-        <div class="pull-left">
+        <div class="float-left">
           <label class="mb-1">
             <input
               :value="item.id"
@@ -18,7 +18,7 @@
           </label>
         </div>
 
-        <div class="count pull-right">
+        <div class="count float-right">
           {{ item.count }}
         </div>
       </div>

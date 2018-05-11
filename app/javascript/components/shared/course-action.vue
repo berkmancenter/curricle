@@ -1,8 +1,9 @@
 <template>
   <span class="course-action">
-    <i
+    <font-awesome-icon
       v-b-tooltip.hover="true"
-      :class="calcClass"
+      :icon="config.icon"
+      :class="{ active: active }"
       :title="tooltip"
       @click="click"
     />
@@ -11,10 +12,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import USER_COURSE_REMOVE_MUTATION from '../../graphql/UserCourseRemove.gql'
 import USER_COURSE_SET_MUTATION from '../../graphql/UserCourseSet.gql'
 
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     type: {
       type: String,
@@ -29,31 +34,31 @@ export default {
     return {
       types: {
         tray: {
-          icon: 'fa-folder',
+          icon: 'folder',
           clickable: true,
           activeTooltip: 'Click to remove from your tray',
           inactiveTooltip: 'Click to add to your tray'
         },
         schedule: {
-          icon: 'fa-clock-o',
+          icon: 'clock',
           clickable: true,
           activeTooltip: 'Click to remove from your schedule',
           inactiveTooltip: 'Click to add to your schedule'
         },
         annotated: {
-          icon: 'fa-pencil',
+          icon: 'pencil-alt',
           clickable: false,
           activeTooltip: 'You have annotated this course',
           inactiveTooltip: 'You have not annotated this course'
         },
         tagged: {
-          icon: 'fa-tag',
+          icon: 'tag',
           clickable: false,
           activeTooltip: 'This course has tags',
           inactiveTooltip: 'This course has no tags'
         },
         shareable: {
-          icon: 'fa-share-alt',
+          icon: 'share-square',
           clickable: false,
           activeTooltip: 'Click to share this course',
           inactiveTooltip: ''
@@ -74,12 +79,6 @@ export default {
     },
     config () {
       return this.types[this.type]
-    },
-    calcClass () {
-      var theClass = { fa: true, active: this.active }
-      theClass[this.config.icon] = true
-
-      return theClass
     }
   },
   methods: {

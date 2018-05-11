@@ -18,10 +18,6 @@
       <course-action
         :course="course.id"
         type="tagged"/>
-      <br>
-      <course-action
-        :course="course.id"
-        type="shareable"/>
     </div>
 
     <div
