@@ -9,6 +9,9 @@ var colorMix = '#2C3194'
 
 var documentWidth = window.innerWidth
 
+var widthScale = 3.75
+var widthOffset = 0
+
 var margin = {top: 40, right: 1, bottom: 10, left: 1}
 var width = documentWidth / 2 - margin.left - margin.right
 var height = 100 - margin.top - margin.bottom
@@ -33,9 +36,12 @@ var departmentAxis = d3.axisTop(departmentBarScale).ticks(5)
 
 var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departmentGradient
 
+var container
 var fullData
 
 function initSetup () {
+  container = d3.select('#visContainer')
+  width = container.node().offsetWidth / widthScale + widthOffset
   courseTypeSvg = d3.select('#courseTypeVis').append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
@@ -349,7 +355,8 @@ window.addEventListener('resize', resizing)
 function resizing () {
   if (documentWidth !== window.innerWidth) {
     documentWidth = window.innerWidth
-    width = documentWidth / 2 - margin.left - margin.right
+    // width = documentWidth / 2 - margin.left - margin.right
+    width = container.node().offsetWidth / widthScale + widthOffset
 
     d3.select('#departmentVis')
       .select('svg')
