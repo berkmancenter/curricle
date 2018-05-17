@@ -83,6 +83,9 @@ function initSetup () {
   departmentGradient.append('stop')
     .attr('stop-color', '#fff')
     .attr('offset', '1')
+
+  loadFullData()
+  window.addEventListener('resize', resizing)
 }
 
 function loadFullData () {
@@ -116,8 +119,6 @@ function appendAxis () {
   d3.selectAll('.domain')
     .style('display', 'none')
 }
-
-loadFullData()
 
 function setDepartmentData (data) {
   var nestedDepartmentData = d3.nest()
@@ -349,8 +350,6 @@ function dataFilter () {
     setDepartmentData(fullData, true)
   }
 }
-
-window.addEventListener('resize', resizing)
 
 function resizing () {
   if (documentWidth !== window.innerWidth) {
