@@ -2,7 +2,7 @@
   <div id="interfaceContainer">
     <div id="searchContainer">
       <div id="search">
-        <b-form @submit="callRequestData">
+        <b-form @submit="onSubmit">
           <b-form-group
             label="Instructor name:"
             label-for="instructorName">
@@ -38,7 +38,8 @@ export default {
     initSetup()
   },
   methods: {
-    callRequestData () {
+    onSubmit (e) {
+      e.preventDefault()
       requestData(this.instructorName)
     }
   }
