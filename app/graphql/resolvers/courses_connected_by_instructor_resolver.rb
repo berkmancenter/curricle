@@ -12,6 +12,8 @@ module Resolvers
           with :term_year, term_year
         end
 
+      return Course.none if search.results.blank?
+
       instructor_email = search.results.first.email
       course_ids_taught_by_instructor = search.results.map(&:course_id)
 
