@@ -7,32 +7,18 @@ var colorLeft = '#D10F84'
 var colorRight = '#00ADF0'
 var colorMix = '#2C3194'
 
-var documentWidth = window.innerWidth
+// var widthScale = 3.75
+// var widthOffset = 0
 
-var widthScale = 3.75
-var widthOffset = 0
-
-var margin = {top: 40, right: 1, bottom: 10, left: 1}
-var width = documentWidth / 2 - margin.left - margin.right
-var height = 100 - margin.top - margin.bottom
+var documentWidth, margin, width, height, courseTypeBarScale, departmentBarScale, courseTypeAxis, departmentAxis
 
 var courseTypeSvg, departmentSvg, classSvg
 
 var courseTypeTextScale = d3.scaleLinear()
   .range([12, 16])
 
-var courseTypeBarScale = d3.scaleLinear()
-  .range([width, 0])
-
-var courseTypeAxis = d3.axisTop(courseTypeBarScale).ticks(5)
-
 var departmentTextScale = d3.scaleLinear()
   .range([12, 16])
-
-var departmentBarScale = d3.scaleLinear()
-  .range([0, width])
-
-var departmentAxis = d3.axisTop(departmentBarScale).ticks(5)
 
 var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departmentGradient
 
@@ -40,8 +26,19 @@ var container
 var fullData
 
 function initSetup () {
-  container = d3.select('#visContainer')
-  width = container.node().offsetWidth / widthScale + widthOffset
+  container = d3.select('#visContainer').node()
+  documentWidth = container.offsetWidth / 2
+
+  // documentWidth = window.innerWidth
+  margin = {top: 40, right: 1, bottom: 10, left: 1}
+  width = documentWidth / 2 - margin.left - margin.right
+  height = 100 - margin.top - margin.bottom
+  courseTypeBarScale = d3.scaleLinear()
+    .range([width, 0])
+  departmentBarScale = d3.scaleLinear()
+    .range([0, width])
+  courseTypeAxis = d3.axisTop(courseTypeBarScale).ticks(5)
+  departmentAxis = d3.axisTop(departmentBarScale).ticks(5)
   courseTypeSvg = d3.select('#courseTypeVis').append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
@@ -352,10 +349,10 @@ function dataFilter () {
 }
 
 function resizing () {
-  if (documentWidth !== window.innerWidth) {
-    documentWidth = window.innerWidth
-    // width = documentWidth / 2 - margin.left - margin.right
-    width = container.node().offsetWidth / widthScale + widthOffset
+  if (documentWidth !== container.offsetWidth / 2) {
+    documentWidth = container.offsetWidth / 2
+    width = documentWidth / 2 - margin.left - margin.right
+    // width = container.node().offsetWidth / widthScale + widthOffset
 
     d3.select('#departmentVis')
       .select('svg')
