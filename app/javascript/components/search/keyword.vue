@@ -26,7 +26,7 @@
     <b-popover
       v-show="keyword.active"
       :target="kwId"
-      triggers="click blur"
+      :triggers="keyword.active ? 'click blur' : ''"
       placement="bottom">
       <b-form-input
         v-model="keyword.text"/>
