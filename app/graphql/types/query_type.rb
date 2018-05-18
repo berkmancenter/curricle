@@ -124,7 +124,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   field :courses_connected_by_instructor, !types[Types::CourseType] do
     description 'Returns collection of courses taught by instructors connected to a given instructor'
 
-    argument :email, !types.String, "Instructor's email address"
+    argument :name, !types.String, "Instructor's name"
 
     resolve Resolvers::CoursesConnectedByInstructorResolver.new
   end
