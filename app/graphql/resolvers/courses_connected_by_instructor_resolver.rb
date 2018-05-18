@@ -12,12 +12,13 @@ module Resolvers
           with :term_year, term_year
         end
 
+      instructor_email = search.results.first.email
       course_ids_taught_by_instructor = search.results.map(&:course_id)
 
       instructor_emails =
         CourseInstructor
         .where(course_id: course_ids_taught_by_instructor, term_year: term_year)
-        .where.not(email: args[:email])
+        .where.not(email: instructor_email)
         .distinct
         .pluck(:email)
 
