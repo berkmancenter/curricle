@@ -18,10 +18,11 @@ export default {
 }
 </script>
 
-<style scoped>
-  svg{
-    display: block;
-    margin: 0;
+<style lang="scss" scoped>
+  div /deep/ {
+    svg {
+      display: block;
+      margin: 0;
   }
   #visContainer{
     height:100vh;
@@ -59,4 +60,5 @@ export default {
     cursor:pointer;
     fill: #2C3194;
   }
+}
 </style>
