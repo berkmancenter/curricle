@@ -1,8 +1,5 @@
 <template>
-  <b-dropdown
-    :text="theSemester ? 'Semester: ' + theSemester : 'Semester'"
-    class="m-md-2"
-  >
+  <b-dropdown :text="filters.semester ? 'Semester: ' + filters.semester : 'Semester'">
     <b-dropdown-item
       v-show="mode !== 'state'"
       @click="setSemester(null)">
@@ -35,11 +32,6 @@ export default {
       required: false
     }
   },
-  data () {
-    return {
-      theSemester: ''
-    }
-  },
   computed: {
     ...mapState('plan', ['semester', 'filters']),
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'sortedSemestersInTray']),
@@ -61,7 +53,6 @@ export default {
   methods: {
     ...mapActions('plan', { planSetSemester: 'setSemester', setFilter: 'setFilter' }),
     setSemester (sem) {
-      this.theSemester = sem
       if (this.mode === 'state') {
         this.planSetSemester(sem)
       } else {
@@ -71,3 +62,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+div /deep/ {
+  .dropdown-toggle, .dropdown-item {
+    font-size: 12px;
+  }
+}
+</style>

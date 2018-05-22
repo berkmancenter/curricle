@@ -1,16 +1,13 @@
 <template>
-  <b-dropdown
-    :text="department ? 'Department: ' + department : 'Department'"
-    class="m-md-2"
-  >
+  <b-dropdown :text="filters.department ? 'Department: ' + filters.department : 'Department'">
     <b-dropdown-item @click="setDepartment(null)">
       All Departments
     </b-dropdown-item>
+
     <b-dropdown-item
       v-for="dept in departmentsInTray"
       :key="dept"
-      @click="setDepartment(dept)"
-    >
+      @click="setDepartment(dept)">
       {{ dept }}
     </b-dropdown-item>
   </b-dropdown>
@@ -20,11 +17,6 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  data () {
-    return {
-      department: ''
-    }
-  },
   computed: {
     ...mapState('plan', ['filters']),
     ...mapGetters('plan', ['departmentsInTray'])
@@ -35,9 +27,16 @@ export default {
   methods: {
     ...mapActions('plan', ['setFilter']),
     setDepartment (dept) {
-      this.department = dept
       this.setFilter({name: 'department', value: dept})
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+div /deep/ {
+  .dropdown-toggle, .dropdown-item {
+    font-size: 12px;
+  }
+}
+</style>

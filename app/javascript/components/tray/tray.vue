@@ -22,35 +22,31 @@
       <multi-year-sidebar
         v-show="viewmode.tray=='multi-year'"
       />
-      <course-list
-        v-show="viewmode.tray=='list-view'"
-        :courses="trayCourses"
-      />
+      <sidebar-list v-show="viewmode.tray === 'list-view'"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
-import CourseList from 'components/shared/course-list'
+import { mapState, mapActions } from 'vuex'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
 import SemesterSidebar from 'components/tray/semester-sidebar'
 import ShareLink from 'components/tray/TrayShareLink'
+import SidebarList from 'components/tray/SidebarList'
 
 export default {
   components: {
-    CourseList,
     FontAwesomeIcon,
     MultiYearSidebar,
     SemesterSidebar,
     ViewSelector,
-    ShareLink
+    ShareLink,
+    SidebarList
   },
   computed: {
-    ...mapState('app', ['viewmode']),
-    ...mapGetters('user', ['trayCourses'])
+    ...mapState('app', ['viewmode'])
   },
   methods: {
     ...mapActions('app', ['closeSidebar'])
