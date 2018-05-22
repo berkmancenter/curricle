@@ -13,7 +13,7 @@
           <td>{{ course.term_name }} <br> {{ course.units_maximum }} units</td>
           <td style = "width: 16em; text-align: justify;">
             <truncate
-              v-show="course.course_description_long"
+              v-if="course.course_description_long"
               :length="50"
               :text="course.course_description_long"
               class="course_description"

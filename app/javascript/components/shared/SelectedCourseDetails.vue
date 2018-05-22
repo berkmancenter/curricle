@@ -18,6 +18,7 @@
     <div class="description">
       <p class="heading">Description</p>
       <truncate
+        v-if="course.course_description_long"
         :length="250"
         :text="course.course_description_long"
         clamp="..."
