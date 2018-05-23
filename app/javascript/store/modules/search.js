@@ -105,6 +105,14 @@ const getters = {
 
   sortedFilters: (state) => (facet) => {
     return _.orderBy(state.facets[facet], ['selected', 'value'], ['desc', 'asc'])
+  },
+
+  catalogYearStart (state, getters, rootState) {
+    return rootState.app.catalogYearStart
+  },
+
+  catalogYearEnd (state, getters, rootState) {
+    return rootState.app.catalogYearEnd
   }
 }
 
@@ -279,6 +287,7 @@ const actions = {
     commit('PUSH_SEARCH_HISTORY', getters.searchSnapshot)
   },
   populateSearchState ({commit}, obj) {
+    commit('RESET_FACETS')
     commit('SET_SEARCH_STATE', obj)
   },
   facetSetAllItemSelections ({ commit, state }, { facet, selected }) {
@@ -318,6 +327,25 @@ const actions = {
         )
       }
     )
+  },
+  searchByInstructor ({ dispatch, getters }, instructorName) {
+    const searchParams = {
+      keywords: [{ active: true, applyTo: ['INSTRUCTOR'], text: instructorName, weight: 5 }],
+      searchTermEnd: 'Fall',
+      searchTermStart: 'Spring',
+      searchTermUseRange: true,
+      searchYearEnd: getters.catalogYearEnd,
+      searchYearStart: getters.catalogYearStart,
+      sortBy: 'SEMESTER'
+    }
+
+    dispatch('populateSearchState', searchParams)
+      .then(
+        () => {
+          dispatch('saveSearchInHistory')
+          dispatch('runKeywordSearch')
+        }
+      )
   }
 }
 
@@ -385,6 +413,9 @@ const mutations = {
   },
   FACET_SET_ITEM_SELECTION (state, { facet, itemId, selected }) {
     Vue.set(state.facets[facet][itemId], 'selected', selected)
+  },
+  RESET_FACETS (state) {
+    state.facets = {}
   }
 }
 

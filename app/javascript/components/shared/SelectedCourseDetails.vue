@@ -37,7 +37,11 @@
           <strong>{{ instructor.display_name }}</strong>
         </p>
         <p class="float-right text-right mb-0">
-          More courses
+          <a
+            href="javascript:"
+            @click="searchByInstructor(instructor.display_name)">
+            More courses
+          </a>
         </p>
       </div>
     </div>
@@ -50,6 +54,7 @@
 
 <script>
 import truncate from 'vue-truncate-collapsed'
+import { serializeSearch } from 'lib/util'
 
 export default {
   components: {
@@ -66,6 +71,12 @@ export default {
       if (this.course.course_instructors.length) {
         return this.course.course_instructors[0].display_name
       }
+    }
+  },
+  methods: {
+    searchByInstructor (instructorName) {
+      this.$store.dispatch('search/searchByInstructor', instructorName)
+      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
     }
   }
 }
@@ -112,10 +123,13 @@ export default {
 
       .instructor {
         border-bottom: 1px solid #999;
-        cursor: not-allowed;
         display: inline-block;
         padding: 4px 0;
         width: 100%;
+
+        a {
+          color: #000;
+        }
       }
     }
   }
