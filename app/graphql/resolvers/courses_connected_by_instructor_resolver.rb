@@ -4,12 +4,12 @@ module Resolvers
   # Return a collection of courses taught by instructors connected to a given instructor
   class CoursesConnectedByInstructorResolver
     def call(_obj, args, _ctx)
-      term_year = Time.current.year
+      term_year_limit = 3.years.ago.year
 
       search =
         CourseInstructor.search do
           fulltext args[:name]
-          with :term_year, term_year
+          with(:term_year).greater_than(term_year_limit)
         end
 
       return Course.none if search.results.blank?
@@ -19,14 +19,16 @@ module Resolvers
 
       instructor_emails =
         CourseInstructor
-        .where(course_id: course_ids_taught_by_instructor, term_year: term_year)
+        .where(course_id: course_ids_taught_by_instructor)
+        .where('term_year > ?', term_year_limit)
         .where.not(email: instructor_email)
         .distinct
         .pluck(:email)
 
       course_ids_taught_by_connected_instructors =
         CourseInstructor
-        .where(email: instructor_emails, term_year: term_year)
+        .where(email: instructor_emails)
+        .where('term_year > ?', term_year_limit)
         .distinct
         .pluck(:course_id)
 
