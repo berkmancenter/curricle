@@ -49,16 +49,27 @@
     <div class="readings">
       <p class="heading">Readings</p>
     </div>
+
+    <div class="meetings">
+      <p class="heading">Class Meeting Times</p>
+      <span class="w-100">
+        <class-meeting-time
+          :schedule="course.schedule"
+        />
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
 import truncate from 'vue-truncate-collapsed'
 import { serializeSearch } from 'lib/util'
+import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 
 export default {
   components: {
-    truncate
+    truncate,
+    ClassMeetingTime
   },
   props: {
     course: {
