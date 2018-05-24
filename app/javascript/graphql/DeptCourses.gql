@@ -1,3 +1,4 @@
+#import "./CourseFragment.gql"
 query DeptCourses(
   $searchDepartments: [DepartmentEnum!],
   $searchComponent: [ComponentEnum!]
@@ -7,8 +8,6 @@ query DeptCourses(
     components: $searchComponent,
     per_page: 500
   ) {
-    id
-    title
-    component
+    ...Course
   }
 }

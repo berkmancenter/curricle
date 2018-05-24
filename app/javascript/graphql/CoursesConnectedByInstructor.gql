@@ -1,20 +1,10 @@
+#import "./CourseFragment.gql"
 query CoursesConnectedByInstructor(
   $instructorName: String!
 ) {
     courses_connected_by_instructor(
       name: $instructorName
     ) {
-        id
-        title
-        class_academic_org_description
-        component
-        term_year
-        term_name
-        course_instructors {
-          id
-          email
-          display_name
-        }
+      ...Course
       }
-
   }

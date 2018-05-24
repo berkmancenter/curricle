@@ -25,7 +25,11 @@ var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departm
 var container
 var fullData
 
-function initSetup () {
+let selectCourse
+
+function initSetup (selectCourseFunction) {
+  selectCourse = selectCourseFunction
+
   container = d3.select('#visContainer').node()
   documentWidth = container.offsetWidth / 2
 
@@ -422,11 +426,17 @@ function classVisualization (data) {
     .style('opacity', 0)
     .style('font-size', function (d, i) { return 12 + 'px' })
     .text(function (d) { return d.title })
-  // .on('click', dataFilter)
+    .on('click', courseClick)
     .transition()
     .delay(500)
     .duration(500)
     .style('opacity', 1)
+}
+
+function courseClick () {
+  const course = this.__data__
+
+  selectCourse(course)
 }
 
 export { initSetup }

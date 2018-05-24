@@ -12,8 +12,8 @@ var maxTextLength = 50
 
 var documentWidth = document.body.clientWidth
 
-if (documentWidth > 900) {
-  documentWidth = 900
+if (documentWidth > 800) {
+  documentWidth = 800
 }
 
 var margin = {top: 50, right: 100, bottom: 150, left: 50}
@@ -22,7 +22,11 @@ var height = 900 - margin.top - margin.bottom
 var svg
 var classScale, instructorTextPosScale, departmentPosScale, instructorTextScale, departmentTextScale
 
-function initSetup () {
+let selectCourse
+
+function initSetup (selectCourseFunction) {
+  selectCourse = selectCourseFunction
+
   svg = d3.select('#visContainer').append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
@@ -227,8 +231,7 @@ function monadicView (data) {
     .text(function (d) {
       if (d.values[0].title.length > maxTextLength) { return d.values[0].title.substring(0, maxTextLength) + '...' } else { return d.values[0].title }
     })
-
-  // .on('click', courseSelectionVis);
+    .on('click', courseClick)
 
   // -------------------------------------------------------------
   //  LeftVis
@@ -422,6 +425,12 @@ function lectureClick () {
     .style('fill', 'rgba(255,255,255,.5)')
 
   requestData(lecturerName)
+}
+
+function courseClick () {
+  const course = this.__data__.values[0]
+
+  selectCourse(course)
 }
 
 function getRandom (arr, n) {

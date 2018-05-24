@@ -10,10 +10,14 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/classes'
+import { mapActions } from 'vuex'
 
 export default {
   mounted () {
-    initSetup()
+    initSetup(this.selectCourse)
+  },
+  methods: {
+    ...mapActions('app', ['selectCourse'])
   }
 }
 </script>
@@ -59,6 +63,14 @@ export default {
   .departmentText, .departmentRect, .courseTypeText, .courseTypeRect{
     cursor:pointer;
     fill: #2C3194;
+  }
+
+  .classText {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 </style>

@@ -27,6 +27,7 @@
 
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -35,9 +36,10 @@ export default {
     }
   },
   mounted () {
-    initSetup()
+    initSetup(this.selectCourse)
   },
   methods: {
+    ...mapActions('app', ['selectCourse']),
     onSubmit (e) {
       e.preventDefault()
       requestData(this.instructorName)
