@@ -6,7 +6,7 @@
       <div
         class="float-left"
         style="width: 28%;">
-        <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
+        <strong>{{ resultsTotalCount }} Results</strong>
       </div>
       <div class="float-left">
         <search-results-sort/>
@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
-    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable']),
+    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable', 'resultsTotalCount']),
     ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['scheduledCourses']),
     currentSchedule () {

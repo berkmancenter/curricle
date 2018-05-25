@@ -21,6 +21,7 @@ const state = {
   resultsPage: 1,
   resultsPerPage: 50,
   resultsMoreAvailable: false,
+  resultsTotalCount: 0,
   searchComplete: false,
   searchRunning: false,
   applyToOptions: [
@@ -253,6 +254,7 @@ const actions = {
 
       if (!userCoursesSearch) {
         dispatch('populateFacets', { facets: response.data.coursesConnection })
+        state.resultsTotalCount = response.data.coursesConnection.totalCount
       }
 
       // store in registry
