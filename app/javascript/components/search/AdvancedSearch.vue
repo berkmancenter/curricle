@@ -47,14 +47,14 @@
         :class="{ selected: showFilters }"
         class="advanced-search-tab"
         @click="toggleSearchFilters">
-        Filter Results ({{ selectedFilterCount }})
+        Filter Results
       </span>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import _ from 'lodash'
 import TimeSelector from 'components/search/TimeSelector'
 import AdvancedSearchFilters from 'components/search/AdvancedSearchFilters'
@@ -87,7 +87,6 @@ export default {
   },
   computed: {
     ...mapState('search', { _times: 'timeRanges' }),
-    ...mapGetters('search', ['selectedFilterCount']),
     advancedSelectedDays () { return _.filter(this.requireDay).length },
     activeTimeRanges () {
       if (this.useAdvanced) {

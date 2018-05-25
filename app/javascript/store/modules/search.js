@@ -93,16 +93,6 @@ const getters = {
     )
   },
 
-  selectedFilterCount (state) {
-    return _.reduce(
-      state.facets,
-      (count, facet) => {
-        return count + _.filter(facet, 'selected').length
-      },
-      0
-    )
-  },
-
   sortedFilters: (state) => (facet) => {
     return _.orderBy(state.facets[facet], ['selected', 'value'], ['desc', 'asc'])
   },
