@@ -64,6 +64,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import { serializeSearch } from 'lib/util'
 import _ from 'lodash'
 import TimeSelector from 'components/search/TimeSelector'
 import AdvancedSearchFilters from 'components/search/AdvancedSearchFilters'
@@ -152,6 +153,8 @@ export default {
           this.timeRanges[day] = [7, 20]
         }
       )
+
+      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
     }
   }
 }
