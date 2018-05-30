@@ -40,7 +40,7 @@
       <span
         :class="{'advanced-search-tab': true, selected: showAdvanced}"
         @click="toggleAdvancedSearch">
-        Advanced Search <span v-show="useAdvanced">({{ advancedSelectedDays }})</span>
+        Advanced Search
       </span>
 
       <span
@@ -141,9 +141,9 @@ export default {
       this.showAdvanced = false
     },
     resetAdvancedSearchFilters () {
-      this.useAdvanced = false
-      this.showFilters = false
       this.resetAdvancedSearch()
+      this.showAdvanced = false
+      this.showFilters = false
 
       _.each(
         _.keys(this.requireDay),
