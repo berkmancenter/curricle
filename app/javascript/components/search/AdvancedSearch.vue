@@ -42,13 +42,22 @@
         @click="toggleAdvancedSearch">
         Advanced Search <span v-show="useAdvanced">({{ advancedSelectedDays }})</span>
       </span>
+
       <span
         v-if="$store.state.search.searchComplete"
         :class="{ selected: showFilters }"
-        class="advanced-search-tab"
+        class="advanced-search-tab ml-1"
         @click="toggleSearchFilters">
         Filter Results
       </span>
+
+      <span
+        v-if="$store.state.search.searchComplete"
+        class="advanced-search-tab ml-1"
+        @click="resetAdvancedSearchFilters">
+        Reset Advanced Search &amp; Filters
+      </span>
+
     </div>
   </div>
 </template>
@@ -121,7 +130,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('search', ['setTimeRanges']),
+    ...mapActions('search', ['resetAdvancedSearch', 'setTimeRanges']),
     toggleAdvancedSearch () {
       this.useAdvanced = true
       this.showAdvanced = !this.showAdvanced
@@ -130,6 +139,19 @@ export default {
     toggleSearchFilters () {
       this.showFilters = !this.showFilters
       this.showAdvanced = false
+    },
+    resetAdvancedSearchFilters () {
+      this.useAdvanced = false
+      this.showFilters = false
+      this.resetAdvancedSearch()
+
+      _.each(
+        _.keys(this.requireDay),
+        day => {
+          this.requireDay[day] = true
+          this.timeRanges[day] = [7, 20]
+        }
+      )
     }
   }
 }
@@ -143,7 +165,7 @@ export default {
 
 .advanced-search-tabs {
   margin: auto;
-  width: 300px;
+  width: 600px;
 }
 
 .advanced-search-tab {

@@ -338,6 +338,12 @@ const actions = {
           dispatch('runKeywordSearch')
         }
       )
+  },
+  resetAdvancedSearch ({ commit, dispatch }) {
+    commit('RESET_TIME_RANGES')
+    commit('RESET_FACETS')
+    dispatch('saveSearchInHistory')
+    dispatch('runKeywordSearch')
   }
 }
 
@@ -408,6 +414,9 @@ const mutations = {
   },
   RESET_FACETS (state) {
     state.facets = {}
+  },
+  RESET_TIME_RANGES (state) {
+    state.timeRanges = undefined
   }
 }
 
