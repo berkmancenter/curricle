@@ -320,6 +320,25 @@ const actions = {
       }
     )
   },
+  searchByCourseId ({ dispatch, getters }, courseId) {
+    const searchParams = {
+      keywords: [{ active: true, applyTo: ['COURSE_ID'], text: courseId, weight: 5 }],
+      searchTermEnd: 'Fall',
+      searchTermStart: 'Spring',
+      searchTermUseRange: true,
+      searchYearEnd: getters.catalogYearEnd,
+      searchYearStart: getters.catalogYearStart,
+      sortBy: 'SEMESTER'
+    }
+
+    dispatch('populateSearchState', searchParams)
+      .then(
+        () => {
+          dispatch('saveSearchInHistory')
+          dispatch('runKeywordSearch')
+        }
+      )
+  },
   searchByInstructor ({ dispatch, getters }, instructorName) {
     const searchParams = {
       keywords: [{ active: true, applyTo: ['INSTRUCTOR'], text: instructorName, weight: 5 }],

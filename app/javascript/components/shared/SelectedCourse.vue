@@ -19,7 +19,13 @@
             :course="theCourse.id"
             type="schedule"/>
         </p>
-        <p class="course-history float-right text-right">See course history</p>
+        <p class="course-history float-right text-right">
+          <a
+            href="javascript:"
+            @click="searchByCourseId(courseId)">
+            See course history
+          </a>
+        </p>
       </div>
 
       <selected-course-details
@@ -34,7 +40,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-
+import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/course-action'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
@@ -61,15 +67,22 @@ export default {
         return this.course
       }
       return this.courses[this.course]
+    },
+    courseId () {
+      return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
     }
   },
   methods: {
-    ...mapActions('app', ['closeSidebar'])
+    ...mapActions('app', ['closeSidebar']),
+    searchByCourseId (courseId) {
+      this.$store.dispatch('search/searchByCourseId', courseId)
+      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .actions {
     display: inline-block;
     width: 100%;
@@ -82,7 +95,10 @@ export default {
   p.course-history {
     font-size: 13px;
     font-weight: bold;
-    cursor: not-allowed;
+
+    a {
+      color: #000;
+    }
   }
 
   .pointer {
