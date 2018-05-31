@@ -27,7 +27,7 @@
       />
     </div>
 
-    <div class="instructors">
+    <div class="instructors mt-3">
       <p class="heading">Instructors</p>
       <div
         v-for="instructor in course.course_instructors"
@@ -46,11 +46,11 @@
       </div>
     </div>
 
-    <div class="readings">
+    <div class="readings mt-3">
       <p class="heading">Readings</p>
     </div>
 
-    <div class="meetings">
+    <div class="meetings mt-3">
       <p class="heading">Class Meeting Times</p>
       <span class="w-100">
         <class-meeting-time
@@ -129,7 +129,6 @@ export default {
 
     .instructors {
       display: inline-block;
-      margin-bottom: 20px;
       width: 100%;
 
       .instructor {
