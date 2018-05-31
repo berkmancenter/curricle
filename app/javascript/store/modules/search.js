@@ -58,6 +58,7 @@ const state = {
     { text: 'Course ID', value: 'COURSE_ID' }
   ],
   timeRanges: undefined,
+  useFilters: false,
   searchHistory: []
 }
 
@@ -82,6 +83,9 @@ const getters = {
   },
 
   selectedFilters: (state) => (facet) => {
+    if (!state.useFilters) {
+      return
+    }
     if (!state.facets[facet]) {
       return
     }
@@ -276,6 +280,9 @@ const actions = {
   setTimeRanges ({commit}, r) {
     commit('SET_TIME_RANGES', r)
   },
+  setUseFilters ({commit}, r) {
+    commit('SET_USE_FILTERS', r)
+  },
   saveSearchInHistory ({commit, getters}) {
     commit('PUSH_SEARCH_HISTORY', getters.searchSnapshot)
   },
@@ -408,6 +415,9 @@ const mutations = {
   },
   SET_TIME_RANGES (state, r) {
     state.timeRanges = r
+  },
+  SET_USE_FILTERS (state, r) {
+    state.useFilters = r
   },
   PUSH_SEARCH_HISTORY (state, o) {
     state.searchHistory.unshift(o)
