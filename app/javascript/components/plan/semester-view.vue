@@ -97,12 +97,11 @@ export default {
     scale () {
       return (this.latestIdx - this.earliestIdx) > 7 ? 50 : 80
     },
+    // Determine if there are any courses with meeting times in the user's schedule
     hasCourses () {
-      return this.coursesByMeetingTime &&
-        _.find(
-          _.at(this.coursesByMeetingTime, daylist),
-          list => list && list.length > 1
-        )
+      const coursesByDay = _.at(this.coursesByMeetingTime, daylist)
+
+      return !!_.find(coursesByDay, 'length')
     },
     currentScheduleByDay () {
       return _.at(this.coursesByMeetingTime, daylist)
