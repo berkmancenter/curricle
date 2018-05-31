@@ -366,7 +366,7 @@ const actions = {
         }
       )
   },
-  resetAdvancedSearch ({ commit, dispatch }) {
+  resetAdvancedSearchFilters ({ commit, dispatch }) {
     commit('RESET_TIME_RANGES')
     commit('RESET_FACETS')
     dispatch('saveSearchInHistory')
