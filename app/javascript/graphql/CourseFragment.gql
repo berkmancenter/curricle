@@ -7,6 +7,7 @@ fragment Course on Course {
   component
   course_description
   course_description_long
+  course_note
   external_course_id
   grading_basis_description
   id

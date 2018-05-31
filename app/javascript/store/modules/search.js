@@ -28,6 +28,7 @@ const state = {
     { text: 'Title', value: 'TITLE' },
     { text: 'Description', value: 'DESCRIPTION' },
     { text: 'Instructor', value: 'INSTRUCTOR' },
+    { text: 'Notes', value: 'NOTES' },
     { text: 'Readings', value: 'READINGS', disabled: true },
     { text: 'Course ID', value: 'COURSE_ID' }
   ],

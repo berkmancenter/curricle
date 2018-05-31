@@ -27,6 +27,17 @@
       />
     </div>
 
+    <div
+      v-if="course.course_note"
+      class="notes mt-3">
+      <p
+        class="heading">
+        Class Notes
+      </p>
+
+      {{ course.course_note }}
+    </div>
+
     <div class="instructors mt-3">
       <p class="heading">Instructors</p>
       <div

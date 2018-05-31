@@ -48,7 +48,7 @@ export default {
       switch (this.selected.length) {
         // TODO: revert this once all search fields are available
         // case this.options.length:
-        case 4:
+        case 5:
           return 'All'
         case 0:
           return 'None'

@@ -7,6 +7,7 @@ module Resolvers
     FIELD_MAPPING = {
       'DESCRIPTION' => :course_description_long,
       'INSTRUCTOR' => %i[first_name last_name],
+      'NOTES' => :course_note,
       # 'Readings' => :readings,
       'TITLE' => :title
     }.freeze

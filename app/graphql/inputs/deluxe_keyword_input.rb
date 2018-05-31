@@ -8,6 +8,7 @@ ApplyToEnum = GraphQL::EnumType.define do
   value('COURSE_ID', 'Course ID')
   value('DESCRIPTION', 'Description')
   value('INSTRUCTOR', 'Instructor')
+  value('NOTES', 'Class Notes')
   value('READINGS', 'Readings')
   value('TITLE', 'Title')
   value('ID', 'Internal ID')
