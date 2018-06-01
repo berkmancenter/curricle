@@ -1,15 +1,16 @@
 <template>
-  <b-dropdown :text="filters.semester ? 'Semester: ' + filters.semester : 'Semester'">
+  <b-dropdown
+    :text="semesterLabel">
     <b-dropdown-item
       v-show="mode !== 'state'"
       @click="setSemester(null)">
       All Semesters
     </b-dropdown-item>
+
     <b-dropdown-item
       v-for="sem in theSemesters"
       :key="sem"
-      @click="setSemester(sem)"
-    >
+      @click="setSemester(sem)">
       {{ sem }}
     </b-dropdown-item>
   </b-dropdown>
@@ -37,6 +38,11 @@ export default {
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'sortedSemestersInTray']),
     theSemesters () {
       return this.source === 'tray' ? this.sortedSemestersInTray : this.sortedSemestersInSchedule
+    },
+    semesterLabel () {
+      const semesterName = this.source === 'tray' ? this.filters.semester : this.semester
+
+      return semesterName ? `Semester: ${semesterName}` : 'Semester'
     }
   },
   watch: {
