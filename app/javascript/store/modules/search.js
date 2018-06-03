@@ -74,8 +74,8 @@ const snapshotProps = [
 ]
 
 const getters = {
-  activeKeywords: state => state.keywords.filter(kw => kw.active),
-  inactiveKeywords: state => state.keywords.filter(kw => !kw.active),
+  activeKeywords: state => state.keywords ? state.keywords.filter(kw => kw.active) : [],
+  inactiveKeywords: state => state.keywords ? state.keywords.filter(kw => !kw.active) : [],
   searchSnapshot (state) {
     var obj = _.cloneDeep(_.pick(state, snapshotProps))
     _.remove(obj.keywords, e => !e.active)
