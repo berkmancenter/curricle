@@ -49,26 +49,6 @@ Types::QueryType = GraphQL::ObjectType.define do
   name 'Query'
   description 'Curricle queries'
 
-  # TODO: Remove/deprecate courses field and CoursesResolver in favor of CoursesConnection
-  field :courses, types[Types::CourseType] do
-    description 'Queries that return lists of courses'
-
-    argument :semester_range, Inputs::SemesterRangeInput, 'Range of semesters to search'
-    argument :deluxe_keywords, types[!Inputs::DeluxeKeywordInput], 'List of objects for a weighted, field-specific search'
-    argument :time_ranges, types[!Inputs::TimeRangeInput], 'List of times/days to look for courses'
-    argument :ids, types[!types.ID], 'List of course IDs'
-    argument :per_page, types.Int, 'Number of courses to return'
-    argument :page, types.Int, 'Pagination page'
-    argument :sort_by, SortByEnum, 'Sort method for search results'
-    argument :schools, types[!SchoolEnum], 'Filter results by school'
-    argument :departments, types[!DepartmentEnum], 'Filter results by department'
-    argument :subjects, types[!SubjectEnum], 'Filter results by subject'
-    argument :components, types[!ComponentEnum], 'Filter results by component'
-    argument :annotated, types.Boolean, 'Only return courses annotated by current user'
-
-    resolve Resolvers::CoursesResolver.new
-  end
-
   field :count_courses_by_department, !types[Types::CoursesByDepartmentType] do
     description 'Return counts of courses by department'
 
