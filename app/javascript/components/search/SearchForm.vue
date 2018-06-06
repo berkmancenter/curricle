@@ -77,6 +77,7 @@ export default {
   methods: {
     addActiveKeyword () {
       if (this.keyword) {
+        this.$root.$emit('bv::hide::popover')
         this.$store.dispatch('search/addKeyword', { text: this.keyword, weight: this.weight, applyTo: this.applyTo, active: true })
       }
 

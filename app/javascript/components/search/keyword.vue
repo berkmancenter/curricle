@@ -24,11 +24,15 @@
       icon="times"
       @click="closeClick"/>
     <b-popover
-      v-show="keyword.active"
+      ref="popover"
       :target="kwId"
-      :triggers="keyword.active ? 'click blur' : ''"
-      placement="bottom">
+      triggers="click blur"
+      placement="bottom"
+      @show="popoverShow($event)"
+      @hide="popoverHide($event)"
+      @shown="popoverActivate($event)">
       <b-form-input
+        :id="kwId+'-kw-edit-keyword'"
         v-model="keyword.text"/>
       <b-form-group
         label="Apply To"
@@ -38,8 +42,6 @@
           :options="applyToOptions"
           :target="kwId+'-weight'"
           name="search-fields"
-          triggers="click blur"
-          placement="bottom"
           stacked/>
       </b-form-group>
       <b-form-group
@@ -76,7 +78,8 @@ export default {
   data () {
     return {
       selected: this.keyword.applyTo,
-      selectedWeight: this.keyword.weight
+      selectedWeight: this.keyword.weight,
+      editing: false
     }
   },
   computed: {
@@ -105,6 +108,19 @@ export default {
     bodyClick () {
       if (!this.keyword.active) {
         this.$store.dispatch('search/activateKeyword', this.keyword)
+      }
+    },
+    popoverShow (arg) {
+      this.$root.$emit('bv::hide::popover')
+      this.editing = true
+    },
+    popoverHide (arg) {
+      this.editing = false
+    },
+    popoverActivate (arg) {
+      var el2 = document.getElementById(this.kwId + '-kw-edit-keyword')
+      if (el2) {
+        el2.focus()
       }
     }
   }
