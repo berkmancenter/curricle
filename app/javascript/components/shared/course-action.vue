@@ -1,7 +1,7 @@
 <template>
   <span class="course-action">
     <font-awesome-icon
-      v-b-tooltip.hover="true"
+      v-b-tooltip.d999.hover="true"
       :icon="config.icon"
       :class="{ active: active }"
       :title="tooltip"
