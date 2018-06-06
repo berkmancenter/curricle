@@ -137,6 +137,7 @@ const actions = {
   runKeywordSearch ({commit, state, getters, dispatch}) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
+    _.forEach(kw, k => delete k.ident)
 
     if (kw && kw.length) {
       commit('RESET_RESULTS_PAGE')
@@ -376,7 +377,13 @@ const actions = {
 
 const mutations = {
   ADD_KEYWORD (state, keyword) {
+    if (!state.keywords) {
+      Vue.set(state, 'keywords', [])
+    }
     if (!state.keywords.filter(k => k.text === keyword.text).length) {
+      if (!keyword.ident) {
+        keyword.ident = _.uniqueId('kw')
+      }
       state.keywords.push(keyword)
     }
   },

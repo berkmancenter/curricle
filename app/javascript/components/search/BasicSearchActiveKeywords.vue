@@ -2,9 +2,8 @@
   <div class="row">
     <div class="col-md-12">
       <keyword
-        v-for="(keyword,idx) in activeKeywords"
-        :key="idx"
-        :keyword-idx="idx"
+        v-for="keyword in activeKeywords"
+        :key="keyword.ident"
         :keyword="keyword"
       />
     </div>

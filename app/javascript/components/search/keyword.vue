@@ -1,7 +1,7 @@
 <template>
   <span
     :class="keywordClass"
-    :key="keywordIdx"
+    :key="keyword.ident"
     :id="kwId"
   >
     <span
@@ -69,10 +69,6 @@ export default {
     keyword: {
       type: Object,
       required: true
-    },
-    keywordIdx: {
-      type: Number,
-      required: true
     }
   },
   data () {
@@ -88,7 +84,7 @@ export default {
       return (this.keyword.active ? 'active' : 'inactive') + '-keyword border border-dark rounded'
     },
     kwId () {
-      return 'keyword-elem-' + this.keywordIdx
+      return 'keyword-elem-' + this.keyword.ident
     },
     keywordApplyTo () {
       if (this.selected.length === this.applyToOptions.length - _.filter(this.applyToOptions, { 'disabled': true }).length) {
