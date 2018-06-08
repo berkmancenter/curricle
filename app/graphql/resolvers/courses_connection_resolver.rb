@@ -12,6 +12,10 @@ module Resolvers
       'TITLE' => :title
     }.freeze
 
+    # Time range sliders are from 7 AM to 8 PM
+    TIME_RANGE_START = 7
+    TIME_RANGE_END = 20
+
     def call(_obj, args, ctx)
       search = search_by_keywords(args)
 
@@ -163,7 +167,7 @@ module Resolvers
     end
 
     def apply_time_ranges(sunspot, times)
-      return unless times.any?
+      return if times.blank?
 
       # times is an array of days of week and start/end values for
       # valid meeting times.
@@ -171,45 +175,57 @@ module Resolvers
       # per definition, if a day is not included in this search, we
       # *must* exclude anything which meets on this particular day.
 
-      # so for each day, we must either include it in the search or
-      # explicitly exclude it from the search.
+      # skip any Solr-based filtering if all ranges equal the min/max values
+      non_default_ranges = times.reject { |time| [time.time_start, time.time_end] == [TIME_RANGE_START, TIME_RANGE_END] }
+      return if non_default_ranges.blank? && times.length == 5
 
-      # convert to a more useful format...
-      lkup = Hash[times.collect { |t| [t[:day_name], [t[:time_start], t[:time_end]]] }]
-      days = %w(monday tuesday wednesday thursday friday)
+      time_ranges = Hash[times.collect { |t| [t[:day_name], [t[:time_start], t[:time_end]]] }]
 
-      excludes = []
-      includes = []
-
-      days.each do |d|
-        if lkup[d.capitalize]
-          includes.push(d)
-        else
-          excludes.push(d)
-        end
-      end
+      weekdays = %w[monday tuesday wednesday thursday friday]
+      days = weekdays + %w[saturday sunday]
+      included_days = weekdays.select { |day| time_ranges.key?(day.capitalize) }
+      excluded_days = weekdays - included_days
 
       sunspot.instance_eval do
-        excludes.each{ |d| with "meets_on_#{d}", false }
         any_of do
-          includes.each{
-            |d|
-            any_of do
-              with "meets_on_#{d}", false
-              all_of do
-                range = lkup[d.capitalize]
-                with "meets_on_#{d}", true
-                # with(:meeting_time_start).greater_than_or_equal_to(range[0])
-                # with(:meeting_time_end).less_than_or_equal_to(range[1])
+          # always include TBD courses with no meeting patterns
+          all_of do
+            days.each { |d| with "meets_on_#{d}", false }
+          end
+
+          # Some courses have meets_on_x values but no meeting_time_start or _end
+          # Unfortunately the Sunspot bug referenced in issue #652 prevents this from working:
+          # with(:meeting_time_start, nil)
+          # with(:meeting_time_end, nil)
+
+          included_days.each do |d|
+            all_of do
+              range = time_ranges[d.capitalize]
+              with "meets_on_#{d}", true
+              excluded_days.each { |day| with("meets_on_#{day}", false) }
+
+              # Sunspot bug https://github.com/sunspot/sunspot/issues/652
+              # prevents this syntax from working...
+              #
+              # with(:meeting_time_start).greater_than_or_equal_to(range[0])
+              # with(:meeting_time_end).less_than_or_equal_to(range[1])
+              #
+              # ...so we are using this slower version:
+              if range[0] != TIME_RANGE_START
                 any_of do
-                  (range[0]..24).to_a.each{|a| with(:meeting_time_start, a) }
+                  # 19:00 is the latest a class can start
+                  (range[0]..19).to_a.each { |a| with(:meeting_time_start, a) }
                 end
+              end
+
+              if range[1] != TIME_RANGE_END
                 any_of do
-                  (0..range[1]).to_a.each{|a| with(:meeting_time_end, a) }
+                  # 8:00 is the earliest a class can end
+                  (8..range[1]).to_a.each { |a| with(:meeting_time_end, a) }
                 end
               end
             end
-          }
+          end
         end
       end
     end
