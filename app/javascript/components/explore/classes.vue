@@ -31,11 +31,6 @@ export default {
       display: block;
       margin: 0;
   }
-  #visContainer{
-    height:100vh;
-    overflow: hidden;
-    position: relative;
-  }
   #courseTypeVis, #departmentVis{
     width: 50%;
     float:left;
@@ -44,7 +39,6 @@ export default {
   }
   #courseTypeVis{
     text-align: left;
-    /*margin-right: 10px;*/
   }
   #departmentVis{
     text-align: right;
@@ -56,11 +50,9 @@ export default {
     max-height:100%;
   }
   .departmentText:hover {
-    /*fill: #2C3194;*/
     text-decoration: underline;
   }
   .courseTypeText:hover {
-    /*fill: #2C3194;*/
     text-decoration: underline;
   }
   .departmentText, .departmentRect, .courseTypeText, .courseTypeRect{

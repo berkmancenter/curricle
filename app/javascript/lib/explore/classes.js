@@ -7,10 +7,7 @@ var colorLeft = '#D10F84'
 var colorRight = '#00ADF0'
 var colorMix = '#2C3194'
 
-// var widthScale = 3.75
-// var widthOffset = 0
-
-var documentWidth, margin, width, height, courseTypeBarScale, departmentBarScale, courseTypeAxis, departmentAxis
+var margin, width, height, courseTypeBarScale, departmentBarScale, courseTypeAxis, departmentAxis
 
 var courseTypeSvg, departmentSvg, classSvg
 
@@ -22,7 +19,6 @@ var departmentTextScale = d3.scaleLinear()
 
 var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departmentGradient
 
-var container
 var fullData
 
 let selectCourse
@@ -32,13 +28,8 @@ function initSetup (selectCourseFunction, selectedSemester) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
 
-  container = d3.select('#visContainer').node()
-
-  documentWidth = container.offsetWidth / 2
-
-  // documentWidth = window.innerWidth
   margin = {top: 40, right: 1, bottom: 10, left: 1}
-  width = documentWidth / 2 - margin.left - margin.right
+  width = 401 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom
   courseTypeBarScale = d3.scaleLinear()
     .range([width, 0])
@@ -89,7 +80,6 @@ function initSetup (selectCourseFunction, selectedSemester) {
     .attr('offset', '1')
 
   loadFullData(semester)
-  window.addEventListener('resize', resizing)
 }
 
 function loadFullData (semester) {
@@ -355,44 +345,6 @@ function dataFilter () {
   } else {
     setCourseTypeData(fullData, true)
     setDepartmentData(fullData, true)
-  }
-}
-
-function resizing () {
-  if (documentWidth !== container.offsetWidth / 2) {
-    documentWidth = container.offsetWidth / 2
-    width = documentWidth / 2 - margin.left - margin.right
-    // width = container.node().offsetWidth / widthScale + widthOffset
-
-    d3.select('#departmentVis')
-      .select('svg')
-      .transition()
-      .attr('width', width)
-
-    d3.select('#courseTypeVis')
-      .select('svg')
-      .transition()
-      .attr('width', width)
-
-    courseTypeBarScale.range([width, 0])
-    departmentBarScale.range([0, width])
-
-    courseTypeSvg.select('.axis').transition(1000).call(courseTypeAxis)
-    departmentSvg.select('.axis').transition(1000).call(departmentAxis)
-
-    d3.selectAll('.departmentRect').transition().duration(500)
-      .attr('width', function (d, i) { return departmentBarScale(d.value.count) })
-
-    d3.selectAll('.courseTypeRect').transition().duration(500)
-      .attr('transform', function (d, i) {
-        return 'translate(' + (courseTypeBarScale(d.value.count)) + ',' + (i * 20 - 15) + ')'
-      })
-      .attr('width', function (d, i) { return width - courseTypeBarScale(d.value.count) })
-
-    d3.selectAll('.courseTypeText').transition().duration(500)
-      .attr('transform', function (d, i) {
-        return 'translate(' + (width - 5) + ',' + (i * 20) + ')'
-      })
   }
 }
 
