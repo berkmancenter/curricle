@@ -1,7 +1,9 @@
+import _ from 'lodash'
 import * as d3 from 'd3'
 import apolloClient from 'apollo'
 import COURSE_COUNTS_QUERY from '../../graphql/CourseCounts.gql'
 import DEPT_COURSES_QUERY from '../../graphql/DeptCourses.gql'
+import { transformSchedule } from 'lib/util'
 
 var colorLeft = '#D10F84'
 var colorRight = '#00ADF0'
@@ -392,7 +394,9 @@ function classVisualization (data) {
 }
 
 function courseClick () {
-  const course = this.__data__
+  const course = _.clone(this.__data__)
+
+  course.schedule = transformSchedule(course)
 
   selectCourse(course)
 }
