@@ -109,6 +109,13 @@ const getters = {
 
   catalogYearEnd (state, getters, rootState) {
     return rootState.app.catalogYearEnd
+  },
+
+  semesterStart (state) {
+    return {
+      term_name: state.searchTermStart.toUpperCase(),
+      term_year: state.searchYearStart
+    }
   }
 }
 

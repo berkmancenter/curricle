@@ -4,7 +4,10 @@ module Resolvers
   # Return a collection of objects with aggregate data about course counts
   class CourseCountsResolver
     def call(_obj, args, _ctx)
-      query = base_query
+      term_name = args[:semester][:term_name]
+      term_year = args[:semester][:term_year]
+
+      query = base_query(term_name, term_year)
       query = filter_by_args(query, args)
 
       count_courses(query)
@@ -12,8 +15,9 @@ module Resolvers
 
     private
 
-    def base_query
+    def base_query(term_name, term_year)
       Course
+        .where(term_name: term_name, term_year: term_year)
         .where.not(component: nil)
         .group(%i[component subject_academic_org_description])
     end

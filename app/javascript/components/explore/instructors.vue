@@ -27,13 +27,16 @@
 
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
       instructorName: ''
     }
+  },
+  computed: {
+    ...mapGetters('search', ['semesterStart'])
   },
   mounted () {
     initSetup(this.selectCourse)
@@ -42,7 +45,7 @@ export default {
     ...mapActions('app', ['selectCourse']),
     onSubmit (e) {
       e.preventDefault()
-      requestData(this.instructorName)
+      requestData(this.instructorName, this.semesterStart)
     }
   }
 }

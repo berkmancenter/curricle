@@ -26,11 +26,14 @@ var container
 var fullData
 
 let selectCourse
+let semester
 
-function initSetup (selectCourseFunction) {
+function initSetup (selectCourseFunction, selectedSemester) {
+  semester = selectedSemester
   selectCourse = selectCourseFunction
 
   container = d3.select('#visContainer').node()
+
   documentWidth = container.offsetWidth / 2
 
   // documentWidth = window.innerWidth
@@ -85,12 +88,15 @@ function initSetup (selectCourseFunction) {
     .attr('stop-color', '#fff')
     .attr('offset', '1')
 
-  loadFullData()
+  loadFullData(semester)
   window.addEventListener('resize', resizing)
 }
 
-function loadFullData () {
-  apolloClient.query({ query: COURSE_COUNTS_QUERY }).then(function (response) {
+function loadFullData (semester) {
+  apolloClient.query({
+    query: COURSE_COUNTS_QUERY,
+    variables: { semester }
+  }).then(function (response) {
     fullData = response.data.course_counts
     appendAxis()
     setDepartmentData(response.data.course_counts)
@@ -391,14 +397,14 @@ function resizing () {
 }
 
 function loadClassData (data) {
+  const semesterRange = { start: semester }
   var searchComponent = data[0].component.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
-
   var searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
 
   apolloClient.query({
     query: DEPT_COURSES_QUERY,
     variables: {
-      searchDepartment, searchComponent
+      semesterRange, searchDepartment, searchComponent
     }
   })
     .then(function (response) {

@@ -1,5 +1,9 @@
-query CourseCounts {
-  course_counts {
+query CourseCounts(
+  $semester: SemesterInput!
+) {
+  course_counts(
+    semester: $semester
+  ) {
     component
     department
     count

@@ -10,11 +10,14 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/classes'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters('search', ['semesterStart'])
+  },
   mounted () {
-    initSetup(this.selectCourse)
+    initSetup(this.selectCourse, this.semesterStart)
   },
   methods: {
     ...mapActions('app', ['selectCourse'])

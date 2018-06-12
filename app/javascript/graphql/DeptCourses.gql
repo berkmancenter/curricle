@@ -1,9 +1,11 @@
 #import "./CourseFragment.gql"
 query DeptCourses(
   $searchDepartments: [DepartmentEnum!],
-  $searchComponent: [ComponentEnum!]
+  $searchComponent: [ComponentEnum!],
+  $semesterRange:  SemesterRangeInput!
 ) {
   courses(
+    semester_range: $semesterRange,
     departments: $searchDepartments,
     components: $searchComponent,
     per_page: 500

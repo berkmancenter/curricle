@@ -23,6 +23,7 @@ var svg
 var classScale, instructorTextPosScale, departmentPosScale, instructorTextScale, departmentTextScale
 
 let selectCourse
+let semester
 
 function initSetup (selectCourseFunction) {
   selectCourse = selectCourseFunction
@@ -109,10 +110,6 @@ function loadLecturerData (coursesConnectedByInstructor) {
   // unfreeze the data object being passed in
   let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
-  data = data.filter(function (d) {
-    return d.term_year === 2018 && d.term_name === 'Spring'
-  })
-
   var random100
 
   if (data.length > 20) {
@@ -133,12 +130,13 @@ function loadLecturerData (coursesConnectedByInstructor) {
   monadicView(random100)
 }
 
-function requestData (instructorName) {
+function requestData (instructorName, selectedSemester) {
   lecturerID = instructorName
+  semester = selectedSemester
 
   apolloClient.query({
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
-    variables: { instructorName }
+    variables: { instructorName, semester }
   }).then(function (response) {
     loadLecturerData(response.data.courses_connected_by_instructor)
   })
@@ -424,7 +422,7 @@ function lectureClick () {
     .attr('height', height + margin.bottom)
     .style('fill', 'rgba(255,255,255,.5)')
 
-  requestData(lecturerName)
+  requestData(lecturerName, semester)
 }
 
 function courseClick () {
