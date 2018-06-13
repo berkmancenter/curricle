@@ -3,17 +3,17 @@
     <div
       class="clearfix pointer"
       @click="showFilters = !showFilters">
-      <div class="filters-header float-left">
+      <div class="filters-header">
         Filter: {{ activeFilterLabel }}
       </div>
 
-      <div class="filters-header float-right">
+      <div class="filters-header text-center">
         <font-awesome-icon
           v-show="!showFilters"
           icon="caret-down"/>
         <font-awesome-icon
           v-show="showFilters"
-          icon="caret-left"/>
+          icon="caret-up"/>
       </div>
     </div>
 
@@ -27,6 +27,8 @@
         source="tray"
       />
     </div>
+
+    <hr class="mt-2">
   </div>
 </template>
 
@@ -53,17 +55,17 @@ export default {
       let activeFilters = []
 
       if (this.filters.department) {
-        activeFilters.push('Department')
+        activeFilters.push(this.filters.department)
       }
 
       if (this.filters.semester) {
-        activeFilters.push('Semester')
+        activeFilters.push(this.filters.semester)
       }
 
       if (activeFilters.length) {
         return activeFilters.join(', ')
       } else {
-        return 'None'
+        return 'Show All'
       }
     }
   }
@@ -78,5 +80,10 @@ export default {
 
 .pointer {
   cursor: pointer;
+}
+
+hr {
+  border-color: #ccc !important;
+  border-width: 1px !important;
 }
 </style>
