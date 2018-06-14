@@ -7,10 +7,10 @@ Curricle is a curriculum mapping experiment that serves as an advising tool.
 Curricle uses a Rails 5.1 backend running in API mode to serve a GraphQL API and a Vue.js 2 single-page application (via the [webpacker](https://github.com/rails/webpacker) gem).
 
 ### Requirements
-* Ruby 2.3.6
+* Ruby 2.4.1
 * PostgreSQL 9.6
 * Node.js 8.9.4
-* Yarn 1.3.2
+* Yarn 1.x
 * Java 8 Runtime Environment (for Solr search engine)
 
 ### Installation
