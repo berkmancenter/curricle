@@ -1,5 +1,5 @@
 query CourseCounts(
-  $semester: SemesterInput!
+  $semester: SemesterInput
 ) {
   course_counts(
     semester: $semester
