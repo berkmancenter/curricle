@@ -48,10 +48,10 @@ Curricle uses a Rails 5.1 backend running in API mode to serve a GraphQL API and
 1. Start Rails application server:
     * `bin/rails s`
 
-== License
+## License
 
 TagTeam is licensed under the AGPL
 
-== Copyright
+## Copyright
 
 2018 President and Fellows of Harvard College
