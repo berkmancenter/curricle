@@ -13,7 +13,7 @@
 
         <div slot="footer">
           <b-button
-            to="/explore/instructor"
+            to="/explore/classes"
             variant="primary">
             View
           </b-button>
@@ -30,7 +30,7 @@
 
         <div slot="footer">
           <b-button
-            to="/explore/classes"
+            to="/explore/instructor"
             variant="primary">
             View
           </b-button>
@@ -47,7 +47,7 @@
 
         <div slot="footer">
           <b-button
-            disabled="true"
+            disabled
             variant="secondary">
             Coming Soon
           </b-button>
@@ -64,7 +64,7 @@
 
         <div slot="footer">
           <b-button
-            disabled="true"
+            disabled
             variant="secondary">
             Coming Soon
           </b-button>
@@ -73,3 +73,9 @@
     </b-card-group>
   </div>
 </template>
+
+<style scoped>
+h4.card-title {
+  font-size:1.4rem;
+}
+</style>
