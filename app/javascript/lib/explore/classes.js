@@ -362,7 +362,8 @@ function loadClassData (data) {
     }
   })
     .then(function (response) {
-      classVisualization(response.data.courses)
+      const courses = response.data.coursesConnection.edges.map(course => course.node)
+      classVisualization(courses)
     })
 }
 
