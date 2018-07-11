@@ -1,58 +1,53 @@
 <template>
-  <b-navbar
-    toggleable="md"
-    type="light"
-    variant="light">
-    <b-navbar-toggle target="nav-collapse"/>
-    <b-navbar-brand>
-      <b-navbar-nav>
-        <basic-search-semester-range/>
-      </b-navbar-nav>
-    </b-navbar-brand>
+  <nav
+    id="main-nav"
+    class="d-none d-md-block h-100 pt-4 px-4">
+    <div
+      id="logo"
+      class="text-center">
+      <router-link to="/">
+        <h1>The Catalog</h1>
+      </router-link>
+    </div>
 
-    <b-collapse
-      id="nav-collapse"
-      is-nav>
-      <b-navbar-nav
+    <div id="primary-nav">
+      <router-link to="/explore">Explore</router-link>
+      <router-link to="/search">Search</router-link>
+      <router-link to="/plan">Plan</router-link>
+    </div>
+
+    <div
+      id="secondary-nav"
+      class="mt-5">
+      <a
+        v-if="!userAuthenticated"
+        href="/users/sign_in">
+        Sign in
+      </a>
+
+      <a
         v-if="userAuthenticated"
-        class="ml-auto">
-        <b-nav-item to="/search">Search</b-nav-item>
-        <b-nav-item to="/explore">Explore</b-nav-item>
-        <b-nav-item to="/plan">Plan</b-nav-item>
-      </b-navbar-nav>
+        href="javascript:null"
+        @click="logout">
+        Logout
+      </a>
 
-      <b-navbar-nav class="ml-auto tray-li">
-        <b-nav-item
-          v-if="!userAuthenticated"
-          href="/users/sign_in">
-          Sign in
-        </b-nav-item>
-        <b-nav-item
-          v-if="userAuthenticated"
-          @click="logout">
-          Logout
-        </b-nav-item>
-        <b-nav-item
-          v-if="userAuthenticated"
-          :class="{'tray-active': isTrayVisible}"
-          href=""
-          @click="trayToggle">
-          Tray
-        </b-nav-item>
-      </b-navbar-nav>
-    </b-collapse>
-  </b-navbar>
+      <a
+        v-if="userAuthenticated"
+        :class="{'tray-active': isTrayVisible}"
+        href="javascript:null"
+        @click="trayToggle">
+        Tray
+      </a>
+    </div>
+  </nav>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
-import BasicSearchSemesterRange from 'components/search/BasicSearchSemesterRange'
 
 export default {
-  components: {
-    BasicSearchSemesterRange
-  },
   computed: {
     ...mapGetters('app', ['isTrayVisible']),
     ...mapGetters('user', ['userAuthenticated'])
@@ -67,13 +62,29 @@ export default {
   }
 }
 </script>
-<style type="text/css">
-  .tray-li:last-child a{
-    padding: 5px 25px !important;
-  }
-  .tray-active .nav-link, .active.nav-link{
-    color: #FFF !important;
+
+<style lang="scss" scoped>
+  #main-nav {
     background-color: #000;
-    border-radius: 2px;
+    color: #fff;
+
+    #logo a {
+      color: #fff;
+    }
+
+    #primary-nav {
+      margin-top: 250px;
+    }
+
+    #primary-nav a, #secondary-nav a {
+      color: #999;
+      display: block;
+      margin: 20px 0;
+      text-transform: uppercase;
+
+      &.router-link-active {
+        color: #fff;
+      }
+    }
   }
 </style>

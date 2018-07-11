@@ -1,5 +1,7 @@
 <template>
-  <div id="sidebar">
+  <div
+    id="sidebar"
+    class="h-100">
     <div class="sidebar-inner">
       <tray
         v-show="sidebarCurrentType==='tray'"
@@ -27,18 +29,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#sidebar {
-  position: fixed;
-  margin-right: 2em;
-  margin-left: 2em;
-  height: calc(100% - 100px); /* Fix to prevent annotation container from being cut off */
-  width: 300px;
-  overflow: hidden;
-}
-.sidebar-inner {
-  overflow-y: auto;
-  height: 100%;
-}
-</style>

@@ -1,12 +1,20 @@
 <template>
   <div id="app">
     <loader-overlay/>
-    <header>
-      <navbar/>
-    </header>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+
+    <div class="row h-100">
+      <div class="col-md-2 px-0">
+        <navbar/>
+      </div>
+
+      <div class="col-md-10">
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+      </div>
+
+    </div>
+
     <course-observer/>
   </div>
 </template>
