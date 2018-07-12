@@ -3,14 +3,8 @@
   %head
     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
-
+    %link{ href: 'https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,700|IBM+Plex+Sans:400,700', rel: 'stylesheet' }
     %title Curricle
-    :css
-      #app {
-        display: flex;
-        flex-flow: column;
-        height: 100vh;
-      }
 
   %body
     .container-fluid
@@ -23,3 +17,14 @@
 
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'
+
+    :css
+      body {
+        font-family: 'IBM Plex Sans'
+      }
+
+      #app {
+        display: flex;
+        flex-flow: column;
+        height: 100vh;
+      }
