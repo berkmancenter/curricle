@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Keyword from 'components/search/keyword'
 import { mapGetters } from 'vuex'
 

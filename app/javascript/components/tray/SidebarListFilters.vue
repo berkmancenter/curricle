@@ -35,7 +35,7 @@
 <script>
 import { mapState } from 'vuex'
 import DepartmentSelector from 'components/plan/department-selector'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SemesterSelector from 'components/plan/semester-selector'
 
 export default {

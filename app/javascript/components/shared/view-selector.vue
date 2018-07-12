@@ -23,7 +23,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   components: {

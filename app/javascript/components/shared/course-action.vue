@@ -12,7 +12,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import USER_COURSE_REMOVE_MUTATION from '../../graphql/UserCourseRemove.gql'
 import USER_COURSE_SET_MUTATION from '../../graphql/UserCourseSet.gql'
 

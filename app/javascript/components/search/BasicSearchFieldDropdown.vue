@@ -22,7 +22,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'BasicSearchFieldDropdown',

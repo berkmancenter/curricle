@@ -13,14 +13,13 @@ import store from '../store'
 import apolloClient from 'apollo'
 import VueApollo from 'vue-apollo'
 import BootstrapVue from 'bootstrap-vue'
-import fontawesome from '@fortawesome/fontawesome'
-import solid from '@fortawesome/fontawesome-free-solid'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from '../app'
 
-// TODO: import only needed icons instead of the entire FA library
-fontawesome.library.add(solid)
+library.add(fas)
 
 Vue.use(BootstrapVue)
 Vue.use(VueApollo)

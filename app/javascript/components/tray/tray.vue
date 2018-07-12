@@ -29,7 +29,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
 import SemesterSidebar from 'components/tray/semester-sidebar'

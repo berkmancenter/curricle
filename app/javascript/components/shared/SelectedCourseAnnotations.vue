@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Tagging from './SelectedCourseAnnotationsTagging'
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
 

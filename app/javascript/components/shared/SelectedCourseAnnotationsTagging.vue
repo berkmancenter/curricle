@@ -19,7 +19,7 @@
 
 <script>
 import axios from 'axios'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   components: {

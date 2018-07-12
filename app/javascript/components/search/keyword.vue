@@ -58,7 +58,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import _ from 'lodash'
 
 export default {

@@ -50,7 +50,7 @@ import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywor
 import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
 import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
 import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { serializeSearch } from 'lib/util'
 

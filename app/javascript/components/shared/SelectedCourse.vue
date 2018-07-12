@@ -42,7 +42,7 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/course-action'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
 import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
 
