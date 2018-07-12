@@ -1171,18 +1171,18 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap-vue@2.0.0-rc.6:
-  version "2.0.0-rc.6"
-  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.0.0-rc.6.tgz#12d0a241414f1efd647e8b14a88c51707c920c86"
+bootstrap-vue@2.0.0-rc.11:
+  version "2.0.0-rc.11"
+  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.0.0-rc.11.tgz#47aaa6d2a8d390477de75e636d8ea652b1d03f59"
   dependencies:
-    bootstrap "^4.0.0"
+    bootstrap "^4.1.1"
     lodash.get "^4.4.2"
     lodash.startcase "^4.4.0"
     opencollective "^1.0.3"
     popper.js "^1.12.9"
     vue-functional-data-merge "^2.0.5"
 
-bootstrap@^4.0.0:
+bootstrap@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
 
@@ -1812,7 +1812,11 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+
+core-js@^2.5.0:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.6.tgz#0fe6d45bf3cac3ac364a9d72de7576f4eb221b9d"
 
