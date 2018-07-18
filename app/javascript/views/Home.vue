@@ -1,7 +1,12 @@
 <template>
   <div
     id="home-content"
-    class="align-middle text-uppercase h-100">
+    class="align-middle text-uppercase h-100 font-weight-bold">
+    <img
+      class="mb-5"
+      style="width: 100px; height: 100px;"
+      src="/images/logos/logo_tc.png">
+
     <strong>The Catalog</strong> will help you<br>
     <strong>explore</strong> Harvard's course history,<br>
     <strong>plan</strong> for your semester schedule,<br>
@@ -11,9 +16,14 @@
 
 <style lang="scss" scoped>
   #home-content {
-    color: #999;
+    color: #bbb;
     font-size: 30px;
+    line-height: 34px;
     margin: 300px 200px 0 200px;
+
+    img {
+      display: block;
+    }
 
     strong {
       color: #000;

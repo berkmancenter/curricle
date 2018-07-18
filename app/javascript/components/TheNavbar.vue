@@ -1,12 +1,14 @@
 <template>
   <nav
     id="main-nav"
-    class="d-none d-md-block h-100 pt-4 px-4">
+    class="d-none d-md-block h-100 pt-5 px-4">
     <div
       id="logo"
       class="text-center">
       <router-link to="/">
-        <h1>The Catalog</h1>
+        <img
+          class="w-75"
+          src="/images/logos/logo_thecatalog.png">
       </router-link>
     </div>
 
