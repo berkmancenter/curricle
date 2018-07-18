@@ -40,10 +40,6 @@
           <button @click="cancelAnnotations">Cancel</button>
         </div>
       </div>
-      <tagging
-        :active-tags="course.user_tags"
-        :course-id="course.id"
-        @deactivateTag="deactivateTag($event)" />
       <p class="annotations-down-arrow text-center">
         <font-awesome-icon
           v-show="isExpand"
@@ -57,13 +53,11 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Tagging from './SelectedCourseAnnotationsTagging'
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
 
 export default {
   components: {
-    FontAwesomeIcon,
-    Tagging
+    FontAwesomeIcon
   },
   props: {
     course: {

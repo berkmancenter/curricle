@@ -1,5 +1,5 @@
 <template>
-  <div class="row mx-0">
+  <div class="row mx-0 h-100">
     <div class="col-md-9 top-header">
       <div> <p class= "your-tray">Your Tray</p>
         <hr>
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 top-header">
+    <div class="col-md-3 pr-0">
       <the-sidebar />
     </div>
   </div>

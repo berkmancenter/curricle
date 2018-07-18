@@ -1,57 +1,59 @@
 <template>
-  <div>
-    <div class="selected-course">
-      <p class="select-course">Selected Course
+  <div
+    id="selected-course"
+    class="pt-3 px-3 h-100">
+
+    <div>
+      <span class="float-left">
+        Selected course
+      </span>
+
+      <span class="float-right">
         <font-awesome-icon
-          class="pointer float-right"
+          class="pointer"
           icon="times"
           @click="closeSidebar"/>
-      </p>
-      <hr>
-      <div
-        v-if="userAuthenticated"
-        class="actions mb-0">
-        <p class="float-left">
-          <course-action
-            :course="theCourse.id"
-            type="tray"/>
-          <course-action
-            :course="theCourse.id"
-            type="schedule"/>
-        </p>
-        <p class="course-history float-right text-right">
-          <a
-            href="javascript:"
-            @click="searchByCourseId(courseId)">
-            See course history
-          </a>
-        </p>
-      </div>
-
-      <selected-course-details
-        :course="theCourse"
-      />
-      <selected-course-annotations
-        v-if="userAuthenticated"
-        :course="theCourse"/>
+      </span>
     </div>
+
+    <hr>
+    <div
+      v-if="userAuthenticated"
+      class="actions mb-0">
+      <p class="float-left">
+        <course-action
+          :course="theCourse.id"
+          type="tray"/>
+        <course-action
+          :course="theCourse.id"
+          type="schedule"/>
+      </p>
+    </div>
+
+    <selected-course-details
+      :course="theCourse"
+    />
+
+    <selected-course-tagging
+      :active-tags="theCourse.user_tags"
+      :course-id="theCourse.id"
+      @deactivateTag="deactivateTag($event)" />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/course-action'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
 import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
+import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
   components: {
-    SelectedCourseAnnotations,
-    SelectedCourseDetails,
     CourseAction,
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    SelectedCourseDetails,
+    SelectedCourseTagging
   },
   props: {
     course: {
@@ -67,17 +69,10 @@ export default {
         return this.course
       }
       return this.courses[this.course]
-    },
-    courseId () {
-      return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
     }
   },
   methods: {
-    ...mapActions('app', ['closeSidebar']),
-    searchByCourseId (courseId) {
-      this.$store.dispatch('search/searchByCourseId', courseId)
-      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
-    }
+    ...mapActions('app', ['closeSidebar'])
   }
 }
 </script>
@@ -88,8 +83,9 @@ export default {
     width: 100%;
   }
 
-  .selected-course {
-    position: relative;
+  #selected-course {
+    background-color: #000;
+    color: #fff;
   }
 
   p.course-history {
@@ -97,7 +93,7 @@ export default {
     font-weight: bold;
 
     a {
-      color: #000;
+      color: #fff;
     }
   }
 

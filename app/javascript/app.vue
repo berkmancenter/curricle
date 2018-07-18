@@ -7,7 +7,7 @@
         <navbar/>
       </div>
 
-      <div class="col-md-10">
+      <div class="col-md-10 pr-0">
         <keep-alive>
           <router-view/>
         </keep-alive>

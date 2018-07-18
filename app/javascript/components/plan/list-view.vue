@@ -73,7 +73,7 @@ export default {
   #app header .navbar-light .navbar-nav a {
     color: #000;
   }
-  .your-tray, .select-course {
+  .your-tray {
     color: #000;
     font-weight: bold;
     margin-bottom: 0px;

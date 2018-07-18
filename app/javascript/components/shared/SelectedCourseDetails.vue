@@ -6,14 +6,14 @@
         <strong>{{ `${course.subject} ${course.catalog_number}` }}</strong><br>
         <strong>{{ `${course.term_name} ${course.term_year}` }}</strong>
       </p>
-      <p class="float-right text-right mb-0">
-        Component: <strong>{{ course.component || '&mdash;' }}</strong><br>
-        Grading basis: <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
-        Instructor: <strong>{{ firstInstructor || '&mdash;' }}</strong>
+      <p class="float-right text-right text-uppercase mb-0">
+        <strong>{{ course.component || '&mdash;' }}</strong><br>
+        <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
+        <strong>{{ firstInstructor || '&mdash;' }}</strong>
       </p>
     </div>
 
-    <h3 class="course-title">{{ course.title }}</h3>
+    <h3 class="course-title text-uppercase">{{ course.title }}</h3>
 
     <div class="description">
       <p class="heading">Description</p>
@@ -21,7 +21,7 @@
         v-if="course.course_description_long"
         :length="250"
         :text="course.course_description_long"
-        clamp="..."
+        clamp="[...]"
         less="Close"
         type="html"
       />
@@ -50,24 +50,12 @@
         <p class="float-right text-right mb-0">
           <a
             href="javascript:"
+            class="text-white"
             @click="searchByInstructor(instructor.display_name)">
-            More courses
+            more courses
           </a>
         </p>
       </div>
-    </div>
-
-    <div class="readings mt-3">
-      <p class="heading">Readings</p>
-    </div>
-
-    <div class="meetings mt-3">
-      <p class="heading">Class Meeting Times</p>
-      <span class="w-100">
-        <class-meeting-time
-          :schedule="course.schedule"
-        />
-      </span>
     </div>
   </div>
 </template>
@@ -75,12 +63,10 @@
 <script>
 import truncate from 'vue-truncate-collapsed'
 import { serializeSearch } from 'lib/util'
-import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 
 export default {
   components: {
-    truncate,
-    ClassMeetingTime
+    truncate
   },
   props: {
     course: {
@@ -128,7 +114,6 @@ export default {
     }
 
     h3.course-title {
-      color: #00f;
       font-size: 18px;
       margin-bottom: 20px;
     }
@@ -147,10 +132,6 @@ export default {
         display: inline-block;
         padding: 4px 0;
         width: 100%;
-
-        a {
-          color: #000;
-        }
       }
     }
   }

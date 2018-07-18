@@ -10,7 +10,9 @@
       </router-link>
     </div>
 
-    <div id="primary-nav">
+    <div
+      id="primary-nav"
+      class="text-uppercase">
       <router-link to="/explore">Explore</router-link>
       <router-link to="/search">Search</router-link>
       <router-link to="/plan">Plan</router-link>
@@ -18,7 +20,7 @@
 
     <div
       id="secondary-nav"
-      class="mt-5">
+      class="text-uppercase mt-5">
       <a
         v-if="!userAuthenticated"
         href="/users/sign_in">
@@ -80,7 +82,6 @@ export default {
       color: #999;
       display: block;
       margin: 20px 0;
-      text-transform: uppercase;
 
       &.router-link-active {
         color: #fff;

@@ -2,15 +2,14 @@
   <div
     id="sidebar"
     class="h-100">
-    <div class="sidebar-inner">
-      <tray
-        v-show="sidebarCurrentType==='tray'"
-      />
-      <selected-course
-        v-if="sidebarCurrentType==='course'"
-        :course="sidebarCurrentContext"
-      />
-    </div>
+    <tray
+      v-show="sidebarCurrentType==='tray'"
+    />
+
+    <selected-course
+      v-if="sidebarCurrentType==='course'"
+      :course="sidebarCurrentContext"
+    />
   </div>
 </template>
 
