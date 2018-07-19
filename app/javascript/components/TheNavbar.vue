@@ -69,9 +69,6 @@ export default {
 
 <style lang="scss" scoped>
   #main-nav {
-    background-color: #000;
-    color: #fff;
-
     #logo a {
       color: #fff;
     }

@@ -1,7 +1,6 @@
 <template>
   <div
-    id="sidebar"
-    class="h-100">
+    id="sidebar">
     <tray
       v-show="sidebarCurrentType==='tray'"
     />

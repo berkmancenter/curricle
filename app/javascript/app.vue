@@ -3,16 +3,26 @@
     <loader-overlay/>
 
     <div class="row h-100">
-      <div class="col-md-2 px-0">
+      <div
+        id="nav-container"
+        class="col-md-2 px-0">
         <navbar/>
       </div>
 
-      <div class="col-md-10 pr-0">
+      <div
+        id="main-container"
+        class="col-md-8">
         <keep-alive>
           <router-view/>
         </keep-alive>
       </div>
 
+      <div
+        id="sidebar-container"
+        :class="{ active: sidebarCurrentType }"
+        class="col-md-2 px-0">
+        <the-sidebar />
+      </div>
     </div>
 
     <course-observer/>
@@ -24,15 +34,18 @@ import { mapGetters } from 'vuex'
 import Navbar from 'components/TheNavbar'
 import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
+import TheSidebar from 'components/TheSidebar'
 
 export default {
   components: {
     Navbar,
     LoaderOverlay,
-    CourseObserver
+    CourseObserver,
+    TheSidebar
   },
   computed: {
-    ...mapGetters('user', ['userAuthenticated'])
+    ...mapGetters('user', ['userAuthenticated']),
+    ...mapGetters('app', ['sidebarCurrentType'])
   },
   mounted () {
     // load initial data
@@ -40,3 +53,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  #nav-container,
+  #main-container,
+  #sidebar-container {
+    overflow: auto;
+  }
+
+  #nav-container, #sidebar-container.active {
+    background-color: #000;
+    color: #fff;
+  }
+</style>

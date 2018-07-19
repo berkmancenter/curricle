@@ -1,7 +1,6 @@
 <template>
   <div
-    v-show="keywords && searchComplete"
-    class="results-container">
+    v-show="keywords && searchComplete">
     <div class="clearfix">
       <div
         class="float-left"
@@ -102,15 +101,6 @@ export default {
 </script>
 
 <style scoped>
-.results-container {
-  flex-flow: column;
-  display: flex;
-}
-
-.results {
-  overflow: auto;
-}
-
 .pointer {
   cursor: pointer;
 }

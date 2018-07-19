@@ -1,7 +1,7 @@
 <template>
   <div
     id="selected-course"
-    class="pt-3 px-3 h-100">
+    class="pt-3 px-3">
 
     <div>
       <span class="float-left">
@@ -84,7 +84,6 @@ export default {
   }
 
   #selected-course {
-    background-color: #000;
     color: #fff;
   }
 
