@@ -48,7 +48,7 @@ module Resolvers
 
     # Detect Course ID keywords in the format of "GENETIC 333"
     def course_id?(string)
-      string =~ /\A[a-zA-Z]+ \d+\z/
+      string =~ /\A[a-zA-Z-]+ \d+\z/
     end
 
     def add_keyword_to_search(sunspot, keyword)
