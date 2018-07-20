@@ -2,8 +2,8 @@
   <span class="course-action">
     <font-awesome-icon
       v-b-tooltip.d999.hover="true"
-      :icon="config.icon"
-      :class="{ active: active, 'text-white': invert }"
+      :icon="icon"
+      :class="{ 'text-white': invert }"
       :title="tooltip"
       @click="click"
     />
@@ -38,31 +38,35 @@ export default {
     return {
       types: {
         tray: {
-          icon: 'folder',
+          activeIcon: 'minus',
+          inactiveIcon: 'plus',
           clickable: true,
           activeTooltip: 'Click to remove from your tray',
           inactiveTooltip: 'Click to add to your tray'
         },
         schedule: {
-          icon: 'clock',
+          activeIcon: 'clock',
+          inactiveIcon: ['far', 'clock'],
           clickable: true,
           activeTooltip: 'Click to remove from your schedule',
           inactiveTooltip: 'Click to add to your schedule'
         },
         annotated: {
-          icon: 'pencil-alt',
+          activeIcon: 'pencil-alt',
+          inactiveIcon: 'pencil-alt',
           clickable: false,
           activeTooltip: 'You have annotated this course',
           inactiveTooltip: 'You have not annotated this course'
         },
         tagged: {
-          icon: 'tag',
+          activeIcon: 'tag',
+          inactiveIcon: 'tag',
           clickable: false,
           activeTooltip: 'This course has tags',
           inactiveTooltip: 'This course has no tags'
         },
         shareable: {
-          icon: 'share-square',
+          activeIcon: 'share-square',
           clickable: false,
           activeTooltip: 'Click to share this course',
           inactiveTooltip: ''
@@ -83,6 +87,9 @@ export default {
     },
     config () {
       return this.types[this.type]
+    },
+    icon () {
+      return this.active ? this.config.activeIcon : this.config.inactiveIcon
     }
   },
   methods: {
@@ -131,10 +138,6 @@ export default {
 
 <style scoped>
   .course-action {
-      color: gray;
-  }
-
-  .course-action .active {
       color: black;
   }
 
