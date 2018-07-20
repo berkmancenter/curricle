@@ -77,7 +77,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import CourseAction from 'components/shared/course-action'
+import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 import truncate from 'vue-truncate-collapsed'
 

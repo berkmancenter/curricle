@@ -3,7 +3,7 @@
     <font-awesome-icon
       v-b-tooltip.d999.hover="true"
       :icon="config.icon"
-      :class="{ active: active }"
+      :class="{ active: active, 'text-white': invert }"
       :title="tooltip"
       @click="click"
     />
@@ -28,6 +28,10 @@ export default {
     course: {
       type: String,
       required: true
+    },
+    invert: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

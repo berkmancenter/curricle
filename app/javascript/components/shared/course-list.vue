@@ -30,7 +30,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CourseAction from 'components/shared/course-action'
+import CourseAction from 'components/shared/CourseAction'
 
 export default {
   components: {

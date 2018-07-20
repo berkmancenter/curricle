@@ -50,7 +50,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
-import CourseAction from 'components/shared/course-action'
+import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 
 export default {

@@ -23,9 +23,11 @@
       <p class="float-left">
         <course-action
           :course="theCourse.id"
+          :invert="true"
           type="tray"/>
         <course-action
           :course="theCourse.id"
+          :invert="true"
           type="schedule"/>
       </p>
     </div>
@@ -43,7 +45,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import CourseAction from 'components/shared/course-action'
+import CourseAction from 'components/shared/CourseAction'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
 import SelectedCourseTagging from './SelectedCourseTagging'
