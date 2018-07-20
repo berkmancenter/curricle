@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="heading">Filter results:</p>
+    <p class="heading">Filter results by:</p>
 
     <div class="row">
       <div

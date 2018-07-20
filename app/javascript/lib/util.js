@@ -747,8 +747,8 @@ function deserializeSearch (route) {
           // format is type, optional weight, colon, encoded search term
           var res = /^([atdirc]+)(\d*):(.*)$/.exec(k)
           if (res) {
-            var [ , types, weight, term ] = res
-            kw.push({ applyTo: searchTypes(types), weight: weight | 0, text: decodeURI(term) })
+            var [ , types, term ] = res
+            kw.push({ applyTo: searchTypes(types), text: decodeURI(term) })
           }
         }
       )
@@ -822,7 +822,7 @@ function serializeSearch (obj) {
   if (obj.keywords) {
     elems.k = _.map(
       obj.keywords,
-      ({text, applyTo, weight}) => applyToString(applyTo) + weight + ':' + encodeURI(text)
+      ({text, applyTo}) => applyToString(applyTo) + ':' + encodeURI(text)
     )
   }
 

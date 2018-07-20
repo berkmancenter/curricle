@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="py-5">
+    <h3>Search:</h3>
+
     <search-form v-if="userAuthenticated"/>
-    <br>
-    <search-results />
+
+    <search-results v-show="results.length"/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import { deserializeSearch } from 'lib/util'
 
 import SearchForm from 'components/search/SearchForm'
@@ -19,7 +21,8 @@ export default {
     SearchResults
   },
   computed: {
-    ...mapGetters('user', ['userAuthenticated'])
+    ...mapGetters('user', ['userAuthenticated']),
+    ...mapState('search', ['results'])
   },
   mounted () {
     if (this.$route.params[0]) {

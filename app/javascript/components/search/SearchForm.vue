@@ -1,45 +1,44 @@
 <template>
   <div>
-    <div class="basic-search">
-      <div class="row">
-        <div class="col-md-3">
-          <font-awesome-icon icon="search"/>
+    <div class="basic-search mb-3">
+      <semester-input/>
+
+      <div class="mt-4 w-50">
+        <b-input-group>
+          <b-input-group-prepend is-text>
+            <img
+              class="icon"
+              src="/images/icons/eye_black.png">
+          </b-input-group-prepend>
+
           <input
             v-model="keyword"
-            class="search"
-            placeholder="Enter Keyword"
+            class="search pl-0 form-control"
+            placeholder="Enter a keyword"
             @keyup.enter="addActiveKeyword">
-        </div>
-        <div class="col-md-7 text-right">
-          <basic-search-field-dropdown
-            :apply-to="applyTo"
-            @applyFilterChange="applyTo = $event"
-          />
-          &nbsp;
-          <basic-search-field-weight-dropdown
-            :weight="weight"
-            @weightChange="weight = $event"
-          />
-        </div>
-        <div class="col-md-2 text-right">
-          <span
-            class="invert pointer"
-            @click="addActiveKeyword">
-            <font-awesome-icon icon="plus"/>
-          </span>
-          <span
-            class="invert pointer"
-            @click="performSearch">
-            Apply
-          </span>
-        </div>
+
+          <b-input-group-append is-text>
+            <basic-search-field-dropdown
+              :apply-to="applyTo"
+              @applyFilterChange="applyTo = $event"
+            />
+          </b-input-group-append>
+
+          <b-input-group-append is-text>
+            <img
+              class="icon pointer"
+              src="/images/icons/return_arrow.png"
+              @click="addActiveKeyword">
+          </b-input-group-append>
+        </b-input-group>
       </div>
     </div>
-    <basic-search-active-keywords/>
-    <br>
-    <basic-search-inactive-keywords/>
-    <br>
+
     <advanced-search/>
+
+    <basic-search-active-keywords/>
+
+    <basic-search-inactive-keywords/>
   </div>
 </template>
 
@@ -50,6 +49,7 @@ import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywor
 import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
 import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
 import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
+import SemesterInput from './SearchFormSemesterInput'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { serializeSearch } from 'lib/util'
@@ -62,6 +62,7 @@ export default {
     BasicSearchFieldDropdown,
     BasicSearchFieldWeightDropdown,
     BasicSearchInactiveKeywords,
+    SemesterInput,
     FontAwesomeIcon
   },
   data () {
@@ -78,10 +79,12 @@ export default {
     addActiveKeyword () {
       if (this.keyword) {
         this.$root.$emit('bv::hide::popover')
-        this.$store.dispatch('search/addKeyword', { text: this.keyword, weight: this.weight, applyTo: this.applyTo, active: true })
+        this.$store.dispatch('search/addKeyword', { text: this.keyword, applyTo: this.applyTo, active: true })
       }
 
       this.keyword = ''
+
+      this.performSearch()
     },
     performSearch () {
       this.$store.dispatch('search/saveSearchInHistory')
@@ -94,19 +97,8 @@ export default {
 
 <style lang="scss" scoped>
 .basic-search {
-  border-bottom: 2px solid #000;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  padding-bottom: 5px;
-
-  input.search {
-    border: none;
-    margin-left: 5px;
-    width: 120px;
-
-    &:focus {
-      outline: none;
-    }
+  .form-control:focus {
+    box-shadow: none;
   }
 
   span.invert {
@@ -114,9 +106,24 @@ export default {
     color: #fff;
     padding: 5px 8px;
   }
+
+  .input-group-text, input.search {
+    background-color: #ddd;
+    border: 0;
+    color: black;
+  }
 }
 
 .pointer {
   cursor: pointer;
+}
+
+::placeholder {
+  color: black !important;
+}
+
+img.icon {
+  height: 12px;
+  width: auto;
 }
 </style>

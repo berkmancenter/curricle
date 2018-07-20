@@ -1,13 +1,10 @@
 <template>
   <div>
-    <router-link to="/home">
-      <strong>The Catalog</strong>
-    </router-link>
-
+    Semester:
     <span
       id="search-semester-range"
       class="pointer">
-      &nbsp;{{ rangeLabel }}&nbsp;<font-awesome-icon icon="caret-down"/>
+      &nbsp;<strong>{{ rangeLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
 
       <b-popover
         target="search-semester-range"
@@ -160,6 +157,6 @@ export default {
   max-width: 100% !important;
 }
 .year-select {
-  width: 5vw;
+  width: 80px !important;
 }
 </style>

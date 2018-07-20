@@ -2,7 +2,7 @@
   <span
     id="sort-by-dropdown"
     class="pointer">
-    Sort by:
+    sort by:
     <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
 
     <b-popover

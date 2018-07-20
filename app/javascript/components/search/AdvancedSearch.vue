@@ -1,69 +1,77 @@
 <template>
-  <div>
+  <div id="advanced-search">
     <div>
-      <div
-        v-if="showAdvanced"
-        class="advanced-search">
-        <table style="width: 100%">
-          <tr
-            v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
-            :key="day"
-          >
-            <td style="width: 100px" >
-              <b-checkbox
-                v-model="requireDay[day]"
-              >
-                {{ day }}
-              </b-checkbox>
-            </td>
-            <td>
-              <time-selector
-                v-show="requireDay[day]"
-                :enabled="requireDay[day]"
-                :selstart="timeRanges[day][0]||7"
-                :selend="timeRanges[day][1]||20"
-                @updatedRange="(arg) => timeRanges[day] = arg"
-              />
-            </td>
-          </tr>
-        </table>
-      </div>
+      <span id="advanced-search-schedule">
+        <span
+          class="advanced-search-element"
+          @click="toggleSearchSchedule">
+          Schedule
+        </span>
+
+        <img
+          class="icon-remove ml-2"
+          src="/images/icons/x_black.png"
+          @click="resetAdvancedSearchFilters">
+      </span>
+
+      <span
+        v-if="$store.state.search.searchComplete"
+        id="advanced-search-filter">
+        <span
+          id="advanced-search-filter-button"
+          class="advanced-search-element ml-4"
+          @click="toggleSearchFilters">
+          Filter
+        </span>
+
+        <img
+          class="icon-remove ml-2"
+          src="/images/icons/x_black.png"
+          @click="resetAdvancedSearchFilters">
+      </span>
     </div>
 
     <div
-      v-if="showFilters"
-      class="advanced-search">
+      v-if="showSchedule"
+      class="advanced-search mt-4">
+      <table style="width: 100%">
+        <tr
+          v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
+          :key="day"
+        >
+          <td style="width: 100px" >
+            <b-checkbox
+              v-model="requireDay[day]">
+              {{ day }}
+            </b-checkbox>
+          </td>
+          <td>
+            <time-selector
+              v-show="requireDay[day]"
+              :enabled="requireDay[day]"
+              :selstart="timeRanges[day][0]||7"
+              :selend="timeRanges[day][1]||20"
+              @updatedRange="(arg) => updateRange(day, arg)"
+            />
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <b-popover
+      v-if="$store.state.search.searchComplete"
+      :show.sync="useFilters"
+      container="advanced-search"
+      target="advanced-search-filter-button"
+      triggers="click blur"
+      placement="bottom">
       <advanced-search-filters/>
-    </div>
-
-    <div class="advanced-search-tabs">
-      <span
-        :class="{'advanced-search-tab': true, selected: showAdvanced}"
-        @click="toggleAdvancedSearch">
-        Advanced Search
-      </span>
-
-      <span
-        v-if="$store.state.search.searchComplete"
-        :class="{ selected: showFilters }"
-        class="advanced-search-tab ml-1"
-        @click="toggleSearchFilters">
-        Filter Results
-      </span>
-
-      <span
-        v-if="$store.state.search.searchComplete"
-        class="advanced-search-tab ml-1"
-        @click="resetAdvancedSearchFilters">
-        Reset Advanced Search &amp; Filters
-      </span>
-
-    </div>
+    </b-popover>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import { serializeSearch } from 'lib/util'
 import _ from 'lodash'
 import TimeSelector from 'components/search/TimeSelector'
@@ -76,9 +84,9 @@ export default {
   },
   data () {
     return {
-      showAdvanced: false,
+      showSchedule: false,
       showFilters: false,
-      useAdvanced: false,
+      useSchedule: false,
       useFilters: false,
       timeRanges: {
         Mon: [7, 20],
@@ -98,9 +106,10 @@ export default {
   },
   computed: {
     ...mapState('search', { _times: 'timeRanges' }),
+    ...mapGetters('search', ['searchSnapshot']),
     advancedSelectedDays () { return _.filter(this.requireDay).length },
     activeTimeRanges () {
-      if (this.useAdvanced) {
+      if (this.useSchedule) {
         var keys = []
         _.each(
           this.requireDay,
@@ -109,6 +118,9 @@ export default {
         return _.pick(this.timeRanges, keys)
       }
       return undefined
+    },
+    activeDays () {
+      return _.filter(this.requireDay, true)
     }
   },
   watch: {
@@ -117,12 +129,15 @@ export default {
     },
     useFilters (r) {
       this.setUseFilters(r)
+    },
+    activeDays () {
+      this.performSearch()
     }
   },
   mounted () {
     // populate default from vuex state
     if (this._times) {
-      this.useAdvanced = true
+      this.useSchedule = true
       _.each(
         _.keys(this.requireDay),
         day => {
@@ -136,19 +151,19 @@ export default {
   },
   methods: {
     ...mapActions('search', ['resetAdvancedSearch', 'setTimeRanges', 'setUseFilters']),
-    toggleAdvancedSearch () {
-      this.useAdvanced = true
-      this.showAdvanced = !this.showAdvanced
+    toggleSearchSchedule () {
+      this.useSchedule = true
+      this.showSchedule = !this.showSchedule
       this.showFilters = false
     },
     toggleSearchFilters () {
       this.showFilters = !this.showFilters
-      this.showAdvanced = false
+      this.showSchedule = false
       this.useFilters = true
     },
     resetAdvancedSearchFilters () {
       this.resetAdvancedSearch()
-      this.showAdvanced = false
+      this.showSchedule = false
       this.showFilters = false
       this.useAdvanced = false
       this.useFilters = false
@@ -162,31 +177,43 @@ export default {
       )
 
       this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+    },
+    updateRange (day, arg) {
+      this.timeRanges[day] = arg
+      this.performSearch()
+    },
+    performSearch () {
+      this.$store.dispatch('search/saveSearchInHistory')
+      this.$router.push('/search/' + serializeSearch(this.searchSnapshot))
+      this.$store.dispatch('search/runKeywordSearch')
     }
   }
 }
 </script>
 
-<style>
-.advanced-search {
-  background-color: #EEE;
-  padding: 1em 2em 1em 1em;
-}
+<style lang="scss" scoped>
+  .advanced-search-element {
+    background: black;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
 
-.advanced-search-tabs {
-  margin: auto;
-  width: 600px;
-}
+  img.icon-remove {
+    height: 35px;
+    width: auto;
+    cursor: pointer;
+  }
 
-.advanced-search-tab {
-  background-color: #CCC;
-  cursor: pointer;
-  padding: .5em;
-  padding-top: 3px;
-  margin: 0;
-}
+  div /deep/ .popover {
+    background-color: black;
+    padding: 10px;
 
-.advanced-search-tab.selected {
-  background-color: #EEE;
-}
+    .arrow:after {
+      border-bottom-color: black;
+    }
+  }
 </style>

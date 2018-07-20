@@ -1,20 +1,18 @@
 <template>
   <div
     v-show="inactiveKeywords.length > 0"
-    class="row">
-    <div class="col-md-12">
-      <b-alert
-        show
-        variant="secondary">
-        <span class="inactive">Inactive</span>
-        <keyword
-          v-for="(keyword,idx) in inactiveKeywords"
-          :key="idx"
-          :keyword-idx="idx"
-          :keyword="keyword"
-        />
-      </b-alert>
-    </div>
+    class="mt-3">
+    <b-alert
+      show
+      variant="secondary">
+      <span class="inactive">Inactive</span>
+      <keyword
+        v-for="(keyword,idx) in inactiveKeywords"
+        :key="idx"
+        :keyword-idx="idx"
+        :keyword="keyword"
+      />
+    </b-alert>
   </div>
 </template>
 

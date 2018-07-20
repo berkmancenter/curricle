@@ -14,7 +14,7 @@ const thisYear = (new Date()).getUTCFullYear()
  * taught to serializeSearch() and deserializeSearch() */
 
 const state = {
-  // list of objects with { text, weight, applyTo, active }
+  // list of objects with { text, applyTo, active }
   facets: {},
   keywords: [],
   results: [],
@@ -32,17 +32,6 @@ const state = {
     { text: 'Readings', value: 'READINGS', disabled: true },
     { text: 'Course ID', value: 'COURSE_ID' }
   ],
-  weightOptions: [
-    { text: '1', value: 1 },
-    { text: '2', value: 2 },
-    { text: '3', value: 3 },
-    { text: '4', value: 4 },
-    { text: '5', value: 5 },
-    { text: '6', value: 6 },
-    { text: '7', value: 7 },
-    { text: '8', value: 8 },
-    { text: '9', value: 9 }
-  ],
   searchTermStart: 'Spring',
   searchTermEnd: 'Spring',
   searchYearStart: thisYear,
@@ -50,12 +39,12 @@ const state = {
   searchTermUseRange: false,
   sortBy: 'RELEVANCE',
   sortByOptions: [
-    { text: 'Relevance', value: 'RELEVANCE' },
-    { text: 'Title', value: 'TITLE' },
-    { text: 'School', value: 'SCHOOL' },
-    { text: 'Semester', value: 'SEMESTER' },
-    { text: 'Department', value: 'DEPARTMENT' },
-    { text: 'Course ID', value: 'COURSE_ID' }
+    { text: 'relevance', value: 'RELEVANCE' },
+    { text: 'title', value: 'TITLE' },
+    { text: 'school', value: 'SCHOOL' },
+    { text: 'semester', value: 'SEMESTER' },
+    { text: 'department', value: 'DEPARTMENT' },
+    { text: 'course id', value: 'COURSE_ID' }
   ],
   timeRanges: undefined,
   useFilters: false,
@@ -100,7 +89,7 @@ const getters = {
   },
 
   sortedFilters: (state) => (facet) => {
-    return _.orderBy(state.facets[facet], ['selected', 'value'], ['desc', 'asc'])
+    return _(state.facets[facet]).filter('selected').orderBy('value').value()
   },
 
   catalogYearStart (state, getters, rootState) {
@@ -338,7 +327,7 @@ const actions = {
   },
   searchByCourseId ({ dispatch, getters }, courseId) {
     const searchParams = {
-      keywords: [{ active: true, applyTo: ['COURSE_ID'], text: courseId, weight: 5 }],
+      keywords: [{ active: true, applyTo: ['COURSE_ID'], text: courseId }],
       searchTermEnd: 'Fall',
       searchTermStart: 'Spring',
       searchTermUseRange: true,
@@ -357,7 +346,7 @@ const actions = {
   },
   searchByInstructor ({ dispatch, getters }, instructorName) {
     const searchParams = {
-      keywords: [{ active: true, applyTo: ['INSTRUCTOR'], text: instructorName, weight: 5 }],
+      keywords: [{ active: true, applyTo: ['INSTRUCTOR'], text: instructorName }],
       searchTermEnd: 'Fall',
       searchTermStart: 'Spring',
       searchTermUseRange: true,

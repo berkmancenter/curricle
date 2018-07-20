@@ -1,14 +1,14 @@
 <template>
   <div class="facet">
-    <h5>{{ facet.title }}:</h5>
+    <h5>{{ facet.title }}</h5>
 
     <div class="facet-list mb-2">
       <div
         v-for="item in items"
         :key="item.id"
         class="facet-item clearfix">
-        <div class="float-left">
-          <label class="mb-1">
+        <div class="float-left label-container">
+          <label class="mb-1 text-white text-uppercase pointer">
             <input
               :value="item.id"
               :checked="item.selected"
@@ -18,36 +18,22 @@
           </label>
         </div>
 
-        <div class="count float-right">
+        <div class="count float-right text-white">
           {{ item.count }}
         </div>
       </div>
     </div>
-
-    <p v-if="Object.keys(items).length > 1">
-      <span
-        class="pointer"
-        @click="selectAll">
-        <strong>
-          Select All
-        </strong>
-      </span>
-
-      <br>
-
-      <span
-        class="pointer"
-        @click="clearAll">
-        <strong>
-          Clear
-        </strong>
-      </span>
-    </p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { serializeSearch } from 'lib/util'
+
 export default {
+  components: {
+    serializeSearch
+  },
   props: {
     facet: {
       type: Object,
@@ -55,6 +41,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('search', ['searchSnapshot']),
     items () {
       return this.$store.getters['search/sortedFilters'](this.facet.key)
     }
@@ -78,33 +65,23 @@ export default {
           selected: e.target.checked
         }
       )
+
+      this.performSearch()
     },
-    selectAll () {
-      this.$store.dispatch(
-        'search/facetSetAllItemSelections',
-        {
-          facet: this.facet.key,
-          selected: true
-        }
-      )
-    },
-    clearAll () {
-      this.$store.dispatch(
-        'search/facetSetAllItemSelections',
-        {
-          facet: this.facet.key,
-          selected: false
-        }
-      )
+    performSearch () {
+      this.$store.dispatch('search/saveSearchInHistory')
+      this.$router.push('/search/' + serializeSearch(this.searchSnapshot))
+      this.$store.dispatch('search/runKeywordSearch')
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 h5 {
   font-size: 14px;
   margin-bottom: 10px;
+  color: white;
 }
 
 .count {
@@ -123,5 +100,18 @@ h5 {
 
 .pointer {
   cursor: pointer;
+}
+
+.label-container {
+  max-width: 60%;
+  overflow: hidden;
+
+  label {
+    white-space: nowrap;
+  }
+}
+
+input[type="checkbox"] {
+  display: none;
 }
 </style>

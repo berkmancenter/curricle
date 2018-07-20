@@ -1,11 +1,12 @@
 <template>
   <div
-    v-show="keywords && searchComplete">
+    v-show="keywords && searchComplete"
+    class="mt-5">
     <div class="clearfix">
       <div
         class="float-left"
         style="width: 28%;">
-        <strong>{{ resultsTotalCount }} Results</strong>
+        <strong>{{ resultsTotalCount }} results</strong>
       </div>
       <div class="float-left">
         <search-results-sort/>
@@ -17,7 +18,7 @@
       </div>
     </div>
 
-    <div class="results">
+    <div class="results mt-3">
       <search-result-row
         v-for="result of results"
         :key="result.id"

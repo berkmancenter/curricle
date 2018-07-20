@@ -53,7 +53,7 @@ export default {
         case 0:
           return 'None'
         default:
-          return this.selected.join(', ') // TODO: Return human-readable versions of the field names
+          return this.selected.map(field => field.charAt()).join(', ') // TODO: Return human-readable versions of the field names
       }
     }
   },

@@ -1,12 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
-      <keyword
-        v-for="keyword in activeKeywords"
-        :key="keyword.ident"
-        :keyword="keyword"
-      />
-    </div>
+  <div class="mt-4">
+    <keyword
+      v-for="keyword in activeKeywords"
+      :key="keyword.ident"
+      :keyword="keyword"
+    />
   </div>
 </template>
 
@@ -25,7 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
