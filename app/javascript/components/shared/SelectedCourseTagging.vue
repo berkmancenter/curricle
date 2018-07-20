@@ -1,19 +1,20 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
-      <span
-        v-for="(tag, index) of activeTags"
-        :key="tag.id"
-        class="active-keyword border border-dark rounded"
-        @click="deactivateTag(index, tag.name)">
-        {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
-      </span>
-      <input
-        v-model="tag"
-        class="input-tag"
-        placeholder="Enter Tag"
-        @keyup.enter="addActiveTag()">
-    </div>
+  <div class="mt-4">
+    <p class="heading">Tags</p>
+
+    <input
+      v-model="tag"
+      class="input-tag text-white w-100 p-2"
+      placeholder="Enter a tag"
+      @keyup.enter="addActiveTag()">
+
+    <span
+      v-for="(tag, index) of activeTags"
+      :key="tag.id"
+      class="active-tag mt-3 mr-2"
+      @click="deactivateTag(index, tag.name)">
+      {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
+    </span>
   </div>
 </template>
 
@@ -75,12 +76,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.active-keyword {
+.active-tag {
   cursor: pointer;
-  margin: 5px 5px 0px 0px;
   padding: 5px 10px;
   display: inline-block;
-  border: 2px solid !important;
+  color: black;
+  background-color: white;
+  font-size: 12px;
 
   &:hover {
     background-color: #eee;
@@ -88,7 +90,18 @@ export default {
 }
 
 .input-tag {
-  margin: 5px 0px;
+  background-color: #555;
   border: none;
+  font-size: 12px;
+}
+
+::placeholder {
+  color: white;
+}
+
+p.heading {
+  border-bottom: 1px solid #999;
+  font-size: 12px;
+  margin-bottom: 8px;
 }
 </style>

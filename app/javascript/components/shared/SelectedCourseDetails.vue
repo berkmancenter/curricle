@@ -22,14 +22,14 @@
         :length="250"
         :text="course.course_description_long"
         clamp="[...]"
-        less="Close"
+        less="[Close]"
         type="html"
       />
     </div>
 
     <div
       v-if="course.course_note"
-      class="notes mt-3">
+      class="notes mt-4">
       <p
         class="heading">
         Class Notes
@@ -38,7 +38,7 @@
       {{ course.course_note }}
     </div>
 
-    <div class="instructors mt-3">
+    <div class="instructors mt-4">
       <p class="heading">Instructors</p>
       <div
         v-for="instructor in course.course_instructors"

@@ -16,16 +16,17 @@
       </span>
     </div>
 
-    <hr>
-
     <div
       v-if="userAuthenticated"
-      class="actions mb-0">
+      class="actions mt-3">
       <p class="float-left">
         <course-action
           :course="theCourse.id"
           :invert="true"
           type="tray"/>
+
+        &nbsp;
+
         <course-action
           :course="theCourse.id"
           :invert="true"
