@@ -17,6 +17,7 @@
     </div>
 
     <hr>
+
     <div
       v-if="userAuthenticated"
       class="actions mb-0">
@@ -29,6 +30,14 @@
           :course="theCourse.id"
           :invert="true"
           type="schedule"/>
+      </p>
+
+      <p class="course-history float-right text-right">
+        <a
+          href="javascript:"
+          @click="searchByCourseId(courseId)">
+          See course history
+        </a>
       </p>
     </div>
 
@@ -45,6 +54,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
+import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/CourseAction'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
@@ -52,6 +62,7 @@ import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
   components: {
+    serializeSearch,
     CourseAction,
     FontAwesomeIcon,
     SelectedCourseDetails,
@@ -71,10 +82,17 @@ export default {
         return this.course
       }
       return this.courses[this.course]
+    },
+    courseId () {
+      return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
     }
   },
   methods: {
-    ...mapActions('app', ['closeSidebar'])
+    ...mapActions('app', ['closeSidebar']),
+    searchByCourseId (courseId) {
+      this.$store.dispatch('search/searchByCourseId', courseId)
+      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+    }
   }
 }
 </script>
