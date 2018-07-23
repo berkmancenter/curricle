@@ -71,8 +71,17 @@ export default {
 
 <style lang="scss" scoped>
 div /deep/ {
-  .dropdown-toggle, .dropdown-item {
+  .dropdown-toggle,
+  .dropdown-item {
     font-size: 12px;
+  }
+
+  .btn-secondary,
+  .btn-secondary.dropdown-toggle {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    padding-left: 0;
   }
 }
 </style>

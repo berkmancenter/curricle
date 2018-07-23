@@ -1,6 +1,6 @@
 <template>
   <div class="plan">
-    <table class="course-list-iltem table">
+    <table class="course-list-item table">
       <tbody>
         <tr
           v-for="course in filteredCourses"
@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style type="text/css">
+<style scoped>
   #app header .navbar-light .navbar-nav a {
     color: #000;
   }
@@ -95,37 +95,37 @@ export default {
     margin-top: 0px !important;
   }
 
-  .course-list-iltem tbody tr{
+  .course-list-item tbody tr{
     background: #DCDCDC;
     font-size: 12px;
     cursor: pointer;
   }
-  .course-list-iltem tbody tr.selected {
+  .course-list-item tbody tr.selected {
     background-color: #f5f7de;
   }
-  .course-list-iltem tbody tr.selected:hover {
+  .course-list-item tbody tr.selected:hover {
     background-color: #b0b29e;
   }
 
-  .course-list-iltem tbody tr:hover {
+  .course-list-item tbody tr:hover {
     background: #C0C0C0;
   }
-  .course-list-iltem tbody tr {
+  .course-list-item tbody tr {
     margin-bottom: 5px;
     width: 100%;
     vertical-align: middle;
   }
-  .course-list-iltem thead {
+  .course-list-item thead {
     display: table-caption;
     width: 100%;
   }
-  .course-list-iltem tbody tr .check_box {
+  .course-list-item tbody tr .check_box {
     display: inline-block;
     margin-top: 14px;
     position: absolute;
     right: 0px;
   }
-  .course-list-iltem tbody {
+  .course-list-item tbody {
     border-top: 2px solid #C0C0C0;
   }
   .table td {
@@ -140,5 +140,4 @@ export default {
   .plan table td{
     padding: 0px 10px;
   }
-
 </style>

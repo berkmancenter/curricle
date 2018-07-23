@@ -3,7 +3,7 @@
     <span
       id="share-dropdown"
       class="pointer">
-      Share&nbsp;<font-awesome-icon icon="share"/>
+      <font-awesome-icon icon="share-alt"/>
 
       <b-popover
         target="share-dropdown"
@@ -38,11 +38,6 @@ export default {
 </script>
 
 <style scoped>
-p.tray-share {
-  font-size: 13px;
-  font-weight: bold;
-}
-
 .pointer {
   cursor: pointer;
 }

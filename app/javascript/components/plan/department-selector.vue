@@ -1,5 +1,5 @@
 <template>
-  <b-dropdown :text="filters.department ? 'Department: ' + filters.department : 'Department'">
+  <b-dropdown :text="'Department: ' + dropdownLabel">
     <b-dropdown-item @click="setDepartment(null)">
       All Departments
     </b-dropdown-item>
@@ -19,7 +19,10 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapState('plan', ['filters']),
-    ...mapGetters('plan', ['departmentsInTray'])
+    ...mapGetters('plan', ['departmentsInTray']),
+    dropdownLabel () {
+      return this.filters.department ? this.filters.department : 'All Departments'
+    }
   },
   mounted () {
     this.setDepartment(this.filters.department)
@@ -35,8 +38,18 @@ export default {
 
 <style lang="scss" scoped>
 div /deep/ {
-  .dropdown-toggle, .dropdown-item {
+  .dropdown-toggle,
+  .dropdown-item {
     font-size: 12px;
   }
+
+  .btn-secondary,
+  .btn-secondary.dropdown-toggle {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    padding-left: 0;
+  }
 }
+
 </style>

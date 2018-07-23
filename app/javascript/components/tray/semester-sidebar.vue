@@ -11,12 +11,11 @@
       <div
         v-show="trayCoursesByDay[day] && trayCoursesByDay[day].length"
         class="float-right"
-        @click="toggleEditDay(day)"
-        v-text="isEditing[day] ? 'Done' : 'Edit'"
       />
       <course-list
         :courses="isEditing[day] ? trayCoursesByDay[day] : coursesByDay[day]"
-        :editable="isEditing[day]"
+        :editable="true"
+        :invert="true"
       />
     </div>
   </div>

@@ -2,19 +2,19 @@
   <p class="float-left">
     <font-awesome-icon
       v-show="showListView"
-      :class="{ active: viewmode[type] == 'list-view'}"
+      :class="{ active: viewmode[type] == 'list-view', invert: invert }"
       class="mr-2"
       icon="list"
       @click="selectView({ view: 'list-view', type })"
     />
     <font-awesome-icon
-      :class="{ active: viewmode[type] == 'semester'} "
+      :class="{ active: viewmode[type] == 'semester', invert: invert } "
       class="mr-2"
       icon="calendar-alt"
       @click="selectView({ view: 'semester', type })"
     />
     <font-awesome-icon
-      :class="{ active: viewmode[type] == 'multi-year'}"
+      :class="{ active: viewmode[type] == 'multi-year', invert: invert }"
       icon="square"
       @click="selectView({ view: 'multi-year', type })"
     />
@@ -37,6 +37,10 @@ export default {
     showListView: {
       type: Boolean,
       default: true
+    },
+    invert: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -55,5 +59,9 @@ svg {
 
 svg.active {
   color: black;
+}
+
+svg.active.invert {
+  color: white;
 }
 </style>

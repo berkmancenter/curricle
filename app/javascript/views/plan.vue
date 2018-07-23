@@ -5,10 +5,13 @@
     <div class="drop-down actions">
       <view-selector
         type="plan"
+        class="mr-3"
       />
+
       <department-selector
         v-show="viewmode.plan == 'list-view'"
       />
+
       <semester-selector
         v-show="viewmode.plan !== 'multi-year'"
         :mode="viewmode.plan == 'list-view' ? 'filter' : 'state'"

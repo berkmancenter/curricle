@@ -1,34 +1,11 @@
 <template>
-  <div class="mb-2">
-    <div
-      class="clearfix pointer"
-      @click="showFilters = !showFilters">
-      <div class="filters-header">
-        Filter: {{ activeFilterLabel }}
-      </div>
+  <div>
+    <department-selector/>
 
-      <div class="filters-header text-center">
-        <font-awesome-icon
-          v-show="!showFilters"
-          icon="caret-down"/>
-        <font-awesome-icon
-          v-show="showFilters"
-          icon="caret-up"/>
-      </div>
-    </div>
-
-    <div v-show="showFilters">
-      <department-selector/>
-
-      <br>
-
-      <semester-selector
-        mode="filter"
-        source="tray"
-      />
-    </div>
-
-    <hr class="mt-2">
+    <semester-selector
+      mode="filter"
+      source="tray"
+    />
   </div>
 </template>
 
@@ -71,19 +48,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.filters-header {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-hr {
-  border-color: #ccc !important;
-  border-width: 1px !important;
-}
-</style>
