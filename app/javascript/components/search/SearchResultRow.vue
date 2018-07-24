@@ -1,70 +1,61 @@
 <template>
   <div
-    :class="{ row: true, 'curricle-search-result': true, selected, conflicted: isConflicted, hiddenConflict }"
-    :style="borderStyle">
-    <div class="col-md-1">
+    :class="{ selected, conflicted: isConflicted, hiddenConflict }"
+    :style="borderStyle"
+    class="row curricle-search-result mb-5 mx-1 py-2">
+    <div class="col-md-1 pt-1">
       <course-action
         :course="course.id"
+        :invert="selected"
+        class="mr-1"
         type="tray"/>
-      <br>
+
       <course-action
         :course="course.id"
+        :invert="selected"
+        class="mr-3"
         type="schedule"/>
+
+      <span class="text-muted">&mdash;</span>
+
       <br>
+
       <course-action
         :course="course.id"
-        type="annotated"/>
-      <br>
-      <course-action
-        :course="course.id"
+        :invert="selected"
+        class="mr-1"
         type="tagged"/>
+
+      <course-action
+        :course="course.id"
+        :invert="selected"
+        type="annotated"/>
+
     </div>
 
     <div
-      class="col-md-2 pointer"
+      class="col-md-9 pointer pl-0"
       @click="selectCourse(course)">
-      <strong>
-        {{ course.academic_group }}
-        <br>
-        {{ course.subject }} {{ course.catalog_number }}
-        <br>
-        {{ course.semester }}
-        <br>
-        {{ course.units_maximum }} Units
-        <br>
-        Section {{ course.class_section }}
-      </strong>
-    </div>
+      <div
+        class="course-title font-weight-bold text-uppercase">
+        {{ course.title }}
+      </div>
 
-    <div
-      class="col-md-2 pointer"
-      @click="selectCourse(course)">
-      Component: <strong>{{ course.component }}</strong>
-      <br>
-      Grading Basis:
-      <br>
-      Instructor:
+      <hr
+        :class="selected"
+        class="m-0">
+
       <span
         v-for="instructor in course.course_instructors"
-        :key="instructor.id">
-        <strong>
-          {{ instructor.display_name }}
-        </strong>
+        :key="instructor.id"
+        class="course-instructor">
+        {{ instructor.display_name }}
       </span>
-    </div>
 
-    <div
-      class="col-md-5 pointer"
-      @click="selectCourse(course)">
-      <h5>{{ course.title }}</h5>
-      <truncate
-        v-if="course.course_description_long"
-        :length="250"
-        :text="course.course_description_long"
-        class="course_description"
-        clamp="..."
-        less="Show Less"
-        type="html"/>
+      <div
+        class="course-component text-uppercase">
+        {{ course.component }}
+      </div>
     </div>
 
     <div class="col-md-2 px-0">
@@ -130,33 +121,43 @@ export default {
 <style lang="scss" scoped>
   .curricle-search-result {
     font-size: 13px;
-    border-left-width: 10px;
-    border-left-style: solid;
-    border-top: 1px solid #ccc;
-    margin-left: 0;
-    margin-right: 25px;
-    padding-top: 10px;
+    border-radius: 4px;
 
     &.selected {
-      background-color: #f5f7de;
-    }
-    &.selected:hover {
-      background-color: #b0b29e;
+      background-color: black;
+      color: white;
+
+      &:hover {
+        background-color: #222;
+      }
     }
 
     &.conflicted {
       background-color: #ffc0cb;
+
       &.selected, &:hover {
         background-color: #ff91a4;
       }
     }
 
-    h5 {
+    .course-title {
+      font-size: 20px;
+    }
+
+    .course-instructor {
       font-size: 16px;
+    }
+
+    .course-component {
+      font-size: 14px;
     }
 
     &:hover {
       background-color: #f0f0f0;
+    }
+
+    hr {
+      border-color: #e0e0e0;
     }
   }
 

@@ -13,12 +13,12 @@
       </div>
       <div class="float-right text-right">
         <b-form-checkbox v-model="showConflicts">
-          Show Results with Conflicts ({{ conflictCount }})
+          show results with conflicts ({{ conflictCount }})
         </b-form-checkbox>
       </div>
     </div>
 
-    <div class="results mt-3">
+    <div class="results mt-4">
       <search-result-row
         v-for="result of results"
         :key="result.id"
