@@ -38,7 +38,7 @@
       @click="selectCourse(course)">
       <div
         class="course-title font-weight-bold text-uppercase">
-        {{ course.title }}
+        {{ course.subject }} {{ course.catalog_number }}: {{ course.title }}
       </div>
 
       <hr
