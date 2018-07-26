@@ -3,11 +3,6 @@
     <p class= "your-tray">Your Tray</p>
     <hr>
     <div class="drop-down actions">
-      <view-selector
-        type="plan"
-        class="mr-3"
-      />
-
       <department-selector
         v-show="viewmode.plan == 'list-view'"
       />
