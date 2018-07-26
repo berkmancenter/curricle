@@ -26,11 +26,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  #visContainer {
+    width: 960px;
+  }
+
   div /deep/ {
     svg {
       display: block;
       margin: 0;
   }
+
   #courseTypeVis, #departmentVis{
     width: 50%;
     float:left;

@@ -31,7 +31,7 @@ function initSetup (selectCourseFunction, selectedSemester) {
   selectCourse = selectCourseFunction
 
   margin = {top: 40, right: 1, bottom: 10, left: 1}
-  width = 401 - margin.left - margin.right
+  width = 480 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom
   courseTypeBarScale = d3.scaleLinear()
     .range([width, 0])
