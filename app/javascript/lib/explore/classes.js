@@ -30,6 +30,9 @@ function initSetup (selectCourseFunction, selectedSemester) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
 
+  // remove existing SVGs prior to (re)drawing new ones
+  d3.select('#visContainer').selectAll('svg').remove()
+
   margin = {top: 40, right: 1, bottom: 10, left: 1}
   width = 480 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom

@@ -1,8 +1,26 @@
 <template>
-  <div id="visContainer">
-    <div id="courseTypeVis">&nbsp; Components</div>
-    <div id="departmentVis">Departments &nbsp;</div>
-    <div id="classVis"/>
+  <div>
+    <div id="semester-input">
+      <semester-input/>
+    </div>
+
+    <div id="visContainer">
+      <div
+        id="courseTypeVis"
+        class="text-left">
+        &nbsp; Components
+      </div>
+
+      <div
+        id="departmentVis"
+        class="text-right">
+        Departments &nbsp;
+      </div>
+
+      <div
+        id="classVis"
+        class="w-100 float-left"/>
+    </div>
   </div>
 </template>
 
@@ -11,10 +29,19 @@ import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/classes'
 import { mapActions, mapGetters } from 'vuex'
+import SemesterInput from 'components/search/SearchFormSemesterInput'
 
 export default {
+  components: {
+    SemesterInput
+  },
   computed: {
     ...mapGetters('search', ['semesterStart'])
+  },
+  watch: {
+    semesterStart (newSemester) {
+      initSetup(this.selectCourse, newSemester)
+    }
   },
   mounted () {
     initSetup(this.selectCourse, this.semesterStart)
@@ -26,51 +53,57 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #visContainer {
-    width: 960px;
-  }
+#visContainer {
+  width: 960px;
 
-  div /deep/ {
+  /deep/ {
     svg {
       display: block;
       margin: 0;
-  }
+    }
 
-  #courseTypeVis, #departmentVis{
-    width: 50%;
-    float:left;
-    overflow: scroll;
-    max-height:100%;
-  }
-  #courseTypeVis{
-    text-align: left;
-  }
-  #departmentVis{
-    text-align: right;
-  }
-  #classVis{
-    width: 100%;
-    float:left;
-    overflow: scroll;
-    max-height:100%;
-  }
-  .departmentText:hover {
-    text-decoration: underline;
-  }
-  .courseTypeText:hover {
-    text-decoration: underline;
-  }
-  .departmentText, .departmentRect, .courseTypeText, .courseTypeRect{
-    cursor:pointer;
-    fill: #2C3194;
-  }
+    #courseTypeVis,
+    #departmentVis {
+      width: 50%;
+      float: left;
+      overflow: scroll;
+      max-height:100%;
+    }
 
-  .classText {
-    cursor: pointer;
+    #classVis {
+      overflow: scroll;
+      max-height: 100%;
+    }
 
-    &:hover {
+    .departmentText:hover {
       text-decoration: underline;
     }
+
+    .courseTypeText:hover {
+      text-decoration: underline;
+    }
+
+    .departmentText,
+    .departmentRect,
+    .courseTypeText,
+    .courseTypeRect {
+      cursor: pointer;
+      fill: #2C3194;
+    }
+
+    .classText {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
+}
+
+#semester-input {
+  position: fixed;
+  bottom: 25px;
+  margin-left: 10px;
 }
 </style>
