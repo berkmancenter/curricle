@@ -1,6 +1,8 @@
 <template>
   <div id="interfaceContainer">
     <div id="searchContainer">
+      <semester-input class="mb-2"/>
+
       <div id="search">
         <b-form @submit="onSubmit">
           <b-form-group
@@ -28,8 +30,12 @@
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
 import { mapActions, mapGetters } from 'vuex'
+import SemesterInput from 'components/search/SearchFormSemesterInput'
 
 export default {
+  components: {
+    SemesterInput
+  },
   data () {
     return {
       instructorName: ''
@@ -52,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div /deep/ svg {
+  #visContainer /deep/ svg {
     display: block;
     margin: auto;
 
@@ -63,7 +69,8 @@ export default {
       stroke-opacity: 0.5;
     }
 
-    .instructorLine, .pageLine {
+    .instructorLine,
+    .pageLine {
       stroke-width: 1px;
       stroke-opacity: 1;
     }
@@ -71,33 +78,38 @@ export default {
     .departmentText {
       fill: #00ADF0;
       text-anchor: end;
+
+      &:hover {
+        fill: red;
+      }
     }
 
-    .classText, .classCircle, .classLine, .selectedInstructorText, .departmentText, .instructorText {
+    .classText,
+    .classCircle,
+    .classLine,
+    .selectedInstructorText,
+    .departmentText,
+    .instructorText {
       cursor: pointer;
     }
 
     .classText {
       fill: #2C3194;
-    }
 
-    .classText:hover {
-      fill: red;
+      &:hover {
+        fill: red;
+      }
     }
 
     .instructorText {
       fill: #D10F84;
+
+      :hover {
+        fill: red;
+      }
     }
 
     .selectedInstructorText:hover {
-      fill: red;
-    }
-
-    .departmentText:hover {
-      fill: red;
-    }
-
-    .instructorText:hover {
       fill: red;
     }
   }
