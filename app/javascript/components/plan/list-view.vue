@@ -1,49 +1,64 @@
 <template>
-  <div class="plan">
-    <table class="course-list-item table">
-      <tbody>
-        <tr
-          v-for="course in filteredCourses"
-          :key="course.id"
-          :class="{ selected: currentCourse && currentCourse.id == course.id }"
-          @click="selectCourse(course)">
-          <td>{{ course.external_course_id }}</td>
-          <td style = "width: 12em;">{{ course.course_description }}</td>
-          <td>{{ course.academic_group }} <br> {{ course.subject }} {{ course.catalog_number }}</td>
-          <td>{{ course.term_name }} <br> {{ course.units_maximum }} units</td>
-          <td style = "width: 16em; text-align: justify;">
-            <truncate
-              v-if="course.course_description_long"
-              :length="50"
-              :text="course.course_description_long"
-              class="course_description"
-              clamp="..."
-              less="Show Less"
-              type="html"/>
-          </td>
-          <td>
-            <class-meeting-time
-              :schedule="course.schedule"
-              :condensed="true"
-            />
-          </td>
-          <td :style="'border-right: 5px solid ' + course.department_color + '; position: relative; font-size: 24px;'">
-            <course-action
-              :course="course.id"
-              type="schedule"/>
-            <course-action
-              :course="course.id"
-              type="annotated"/>
-          </td>
-          <span class= "check_box">
-            <input
-              type="checkbox"
-              name=""
-              value="">
-          </span>
-        </tr>
-      </tbody>
-    </table>
+  <div class="mt-4">
+    <div
+      v-for="course in filteredCourses"
+      :key="course.id"
+      :class="{ selected: selected(course) }"
+      class="row plan-list-item mb-3 mx-1 py-2"
+      @click="selectCourse(course)">
+      <div class="col-md-1 pt-1 pointer">
+        <course-action
+          :course="course.id"
+          :invert="selected(course)"
+          class="mr-1"
+          type="tray"/>
+
+        <br>
+
+        <course-action
+          :course="course.id"
+          :invert="selected(course)"
+          class="mr-3"
+          type="schedule"/>
+      </div>
+
+      <div class="col-md-2 pointer">
+        <div class="text-uppercase font-weight-bold course-title">
+          {{ course.title }}
+        </div>
+
+        <span
+          v-for="instructor in course.course_instructors"
+          :key="instructor.id"
+          class="course-instructor">
+          {{ instructor.display_name }}
+        </span>
+      </div>
+
+      <div class="col-md-2 pointer text-uppercase">
+        {{ course.subject }} {{ course.catalog_number }}<br>
+        {{ course.term_name }} {{ course.term_year }}<br>
+        {{ course.component }}
+      </div>
+
+      <div class="col-md-5 pointer">
+        <truncate
+          v-if="course.course_description_long"
+          :length="200"
+          :text="course.course_description_long"
+          class="course_description"
+          clamp="[..]"
+          less="Show Less"
+          type="html"/>
+      </div>
+
+      <div class="col-md-2 px-0">
+        <class-meeting-time
+          :schedule="course.schedule"
+          :condensed="true"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -64,80 +79,35 @@ export default {
     ...mapGetters('plan', ['filteredCourses'])
   },
   methods: {
-    ...mapActions('app', ['selectCourse'])
+    ...mapActions('app', ['selectCourse']),
+    selected (course) {
+      return this.currentCourse && this.currentCourse.id === course.id
+    }
   }
 }
 </script>
 
-<style scoped>
-  #app header .navbar-light .navbar-nav a {
-    color: #000;
-  }
-  .your-tray {
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 0px;
-  }
-  .dropdown button, .dropdown button:hover, .dropdown button:focus {
-    background-color: inherit;
-    color: #000;
-    border: none;
-  }
-  .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
-    background-color: inherit !important;
-    color: #000 !important;
-    border: none !important;
-    box-shadow: inherit !important;
-  }
-  hr {
-    border-color: #000 !important;
-    border-width: 2px !important;
-    margin-top: 0px !important;
-  }
-
-  .course-list-item tbody tr{
-    background: #DCDCDC;
-    font-size: 12px;
+<style lang="scss" scoped>
+  .pointer {
     cursor: pointer;
   }
-  .course-list-item tbody tr.selected {
-    background-color: #f5f7de;
-  }
-  .course-list-item tbody tr.selected:hover {
-    background-color: #b0b29e;
-  }
 
-  .course-list-item tbody tr:hover {
-    background: #C0C0C0;
-  }
-  .course-list-item tbody tr {
-    margin-bottom: 5px;
-    width: 100%;
-    vertical-align: middle;
-  }
-  .course-list-item thead {
-    display: table-caption;
-    width: 100%;
-  }
-  .course-list-item tbody tr .check_box {
-    display: inline-block;
-    margin-top: 14px;
-    position: absolute;
-    right: 0px;
-  }
-  .course-list-item tbody {
-    border-top: 2px solid #C0C0C0;
-  }
-  .table td {
-    vertical-align: middle !important;
-  }
-  .user-schedule{
-    color: gray;
-  }
-  .course_description p {
-    padding-top: 13px !important;
-  }
-  .plan table td{
-    padding: 0px 10px;
+  .plan-list-item {
+    font-size: 13px;
+    border-radius: 4px;
+
+    &.selected {
+      background-color: black;
+      color: white;
+
+      &:hover {
+        background-color: #222;
+      }
+    }
+
+    .course-title {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 </style>

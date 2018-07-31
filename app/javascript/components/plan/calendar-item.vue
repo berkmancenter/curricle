@@ -1,17 +1,14 @@
 <template>
   <div
-    :class="{'calendar-item': true, provisional, selected }"
+    :class="{ provisional, selected }"
     :style="computedStyle"
+    class="calendar-item text-uppercase font-weight-bold p-2"
     @click="selectCourse(item)">
-    <strong>{{ item.external_course_id }}</strong>
-    <br>
     {{ item.title }}
-    <br>
-    <strong>
-      {{ item.academic_group }}
-      <br>
-      {{ item.subject }} {{ item.catalog_number }}
-    </strong>
+
+    <div class="course-component">
+      {{ item.component }}
+    </div>
   </div>
 </template>
 
@@ -51,10 +48,9 @@ export default {
   },
   computed: {
     computedStyle () {
-      var top = this.scale * this.offset + 25 + this.nudge
+      var top = this.scale * this.offset + 65 + this.nudge
       return {
-        top: top + 'px',
-        'border-top': '10px solid ' + (this.item.department_color || '#000')
+        top: top + 'px'
       }
     }
   },
@@ -69,10 +65,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .calendar-item {
   position: absolute;
-  background-color: #DCDCDC;
+  background-color: white;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-left: .5em;
@@ -81,31 +77,40 @@ export default {
   width: 90%;
   height: var(--height);
   min-height: var(--height);
-  border-radius: 5px;
-  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 4px;
+  border: 2px solid black;
   background-clip: padding-box;
-  box-shadow: 0 0 10px rgba(32,32,32,0.5);
   cursor: pointer;
-}
 
-.calendar-item:hover {
-  background-color: #C0C0C0;
-  z-index: 10;
-  box-shadow: 0 0 15px black;
-  height: auto;
-}
+  &:hover {
+    background-color: #DCDCDC;
+    z-index: 10;
+    height: auto;
+  }
 
-.calendar-item.selected {
-  background-color: #f5f7de;
-  box-shadow: 0 0 15px #4f6477;
-}
+  &.selected {
+    background-color: black;
+    color: white;
 
-.calendar-item.selected:hover {
-  background-color: #b0b29e;
-}
+    &:hover {
+      background-color: #222;
+    }
+  }
 
-.calendar-item.provisional {
-  opacity: 0.5;
-  z-index: 5;
+  &.provisional {
+    opacity: 0.5;
+    z-index: 5;
+  }
+
+  .course-component {
+    color: #777;
+    font-weight: normal;
+    white-space: nowrap;
+    transform: translateX(-10px) translateY(-15px) rotate(-90deg);
+    transform-origin: left center;
+    position: absolute;
+    top: 100%;
+    left: 100%;
+  }
 }
 </style>

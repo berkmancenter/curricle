@@ -1,57 +1,52 @@
 <template>
-  <span>
-    <b-row>
-      <strong>{{ semester }}</strong>
-    </b-row>
-    <b-row :style="{ height: ((longestDuration + 1) * scale + 30) + 'px' }">
-      <b-col>
-        <b-row>
-          <b-col class="header">
-            Time
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <span
-              v-for="(hr,index) in hours"
-              :key="hr"
-              :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '802px', 'border-top': '1px solid lightgray' }"
-            >
-              {{ hr }}
-            </span>
-          </b-col>
-        </b-row>
-      </b-col>
-      <b-col
+  <b-row class="mt-5">
+    <b-col>
+      <b-row>
+        <b-col class="font-weight-bold">
+          {{ semester }}
+
+          <hr>
+        </b-col>
+      </b-row>
+
+      <b-row
         v-for="course in courses"
         :key="course.index"
-        class="day-column"
-      >
-        <b-row>
-          <b-col class="header"/>
-        </b-row>
-        <b-row>
-          <calendar-item
-            :item="course"
-            :scale="scale"
-            :offset="0"
-            :height="course.units_maximum"
-          />
-        </b-row>
-      </b-col>
-    </b-row>
-  </span>
+        :class="{ selected: currentCourse && currentCourse.id === course.id }"
+        class="mb-1 mx-1 pointer"
+        @click="selectCourse(course)">
+        <b-col
+          cols="6"
+          class="text-uppercase font-weight-bold">
+          {{ course.title }}
+        </b-col>
+
+        <b-col
+          cols="2"
+          class="text-muted">
+          {{ firstInstructorName(course) }}
+        </b-col>
+
+        <b-col
+          cols="2"
+          class="text-muted text-uppercase">
+          {{ course.subject }} {{ course.catalog_number }}
+        </b-col>
+
+        <b-col
+          cols="2"
+          class="text-muted text-uppercase">
+          {{ course.component }}
+        </b-col>
+      </b-row>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
-import _ from 'lodash'
-
-import CalendarItem from 'components/plan/calendar-item'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  components: {
-    CalendarItem
-  },
   props: {
     courses: {
       type: Array,
@@ -62,31 +57,34 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      scale: 80
-    }
-  },
   computed: {
-    longestDuration () {
-      var duration = 0
-      _.each(this.courses, c => { duration = Math.max(duration, c.units_maximum | 0) })
-      return Math.max(3, duration)
-    },
-    hours () {
-      return _.map(_.range(this.longestDuration + 1), h => h === 0 ? '' : h === 1 ? '1hr' : h + 'hr')
+    ...mapGetters('app', ['currentCourse'])
+  },
+  methods: {
+    ...mapActions('app', ['selectCourse']),
+    firstInstructorName (course) {
+      if (course.course_instructors.length) {
+        return course.course_instructors[0].display_name
+      } else {
+        return 'Instructor TBD'
+      }
     }
   }
 }
 </script>
 
-<style scoped>
-.day-column {
-
+<style lang="scss" scoped>
+.pointer {
+  cursor: pointer;
 }
 
-.header {
-    font-weight: bold;
-    text-align: left;
+.selected {
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+
+  .text-muted {
+    color: #c0c0c0 !important;
+  }
 }
 </style>

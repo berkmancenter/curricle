@@ -42,7 +42,7 @@ export default {
     semesterLabel () {
       const semesterName = this.source === 'tray' ? this.filters.semester : this.semester
 
-      return semesterName ? `Semester: ${semesterName}` : 'Semester'
+      return semesterName ? `Semester: ${semesterName}` : 'Semester: All Semesters'
     }
   },
   watch: {

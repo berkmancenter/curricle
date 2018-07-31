@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <p class= "your-tray">Your Tray</p>
-    <hr>
+  <div class="py-5">
+    <h3>Plan:</h3>
+
     <div class="drop-down actions">
       <department-selector
         v-show="viewmode.plan == 'list-view'"
