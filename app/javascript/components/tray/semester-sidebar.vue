@@ -10,11 +10,12 @@
       <strong>{{ day }}</strong>
       <div
         v-show="trayCoursesByDay[day] && trayCoursesByDay[day].length"
-        class="float-right"
-      />
+        class="float-right pointer"
+        @click="toggleEditDay(day)"
+        v-text="isEditing[day] ? 'Done' : 'Edit'"/>
       <course-list
         :courses="isEditing[day] ? trayCoursesByDay[day] : coursesByDay[day]"
-        :editable="true"
+        :editable="isEditing[day]"
         :invert="true"
       />
     </div>
@@ -74,5 +75,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.pointer {
+  cursor: pointer;
+}
 </style>
