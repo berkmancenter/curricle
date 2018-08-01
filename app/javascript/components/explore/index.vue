@@ -64,9 +64,9 @@
 
         <div slot="footer">
           <b-button
-            disabled
-            variant="secondary">
-            Coming Soon
+            to="/explore/universe"
+            variant="primary">
+            View
           </b-button>
         </div>
       </b-card>

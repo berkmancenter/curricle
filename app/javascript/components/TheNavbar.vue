@@ -37,6 +37,15 @@
           to="/explore/instructor">
           Lecture Networks
         </router-link>
+
+        <br>
+
+        <router-link
+          class="nav sub"
+          to="/explore/universe">
+          All Courses
+        </router-link>
+
       </div>
 
       <router-link

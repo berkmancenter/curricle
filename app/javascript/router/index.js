@@ -11,6 +11,7 @@ import SharedSchedule from '../views/SharedSchedule'
 import ExploreIndex from '../components/explore/index'
 import ExploreClasses from '../components/explore/classes'
 import ExploreInstructors from '../components/explore/instructors'
+import ExploreUniverse from '../components/explore/universe'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,9 @@ export default new VueRouter({
       }, {
         path: 'instructor',
         component: ExploreInstructors
+      }, {
+        path: 'universe',
+        component: ExploreUniverse
       }]
     },
     { path: '/home', component: CurricleHome },

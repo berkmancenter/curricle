@@ -12,6 +12,8 @@ fragment Course on Course {
   grading_basis_description
   id
   subject
+  subject_academic_org_description
+  subject_description
   term_name
   term_year
   title
