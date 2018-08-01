@@ -24,6 +24,8 @@ if (windowHeight > windowWidth) {
   visSize = windowHeight
 }
 
+visSize = Math.min(1100, visSize)
+
 var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
