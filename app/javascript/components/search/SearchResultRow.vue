@@ -54,7 +54,8 @@
 
       <div
         class="course-component text-uppercase">
-        {{ course.component }}
+        {{ course.component }}<br>
+        {{ course.term_name }} {{ course.term_year }}
       </div>
     </div>
 
