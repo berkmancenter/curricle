@@ -8,7 +8,7 @@
         img-top
         title="Departments &amp; Types">
         <p class="card-text">
-          Browse through courses offered in a given semester.
+          Explore courses by selecting components (class formats) and departments (subjects and courses of study).
         </p>
 
         <div slot="footer">
@@ -25,7 +25,7 @@
         img-top
         title="Instructors">
         <p class="card-text">
-          Follow the paths of connected instructors to discover new courses.
+          Discover faculty networks of teaching and learning. Select an instructor to see faculty with whom they've co-taught, connecting through courses to departments.
         </p>
 
         <div slot="footer">
@@ -59,7 +59,7 @@
         img-top
         title="All Courses">
         <p class="card-text">
-          Explore the cosmos of all courses offered in a single semester.
+          Get an overview of the universe of courses offered at Harvard, and explore departments and programs to browse their offerings.
         </p>
 
         <div slot="footer">
