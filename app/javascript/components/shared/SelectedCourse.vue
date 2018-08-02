@@ -46,6 +46,10 @@
       :course="theCourse"
     />
 
+    <selected-course-annotations
+      v-if="userAuthenticated"
+      :course="theCourse"/>
+
     <selected-course-tagging
       :active-tags="theCourse.user_tags"
       :course-id="theCourse.id"
@@ -58,7 +62,8 @@ import { mapActions, mapState, mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/CourseAction'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
+import SelectedCourseAnnotations from './SelectedCourseAnnotations'
+import SelectedCourseDetails from './SelectedCourseDetails'
 import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
@@ -66,6 +71,7 @@ export default {
     serializeSearch,
     CourseAction,
     FontAwesomeIcon,
+    SelectedCourseAnnotations,
     SelectedCourseDetails,
     SelectedCourseTagging
   },
