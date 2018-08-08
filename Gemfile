@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 1.0'
 gem 'progress_bar', '~> 1.2'
 gem 'puma', '~> 3.11'
-gem 'rails', '~> 5.2'
+gem 'rails', '5.2.1' # @drg skip
 gem 'smarter_csv', '~> 1.2'
 gem 'sunspot_rails', '~> 2.3'
 gem 'webpacker', '~> 3.5'
