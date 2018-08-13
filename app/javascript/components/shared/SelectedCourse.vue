@@ -51,9 +51,7 @@
       :course-id="theCourse.id"/>
 
     <selected-course-tagging
-      :active-tags="theCourse.user_tags"
-      :course-id="theCourse.id"
-      @deactivateTag="deactivateTag($event)" />
+      :course-id="theCourse.id"/>
   </div>
 </template>
 

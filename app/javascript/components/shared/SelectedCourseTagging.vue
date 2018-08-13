@@ -3,26 +3,38 @@
     <p class="heading">Tags</p>
 
     <input
-      v-model="tag"
+      v-model="tagInput"
       class="input-tag text-white w-100 p-2"
       placeholder="Enter a tag"
-      @keyup.enter="addActiveTag()">
+      @keyup.enter="addTag()">
 
     <span
-      v-for="(tag, index) of activeTags"
+      v-for="tag of course.tags"
       :key="tag.id"
       class="active-tag mt-3 mr-2"
-      @click="deactivateTag(index, tag.name)">
+      @click="removeTag(tag.id)">
       {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
     </span>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import TAG_REMOVE_MUTATION from '../../graphql/TagRemove.gql'
+import TAG_SET_MUTATION from '../../graphql/TagSet.gql'
+import COURSE_QUERY from '../../graphql/Course.gql'
 
 export default {
+  apollo: {
+    course: {
+      query: COURSE_QUERY,
+      variables () {
+        return {
+          id: this.courseId
+        }
+      }
+    }
+  },
   components: {
     FontAwesomeIcon
   },
@@ -30,45 +42,34 @@ export default {
     courseId: {
       type: String,
       required: true
-    },
-    activeTags: {
-      type: Array,
-      default: function () {
-        return []
-      }
     }
   },
-  data: function () {
-    return { tag: '' }
+  data () {
+    return {
+      course: {},
+      tagInput: ''
+    }
   },
   methods: {
-    deactivateTag (index, tagName) {
-      axios.delete('/tags/remove', { data: {
-        course_id: this.courseId,
-        name: tagName
-      }})
-        .then(function (response) {
-          console.log(response)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-      this.activeTags.splice(index, 1)
+    removeTag (id) {
+      this.$apollo.mutate({
+        mutation: TAG_REMOVE_MUTATION,
+        variables: {
+          id: id
+        }
+      })
     },
-    addActiveTag () {
-      if (this.tag) {
-        axios.post('/tags', {
-          course_id: this.courseId,
-          name: this.tag
+    addTag () {
+      if (this.tagInput) {
+        this.$apollo.mutate({
+          mutation: TAG_SET_MUTATION,
+          variables: {
+            name: this.tagInput,
+            course_id: this.course.id
+          }
         })
-          .then(function (response) {
-            console.log(response.data)
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-        this.activeTags.push({name: this.tag, course_id: this.courseId})
-        this.tag = ''
+
+        this.tagInput = ''
       }
     }
   }

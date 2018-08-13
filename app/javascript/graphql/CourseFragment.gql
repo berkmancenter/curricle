@@ -38,4 +38,8 @@ fragment Course on Course {
     meets_on_saturday
     meets_on_sunday
   }
+  tags {
+    id
+    name
+  }
 }

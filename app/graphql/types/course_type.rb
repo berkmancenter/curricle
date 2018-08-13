@@ -62,6 +62,19 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :subject, types.String, 'Subject'
   field :subject_academic_org_description, types.String, 'Subject academic organization description'
   field :subject_description, types.String, 'Subject description'
+
+  field :tags, types[Types::TagType], 'List of tags added by the current user' do
+    resolve(
+      lambda do |course, _args, context|
+        BatchLoader.for(course.id).batch(default_value: []) do |course_ids, loader|
+          Tag.where(course: course_ids, user: context[:current_user]).each do |tag|
+            loader.call(tag.course_id) { |memo| memo << tag }
+          end
+        end
+      end
+    )
+  end
+
   field :term_name, types.String, 'Term name'
   field :term_pattern_code, types.String, 'Term pattern code'
   field :term_pattern_description, types.String, 'Term pattern description'

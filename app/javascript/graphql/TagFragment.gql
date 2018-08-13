@@ -1,0 +1,10 @@
+fragment Tag on Tag {
+  id
+  name
+  course {
+    id
+    tags {
+      id
+    }
+  }
+}
