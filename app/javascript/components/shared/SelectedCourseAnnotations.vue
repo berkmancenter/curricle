@@ -59,9 +59,6 @@ export default {
     editableText (newStr) {
       this.editableTextLength = newStr.length
     },
-    savedAnnotation () {
-      this.editableText = this.savedAnnotation
-    },
     course () {
       this.editableText = this.savedAnnotation
     }
@@ -77,20 +74,6 @@ export default {
           text: this.editableText,
           course_id: this.course.id,
           id: this.course.annotation && this.course.annotation.id
-        },
-        update: (store, { data: { annotationSet } }) => {
-          const localCourse = store.readFragment({
-            id: `Course:${this.courseId}`,
-            fragment: COURSE_FRAGMENT
-          })
-
-          localCourse.annotation = annotationSet
-
-          store.writeFragment({
-            id: `Course:${this.courseId}`,
-            fragment: COURSE_FRAGMENT,
-            data: localCourse
-          })
         }
       })
     }
