@@ -48,7 +48,7 @@
 
     <selected-course-annotations
       v-if="userAuthenticated"
-      :course="theCourse"/>
+      :course-id="theCourse.id"/>
 
     <selected-course-tagging
       :active-tags="theCourse.user_tags"

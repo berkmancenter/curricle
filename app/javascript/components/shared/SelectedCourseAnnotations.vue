@@ -5,9 +5,9 @@
     <div>
       <textarea
         v-model="editableText"
+        :maxlength="maxLength"
         rows="5"
-        class="w-100"
-        maxlength="500"/>
+        class="w-100"/>
 
       <span class="word-count">{{ editableTextLength }} / {{ maxLength }} characters</span>
 
@@ -25,37 +25,34 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
+import COURSE_FRAGMENT from '../../graphql/CourseFragment.gql'
 
 export default {
   components: {
     FontAwesomeIcon
   },
   props: {
-    course: {
-      type: Object,
+    courseId: {
+      type: String,
       required: true
     }
   },
   data () {
     return {
-      editableAnnotationText: '',
       editableText: '',
       maxLength: 500,
-      editableTextLength: 0,
-      updatedAnnotationText: {}
+      editableTextLength: 0
     }
   },
   computed: {
+    course () {
+      return this.$apolloProvider.defaultClient.cache.readFragment({
+        id: `Course:${this.courseId}`,
+        fragment: COURSE_FRAGMENT
+      })
+    },
     savedAnnotation () {
-      if (this.updatedAnnotationText[this.course.id]) {
-        return this.updatedAnnotationText[this.course.id]
-      }
-
-      if (!this.course.annotation) {
-        return ''
-      }
-
-      return this.course.annotation.text
+      return this.course.annotation ? this.course.annotation.text : ''
     }
   },
   watch: {
@@ -74,15 +71,27 @@ export default {
   },
   methods: {
     updateAnnotations () {
-      this.$apollo.provider.defaultClient.mutate({
+      this.$apollo.mutate({
         mutation: ANNOTATION_SET_MUTATION,
         variables: {
           text: this.editableText,
           course_id: this.course.id,
           id: this.course.annotation && this.course.annotation.id
+        },
+        update: (store, { data: { annotationSet } }) => {
+          const localCourse = store.readFragment({
+            id: `Course:${this.courseId}`,
+            fragment: COURSE_FRAGMENT
+          })
+
+          localCourse.annotation = annotationSet
+
+          store.writeFragment({
+            id: `Course:${this.courseId}`,
+            fragment: COURSE_FRAGMENT,
+            data: localCourse
+          })
         }
-      }).then(response => {
-        this.updatedAnnotationText[this.course.id] = response.data.annotationSet.text
       })
     }
   }
