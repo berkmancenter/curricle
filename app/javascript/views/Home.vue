@@ -19,7 +19,7 @@
     color: #bbb;
     font-size: 30px;
     line-height: 34px;
-    margin: 300px 200px 0 200px;
+    padding: 300px 200px 0 200px;
 
     img {
       display: block;
