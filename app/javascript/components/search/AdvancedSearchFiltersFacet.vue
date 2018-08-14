@@ -14,7 +14,7 @@
               :checked="item.selected"
               type="checkbox"
               @change="toggleCheckbox">
-            {{ truncate(item.value) }}
+            {{ item.value }}
           </label>
         </div>
 
@@ -47,15 +47,6 @@ export default {
     }
   },
   methods: {
-    truncate (str) {
-      const maxLength = 15
-
-      if (str.length > maxLength) {
-        return `${str.substring(0, maxLength)}...`
-      } else {
-        return str
-      }
-    },
     toggleCheckbox (e) {
       this.$store.commit(
         'search/FACET_SET_ITEM_SELECTION',
@@ -104,7 +95,7 @@ h5 {
 
 .label-container {
   max-width: 60%;
-  overflow: hidden;
+  overflow: scroll;
 
   label {
     white-space: nowrap;

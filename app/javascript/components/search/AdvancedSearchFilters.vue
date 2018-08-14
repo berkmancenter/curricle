@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="filter-container">
     <p class="heading">Filter results by:</p>
 
     <div class="row">
@@ -33,9 +33,13 @@ export default {
 }
 </script>
 
-<style scoped>
-  p.heading {
-    color: #888;
-    font-size: 13px;
+<style lang="scss" scoped>
+  #filter-container {
+    min-width: 400px;
+
+    p.heading {
+      color: #888;
+      font-size: 13px;
+    }
   }
 </style>
