@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206175525) do
+ActiveRecord::Schema.define(version: 2018_08_14_122657) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "btree_gin"
+  enable_extension "plpgsql"
 
   create_table "annotations", id: :serial, force: :cascade do |t|
     t.integer "user_id"
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20180206175525) do
     t.string "term_pattern_code"
     t.text "term_pattern_description"
     t.integer "units_maximum"
-    t.integer "catalog_number"
+    t.string "catalog_number"
     t.text "course_description"
     t.text "course_description_long"
     t.text "course_note"

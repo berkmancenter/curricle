@@ -46,9 +46,14 @@ module Resolvers
 
     private
 
-    # Detect Course ID keywords in the format of "GENETIC 333"
+    # Detect Course ID (subject + catalog_number) keywords in various formats:
+    #
+    # * LIFESCI 50A
+    # * xmit 11.487
+    # * XR-S -052A
+    #
     def course_id?(string)
-      string =~ /\A[a-zA-Z-]+ \d+\z/
+      string =~ /\A[a-zA-Z-]+ \S+\z/
     end
 
     def add_keyword_to_search(sunspot, keyword)
@@ -70,7 +75,7 @@ module Resolvers
 
       sunspot.instance_eval do
         with :subject, subject.upcase
-        with :catalog_number, catalog_number.to_i
+        with :catalog_number, catalog_number
       end
     end
 

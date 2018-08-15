@@ -37,7 +37,7 @@ class Course < ApplicationRecord
     string :term_pattern_code
     text :term_pattern_description
     integer :units_maximum
-    integer :catalog_number
+    string :catalog_number
     text :course_description
     text :course_description_long
     text :course_note

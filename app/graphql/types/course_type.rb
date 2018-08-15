@@ -20,7 +20,7 @@ Types::CourseType = GraphQL::ObjectType.define do
     )
   end
 
-  field :catalog_number, types.Int, 'Catalog number'
+  field :catalog_number, types.String, 'Catalog number'
   field :class_academic_org_description, types.String, 'Class academic organization description'
   field :class_section, types.String, 'Class section'
   field :component, types.String, 'Component'
