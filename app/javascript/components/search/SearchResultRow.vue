@@ -45,11 +45,8 @@
         :class="selected"
         class="m-0">
 
-      <span
-        v-for="instructor in course.course_instructors"
-        :key="instructor.id"
-        class="course-instructor">
-        {{ instructor.display_name }}
+      <span class="course-instructor">
+        {{ instructorNames }}
       </span>
 
       <div
@@ -111,6 +108,22 @@ export default {
     },
     hiddenConflict () {
       return this.isConflicted && !this.showConflicts
+    },
+    instructorNames () {
+      const limit = 4 // only display this many instructors inline
+
+      let formattedString = this
+        .course
+        .course_instructors
+        .slice(0, limit)
+        .map(instructor => instructor.display_name)
+        .join(', ')
+
+      if (this.course.course_instructors.length > limit) {
+        formattedString += '...'
+      }
+
+      return formattedString
     }
   },
   methods: {
