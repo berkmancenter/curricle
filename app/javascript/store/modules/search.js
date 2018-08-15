@@ -157,6 +157,7 @@ const actions = {
   runKeywordSearchAgain ({commit, state, getters, dispatch}) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
+    _.forEach(kw, k => delete k.ident)
 
     if (kw && kw.length) {
       commit('INCREMENT_RESULTS_PAGE')
