@@ -46,6 +46,13 @@
           All Courses
         </router-link>
 
+        <br>
+
+        <router-link
+          class="nav sub"
+          to="/explore/keywords">
+          Keywords
+        </router-link>
       </div>
 
       <router-link
