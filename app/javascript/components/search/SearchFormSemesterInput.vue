@@ -156,7 +156,12 @@ export default {
 .popover {
   max-width: 100% !important;
 }
+
 .year-select {
   width: 80px !important;
+}
+
+.pointer {
+  cursor: pointer;
 }
 </style>

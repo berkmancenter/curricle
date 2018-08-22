@@ -1,81 +1,87 @@
 <template>
-  <div id="interfaceContainer">
-    <div id="dimContainer">
-      <ul>
-        <li
-          class="dimSelect active"
-          value="component">
-        Component</li> |
+  <div>
+    <div id="interfaceContainer">
+      <div id="dimContainer">
+        <ul>
+          <li
+            class="dimSelect active"
+            value="component">
+          Component</li> |
 
-        <li
-          class="dimSelect"
-          value="subject_description">
-        Subject</li> |
+          <li
+            class="dimSelect"
+            value="subject_description">
+          Subject</li> |
 
-        <li
-          class="dimSelect"
-          value="division_description">
-        Division</li> |
+          <li
+            class="dimSelect"
+            value="division_description">
+          Division</li> |
 
-        <li
-          class="dimSelect"
-          value="units_maximum">
-        Units</li> |
+          <li
+            class="dimSelect"
+            value="units_maximum">
+          Units</li> |
 
-        <li
-          class="dimSelect"
-          value="term_pattern_description">
-        Term</li> |
+          <li
+            class="dimSelect"
+            value="term_pattern_description">
+          Term</li> |
 
-        <li
-          class="dimSelect"
-          value="class_academic_org_description">
-        Department</li> |
+          <li
+            class="dimSelect"
+            value="class_academic_org_description">
+          Department</li> |
 
-        <li
-          id="dimClass"
-          class="dimSelect"
-          value="title">
-          Class
-        </li>
-      </ul>
-    </div>
-
-    <div id="searchContainer">
-      <div
-        id="searchOne"
-        class="searchBox">
-        <input
-          id="searchBoxOne"
-          class="searchBoxInput"
-          type="text"
-          placeholder="search term...">
-
-        <button
-          id="searchBoxOneButton"
-          class="searchBoxButton">
-          &gt;
-        </button>
+          <li
+            id="dimClass"
+            class="dimSelect"
+            value="title">
+            Class
+          </li>
+        </ul>
       </div>
 
-      <div
-        id="searchTwo"
-        class="searchBox">
-        <button
-          id="searchBoxTwoButton"
-          class="searchBoxButton">
-          &lt;
-        </button>
+      <div id="searchContainer">
+        <div
+          id="searchOne"
+          class="searchBox">
+          <input
+            id="searchBoxOne"
+            class="searchBoxInput"
+            type="text"
+            placeholder="search term...">
 
-        <input
-          id="searchBoxTwo"
-          class="searchBoxInput"
-          type="text"
-          placeholder="search term...">
+          <button
+            id="searchBoxOneButton"
+            class="searchBoxButton">
+            &gt;
+          </button>
+        </div>
+
+        <div
+          id="searchTwo"
+          class="searchBox">
+          <button
+            id="searchBoxTwoButton"
+            class="searchBoxButton">
+            &lt;
+          </button>
+
+          <input
+            id="searchBoxTwo"
+            class="searchBoxInput"
+            type="text"
+            placeholder="search term...">
+        </div>
       </div>
+
+      <div id="visContainer"/>
     </div>
 
-    <div id="visContainer"/>
+    <div id="semester-input">
+      <semester-input/>
+    </div>
   </div>
 </template>
 
@@ -83,10 +89,26 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/keywords'
+import { mapActions, mapGetters } from 'vuex'
+import SemesterInput from 'components/search/SearchFormSemesterInput'
 
 export default {
+  components: {
+    SemesterInput
+  },
+  computed: {
+    ...mapGetters('search', ['semesterStart'])
+  },
+  watch: {
+    semesterStart (newSemester) {
+      initSetup(this.selectCourse, newSemester)
+    }
+  },
   mounted () {
-    initSetup()
+    initSetup(this.selectCourse, this.semesterStart)
+  },
+  methods: {
+    ...mapActions('app', ['selectCourse'])
   }
 }
 </script>
@@ -211,5 +233,11 @@ export default {
       text-decoration: underline;
     }
   }
+}
+
+#semester-input {
+  position: fixed;
+  bottom: 25px;
+  margin-left: 10px;
 }
 </style>

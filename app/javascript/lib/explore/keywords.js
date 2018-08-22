@@ -1,5 +1,9 @@
 import $ from 'jquery'
 import * as d3 from 'd3'
+import _ from 'lodash'
+import apolloClient from 'apollo'
+import COURSES_SEARCH_QUERY from '../../graphql/CoursesSearch.gql'
+import { transformSchedule } from 'lib/util'
 //  Colors
 
 // var colorLeft = '#B53139';
@@ -46,15 +50,27 @@ var networkWidthScale
 
 var fullData
 
-function requestData (searchTerm, numTerm) {
-  var jsonQuery = '{ courses (page: 1, per_page: 5000, semester_range: {start: {term_name: SPRING, term_year: 2018}}, deluxe_keywords: [{text: ' + searchTerm + ', applyTo: [TITLE, DESCRIPTION]}]) { title subject_description id component division_description term_pattern_description units_maximum class_academic_org_description } }'
+let selectCourse
+let semester
 
-  $.post({
-    url: 'http://hz17.endpoint.com:9000/graphql',
-    data: JSON.stringify({ 'query': jsonQuery }),
-    contentType: 'application/json'
-  }).done(function (response) {
-    addToDataSet(response.data.courses, searchTerm, numTerm)
+function requestData (searchTerm, numTerm) {
+  const semesterRange = { start: semester }
+
+  apolloClient.query({
+    query: COURSES_SEARCH_QUERY,
+    variables: {
+      page: 1,
+      perPage: 5000,
+      semesterRange: semesterRange,
+      deluxeKeywords: [{
+        text: searchTerm,
+        applyTo: ['TITLE', 'DESCRIPTION']
+      }]
+    }
+  }).then(function (response) {
+    // course objects need to be cloned so that they can be extended by addToDataSet()
+    const courses = response.data.coursesConnection.edges.map(course => _.clone(course.node))
+    addToDataSet(courses, searchTerm, numTerm)
   })
 }
 
@@ -79,7 +95,14 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup () {
+function initSetup (selectCourseFunction, selectedSemester) {
+  semester = selectedSemester
+  selectCourse = selectCourseFunction
+  centerData = 'component'
+
+  // remove existing SVGs prior to (re)drawing new ones
+  d3.select('#visContainer').selectAll('svg').remove()
+
   var svg = d3.select('#visContainer').append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
@@ -441,6 +464,17 @@ function centerClick () {
   var selectionData = fullData.filter(function (d) {
     return d[centerData] === selectedKey
   })
+
+  // Courses at the intersection of both keywords will be in the selectionData array twice
+  const uniqueCourses = _.uniqBy(selectionData, 'id')
+
+  if (centerData === 'title' && uniqueCourses.length === 1) {
+    const course = _.clone(selectionData[0])
+
+    course.schedule = transformSchedule(course)
+
+    selectCourse(course)
+  }
 
   centerData = 'title'
 
