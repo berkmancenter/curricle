@@ -1,27 +1,6 @@
 <template>
   <div>
     <div id="interfaceContainer">
-      <div id="searchContainer">
-        <div id="search">
-          <b-form @submit="onSubmit">
-            <b-form-group
-              label="Instructor name:"
-              label-for="instructorName">
-              <b-form-input
-                id="instructorName"
-                v-model="instructorName"
-                type="search"
-                required
-                placeholder="Enter name"/>
-            </b-form-group>
-            <b-button
-              type="submit"
-              variant="primary">
-              Submit
-            </b-button>
-          </b-form>
-        </div>
-      </div>
       <div id="visContainer"/>
     </div>
 
@@ -44,6 +23,29 @@
       </p>
 
       <semester-input/>
+
+      <div
+        id="searchContainer"
+        class="mt-2">
+        <div id="search">
+          <b-form @submit="onSubmit">
+            <b-form-group>
+              <b-form-input
+                id="instructorName"
+                v-model="instructorName"
+                type="search"
+                required
+                placeholder="Enter name"/>
+            </b-form-group>
+
+            <b-button
+              type="submit"
+              variant="primary">
+              Submit
+            </b-button>
+          </b-form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -139,7 +141,7 @@ export default {
   position: fixed;
   bottom: 25px;
   margin-left: 10px;
-  width: 200px;
+  width: 250px;
 
   h3 {
     font-size: 18px;
