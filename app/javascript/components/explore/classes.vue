@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div id="semester-input">
-      <semester-input/>
-    </div>
-
     <div id="visContainer">
       <div
         id="courseTypeVis"
@@ -20,6 +16,25 @@
       <div
         id="classVis"
         class="w-100 float-left"/>
+    </div>
+
+    <div id="vis-description">
+      <h3>Explore:</h3>
+
+      <p>
+        Explore courses by selecting <span class="components">components</span>
+        (class formats) and <span class="departments">departments</span>
+        (subjects and courses of study).
+
+        <span
+          v-b-tooltip.hover
+          title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;components.&quot; In the left column, find your desired component, and look in the right column to select your desired department. Once you have selected both a department and component, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Component to reset the visualization and start again."
+          class="pointer">
+          MORE&nbsp;&gt;
+        </span>
+      </p>
+
+      <semester-input/>
     </div>
   </div>
 </template>
@@ -101,9 +116,26 @@ export default {
   }
 }
 
-#semester-input {
+#vis-description {
   position: fixed;
   bottom: 25px;
   margin-left: 10px;
+  width: 200px;
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+
+    span.components {
+      color: #d10f84;
+    }
+
+    span.departments {
+      color: #00adf0;
+    }
+  }
 }
 </style>

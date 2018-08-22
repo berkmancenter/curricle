@@ -1,29 +1,50 @@
 <template>
-  <div id="interfaceContainer">
-    <div id="searchContainer">
-      <semester-input class="mb-2"/>
-
-      <div id="search">
-        <b-form @submit="onSubmit">
-          <b-form-group
-            label="Instructor name:"
-            label-for="instructorName">
-            <b-form-input
-              id="instructorName"
-              v-model="instructorName"
-              type="search"
-              required
-              placeholder="Enter name"/>
-          </b-form-group>
-          <b-button
-            type="submit"
-            variant="primary">
-            Submit
-          </b-button>
-        </b-form>
+  <div>
+    <div id="interfaceContainer">
+      <div id="searchContainer">
+        <div id="search">
+          <b-form @submit="onSubmit">
+            <b-form-group
+              label="Instructor name:"
+              label-for="instructorName">
+              <b-form-input
+                id="instructorName"
+                v-model="instructorName"
+                type="search"
+                required
+                placeholder="Enter name"/>
+            </b-form-group>
+            <b-button
+              type="submit"
+              variant="primary">
+              Submit
+            </b-button>
+          </b-form>
+        </div>
       </div>
+      <div id="visContainer"/>
     </div>
-    <div id="visContainer"/>
+
+    <div id="vis-description">
+      <h3>Explore:</h3>
+
+      <p>
+        Discover faculty networks of teaching and learning.
+        Select an <span class="instructor">instructor</span>
+        to see faculty with whom they've co-taught, connecting
+        through <span class="courses">courses</span> to
+        <span class="departments">departments</span>.
+
+        <span
+          v-b-tooltip.hover
+          title="Instructors from very different fields often explore shared interests by teaching together; this visualization will help you explore networks of faculty by showing you classes co-taught by instructors. Type the name of any Harvard instructor into the search bar and a network will appear. On the left will be all other Harvard instructors with whom the instructor has co-taught. Lines connect these instructors to courses and the departments that offer them. Select course titles to learn about the courses. If you click on another instructor, the visualization will shift and display the network of this instructor in new patterns of courses and departments."
+          class="pointer">
+          MORE&nbsp;&gt;
+        </span>
+      </p>
+
+      <semester-input/>
+    </div>
   </div>
 </template>
 
@@ -58,59 +79,87 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #visContainer /deep/ svg {
-    display: block;
-    margin: auto;
+#visContainer /deep/ svg {
+  display: block;
+  margin: auto;
 
-    .contributionCircle {
-      fill: none;
-      stroke: #000;
-      stroke-width: 0.5px;
-      stroke-opacity: 0.5;
-    }
+  .contributionCircle {
+    fill: none;
+    stroke: #000;
+    stroke-width: 0.5px;
+    stroke-opacity: 0.5;
+  }
 
-    .instructorLine,
-    .pageLine {
-      stroke-width: 1px;
-      stroke-opacity: 1;
-    }
+  .instructorLine,
+  .pageLine {
+    stroke-width: 1px;
+    stroke-opacity: 1;
+  }
 
-    .departmentText {
-      fill: #00ADF0;
-      text-anchor: end;
+  .departmentText {
+    fill: #00ADF0;
+    text-anchor: end;
 
-      &:hover {
-        fill: red;
-      }
-    }
-
-    .classText,
-    .classCircle,
-    .classLine,
-    .selectedInstructorText,
-    .departmentText,
-    .instructorText {
-      cursor: pointer;
-    }
-
-    .classText {
-      fill: #2C3194;
-
-      &:hover {
-        fill: red;
-      }
-    }
-
-    .instructorText {
-      fill: #D10F84;
-
-      :hover {
-        fill: red;
-      }
-    }
-
-    .selectedInstructorText:hover {
+    &:hover {
       fill: red;
     }
   }
+
+  .classText,
+  .classCircle,
+  .classLine,
+  .selectedInstructorText,
+  .departmentText,
+  .instructorText {
+    cursor: pointer;
+  }
+
+  .classText {
+    fill: #2C3194;
+
+    &:hover {
+      fill: red;
+    }
+  }
+
+  .instructorText {
+    fill: #D10F84;
+
+    :hover {
+      fill: red;
+    }
+  }
+
+  .selectedInstructorText:hover {
+    fill: red;
+  }
+}
+
+#vis-description {
+  position: fixed;
+  bottom: 25px;
+  margin-left: 10px;
+  width: 200px;
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+
+    span.instructor {
+      color: #d10f84;
+    }
+
+    span.courses {
+      color: #2c3194;
+
+    }
+
+    span.departments {
+      color: #00adf0;
+    }
+  }
+}
 </style>

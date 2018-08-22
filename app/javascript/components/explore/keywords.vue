@@ -79,7 +79,20 @@
       <div id="visContainer"/>
     </div>
 
-    <div id="semester-input">
+    <div id="vis-description">
+      <h3>Explore:</h3>
+
+      <p>
+        Visualize the appearance of terms across the curriculum.
+
+        <span
+          v-b-tooltip.hover
+          title="In this visualization, you can explore the use of key terms in the names and descriptions of courses to reveal compelling combinations of concepts across the curriculum. In the entry fields at left and right, enter two keywords—&quot;truth&quot; and &quot;lies,&quot; or &quot;economics&quot; and &quot;evolution,&quot; perhaps—and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. Click on course titles to access full course descriptions or add courses to your tray. To reset the visualization, simply enter new keywords at left and right."
+          class="pointer">
+          MORE&nbsp;&gt;
+        </span>
+      </p>
+
       <semester-input/>
     </div>
   </div>
@@ -235,9 +248,18 @@ export default {
   }
 }
 
-#semester-input {
+#vis-description {
   position: fixed;
   bottom: 25px;
   margin-left: 10px;
+  width: 200px;
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
 }
 </style>

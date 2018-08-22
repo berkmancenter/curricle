@@ -1,10 +1,28 @@
 <template>
-  <div id="visWrapper">
-    <canvas id="visCANVAS"/>
+  <div>
+    <div id="visWrapper">
+      <canvas id="visCANVAS"/>
 
-    <svg id="visSVG">
-      <g/>
-    </svg>
+      <svg id="visSVG">
+        <g/>
+      </svg>
+    </div>
+
+    <div id="vis-description">
+      <h3>Explore:</h3>
+
+      <p>
+        Get an overview of the universe of courses offered at Harvard, and
+        explore departments and programs to browse their offerings.
+
+        <span
+          v-b-tooltip.hover
+          title="Here, we see the course offerings of departments and programs across Harvard College and several of the graduate and professional schools. Clicking a departmental &quot;cloud&quot; will take you to a matrix of dots representing the courses offered in that department; click on a dot to see the full information on any individual course. These dot matrices are not unstructured, lending an element of surprise to the discovery of courses."
+          class="pointer">
+          MORE&nbsp;&gt;
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -132,6 +150,21 @@ export default {
       border-width: 13px;
       margin-left: -13px;
     }
+  }
+}
+
+#vis-description {
+  position: fixed;
+  bottom: 25px;
+  margin-left: 10px;
+  width: 200px;
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
   }
 }
 </style>
