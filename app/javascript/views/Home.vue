@@ -7,8 +7,8 @@
       style="width: 100px; height: 100px;"
       src="/images/logos/logo_tc.png">
 
-    <strong>The Catalog</strong> will help you<br>
-    <strong>explore</strong> Harvard's course history,<br>
+    <strong>Curricle</strong> will help you<br>
+    <strong>explore</strong>the Harvard curriculum, past and present,<br>
     <strong>plan</strong> for your semester schedule,<br>
     and <strong>search</strong> by keywords.
   </div>
