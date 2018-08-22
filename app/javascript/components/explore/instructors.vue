@@ -26,23 +26,31 @@
 
       <div
         id="searchContainer"
-        class="mt-2">
+        class="mt-3">
         <div id="search">
           <b-form @submit="onSubmit">
-            <b-form-group>
+            <b-input-group>
+              <b-input-group-prepend is-text>
+                <img
+                  class="icon"
+                  src="/images/icons/eye_black.png">
+              </b-input-group-prepend>
+
               <b-form-input
                 id="instructorName"
                 v-model="instructorName"
                 type="search"
+                class="search pl-0"
                 required
-                placeholder="Enter name"/>
-            </b-form-group>
+                placeholder="Enter instructor name"/>
 
-            <b-button
-              type="submit"
-              variant="primary">
-              Submit
-            </b-button>
+              <b-input-group-append is-text>
+                <img
+                  class="icon pointer"
+                  src="/images/icons/return_arrow.png"
+                  @click="onSubmit">
+              </b-input-group-append>
+            </b-input-group>
           </b-form>
         </div>
       </div>
@@ -162,6 +170,27 @@ export default {
     span.departments {
       color: #00adf0;
     }
+  }
+}
+
+#searchContainer {
+  .form-control:focus {
+    box-shadow: none;
+  }
+
+  .input-group-text, input.search {
+    background-color: #ddd;
+    border: 0;
+    color: black;
+  }
+
+  ::placeholder {
+    color: black !important;
+  }
+
+  img.icon {
+    height: 12px;
+    width: auto;
   }
 }
 </style>
