@@ -175,10 +175,6 @@ export default {
     }
   }
 
-  .pointer {
-    cursor: pointer;
-  }
-
   .hiddenConflict {
     height: 0px;
     display: none;

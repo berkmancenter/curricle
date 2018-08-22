@@ -160,8 +160,4 @@ export default {
 .year-select {
   width: 80px !important;
 }
-
-.pointer {
-  cursor: pointer;
-}
 </style>

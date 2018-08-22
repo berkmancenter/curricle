@@ -114,10 +114,6 @@ export default {
   }
 }
 
-.pointer {
-  cursor: pointer;
-}
-
 ::placeholder {
   color: black !important;
 }

@@ -120,8 +120,4 @@ export default {
       color: #fff;
     }
   }
-
-  .pointer {
-    cursor: pointer;
-  }
 </style>

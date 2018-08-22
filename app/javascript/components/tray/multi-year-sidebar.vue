@@ -45,9 +45,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.pointer {
-  cursor: pointer;
-}
-</style>

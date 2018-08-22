@@ -74,10 +74,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pointer {
-  cursor: pointer;
-}
-
 .selected {
   background-color: black;
   color: white;

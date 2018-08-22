@@ -38,10 +38,6 @@ export default {
 </script>
 
 <style scoped>
-.pointer {
-  cursor: pointer;
-}
-
 span.shared-schedule-url {
   font-size: 13px;
   font-weight: bold;

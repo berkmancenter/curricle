@@ -94,10 +94,6 @@ export default {
     font-size: 10px;
   }
 
-  .pointer {
-    cursor: pointer;
-  }
-
   .button-container {
     margin-top: -15px;
   }

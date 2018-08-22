@@ -89,10 +89,6 @@ h5 {
   overflow: scroll;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
 .label-container {
   max-width: 60%;
   overflow: scroll;

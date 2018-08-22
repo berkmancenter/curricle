@@ -88,10 +88,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .pointer {
-    cursor: pointer;
-  }
-
   .plan-list-item {
     font-size: 13px;
     border-radius: 4px;
