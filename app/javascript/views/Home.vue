@@ -8,9 +8,22 @@
       src="/images/logos/logo_tc.png">
 
     <strong>Curricle</strong> will help you<br>
-    <strong>explore</strong>the Harvard curriculum, past and present,<br>
-    <strong>plan</strong> for your semester schedule,<br>
-    and <strong>search</strong> by keywords.
+    <router-link
+    to="/explore">
+      <strong>explore</strong> 
+    </router-link>
+    the Harvard curriculum, past and present,<br>
+    <router-link
+    to="/plan">
+      <strong>plan</strong> 
+    </router-link>
+    your semester schedule,<br>
+    and 
+    <router-link
+    to="/search">
+    <strong>search</strong> 
+    </router-link>
+    by keywords.
   </div>
 </template>
 
