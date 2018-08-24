@@ -66,7 +66,7 @@ export default {
     text {
       font: 10px 'IBM Plex Sans';
       font-weight: 300;
-      text-anchor: middle;
+      text-anchor: start;
       fill: black;
     }
 
