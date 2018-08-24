@@ -3,73 +3,54 @@
     <b-card-group
       deck
       class="mb-5">
+      <router-link
+        to="/explore/classes"
+        variant="primary">
       <b-card
         img-src="/images/explore/departments.png"
         img-top
-        title="Departments &amp; Types">
+        title="Learning Modes">       
         <p class="card-text">
-          Explore courses by selecting components (class formats) and departments (subjects and courses of study).
+          Explore courses by selecting class learning modes and departments.
         </p>
-
-        <div slot="footer">
-          <b-button
-            to="/explore/classes"
-            variant="primary">
-            View
-          </b-button>
-        </div>
       </b-card>
-
+      </router-link>
+      <router-link
+        to="/explore/instructor"
+        variant="primary">
       <b-card
         img-src="/images/explore/instructors.png"
         img-top
-        title="Instructors">
+        title="Instructor Networks">
         <p class="card-text">
-          Discover faculty networks of teaching and learning. Select an instructor to see faculty with whom they've co-taught, connecting through courses to departments.
+          Select an instructor to discover faculty networks by course and department.
         </p>
-
-        <div slot="footer">
-          <b-button
-            to="/explore/instructor"
-            variant="primary">
-            View
-          </b-button>
-        </div>
       </b-card>
-
+      </router-link>
+      <router-link
+        to="/explore/keywords"
+        variant="primary">
       <b-card
         img-src="/images/explore/keywords.png"
         img-top
-        title="Keywords">
+        title="Truth vs. Lies">
         <p class="card-text">
-          Visualize the appearance of terms across the curriculum.
+          Visualize descriptive terms across the curriculum through keyword comparisons.
         </p>
-
-        <div slot="footer">
-          <b-button
-            to="/explore/keywords"
-            variant="primary">
-            View
-          </b-button>
-        </div>
       </b-card>
-
+      </router-link>
+      <router-link
+        to="/explore/universe"
+        variant="primary">
       <b-card
         img-src="/images/explore/courses.png"
         img-top
-        title="All Courses">
+        title="Course Universe">
         <p class="card-text">
-          Get an overview of the universe of courses offered at Harvard, and explore departments and programs to browse their offerings.
+          Explore all of Harvard's departments and programs to browse their offerings.
         </p>
-
-        <div slot="footer">
-          <b-button
-            to="/explore/universe"
-            variant="primary">
-            View
-          </b-button>
-        </div>
       </b-card>
+      </router-link>
     </b-card-group>
   </div>
 </template>
