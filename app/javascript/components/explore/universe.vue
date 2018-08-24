@@ -17,7 +17,7 @@
 
         <span
           v-b-tooltip.hover
-          title="Here, we see the course offerings of departments and programs across Harvard College and several of the graduate and professional schools. Clicking a departmental &quot;cloud&quot; will take you to a matrix of dots representing the courses offered in that department; click on a dot to see the full information on any individual course. These dot matrices are not unstructured, lending an element of surprise to the discovery of courses."
+          title="Here, we see the course offerings of departments and programs across Harvard College and several of the graduate and professional schools. Clicking a departmental &quot;cloud&quot; will take you to a matrix of dots representing the courses offered in that department; click on a dot to see the full information on any individual course. These dot matrices are unstructured, lending an element of surprise to the discovery of courses."
           class="pointer">
           MORE&nbsp;&gt;
         </span>
