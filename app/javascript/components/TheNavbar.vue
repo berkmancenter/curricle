@@ -27,7 +27,7 @@
         <router-link
           class="nav sub"
           to="/explore/classes">
-          Bar Comparison
+          Learning Modes
         </router-link>
 
         <br>
@@ -35,7 +35,7 @@
         <router-link
           class="nav sub"
           to="/explore/instructor">
-          Lecture Networks
+          Instructor Networks
         </router-link>
 
         <br>
@@ -43,7 +43,7 @@
         <router-link
           class="nav sub"
           to="/explore/universe">
-          All Courses
+          Course Universe
         </router-link>
 
         <br>
@@ -51,7 +51,7 @@
         <router-link
           class="nav sub"
           to="/explore/keywords">
-          Keywords
+          Truth vs. Lies
         </router-link>
       </div>
 
