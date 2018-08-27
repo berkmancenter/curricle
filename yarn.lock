@@ -7625,6 +7625,10 @@ vue-loader@14.2.2:
     vue-style-loader "^4.0.1"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-matomo@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-0.1.10.tgz#4d15425660061122dfe24db5f1cf9f111c444d2b"
+
 vue-router@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
