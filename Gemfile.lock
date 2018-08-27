@@ -296,7 +296,7 @@ DEPENDENCIES
   rails (= 5.2.1)
   rspec-rails (~> 3.8)
   rubocop (~> 0.58)
-  rubocop-rspec (~> 1.27)
+  rubocop-rspec (~> 1.29)
   shoulda-matchers (~> 3.1)
   smarter_csv (~> 1.2)
   spring (~> 2.0)
