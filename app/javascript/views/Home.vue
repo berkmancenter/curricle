@@ -7,10 +7,10 @@
       style="width: 100px; height: 100px;"
       src="/images/logos/logo_tc.png">
 
-    <strong>The Catalog</strong> will help you<br>
-    <strong>explore</strong> Harvard's course history,<br>
-    <strong>plan</strong> for your semester schedule,<br>
-    and <strong>search</strong> by keywords.
+    <strong>Curricle</strong> will help you<br>
+    <strong>explore</strong> Harvard's curriculum, past and present,<br>
+    <strong>search</strong> by keyword, and<br>
+    <strong>plan</strong> your schedule.
   </div>
 </template>
 
@@ -19,7 +19,7 @@
     color: #bbb;
     font-size: 30px;
     line-height: 34px;
-    padding: 300px 200px 0 200px;
+    padding: 300px 100px 0 100px;
 
     img {
       display: block;
