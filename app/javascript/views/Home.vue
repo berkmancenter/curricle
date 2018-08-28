@@ -9,19 +9,19 @@
 
     <strong>Curricle</strong> will help you<br>
     <router-link
-    to="/explore">
-      <strong>explore</strong> 
+      to="/explore">
+      <strong>explore</strong>
     </router-link>
     the Harvard curriculum, past and present,<br>
     <router-link
-    to="/plan">
-      <strong>plan</strong> 
+      to="/plan">
+      <strong>plan</strong>
     </router-link>
     your semester schedule,<br>
-    and 
+    and
     <router-link
-    to="/search">
-    <strong>search</strong> 
+      to="/search">
+      <strong>search</strong>
     </router-link>
     by keywords.
   </div>
