@@ -22,6 +22,8 @@
           MORE&nbsp;&gt;
         </span>
       </p>
+
+      <semester-input/>
     </div>
   </div>
 </template>
@@ -30,11 +32,23 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/universe'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import SemesterInput from 'components/search/SearchFormSemesterInput'
 
 export default {
+  components: {
+    SemesterInput
+  },
+  computed: {
+    ...mapGetters('search', ['semesterStart'])
+  },
+  watch: {
+    semesterStart (newSemester) {
+      initSetup(this.selectCourse, newSemester)
+    }
+  },
   mounted () {
-    initSetup(this.selectCourse)
+    initSetup(this.selectCourse, this.semesterStart)
   },
   methods: {
     ...mapActions('app', ['selectCourse'])

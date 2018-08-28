@@ -15,6 +15,7 @@ let diameter
 let pack
 let root
 let selectCourse
+let semester
 let tooltipDiv
 let svg
 
@@ -30,12 +31,15 @@ var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
 
-function initSetup (selectCourseFunction) {
+function initSetup (selectCourseFunction, selectedSemester) {
+  semester = selectedSemester
   selectCourse = selectCourseFunction
 
   var width = +visSize
   var height = +visSize
   diameter = +visSize
+
+  d3.select('#visSVG').selectAll('g').remove()
 
   svg = d3.select('#visSVG')
   svg.attr('width', width)
@@ -82,7 +86,7 @@ function initSetup (selectCourseFunction) {
 function requestFirstData () {
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
-    variables: { semester: { term_name: 'SPRING', term_year: 2018 } }
+    variables: { semester: semester }
   }).then(function (response) {
     nestData(response.data.course_counts)
   })
@@ -279,6 +283,7 @@ function randomPoints (xPos, yPos, radius, amount) {
 
 function requestSecondData (searchText, xPos, yPos, radius) {
   var enumSearch = searchText.toUpperCase().replace(/, /g, '_').replace(/-/g, '_').replace(/\./g, '_').replace(/ /g, '_')
+  const semesterRange = { start: semester }
 
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
@@ -286,12 +291,7 @@ function requestSecondData (searchText, xPos, yPos, radius) {
       page: 1,
       perPage: 1000,
       departments: enumSearch,
-      semesterRange: {
-        start: {
-          term_name: 'SPRING',
-          term_year: 2018
-        }
-      }
+      semesterRange: semesterRange
     }
   }).then(function (response) {
     const courses = response.data.coursesConnection.edges.map(course => course.node)
