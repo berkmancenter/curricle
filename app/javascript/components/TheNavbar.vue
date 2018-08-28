@@ -75,33 +75,31 @@
       <div
         v-show="activeNavPrimary === 'plan'"
         class="nav-sub-container">
-        <a
+        <span
           :class="{ 'router-link-exact-active': viewmode['plan'] === 'list-view' }"
           class="nav sub"
-          href="javascript:null"
           @click="selectView({ view: 'list-view', type: 'plan' })">
           List
-        </a>
+        </span>
 
         <br>
 
-        <a
+        <span
           :class="{ 'router-link-exact-active': viewmode['plan'] === 'semester' }"
           class="nav sub"
-          href="javascript:null"
           @click="selectView({ view: 'semester', type: 'plan' })">
           Week
-        </a>
+        </span>
 
         <br>
 
-        <a
+        <span
           :class="{ 'router-link-exact-active': viewmode['plan'] === 'multi-year' }"
           class="nav sub"
           href="javascript:null"
           @click="selectView({ view: 'multi-year', type: 'plan' })">
           Semester
-        </a>
+        </span>
       </div>
     </div>
 
@@ -115,24 +113,22 @@
         Sign in
       </a>
 
-      <a
+      <span
         v-if="userAuthenticated"
         class="nav secondary"
-        href="javascript:null"
         @click="logout">
         Logout
-      </a>
+      </span>
 
       <br>
 
-      <a
+      <span
         v-if="userAuthenticated"
         :class="{'tray-active': isTrayVisible}"
         class="nav secondary"
-        href="javascript:null"
         @click="trayToggle">
         Tray
-      </a>
+      </span>
     </div>
   </nav>
 </template>
@@ -179,6 +175,11 @@ export default {
       padding: 4px 6px;
       display: inline-block;
 
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
       &.primary, &.secondary {
         color: #999;
         margin: 10px 0;
@@ -188,6 +189,7 @@ export default {
       &.sub {
         color: #777;
         margin-bottom: 10px;
+
       }
 
       &.router-link-active {
