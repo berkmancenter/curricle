@@ -50,7 +50,7 @@ Curricle uses a Rails 5.2 backend running in API mode to serve a GraphQL API and
 
 ## License
 
-TagTeam is licensed under the AGPL
+Curricle is licensed under the AGPL
 
 ## Copyright
 
