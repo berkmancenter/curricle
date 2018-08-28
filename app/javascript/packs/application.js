@@ -19,11 +19,17 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from '../app'
+import VueMatomo from 'vue-matomo'
 
 library.add(far, fas)
 
 Vue.use(BootstrapVue)
 Vue.use(VueApollo)
+Vue.use(VueMatomo, {
+  host: 'https://stats.berkman.harvard.edu',
+  siteId: 8,
+  router: router
+})
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient

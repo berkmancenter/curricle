@@ -32,7 +32,7 @@
     color: #bbb;
     font-size: 30px;
     line-height: 34px;
-    padding: 300px 200px 0 200px;
+    padding: 300px 100px 0 100px;
 
     img {
       display: block;
