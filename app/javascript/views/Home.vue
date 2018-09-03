@@ -1,7 +1,7 @@
 <template>
   <div
     id="home-content"
-    class="align-middle text-uppercase h-100 font-weight-bold">
+    class="align-middle text-uppercase font-weight-bold">
     <img
       class="mb-5"
       style="width: 100px; height: 100px;"
@@ -32,7 +32,8 @@
     color: #bbb;
     font-size: 30px;
     line-height: 34px;
-    padding: 300px 100px 0 100px;
+    margin-left: 5%;
+    margin-top: 20%;
 
     img {
       display: block;
