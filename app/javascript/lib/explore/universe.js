@@ -25,7 +25,7 @@ if (windowHeight > windowWidth) {
   visSize = windowHeight
 }
 
-visSize = Math.min(1100, visSize)
+visSize = Math.min(900, visSize)
 
 var dotSize = visSize / 500
 

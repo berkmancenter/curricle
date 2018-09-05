@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div
+      class="text-center text-uppercase">
+      Instructor Networks
+
+      <h4
+        class="text-uppercase font-weight-bold">
+        {{ submittedName }}
+      </h4>
+    </div>
+
     <div id="interfaceContainer">
       <div id="visContainer"/>
     </div>
@@ -69,7 +79,8 @@ export default {
   },
   data () {
     return {
-      instructorName: ''
+      instructorName: '',
+      submittedName: ''
     }
   },
   computed: {
@@ -82,6 +93,7 @@ export default {
     ...mapActions('app', ['selectCourse']),
     onSubmit (e) {
       e.preventDefault()
+      this.submittedName = this.instructorName
       requestData(this.instructorName, this.semesterStart)
     }
   }

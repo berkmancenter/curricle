@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div
+      class="text-center text-uppercase">
+      Keywords
+
+      <h4
+        class="text-uppercase font-weight-bold">
+        {{ keywordOne }} / {{ keywordTwo }}
+      </h4>
+    </div>
+
     <div id="interfaceContainer">
       <div id="dimContainer">
         <ul>
@@ -48,9 +58,11 @@
           class="searchBox">
           <input
             id="searchBoxOne"
+            v-model="searchBoxOne"
             class="searchBoxInput"
             type="text"
-            placeholder="search term...">
+            placeholder="search term..."
+            @keyup.enter="updateKeywords">
 
           <button
             id="searchBoxOneButton"
@@ -70,9 +82,11 @@
 
           <input
             id="searchBoxTwo"
+            v-model="searchBoxTwo"
             class="searchBoxInput"
             type="text"
-            placeholder="search term...">
+            placeholder="search term..."
+            @keyup.enter="updateKeywords">
         </div>
       </div>
 
@@ -109,6 +123,14 @@ export default {
   components: {
     SemesterInput
   },
+  data () {
+    return {
+      keywordOne: '',
+      keywordTwo: '',
+      searchBoxOne: 'Knowledge',
+      searchBoxTwo: 'Networks'
+    }
+  },
   computed: {
     ...mapGetters('search', ['semesterStart'])
   },
@@ -118,10 +140,15 @@ export default {
     }
   },
   mounted () {
+    this.updateKeywords()
     initSetup(this.selectCourse, this.semesterStart)
   },
   methods: {
-    ...mapActions('app', ['selectCourse'])
+    ...mapActions('app', ['selectCourse']),
+    updateKeywords () {
+      this.keywordOne = this.searchBoxOne
+      this.keywordTwo = this.searchBoxTwo
+    }
   }
 }
 </script>

@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div
+      class="text-center text-uppercase">
+      Course Universe
+
+      <h4
+        class="text-uppercase font-weight-bold">
+        All Departments
+      </h4>
+    </div>
+
     <div id="visWrapper">
       <canvas id="visCANVAS"/>
 
@@ -61,7 +71,7 @@ export default {
   /deep/ {
     #visSVG {
       position: absolute;
-      top: 0;
+      top: 150px;
       bottom: 0;
       left: 0;
       right: 0;
@@ -70,7 +80,7 @@ export default {
 
     #visCANVAS {
       position: absolute;
-      top: 0;
+      top: 150px;
       bottom: 0;
       left: 0;
       right: 0;

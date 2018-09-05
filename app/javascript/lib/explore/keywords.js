@@ -307,7 +307,7 @@ function setData (data) {
 
 function setSideTextVis (nestedData) {
   var leftText = d3.select('#searchOne')
-  const topMargin = 108
+  const topMargin = 168
 
   leftText.transition().duration(500)
     .style('left', (textPaddingSideViz - 100) + 'px')

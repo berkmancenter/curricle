@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div
+      class="text-center text-uppercase">
+      Select a Component and Department
+
+      <h4
+        class="text-uppercase font-weight-bold">
+        Learning Modes
+      </h4>
+    </div>
+
     <div id="visContainer">
       <div
         id="courseTypeVis"

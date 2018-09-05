@@ -7,8 +7,6 @@ var colorLeft = '#D10F84'
 var colorRight = '#00ADF0'
 var colorMix = '#2C3194'
 
-var lecturerID
-
 var maxTextLength = 50
 
 var documentWidth = document.body.clientWidth
@@ -132,7 +130,6 @@ function loadLecturerData (coursesConnectedByInstructor) {
 }
 
 function requestData (instructorName, selectedSemester) {
-  lecturerID = instructorName
   semester = selectedSemester
 
   apolloClient.query({
@@ -194,18 +191,6 @@ function monadicView (data) {
   instructorTextPosScale.domain(nestedInstructorData.map(function (d) { return d.key }))
 
   departmentPosScale.domain(nestedDepartmentData.map(function (d) { return d.key }))
-
-  // -------------------------------------------------------------
-  //  Lecturer Name
-
-  svg.select('.lecturerName').remove()
-
-  svg.append('text')
-    .attr('class', 'lecturerName')
-    .attr('transform', 'translate(-20,-20),rotate(0)')
-    .style('text-anchor', 'start')
-    .style('font-size', '15px')
-    .text(lecturerID)
 
   //  CenterVis
 
