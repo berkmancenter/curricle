@@ -6,6 +6,8 @@ ruby '2.4.1'
 gem 'batch-loader', '~> 1.2'
 gem 'bootsnap', '~> 1.3', require: false
 gem 'devise', '~> 4.5'
+gem 'devise_cas_authenticatable', '~> 1.10'
+gem 'dotenv-rails', '~> 2.5'
 gem 'graphql', '~> 1.8'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.7'

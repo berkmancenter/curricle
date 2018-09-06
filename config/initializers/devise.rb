@@ -274,4 +274,11 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  # CAS / Harvard Key
+  config.cas_base_url = 'https://stage.pin1.harvard.edu/cas'
+
+  config.cas_client_config_options = {
+    logger: CASClient::Logger.new(Rails.root.join('log', 'cas.log'))
+  }
 end
