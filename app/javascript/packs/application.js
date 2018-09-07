@@ -40,7 +40,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  provide: apolloProvider.provide(),
+  apolloProvider,
   components: { App },
   template: '<App/>'
 })
