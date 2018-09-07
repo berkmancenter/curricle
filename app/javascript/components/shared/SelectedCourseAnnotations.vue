@@ -25,9 +25,19 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
-import COURSE_FRAGMENT from '../../graphql/CourseFragment.gql'
+import COURSE_QUERY from '../../graphql/Course.gql'
 
 export default {
+  apollo: {
+    course: {
+      query: COURSE_QUERY,
+      variables () {
+        return {
+          id: this.courseId
+        }
+      }
+    }
+  },
   components: {
     FontAwesomeIcon
   },
@@ -39,18 +49,13 @@ export default {
   },
   data () {
     return {
+      course: {},
       editableText: '',
       maxLength: 500,
       editableTextLength: 0
     }
   },
   computed: {
-    course () {
-      return this.$apolloProvider.defaultClient.cache.readFragment({
-        id: `Course:${this.courseId}`,
-        fragment: COURSE_FRAGMENT
-      })
-    },
     savedAnnotation () {
       return this.course.annotation ? this.course.annotation.text : ''
     }
