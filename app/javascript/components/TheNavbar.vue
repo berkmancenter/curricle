@@ -7,8 +7,8 @@
       class="text-center">
       <router-link to="/">
         <img
-          class="w-75"
-          src="/images/logos/logo_thecatalog.png">
+          class="w-100"
+          src="/images/logos/curricle.svg">
       </router-link>
     </div>
 

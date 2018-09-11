@@ -3,9 +3,9 @@
     id="home-content"
     class="align-middle text-uppercase font-weight-bold">
     <img
+      id="logo"
       class="mb-5"
-      style="width: 100px; height: 100px;"
-      src="/images/logos/logo_tc.png">
+      src="/images/logos/curricle.svg">
 
     <strong>Curricle</strong> will help you<br>
     <router-link
@@ -35,8 +35,10 @@
     margin-left: 5%;
     margin-top: 20%;
 
-    img {
+    img#logo {
       display: block;
+      height: 80px;
+      width: auto;
     }
 
     strong {
