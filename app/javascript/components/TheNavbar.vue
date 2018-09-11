@@ -129,6 +129,14 @@
         @click="trayToggle">
         Tray
       </span>
+
+      <br>
+
+      <router-link
+        class="nav secondary"
+        to="/about">
+        About
+      </router-link>
     </div>
   </nav>
 </template>

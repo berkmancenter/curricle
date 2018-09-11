@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import { deserializeSearch } from 'lib/util'
 
+import CurricleAbout from '../views/About'
 import CurricleExplore from '../views/explore'
 import CurricleHome from '../views/Home'
 import CurriclePlan from '../views/plan'
@@ -18,6 +19,7 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
+    { path: '/about', component: CurricleAbout },
     { path: '/explore',
       component: CurricleExplore,
       children: [{
