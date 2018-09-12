@@ -26,7 +26,7 @@
 
         <span
           v-b-tooltip.hover
-          title="Instructors from very different fields often explore shared interests by teaching together; this visualization will help you explore networks of faculty by showing you classes co-taught by instructors. Type the name of any Harvard instructor into the search bar and a network will appear. On the left will be all other Harvard instructors with whom the instructor has co-taught. Lines connect these instructors to courses and the departments that offer them. Select course titles to learn about the courses. If you click on another instructor, the visualization will shift and display the network of this instructor in new patterns of courses and departments."
+          title="Instructors from different fields often explore shared interests by teaching together; this visualization explores networks of faculty by showing classes co-taught by instructors. Type the name of an instructor into the search bar and a network will appear with co-teachers. Lines connect these instructors to courses and the departments that offer them. Select course titles to learn more. Shift across instructors for new connections and patterns."
           class="pointer">
           MORE&nbsp;&gt;
         </span>
