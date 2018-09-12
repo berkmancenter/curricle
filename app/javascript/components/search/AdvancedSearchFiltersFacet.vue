@@ -90,8 +90,8 @@ h5 {
 }
 
 .label-container {
-  max-width: 60%;
-  overflow: scroll;
+  max-width: 70%;
+  overflow: hidden;
 
   label {
     white-space: nowrap;
