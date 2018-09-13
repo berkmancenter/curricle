@@ -106,61 +106,36 @@
     <div
       id="nav-secondary-container"
       class="text-uppercase mt-5">
-      <a
-        v-if="!userAuthenticated"
-        class="nav secondary"
-        href="/users/sign_in">
-        Sign in
-      </a>
-
-      <span
-        v-if="userAuthenticated"
-        class="nav secondary"
-        @click="logout">
-        Logout
-      </span>
-
-      <br>
-
-      <span
-        v-if="userAuthenticated"
-        :class="{'tray-active': isTrayVisible}"
-        class="nav secondary"
-        @click="trayToggle">
-        Tray
-      </span>
-
-      <br>
-
       <router-link
         class="nav secondary"
         to="/about">
         About
       </router-link>
+
+      <br>
+
+      <a
+        class="nav secondary"
+        target="_blank"
+        href="http://curricle.wpengine.com">
+        Curricle Lens
+      </a>
     </div>
   </nav>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
-import axios from 'axios'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('app', ['isTrayVisible']),
-    ...mapGetters('user', ['userAuthenticated']),
     ...mapState('app', ['viewmode']),
     activeNavPrimary () {
       return this.$route.path.split('/')[1]
     }
   },
   methods: {
-    ...mapActions('app', ['selectView', 'trayToggle']),
-    logout () {
-      this.$store.dispatch('user/clearTokens')
-
-      axios.get('/users/sign_out')
-    }
+    ...mapActions('app', ['selectView'])
   }
 }
 </script>
@@ -176,7 +151,7 @@ export default {
     }
 
     .nav-sub-container {
-      margin: 15px 0;
+      margin: 10px 0;
     }
 
     .nav {
@@ -190,14 +165,13 @@ export default {
 
       &.primary, &.secondary {
         color: #999;
-        margin: 10px 0;
+        margin: 4px 0;
         text-transform: uppercase;
       }
 
       &.sub {
         color: #777;
-        margin-bottom: 10px;
-
+        margin-bottom: 4px;
       }
 
       &.router-link-active {

@@ -2,6 +2,9 @@
   <div id="app">
     <loader-overlay/>
 
+    <the-tray-control
+      v-if="userAuthenticated" />
+
     <div class="row h-100">
       <div
         id="nav-container"
@@ -21,6 +24,9 @@
         id="sidebar-container"
         :class="{ active: sidebarCurrentType }"
         class="col-md-2 px-0">
+        <the-authentication-link
+          v-show="!sidebarCurrentType"/>
+
         <the-sidebar />
 
         <the-feedback-link/>
@@ -37,16 +43,20 @@ import { mapGetters } from 'vuex'
 import Navbar from 'components/TheNavbar'
 import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
+import TheAuthenticationLink from 'components/TheAuthenticationLink'
 import TheSidebar from 'components/TheSidebar'
 import TheFeedbackLink from 'components/TheFeedbackLink'
+import TheTrayControl from 'components/TheTrayControl'
 
 export default {
   components: {
     Navbar,
     LoaderOverlay,
     CourseObserver,
+    TheAuthenticationLink,
     TheSidebar,
-    TheFeedbackLink
+    TheFeedbackLink,
+    TheTrayControl
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
