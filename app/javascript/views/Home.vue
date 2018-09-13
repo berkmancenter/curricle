@@ -5,7 +5,7 @@
     <img
       id="logo"
       class="mb-5"
-      src="/images/logos/curricle.svg">
+      src="/images/logos/curricle-white-bg.svg">
 
     <strong>Curricle</strong> will help you<br>
     <router-link

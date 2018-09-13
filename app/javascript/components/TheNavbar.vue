@@ -8,7 +8,7 @@
       <router-link to="/">
         <img
           class="w-100"
-          src="/images/logos/curricle.svg">
+          src="/images/logos/curricle-black-bg.svg">
       </router-link>
     </div>
 
