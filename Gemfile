@@ -5,11 +5,11 @@ ruby '2.4.1'
 
 gem 'batch-loader', '~> 1.2'
 gem 'bootsnap', '~> 1.3', require: false
-gem 'devise', '~> 4.4'
+gem 'devise', '~> 4.5'
 gem 'graphql', '~> 1.8'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.7'
-gem 'pg', '~> 1.0'
+gem 'pg', '~> 1.1'
 gem 'progress_bar', '~> 1.2'
 gem 'puma', '~> 3.12'
 gem 'rails', '5.2.1' # @drg skip
@@ -31,18 +31,18 @@ group :development do
   gem 'graphiql-rails', '~> 1.4'
   gem 'listen', '~> 3.1'
   gem 'rack-cors', '~> 1.0'
-  gem 'rubocop', '~> 0.58'
+  gem 'rubocop', '~> 0.59'
   gem 'rubocop-rspec', '~> 1.29'
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
   gem 'spring-watcher-listen', '~> 2.0'
   gem 'sunspot_solr', '~> 2.3'
-  gem 'web-console', '~> 3.6'
+  gem 'web-console', '~> 3.7'
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 4.10'
+  gem 'factory_bot_rails', '~> 4.11'
   gem 'fuubar', '~> 2.3'
   gem 'shoulda-matchers', '~> 3.1'
 end
