@@ -23,8 +23,8 @@ var maxTextLength = 30
 var datasetOne = []
 var datasetTwo = []
 
-var leftSelection = '"Knowledge"'
-var rightSelection = '"Networks"'
+var leftSelection = 'Truth'
+var rightSelection = 'Lies'
 
 var sideData = 'searchTerm'
 var centerData = 'component' // component subject_description

@@ -127,8 +127,8 @@ export default {
     return {
       keywordOne: '',
       keywordTwo: '',
-      searchBoxOne: 'Knowledge',
-      searchBoxTwo: 'Networks'
+      searchBoxOne: 'Truth',
+      searchBoxTwo: 'Lies'
     }
   },
   computed: {
