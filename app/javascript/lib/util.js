@@ -741,11 +741,13 @@ function deserializeSearch (route) {
     /* handle keywords */
     if (tokens.k) {
       var kw = []
+
       _.each(
         tokens.k,
         k => {
-          // format is type, optional weight, colon, encoded search term
-          var res = /^([atdirc]+)(\d*):(.*)$/.exec(k)
+          // format is type ('apply to' fields), colon, encoded search term
+          var res = /^([atdinrc]+):(.*)$/.exec(k)
+
           if (res) {
             var [ , types, term ] = res
             kw.push({ applyTo: searchTypes(types), text: decodeURI(term) })
@@ -787,17 +789,20 @@ function deserializeSearch (route) {
 }
 
 function searchTypes (str) {
-  // special-case:
-  if (str === 'a') {
-    str = 'tdirc'
-  }
   const lkup = {
     t: 'TITLE',
     d: 'DESCRIPTION',
     i: 'INSTRUCTOR',
-    r: 'READINGS',
+    n: 'NOTES',
+    // r: 'READINGS',
     c: 'COURSE_ID'
   }
+
+  // special case, treat 'a' as all available 'apply to' fields:
+  if (str === 'a') {
+    str = _.keys(lkup).join('')
+  }
+
   var types =
       _(str.split(''))
         .uniq()
@@ -852,7 +857,7 @@ function applyToString (arr) {
         .filter(/^[tdlir]/)
         .join('')
   // since Readings is disabled we have a special-case category here
-  if (str.length === 4 + (str.match(/r/) ? 1 : 0)) {
+  if (str.length === 5 + (str.match(/r/) ? 1 : 0)) {
     str = 'a'
   }
   return str
