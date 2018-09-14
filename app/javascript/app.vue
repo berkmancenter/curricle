@@ -3,7 +3,8 @@
     <loader-overlay/>
 
     <the-tray-control
-      v-if="userAuthenticated" />
+      v-if="userAuthenticated"
+      v-show="!sidebarCurrentType"/>
 
     <div class="row h-100">
       <div

@@ -1,7 +1,6 @@
 <template>
   <div
     id="tray-control"
-    :class="{ 'd-none': isTrayVisible }"
     class="background-black pointer text-uppercase"
     @click="trayToggle">
     Tray
@@ -9,12 +8,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
-  computed: {
-    ...mapGetters('app', ['isTrayVisible'])
-  },
   methods: {
     ...mapActions('app', ['trayToggle'])
   }
