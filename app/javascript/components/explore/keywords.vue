@@ -25,18 +25,8 @@
 
           <li
             class="dimSelect"
-            value="division_description">
-          Division</li> |
-
-          <li
-            class="dimSelect"
             value="units_maximum">
           Units</li> |
-
-          <li
-            class="dimSelect"
-            value="term_pattern_description">
-          Term</li> |
 
           <li
             class="dimSelect"
