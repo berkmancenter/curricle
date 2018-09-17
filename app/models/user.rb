@@ -12,12 +12,4 @@ class User < ApplicationRecord
 
   has_secure_token :api_token
   has_secure_token :schedule_token
-
-  def self.current
-    Thread.current[:user]
-  end
-
-  def self.current=(user)
-    Thread.current[:user] = user
-  end
 end
