@@ -230,8 +230,6 @@ function initSetup (selectCourseFunction, selectedSemester) {
     .attr('offset', '100%')
     .attr('stop-color', colorRight)
     .attr('stop-opacity', 0)
-  document.getElementById('searchBoxOne').value = leftSelection.substr(1).slice(0, -1)
-  document.getElementById('searchBoxTwo').value = rightSelection.substr(1).slice(0, -1)
 
   requestData(leftSelection, 1)
 
@@ -248,25 +246,24 @@ function initSetup (selectCourseFunction, selectedSemester) {
     setData(fullData)
   })
 
-  $('#searchBoxOneButton').click(function () {
-    leftSelection = '"' + document.getElementById('searchBoxOne').value + '"'
+  $('#searchBoxOne').keyup(function (event) {
+    if (event.keyCode !== 13) {
+      return
+    }
+
+    leftSelection = document.getElementById('searchBoxOne').value
 
     requestData(leftSelection, 1)
   })
-  $('#searchBoxOne').keyup(function (event) {
-    if (event.keyCode === 13) {
-      $('#searchBoxOneButton').click()
+
+  $('#searchBoxTwo').keyup(function (event) {
+    if (event.keyCode !== 13) {
+      return
     }
-  })
-  $('#searchBoxTwoButton').click(function () {
-    rightSelection = '"' + document.getElementById('searchBoxTwo').value + '"'
+
+    rightSelection = document.getElementById('searchBoxTwo').value
 
     requestData(rightSelection, 2)
-  })
-  $('#searchBoxTwo').keyup(function (event) {
-    if (event.keyCode === 13) {
-      $('#searchBoxTwoButton').click()
-    }
   })
 }
 
