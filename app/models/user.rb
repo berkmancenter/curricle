@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :annotations, dependent: :destroy
+  has_many :tags, dependent: :destroy
   has_many :user_courses, dependent: :destroy
   has_many :courses, through: :user_courses, inverse_of: :users
 
