@@ -98,10 +98,4 @@ class Course < ApplicationRecord
     set_division
     save
   end
-
-  def user_tags
-    tags.where(
-      user_id: User.current
-    )
-  end
 end
