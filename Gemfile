@@ -19,6 +19,7 @@ gem 'webpacker', '~> 3.5'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
+  gem 'factory_bot_rails', '~> 4.11'
   gem 'pry', '~> 0.11'
   gem 'pry-byebug', '~> 3.6'
   gem 'pry-rails', '~> 0.3'
@@ -42,7 +43,6 @@ group :development do
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 4.11'
   gem 'fuubar', '~> 2.3'
   gem 'shoulda-matchers', '~> 3.1'
 end
