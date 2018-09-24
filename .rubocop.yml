@@ -13,3 +13,5 @@ Metrics/LineLength:
   Enabled: false
 Rails:
   Enabled: true
+RSpec/NestedGroups:
+  Max: 4
