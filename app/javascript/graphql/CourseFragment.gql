@@ -2,14 +2,18 @@ fragment Course on Course {
   academic_group
   academic_group_description
   catalog_number
+  class_academic_org_description
   class_section
   component
   course_description
   course_description_long
+  course_note
   external_course_id
   grading_basis_description
   id
   subject
+  subject_academic_org_description
+  subject_description
   term_name
   term_year
   title
@@ -33,5 +37,9 @@ fragment Course on Course {
     meets_on_friday
     meets_on_saturday
     meets_on_sunday
+  }
+  tags {
+    id
+    name
   }
 }

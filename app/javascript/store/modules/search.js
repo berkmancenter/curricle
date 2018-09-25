@@ -14,32 +14,23 @@ const thisYear = (new Date()).getUTCFullYear()
  * taught to serializeSearch() and deserializeSearch() */
 
 const state = {
-  // list of objects with { text, weight, applyTo, active }
+  // list of objects with { text, applyTo, active }
   facets: {},
   keywords: [],
   results: [],
   resultsPage: 1,
   resultsPerPage: 50,
   resultsMoreAvailable: false,
+  resultsTotalCount: 0,
   searchComplete: false,
   searchRunning: false,
   applyToOptions: [
     { text: 'Title', value: 'TITLE' },
     { text: 'Description', value: 'DESCRIPTION' },
     { text: 'Instructor', value: 'INSTRUCTOR' },
+    { text: 'Notes', value: 'NOTES' },
     { text: 'Readings', value: 'READINGS', disabled: true },
     { text: 'Course ID', value: 'COURSE_ID' }
-  ],
-  weightOptions: [
-    { text: '1', value: 1 },
-    { text: '2', value: 2 },
-    { text: '3', value: 3 },
-    { text: '4', value: 4 },
-    { text: '5', value: 5 },
-    { text: '6', value: 6 },
-    { text: '7', value: 7 },
-    { text: '8', value: 8 },
-    { text: '9', value: 9 }
   ],
   searchTermStart: 'Spring',
   searchTermEnd: 'Spring',
@@ -48,14 +39,15 @@ const state = {
   searchTermUseRange: false,
   sortBy: 'RELEVANCE',
   sortByOptions: [
-    { text: 'Relevance', value: 'RELEVANCE' },
-    { text: 'Title', value: 'TITLE' },
-    { text: 'School', value: 'SCHOOL' },
-    { text: 'Semester', value: 'SEMESTER' },
-    { text: 'Department', value: 'DEPARTMENT' },
-    { text: 'Course ID', value: 'COURSE_ID' }
+    { text: 'relevance', value: 'RELEVANCE' },
+    { text: 'title', value: 'TITLE' },
+    { text: 'school', value: 'SCHOOL' },
+    { text: 'semester', value: 'SEMESTER' },
+    { text: 'department', value: 'DEPARTMENT' },
+    { text: 'course id', value: 'COURSE_ID' }
   ],
   timeRanges: undefined,
+  useFilters: false,
   searchHistory: []
 }
 
@@ -71,15 +63,18 @@ const snapshotProps = [
 ]
 
 const getters = {
-  activeKeywords: state => state.keywords.filter(kw => kw.active),
-  inactiveKeywords: state => state.keywords.filter(kw => !kw.active),
+  activeKeywords: state => state.keywords ? state.keywords.filter(kw => kw.active) : [],
+  inactiveKeywords: state => state.keywords ? state.keywords.filter(kw => !kw.active) : [],
   searchSnapshot (state) {
     var obj = _.cloneDeep(_.pick(state, snapshotProps))
-    _.remove(obj.keywords, '!active')
+    _.remove(obj.keywords, e => !e.active)
     return obj
   },
 
   selectedFilters: (state) => (facet) => {
+    if (!state.useFilters) {
+      return
+    }
     if (!state.facets[facet]) {
       return
     }
@@ -93,18 +88,23 @@ const getters = {
     )
   },
 
-  selectedFilterCount (state) {
-    return _.reduce(
-      state.facets,
-      (count, facet) => {
-        return count + _.filter(facet, 'selected').length
-      },
-      0
-    )
+  sortedFilters: (state) => (facet) => {
+    return _(state.facets[facet]).filter('selected').orderBy('value').value()
   },
 
-  sortedFilters: (state) => (facet) => {
-    return _.orderBy(state.facets[facet], ['selected', 'value'], ['desc', 'asc'])
+  catalogYearStart (state, getters, rootState) {
+    return rootState.app.catalogYearStart
+  },
+
+  catalogYearEnd (state, getters, rootState) {
+    return rootState.app.catalogYearEnd
+  },
+
+  semesterStart (state) {
+    return {
+      term_name: state.searchTermStart.toUpperCase(),
+      term_year: state.searchYearStart
+    }
   }
 }
 
@@ -133,6 +133,7 @@ const actions = {
   runKeywordSearch ({commit, state, getters, dispatch}) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
+    _.forEach(kw, k => delete k.ident)
 
     if (kw && kw.length) {
       commit('RESET_RESULTS_PAGE')
@@ -156,6 +157,7 @@ const actions = {
   runKeywordSearchAgain ({commit, state, getters, dispatch}) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
+    _.forEach(kw, k => delete k.ident)
 
     if (kw && kw.length) {
       commit('INCREMENT_RESULTS_PAGE')
@@ -255,6 +257,7 @@ const actions = {
 
       if (!userCoursesSearch) {
         dispatch('populateFacets', { facets: response.data.coursesConnection })
+        state.resultsTotalCount = response.data.coursesConnection.totalCount
       }
 
       // store in registry
@@ -275,10 +278,14 @@ const actions = {
   setTimeRanges ({commit}, r) {
     commit('SET_TIME_RANGES', r)
   },
+  setUseFilters ({commit}, r) {
+    commit('SET_USE_FILTERS', r)
+  },
   saveSearchInHistory ({commit, getters}) {
     commit('PUSH_SEARCH_HISTORY', getters.searchSnapshot)
   },
   populateSearchState ({commit}, obj) {
+    commit('RESET_FACETS')
     commit('SET_SEARCH_STATE', obj)
   },
   facetSetAllItemSelections ({ commit, state }, { facet, selected }) {
@@ -318,12 +325,62 @@ const actions = {
         )
       }
     )
+  },
+  searchByCourseId ({ dispatch, getters }, courseId) {
+    const searchParams = {
+      keywords: [{ active: true, applyTo: ['COURSE_ID'], text: courseId }],
+      searchTermEnd: 'Fall',
+      searchTermStart: 'Spring',
+      searchTermUseRange: true,
+      searchYearEnd: getters.catalogYearEnd,
+      searchYearStart: getters.catalogYearStart,
+      sortBy: 'SEMESTER'
+    }
+
+    dispatch('populateSearchState', searchParams)
+      .then(
+        () => {
+          dispatch('saveSearchInHistory')
+          dispatch('runKeywordSearch')
+        }
+      )
+  },
+  searchByInstructor ({ dispatch, getters }, instructorName) {
+    const searchParams = {
+      keywords: [{ active: true, applyTo: ['INSTRUCTOR'], text: instructorName }],
+      searchTermEnd: 'Fall',
+      searchTermStart: 'Spring',
+      searchTermUseRange: true,
+      searchYearEnd: getters.catalogYearEnd,
+      searchYearStart: getters.catalogYearStart,
+      sortBy: 'SEMESTER'
+    }
+
+    dispatch('populateSearchState', searchParams)
+      .then(
+        () => {
+          dispatch('saveSearchInHistory')
+          dispatch('runKeywordSearch')
+        }
+      )
+  },
+  resetAdvancedSearch ({ commit, dispatch }) {
+    commit('RESET_TIME_RANGES')
+    commit('RESET_FACETS')
+    dispatch('saveSearchInHistory')
+    dispatch('runKeywordSearch')
   }
 }
 
 const mutations = {
   ADD_KEYWORD (state, keyword) {
+    if (!state.keywords) {
+      Vue.set(state, 'keywords', [])
+    }
     if (!state.keywords.filter(k => k.text === keyword.text).length) {
+      if (!keyword.ident) {
+        keyword.ident = _.uniqueId('kw')
+      }
       state.keywords.push(keyword)
     }
   },
@@ -363,6 +420,9 @@ const mutations = {
   SET_TIME_RANGES (state, r) {
     state.timeRanges = r
   },
+  SET_USE_FILTERS (state, r) {
+    state.useFilters = r
+  },
   PUSH_SEARCH_HISTORY (state, o) {
     state.searchHistory.unshift(o)
     // keep 5 elems in the search history
@@ -385,6 +445,12 @@ const mutations = {
   },
   FACET_SET_ITEM_SELECTION (state, { facet, itemId, selected }) {
     Vue.set(state.facets[facet][itemId], 'selected', selected)
+  },
+  RESET_FACETS (state) {
+    state.facets = {}
+  },
+  RESET_TIME_RANGES (state) {
+    state.timeRanges = undefined
   }
 }
 

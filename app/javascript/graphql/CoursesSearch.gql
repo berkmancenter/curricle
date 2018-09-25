@@ -44,5 +44,6 @@ query CoursesSearch(
         departments {
           ...Facet
         }
+        totalCount
       }
   }

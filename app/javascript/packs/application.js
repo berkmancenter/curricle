@@ -13,19 +13,23 @@ import store from '../store'
 import apolloClient from 'apollo'
 import VueApollo from 'vue-apollo'
 import BootstrapVue from 'bootstrap-vue'
-import fontawesome from '@fortawesome/fontawesome'
-import solid from '@fortawesome/fontawesome-free-solid'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from '../app'
+import VueMatomo from 'vue-matomo'
 
-window.$ = window.jQuery = require('jquery')
-
-// TODO: import only needed icons instead of the entire FA library
-fontawesome.library.add(solid)
+library.add(far, fas)
 
 Vue.use(BootstrapVue)
 Vue.use(VueApollo)
+Vue.use(VueMatomo, {
+  host: 'https://stats.berkman.harvard.edu',
+  siteId: 8,
+  router: router
+})
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient

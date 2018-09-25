@@ -1,18 +1,15 @@
 <template>
-  <div class="row">
-    <div class="col-md-12">
-      <keyword
-        v-for="(keyword,idx) in activeKeywords"
-        :key="idx"
-        :keyword-idx="idx"
-        :keyword="keyword"
-      />
-    </div>
+  <div class="mt-4">
+    <keyword
+      v-for="keyword in activeKeywords"
+      :key="keyword.ident"
+      :keyword="keyword"
+    />
   </div>
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Keyword from 'components/search/keyword'
 import { mapGetters } from 'vuex'
 
@@ -26,7 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

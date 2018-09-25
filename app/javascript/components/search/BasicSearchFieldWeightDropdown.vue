@@ -10,17 +10,16 @@
         triggers="click blur"
         placement="bottom">
         <b-form-radio-group
-          stacked
           v-model="sel"
           :options="options"
-        />
+          stacked/>
       </b-popover>
     </span>
   </span>
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'BasicSearchFieldWeightDropdown',
@@ -56,9 +55,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.pointer {
-  cursor: pointer;
-}
-</style>

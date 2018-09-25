@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-5">
     <semester-credit-hours
       v-for="semester in sortedSemestersInSchedule"
       :semester="semester"

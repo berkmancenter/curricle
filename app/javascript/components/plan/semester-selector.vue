@@ -1,18 +1,16 @@
 <template>
   <b-dropdown
-    :text="theSemester ? 'Semester: ' + theSemester : 'Semester'"
-    class="m-md-2"
-  >
+    :text="semesterLabel">
     <b-dropdown-item
-      @click="setSemester(null)"
-      v-show="mode !== 'state'">
+      v-show="mode !== 'state'"
+      @click="setSemester(null)">
       All Semesters
     </b-dropdown-item>
+
     <b-dropdown-item
       v-for="sem in theSemesters"
       :key="sem"
-      @click="setSemester(sem)"
-    >
+      @click="setSemester(sem)">
       {{ sem }}
     </b-dropdown-item>
   </b-dropdown>
@@ -35,16 +33,16 @@ export default {
       required: false
     }
   },
-  data () {
-    return {
-      theSemester: ''
-    }
-  },
   computed: {
     ...mapState('plan', ['semester', 'filters']),
     ...mapGetters('plan', ['sortedSemestersInSchedule', 'sortedSemestersInTray']),
     theSemesters () {
       return this.source === 'tray' ? this.sortedSemestersInTray : this.sortedSemestersInSchedule
+    },
+    semesterLabel () {
+      const semesterName = this.source === 'tray' ? this.filters.semester : this.semester
+
+      return semesterName ? `Semester: ${semesterName}` : 'Semester: All Semesters'
     }
   },
   watch: {
@@ -61,7 +59,6 @@ export default {
   methods: {
     ...mapActions('plan', { planSetSemester: 'setSemester', setFilter: 'setFilter' }),
     setSemester (sem) {
-      this.theSemester = sem
       if (this.mode === 'state') {
         this.planSetSemester(sem)
       } else {
@@ -71,3 +68,20 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+div /deep/ {
+  .dropdown-toggle,
+  .dropdown-item {
+    font-size: 12px;
+  }
+
+  .btn-secondary,
+  .btn-secondary.dropdown-toggle {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    padding-left: 0;
+  }
+}
+</style>

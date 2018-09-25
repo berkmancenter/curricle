@@ -6,8 +6,8 @@
         <hr>
         <div class="actions clearfix">
           <view-selector
-            type="plan"
-            :show-list-view="false"/>
+            :show-list-view="false"
+            type="plan"/>
 
           <semester-selector
             v-show="viewmode.plan !== 'multi-year'"

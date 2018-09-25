@@ -1,15 +1,16 @@
 <template>
-  <div>
+  <div class="pt-3 px-3">
     <div class="your-tray-parent clearfix">
-      <p class="your-tray">Your Tray
-        <span
-          class="fa fa-close pull-right"
+      <p>Your Tray
+        <font-awesome-icon
+          class="pointer float-right"
+          icon="times"
           @click="closeSidebar"
         />
       </p>
       <hr>
       <div class="actions mx-0">
-        <view-selector/>
+        <view-selector :invert="true" />
         <share-link/>
       </div>
     </div>
@@ -21,46 +22,34 @@
       <multi-year-sidebar
         v-show="viewmode.tray=='multi-year'"
       />
-      <course-list
-        v-show="viewmode.tray=='list-view'"
-        :courses="trayCourses"
-      />
+      <sidebar-list v-show="viewmode.tray === 'list-view'"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
-import CourseList from 'components/shared/course-list'
+import { mapState, mapActions } from 'vuex'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
 import SemesterSidebar from 'components/tray/semester-sidebar'
 import ShareLink from 'components/tray/TrayShareLink'
+import SidebarList from 'components/tray/SidebarList'
 
 export default {
   components: {
-    CourseList,
+    FontAwesomeIcon,
     MultiYearSidebar,
     SemesterSidebar,
     ViewSelector,
-    ShareLink
+    ShareLink,
+    SidebarList
   },
   computed: {
-    ...mapState('app', ['viewmode']),
-    ...mapGetters('user', ['trayCourses'])
+    ...mapState('app', ['viewmode'])
   },
   methods: {
     ...mapActions('app', ['closeSidebar'])
   }
 }
 </script>
-
-<style scoped>
-.fa.fa-close {
-  padding-right: 0.5em;
-}
-
-.fa.fa-close:hover {
-  color: gray;
-}
-</style>

@@ -10,14 +10,4 @@ Rails.application.routes.draw do
   end
 
   post '/graphql', to: 'graphql#execute'
-
-  resources :tags do
-    collection do
-      get :search
-      get :get_tags
-      delete :remove
-    end
-  end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

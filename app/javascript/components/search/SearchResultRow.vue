@@ -1,74 +1,59 @@
 <template>
   <div
-    :class="{ row: true, 'curricle-search-result': true, selected, conflicted: isConflicted, hiddenConflict }"
-    :style="borderStyle">
-    <div class="col-md-1">
+    :class="{ selected, conflicted: isConflicted, hiddenConflict }"
+    :style="borderStyle"
+    class="row curricle-search-result mb-5 mx-1 py-2">
+    <div class="col-md-1 pt-1">
       <course-action
-        type="tray"
-        :course="course.id"/>
+        :course="course.id"
+        :invert="selected"
+        class="mr-1"
+        type="tray"/>
+
+      <course-action
+        :course="course.id"
+        :invert="selected"
+        class="mr-3"
+        type="schedule"/>
+
+      <span class="text-muted">&mdash;</span>
+
       <br>
+
       <course-action
-        type="schedule"
-        :course="course.id"/>
-      <br>
+        :course="course.id"
+        :invert="selected"
+        class="mr-1"
+        type="tagged"/>
+
       <course-action
-        type="annotated"
-        :course="course.id"/>
-      <br>
-      <course-action
-        type="tagged"
-        :course="course.id"/>
-      <br>
-      <course-action
-        type="shareable"
-        :course="course.id"/>
+        :course="course.id"
+        :invert="selected"
+        type="annotated"/>
+
     </div>
 
     <div
-      class="col-md-2 pointer"
+      class="col-md-9 pointer pl-0"
       @click="selectCourse(course)">
-      <strong>
-        {{ course.academic_group }}
-        <br>
-        {{ course.subject }} {{ course.catalog_number }}
-        <br>
-        {{ course.semester }}
-        <br>
-        {{ course.units_maximum }} Units
-        <br>
-        Section {{ course.class_section }}
-      </strong>
-    </div>
+      <div
+        class="course-title font-weight-bold text-uppercase">
+        {{ course.subject }} {{ course.catalog_number }}: {{ course.title }}
+      </div>
 
-    <div
-      class="col-md-2 pointer"
-      @click="selectCourse(course)">
-      Component: <strong>{{ course.component }}</strong>
-      <br>
-      Grading Basis:
-      <br>
-      Instructor:
-      <span
-        v-for="instructor in course.course_instructors"
-        :key="instructor.id">
-        <strong>
-          {{ instructor.display_name }}
-        </strong>
+      <hr
+        :class="selected"
+        class="m-0">
+
+      <span class="course-instructor">
+        {{ instructorNames }}
       </span>
-    </div>
 
-    <div
-      class="col-md-5 pointer"
-      @click="selectCourse(course)">
-      <h5>{{ course.title }}</h5>
-      <truncate
-        class="course_description"
-        clamp="..."
-        :length="250"
-        less="Show Less"
-        type="html"
-        :text="course.course_description_long"
-        v-if="course.course_description_long"/>
+      <div
+        class="course-component text-uppercase">
+        {{ course.component }}<br>
+        {{ course.term_name }} {{ course.term_year }}
+      </div>
     </div>
 
     <div class="col-md-2 px-0">
@@ -81,7 +66,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import CourseAction from 'components/shared/course-action'
+import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 import truncate from 'vue-truncate-collapsed'
 
@@ -123,6 +108,22 @@ export default {
     },
     hiddenConflict () {
       return this.isConflicted && !this.showConflicts
+    },
+    instructorNames () {
+      const limit = 4 // only display this many instructors inline
+
+      let formattedString = this
+        .course
+        .course_instructors
+        .slice(0, limit)
+        .map(instructor => instructor.display_name)
+        .join(', ')
+
+      if (this.course.course_instructors.length > limit) {
+        formattedString += '...'
+      }
+
+      return formattedString
     }
   },
   methods: {
@@ -134,38 +135,44 @@ export default {
 <style lang="scss" scoped>
   .curricle-search-result {
     font-size: 13px;
-    border-left-width: 10px;
-    border-left-style: solid;
-    border-top: 1px solid #ccc;
-    margin-left: 0;
-    margin-right: 25px;
-    padding-top: 10px;
+    border-radius: 4px;
 
     &.selected {
-      background-color: #f5f7de;
-    }
-    &.selected:hover {
-      background-color: #b0b29e;
+      background-color: black;
+      color: white;
+
+      &:hover {
+        background-color: #222;
+      }
     }
 
     &.conflicted {
       background-color: #ffc0cb;
+
       &.selected, &:hover {
         background-color: #ff91a4;
       }
     }
 
-    h5 {
+    .course-title {
+      font-size: 20px;
+    }
+
+    .course-instructor {
       font-size: 16px;
+    }
+
+    .course-component {
+      font-size: 14px;
     }
 
     &:hover {
       background-color: #f0f0f0;
     }
-  }
 
-  .pointer {
-    cursor: pointer;
+    hr {
+      border-color: #e0e0e0;
+    }
   }
 
   .hiddenConflict {

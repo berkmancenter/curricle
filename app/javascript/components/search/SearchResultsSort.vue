@@ -2,27 +2,27 @@
   <span
     id="sort-by-dropdown"
     class="pointer">
-    Sort by:
+    sort by:
     <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
 
     <b-popover
-      placement="bottom"
       ref="popover"
+      placement="bottom"
       target="sort-by-dropdown"
       triggers="click blur">
       <b-form-radio-group
+        v-model="selected"
+        :options="sortByOptions"
         buttons
         button-variant="outline-dark"
         stacked
-        v-model="selected"
-        name="sort-fields"
-        :options="sortByOptions"/>
+        name="sort-fields"/>
     </b-popover>
   </span>
 </template>
 
 <script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { mapState } from 'vuex'
 import _ from 'lodash'
 
@@ -49,9 +49,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.pointer {
-  cursor: pointer;
-}
-</style>

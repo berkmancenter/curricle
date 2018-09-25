@@ -4,6 +4,9 @@ query UserCourses($scheduleToken: String) {
     annotation {
       id
     }
+    tags {
+      id
+    }
     user_course {
       id
       include_in_path

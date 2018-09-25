@@ -1,0 +1,34 @@
+<template>
+  <div
+    id="tray-control"
+    class="background-black pointer text-uppercase"
+    @click="trayToggle">
+    Tray
+  </div>
+</template>
+
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions('app', ['trayToggle'])
+  }
+}
+</script>
+
+<style scoped>
+#tray-control {
+  background-color: black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: white;
+  padding: 15px 30px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateX(71px) rotate(-90deg);
+  transform-origin: left center;
+  z-index: 99;
+}
+</style>

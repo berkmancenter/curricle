@@ -3,20 +3,11 @@
   %head
     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
-
+    %link{ href: 'https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,700|IBM+Plex+Sans:400,700', rel: 'stylesheet' }
     %title Curricle
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}/
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css", :rel => "stylesheet"}/
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js", :rel => "javascript"}/
-    :css
-      #app {
-        display: flex;
-        flex-flow: column;
-        height: 100vh;
-      }
 
   %body
-    .container
+    .container-fluid
       #app
 
     - if current_user.present?
@@ -26,3 +17,18 @@
 
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'
+
+    :css
+      body {
+        font-family: 'IBM Plex Sans'
+      }
+
+      #app {
+        display: flex;
+        flex-flow: column;
+        height: 100vh;
+      }
+
+      .pointer {
+        cursor: pointer;
+      }

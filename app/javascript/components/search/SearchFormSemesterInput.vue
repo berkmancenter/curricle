@@ -1,13 +1,10 @@
 <template>
   <div>
-    <router-link to="/home">
-      <strong>The Catalog</strong>
-    </router-link>
-
+    Semester:
     <span
       id="search-semester-range"
       class="pointer">
-      &nbsp;{{ rangeLabel }}&nbsp;<font-awesome-icon icon="caret-down"/>
+      &nbsp;<strong>{{ rangeLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
 
       <b-popover
         target="search-semester-range"
@@ -19,17 +16,17 @@
           <b-row>
             <b-col class="justify-content-md-left">
               <b-form-radio-group
-                stacked
                 v-model="searchTermStart"
-                name="search-start-term"
                 :options="optionsTermName"
+                stacked
+                name="search-start-term"
               />
             </b-col>
             <b-col class="justify-content-md-left">
               <b-form-select
-                class="year-select"
                 v-model="searchYearStart"
-                :options="optionsTermYear" />
+                :options="optionsTermYear"
+                class="year-select"/>
             </b-col>
             <b-col class="justify-content-md-left">
               <b-form-checkbox v-model="searchTermUseRange">
@@ -41,20 +38,19 @@
               class="justify-content-md-left"
             >
               <b-form-radio-group
-                stacked
                 v-model="searchTermEnd"
-                name="search-end-term"
                 :options="optionsTermName"
-              />
+                name="search-end-term"
+                stacked/>
             </b-col>
             <b-col
               v-show="searchTermUseRange"
               class="justify-content-md-left"
             >
               <b-form-select
-                class="year-select"
                 v-model="searchYearEnd"
-                :options="optionsTermYearEnd" />
+                :options="optionsTermYearEnd"
+                class="year-select"/>
             </b-col>
           </b-row>
         </b-form>
@@ -65,7 +61,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import _ from 'lodash'
 
 export default {
@@ -160,7 +156,8 @@ export default {
 .popover {
   max-width: 100% !important;
 }
+
 .year-select {
-  width: 5vw;
+  width: 80px !important;
 }
 </style>

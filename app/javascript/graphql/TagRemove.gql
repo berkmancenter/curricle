@@ -1,0 +1,8 @@
+mutation tagRemove($id: ID!) {
+  tagRemove(id: $id) {
+    id
+    tags {
+      id
+    }
+  }
+}

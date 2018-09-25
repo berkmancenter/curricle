@@ -2,11 +2,10 @@
   <div :class="{ 'timebar-container': true, conflicted }">
     <div class="bar-bg">
       <span
-        class="bar-display"
         v-for="(bar,idx) in bars"
         :key="idx"
         :style="computedStyle(bar)"
-      />
+        class="bar-display"/>
     </div>
   </div>
 </template>

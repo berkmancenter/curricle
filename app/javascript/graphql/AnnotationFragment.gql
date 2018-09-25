@@ -1,4 +1,10 @@
 fragment Annotation on Annotation {
   id
   text
+  course {
+    id
+    annotation {
+      id
+    }
+  }
 }

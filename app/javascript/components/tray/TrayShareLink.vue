@@ -1,9 +1,9 @@
 <template>
-  <p class="tray-share pull-right text-right">
+  <p class="tray-share float-right text-right">
     <span
       id="share-dropdown"
       class="pointer">
-      Share&nbsp;<font-awesome-icon icon="share"/>
+      <font-awesome-icon icon="share-alt"/>
 
       <b-popover
         target="share-dropdown"
@@ -22,7 +22,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   components: {
@@ -38,15 +38,6 @@ export default {
 </script>
 
 <style scoped>
-p.tray-share {
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
 span.shared-schedule-url {
   font-size: 13px;
   font-weight: bold;

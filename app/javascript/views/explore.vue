@@ -1,37 +1,34 @@
 <template>
-  <div class="row mx-0">
-    <div class="col-md-9">
-      <hr>
-      <b-jumbotron
-        header="Explore"
-        lead="View Template">
-        <p>Paragraph</p>
+  <div>
+    <h1
+      v-show="exploreRoot"
+      class="my-3">
+      <b-link to="/explore">Explore</b-link>
+    </h1>
 
-        <b-btn
-          variant="primary"
-          href="#">
-          Button
-        </b-btn>
-      </b-jumbotron>
-    </div>
-    <div class="col-md-3 top-header">
-      <the-sidebar />
-    </div>
+    <h3
+      v-show="exploreRoot"
+      class="mb-5"
+      style="font-weight: normal;">
+      Use visualizations to explore the curriculum, follow unexpected connections, and discover new courses.
+    </h3>
+
+    <router-view class="mt-5"/>
   </div>
 </template>
 
 <script>
-import TheSidebar from 'components/TheSidebar'
-
 export default {
-  components: {
-    TheSidebar
+  computed: {
+    exploreRoot () {
+      return this.$route.path === '/explore'
+    }
   }
 }
 </script>
 
 <style type="text/css">
-  .top-header {
-    margin-top: 28px;
+  h1 a.active {
+    color: black;
   }
 </style>

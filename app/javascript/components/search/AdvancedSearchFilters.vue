@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <p class="heading">Filter results:</p>
+  <div id="filter-container">
+    <p class="heading">Filter results by:</p>
 
     <div class="row">
       <div
-        class="col-md-3"
         v-for="facet in facets"
-        :key="facet.key">
+        :key="facet.key"
+        class="col-md-3">
         <advanced-search-filters-facet :facet="facet"/>
       </div>
     </div>
@@ -33,9 +33,13 @@ export default {
 }
 </script>
 
-<style scoped>
-  p.heading {
-    color: #888;
-    font-size: 13px;
+<style lang="scss" scoped>
+  #filter-container {
+    min-width: 400px;
+
+    p.heading {
+      color: #888;
+      font-size: 13px;
+    }
   }
 </style>

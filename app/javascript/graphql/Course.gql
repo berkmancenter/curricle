@@ -1,0 +1,9 @@
+#import "./CourseFragment.gql"
+
+query Course(
+  $id: ID!
+) {
+  course(id: $id) {
+    ...Course
+  }
+}

@@ -2,7 +2,6 @@
   <div class="time-selector">
     <vue-slider
       v-model="selrange"
-      tooltip="always"
       :height="4"
       :lazy="true"
       :piecewise="true"
@@ -13,7 +12,8 @@
       :show="enabled"
       :disabled="!enabled"
       :formatter="formatTime"
-    />
+      tooltip="always"
+      @callback="callback"/>
   </div>
 </template>
 
@@ -59,9 +59,6 @@ export default {
     }
   },
   watch: {
-    selrange (r) {
-      this.$emit('updatedRange', r)
-    },
     selstart (s) {
       this.selrange[0] = s
     },
@@ -74,7 +71,10 @@ export default {
     this.selrange[1] = this.selend || this.rangeend
   },
   methods: {
-    formatTime: (t) => prettyTime(t)
+    formatTime: (t) => prettyTime(t),
+    callback (r) {
+      this.$emit('updatedRange', this.selrange)
+    }
   }
 }
 </script>

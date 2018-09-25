@@ -1,59 +1,48 @@
 <template>
-  <div>
-    <div class="row">
-      <div class="col-md-12">
-        <b-jumbotron
-          header-level="4"
-          class="text-center">
-          <template slot="header">
-            The Catalog will help you <strong>explore</strong> Harvard's course history,
-            <strong>plan</strong> for your semester schedule, and <strong>search</strong> by keywords.
-          </template>
-        </b-jumbotron>
-      </div>
-    </div>
+  <div
+    id="home-content"
+    class="align-middle text-uppercase font-weight-bold">
+    <img
+      id="logo"
+      class="mb-5"
+      src="/images/logos/curricle-white-bg.svg">
 
-    <div class="row">
-      <div class="col-md-4">
-        <h5>Search</h5>
-
-        <router-link to="/search">
-          <img
-            alt="Search"
-            class="thumbnail"
-            src="/images/home/search.png">
-        </router-link>
-      </div>
-
-      <div class="col-md-4">
-        <h5>Explore</h5>
-
-        <router-link to="/explore">
-          <img
-            alt="Explore"
-            class="thumbnail"
-            src="/images/home/explore.png">
-        </router-link>
-      </div>
-
-      <div class="col-md-4">
-        <h5>Plan</h5>
-
-        <router-link to="/plan">
-          <img
-            alt="Plan"
-            class="thumbnail"
-            src="/images/home/plan.png">
-        </router-link>
-      </div>
-    </div>
+    <strong>Curricle</strong> will help you<br>
+    <router-link
+      to="/explore">
+      <strong>explore</strong>
+    </router-link>
+    the Harvard curriculum, past and present,<br>
+    <router-link
+      to="/plan">
+      <strong>plan</strong>
+    </router-link>
+    your semester schedule,<br>
+    and
+    <router-link
+      to="/search">
+      <strong>search</strong>
+    </router-link>
+    by keywords.
   </div>
 </template>
 
-<style scoped>
-  img.thumbnail {
-    border: 2px solid #000;
-    padding: 3px;
-    width: 90%;
+<style lang="scss" scoped>
+  #home-content {
+    color: #bbb;
+    font-size: 30px;
+    line-height: 34px;
+    margin-left: 5%;
+    margin-top: 20%;
+
+    img#logo {
+      display: block;
+      height: 80px;
+      width: auto;
+    }
+
+    strong {
+      color: #000;
+    }
   }
 </style>

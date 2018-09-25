@@ -1,24 +1,24 @@
 <template>
   <div
-    class="results-container"
-    v-show="keywords && searchComplete">
+    v-show="keywords && searchComplete"
+    class="mt-5">
     <div class="clearfix">
       <div
-        class="pull-left"
+        class="float-left"
         style="width: 28%;">
-        <strong>{{ results.length - (showConflicts ? 0 : conflictCount) }} Results</strong>
+        <strong>{{ resultsTotalCount }} results</strong>
       </div>
-      <div class="pull-left">
+      <div class="float-left">
         <search-results-sort/>
       </div>
-      <div class="pull-right text-right">
+      <div class="float-right text-right">
         <b-form-checkbox v-model="showConflicts">
-          Show Results with Conflicts ({{ conflictCount }})
+          show results with conflicts ({{ conflictCount }})
         </b-form-checkbox>
       </div>
     </div>
 
-    <div class="results">
+    <div class="results mt-4">
       <search-result-row
         v-for="result of results"
         :key="result.id"
@@ -30,8 +30,8 @@
       />
 
       <div
-        class="text-center my-4"
-        v-show="resultsMoreAvailable">
+        v-show="resultsMoreAvailable"
+        class="text-center my-4">
         <b-button
           class="pointer"
           variant="secondary"
@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     ...mapGetters('search', { keywords: 'activeKeywords' }),
-    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable']),
+    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable', 'resultsTotalCount']),
     ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['scheduledCourses']),
     currentSchedule () {
@@ -100,18 +100,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.results-container {
-  flex-flow: column;
-  display: flex;
-}
-
-.results {
-  overflow: auto;
-}
-
-.pointer {
-  cursor: pointer;
-}
-</style>

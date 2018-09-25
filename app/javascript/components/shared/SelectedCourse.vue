@@ -1,56 +1,77 @@
 <template>
-  <div>
-    <div class="selected-course">
-      <p class="select-course">Selected Course
-        <i
-          class="fa fa-close pull-right"
-          @click="closeSidebar"
-        />
-      </p>
-      <hr>
-      <div
-        class="actions mb-0"
-        v-if="userAuthenticated">
-        <p class="pull-left">
-          <course-action
-            type="tray"
-            :course="theCourse.id"
-          />
-          <course-action
-            type="schedule"
-            :course="theCourse.id"
-          />
-          <course-action
-            type="shareable"
-            :course="theCourse.id"
-          />
-        </p>
-        <p class="course-history pull-right text-right">See course history</p>
-      </div>
+  <div
+    id="selected-course"
+    class="pt-3 px-3">
 
-      <selected-course-details
-        :course="theCourse"
-      />
-      <selected-course-annotations
-        :course="theCourse"
-        v-if="userAuthenticated"
-      />
+    <div>
+      <span class="float-left">
+        Selected course
+      </span>
+
+      <span class="float-right">
+        <font-awesome-icon
+          class="pointer"
+          icon="times"
+          @click="closeSidebar"/>
+      </span>
     </div>
+
+    <div
+      v-if="userAuthenticated"
+      class="actions mt-3">
+      <p class="float-left">
+        <course-action
+          :course="theCourse.id"
+          :invert="true"
+          type="tray"/>
+
+        &nbsp;
+
+        <course-action
+          :course="theCourse.id"
+          :invert="true"
+          type="schedule"/>
+      </p>
+
+      <p class="course-history float-right text-right">
+        <a
+          href="javascript:"
+          @click="searchByCourseId(courseId)">
+          See course history
+        </a>
+      </p>
+    </div>
+
+    <selected-course-details
+      :course="theCourse"
+    />
+
+    <selected-course-annotations
+      v-if="userAuthenticated"
+      :course-id="theCourse.id"/>
+
+    <selected-course-tagging
+      :course-id="theCourse.id"/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-
-import CourseAction from 'components/shared/course-action'
-import SelectedCourseAnnotations from 'components/shared/SelectedCourseAnnotations'
-import SelectedCourseDetails from 'components/shared/SelectedCourseDetails'
+import { serializeSearch } from 'lib/util'
+import CourseAction from 'components/shared/CourseAction'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import SelectedCourseAnnotations from './SelectedCourseAnnotations'
+import SelectedCourseDetails from './SelectedCourseDetails'
+import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
   components: {
+    serializeSearch,
+    CourseAction,
+    FontAwesomeIcon,
     SelectedCourseAnnotations,
     SelectedCourseDetails,
-    CourseAction
+    SelectedCourseTagging
   },
   props: {
     course: {
@@ -66,35 +87,37 @@ export default {
         return this.course
       }
       return this.courses[this.course]
+    },
+    courseId () {
+      return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
     }
   },
   methods: {
-    ...mapActions('app', ['closeSidebar'])
+    ...mapActions('app', ['closeSidebar']),
+    searchByCourseId (courseId) {
+      this.$store.dispatch('search/searchByCourseId', courseId)
+      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+    }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .actions {
     display: inline-block;
     width: 100%;
   }
 
-  .selected-course {
-    position: relative;
+  #selected-course {
+    color: #fff;
   }
 
   p.course-history {
     font-size: 13px;
     font-weight: bold;
-    cursor: not-allowed;
-  }
 
-  .fa.fa-close {
-    padding-right: 0.5em;
-  }
-
-  .fa.fa-close:hover {
-    color: gray;
+    a {
+      color: #fff;
+    }
   }
 </style>

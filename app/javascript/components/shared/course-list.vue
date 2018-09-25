@@ -1,27 +1,29 @@
 <template>
   <div class="table-responsive">
-    <table class="course-list-iltem table">
+    <table class="course-list-item invert table table-borderless">
       <thead/>
       <tbody>
         <tr
           v-for="course in courses"
           :key="course.id"
+          :class="{ selected: currentCourse && currentCourse.id == course.id }"
           @mouseenter="addProvisionalCourse(course)"
           @mouseleave="removeProvisionalCourse(course)"
-          :class="{ selected: currentCourse && currentCourse.id == course.id }"
         >
-          <td>{{ course.external_course_id }}</td>
-          <td @click="!editable && selectCourse(course)">{{ course.title }}</td>
-          <td :style="calcStyle(course)">
+          <td>{{ `${course.subject} ${course.catalog_number}` }}</td>
+          <td @click="selectCourse(course)">{{ course.title }}</td>
+          <td>
             <course-action
-              type="schedule"
-              :course="course.id"
               v-show="editable"
-            />
-            <course-action
-              type="annotated"
               :course="course.id"
-              v-show="editable"/>
+              :invert="invert"
+              type="annotated"/>
+
+            <course-action
+              v-show="editable"
+              :course="course.id"
+              :invert="invert"
+              type="schedule"/>
           </td>
         </tr>
       </tbody>
@@ -31,7 +33,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CourseAction from 'components/shared/course-action'
+import CourseAction from 'components/shared/CourseAction'
 
 export default {
   components: {
@@ -45,6 +47,10 @@ export default {
     editable: {
       type: Boolean,
       default: true
+    },
+    invert: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -52,34 +58,32 @@ export default {
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
-    ...mapActions('plan', ['addProvisionalCourse', 'removeProvisionalCourse']),
-    calcStyle (course) {
-      return 'border-right: 5px solid ' + (course.department_color || '#000')
-    }
+    ...mapActions('plan', ['addProvisionalCourse', 'removeProvisionalCourse'])
   }
 }
 </script>
 
-<style>
-.course-list-iltem tbody tr {
-    margin-bottom: 5px;
-    width: 100%;
-    vertical-align: middle;
-    background: #DCDCDC;
-    font-size: 12px;
-    cursor: pointer;
-    height: 60px;
+<style lang="scss">
+.course-list-item {
+  tbody {
+    tr {
+      margin-bottom: 5px;
+      width: 100%;
+      vertical-align: middle;
+      font-size: 12px;
+      cursor: pointer;
+      height: 60px;
+    }
   }
-  .course-list-iltem thead {
+
+  thead {
     display: table-caption;
     width: 100%;
   }
 
-  .course-list-iltem tbody {
-    border-top: 2px solid #C0C0C0;
-  }
-  .table td {
+  td {
     vertical-align: middle !important;
   }
+}
 
 </style>

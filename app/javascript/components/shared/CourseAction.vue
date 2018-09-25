@@ -1,20 +1,25 @@
 <template>
   <span class="course-action">
-    <i
-      :class="calcClass"
-      @click="click"
-      v-b-tooltip.hover="true"
+    <font-awesome-icon
+      v-b-tooltip.d999.hover="true"
+      :icon="icon"
+      :class="{ 'text-white': invert }"
       :title="tooltip"
+      @click="click"
     />
   </span>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import USER_COURSE_REMOVE_MUTATION from '../../graphql/UserCourseRemove.gql'
 import USER_COURSE_SET_MUTATION from '../../graphql/UserCourseSet.gql'
 
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     type: {
       type: String,
@@ -23,37 +28,45 @@ export default {
     course: {
       type: String,
       required: true
+    },
+    invert: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       types: {
         tray: {
-          icon: 'fa-folder',
+          activeIcon: 'minus',
+          inactiveIcon: 'plus',
           clickable: true,
           activeTooltip: 'Click to remove from your tray',
           inactiveTooltip: 'Click to add to your tray'
         },
         schedule: {
-          icon: 'fa-clock-o',
+          activeIcon: 'clock',
+          inactiveIcon: ['far', 'clock'],
           clickable: true,
           activeTooltip: 'Click to remove from your schedule',
           inactiveTooltip: 'Click to add to your schedule'
         },
         annotated: {
-          icon: 'fa-pencil',
+          activeIcon: 'pencil-alt',
+          inactiveIcon: 'pencil-alt',
           clickable: false,
           activeTooltip: 'You have annotated this course',
           inactiveTooltip: 'You have not annotated this course'
         },
         tagged: {
-          icon: 'fa-tag',
+          activeIcon: 'tag',
+          inactiveIcon: 'tag',
           clickable: false,
           activeTooltip: 'This course has tags',
           inactiveTooltip: 'This course has no tags'
         },
         shareable: {
-          icon: 'fa-share-alt',
+          activeIcon: 'share-square',
           clickable: false,
           activeTooltip: 'Click to share this course',
           inactiveTooltip: ''
@@ -75,11 +88,8 @@ export default {
     config () {
       return this.types[this.type]
     },
-    calcClass () {
-      var theClass = { fa: true, active: this.active }
-      theClass[this.config.icon] = true
-
-      return theClass
+    icon () {
+      return this.active ? this.config.activeIcon : this.config.inactiveIcon
     }
   },
   methods: {
@@ -128,10 +138,6 @@ export default {
 
 <style scoped>
   .course-action {
-      color: gray;
-  }
-
-  .course-action .active {
       color: black;
   }
 

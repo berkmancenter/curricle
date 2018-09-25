@@ -5,13 +5,13 @@
       :key="semester">
       <strong>{{ semester }}</strong>
       <div
-        v-text="isEditing[semester] ? 'Done' : 'Edit'"
+        class="float-right pointer"
         @click="toggleEditSemester(semester)"
-        class="pull-right"
-      />
+        v-text="isEditing[semester] ? 'Done' : 'Edit'"/>
       <course-list
         :courses="(isEditing[semester] ? trayCoursesBySemester[semester] : scheduledCoursesBySemester[semester]) || []"
         :editable="isEditing[semester]"
+        :invert="true"
       />
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
     ...mapGetters('plan', ['scheduledCoursesBySemester', 'trayCoursesBySemester', 'sortedSemestersInTray'])
   },
   mounted () {
-    _.each(this.sortedSemestersInTray, d => { this.$set(this.isEditing, d, false) })
+    _.each(this.sortedSemestersInTray, s => { this.$set(this.isEditing, s, false) })
   },
   methods: {
     toggleEditSemester (sem) {
@@ -45,6 +45,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

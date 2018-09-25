@@ -119,10 +119,10 @@ const actions = {
   /*
    * courseHasStatus checks a given course id and returns true if the
    * state type is true for the user in question.  This is related to
-   * the course-action component, so consolidating any checks here.
+   * the CourseAction component, so consolidating any checks here.
 
    * If you need to add more types you will need to add the checker
-   * here and adjust the course-action component as well to add the
+   * here and adjust the CourseAction component as well to add the
    * icons/actions used.
    */
   courseHasStatus ({ state, getters }, { course, type }) {

@@ -5,6 +5,7 @@ module Resolvers
   class CourseCountsResolver
     def call(_obj, args, _ctx)
       query = base_query
+      query = filter_by_semester(query, args)
       query = filter_by_args(query, args)
 
       count_courses(query)
@@ -15,6 +16,7 @@ module Resolvers
     def base_query
       Course
         .where.not(component: nil)
+        .where(class_section: 1) # Scope to class section 1 to eliminate duplicate sections of the same course
         .group(%i[component subject_academic_org_description])
     end
 
@@ -23,6 +25,15 @@ module Resolvers
       query = query.where(subject_academic_org_description: args[:department]) if args[:department].present?
 
       query
+    end
+
+    def filter_by_semester(query, args)
+      return query if args[:semester].blank?
+
+      term_name = args[:semester][:term_name]
+      term_year = args[:semester][:term_year]
+
+      query.where(term_name: term_name, term_year: term_year)
     end
 
     def count_courses(query)

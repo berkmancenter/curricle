@@ -1,64 +1,47 @@
 <template>
   <span
     :class="keywordClass"
-    :key="keywordIdx"
+    :key="keyword.ident"
     :id="kwId"
+    class="text-uppercase mr-2"
   >
     <span
-      :id="kwId+'-applyTo'"
-      class="applyTo"
-    >
-      {{ keywordApplyTo }}
-    </span>
-    <span
-      :id="kwId+'-weight'"
-      :class="'wt-' + selectedWeight"
-    >
-      {{ selectedWeight }}
-    </span>
-    <span
-    @click="bodyClick">
+      @click="bodyClick">
       {{ keyword.text }}
     </span>&nbsp;&nbsp;
     <font-awesome-icon
       icon="times"
       @click="closeClick"/>
     <b-popover
-      v-show="keyword.active"
+      ref="popover"
       :target="kwId"
       triggers="click blur"
-      placement="bottom">
+      placement="bottom"
+      @show="popoverShow($event)"
+      @hide="popoverHide($event)"
+      @shown="popoverActivate($event)">
       <b-form-input
-      v-model="keyword.text"/>
+        :id="kwId+'-kw-edit-keyword'"
+        v-model="keyword.text"
+        class="mb-2"/>
       <b-form-group
-        label="Apply To"
+        label="Apply to:"
       >
         <b-form-checkbox-group
-          stacked
           v-model="selected"
-          name="search-fields"
           :options="applyToOptions"
           :target="kwId+'-weight'"
-          triggers="click blur"
-          placement="bottom"
-        />
-      </b-form-group>
-      <b-form-group
-      label="Weight">
-        <b-form-checkbox-group
-          stacked
-          v-model="selectedWeight"
-          name="search-fields-weight"
-          :options="weightOptions"
-        />
+          name="search-fields"
+          stacked/>
       </b-form-group>
     </b-popover>
   </span>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { mapGetters, mapState } from 'vuex'
+import { serializeSearch } from 'lib/util'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import _ from 'lodash'
 
 export default {
@@ -69,25 +52,22 @@ export default {
     keyword: {
       type: Object,
       required: true
-    },
-    keywordIdx: {
-      type: Number,
-      required: true
     }
   },
   data () {
     return {
       selected: this.keyword.applyTo,
-      selectedWeight: this.keyword.weight
+      editing: false
     }
   },
   computed: {
-    ...mapState('search', ['applyToOptions', 'weightOptions']),
+    ...mapState('search', ['applyToOptions']),
+    ...mapGetters('search', ['searchSnapshot']),
     keywordClass () {
       return (this.keyword.active ? 'active' : 'inactive') + '-keyword border border-dark rounded'
     },
     kwId () {
-      return 'keyword-elem-' + this.keywordIdx
+      return 'keyword-elem-' + this.keyword.ident
     },
     keywordApplyTo () {
       if (this.selected.length === this.applyToOptions.length - _.filter(this.applyToOptions, { 'disabled': true }).length) {
@@ -103,11 +83,31 @@ export default {
     closeClick () {
       var act = this.keyword.active ? 'search/deactivateKeyword' : 'search/removeKeyword'
       this.$store.dispatch(act, this.keyword)
+      this.performSearch()
     },
     bodyClick () {
       if (!this.keyword.active) {
         this.$store.dispatch('search/activateKeyword', this.keyword)
+        this.performSearch()
       }
+    },
+    popoverShow (arg) {
+      this.$root.$emit('bv::hide::popover')
+      this.editing = true
+    },
+    popoverHide (arg) {
+      this.editing = false
+    },
+    popoverActivate (arg) {
+      var el2 = document.getElementById(this.kwId + '-kw-edit-keyword')
+      if (el2) {
+        el2.focus()
+      }
+    },
+    performSearch () {
+      this.$store.dispatch('search/saveSearchInHistory')
+      this.$router.push('/search/' + serializeSearch(this.searchSnapshot))
+      this.$store.dispatch('search/runKeywordSearch')
     }
   }
 }
@@ -117,39 +117,17 @@ export default {
 .inactive-keyword, .active-keyword {
   cursor: pointer;
   display: inline-block;
-  margin: 0 10px 10px 0;
   padding: 5px 10px;
+  font-size: 14px;
 
   &:hover {
     background-color: #eee;
   }
 
-  .applyTo, .wt {
+  .applyTo {
     display: inline;
-    width: 1em;
-    height: 1em;
-    font-size: .75em;
-    padding: 2px;
+    background-color: black;
+    color: white;
   }
-  $weights: 1,2,3,4,5,6,7,8,9,10;
-
-  @each $k in $weights {
-    .wt-#{$k} {
-      @extend .wt;
-
-      @if $k > 5 {
-        color: white;
-      } @else {
-        color: black;
-      }
-
-      background-color: rgb(255 - $k * 25, 255 - $k * 25, 255 - $k * 25);
-    }
-  }
-}
-
-.applyTo {
-  background-color: black;
-  color: white;
 }
 </style>

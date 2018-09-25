@@ -10,10 +10,10 @@
         triggers="click blur"
         placement="bottom">
         <b-form-checkbox-group
-          stacked
           v-model="selected"
-          name="search-fields"
           :options="options"
+          stacked
+          name="search-fields"
         />
       </b-popover>
     </span>
@@ -22,7 +22,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'BasicSearchFieldDropdown',
@@ -48,12 +48,12 @@ export default {
       switch (this.selected.length) {
         // TODO: revert this once all search fields are available
         // case this.options.length:
-        case 4:
+        case 5:
           return 'All'
         case 0:
           return 'None'
         default:
-          return this.selected.join(', ') // TODO: Return human-readable versions of the field names
+          return this.selected.map(field => field.charAt()).join(', ') // TODO: Return human-readable versions of the field names
       }
     }
   },
@@ -62,9 +62,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.pointer {
-  cursor: pointer;
-}
-</style>

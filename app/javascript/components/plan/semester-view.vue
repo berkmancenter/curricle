@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="mt-3">
     <b-row v-show="coursesTBD && coursesTBD.length">
       <b-col style="height: 150px;">
         <b-row>
-          <b-col class="md-1">
-            <strong>Schedule TBD:</strong>
+          <b-col class="md-1 font-weight-bold text-uppercase">
+            Schedule TBD:
           </b-col>
         </b-row>
         <b-row>
@@ -16,6 +16,7 @@
               :scale="scale"
               :offset="0"
               :height="1"
+              :nudge="-65"
               :provisional="provisionalCourseIds.includes(course.id)"
               :selected="currentCourse && currentCourse.id == course.id"
             />
@@ -25,9 +26,9 @@
     </b-row>
     <b-row v-show="hasCourses">
       <b-col>
-        <b-row>
+        <b-row class="header-row">
           <b-col class="header">
-            Time
+            &nbsp;
           </b-col>
         </b-row>
         <b-row>
@@ -36,6 +37,7 @@
               v-for="(time,index) in times"
               :key="time"
               :style="{ display: 'block', position: 'absolute', top: index * scale + 'px', width: '575%', 'border-top': '1px solid lightgray' }"
+              class="time-label"
             >
               {{ time }}
             </span>
@@ -97,12 +99,11 @@ export default {
     scale () {
       return (this.latestIdx - this.earliestIdx) > 7 ? 50 : 80
     },
+    // Determine if there are any courses with meeting times in the user's schedule
     hasCourses () {
-      return this.coursesByMeetingTime &&
-        _.find(
-          _.at(this.coursesByMeetingTime, daylist),
-          list => list && list.length > 1
-        )
+      const coursesByDay = _.at(this.coursesByMeetingTime, daylist)
+
+      return !!_.find(coursesByDay, 'length')
     },
     currentScheduleByDay () {
       return _.at(this.coursesByMeetingTime, daylist)
@@ -136,8 +137,8 @@ export default {
       ))
     },
     times () {
-      return ['midnight', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm',
-        '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm', '12am' ]
+      return ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00',
+        '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00' ]
         .slice(this.earliestIdx, this.latestIdx)
     },
     provisionalCourseIds () {
@@ -166,13 +167,19 @@ export default {
 }
 </script>
 
-<style scoped>
-.day-column {
-
+<style lang="scss" scoped>
+.header-row {
+  margin-bottom: 40px;
 }
 
 .header {
-    font-weight: bold;
-    text-align: left;
+  font-weight: bold;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.time-label {
+  font-size: 12px;
+  font-family: 'IBM Plex Mono'
 }
 </style>
