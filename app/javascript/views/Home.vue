@@ -28,21 +28,19 @@
       by keywords.
     </div>
 
-    <span
-      v-if="!userAuthenticated"
-      id="login-link-container">
-      <a
-        href="/users/sign_in">
-        Sign in with HarvardKey
-      </a>
-    </span>
+    <authentication-link
+      v-if="!userAuthenticated"/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import AuthenticationLink from 'components/shared/AuthenticationLink.vue'
 
 export default {
+  components: {
+    AuthenticationLink
+  },
   computed: {
     ...mapGetters('user', ['userAuthenticated'])
   }
@@ -65,18 +63,6 @@ export default {
 
     a {
       color: black;
-    }
-  }
-
-  #login-link-container {
-    display: inline-block;
-    background: black;
-    color: white;
-    font-size: 24px;
-    padding: 20px 30px;
-
-    a {
-      color: white;
     }
   }
 </style>
