@@ -25,7 +25,7 @@ module Resolvers
 
     def determine_term_year_range(semester)
       term_year_max = semester[:term_year]
-      term_year_min = term_year_max - 2
+      term_year_min = term_year_max - 10
 
       term_year_min..term_year_max
     end
