@@ -1,5 +1,6 @@
 import Vue from 'vue/dist/vue.esm'
 import VueRouter from 'vue-router'
+import store from '../store'
 
 import { deserializeSearch } from 'lib/util'
 
@@ -17,7 +18,7 @@ import ExploreUniverse from '../components/explore/universe'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [
     { path: '/about', component: CurricleAbout },
     { path: '/explore',
@@ -48,3 +49,14 @@ export default new VueRouter({
     { path: '*', redirect: 'home' }
   ]
 })
+
+// Prevent anonymous access to any route other than the landing page
+router.beforeEach((to, _from, next) => {
+  if (to.path === '/home' || store.getters['user/userAuthenticated']) {
+    next()
+  } else {
+    window.location = '/users/sign_in'
+  }
+})
+
+export default router

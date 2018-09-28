@@ -12,7 +12,9 @@
       </router-link>
     </div>
 
-    <div id="nav-primary-container">
+    <div
+      v-if="userAuthenticated"
+      id="nav-primary-container">
       <router-link
         class="nav primary"
         to="/explore">
@@ -104,6 +106,7 @@
     </div>
 
     <div
+      v-if="userAuthenticated"
       id="nav-secondary-container"
       class="text-uppercase mt-5">
       <router-link
@@ -125,10 +128,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   computed: {
+    ...mapGetters('user', ['userAuthenticated']),
     ...mapState('app', ['viewmode']),
     activeNavPrimary () {
       return this.$route.path.split('/')[1]
