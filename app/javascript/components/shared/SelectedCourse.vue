@@ -92,6 +92,14 @@ export default {
       return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
     }
   },
+  watch: {
+    course: {
+      immediate: true,
+      handler: function (newCourse) {
+        this.$store.dispatch('courses/registerCourses', [newCourse])
+      }
+    }
+  },
   methods: {
     ...mapActions('app', ['closeSidebar']),
     searchByCourseId (courseId) {
