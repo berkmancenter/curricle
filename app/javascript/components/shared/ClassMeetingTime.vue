@@ -1,37 +1,25 @@
 <template>
   <div
-    v-if="hasData"
-    class="t">
+    v-if="hasData">
     <div
       v-for="(day,index) in week"
       v-show="!condensed || day.timeBar"
       :key="index"
-      :class="{ tr: true, conflicted: conflicts[index] }">
-      <div class="td">
-        {{ day.timePretty }}
-      </div>
+      :class="{ conflicted: conflicts[index] }">
       <div
-        :class="{ td: true, inactive: !(day.timeBar && day.timeBar.length) }"
-      >
-        {{ day.abbrev }}
-      </div>
-      <div class="td vertical-center">
-        <time-bar
-          v-if="day.timeBar && day.timeBar.length"
-          :bars="day.timeBar"
-          :conflicted="conflicts[index]"
-        />
+        :class="{ inactive: !(day.timeBar && day.timeBar.length) }">
+        <span
+          class="day-name">
+          {{ day.abbrev }}
+        </span>
+
+        {{ day.timePretty }}
       </div>
     </div>
   </div>
   <div
-    v-else
-    class="t">
-    <div class="tr">
-      <div class="td">
-        Schedule TBD
-      </div>
-    </div>
+    v-else>
+    Schedule TBD
   </div>
 </template>
 
@@ -59,12 +47,8 @@
 
 import _ from 'lodash'
 import { prettyTime } from 'lib/util'
-import TimeBar from 'components/shared/time-bar'
 
 export default {
-  components: {
-    TimeBar
-  },
   props: {
     schedule: {
       type: Object,
@@ -95,7 +79,7 @@ export default {
       return []
     },
     week () {
-      var abbrev = this.condensed ? ['M', 'Tu', 'W', 'Th', 'F'] : ['M', 'T', 'W', 'T', 'F']
+      var abbrev = ['MON', 'TUE', 'WED', 'THU', 'FRI']
 
       return _.zipWith(
         abbrev,
@@ -119,18 +103,16 @@ export default {
 </script>
 
 <style scoped>
-.t { display: table; }
-.tr { display: table-row; }
-.td { display: table-cell; }
 .inactive {
   color: gray;
 }
+
 .conflicted {
   color: darkred;
 }
-.vertical-center {
-  display: flex;
-  align-items: center;
-  max-height: 100vh;
+
+.day-name {
+  display: inline-block;
+  width: 32px;
 }
 </style>
