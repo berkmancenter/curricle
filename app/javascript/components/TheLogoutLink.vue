@@ -2,14 +2,7 @@
   <div
     id="authentication-container"
     class="text-right text-uppercase">
-    <a
-      v-if="!userAuthenticated"
-      href="/users/sign_in">
-      Sign in
-    </a>
-
     <span
-      v-if="userAuthenticated"
       class="pointer"
       @click="logout">
       Logout
@@ -18,13 +11,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
-  computed: {
-    ...mapGetters('user', ['userAuthenticated'])
-  },
   methods: {
     logout () {
       this.$store.dispatch('user/clearTokens')

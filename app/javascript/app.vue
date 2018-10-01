@@ -25,7 +25,8 @@
         id="sidebar-container"
         :class="{ active: sidebarCurrentType }"
         class="col-md-2 px-0">
-        <the-authentication-link
+        <the-logout-link
+          v-if="userAuthenticated"
           v-show="!sidebarCurrentType"/>
 
         <the-sidebar />
@@ -44,7 +45,7 @@ import { mapGetters } from 'vuex'
 import Navbar from 'components/TheNavbar'
 import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
-import TheAuthenticationLink from 'components/TheAuthenticationLink'
+import TheLogoutLink from 'components/TheLogoutLink'
 import TheSidebar from 'components/TheSidebar'
 import TheFeedbackLink from 'components/TheFeedbackLink'
 import TheTrayControl from 'components/TheTrayControl'
@@ -54,7 +55,7 @@ export default {
     Navbar,
     LoaderOverlay,
     CourseObserver,
-    TheAuthenticationLink,
+    TheLogoutLink,
     TheSidebar,
     TheFeedbackLink,
     TheTrayControl
