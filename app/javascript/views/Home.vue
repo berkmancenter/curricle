@@ -8,24 +8,22 @@
         class="mb-5"
         src="/images/logos/curricle-white-bg.svg">
 
-      Curricle will help you
+      Curricle will help you<br>
       <router-link
         to="/explore">
         <strong>explore</strong>
       </router-link>
-      the Harvard<br>
-      curriculum, past and present,<br>
-      <router-link
-        to="/plan">
-        <strong>plan</strong>
-      </router-link>
-      your semester schedule,<br>
-      and
+      the Harvard curriculum, past and present,<br>
       <router-link
         to="/search">
         <strong>search</strong>
       </router-link>
-      by keywords.
+      courses by keywords, and<br>
+      <router-link
+        to="/plan">
+        <strong>plan</strong>
+      </router-link>
+      your semester schedule.
     </div>
 
     <span
