@@ -35,12 +35,13 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 })
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  apolloProvider,
-  components: { App },
-  template: '<App/>'
+document.addEventListener('DOMContentLoaded', () => {
+  /* eslint-disable no-new */
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    apolloProvider,
+    render: h => h(App)
+  })
 })
