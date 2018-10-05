@@ -276,7 +276,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   # CAS / Harvard Key
-  config.cas_base_url = 'https://stage.pin1.harvard.edu/cas'
+  config.cas_base_url = 'https://www.pin1.harvard.edu/cas'
 
   config.cas_client_config_options = {
     logger: CASClient::Logger.new(Rails.root.join('log', 'cas.log'))
