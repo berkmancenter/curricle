@@ -18,9 +18,19 @@ class User < ApplicationRecord
   has_secure_token :api_token
   has_secure_token :schedule_token
 
+  # populate attributes with data returned by CAS
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
-      # populate attributes with data returned by CAS here
+      case name.to_sym
+      when :mail
+        self.email = value
+      when :displayName
+        self.display_name = value
+      when :givenName
+        self.given_name = value
+      when :sn
+        self.surname = value
+      end
     end
   end
 end
