@@ -1,6 +1,5 @@
 import Vue from 'vue/dist/vue.esm'
 import VueRouter from 'vue-router'
-import store from '../store'
 
 import { deserializeSearch } from 'lib/util'
 
@@ -52,7 +51,7 @@ const router = new VueRouter({
 
 // Prevent anonymous access to any route other than the landing page
 router.beforeEach((to, _from, next) => {
-  if (to.path === '/home' || store.getters['user/userAuthenticated']) {
+  if (to.path === '/home' || localStorage.getItem('curricle_api_token')) {
     next()
   } else {
     window.location = '/users/sign_in'
