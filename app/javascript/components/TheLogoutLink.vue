@@ -11,14 +11,12 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   methods: {
     logout () {
       this.$store.dispatch('user/clearTokens')
 
-      axios.get('/users/sign_out')
+      window.location = '/users/sign_out'
     }
   }
 }
