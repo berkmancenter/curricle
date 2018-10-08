@@ -57,7 +57,7 @@
       <b-card
         img-src="/images/explore/keywords.png"
         img-top
-        title="Truth vs. Lies">
+        title="Keyword Comparisons">
         <p class="card-text">
           Visualize descriptive terms across the curriculum through keyword comparisons.
         </p>

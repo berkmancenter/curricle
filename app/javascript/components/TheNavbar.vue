@@ -53,7 +53,7 @@
         <router-link
           class="nav sub"
           to="/explore/keywords">
-          Truth vs. Lies
+          Keyword Comparisons
         </router-link>
       </div>
 

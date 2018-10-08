@@ -2,7 +2,7 @@
   <div>
     <div
       class="text-center text-uppercase">
-      Keywords
+      Keyword Comparisons
 
       <h4
         class="text-uppercase font-weight-bold">
