@@ -7,7 +7,8 @@ import CurricleAbout from '../views/About'
 import CurricleExplore from '../views/explore'
 import CurricleHome from '../views/Home'
 import CurriclePlan from '../views/plan'
-import CurricleSearch from '../views/search'
+import SearchAdvanced from 'views/SearchAdvanced'
+import SearchBasic from 'views/SearchBasic'
 import SharedSchedule from '../views/SharedSchedule'
 import ExploreIndex from '../components/explore/index'
 import ExploreClasses from '../components/explore/classes'
@@ -42,8 +43,9 @@ const router = new VueRouter({
     },
     { path: '/home', component: CurricleHome },
     { path: '/plan', component: CurriclePlan },
-    { path: '/search', component: CurricleSearch },
-    { path: '/search/*', component: CurricleSearch, props: deserializeSearch },
+    { path: '/search', component: SearchBasic },
+    { path: '/search/advanced', component: SearchAdvanced },
+    { path: '/search/advanced/*', component: SearchAdvanced, props: deserializeSearch },
     { path: '/shared-schedule/:scheduleToken', component: SharedSchedule, props: true },
     { path: '*', redirect: 'home' }
   ]

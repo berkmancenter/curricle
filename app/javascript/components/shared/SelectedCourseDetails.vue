@@ -84,7 +84,7 @@ export default {
   methods: {
     searchByInstructor (instructorName) {
       this.$store.dispatch('search/searchByInstructor', instructorName)
-      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+      this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
     }
   }
 }

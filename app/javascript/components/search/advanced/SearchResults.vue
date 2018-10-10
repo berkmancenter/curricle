@@ -46,8 +46,8 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
-import SearchResultRow from 'components/search/SearchResultRow'
-import SearchResultsSort from 'components/search/SearchResultsSort'
+import SearchResultRow from './SearchResultRow'
+import SearchResultsSort from './SearchResultsSort'
 import { scheduleMakeDescriptor, courseConflictsWithScheduleByDay } from 'lib/util'
 
 export default {

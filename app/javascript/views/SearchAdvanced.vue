@@ -1,6 +1,6 @@
 <template>
   <div class="py-5">
-    <h3>Search:</h3>
+    <h3>Advanced Search:</h3>
 
     <search-form v-if="userAuthenticated"/>
 
@@ -12,8 +12,8 @@
 import { mapGetters, mapState } from 'vuex'
 import { deserializeSearch } from 'lib/util'
 
-import SearchForm from 'components/search/SearchForm'
-import SearchResults from 'components/search/SearchResults'
+import SearchForm from 'components/search/advanced/SearchForm'
+import SearchResults from 'components/search/advanced/SearchResults'
 
 export default {
   components: {

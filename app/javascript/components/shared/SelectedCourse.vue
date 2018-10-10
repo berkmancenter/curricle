@@ -104,7 +104,7 @@ export default {
     ...mapActions('app', ['closeSidebar']),
     searchByCourseId (courseId) {
       this.$store.dispatch('search/searchByCourseId', courseId)
-      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+      this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
     }
   }
 }

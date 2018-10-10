@@ -71,7 +71,7 @@
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
 import { mapActions, mapGetters } from 'vuex'
-import SemesterInput from 'components/search/SearchFormSemesterInput'
+import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {

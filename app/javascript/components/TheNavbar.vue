@@ -65,6 +65,17 @@
 
       <br>
 
+      <div
+        v-show="activeNavPrimary === 'search'"
+        class="nav-sub-container">
+
+        <router-link
+          class="nav sub"
+          to="/search/advanced">
+          Advanced Search
+        </router-link>
+      </div>
+
       <router-link
         class="nav primary plan"
         to="/plan">

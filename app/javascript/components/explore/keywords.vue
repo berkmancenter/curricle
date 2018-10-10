@@ -107,7 +107,7 @@ import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/keywords'
 import { mapActions, mapGetters } from 'vuex'
-import SemesterInput from 'components/search/SearchFormSemesterInput'
+import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
