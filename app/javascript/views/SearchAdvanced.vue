@@ -13,7 +13,7 @@ import { mapGetters, mapState } from 'vuex'
 import { deserializeSearch } from 'lib/util'
 
 import SearchForm from 'components/search/advanced/SearchForm'
-import SearchResults from 'components/search/advanced/SearchResults'
+import SearchResults from 'components/search/SearchResults'
 
 export default {
   components: {
@@ -25,6 +25,8 @@ export default {
     ...mapState('search', ['results'])
   },
   mounted () {
+    this.$store.commit('search/RESET_RESULTS')
+
     if (this.$route.params[0]) {
       var obj = deserializeSearch(this.$route)
       if (obj) {

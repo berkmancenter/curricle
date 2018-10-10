@@ -32,6 +32,7 @@ module Resolvers
       Course.search do
         with :id, args[:ids] if args[:ids].present?
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
+        basic_search(self, args[:basic]) if args[:basic].present?
         apply_filters(self, args)
         apply_time_ranges(self, args[:time_ranges]) if args[:time_ranges]
         semester_range_scope(self, args[:semester_range])
@@ -66,6 +67,19 @@ module Resolvers
           search_by_fulltext(self, keyword)
         else
           with :id, 0 # prevent inadvertently returning all courses
+        end
+      end
+    end
+
+    def basic_search(sunspot, query)
+      query.gsub!(/[()]/, '"')
+      phrases = query.split('|')
+
+      sunspot.instance_eval do
+        any do
+          phrases.each do |phrase|
+            fulltext phrase, fields: %i[course_description_long title]
+          end
         end
       end
     end

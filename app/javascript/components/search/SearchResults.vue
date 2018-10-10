@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     searchAgain () {
-      this.$store.dispatch('search/runKeywordSearchAgain')
+      this.$store.dispatch('search/runSearchAgain')
     }
   }
 }

@@ -15,6 +15,7 @@ const thisYear = (new Date()).getUTCFullYear()
 
 const state = {
   // list of objects with { text, applyTo, active }
+  basic: '',
   facets: {},
   keywords: [],
   results: [],
@@ -63,6 +64,7 @@ const snapshotProps = [
 ]
 
 const getters = {
+  activeBasicSearch: state => state.basic,
   activeKeywords: state => state.keywords ? state.keywords.filter(kw => kw.active) : [],
   inactiveKeywords: state => state.keywords ? state.keywords.filter(kw => !kw.active) : [],
   searchSnapshot (state) {
@@ -130,7 +132,50 @@ const actions = {
       commit('DELETE_KEYWORD', idx)
     }
   },
+  runSearchAgain ({dispatch, getters}) {
+    if (getters.activeBasicSearch) {
+      dispatch('runBasicSearchAgain')
+    } else {
+      dispatch('runKeywordSearchAgain')
+    }
+  },
+  runBasicSearch ({commit, state, getters, dispatch}) {
+    const query = getters.activeBasicSearch
+
+    commit('RESET_RESULTS_PAGE')
+    state.searchRunning = true
+    dispatch(
+      'runSearch',
+      {
+        basic: query,
+        handler: response => {
+          state.results = response
+          state.resultsMoreAvailable = (response.length === state.resultsPerPage)
+          state.searchComplete = true
+          state.searchRunning = false
+        }
+      }
+    )
+  },
+  runBasicSearchAgain ({commit, state, getters, dispatch}) {
+    const query = getters.activeBasicSearch
+
+    commit('INCREMENT_RESULTS_PAGE')
+    state.searchRunning = true
+    dispatch(
+      'runSearch',
+      {
+        basic: query,
+        handler: response => {
+          state.results = state.results.concat(response)
+          state.resultsMoreAvailable = (response.length === state.resultsPerPage)
+          state.searchRunning = false
+        }
+      }
+    )
+  },
   runKeywordSearch ({commit, state, getters, dispatch}) {
+    commit('SET_BASIC_SEARCH', '')
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
     _.forEach(kw, k => delete k.ident)
@@ -177,7 +222,7 @@ const actions = {
       state.results = []
     }
   },
-  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler, userCoursesSearch}, searchOptions) {
+  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler, userCoursesSearch, basic}, searchOptions) {
     var vars = {}
     var query = COURSES_SEARCH_QUERY
 
@@ -228,6 +273,8 @@ const actions = {
       vars.ids = ids
     } else if (keywords && keywords.length) {
       vars.deluxeKeywords = keywords
+    } else if (basic) {
+      vars.basic = basic
     } else {
       console.error('runSearch: param errors')
       return
@@ -451,6 +498,12 @@ const mutations = {
   },
   RESET_TIME_RANGES (state) {
     state.timeRanges = undefined
+  },
+  RESET_RESULTS (state) {
+    state.results = []
+  },
+  SET_BASIC_SEARCH (state, query) {
+    state.basic = query
   }
 }
 
