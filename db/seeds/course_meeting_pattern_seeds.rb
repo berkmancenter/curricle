@@ -38,7 +38,12 @@ course_meeting_patterns = SmarterCSV.process(Rails.root.join('lib', 'seeds', 'co
     else
       cmp.course_id = course.id
     end
+    begin
     cmp.save
     puts "'#{cmp.external_course_id}-#{cmp.class_section}' saved"
+    rescue
+      puts "#{time.now}: retrying #{cmp.external_course_id}-#{cmp.class_section}"
+      redo
+    end
   end
 end

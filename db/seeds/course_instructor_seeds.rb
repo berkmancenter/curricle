@@ -34,7 +34,12 @@ course_instructors = SmarterCSV.process(Rails.root.join('lib', 'seeds', 'course_
       ci.course_id = course.id
     end
 
+    begin
     ci.save
     puts "'#{ci.last_name}' saved"
+    rescue
+      puts "#{time.now}: retrying #{ci.last_name}"
+      redo
+    end
   end
 end
