@@ -8,7 +8,7 @@ const state = {
   semester: '',
   filters: {},
   filterFieldMap: {
-    department: 'academic_group_description',
+    department: 'class_academic_org_description',
     semester: 'semester'
   },
   provisionalCourses: {}
@@ -26,7 +26,7 @@ const getters = {
     return rootGetters['user/trayCourses']
   },
   departmentsInTray (state, getters) {
-    return _.uniq(getters.trayCourses.map(k => k.academic_group_description).sort())
+    return _.uniq(getters.trayCourses.map(k => k.class_academic_org_description).sort())
   },
   semestersInTray (state, getters) {
     return _.uniq(getters.trayCourses.map(k => k.semester).sort())
