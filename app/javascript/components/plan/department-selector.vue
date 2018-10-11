@@ -41,6 +41,8 @@ div /deep/ {
   .dropdown-toggle,
   .dropdown-item {
     font-size: 12px;
+    text-align: left;
+    white-space: normal;
   }
 
   .btn-secondary,

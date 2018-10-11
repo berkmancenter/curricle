@@ -1,35 +1,55 @@
 <template>
   <div
-    id="home-content"
-    class="align-middle text-uppercase font-weight-bold">
-    <img
-      id="logo"
-      class="mb-5"
-      src="/images/logos/curricle-white-bg.svg">
+    id="home-content">
+    <div
+      class="mb-5">
+      <img
+        id="logo"
+        class="mb-5"
+        src="/images/logos/curricle-white-bg.svg">
 
-    <strong>Curricle</strong> will help you<br>
-    <router-link
-      to="/explore">
-      <strong>explore</strong>
-    </router-link>
-    the Harvard curriculum, past and present,<br>
-    <router-link
-      to="/plan">
-      <strong>plan</strong>
-    </router-link>
-    your semester schedule,<br>
-    and
-    <router-link
-      to="/search">
-      <strong>search</strong>
-    </router-link>
-    by keywords.
+      Curricle will help you<br>
+      <router-link
+        to="/explore">
+        <strong>explore</strong>
+      </router-link>
+      the Harvard curriculum, past and present,<br>
+      <router-link
+        to="/search">
+        <strong>search</strong>
+      </router-link>
+      courses by keywords, and<br>
+      <router-link
+        to="/plan">
+        <strong>plan</strong>
+      </router-link>
+      your semester schedule.
+    </div>
+
+    <span
+      v-if="!userAuthenticated"
+      id="login-link-container">
+      <a
+        href="/users/sign_in">
+        Sign in with HarvardKey
+      </a>
+    </span>
   </div>
 </template>
 
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters('user', ['userAuthenticated'])
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   #home-content {
-    color: #bbb;
+    color: black;
     font-size: 30px;
     line-height: 34px;
     margin-left: 5%;
@@ -41,8 +61,20 @@
       width: auto;
     }
 
-    strong {
-      color: #000;
+    a {
+      color: black;
+    }
+  }
+
+  #login-link-container {
+    display: inline-block;
+    background: black;
+    color: white;
+    font-size: 24px;
+    padding: 20px 30px;
+
+    a {
+      color: white;
     }
   }
 </style>

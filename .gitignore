@@ -24,6 +24,7 @@
 .byebug_history
 /nginx
 /pgsql
+/public/assets
 /public/packs
 /public/packs-test
 /node_modules

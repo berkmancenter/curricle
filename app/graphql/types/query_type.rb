@@ -106,18 +106,19 @@ Types::QueryType = GraphQL::ObjectType.define do
   connection :coursesConnection, Connections::CoursesConnection do
     description 'Queries that return lists of courses with connection metadata'
 
-    argument :semester_range, Inputs::SemesterRangeInput, 'Range of semesters to search'
-    argument :deluxe_keywords, types[!Inputs::DeluxeKeywordInput], 'List of objects for a weighted, field-specific search'
-    argument :time_ranges, types[!Inputs::TimeRangeInput], 'List of times/days to look for courses'
-    argument :ids, types[!types.ID], 'List of course IDs'
-    argument :per_page, types.Int, 'Number of courses to return'
-    argument :page, types.Int, 'Pagination page'
-    argument :sort_by, SortByEnum, 'Sort method for search results'
-    argument :schools, types[!SchoolEnum], 'Filter results by school'
-    argument :departments, types[!DepartmentEnum], 'Filter results by department'
-    argument :subjects, types[!SubjectEnum], 'Filter results by subject'
-    argument :components, types[!ComponentEnum], 'Filter results by component'
     argument :annotated, types.Boolean, 'Only return courses annotated by current user'
+    argument :basic, types.String, 'Simple search queries using the my.harvard operators'
+    argument :components, types[!ComponentEnum], 'Filter results by component'
+    argument :deluxe_keywords, types[!Inputs::DeluxeKeywordInput], 'List of objects for a weighted, field-specific search'
+    argument :departments, types[!DepartmentEnum], 'Filter results by department'
+    argument :ids, types[!types.ID], 'List of course IDs'
+    argument :page, types.Int, 'Pagination page'
+    argument :per_page, types.Int, 'Number of courses to return'
+    argument :schools, types[!SchoolEnum], 'Filter results by school'
+    argument :semester_range, Inputs::SemesterRangeInput, 'Range of semesters to search'
+    argument :sort_by, SortByEnum, 'Sort method for search results'
+    argument :subjects, types[!SubjectEnum], 'Filter results by subject'
+    argument :time_ranges, types[!Inputs::TimeRangeInput], 'List of times/days to look for courses'
 
     resolve Resolvers::CoursesConnectionResolver.new
   end

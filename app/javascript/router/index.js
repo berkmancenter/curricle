@@ -7,7 +7,8 @@ import CurricleAbout from '../views/About'
 import CurricleExplore from '../views/explore'
 import CurricleHome from '../views/Home'
 import CurriclePlan from '../views/plan'
-import CurricleSearch from '../views/search'
+import SearchAdvanced from 'views/SearchAdvanced'
+import SearchBasic from 'views/SearchBasic'
 import SharedSchedule from '../views/SharedSchedule'
 import ExploreIndex from '../components/explore/index'
 import ExploreClasses from '../components/explore/classes'
@@ -17,7 +18,7 @@ import ExploreUniverse from '../components/explore/universe'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [
     { path: '/about', component: CurricleAbout },
     { path: '/explore',
@@ -42,9 +43,21 @@ export default new VueRouter({
     },
     { path: '/home', component: CurricleHome },
     { path: '/plan', component: CurriclePlan },
-    { path: '/search', component: CurricleSearch },
-    { path: '/search/*', component: CurricleSearch, props: deserializeSearch },
+    { path: '/search', component: SearchBasic },
+    { path: '/search/advanced', component: SearchAdvanced },
+    { path: '/search/advanced/*', component: SearchAdvanced, props: deserializeSearch },
     { path: '/shared-schedule/:scheduleToken', component: SharedSchedule, props: true },
     { path: '*', redirect: 'home' }
   ]
 })
+
+// Prevent anonymous access to any route other than the landing page
+router.beforeEach((to, _from, next) => {
+  if (to.path === '/home' || localStorage.getItem('curricle_api_token')) {
+    next()
+  } else {
+    window.location = '/users/sign_in'
+  }
+})
+
+export default router

@@ -43,16 +43,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import AdvancedSearch from 'components/search/AdvancedSearch'
-import BasicSearchActiveKeywords from 'components/search/BasicSearchActiveKeywords'
-import BasicSearchFieldDropdown from 'components/search/BasicSearchFieldDropdown'
-import BasicSearchFieldWeightDropdown from 'components/search/BasicSearchFieldWeightDropdown'
-import BasicSearchInactiveKeywords from 'components/search/BasicSearchInactiveKeywords'
-import SemesterInput from './SearchFormSemesterInput'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
+import { mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
+
+import AdvancedSearch from './AdvancedSearch'
+import BasicSearchActiveKeywords from './BasicSearchActiveKeywords'
+import BasicSearchFieldDropdown from './BasicSearchFieldDropdown'
+import BasicSearchFieldWeightDropdown from './BasicSearchFieldWeightDropdown'
+import BasicSearchInactiveKeywords from './BasicSearchInactiveKeywords'
+import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   name: 'BasicSearch',
@@ -88,7 +88,7 @@ export default {
     },
     performSearch () {
       this.$store.dispatch('search/saveSearchInHistory')
-      this.$router.push('/search/' + serializeSearch(this.searchSnapshot))
+      this.$router.push('/search/advanced/' + serializeSearch(this.searchSnapshot))
       this.$store.dispatch('search/runKeywordSearch')
     }
   }

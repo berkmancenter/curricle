@@ -12,7 +12,9 @@
       </router-link>
     </div>
 
-    <div id="nav-primary-container">
+    <div
+      v-if="userAuthenticated"
+      id="nav-primary-container">
       <router-link
         class="nav primary"
         to="/explore">
@@ -51,7 +53,7 @@
         <router-link
           class="nav sub"
           to="/explore/keywords">
-          Truth vs. Lies
+          Keyword Comparisons
         </router-link>
       </div>
 
@@ -62,6 +64,17 @@
       </router-link>
 
       <br>
+
+      <div
+        v-show="activeNavPrimary === 'search'"
+        class="nav-sub-container">
+
+        <router-link
+          class="nav sub"
+          to="/search/advanced">
+          Advanced Search
+        </router-link>
+      </div>
 
       <router-link
         class="nav primary plan"
@@ -104,6 +117,7 @@
     </div>
 
     <div
+      v-if="userAuthenticated"
       id="nav-secondary-container"
       class="text-uppercase mt-5">
       <router-link
@@ -125,10 +139,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   computed: {
+    ...mapGetters('user', ['userAuthenticated']),
     ...mapState('app', ['viewmode']),
     activeNavPrimary () {
       return this.$route.path.split('/')[1]

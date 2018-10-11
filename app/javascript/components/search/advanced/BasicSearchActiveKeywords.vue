@@ -10,7 +10,7 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Keyword from 'components/search/keyword'
+import Keyword from './keyword'
 import { mapGetters } from 'vuex'
 
 export default {

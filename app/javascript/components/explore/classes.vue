@@ -10,17 +10,22 @@
       </h4>
     </div>
 
-    <div id="visContainer">
+    <div
+      id="visContainer">
       <div
-        id="courseTypeVis"
-        class="text-left">
-        &nbsp; Components
+        id="courseTypeVis">
+        <h5
+          id="courseTypeHeadline">
+          Components
+        </h5>
       </div>
 
       <div
-        id="departmentVis"
-        class="text-right">
-        Departments &nbsp;
+        id="departmentVis">
+        <h5
+          id="departmentHeadline">
+          Departments
+        </h5>
       </div>
 
       <div
@@ -28,7 +33,8 @@
         class="w-100 float-left"/>
     </div>
 
-    <div id="vis-description">
+    <div
+      id="vis-description">
       <h3>Explore:</h3>
 
       <p>
@@ -54,7 +60,7 @@ import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/classes'
 import { mapActions, mapGetters } from 'vuex'
-import SemesterInput from 'components/search/SearchFormSemesterInput'
+import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
@@ -79,12 +85,26 @@ export default {
 
 <style lang="scss" scoped>
 #visContainer {
-  width: 960px;
-
   /deep/ {
     svg {
       display: block;
       margin: 0;
+    }
+
+    #courseTypeHeadline:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #departmentHeadline:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+      width: 0px;  /* remove scrollbar space */
+      background: transparent;
     }
 
     #courseTypeVis,
@@ -95,7 +115,17 @@ export default {
       max-height:100%;
     }
 
+    #courseTypeVis {
+      text-align: left;
+    }
+
+    #departmentVis {
+      text-align: right;
+    }
+
     #classVis {
+      width: 100%;
+      float:left;
       overflow: scroll;
       max-height: 100%;
     }
@@ -113,7 +143,6 @@ export default {
     .courseTypeText,
     .courseTypeRect {
       cursor: pointer;
-      fill: #2C3194;
     }
 
     .classText {
@@ -140,11 +169,11 @@ export default {
     font-size: 14px;
 
     span.components {
-      color: #d10f84;
+      color: #f0cf61;
     }
 
     span.departments {
-      color: #00adf0;
+      color: #32b67a;
     }
   }
 }

@@ -25,7 +25,7 @@ module Resolvers
 
     def determine_term_year_range(semester)
       term_year_max = semester[:term_year]
-      term_year_min = term_year_max - 2
+      term_year_min = term_year_max - 10
 
       term_year_min..term_year_max
     end
@@ -56,7 +56,7 @@ module Resolvers
       CourseInstructor
         .where(course_id: course_ids)
         .where(term_year: term_year_range)
-        .where(instructor_role: %w[HEAD PI]) # eliminate TFs, course coordinators, etc.
+        .where(instructor_role: %w[HEAD INST PI]) # eliminate TFs, course coordinators, etc.
         .where.not(email: instructor_email)
         .distinct
         .pluck(:email)

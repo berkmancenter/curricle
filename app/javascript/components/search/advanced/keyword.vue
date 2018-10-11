@@ -106,7 +106,7 @@ export default {
     },
     performSearch () {
       this.$store.dispatch('search/saveSearchInHistory')
-      this.$router.push('/search/' + serializeSearch(this.searchSnapshot))
+      this.$router.push('/search/advanced/' + serializeSearch(this.searchSnapshot))
       this.$store.dispatch('search/runKeywordSearch')
     }
   }

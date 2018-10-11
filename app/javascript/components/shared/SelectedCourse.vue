@@ -92,11 +92,19 @@ export default {
       return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
     }
   },
+  watch: {
+    course: {
+      immediate: true,
+      handler: function (newCourse) {
+        this.$store.dispatch('courses/registerCourses', [newCourse])
+      }
+    }
+  },
   methods: {
     ...mapActions('app', ['closeSidebar']),
     searchByCourseId (courseId) {
       this.$store.dispatch('search/searchByCourseId', courseId)
-      this.$router.push('/search/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
+      this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
     }
   }
 }
