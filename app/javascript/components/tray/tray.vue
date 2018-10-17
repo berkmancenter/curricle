@@ -16,13 +16,14 @@
     </div>
 
     <div class="mx-0">
-      <semester-sidebar
-        v-show="viewmode.tray=='semester'"
-      />
+      <sidebar-list
+        v-show="viewmode.tray === 'list-view'"/>
+
+      <sidebar-semester
+        v-show="viewmode.tray=='semester'"/>
+
       <multi-year-sidebar
-        v-show="viewmode.tray=='multi-year'"
-      />
-      <sidebar-list v-show="viewmode.tray === 'list-view'"/>
+        v-show="viewmode.tray=='multi-year'"/>
     </div>
   </div>
 </template>
@@ -32,18 +33,18 @@ import { mapState, mapActions } from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ViewSelector from 'components/shared/view-selector'
 import MultiYearSidebar from 'components/tray/multi-year-sidebar'
-import SemesterSidebar from 'components/tray/semester-sidebar'
 import ShareLink from 'components/tray/TrayShareLink'
 import SidebarList from 'components/tray/SidebarList'
+import SidebarSemester from 'components/tray/SidebarSemester'
 
 export default {
   components: {
     FontAwesomeIcon,
     MultiYearSidebar,
-    SemesterSidebar,
     ViewSelector,
     ShareLink,
-    SidebarList
+    SidebarList,
+    SidebarSemester
   },
   computed: {
     ...mapState('app', ['viewmode'])

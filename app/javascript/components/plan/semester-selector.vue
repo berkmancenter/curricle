@@ -8,7 +8,7 @@
     </b-dropdown-item>
 
     <b-dropdown-item
-      v-for="sem in theSemesters"
+      v-for="sem in sortedSemestersInTray"
       :key="sem"
       @click="setSemester(sem)">
       {{ sem }}
@@ -35,10 +35,7 @@ export default {
   },
   computed: {
     ...mapState('plan', ['semester', 'filters']),
-    ...mapGetters('plan', ['sortedSemestersInSchedule', 'sortedSemestersInTray']),
-    theSemesters () {
-      return this.source === 'tray' ? this.sortedSemestersInTray : this.sortedSemestersInSchedule
-    },
+    ...mapGetters('plan', ['sortedSemestersInTray']),
     semesterLabel () {
       const semesterName = this.source === 'tray' ? this.filters.semester : this.semester
 
@@ -46,9 +43,9 @@ export default {
     }
   },
   watch: {
-    sortedSemestersInSchedule () {
-      if (this.semester === '' || !_.includes(this.sortedSemestersInSchedule, this.semester)) {
-        this.setSemester(this.sortedSemestersInSchedule[0])
+    sortedSemestersInTray () {
+      if (this.semester === '' || !_.includes(this.sortedSemestersInTray, this.semester)) {
+        this.setSemester(this.sortedSemestersInTray[0])
       }
     }
   },

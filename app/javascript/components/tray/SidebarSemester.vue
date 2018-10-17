@@ -1,5 +1,5 @@
 <template>
-  <div class="semester-sidebar">
+  <div>
     <semester-selector
       mode="state"
       source="schedule"/>
@@ -51,13 +51,6 @@ export default {
       return partitionCoursesByDay(courses)
     },
     days: () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-  },
-  watch: {
-    sortedSemestersInSchedule () {
-      if (!this.sortedSemestersInSchedule.includes(this.semester)) {
-        this.setSemester(this.sortedSemestersInSchedule[0])
-      }
-    }
   },
   mounted () {
     if (this.sortedSemestersInSchedule && !this.sortedSemestersInSchedule.includes(this.semester)) {
