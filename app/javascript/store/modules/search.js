@@ -111,35 +111,35 @@ const getters = {
 }
 
 const actions = {
-  addKeyword ({commit}, keyword) {
+  addKeyword ({ commit }, keyword) {
     commit('ADD_KEYWORD', keyword)
   },
-  deactivateKeyword ({commit, state}, keyword) {
+  deactivateKeyword ({ commit, state }, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
       commit('DEACTIVATE_KEYWORD', idx)
     }
   },
-  activateKeyword ({commit, state}, keyword) {
+  activateKeyword ({ commit, state }, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
       commit('ACTIVATE_KEYWORD', idx)
     }
   },
-  removeKeyword ({commit, state}, keyword) {
+  removeKeyword ({ commit, state }, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
       commit('DELETE_KEYWORD', idx)
     }
   },
-  runSearchAgain ({dispatch, getters}) {
+  runSearchAgain ({ dispatch, getters }) {
     if (getters.activeBasicSearch) {
       dispatch('runBasicSearchAgain')
     } else {
       dispatch('runKeywordSearchAgain')
     }
   },
-  runBasicSearch ({commit, state, getters, dispatch}) {
+  runBasicSearch ({ commit, state, getters, dispatch }) {
     const query = getters.activeBasicSearch
 
     commit('RESET_RESULTS_PAGE')
@@ -157,7 +157,7 @@ const actions = {
       }
     )
   },
-  runBasicSearchAgain ({commit, state, getters, dispatch}) {
+  runBasicSearchAgain ({ commit, state, getters, dispatch }) {
     const query = getters.activeBasicSearch
 
     commit('INCREMENT_RESULTS_PAGE')
@@ -174,7 +174,7 @@ const actions = {
       }
     )
   },
-  runKeywordSearch ({commit, state, getters, dispatch}) {
+  runKeywordSearch ({ commit, state, getters, dispatch }) {
     commit('SET_BASIC_SEARCH', '')
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
@@ -199,7 +199,7 @@ const actions = {
       state.results = []
     }
   },
-  runKeywordSearchAgain ({commit, state, getters, dispatch}) {
+  runKeywordSearchAgain ({ commit, state, getters, dispatch }) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
     _.forEach(kw, k => delete k.ident)
@@ -222,7 +222,7 @@ const actions = {
       state.results = []
     }
   },
-  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler, userCoursesSearch, basic}, searchOptions) {
+  runSearch ({ commit, state, getters, dispatch }, { keywords, ids, handler, userCoursesSearch, basic }, searchOptions) {
     var vars = {}
     var query = COURSES_SEARCH_QUERY
 
@@ -316,22 +316,22 @@ const actions = {
 
     promise.then(handler)
   },
-  changeSortBy ({commit, state, dispatch}, value) {
+  changeSortBy ({ commit, state, dispatch }, value) {
     if (state.sortBy !== value) {
       commit('SET_SORT_BY', value)
       dispatch('runKeywordSearch')
     }
   },
-  setTimeRanges ({commit}, r) {
+  setTimeRanges ({ commit }, r) {
     commit('SET_TIME_RANGES', r)
   },
-  setUseFilters ({commit}, r) {
+  setUseFilters ({ commit }, r) {
     commit('SET_USE_FILTERS', r)
   },
-  saveSearchInHistory ({commit, getters}) {
+  saveSearchInHistory ({ commit, getters }) {
     commit('PUSH_SEARCH_HISTORY', getters.searchSnapshot)
   },
-  populateSearchState ({commit}, obj) {
+  populateSearchState ({ commit }, obj) {
     commit('RESET_FACETS')
     commit('SET_SEARCH_STATE', obj)
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="table-responsive">
     <table class="course-list-item invert table table-borderless">
-      <thead/>
+      <thead />
       <tbody>
         <tr
           v-for="course in courses"
@@ -17,13 +17,15 @@
               v-show="editable"
               :course="course.id"
               :invert="invert"
-              type="annotated"/>
+              type="annotated"
+            />
 
             <course-action
               v-show="editable"
               :course="course.id"
               :invert="invert"
-              type="schedule"/>
+              type="schedule"
+            />
           </td>
         </tr>
       </tbody>

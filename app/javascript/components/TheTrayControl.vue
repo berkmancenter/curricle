@@ -2,7 +2,8 @@
   <div
     id="tray-control"
     class="background-black pointer text-uppercase"
-    @click="trayToggle">
+    @click="trayToggle"
+  >
     Tray
   </div>
 </template>

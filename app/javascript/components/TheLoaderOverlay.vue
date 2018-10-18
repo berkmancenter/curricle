@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="searchRunning"
-    class="loading"/>
+    class="loading"
+  />
 </template>
 
 <script>

@@ -35,7 +35,7 @@ function initSetup (selectCourseFunction, selectedSemester) {
   d3.select('#visContainer').selectAll('svg').remove()
 
   const marginX = 1
-  margin = {top: 40, right: marginX, bottom: 10, left: marginX}
+  margin = { top: 40, right: marginX, bottom: 10, left: marginX }
   width = documentWidth / 2 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom
   courseTypeBarScale = d3.scaleLinear()

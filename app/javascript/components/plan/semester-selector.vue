@@ -1,16 +1,19 @@
 <template>
   <b-dropdown
-    :text="semesterLabel">
+    :text="semesterLabel"
+  >
     <b-dropdown-item
       v-show="mode !== 'state'"
-      @click="setSemester(null)">
+      @click="setSemester(null)"
+    >
       All Semesters
     </b-dropdown-item>
 
     <b-dropdown-item
       v-for="sem in sortedSemestersInTray"
       :key="sem"
-      @click="setSemester(sem)">
+      @click="setSemester(sem)"
+    >
       {{ sem }}
     </b-dropdown-item>
   </b-dropdown>

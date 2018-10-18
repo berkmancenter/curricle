@@ -1,7 +1,8 @@
 <template>
   <div
     id="selected-course"
-    class="pt-3 px-3">
+    class="pt-3 px-3"
+  >
 
     <div>
       <span class="float-left">
@@ -12,31 +13,36 @@
         <font-awesome-icon
           class="pointer"
           icon="times"
-          @click="closeSidebar"/>
+          @click="closeSidebar"
+        />
       </span>
     </div>
 
     <div
       v-if="userAuthenticated"
-      class="actions mt-3">
+      class="actions mt-3"
+    >
       <p class="float-left">
         <course-action
           :course="theCourse.id"
           :invert="true"
-          type="tray"/>
+          type="tray"
+        />
 
         &nbsp;
 
         <course-action
           :course="theCourse.id"
           :invert="true"
-          type="schedule"/>
+          type="schedule"
+        />
       </p>
 
       <p class="course-history float-right text-right">
         <a
           href="javascript:"
-          @click="searchByCourseId(courseId)">
+          @click="searchByCourseId(courseId)"
+        >
           See course history
         </a>
       </p>
@@ -48,25 +54,26 @@
 
     <selected-course-annotations
       v-if="userAuthenticated"
-      :course-id="theCourse.id"/>
+      :course-id="theCourse.id"
+    />
 
     <selected-course-tagging
-      :course-id="theCourse.id"/>
+      :course-id="theCourse.id"
+    />
   </div>
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { mapActions, mapState, mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/CourseAction'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SelectedCourseAnnotations from './SelectedCourseAnnotations'
 import SelectedCourseDetails from './SelectedCourseDetails'
 import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
   components: {
-    serializeSearch,
     CourseAction,
     FontAwesomeIcon,
     SelectedCourseAnnotations,

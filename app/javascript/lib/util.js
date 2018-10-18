@@ -811,7 +811,7 @@ function searchTypes (str) {
   return _(lkup).pick(types).values().value()
 }
 
-export {deserializeSearch}
+export { deserializeSearch }
 
 function serializeSearch (obj) {
   // TODO: sanity-checks?
@@ -827,7 +827,7 @@ function serializeSearch (obj) {
   if (obj.keywords) {
     elems.k = _.map(
       obj.keywords,
-      ({text, applyTo}) => applyToString(applyTo) + ':' + encodeURI(text)
+      ({ text, applyTo }) => applyToString(applyTo) + ':' + encodeURI(text)
     )
   }
 
@@ -863,4 +863,4 @@ function applyToString (arr) {
   return str
 }
 
-export {serializeSearch}
+export { serializeSearch }

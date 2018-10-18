@@ -1,10 +1,12 @@
 <template>
   <div
     v-show="inactiveKeywords.length > 0"
-    class="mt-3">
+    class="mt-3"
+  >
     <b-alert
       show
-      variant="secondary">
+      variant="secondary"
+    >
       <span class="inactive">Inactive</span>
       <keyword
         v-for="(keyword,idx) in inactiveKeywords"
@@ -17,13 +19,11 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Keyword from './keyword'
 import { mapGetters } from 'vuex'
+import Keyword from './keyword'
 
 export default {
   components: {
-    FontAwesomeIcon,
     Keyword
   },
   computed: {

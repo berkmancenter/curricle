@@ -15,7 +15,7 @@ if (documentWidth > 800) {
   documentWidth = 800
 }
 
-var margin = {top: 50, right: 100, bottom: 150, left: 50}
+var margin = { top: 50, right: 100, bottom: 150, left: 50 }
 var width = documentWidth - margin.left - margin.right
 var height = 900 - margin.top - margin.bottom
 var svg

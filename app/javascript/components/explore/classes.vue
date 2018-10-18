@@ -1,40 +1,49 @@
 <template>
   <div>
     <div
-      class="text-center text-uppercase">
+      class="text-center text-uppercase"
+    >
       Select a Component and Department
 
       <h4
-        class="text-uppercase font-weight-bold">
+        class="text-uppercase font-weight-bold"
+      >
         Learning Modes
       </h4>
     </div>
 
     <div
-      id="visContainer">
+      id="visContainer"
+    >
       <div
-        id="courseTypeVis">
+        id="courseTypeVis"
+      >
         <h5
-          id="courseTypeHeadline">
+          id="courseTypeHeadline"
+        >
           Components
         </h5>
       </div>
 
       <div
-        id="departmentVis">
+        id="departmentVis"
+      >
         <h5
-          id="departmentHeadline">
+          id="departmentHeadline"
+        >
           Departments
         </h5>
       </div>
 
       <div
         id="classVis"
-        class="w-100 float-left"/>
+        class="w-100 float-left"
+      />
     </div>
 
     <div
-      id="vis-description">
+      id="vis-description"
+    >
       <h3>Explore:</h3>
 
       <p>
@@ -45,12 +54,13 @@
         <span
           v-b-tooltip.hover
           title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;components.&quot; In the left column, find your desired component, and look in the right column to select your desired department. Once you have selected both a department and component, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Component to reset the visualization and start again."
-          class="pointer">
+          class="pointer"
+        >
           MORE&nbsp;&gt;
         </span>
       </p>
 
-      <semester-input/>
+      <semester-input />
     </div>
   </div>
 </template>

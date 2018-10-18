@@ -99,7 +99,7 @@ function nestData (data) {
     // .rollup(function(d) { return d.count; });
     .rollup(function (d) { return d3.sum(d, function (d) { return d.count }) })
 
-  root = d3.hierarchy({values: nest.entries(data)}, function (d) { return d.values })
+  root = d3.hierarchy({ values: nest.entries(data) }, function (d) { return d.values })
     .sum(function (d) { return d.value })
     .sort(function (a, b) { return b.value - a.value })
 
@@ -308,7 +308,7 @@ function closeUpVis (data, xPos, yPos, radius) {
     .size([diameter * 0.8, diameter * 0.8])
     .padding(10)
 
-  var rootCloseUp = d3.hierarchy({children: data})
+  var rootCloseUp = d3.hierarchy({ children: data })
     .sum(function (d) { return 1 })
 
   packCloseUp(rootCloseUp)

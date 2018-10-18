@@ -1,17 +1,19 @@
 <template>
   <div>
     <div
-      class="text-center text-uppercase">
+      class="text-center text-uppercase"
+    >
       Instructor Networks
 
       <h4
-        class="text-uppercase font-weight-bold">
+        class="text-uppercase font-weight-bold"
+      >
         {{ submittedName }}
       </h4>
     </div>
 
     <div id="interfaceContainer">
-      <div id="visContainer"/>
+      <div id="visContainer" />
     </div>
 
     <div id="vis-description">
@@ -27,23 +29,26 @@
         <span
           v-b-tooltip.hover
           title="Instructors from different fields often explore shared interests by teaching together; this visualization explores networks of faculty by showing classes co-taught by instructors. Type the name of an instructor into the search bar and a network will appear with co-teachers. Lines connect these instructors to courses and the departments that offer them. Select course titles to learn more. Shift across instructors for new connections and patterns."
-          class="pointer">
+          class="pointer"
+        >
           MORE&nbsp;&gt;
         </span>
       </p>
 
-      <semester-input/>
+      <semester-input />
 
       <div
         id="searchContainer"
-        class="mt-3">
+        class="mt-3"
+      >
         <div id="search">
           <b-form @submit="onSubmit">
             <b-input-group>
               <b-input-group-prepend is-text>
                 <img
                   class="icon"
-                  src="/images/icons/eye_black.png">
+                  src="/images/icons/eye_black.png"
+                >
               </b-input-group-prepend>
 
               <b-form-input
@@ -52,13 +57,15 @@
                 type="search"
                 class="search pl-0"
                 required
-                placeholder="Enter instructor name"/>
+                placeholder="Enter instructor name"
+              />
 
               <b-input-group-append is-text>
                 <img
                   class="icon pointer"
                   src="/images/icons/return_arrow.png"
-                  @click="onSubmit">
+                  @click="onSubmit"
+                >
               </b-input-group-append>
             </b-input-group>
           </b-form>

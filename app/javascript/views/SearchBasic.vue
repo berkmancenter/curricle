@@ -2,9 +2,9 @@
   <div class="py-5">
     <h3>Search:</h3>
 
-    <search-form/>
+    <search-form />
 
-    <search-results v-show="results.length"/>
+    <search-results v-show="results.length" />
   </div>
 </template>
 

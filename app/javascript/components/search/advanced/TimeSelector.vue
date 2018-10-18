@@ -13,18 +13,19 @@
       :disabled="!enabled"
       :formatter="formatTime"
       tooltip="always"
-      @callback="callback"/>
+      @callback="callback"
+    />
   </div>
 </template>
 
 <script>
 import { prettyTime } from 'lib/util'
 import _ from 'lodash'
-import vueSlider from 'vue-slider-component'
+import VueSlider from 'vue-slider-component'
 
 export default {
   components: {
-    vueSlider
+    VueSlider
   },
   props: {
     rangestart: {

@@ -1,15 +1,19 @@
 <template>
   <div
-    v-if="hasData">
+    v-if="hasData"
+  >
     <div
       v-for="(day,index) in week"
       v-show="!condensed || day.timeBar"
       :key="index"
-      :class="{ conflicted: conflicts[index] }">
+      :class="{ conflicted: conflicts[index] }"
+    >
       <div
-        :class="{ inactive: !(day.timeBar && day.timeBar.length) }">
+        :class="{ inactive: !(day.timeBar && day.timeBar.length) }"
+      >
         <span
-          class="day-name">
+          class="day-name"
+        >
           {{ day.abbrev }}
         </span>
 
@@ -18,7 +22,8 @@
     </div>
   </div>
   <div
-    v-else>
+    v-else
+  >
     Schedule TBD
   </div>
 </template>

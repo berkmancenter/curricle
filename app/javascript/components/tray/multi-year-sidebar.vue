@@ -2,12 +2,14 @@
   <div class="multi-year-sidebar">
     <div
       v-for="semester in sortedSemestersInTray.slice().reverse()"
-      :key="semester">
+      :key="semester"
+    >
       <strong>{{ semester }}</strong>
       <div
         class="float-right pointer"
         @click="toggleEditSemester(semester)"
-        v-text="isEditing[semester] ? 'Done' : 'Edit'"/>
+        v-text="isEditing[semester] ? 'Done' : 'Edit'"
+      />
       <course-list
         :courses="(isEditing[semester] ? trayCoursesBySemester[semester] : scheduledCoursesBySemester[semester]) || []"
         :editable="isEditing[semester]"

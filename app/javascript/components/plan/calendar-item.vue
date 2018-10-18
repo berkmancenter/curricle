@@ -3,7 +3,8 @@
     :class="{ provisional, selected }"
     :style="computedStyle"
     class="calendar-item text-uppercase font-weight-bold p-2"
-    @click="selectCourse(item)">
+    @click="selectCourse(item)"
+  >
     {{ item.title }}
 
     <div class="course-component">

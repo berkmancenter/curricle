@@ -1,8 +1,10 @@
 <template>
   <div
-    class="row py-5">
+    class="row py-5"
+  >
     <div
-      class="col-md-8">
+      class="col-md-8"
+    >
       <h3>
         About:
       </h3>
@@ -37,12 +39,14 @@
         Make use of the
         <a
           target="_blank"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfZdL8a7O51UCurjNinVRx0RJI8ahBdUIf0uHcoNfDt6--Elw/viewform?usp=sf_link">
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfZdL8a7O51UCurjNinVRx0RJI8ahBdUIf0uHcoNfDt6--Elw/viewform?usp=sf_link"
+        >
           feedback form
         </a>
         to report bugs and issues. For general inquiries, send us an email at
         <a
-          href="mailto:info@metalab.harvard.edu">
+          href="mailto:info@metalab.harvard.edu"
+        >
           info@metalab.harvard.edu
         </a>
       </p>

@@ -7,14 +7,16 @@
         v-model="editableText"
         :maxlength="maxLength"
         rows="5"
-        class="w-100"/>
+        class="w-100"
+      />
 
       <span class="word-count">{{ editableTextLength }} / {{ maxLength }} characters</span>
 
       <div class="button-container">
         <button
           class="btn clearfix"
-          @click="updateAnnotations">
+          @click="updateAnnotations"
+        >
           Save
         </button>
       </div>
@@ -23,7 +25,6 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
 import COURSE_QUERY from '../../graphql/Course.gql'
 
@@ -37,9 +38,6 @@ export default {
         }
       }
     }
-  },
-  components: {
-    FontAwesomeIcon
   },
   props: {
     courseId: {

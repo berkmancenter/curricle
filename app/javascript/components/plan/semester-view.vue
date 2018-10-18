@@ -10,7 +10,8 @@
         <b-row>
           <b-col
             v-for="course in coursesTBD"
-            :key="course.id">
+            :key="course.id"
+          >
             <calendar-item
               :item="course"
               :scale="scale"
@@ -56,8 +57,8 @@
         <b-row>
           <calendar-item
             v-for="item in currentScheduleByDay[index]"
-            :item="item.course"
             :key="item.course.id"
+            :item="item.course"
             :scale="scale"
             :offset="item.meetingTime[0] - earliestIdx"
             :height="item.meetingTime[1]"

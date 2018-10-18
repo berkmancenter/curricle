@@ -2,17 +2,20 @@
   <div>
     <semester-selector
       mode="state"
-      source="schedule"/>
+      source="schedule"
+    />
 
     <div
       v-for="day in days"
-      :key="day">
+      :key="day"
+    >
       <strong>{{ day }}</strong>
       <div
         v-show="trayCoursesByDay[day] && trayCoursesByDay[day].length"
         class="float-right pointer"
         @click="toggleEditDay(day)"
-        v-text="isEditing[day] ? 'Done' : 'Edit'"/>
+        v-text="isEditing[day] ? 'Done' : 'Edit'"
+      />
       <course-list
         :courses="isEditing[day] ? trayCoursesByDay[day] : coursesByDay[day]"
         :editable="isEditing[day]"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <department-selector/>
+    <department-selector />
 
     <semester-selector
       mode="filter"
@@ -12,13 +12,11 @@
 <script>
 import { mapState } from 'vuex'
 import DepartmentSelector from 'components/plan/department-selector'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SemesterSelector from 'components/plan/semester-selector'
 
 export default {
   components: {
     DepartmentSelector,
-    FontAwesomeIcon,
     SemesterSelector
   },
   data () {

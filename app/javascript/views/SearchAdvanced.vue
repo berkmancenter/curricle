@@ -2,9 +2,9 @@
   <div class="py-5">
     <h3>Advanced Search:</h3>
 
-    <search-form v-if="userAuthenticated"/>
+    <search-form v-if="userAuthenticated" />
 
-    <search-results v-show="results.length"/>
+    <search-results v-show="results.length" />
   </div>
 </template>
 

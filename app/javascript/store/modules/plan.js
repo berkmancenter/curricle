@@ -50,22 +50,22 @@ const getters = {
 }
 
 const actions = {
-  setFilter ({commit}, filter) {
+  setFilter ({ commit }, filter) {
     commit('SET_FILTER', filter)
   },
-  setSemester ({commit}, semester) {
+  setSemester ({ commit }, semester) {
     commit('SET_SEMESTER', semester)
   },
-  addProvisionalCourse ({commit}, course) {
+  addProvisionalCourse ({ commit }, course) {
     commit('ADD_PROVISIONAL_COURSE', course)
   },
-  removeProvisionalCourse ({commit}, course) {
+  removeProvisionalCourse ({ commit }, course) {
     commit('DEL_PROVISIONAL_COURSE', course)
   }
 }
 
 const mutations = {
-  SET_FILTER (state, {name, value}) {
+  SET_FILTER (state, { name, value }) {
     if (value) {
       Vue.set(state.filters, name, value)
     } else {

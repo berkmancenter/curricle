@@ -6,14 +6,16 @@
       v-model="tagInput"
       class="input-tag text-white w-100 p-2"
       placeholder="Enter a tag"
-      @keyup.enter="addTag()">
+      @keyup.enter="addTag()"
+    >
 
     <span
       v-for="tag of course.tags"
       :key="tag.id"
       class="active-tag mt-3 mr-2"
-      @click="removeTag(tag.id)">
-      {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times"/>
+      @click="removeTag(tag.id)"
+    >
+      {{ tag.name }}&nbsp;&nbsp;<font-awesome-icon icon="times" />
     </span>
   </div>
 </template>

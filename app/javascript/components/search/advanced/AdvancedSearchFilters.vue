@@ -6,8 +6,9 @@
       <div
         v-for="facet in facets"
         :key="facet.key"
-        class="col-md-3">
-        <advanced-search-filters-facet :facet="facet"/>
+        class="col-md-3"
+      >
+        <advanced-search-filters-facet :facet="facet" />
       </div>
     </div>
   </div>

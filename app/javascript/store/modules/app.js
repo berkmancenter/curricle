@@ -31,21 +31,21 @@ const getters = {
 }
 
 const actions = {
-  trayToggle ({commit, getters, state}) {
+  trayToggle ({ commit, getters, state }) {
     var wasVis = getters.isTrayVisible
     commit('REMOVE_SIDEBAR_ELEM', { type: 'tray' })
     if (!wasVis) {
       commit('ADD_SIDEBAR_ELEM', { type: 'tray' })
     }
   },
-  selectView ({commit}, view) { commit('CHOOSE_SIDEBAR_VIEW', view) },
-  selectCourse ({commit, getters}, course) {
+  selectView ({ commit }, view) { commit('CHOOSE_SIDEBAR_VIEW', view) },
+  selectCourse ({ commit, getters }, course) {
     // with the current setup we support only a single visible course,
     // however it would be easy to support a course history/stack
     commit('REMOVE_SIDEBAR_ELEM', { type: 'course' })
     commit('ADD_SIDEBAR_ELEM', { type: 'course', payload: course })
   },
-  closeSidebar ({commit}) {
+  closeSidebar ({ commit }) {
     commit('REMOVE_TOP_SIDEBAR_ELEM')
   }
 }

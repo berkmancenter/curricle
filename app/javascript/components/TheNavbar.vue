@@ -1,23 +1,28 @@
 <template>
   <nav
     id="nav-main"
-    class="d-none d-md-block h-100 pt-5 px-4">
+    class="d-none d-md-block h-100 pt-5 px-4"
+  >
     <div
       id="logo"
-      class="text-center">
+      class="text-center"
+    >
       <router-link to="/">
         <img
           class="w-100"
-          src="/images/logos/curricle-black-bg.svg">
+          src="/images/logos/curricle-black-bg.svg"
+        >
       </router-link>
     </div>
 
     <div
       v-if="userAuthenticated"
-      id="nav-primary-container">
+      id="nav-primary-container"
+    >
       <router-link
         class="nav primary"
-        to="/explore">
+        to="/explore"
+      >
         Explore
       </router-link>
 
@@ -25,10 +30,12 @@
 
       <div
         v-show="activeNavPrimary === 'explore'"
-        class="nav-sub-container">
+        class="nav-sub-container"
+      >
         <router-link
           class="nav sub"
-          to="/explore/classes">
+          to="/explore/classes"
+        >
           Learning Modes
         </router-link>
 
@@ -36,7 +43,8 @@
 
         <router-link
           class="nav sub"
-          to="/explore/instructor">
+          to="/explore/instructor"
+        >
           Instructor Networks
         </router-link>
 
@@ -44,7 +52,8 @@
 
         <router-link
           class="nav sub"
-          to="/explore/universe">
+          to="/explore/universe"
+        >
           Course Universe
         </router-link>
 
@@ -52,14 +61,16 @@
 
         <router-link
           class="nav sub"
-          to="/explore/keywords">
+          to="/explore/keywords"
+        >
           Keyword Comparisons
         </router-link>
       </div>
 
       <router-link
         class="nav primary"
-        to="/search">
+        to="/search"
+      >
         Search
       </router-link>
 
@@ -67,18 +78,21 @@
 
       <div
         v-show="activeNavPrimary === 'search'"
-        class="nav-sub-container">
+        class="nav-sub-container"
+      >
 
         <router-link
           class="nav sub"
-          to="/search/advanced">
+          to="/search/advanced"
+        >
           Advanced Search
         </router-link>
       </div>
 
       <router-link
         class="nav primary plan"
-        to="/plan">
+        to="/plan"
+      >
         Plan
       </router-link>
 
@@ -87,11 +101,13 @@
       <!-- TODO: Update Plan navigation to use vue-router -->
       <div
         v-show="activeNavPrimary === 'plan'"
-        class="nav-sub-container">
+        class="nav-sub-container"
+      >
         <span
           :class="{ 'router-link-exact-active': viewmode['plan'] === 'list-view' }"
           class="nav sub"
-          @click="selectView({ view: 'list-view', type: 'plan' })">
+          @click="selectView({ view: 'list-view', type: 'plan' })"
+        >
           List
         </span>
 
@@ -100,7 +116,8 @@
         <span
           :class="{ 'router-link-exact-active': viewmode['plan'] === 'semester' }"
           class="nav sub"
-          @click="selectView({ view: 'semester', type: 'plan' })">
+          @click="selectView({ view: 'semester', type: 'plan' })"
+        >
           Week
         </span>
 
@@ -110,7 +127,8 @@
           :class="{ 'router-link-exact-active': viewmode['plan'] === 'multi-year' }"
           class="nav sub"
           href="javascript:null"
-          @click="selectView({ view: 'multi-year', type: 'plan' })">
+          @click="selectView({ view: 'multi-year', type: 'plan' })"
+        >
           Semester
         </span>
       </div>
@@ -119,10 +137,12 @@
     <div
       v-if="userAuthenticated"
       id="nav-secondary-container"
-      class="text-uppercase mt-5">
+      class="text-uppercase mt-5"
+    >
       <router-link
         class="nav secondary"
-        to="/about">
+        to="/about"
+      >
         About
       </router-link>
 
@@ -131,7 +151,8 @@
       <a
         class="nav secondary"
         target="_blank"
-        href="http://curricle.wpengine.com">
+        href="http://curricle.wpengine.com"
+      >
         Curricle Lens
       </a>
     </div>

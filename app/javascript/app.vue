@@ -1,42 +1,47 @@
 <template>
   <div id="app">
-    <loader-overlay/>
+    <loader-overlay />
 
     <the-tray-control
       v-if="userAuthenticated"
-      v-show="!sidebarCurrentType"/>
+      v-show="!sidebarCurrentType"
+    />
 
     <div class="row h-100">
       <div
         id="nav-container"
-        class="col-md-2 px-0">
-        <navbar/>
+        class="col-md-2 px-0"
+      >
+        <navbar />
       </div>
 
       <div
         id="main-container"
-        class="col-md-8">
+        class="col-md-8"
+      >
         <keep-alive>
-          <router-view/>
+          <router-view />
         </keep-alive>
       </div>
 
       <div
         id="sidebar-container"
         :class="{ active: sidebarCurrentType }"
-        class="col-md-2 px-0">
+        class="col-md-2 px-0"
+      >
         <the-logout-link
           v-if="userAuthenticated"
-          v-show="!sidebarCurrentType"/>
+          v-show="!sidebarCurrentType"
+        />
 
         <the-sidebar />
 
-        <the-feedback-link/>
+        <the-feedback-link />
       </div>
 
     </div>
 
-    <course-observer/>
+    <course-observer />
   </div>
 </template>
 

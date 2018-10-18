@@ -1,10 +1,12 @@
 <template>
   <div
     id="authentication-container"
-    class="text-right text-uppercase">
+    class="text-right text-uppercase"
+  >
     <span
       class="pointer"
-      @click="logout">
+      @click="logout"
+    >
       Logout
     </span>
   </div>

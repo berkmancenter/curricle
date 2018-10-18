@@ -1,11 +1,13 @@
 <template>
   <div>
     <div
-      class="text-center text-uppercase">
+      class="text-center text-uppercase"
+    >
       Keyword Comparisons
 
       <h4
-        class="text-uppercase font-weight-bold">
+        class="text-uppercase font-weight-bold"
+      >
         {{ keywordOne }} / {{ keywordTwo }}
       </h4>
     </div>
@@ -15,28 +17,33 @@
         <ul>
           <li
             class="dimSelect active"
-            value="component">
+            value="component"
+          >
           Component</li> |
 
           <li
             class="dimSelect"
-            value="subject_description">
+            value="subject_description"
+          >
           Subject</li> |
 
           <li
             class="dimSelect"
-            value="units_maximum">
+            value="units_maximum"
+          >
           Units</li> |
 
           <li
             class="dimSelect"
-            value="class_academic_org_description">
+            value="class_academic_org_description"
+          >
           Department</li> |
 
           <li
             id="dimClass"
             class="dimSelect"
-            value="title">
+            value="title"
+          >
             Class
           </li>
         </ul>
@@ -45,28 +52,33 @@
       <div id="searchContainer">
         <div
           id="searchOne"
-          class="searchBox">
+          class="searchBox"
+        >
           <input
             id="searchBoxOne"
             v-model="searchBoxOne"
             class="searchBoxInput"
             type="text"
             placeholder="search term..."
-            @keyup.enter="updateKeywords">
+            @keyup.enter="updateKeywords"
+          >
 
           <button
             id="searchBoxOneButton"
-            class="searchBoxButton">
+            class="searchBoxButton"
+          >
             &gt;
           </button>
         </div>
 
         <div
           id="searchTwo"
-          class="searchBox">
+          class="searchBox"
+        >
           <button
             id="searchBoxTwoButton"
-            class="searchBoxButton">
+            class="searchBoxButton"
+          >
             &lt;
           </button>
 
@@ -76,11 +88,12 @@
             class="searchBoxInput"
             type="text"
             placeholder="search term..."
-            @keyup.enter="updateKeywords">
+            @keyup.enter="updateKeywords"
+          >
         </div>
       </div>
 
-      <div id="visContainer"/>
+      <div id="visContainer" />
     </div>
 
     <div id="vis-description">
@@ -92,12 +105,13 @@
         <span
           v-b-tooltip.hover
           title="In this visualization, you can explore the use of key terms in the names and descriptions of courses to reveal compelling combinations of concepts across the curriculum. In the entry fields at left and right, enter two keywords—&quot;truth&quot; and &quot;lies,&quot; or &quot;economics&quot; and &quot;evolution,&quot; perhaps—and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. Click on course titles to access full course descriptions or add courses to your tray. To reset the visualization, simply enter new keywords at left and right."
-          class="pointer">
+          class="pointer"
+        >
           MORE&nbsp;&gt;
         </span>
       </p>
 
-      <semester-input/>
+      <semester-input />
     </div>
   </div>
 </template>

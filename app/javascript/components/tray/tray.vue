@@ -11,19 +11,22 @@
       <hr>
       <div class="actions mx-0">
         <view-selector :invert="true" />
-        <share-link/>
+        <share-link />
       </div>
     </div>
 
     <div class="mx-0">
       <sidebar-list
-        v-show="viewmode.tray === 'list-view'"/>
+        v-show="viewmode.tray === 'list-view'"
+      />
 
       <sidebar-semester
-        v-show="viewmode.tray=='semester'"/>
+        v-show="viewmode.tray=='semester'"
+      />
 
       <multi-year-sidebar
-        v-show="viewmode.tray=='multi-year'"/>
+        v-show="viewmode.tray=='multi-year'"
+      />
     </div>
   </div>
 </template>

@@ -2,13 +2,15 @@
   <p class="tray-share float-right text-right">
     <span
       id="share-dropdown"
-      class="pointer">
-      <font-awesome-icon icon="share-alt"/>
+      class="pointer"
+    >
+      <font-awesome-icon icon="share-alt" />
 
       <b-popover
         target="share-dropdown"
         triggers="click blur"
-        placement="bottom">
+        placement="bottom"
+      >
         Share this link to allow others to view your schedule:
         <br>
         <span class="shared-schedule-url">

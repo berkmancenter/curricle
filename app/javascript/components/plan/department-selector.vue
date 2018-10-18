@@ -7,7 +7,8 @@
     <b-dropdown-item
       v-for="dept in departmentsInTray"
       :key="dept"
-      @click="setDepartment(dept)">
+      @click="setDepartment(dept)"
+    >
       {{ dept }}
     </b-dropdown-item>
   </b-dropdown>
@@ -30,7 +31,7 @@ export default {
   methods: {
     ...mapActions('plan', ['setFilter']),
     setDepartment (dept) {
-      this.setFilter({name: 'department', value: dept})
+      this.setFilter({ name: 'department', value: dept })
     }
   }
 }

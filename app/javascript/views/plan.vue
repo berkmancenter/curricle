@@ -13,11 +13,11 @@
         :source="viewmode.plan == 'list-view' ? 'tray' : 'schedule'"
       />
     </div>
-    <div class="clearfix"/>
+    <div class="clearfix" />
     <div>
-      <plan-list-view v-show="viewmode.plan === 'list-view'"/>
-      <plan-semester-view v-show="viewmode.plan === 'semester'"/>
-      <plan-year-view v-show="viewmode.plan === 'multi-year'"/>
+      <plan-list-view v-show="viewmode.plan === 'list-view'" />
+      <plan-semester-view v-show="viewmode.plan === 'semester'" />
+      <plan-year-view v-show="viewmode.plan === 'multi-year'" />
     </div>
   </div>
 </template>
@@ -29,7 +29,6 @@ import PlanYearView from 'components/plan/multi-year-view'
 import PlanSemesterView from 'components/plan/semester-view'
 import DepartmentSelector from 'components/plan/department-selector'
 import SemesterSelector from 'components/plan/semester-selector'
-import ViewSelector from 'components/shared/view-selector'
 
 export default {
   components: {
@@ -37,8 +36,7 @@ export default {
     PlanListView,
     PlanYearView,
     PlanSemesterView,
-    SemesterSelector,
-    ViewSelector
+    SemesterSelector
   },
   computed: {
     ...mapState('app', ['viewmode'])

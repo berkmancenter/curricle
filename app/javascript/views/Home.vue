@@ -1,26 +1,32 @@
 <template>
   <div
-    id="home-content">
+    id="home-content"
+  >
     <div
-      class="mb-5">
+      class="mb-5"
+    >
       <img
         id="logo"
         class="mb-5"
-        src="/images/logos/curricle-white-bg.svg">
+        src="/images/logos/curricle-white-bg.svg"
+      >
 
       Curricle will help you<br>
       <router-link
-        to="/explore">
+        to="/explore"
+      >
         <strong>explore</strong>
       </router-link>
       the Harvard curriculum, past and present,<br>
       <router-link
-        to="/search">
+        to="/search"
+      >
         <strong>search</strong>
       </router-link>
       courses by keywords, and<br>
       <router-link
-        to="/plan">
+        to="/plan"
+      >
         <strong>plan</strong>
       </router-link>
       your semester schedule.
@@ -28,9 +34,11 @@
 
     <span
       v-if="!userAuthenticated"
-      id="login-link-container">
+      id="login-link-container"
+    >
       <a
-        href="/users/sign_in">
+        href="/users/sign_in"
+      >
         Sign in with HarvardKey
       </a>
     </span>

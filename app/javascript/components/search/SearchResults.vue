@@ -1,15 +1,17 @@
 <template>
   <div
     v-show="keywords && searchComplete"
-    class="mt-5">
+    class="mt-5"
+  >
     <div class="clearfix">
       <div
         class="float-left"
-        style="width: 28%;">
+        style="width: 28%;"
+      >
         <strong>{{ resultsTotalCount }} results</strong>
       </div>
       <div class="float-left">
-        <search-results-sort/>
+        <search-results-sort />
       </div>
       <div class="float-right text-right">
         <b-form-checkbox v-model="showConflicts">
@@ -31,11 +33,13 @@
 
       <div
         v-show="resultsMoreAvailable"
-        class="text-center my-4">
+        class="text-center my-4"
+      >
         <b-button
           class="pointer"
           variant="secondary"
-          @click="searchAgain">
+          @click="searchAgain"
+        >
           More Results
         </b-button>
       </div>

@@ -39,7 +39,7 @@ var containerWidth = window.innerWidth * 0.667
 
 var documentWidth = Math.max(containerWidth, minDocumentWidth)
 
-var margin = {top: 50, right: 10, bottom: 50, left: 10}
+var margin = { top: 50, right: 10, bottom: 50, left: 10 }
 var width = documentWidth - margin.left - margin.right
 var height = documentHeight - margin.top - margin.bottom
 
