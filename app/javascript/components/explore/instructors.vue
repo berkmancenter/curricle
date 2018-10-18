@@ -125,15 +125,6 @@ export default {
     stroke-opacity: 1;
   }
 
-  .departmentText {
-    fill: #00ADF0;
-    text-anchor: end;
-
-    &:hover {
-      fill: red;
-    }
-  }
-
   .classText,
   .classCircle,
   .classLine,
@@ -143,8 +134,17 @@ export default {
     cursor: pointer;
   }
 
+  .departmentText {
+    fill: #00adf0;
+    text-anchor: end;
+
+    &:hover {
+      fill: red;
+    }
+  }
+
   .classText {
-    fill: #2C3194;
+    fill: #2c3194;
 
     &:hover {
       fill: red;
@@ -152,7 +152,7 @@ export default {
   }
 
   .instructorText {
-    fill: #D10F84;
+    fill: #d10f84;
 
     :hover {
       fill: red;
@@ -183,7 +183,6 @@ export default {
 
     span.courses {
       color: #2c3194;
-
     }
 
     span.departments {
@@ -197,7 +196,8 @@ export default {
     box-shadow: none;
   }
 
-  .input-group-text, input.search {
+  .input-group-text,
+  input.search {
     background-color: #ddd;
     border: 0;
     color: black;

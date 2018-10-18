@@ -54,5 +54,4 @@ div /deep/ {
     padding-left: 0;
   }
 }
-
 </style>

@@ -86,6 +86,6 @@
 
 <style scoped>
 h4.card-title {
-  font-size:1.4rem;
+  font-size: 1.4rem;
 }
 </style>

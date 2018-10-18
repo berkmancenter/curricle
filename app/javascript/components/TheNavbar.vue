@@ -199,7 +199,8 @@ export default {
         text-decoration: underline;
       }
 
-      &.primary, &.secondary {
+      &.primary,
+      &.secondary {
         color: #999;
         margin: 4px 0;
         text-transform: uppercase;

@@ -85,10 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .annotations textarea{
-    resize: none !important;
-  }
-
   .word-count {
     position: relative;
     color: #ccc;

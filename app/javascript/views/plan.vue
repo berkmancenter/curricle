@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style type="text/css">
-  .actions i{
+  .actions i {
     font-size: 20px;
     padding-right: 15px;
   }

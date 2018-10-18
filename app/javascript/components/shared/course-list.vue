@@ -87,5 +87,4 @@ export default {
     vertical-align: middle !important;
   }
 }
-
 </style>

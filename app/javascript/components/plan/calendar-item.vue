@@ -72,8 +72,8 @@ export default {
   background-color: white;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding-left: .5em;
-  padding-right: .5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   font-size: 12px;
   width: 90%;
   height: var(--height);
@@ -84,7 +84,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    background-color: #DCDCDC;
+    background-color: #dcdcdc;
     z-index: 10;
     height: auto;
   }

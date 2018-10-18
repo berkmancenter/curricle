@@ -119,7 +119,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.inactive-keyword, .active-keyword {
+.inactive-keyword,
+.active-keyword {
   cursor: pointer;
   display: inline-block;
   padding: 5px 10px;

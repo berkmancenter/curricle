@@ -40,12 +40,12 @@
       v-if="showSchedule"
       class="advanced-search mt-4"
     >
-      <table style="width: 100%">
+      <table style="width: 100%;">
         <tr
           v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
           :key="day"
         >
-          <td style="width: 100px">
+          <td style="width: 100px;">
             <b-checkbox
               v-model="requireDay[day]"
             >
@@ -220,7 +220,7 @@ export default {
     background-color: black;
     padding: 10px;
 
-    .arrow:after {
+    .arrow::after {
       border-bottom-color: black;
     }
   }

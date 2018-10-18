@@ -113,7 +113,7 @@ export default {
 
     ::-webkit-scrollbar {
       display: none;
-      width: 0px;  /* remove scrollbar space */
+      width: 0;  /* remove scrollbar space */
       background: transparent;
     }
 
@@ -122,7 +122,7 @@ export default {
       width: 50%;
       float: left;
       overflow: scroll;
-      max-height:100%;
+      max-height: 100%;
     }
 
     #courseTypeVis {
@@ -135,9 +135,16 @@ export default {
 
     #classVis {
       width: 100%;
-      float:left;
+      float: left;
       overflow: scroll;
       max-height: 100%;
+    }
+
+    .departmentText,
+    .departmentRect,
+    .courseTypeText,
+    .courseTypeRect {
+      cursor: pointer;
     }
 
     .departmentText:hover {
@@ -146,13 +153,6 @@ export default {
 
     .courseTypeText:hover {
       text-decoration: underline;
-    }
-
-    .departmentText,
-    .departmentRect,
-    .courseTypeText,
-    .courseTypeRect {
-      cursor: pointer;
     }
 
     .classText {

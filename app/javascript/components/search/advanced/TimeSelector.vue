@@ -81,9 +81,10 @@ export default {
 </script>
 
 <style>
-.vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-top .vue-slider-tooltip:before {
+.vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-top .vue-slider-tooltip::before {
   display: none;
 }
+
 .vue-slider-component .vue-slider-tooltip-wrap.vue-slider-tooltip-top {
   top: 20px;
 }

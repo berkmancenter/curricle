@@ -160,56 +160,57 @@ export default {
 <style lang="scss" scoped>
 #interfaceContainer {
   /deep/ {
-    svg{
+    svg {
       display: block;
       margin: 0;
     }
 
-    .rightSelected, .leftSelected{
-      /*text-decoration: underline;*/
-      font-weight: 300;
-      cursor:pointer;
-    }
-
-    .rightSelected:hover, .leftSelected:hover{
-      text-decoration: underline;
-    }
-
-    .leftSelected{
+    .leftSelected {
       fill: green;
     }
 
-    .rightSelected{
+    .rightSelected {
       fill: orange;
     }
 
-    .centerText{
-      cursor:pointer;
-      text-shadow:
-      -1px -1px 0 rgba(255,255,255,.5),
-        1px -1px 0 rgba(255,255,255,.5),
-        -1px 1px 0 rgba(255,255,255,.5),
-        1px 1px 0 rgba(255,255,255,.5);
+    .rightSelected,
+    .leftSelected {
+      /* text-decoration: underline; */
+      font-weight: 300;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
-    .centerText:hover{
+    .centerText {
+      cursor: pointer;
+      text-shadow:
+        -1px -1px 0 rgba(255, 255, 255, 0.5),
+        1px -1px 0 rgba(255, 255, 255, 0.5),
+        -1px 1px 0 rgba(255, 255, 255, 0.5),
+        1px 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .centerText:hover {
       text-decoration: underline;
     }
 
-    .centerSelected{
+    .centerSelected {
       text-decoration: underline;
       font-weight: 700;
-      cursor:pointer;
+      cursor: pointer;
     }
 
-    .insideText:hover{
+    .insideText:hover {
       text-decoration: underline;
-      cursor:pointer;
+      cursor: pointer;
     }
 
-    /*------ Search Style -------*/
+    /* ------ Search Style ------- */
 
-    .searchBox{
+    .searchBox {
       position: absolute;
       width: 137px;
       top: 50%;
@@ -217,20 +218,20 @@ export default {
       background: none;
     }
 
-    #searchBoxOne{
+    #searchBoxOne {
       text-align: right;
       color: #f0cf61;
     }
 
-    #searchBoxTwo{
+    #searchBoxTwo {
       color: #005397;
     }
 
-    #searchBoxOneButton{
+    #searchBoxOneButton {
       text-align: right;
     }
 
-    .searchBoxInput{
+    .searchBoxInput {
       outline: none;
       font-family: 'IBM Plex Sans', sans-serif;
       border: none;
@@ -240,7 +241,7 @@ export default {
       width: 90px;
     }
 
-    .searchBoxButton{
+    .searchBoxButton {
       outline: none;
       font-family: 'IBM Plex Sans', sans-serif;
       border: none;
@@ -248,10 +249,10 @@ export default {
       background: white;
     }
 
-    /*------ Dim. Select Style -------*/
+    /* ------ Dim. Select Style ------- */
 
-    #dimContainer{
-      height: 0px;
+    #dimContainer {
+      height: 0;
       padding-top: 30px;
       text-align: center;
       min-width: 600px;
@@ -262,18 +263,18 @@ export default {
       margin: auto;
       padding: 0;
       vertical-align: middle;
-        }
-
-    #dimContainer li {
-        display: inline;
-        cursor: pointer;
     }
 
-    .dimSelect:hover{
+    #dimContainer li {
+      display: inline;
+      cursor: pointer;
+    }
+
+    .dimSelect:hover {
       text-decoration: underline;
     }
 
-    .dimSelect.active{
+    .dimSelect.active {
       text-decoration: underline;
     }
   }

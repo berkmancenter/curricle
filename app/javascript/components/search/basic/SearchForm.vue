@@ -90,7 +90,8 @@ export default {
     padding: 5px 8px;
   }
 
-  .input-group-text, input.search {
+  .input-group-text,
+  input.search {
     background-color: #ddd;
     border: 0;
     color: black;

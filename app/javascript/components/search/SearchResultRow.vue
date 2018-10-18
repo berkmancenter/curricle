@@ -158,7 +158,8 @@ export default {
     &.conflicted {
       background-color: #ffc0cb;
 
-      &.selected, &:hover {
+      &.selected,
+      &:hover {
         background-color: #ff91a4;
       }
     }
@@ -185,12 +186,13 @@ export default {
   }
 
   .hiddenConflict {
-    height: 0px;
+    height: 0;
     display: none;
     transition: height 2s;
   }
 
-  .usercourse, .userschedule {
+  .usercourse,
+  .userschedule {
     color: gray;
   }
 </style>

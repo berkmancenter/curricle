@@ -138,7 +138,7 @@ export default {
 
 <style scoped>
   .course-action {
-      color: black;
+    color: black;
   }
 
   i.fa {

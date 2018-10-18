@@ -174,6 +174,6 @@ export default {
 
 .time-label {
   font-size: 12px;
-  font-family: 'IBM Plex Mono'
+  font-family: 'IBM Plex Mono', sans-serif;
 }
 </style>
