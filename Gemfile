@@ -12,12 +12,12 @@ gem 'graphql', '~> 1.8'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '~> 1.1'
-gem 'progress_bar', '~> 1.2'
+gem 'progress_bar', '~> 1.3'
 gem 'puma', '~> 3.12'
 gem 'rails', '5.2.1' # @drg skip
 gem 'smarter_csv', '~> 1.2'
 gem 'sunspot_rails', '~> 2.3'
-gem 'webpacker', '~> 4.0.0.pre'
+gem 'webpacker', '~> 4.0.0.pre' # @drg skip
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
@@ -35,7 +35,7 @@ group :development do
   gem 'listen', '~> 3.1'
   gem 'rack-cors', '~> 1.0'
   gem 'rubocop', '~> 0.59'
-  gem 'rubocop-rspec', '~> 1.29'
+  gem 'rubocop-rspec', '~> 1.30'
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
