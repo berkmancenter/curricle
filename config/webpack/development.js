@@ -1,6 +1,5 @@
-const environment = require('./environment')
-const eslintConfig = require('./development/eslint')
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
-environment.config.merge(eslintConfig)
+const environment = require('./environment')
 
 module.exports = environment.toWebpackConfig()

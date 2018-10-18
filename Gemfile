@@ -17,7 +17,7 @@ gem 'puma', '~> 3.12'
 gem 'rails', '5.2.1' # @drg skip
 gem 'smarter_csv', '~> 1.2'
 gem 'sunspot_rails', '~> 2.3'
-gem 'webpacker', '~> 3.5'
+gem 'webpacker', '~> 4.0.0.pre'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
