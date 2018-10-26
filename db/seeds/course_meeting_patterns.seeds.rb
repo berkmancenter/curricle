@@ -1,0 +1,67 @@
+# frozen_string_literal: true
+
+require_relative 'curricle_importer'
+
+class CurricleCourseMeetingPatternImporter < CurricleImporter
+  TABLE_NAME = 'course_meeting_patterns'
+
+  SQL_COLUMNS = %w[
+    external_course_id
+    term_name
+    term_year
+    class_section
+    class_meeting_number
+    meeting_time_start
+    meeting_time_end
+    meets_on_monday
+    meets_on_tuesday
+    meets_on_wednesday
+    meets_on_thursday
+    meets_on_friday
+    meets_on_saturday
+    meets_on_sunday
+    start_date
+    end_date
+    external_facility_id
+    facility_description
+    course_id
+    created_at
+    updated_at
+  ].freeze
+
+  def format_row(row) # rubocop:disable Metrics/MethodLength
+    term_year, term_name = row[:term_description].to_s.split(' ')
+    term_year = term_year.to_i
+    class_section = /^\d+$/.match?(row[:class_section].to_s) ? row[:class_section].to_i : row[:class_section]
+    key = "#{term_year}#{term_name}#{row[:course_id]}#{class_section}"
+    meeting_time_start = Time.strptime(row[:meeting_time_start], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_start]
+    meeting_time_end = Time.strptime(row[:meeting_time_end], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_end]
+    course_id = COURSES_CACHE[key]
+
+    [
+      row[:course_id],
+      term_name,
+      term_year,
+      class_section,
+      row[:class_mtg_nbr],
+      meeting_time_start,
+      meeting_time_end,
+      row[:mon] == 'Y',
+      row[:tues] == 'Y',
+      row[:wed] == 'Y',
+      row[:thurs] == 'Y',
+      row[:fri] == 'Y',
+      row[:sat] == 'Y',
+      row[:sun] == 'Y',
+      Date.parse(row[:start_dt]),
+      Date.parse(row[:end_dt]),
+      row[:facility_id],
+      row[:facility_description],
+      course_id,
+      Time.current,
+      Time.current
+    ]
+  end
+end
+
+CurricleCourseMeetingPatternImporter.new.run

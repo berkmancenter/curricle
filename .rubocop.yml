@@ -13,5 +13,8 @@ Metrics/LineLength:
   Enabled: false
 Rails:
   Enabled: true
+Rails/Output:
+  Exclude:
+    - 'db/**/*'
 RSpec/NestedGroups:
   Max: 4

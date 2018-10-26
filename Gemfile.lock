@@ -229,10 +229,10 @@ GEM
       sexp_processor (~> 4.9)
     rubycas-client (2.3.9)
       activesupport
+    seedbank (0.4.0)
     sexp_processor (4.11.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
-    smarter_csv (1.2.5)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -308,8 +308,8 @@ DEPENDENCIES
   rspec-rails (~> 3.8)
   rubocop (~> 0.59)
   rubocop-rspec (~> 1.30)
+  seedbank (~> 0.4)
   shoulda-matchers (~> 3.1)
-  smarter_csv (~> 1.2)
   spring (~> 2.0)
   spring-commands-rspec (~> 1.0)
   spring-commands-rubocop (~> 0.2)
@@ -323,4 +323,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.16.1
+   1.16.6
