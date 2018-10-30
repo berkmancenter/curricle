@@ -154,7 +154,6 @@ module Resolvers
 
     def apply_filters(sunspot, args)
       sunspot.instance_eval do
-        with :class_section, '1' # all class_sections should be 1
         with :academic_group, Array(args[:schools])
         with :subject_academic_org_description, Array(args[:departments])
         with :subject, Array(args[:subjects])

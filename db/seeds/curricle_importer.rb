@@ -30,7 +30,7 @@ class CurricleImporter
       CSV.foreach(@csv_file, headers: true, header_converters: :symbol) do |row|
         formatted_row = format_row(row)
 
-        @pgconn.put_copy_data(formatted_row)
+        @pgconn.put_copy_data(formatted_row) if formatted_row.present?
 
         @progressbar.increment!
       end

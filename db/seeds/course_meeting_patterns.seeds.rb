@@ -30,19 +30,19 @@ class CurricleCourseMeetingPatternImporter < CurricleImporter
   ].freeze
 
   def format_row(row) # rubocop:disable Metrics/MethodLength
+    external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
     term_year = term_year.to_i
-    class_section = /^\d+$/.match?(row[:class_section].to_s) ? row[:class_section].to_i : row[:class_section]
-    key = "#{term_year}#{term_name}#{row[:course_id]}#{class_section}"
+    key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
     meeting_time_start = Time.strptime(row[:meeting_time_start], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_start]
     meeting_time_end = Time.strptime(row[:meeting_time_end], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_end]
     course_id = COURSES_CACHE[key]
 
     [
-      row[:course_id],
+      external_course_id,
       term_name,
       term_year,
-      class_section,
+      row[:class_section],
       row[:class_mtg_nbr],
       meeting_time_start,
       meeting_time_end,

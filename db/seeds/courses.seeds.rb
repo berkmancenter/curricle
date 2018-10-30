@@ -32,16 +32,21 @@ class CurricleCourseImporter < CurricleImporter
   ].freeze
 
   def format_row(row) # rubocop:disable Metrics/MethodLength
+    external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
+    term_year = term_year.to_i
+    key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
+
+    return if COURSES_CACHE.key?(key)
 
     [
-      row[:course_id],
+      external_course_id,
       row[:course_descr],
       row[:course_title_long],
       term_name,
       term_year.to_i,
       row[:academic_year],
-      /^\d+$/.match?(row[:class_section].to_s) ? row[:class_section].to_i : row[:class_section],
+      row[:class_section],
       row[:component_description],
       row[:subject],
       row[:subject_description],
