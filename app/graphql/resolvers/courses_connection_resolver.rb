@@ -16,6 +16,8 @@ module Resolvers
     TIME_RANGE_START = 7
     TIME_RANGE_END = 20
 
+    COURSE_ID_REGEX = /\A([a-zA-Z-]+)\s?(\d\S*)\z/
+
     def call(_obj, args, ctx)
       search = search_by_keywords(args)
 
@@ -51,16 +53,15 @@ module Resolvers
     #
     # * LIFESCI 50A
     # * xmit 11.487
-    # * XR-S -052A
     #
     def course_id?(string)
-      string =~ /\A[a-zA-Z-]+ \S+\z/
+      (string =~ COURSE_ID_REGEX) && true
     end
 
     def add_keyword_to_search(sunspot, keyword)
       sunspot.instance_eval do
         if keyword[:fields].include?('COURSE_ID') && course_id?(keyword[:text])
-          search_by_course_id(self, keyword)
+          search_by_course_id(self, keyword[:text])
         elsif keyword[:fields] == ['ID'] && keyword[:text] =~ /\A\d+\z/
           with :id, keyword[:text].to_i
         elsif keyword[:fields] != ['COURSE_ID']
@@ -72,24 +73,29 @@ module Resolvers
     end
 
     def basic_search(sunspot, query)
+      if course_id?(query)
+        search_by_course_id(sunspot, query)
+        return
+      end
+
       query.gsub!(/[()]/, '"')
       phrases = query.split('|')
 
       sunspot.instance_eval do
         any do
           phrases.each do |phrase|
-            fulltext phrase, fields: %i[course_description_long title]
+            fulltext phrase, fields: %i[class_academic_org_description course_description_long title]
           end
         end
       end
     end
 
-    def search_by_course_id(sunspot, keyword)
-      subject, catalog_number = keyword[:text].split
+    def search_by_course_id(sunspot, query)
+      subject, catalog_number = query.match(COURSE_ID_REGEX).captures
 
       sunspot.instance_eval do
         with :subject, subject.upcase
-        with :catalog_number, catalog_number
+        with :catalog_number, catalog_number.upcase
       end
     end
 
@@ -169,7 +175,6 @@ module Resolvers
 
     def apply_filters(sunspot, args)
       sunspot.instance_eval do
-        with :class_section, '1' # all class_sections should be 1
         with :academic_group, Array(args[:schools])
         with :subject_academic_org_description, Array(args[:departments])
         with :subject, Array(args[:subjects])
