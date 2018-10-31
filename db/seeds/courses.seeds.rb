@@ -58,7 +58,7 @@ class CurricleCourseImporter < CurricleImporter
       row[:term_pattern_code],
       row[:term_pattern_description],
       row[:units_maximum].to_i,
-      row[:catalog_number].to_i,
+      row[:catalog_number],
       row[:course_descrlong],
       row[:course_note],
       Time.current,
