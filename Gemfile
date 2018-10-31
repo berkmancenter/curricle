@@ -39,7 +39,6 @@ group :development do
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
-  gem 'spring-watcher-listen', '~> 2.0'
   gem 'sunspot_solr', '~> 2.3'
   gem 'web-console', '~> 3.7'
 end
