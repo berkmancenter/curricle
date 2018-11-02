@@ -1,67 +1,95 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+  <head>
+    <title>The page you were looking for doesn't exist (404)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,700|IBM+Plex+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    <style>
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+      #app {
+        display: flex;
+        flex-flow: column;
+        height: 100vh;
+      }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+      #nav-container {
+        background-color: #000;
+        color: #fff;
+      }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
+      #main-content {
+        color: black;
+        font-size: 30px;
+        line-height: 34px;
+        margin-left: 5%;
+        margin-top: 20%;
+      }
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      #jumbo {
+        color: #aaa;
+        font-size: 150px;
+        font-weight: bold;
+        line-height: 150px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- This file lives in public/404.html -->
+    <div
+      class="container-fluid"
+    >
+      <div
+        id="app"
+      >
+        <div
+          class="row h-100"
+        >
+          <div
+            id="nav-container"
+            class="col-md-2 px-0"
+          >
+            <div
+              class="d-none d-md-block h-100 pt-5 px-4"
+            >
+              <a
+                href="/"
+              >
+                <img
+                  class="w-100"
+                  src="/images/logos/curricle-black-bg.svg"
+                >
+              </a>
+            </div>
+          </div>
+
+          <div
+            id="main-container"
+            class="col-md-8"
+          >
+            <div
+              id="main-content"
+            >
+              <p
+                id="jumbo"
+                class="mb-4"
+              >
+                404
+              </p>
+
+              <h1>
+                Sorry, we can't find the page you're<br>
+                looking for.
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+  </body>
 </html>
