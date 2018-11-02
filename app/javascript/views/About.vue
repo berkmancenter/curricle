@@ -10,7 +10,7 @@
       </h3>
 
       <p>
-        CURRICLE is a platform for course discovery across the Harvard curriculum, past and present. When completed, the platform will offer a full suite of tools for understanding current course offerings, charting schedules and sequencing courses in concentration and distribution, and developing a calendar of classes over the term, the year, and an entire degree program. Unlike conventional course selection systems, Curricle reveals the curriculum not as a mere listing of courses but as a dynamic network of connections that, like a living organism, evolves over time.
+        CURRICLE is a platform for course discovery across the Harvard curriculum, past and present. When completed, the platform will offer a full suite of tools for exploring current course offerings, charting course schedules by concentration, and planning a calendar of classes over the term, year, and entire degree program. Unlike conventional course selection systems, which display a mere listing of courses, Curricle reveals the curriculum as a dynamic network of connections that, like a living organism, evolves over time.
       </p>
 
       <p>
@@ -26,11 +26,11 @@
       </p>
 
       <p>
-        PLAN presents a robust set of organizing, tagging, and anntation tools to sequence courses across weekly, yearly, and multi-year views.
+        PLAN presents a robust set of organizing, tagging, and annotation tools to sequence courses across weekly, yearly, and multi-year views.
       </p>
 
       <p>
-        Still in beta testing, Curricle is not a replacement for my.harvard, Harvard University's official course-selection tool. It complements that system and similar platforms at other colleges and universities. Built upon current and historic course data from the Office of the Registrar, its future datasets will include sources like Canvas, library reserves, linked semantic data, and student-created tags. In order to ensure an optimal user experience, it eliminates duplications in the Registrar’s database, so search results between the two platforms will differ.
+        Still in beta testing, Curricle is not a replacement for my.harvard.edu, Harvard University's official course-selection tool. Rather, it complements that system and similar platforms at other colleges and universities. Built upon current and historic course data from the Office of the Registrar, its future datasets will include sources like Canvas, library reserves, linked semantic data, and student-created tags. In order to ensure an optimal user experience, it eliminates duplications in the Registrar’s database, so search results between the two platforms will differ.
       </p>
 
       <p>
