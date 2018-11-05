@@ -33,7 +33,7 @@ const state = {
     { text: 'Readings', value: 'READINGS', disabled: true },
     { text: 'Course ID', value: 'COURSE_ID' }
   ],
-  searchTermStart: 'Spring',
+  searchTermStart: 'Fall',
   searchTermEnd: 'Spring',
   searchYearStart: thisYear,
   searchYearEnd: thisYear + 1,
