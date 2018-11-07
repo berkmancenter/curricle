@@ -9,6 +9,13 @@ import Vue from 'vue/dist/vue.esm'
 import { transformSchedule } from 'lib/util'
 
 const thisYear = (new Date()).getUTCFullYear()
+let thisSemester
+
+if (new Date().getMonth <= 5) {
+  thisSemester = 'Spring'
+} else {
+  thisSemester = 'Fall'
+}
 
 /* NOTE: any search state that affects the search results needs to be
  * taught to serializeSearch() and deserializeSearch() */
@@ -33,8 +40,8 @@ const state = {
     { text: 'Readings', value: 'READINGS', disabled: true },
     { text: 'Course ID', value: 'COURSE_ID' }
   ],
-  searchTermStart: 'Fall',
-  searchTermEnd: 'Spring',
+  searchTermStart: thisSemester,
+  searchTermEnd: thisSemester,
   searchYearStart: thisYear,
   searchYearEnd: thisYear + 1,
   searchTermUseRange: false,
@@ -106,6 +113,13 @@ const getters = {
     return {
       term_name: state.searchTermStart.toUpperCase(),
       term_year: state.searchYearStart
+    }
+  },
+
+  currentSemester (state) {
+    return {
+      term_name: thisSemester,
+      term_year: thisYear
     }
   }
 }

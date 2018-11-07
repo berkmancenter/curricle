@@ -130,7 +130,10 @@ function loadLecturerData (coursesConnectedByInstructor) {
 }
 
 function requestData (instructorName, selectedSemester) {
-  semester = selectedSemester
+  semester = {
+    term_name: selectedSemester.term_name.toUpperCase(),
+    term_year: selectedSemester.term_year
+  }
 
   apolloClient.query({
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,

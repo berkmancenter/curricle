@@ -20,7 +20,7 @@
       <h3>Explore:</h3>
 
       <p>
-        Discover faculty networks of teaching and learning.
+        Discover faculty networks of teaching and learning from the past ten years.
         Select an <span class="instructor">instructor</span>
         to see faculty with whom they've co-taught, connecting
         through <span class="courses">courses</span> to
@@ -34,8 +34,6 @@
           MORE&nbsp;&gt;
         </span>
       </p>
-
-      <semester-input />
 
       <div
         id="searchContainer"
@@ -78,12 +76,8 @@
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
 import { mapActions, mapGetters } from 'vuex'
-import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
-  components: {
-    SemesterInput
-  },
   data () {
     return {
       instructorName: '',
@@ -91,7 +85,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['semesterStart'])
+    ...mapGetters('search', ['currentSemester'])
   },
   mounted () {
     initSetup(this.selectCourse)
@@ -101,7 +95,7 @@ export default {
     onSubmit (e) {
       e.preventDefault()
       this.submittedName = this.instructorName
-      requestData(this.instructorName, this.semesterStart)
+      requestData(this.instructorName, this.currentSemester)
     }
   }
 }
