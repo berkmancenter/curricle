@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <h1
-      v-show="exploreRoot"
-      class="my-3"
-    >
-      <b-link to="/explore">Explore</b-link>
-    </h1>
-
+  <div
+    class="py-5"
+  >
     <h3
       v-show="exploreRoot"
-      class="mb-5"
-      style="font-weight: normal;"
     >
-      Use visualizations to explore the curriculum, follow unexpected connections, and discover new courses.
+      Explore:
     </h3>
+
+    <div
+      v-show="exploreRoot"
+      class="row mb-5"
+    >
+      <div class="col-sm-12 col-md-5">
+        Use visualizations to explore the curriculum, follow unexpected connections, and discover new courses.
+      </div>
+    </div>
 
     <router-view class="mt-5" />
   </div>
