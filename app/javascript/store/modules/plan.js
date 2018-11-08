@@ -2,7 +2,7 @@
 
 import Vue from 'vue/dist/vue.esm'
 import _ from 'lodash'
-import { sortedSemesters } from 'lib/util'
+import { partitionCoursesByMeetingTime, sortedSemesters } from 'lib/util'
 
 const state = {
   semester: '',
@@ -46,6 +46,34 @@ const getters = {
   },
   sortedSemestersInTray (state, getters) {
     return sortedSemesters(getters.semestersInTray)
+  },
+  conflictedCourseIds (state, getters) {
+    const schedule = partitionCoursesByMeetingTime(getters.scheduledCourses)
+    let courseIds = []
+
+    _.forEach(schedule, day => {
+      _.forEach(day, course => {
+        _.forEach(day, comparisonCourse => {
+          if (course === comparisonCourse) {
+            return
+          }
+
+          const courseStartTime = course.meetingTime[0]
+          const courseEndTime = courseStartTime + course.meetingTime[1]
+          const startTime = comparisonCourse.meetingTime[0]
+          const endTime = startTime + comparisonCourse.meetingTime[1]
+
+          if (
+            (courseStartTime >= startTime && courseStartTime <= endTime) ||
+            (courseEndTime >= startTime && courseEndTime <= endTime)
+          ) {
+            courseIds.push(course.course.id, comparisonCourse.course.id)
+          }
+        })
+      })
+    })
+
+    return _.uniq(courseIds)
   }
 }
 

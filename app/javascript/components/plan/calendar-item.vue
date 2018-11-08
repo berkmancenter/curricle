@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ provisional, selected }"
+    :class="{ conflicted, provisional, selected }"
     :style="computedStyle"
     class="calendar-item text-uppercase font-weight-bold p-2"
     @click="selectCourse(item)"
@@ -27,6 +27,10 @@ export default {
       default: false
     },
     selected: {
+      type: Boolean,
+      default: false
+    },
+    conflicted: {
       type: Boolean,
       default: false
     },
@@ -101,6 +105,15 @@ export default {
   &.provisional {
     opacity: 0.5;
     z-index: 5;
+  }
+
+  &.conflicted {
+    background-color: #ffc0cb;
+
+    &.selected,
+    &:hover {
+      background-color: #ff91a4;
+    }
   }
 
   .course-component {

@@ -64,6 +64,7 @@
             :height="item.meetingTime[1]"
             :provisional="provisionalCourseIds.includes(item.course.id)"
             :selected="currentCourse && currentCourse.id == item.course.id"
+            :conflicted="conflictedCourseIds.includes(item.course.id)"
           />
         </b-row>
       </b-col>
@@ -87,7 +88,7 @@ export default {
   computed: {
     ...mapGetters('app', ['currentCourse']),
     ...mapState('plan', ['semester', 'provisionalCourses']),
-    ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
+    ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses', 'conflictedCourseIds']),
     courses () {
       return _.uniqBy(
         _.filter(
