@@ -59,7 +59,7 @@
 
       <div class="col-md-2 px-0">
         <class-meeting-time
-          :schedule="course.schedule"
+          :course="course"
           :condensed="true"
         />
       </div>

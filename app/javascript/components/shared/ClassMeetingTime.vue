@@ -24,7 +24,13 @@
   <div
     v-else
   >
-    Schedule TBD
+    <div v-if="pastSemester">
+      {{ course.term_name }} {{ course.term_year }}
+    </div>
+    <div v-else>
+      Schedule TBD
+    </div>
+
   </div>
 </template>
 
@@ -55,7 +61,7 @@ import { prettyTime } from 'lib/util'
 
 export default {
   props: {
-    schedule: {
+    course: {
       type: Object,
       required: true
     },
@@ -78,8 +84,8 @@ export default {
     /* turns the input params into the more sensible data structure for use by this component */
     days () {
       // handling only the 'simple' schedule type; add logic for split schedules and the like here
-      if (this.schedule.type === 'simple') {
-        return this.schedule.data
+      if (this.course.schedule.type === 'simple') {
+        return this.course.schedule.data
       }
       return []
     },
@@ -102,7 +108,10 @@ export default {
         }
       )
     },
-    hasData () { return this.days && this.days.length }
+    hasData () { return this.days && this.days.length },
+    pastSemester () {
+      return this.$store.getters['search/isPastSemester'](this.course.term_name, this.course.term_year)
+    }
   }
 }
 </script>

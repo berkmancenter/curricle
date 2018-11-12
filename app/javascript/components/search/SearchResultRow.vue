@@ -69,7 +69,7 @@
       <class-meeting-time
         :condensed="true"
         :conflicts="conflicts"
-        :schedule="course.schedule"
+        :course="course"
       />
     </div>
   </div>
