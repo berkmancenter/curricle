@@ -1,8 +1,8 @@
 <template>
   <div>
     <visualization-card
-      title="Learning Modes"
-      text="Explore courses by selecting class learning modes and departments."
+      title="Learning Styles"
+      text="Explore courses by selecting class learning styles and departments."
       link="/explore/classes"
       image="/images/explore/departments.png"
     />

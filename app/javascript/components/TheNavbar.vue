@@ -36,7 +36,7 @@
           class="nav sub"
           to="/explore/classes"
         >
-          Learning Modes
+          Learning Styles
         </router-link>
 
         <br>

@@ -3,12 +3,12 @@
     <div
       class="text-center text-uppercase"
     >
-      Select a Component and Department
+      Select a Format and Department
 
       <h4
         class="text-uppercase font-weight-bold"
       >
-        Learning Modes
+        Learning Styles
       </h4>
     </div>
 
@@ -21,7 +21,7 @@
         <h5
           id="courseTypeHeadline"
         >
-          Components
+          Formats
         </h5>
       </div>
 
@@ -47,13 +47,13 @@
       <h3>Explore:</h3>
 
       <p>
-        Explore courses by selecting <span class="components">components</span>
-        (class formats) and <span class="departments">departments</span>
+        Explore courses by selecting <span class="formats">formats</span>
+        (class types) and <span class="departments">departments</span>
         (subjects and courses of study).
 
         <span
           v-b-tooltip.hover
-          title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;components.&quot; In the left column, find your desired component, and look in the right column to select your desired department. Once you have selected both a department and component, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Component to reset the visualization and start again."
+          title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;formats.&quot; In the left column, find your desired format, and look in the right column to select your desired department. Once you have selected both a department and format, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Format to reset the visualization and start again."
           class="pointer"
         >
           MORE&nbsp;&gt;
@@ -178,7 +178,7 @@ export default {
   p {
     font-size: 14px;
 
-    span.components {
+    span.formats {
       color: #f0cf61;
     }
 
