@@ -22,6 +22,8 @@
         <keep-alive>
           <router-view />
         </keep-alive>
+
+        <the-data-last-updated-indicator />
       </div>
 
       <div
@@ -54,6 +56,7 @@ import TheLogoutLink from 'components/TheLogoutLink'
 import TheSidebar from 'components/TheSidebar'
 import TheFeedbackLink from 'components/TheFeedbackLink'
 import TheTrayControl from 'components/TheTrayControl'
+import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
 
 export default {
   components: {
@@ -63,7 +66,8 @@ export default {
     TheLogoutLink,
     TheSidebar,
     TheFeedbackLink,
-    TheTrayControl
+    TheTrayControl,
+    TheDataLastUpdatedIndicator
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
