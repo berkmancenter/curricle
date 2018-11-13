@@ -121,7 +121,7 @@ export default {
     #departmentVis {
       width: 50%;
       float: left;
-      overflow: scroll;
+      overflow: none;
       max-height: 100%;
     }
 
