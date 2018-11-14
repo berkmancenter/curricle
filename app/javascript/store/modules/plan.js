@@ -48,27 +48,31 @@ const getters = {
     return sortedSemesters(getters.semestersInTray)
   },
   conflictedCourseIds (state, getters) {
-    const schedule = partitionCoursesByMeetingTime(getters.scheduledCourses)
+    const schedule = getters.scheduledCoursesBySemester
     let courseIds = []
 
-    _.forEach(schedule, day => {
-      _.forEach(day, course => {
-        _.forEach(day, comparisonCourse => {
-          if (course === comparisonCourse) {
-            return
-          }
+    _.forEach(schedule, semester => {
+      const semesterSchedule = partitionCoursesByMeetingTime(semester)
 
-          const courseStartTime = course.meetingTime[0]
-          const courseEndTime = courseStartTime + course.meetingTime[1]
-          const startTime = comparisonCourse.meetingTime[0]
-          const endTime = startTime + comparisonCourse.meetingTime[1]
+      _.forEach(semesterSchedule, day => {
+        _.forEach(day, course => {
+          _.forEach(day, comparisonCourse => {
+            if (course === comparisonCourse) {
+              return
+            }
 
-          if (
-            (courseStartTime >= startTime && courseStartTime <= endTime) ||
-            (courseEndTime >= startTime && courseEndTime <= endTime)
-          ) {
-            courseIds.push(course.course.id, comparisonCourse.course.id)
-          }
+            const courseStartTime = course.meetingTime[0]
+            const courseEndTime = courseStartTime + course.meetingTime[1]
+            const startTime = comparisonCourse.meetingTime[0]
+            const endTime = startTime + comparisonCourse.meetingTime[1]
+
+            if (
+              (courseStartTime >= startTime && courseStartTime <= endTime) ||
+              (courseEndTime >= startTime && courseEndTime <= endTime)
+            ) {
+              courseIds.push(course.course.id, comparisonCourse.course.id)
+            }
+          })
         })
       })
     })
