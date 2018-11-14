@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="hasData"
+    v-if="hasData && !pastSemester"
   >
     <div
       v-for="(day,index) in week"
