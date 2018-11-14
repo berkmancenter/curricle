@@ -16,6 +16,7 @@ let pack
 let root
 let selectCourse
 let semester
+let showLoaderOverlay
 let tooltipDiv
 let svg
 
@@ -31,9 +32,10 @@ var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
 
-function initSetup (selectCourseFunction, selectedSemester) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
 
   var width = +visSize
   var height = +visSize
@@ -84,11 +86,14 @@ function initSetup (selectCourseFunction, selectedSemester) {
 }
 
 function requestFirstData () {
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
     variables: { semester: semester }
   }).then(function (response) {
     nestData(response.data.course_counts)
+    showLoaderOverlay(false)
   })
 }
 
@@ -285,6 +290,8 @@ function requestSecondData (searchText, xPos, yPos, radius) {
   var enumSearch = searchText.toUpperCase().replace(/, /g, '_').replace(/-/g, '_').replace(/\./g, '_').replace(/ /g, '_')
   const semesterRange = { start: semester }
 
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
     variables: {
@@ -296,6 +303,7 @@ function requestSecondData (searchText, xPos, yPos, radius) {
   }).then(function (response) {
     const courses = response.data.coursesConnection.edges.map(course => course.node)
     closeUpVis(courses, xPos, yPos, radius)
+    showLoaderOverlay(false)
   })
 }
 

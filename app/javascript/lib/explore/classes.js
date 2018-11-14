@@ -25,10 +25,12 @@ var fullData
 
 let selectCourse
 let semester
+let showLoaderOverlay
 
-function initSetup (selectCourseFunction, selectedSemester) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
   documentWidth = d3.select('#visContainer').node().getBoundingClientRect().width
 
   // remove existing SVGs prior to (re)drawing new ones
@@ -95,6 +97,8 @@ function initSetup (selectCourseFunction, selectedSemester) {
 }
 
 function loadFullData (semester) {
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
     variables: { semester }
@@ -103,6 +107,7 @@ function loadFullData (semester) {
     appendAxis()
     setDepartmentData(response.data.course_counts)
     setCourseTypeData(response.data.course_counts)
+    showLoaderOverlay(false)
   })
 }
 
@@ -404,6 +409,8 @@ function loadClassData (data) {
   var searchComponent = data[0].component.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
   var searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
 
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: DEPT_COURSES_QUERY,
     variables: {
@@ -413,6 +420,7 @@ function loadClassData (data) {
     .then(function (response) {
       const courses = response.data.coursesConnection.edges.map(course => course.node)
       classVisualization(courses)
+      showLoaderOverlay(false)
     })
 }
 

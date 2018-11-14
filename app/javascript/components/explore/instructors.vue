@@ -75,7 +75,7 @@
 
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -88,10 +88,13 @@ export default {
     ...mapGetters('search', ['currentSemester'])
   },
   mounted () {
-    initSetup(this.selectCourse)
+    initSetup(this.selectCourse, this.showLoaderOverlay)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
+    ...mapMutations({
+      showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
+    }),
     onSubmit (e) {
       e.preventDefault()
       this.submittedName = this.instructorName

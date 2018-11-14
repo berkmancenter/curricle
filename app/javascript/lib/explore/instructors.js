@@ -23,9 +23,11 @@ var classScale, instructorTextPosScale, departmentPosScale, instructorTextScale,
 
 let selectCourse
 let semester
+let showLoaderOverlay
 
-function initSetup (selectCourseFunction) {
+function initSetup (selectCourseFunction, showLoaderOverlayFunction) {
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
 
   svg = d3.select('#visContainer').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -135,11 +137,14 @@ function requestData (instructorName, selectedSemester) {
     term_year: selectedSemester.term_year
   }
 
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
     variables: { instructorName, semester }
   }).then(function (response) {
     loadLecturerData(response.data.courses_connected_by_instructor)
+    showLoaderOverlay(false)
   })
 }
 

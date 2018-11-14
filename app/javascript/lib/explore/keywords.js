@@ -52,9 +52,12 @@ var fullData
 
 let selectCourse
 let semester
+let showLoaderOverlay
 
 function requestData (searchTerm, numTerm) {
   const semesterRange = { start: semester }
+
+  showLoaderOverlay(true)
 
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
@@ -71,6 +74,7 @@ function requestData (searchTerm, numTerm) {
     // course objects need to be cloned so that they can be extended by addToDataSet()
     const courses = response.data.coursesConnection.edges.map(course => _.clone(course.node))
     addToDataSet(courses, searchTerm, numTerm)
+    showLoaderOverlay(false)
   })
 }
 
@@ -95,9 +99,10 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup (selectCourseFunction, selectedSemester) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
   centerData = 'component'
 
   // remove existing SVGs prior to (re)drawing new ones

@@ -120,7 +120,7 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/keywords'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
@@ -140,15 +140,18 @@ export default {
   },
   watch: {
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay)
     }
   },
   mounted () {
     this.updateKeywords()
-    initSetup(this.selectCourse, this.semesterStart)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
+    ...mapMutations({
+      showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
+    }),
     updateKeywords () {
       this.keywordOne = this.searchBoxOne
       this.keywordTwo = this.searchBoxTwo

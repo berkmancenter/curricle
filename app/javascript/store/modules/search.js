@@ -530,6 +530,9 @@ const mutations = {
   },
   SET_BASIC_SEARCH (state, query) {
     state.basic = query
+  },
+  SET_SEARCH_RUNNING (state, value) {
+    state.searchRunning = value
   }
 }
 
