@@ -111,24 +111,16 @@ function loadLecturerData (coursesConnectedByInstructor) {
   // unfreeze the data object being passed in
   let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
-  var random100
-
-  if (data.length > 20) {
-    random100 = getRandom(data, 20)
-  } else {
-    random100 = data
-  }
-
-  random100.forEach(function (d) {
+  data.forEach(function (d) {
     d.departmentClass = d.class_academic_org_description.replace(/ +/g, '_')
     d.courseTypeClass = d.component
   })
 
-  random100.sort(function (a, b) {
+  data.sort(function (a, b) {
     return d3.ascending(a.class_academic_org_description, b.class_academic_org_description)
   })
 
-  monadicView(random100)
+  monadicView(data)
 }
 
 function requestData (instructorName, selectedSemester) {
@@ -425,20 +417,6 @@ function courseClick () {
   course.schedule = transformSchedule(course)
 
   selectCourse(course)
-}
-
-function getRandom (arr, n) {
-  var result = new Array(n)
-  var len = arr.length
-  var taken = new Array(len)
-
-  if (n > len) { throw new RangeError('getRandom: more elements taken than available') }
-  while (n--) {
-    var x = Math.floor(Math.random() * len)
-    result[n] = arr[x in taken ? taken[x] : x]
-    taken[x] = --len
-  }
-  return result
 }
 
 export { initSetup, requestData }
