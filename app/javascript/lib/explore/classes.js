@@ -151,18 +151,16 @@ function setDepartmentData (data) {
     .duration(1000)
     .attr('height', nestedDepartmentData.length * 20 + 22)
 
-  nestedDepartmentData.sort(function (a, b) {
-    return b.value.count - a.value.count
-  })
+  const sortedDepartmentData = _.sortBy(nestedDepartmentData, 'key')
 
-  departmentTextScaleMax = d3.max(nestedDepartmentData, function (d) { return d.value.count })
+  departmentTextScaleMax = d3.max(sortedDepartmentData, function (d) { return d.value.count })
 
   departmentTextScale.domain([0, departmentTextScaleMax])
   departmentBarScale.domain([0, departmentTextScaleMax])
 
   departmentSvg.select('.axis').transition(1000).call(departmentAxis)
 
-  setDepartmentVis(nestedDepartmentData)
+  setDepartmentVis(sortedDepartmentData)
 }
 
 function setCourseTypeData (data, expand) {
