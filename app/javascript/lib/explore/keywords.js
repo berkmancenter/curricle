@@ -27,7 +27,7 @@ var leftSelection = 'Truth'
 var rightSelection = 'Lies'
 
 var sideData = 'searchTerm'
-var centerData = 'component' // component subject_description
+var centerData = 'subject_description' // component subject_description
 
 var textPaddingSideViz = 180
 
@@ -103,7 +103,7 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
   semester = selectedSemester
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
-  centerData = 'component'
+  centerData = 'subject_description'
 
   // remove existing SVGs prior to (re)drawing new ones
   d3.select('#visContainer').selectAll('svg').remove()
@@ -309,7 +309,7 @@ function setData (data) {
 
 function setSideTextVis (nestedData) {
   var leftText = d3.select('#searchOne')
-  const topMargin = 168
+  const topMargin = 215
 
   leftText.transition().duration(500)
     .style('left', (textPaddingSideViz - 100) + 'px')

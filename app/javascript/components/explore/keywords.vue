@@ -16,35 +16,23 @@
       <div id="dimContainer">
         <ul>
           <li
-            class="dimSelect active"
+            class="dimSelect"
             value="component"
           >
-          Component</li> |
+          Learning Styles</li> |
 
           <li
-            class="dimSelect"
+            class="dimSelect active"
             value="subject_description"
           >
-          Subject</li> |
-
-          <li
-            class="dimSelect"
-            value="units_maximum"
-          >
-          Units</li> |
-
-          <li
-            class="dimSelect"
-            value="class_academic_org_description"
-          >
-          Department</li> |
+          Subjects</li> |
 
           <li
             id="dimClass"
             class="dimSelect"
             value="title"
           >
-            Class
+            Classes
           </li>
         </ul>
       </div>
