@@ -24,10 +24,12 @@ var classScale, instructorTextPosScale, departmentPosScale, instructorTextScale,
 let selectCourse
 let semester
 let showLoaderOverlay
+let setTitleName
 
-function initSetup (selectCourseFunction, showLoaderOverlayFunction) {
+function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction) {
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
+  setTitleName = setTitleNameFunction
 
   svg = d3.select('#visContainer').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -128,6 +130,8 @@ function requestData (instructorName, selectedSemester) {
     term_name: selectedSemester.term_name.toUpperCase(),
     term_year: selectedSemester.term_year
   }
+
+  setTitleName(instructorName)
 
   showLoaderOverlay(true)
 

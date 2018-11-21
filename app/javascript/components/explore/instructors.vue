@@ -8,7 +8,7 @@
       <h4
         class="text-uppercase font-weight-bold"
       >
-        {{ submittedName }}
+        {{ titleName }}
       </h4>
     </div>
 
@@ -81,14 +81,14 @@ export default {
   data () {
     return {
       instructorName: '',
-      submittedName: ''
+      titleName: ''
     }
   },
   computed: {
     ...mapGetters('search', ['currentSemester'])
   },
   mounted () {
-    initSetup(this.selectCourse, this.showLoaderOverlay)
+    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
@@ -97,8 +97,10 @@ export default {
     }),
     onSubmit (e) {
       e.preventDefault()
-      this.submittedName = this.instructorName
       requestData(this.instructorName, this.currentSemester)
+    },
+    setTitleName (name) {
+      this.titleName = name
     }
   }
 }
