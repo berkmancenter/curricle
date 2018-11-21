@@ -98,6 +98,8 @@ export default {
 
 <style lang="scss" scoped>
 #visContainer {
+  overflow: none;
+
   /deep/ {
     svg {
       display: block;
@@ -139,7 +141,7 @@ export default {
     #classVis {
       width: 100%;
       float: left;
-      overflow: scroll;
+      overflow: none;
       max-height: 100%;
     }
 
