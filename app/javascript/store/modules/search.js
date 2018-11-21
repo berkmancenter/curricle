@@ -8,10 +8,11 @@ import Vue from 'vue/dist/vue.esm'
 
 import { transformSchedule } from 'lib/util'
 
-const thisYear = (new Date()).getUTCFullYear()
+const currentDate = new Date()
+const thisYear = currentDate.getUTCFullYear()
 let thisSemester
 
-if (new Date().getMonth <= 5) {
+if (currentDate.getMonth <= 4) {
   thisSemester = 'Spring'
 } else {
   thisSemester = 'Fall'
