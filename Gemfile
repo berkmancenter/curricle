@@ -14,7 +14,7 @@ gem 'jbuilder', '~> 2.8'
 gem 'pg', '~> 1.1'
 gem 'progress_bar', '~> 1.3'
 gem 'puma', '~> 3.12'
-gem 'rails', '5.2.1' # @drg skip
+gem 'rails', '5.2.1.1' # @drg skip
 gem 'seedbank', '~> 0.4'
 gem 'sunspot_rails', '~> 2.3'
 gem 'webpacker', '~> 4.0.0.pre' # @drg skip
