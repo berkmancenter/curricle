@@ -1,9 +1,17 @@
 <template>
-  <div
-    v-show="keywords && searchComplete"
-    class="mt-5"
-  >
-    <div class="clearfix">
+  <div class="mt-5">
+    <div
+      v-if="resultsTotalCount === 0"
+    >
+      <strong>
+        No results found for that search.
+      </strong>
+    </div>
+
+    <div
+      v-else
+      class="clearfix"
+    >
       <div
         class="float-left"
         style="width: 28%;"
@@ -65,8 +73,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', { keywords: 'activeKeywords' }),
-    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable', 'resultsTotalCount']),
+    ...mapState('search', ['results', 'resultsMoreAvailable', 'resultsTotalCount']),
     ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['scheduledCourses']),
     currentSchedule () {

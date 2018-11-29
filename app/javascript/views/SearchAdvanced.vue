@@ -4,7 +4,7 @@
 
     <search-form v-if="userAuthenticated" />
 
-    <search-results v-show="results.length" />
+    <search-results v-show="searchComplete" />
   </div>
 </template>
 
@@ -22,11 +22,9 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
-    ...mapState('search', ['results'])
+    ...mapState('search', ['searchComplete'])
   },
   mounted () {
-    this.$store.commit('search/RESET_RESULTS')
-
     if (this.$route.params[0]) {
       var obj = deserializeSearch(this.$route)
       if (obj) {

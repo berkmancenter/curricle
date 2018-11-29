@@ -4,13 +4,12 @@
 
     <search-form />
 
-    <search-results v-show="results.length" />
+    <search-results v-show="searchComplete" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
 import SearchForm from 'components/search/basic/SearchForm'
 import SearchResults from 'components/search/SearchResults'
 
@@ -20,7 +19,7 @@ export default {
     SearchResults
   },
   computed: {
-    ...mapState('search', ['results'])
+    ...mapState('search', ['searchComplete'])
   }
 }
 </script>
