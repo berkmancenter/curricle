@@ -24,11 +24,11 @@
         Select an <span class="instructor">instructor</span>
         to see faculty with whom they've co-taught, connecting
         through <span class="courses">courses</span> to
-        <span class="departments">departments</span>.
+        <span class="subjects">subjects</span>.
 
         <span
           v-b-tooltip.hover
-          title="Instructors from different fields often explore shared interests by teaching together; this visualization explores networks of faculty by showing classes co-taught by instructors. Type the name of an instructor into the search bar and a network will appear with co-teachers. Lines connect these instructors to courses and the departments that offer them. Select course titles to learn more. Shift across instructors for new connections and patterns."
+          title="Instructors from different fields often explore shared interests by teaching together; this visualization explores networks of faculty by showing classes co-taught by instructors. Type the name of an instructor into the search bar and a network will appear with co-teachers. Lines connect these instructors to courses and the subjects that offer them. Select course titles to learn more. Shift across instructors for new connections and patterns."
           class="pointer"
         >
           MORE&nbsp;&gt;
@@ -128,12 +128,12 @@ export default {
   .classCircle,
   .classLine,
   .selectedInstructorText,
-  .departmentText,
+  .subjectText,
   .instructorText {
     cursor: pointer;
   }
 
-  .departmentText {
+  .subjectText {
     fill: #00adf0;
     text-anchor: end;
 
@@ -184,7 +184,7 @@ export default {
       color: #2c3194;
     }
 
-    span.departments {
+    span.subjects {
       color: #00adf0;
     }
   }

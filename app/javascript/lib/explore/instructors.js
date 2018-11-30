@@ -19,7 +19,7 @@ var margin = { top: 50, right: 100, bottom: 150, left: 50 }
 var width = documentWidth - margin.left - margin.right
 var height = 900 - margin.top - margin.bottom
 var svg
-var classScale, instructorTextPosScale, departmentPosScale, instructorTextScale, departmentTextScale
+var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, subjectTextScale
 
 let selectCourse
 let semester
@@ -43,13 +43,13 @@ function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNam
   instructorTextPosScale = d3.scalePoint()
     .range([margin.top, height])
 
-  departmentPosScale = d3.scalePoint()
+  subjectPosScale = d3.scalePoint()
     .range([margin.top, height])
 
   instructorTextScale = d3.scaleLinear()
     .range([9, 20])
 
-  departmentTextScale = d3.scaleLinear()
+  subjectTextScale = d3.scaleLinear()
     .range([9, 20])
 
   var gradientLeft = svg.append('defs')
@@ -114,12 +114,12 @@ function loadLecturerData (coursesConnectedByInstructor) {
   let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
   data.forEach(function (d) {
-    d.departmentClass = d.class_academic_org_description.replace(/ +/g, '_')
+    d.subjectClass = d.subject_description.replace(/ +/g, '_')
     d.courseTypeClass = d.component
   })
 
   data.sort(function (a, b) {
-    return d3.ascending(a.class_academic_org_description, b.class_academic_org_description)
+    return d3.ascending(a.subject_description, b.subject_description)
   })
 
   monadicView(data)
@@ -155,12 +155,12 @@ function monadicView (data) {
     .rollup()
     .entries(data)
 
-  var nestedDepartmentData = d3.nest()
-    .key(function (d) { return d.class_academic_org_description })
+  var nestedSubjectData = d3.nest()
+    .key(function (d) { return d.subject_description })
     .rollup(function (v) {
       return {
         count: v.length,
-        classes: v[0].departmentClass
+        classes: v[0].subjectClass
       }
     })
     .entries(data)
@@ -170,7 +170,7 @@ function monadicView (data) {
     .rollup(function (v) {
       return {
         count: v.length,
-        classes: v[0].departmentClass,
+        classes: v[0].subjectClass,
         // classes: function(d) { return d.amount; })
         name: v[0].course_instructors[0].display_name,
         eMail: v[0].course_instructors[0].email
@@ -184,17 +184,17 @@ function monadicView (data) {
 
   classScale.range([margin.top, height])
   instructorTextPosScale.range([margin.top + 50, height - 50])
-  departmentPosScale.range([margin.top + 50, height - 50])
+  subjectPosScale.range([margin.top + 50, height - 50])
 
   classScale.domain(data.map(function (d) { return d.id }))
 
   instructorTextScale.domain([0, Math.max(d3.max(nestedInstructorData, function (d) { return d.value.count }), 5)])
 
-  departmentTextScale.domain([0, Math.max(d3.max(nestedDepartmentData, function (d) { return d.value.count }), 5)])
+  subjectTextScale.domain([0, Math.max(d3.max(nestedSubjectData, function (d) { return d.value.count }), 5)])
 
   instructorTextPosScale.domain(nestedInstructorData.map(function (d) { return d.key }))
 
-  departmentPosScale.domain(nestedDepartmentData.map(function (d) { return d.key }))
+  subjectPosScale.domain(nestedSubjectData.map(function (d) { return d.key }))
 
   //  CenterVis
 
@@ -210,7 +210,7 @@ function monadicView (data) {
   classText
     .enter()
     .append('text')
-    .attr('class', function (d) { return 'classText ' + d.values[0].departmentClass + ' ' + d.values[0].courseTypeClass })
+    .attr('class', function (d) { return 'classText ' + d.values[0].subjectClass + ' ' + d.values[0].courseTypeClass })
     .attr('y', function (d) { return classScale(d.key) - 4 })
     .attr('x', function (d) { return width / 2 })
     .style('text-anchor', 'middle')
@@ -261,7 +261,7 @@ function monadicView (data) {
   instructorLine
     .transition()
     .duration(500)
-    .attr('class', function (d) { return 'instructorLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'instructorLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
       x2 = width / 2 - (d.title.length * 2)
       y2 = classScale(d.id)
@@ -276,7 +276,7 @@ function monadicView (data) {
   instructorLine
     .enter()
     .append('path')
-    .attr('class', function (d) { return 'instructorLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'instructorLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
       x2 = width / 2 - (d.title.length * 2)
       y2 = classScale(d.id)
@@ -293,24 +293,24 @@ function monadicView (data) {
   // -------------------------------------------------------------
   //  RightVis
 
-  var departmentText = svg.selectAll('.departmentText')
-    .data(nestedDepartmentData, function (d) { return d.key })
+  var subjectText = svg.selectAll('.subjectText')
+    .data(nestedSubjectData, function (d) { return d.key })
 
-  departmentText.exit().remove()
+  subjectText.exit().remove()
 
-  departmentText.transition().duration(500)
-    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (departmentPosScale(d.key) - 2) + ')' })
+  subjectText.transition().duration(500)
+    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (subjectPosScale(d.key) - 2) + ')' })
     .attr('dy', '0.3em')
-    .style('font-size', function (d, i) { return departmentTextScale(d.value.count) })
+    .style('font-size', function (d, i) { return subjectTextScale(d.value.count) })
 
-  departmentText
+  subjectText
     .enter()
     .append('text')
-    .attr('class', function (d) { return 'departmentText ' + d.value.classes })
-    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (departmentPosScale(d.key) - 2) + ')' })
+    .attr('class', function (d) { return 'subjectText ' + d.value.classes })
+    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (subjectPosScale(d.key) - 2) + ')' })
     .attr('dy', '0.3em')
     .style('text-anchor', 'start')
-    .style('font-size', function (d, i) { return departmentTextScale(d.value.count) })
+    .style('font-size', function (d, i) { return subjectTextScale(d.value.count) })
     .text(function (d) {
       if (d.key.length > maxTextLength) { return d.key.substring(0, maxTextLength) + '...' } else { return d.key }
     })
@@ -319,19 +319,19 @@ function monadicView (data) {
   x1 = width - 150
   xHalf = x1 - documentWidth / 20
 
-  var departmentLine = svg.selectAll('.departmentLine')
+  var subjectLine = svg.selectAll('.subjectLine')
     .data(data)
 
-  departmentLine.exit().remove()
+  subjectLine.exit().remove()
 
-  departmentLine
+  subjectLine
     .transition()
     .duration(500)
-    .attr('class', function (d) { return 'departmentLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'subjectLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
       x2 = width / 2 + (d.title.length * 2)
       y2 = classScale(d.id)
-      y1 = departmentPosScale(d.class_academic_org_description)
+      y1 = subjectPosScale(d.subject_description)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -339,14 +339,14 @@ function monadicView (data) {
           ' ' + x2 + ',' + y2
     })
 
-  departmentLine
+  subjectLine
     .enter()
     .append('path')
-    .attr('class', function (d) { return 'departmentLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'subjectLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
       x2 = width / 2 + (d.title.length * 2)
       y2 = classScale(d.id)
-      y1 = departmentPosScale(d.class_academic_org_description)
+      y1 = subjectPosScale(d.subject_description)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -370,8 +370,8 @@ function categoryClick () {
   svg.selectAll('.instructorLine').style('opacity', 0.1)
   svg.selectAll('.instructorText').style('opacity', 0.1)
 
-  svg.selectAll('.departmentLine').style('opacity', 0.1)
-  svg.selectAll('.departmentText').style('opacity', 0.1)
+  svg.selectAll('.subjectLine').style('opacity', 0.1)
+  svg.selectAll('.subjectText').style('opacity', 0.1)
 
   svg.selectAll('.' + selectedClass).style('opacity', 1)
 
@@ -395,8 +395,8 @@ function categoryClickRemoval () {
   svg.selectAll('.instructorLine').style('opacity', 1)
   svg.selectAll('.instructorText').style('opacity', 1)
 
-  svg.selectAll('.departmentLine').style('opacity', 1)
-  svg.selectAll('.departmentText').style('opacity', 1)
+  svg.selectAll('.subjectLine').style('opacity', 1)
+  svg.selectAll('.subjectText').style('opacity', 1)
 }
 // -------------------------------------------------------------
 //  lecturer Vis on Class selection
