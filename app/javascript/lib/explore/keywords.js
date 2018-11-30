@@ -346,7 +346,7 @@ function dataPrepCenterVis (filteredData) {
   // var filteredData = fullData //.filter(function(d) { return d[sideData] === leftSelection || d[sideData] === rightSelection });
 
   var nestedData = d3.nest()
-    .key(function (d) { return d[centerData] })
+    .key(function (d) { return centerData === 'title' ? d['id'] : d[centerData] })
     .key(function (d) { return d[sideData] })
     .rollup(function (v) {
       return {
@@ -437,7 +437,9 @@ function setCenterVis (sortedData) {
     })
     .style('font-size', function (d) { return typeTextScale(+d.totalCount) + 'px' })
     .text(function (d) {
-      if (d.key.length > maxTextLength) { return d.key.substring(0, maxTextLength) + '...' } else { return d.key }
+      const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+
+      return (title.length > maxTextLength) ? title.substring(0, maxTextLength) + '...' : title
     })
     .on('click', centerClick)
     .on('mouseover', showCountCenterVis)
@@ -464,7 +466,9 @@ function centerClick () {
   var selectedKey = this.__data__.key
 
   var selectionData = fullData.filter(function (d) {
-    return d[centerData] === selectedKey
+    const key = (centerData === 'title') ? 'id' : centerData
+
+    return d[key] === selectedKey
   })
 
   // Courses at the intersection of both keywords will be in the selectionData array twice
@@ -490,18 +494,24 @@ function showCountCenterVis () {
   var thisData = this.__data__
 
   if (thisData.values.length === 1) {
-    if (thisData.values[0].key === leftSelection) {
-      d3.select(this).text(function (d) { return d.values[0].value.count + ' - ' + d.key })
-    } else {
-      d3.select(this).text(function (d) { return d.key + ' - ' + d.values[0].value.count })
-    }
+    d3.select(this).text(function (d) {
+      const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+
+      if (thisData.values[0].key === leftSelection) {
+        return d.values[0].value.count + ' - ' + title
+      } else {
+        return title + ' - ' + d.values[0].value.count
+      }
+    })
   } else {
     d3.select(this).text(function (d) { return d.values[0].value.count + ' - ' + d.key + ' - ' + d.values[1].value.count })
   }
 }
 function removeCountCenterVis () {
   d3.select(this).text(function (d) {
-    if (d.key.length > maxTextLength) { return d.key.substring(0, maxTextLength) + '...' } else { return d.key }
+    const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+
+    return (title.length > maxTextLength) ? title.substring(0, maxTextLength) + '...' : title
   })
 }
 
