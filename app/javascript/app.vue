@@ -2,6 +2,11 @@
   <div id="app">
     <loader-overlay />
 
+    <the-navbar-control
+      v-if="userAuthenticated"
+      v-show="sidebarCurrentType"
+    />
+
     <the-tray-control
       v-if="userAuthenticated"
       v-show="!sidebarCurrentType"
@@ -10,9 +15,10 @@
     <div class="row h-100">
       <div
         id="nav-container"
+        :class="{ active: !sidebarCurrentType }"
         class="col-md-2 px-0"
       >
-        <navbar />
+        <navbar v-if="!sidebarCurrentType" />
       </div>
 
       <div
@@ -57,6 +63,7 @@ import TheSidebar from 'components/TheSidebar'
 import TheFeedbackLink from 'components/TheFeedbackLink'
 import TheTrayControl from 'components/TheTrayControl'
 import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
+import TheNavbarControl from 'components/TheNavbarControl'
 
 export default {
   components: {
@@ -67,7 +74,8 @@ export default {
     TheSidebar,
     TheFeedbackLink,
     TheTrayControl,
-    TheDataLastUpdatedIndicator
+    TheDataLastUpdatedIndicator,
+    TheNavbarControl
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
@@ -87,7 +95,7 @@ export default {
   overflow: auto;
 }
 
-#nav-container,
+#nav-container.active,
 #sidebar-container.active {
   background-color: #000;
   color: #fff;
