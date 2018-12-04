@@ -45,8 +45,10 @@ const actions = {
     commit('REMOVE_SIDEBAR_ELEM', { type: 'course' })
     commit('ADD_SIDEBAR_ELEM', { type: 'course', payload: course })
   },
-  closeSidebar ({ commit }) {
-    commit('REMOVE_TOP_SIDEBAR_ELEM')
+  closeSidebar ({ commit, state }) {
+    for (let i = 0; i <= state.sidebarStack.length; i++) {
+      commit('REMOVE_TOP_SIDEBAR_ELEM')
+    }
   }
 }
 
