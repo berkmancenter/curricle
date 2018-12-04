@@ -51,7 +51,8 @@
         class="day-column"
       >
         <b-row>
-          <b-col class="header">{{ day }}
+          <b-col class="header">
+            {{ day }}
           </b-col>
         </b-row>
         <b-row>

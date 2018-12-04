@@ -9,14 +9,18 @@
       <p class="float-right text-right text-uppercase mb-0">
         <strong>{{ course.component || '&mdash;' }}</strong><br>
         <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
-        <strong>{{ firstInstructor || '&mdash;' }}</strong>
+        <strong>{{ firstInstructor }}</strong>
       </p>
     </div>
 
-    <h3 class="course-title text-uppercase">{{ course.title }}</h3>
+    <h3 class="course-title text-uppercase">
+      {{ course.title }}
+    </h3>
 
     <div class="description">
-      <p class="heading">Description</p>
+      <p class="heading">
+        Description
+      </p>
       <truncate
         v-if="course.course_description_long"
         :length="250"
@@ -41,7 +45,9 @@
     </div>
 
     <div class="instructors mt-4">
-      <p class="heading">Instructors</p>
+      <p class="heading">
+        Instructors
+      </p>
       <div
         v-for="instructor in course.course_instructors"
         :key="instructor.id"
@@ -82,6 +88,8 @@ export default {
     firstInstructor () {
       if (this.course.course_instructors.length) {
         return this.course.course_instructors[0].display_name
+      } else {
+        return '&mdash;'
       }
     }
   },

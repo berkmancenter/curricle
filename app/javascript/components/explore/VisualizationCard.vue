@@ -9,7 +9,9 @@
 
     <div class="col-sm-12 col-md-4">
       <p>
-        <strong class="text-uppercase">{{ title }}</strong>
+        <strong class="text-uppercase">
+          {{ title }}
+        </strong>
       </p>
 
       <p>{{ text }}</p>

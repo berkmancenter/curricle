@@ -47,8 +47,12 @@
       <h3>Explore:</h3>
 
       <p>
-        Explore courses by selecting <span class="formats">formats</span>
-        (class types) and <span class="departments">departments</span>
+        Explore courses by selecting <span class="formats">
+          formats
+        </span>
+        (class types) and <span class="departments">
+          departments
+        </span>
         (subjects and courses of study).
 
         <span

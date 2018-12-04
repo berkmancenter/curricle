@@ -80,7 +80,6 @@
         v-show="activeNavPrimary === 'search'"
         class="nav-sub-container"
       >
-
         <router-link
           class="nav sub"
           to="/search/advanced"

@@ -7,7 +7,9 @@
       show
       variant="secondary"
     >
-      <span class="inactive">Inactive</span>
+      <span class="inactive">
+        Inactive
+      </span>
       <keyword
         v-for="(keyword,idx) in inactiveKeywords"
         :key="idx"

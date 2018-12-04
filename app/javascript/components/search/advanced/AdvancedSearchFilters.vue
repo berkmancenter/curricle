@@ -1,6 +1,8 @@
 <template>
   <div id="filter-container">
-    <p class="heading">Filter results by:</p>
+    <p class="heading">
+      Filter results by:
+    </p>
 
     <div class="row">
       <div

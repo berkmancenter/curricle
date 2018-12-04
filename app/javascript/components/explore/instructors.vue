@@ -21,10 +21,16 @@
 
       <p>
         Discover faculty networks of teaching and learning from the past ten years.
-        Select an <span class="instructor">instructor</span>
+        Select an <span class="instructor">
+          instructor
+        </span>
         to see faculty with whom they've co-taught, connecting
-        through <span class="courses">courses</span> to
-        <span class="subjects">subjects</span>.
+        through <span class="courses">
+          courses
+        </span> to
+        <span class="subjects">
+          subjects
+        </span>.
 
         <span
           v-b-tooltip.hover

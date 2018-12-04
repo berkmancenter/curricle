@@ -19,13 +19,15 @@
             class="dimSelect"
             value="component"
           >
-          Learning Styles</li> |
+            Learning Styles
+          </li> |
 
           <li
             class="dimSelect active"
             value="subject_description"
           >
-          Subjects</li> |
+            Subjects
+          </li> |
 
           <li
             id="dimClass"

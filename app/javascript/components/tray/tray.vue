@@ -1,7 +1,8 @@
 <template>
   <div class="pt-3 px-3">
     <div class="your-tray-parent clearfix">
-      <p>Your Tray
+      <p>
+        Your Tray
         <font-awesome-icon
           class="pointer float-right"
           icon="times"

@@ -19,7 +19,9 @@
         type="schedule"
       />
 
-      <span class="text-muted">&mdash;</span>
+      <span class="text-muted">
+        &mdash;
+      </span>
 
       <br>
 
@@ -35,7 +37,6 @@
         :invert="selected"
         type="annotated"
       />
-
     </div>
 
     <div

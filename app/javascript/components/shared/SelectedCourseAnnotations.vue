@@ -1,6 +1,8 @@
 <template>
   <div class="mt-4">
-    <p class="heading">Annotations</p>
+    <p class="heading">
+      Annotations
+    </p>
 
     <div>
       <textarea
@@ -10,7 +12,9 @@
         class="w-100"
       />
 
-      <span class="word-count">{{ editableTextLength }} / {{ maxLength }} characters</span>
+      <span class="word-count">
+        {{ editableTextLength }} / {{ maxLength }} characters
+      </span>
 
       <div class="button-container">
         <button

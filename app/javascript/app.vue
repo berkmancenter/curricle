@@ -46,7 +46,6 @@
 
         <the-feedback-link />
       </div>
-
     </div>
 
     <course-observer />

@@ -3,7 +3,6 @@
     id="selected-course"
     class="pt-3 px-3"
   >
-
     <div>
       <span class="float-left">
         Selected course

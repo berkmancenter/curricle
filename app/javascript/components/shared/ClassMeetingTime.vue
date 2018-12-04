@@ -30,7 +30,6 @@
     <div v-else>
       Schedule TBD
     </div>
-
   </div>
 </template>
 

@@ -11,7 +11,9 @@
           @mouseleave="removeProvisionalCourse(course)"
         >
           <td>{{ `${course.subject} ${course.catalog_number}` }}</td>
-          <td @click="selectCourse(course)">{{ course.title }}</td>
+          <td @click="selectCourse(course)">
+            {{ course.title }}
+          </td>
           <td>
             <course-action
               v-show="editable"

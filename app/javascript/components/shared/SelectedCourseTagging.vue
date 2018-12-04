@@ -1,6 +1,8 @@
 <template>
   <div class="mt-4">
-    <p class="heading">Tags</p>
+    <p class="heading">
+      Tags
+    </p>
 
     <input
       v-model="tagInput"
