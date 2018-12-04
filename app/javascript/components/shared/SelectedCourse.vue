@@ -13,7 +13,7 @@
         <font-awesome-icon
           class="pointer"
           icon="times"
-          @click="closeSidebar"
+          @click="closeSelectedCourse"
         />
       </span>
     </div>
@@ -65,7 +65,7 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/CourseAction'
 import SelectedCourseAnnotations from './SelectedCourseAnnotations'
@@ -108,7 +108,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('app', ['closeSidebar']),
+    closeSelectedCourse () {
+      this.$store.commit('app/REMOVE_TOP_SIDEBAR_ELEM')
+    },
     searchByCourseId (courseId) {
       this.$store.dispatch('search/searchByCourseId', courseId)
       this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
