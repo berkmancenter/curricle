@@ -9,13 +9,20 @@ import Vue from 'vue/dist/vue.esm'
 import { transformSchedule } from 'lib/util'
 
 const currentDate = new Date()
-const thisYear = currentDate.getUTCFullYear()
+let thisYear = currentDate.getUTCFullYear()
+let thisMonth = currentDate.getMonth()
 let thisSemester
 
-if (currentDate.getMonth <= 4) {
+if (thisMonth <= 4) {
   thisSemester = 'Spring'
 } else {
   thisSemester = 'Fall'
+}
+
+// Edge case for December to show Spring semester of next calendar year
+if (thisMonth === 11) {
+  thisSemester = 'Spring'
+  thisYear += 1
 }
 
 /* NOTE: any search state that affects the search results needs to be
