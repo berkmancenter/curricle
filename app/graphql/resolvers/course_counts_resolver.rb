@@ -16,7 +16,9 @@ module Resolvers
     def base_query
       Course
         .where.not(component: nil)
+        .where.not(component: '')
         .group(%i[component subject_academic_org_description])
+        .order(:subject_academic_org_description, :component)
     end
 
     def filter_by_args(query, args)
