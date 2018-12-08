@@ -3,6 +3,7 @@
 import _ from 'lodash'
 
 const state = {
+  alertText: '',
   viewmode: {
     tray: 'list-view',
     plan: 'list-view'
@@ -79,6 +80,9 @@ const mutations = {
   },
   SET_SEMESTER: (state, s) => {
     state.semester = s
+  },
+  SET_ALERT_TEXT: (state, text) => {
+    state.alertText = text
   }
 }
 

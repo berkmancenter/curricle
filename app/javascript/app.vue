@@ -25,6 +25,10 @@
         id="main-container"
         class="col-md-8"
       >
+        <the-alert
+          class="mt-2"
+        />
+
         <keep-alive>
           <router-view />
         </keep-alive>
@@ -63,6 +67,7 @@ import TheFeedbackLink from 'components/TheFeedbackLink'
 import TheTrayControl from 'components/TheTrayControl'
 import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
 import TheNavbarControl from 'components/TheNavbarControl'
+import TheAlert from 'components/TheAlert'
 
 export default {
   components: {
@@ -74,7 +79,8 @@ export default {
     TheFeedbackLink,
     TheTrayControl,
     TheDataLastUpdatedIndicator,
-    TheNavbarControl
+    TheNavbarControl,
+    TheAlert
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),

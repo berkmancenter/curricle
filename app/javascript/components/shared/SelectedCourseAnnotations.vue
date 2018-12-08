@@ -31,6 +31,7 @@
 <script>
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
 import COURSE_QUERY from '../../graphql/Course.gql'
+import { mapMutations } from 'vuex'
 
 export default {
   apollo: {
@@ -74,6 +75,7 @@ export default {
     this.editableText = this.savedAnnotation
   },
   methods: {
+    ...mapMutations('app', ['SET_ALERT_TEXT']),
     updateAnnotations () {
       this.$apollo.mutate({
         mutation: ANNOTATION_SET_MUTATION,
@@ -82,7 +84,9 @@ export default {
           course_id: this.course.id,
           id: this.course.annotation && this.course.annotation.id
         }
-      })
+      }).then(
+        this.SET_ALERT_TEXT('Annotation saved')
+      )
     }
   }
 }

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import USER_COURSE_REMOVE_MUTATION from '../../graphql/UserCourseRemove.gql'
 import USER_COURSE_SET_MUTATION from '../../graphql/UserCourseSet.gql'
@@ -93,6 +93,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('app', ['SET_ALERT_TEXT']),
     click () {
       if (!this.config.clickable) { return }
 
@@ -104,9 +105,14 @@ export default {
     },
     setUserCourse () {
       var includeInPath = false
+      let alertText = ''
 
       if (this.type === 'schedule') {
         includeInPath = !this.courseflags[this.type][this.course]
+
+        alertText = includeInPath ? 'Course added to schedule' : 'Course removed from schedule'
+      } else {
+        alertText = 'Course added to tray'
       }
 
       this.$apollo.provider.defaultClient.mutate({
@@ -116,7 +122,7 @@ export default {
           includeInPath: includeInPath
         }
       }).then(
-        this.toggleCourseStatus()
+        this.toggleCourseStatus(alertText)
       )
     },
     removeUserCourse () {
@@ -126,10 +132,12 @@ export default {
           courseId: this.course
         }
       }).then(
-        this.toggleCourseStatus()
+        this.toggleCourseStatus('Course removed from tray')
       )
     },
-    toggleCourseStatus () {
+    toggleCourseStatus (alertText) {
+      this.SET_ALERT_TEXT(alertText)
+
       this.$store.dispatch('user/toggleCourseStatus', { type: this.type, course: this.course })
     }
   }
