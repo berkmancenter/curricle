@@ -12,7 +12,33 @@
       </h4>
     </div>
 
-    <div id="interfaceContainer">
+    <div
+      v-show="showNoResultsContainer"
+      id="noResultsContainer"
+      class="mt-5 text-center"
+    >
+      <p>
+        There are no results for your search.<br>
+        Try one of the instructors below to get started:
+      </p>
+
+      <p
+        v-for="instructor in predefinedInstructors"
+        :key="instructor"
+      >
+        <span
+          class="instructor"
+          @click="forceInstructorSearch(instructor)"
+        >
+          {{ instructor }}
+        </span>
+      </p>
+    </div>
+
+    <div
+      v-show="!showNoResultsContainer"
+      id="interfaceContainer"
+    >
       <div id="visContainer" />
     </div>
 
@@ -86,7 +112,12 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
+      predefinedInstructors: [
+        'Jeffrey Schnapp',
+        'Sara Gorman'
+      ],
       instructorName: '',
+      showNoResultsContainer: false,
       titleName: ''
     }
   },
@@ -94,25 +125,43 @@ export default {
     ...mapGetters('search', ['currentSemester'])
   },
   mounted () {
-    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName)
+    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName, this.setShowNoResultsContainer)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
     ...mapMutations({
       showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
     }),
+    forceInstructorSearch (name) {
+      this.instructorName = name
+
+      requestData(this.instructorName, this.currentSemester)
+    },
     onSubmit (e) {
       e.preventDefault()
+      this.setShowNoResultsContainer(false)
       requestData(this.instructorName, this.currentSemester)
     },
     setTitleName (name) {
       this.titleName = name
+    },
+    setShowNoResultsContainer (bool) {
+      this.showNoResultsContainer = bool
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+span.instructor {
+  color: #d10f84;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 #visContainer /deep/ svg {
   display: block;
   margin: auto;

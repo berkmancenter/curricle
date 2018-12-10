@@ -25,11 +25,13 @@ let selectCourse
 let semester
 let showLoaderOverlay
 let setTitleName
+let showNoResultsContainer
 
-function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction) {
+function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction, showNoResultsContainerFunction) {
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
   setTitleName = setTitleNameFunction
+  showNoResultsContainer = showNoResultsContainerFunction
 
   svg = d3.select('#visContainer').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -139,7 +141,15 @@ function requestData (instructorName, selectedSemester) {
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
     variables: { instructorName, semester }
   }).then(function (response) {
-    loadLecturerData(response.data.courses_connected_by_instructor)
+    const courses = response.data.courses_connected_by_instructor
+
+    if (courses.length) {
+      showNoResultsContainer(false)
+      loadLecturerData(courses)
+    } else {
+      showNoResultsContainer(true)
+    }
+
     showLoaderOverlay(false)
   })
 }
