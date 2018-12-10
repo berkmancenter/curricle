@@ -2,9 +2,7 @@
   <div>
     <b-alert
       :show="dismissCountDown"
-      dismissible
       fade
-      variant="secondary"
       @dismissed="dismissCountDown=0"
       @dismiss-count-down="countDownChanged"
     >
@@ -44,3 +42,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+div.alert {
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}
+</style>

@@ -26,7 +26,7 @@
         class="col-md-8"
       >
         <the-alert
-          class="mt-2"
+          class="mt-2 col-md-4 offset-md-8"
         />
 
         <keep-alive>
