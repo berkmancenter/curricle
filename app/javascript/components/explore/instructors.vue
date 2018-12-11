@@ -87,16 +87,9 @@
                 type="search"
                 class="search pl-0"
                 required
+                autocomplete="none"
                 placeholder="Enter instructor name"
               />
-
-              <b-input-group-append is-text>
-                <img
-                  class="icon pointer"
-                  src="/images/icons/return_arrow.png"
-                  @click="onSubmit"
-                >
-              </b-input-group-append>
             </b-input-group>
           </b-form>
         </div>
@@ -108,8 +101,35 @@
 <script>
 import { initSetup, requestData } from 'lib/explore/instructors'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import INSTRUCTOR_NAMES_QUERY from 'graphql/InstructorNames.gql'
+import Awesomplete from 'awesomplete'
 
 export default {
+  apollo: {
+    instructor_names: {
+      query: INSTRUCTOR_NAMES_QUERY,
+      variables () {
+        return {
+          semester: {
+            term_name: this.currentSemester.term_name.toUpperCase(),
+            term_year: this.currentSemester.term_year
+          },
+          past_years: 10
+        }
+      },
+      result () {
+        // Set up awesomplete-based autocomplete on the instructor name input
+        var input = document.getElementById('instructorName')
+
+        let awesomplete = new Awesomplete(input, { minChars: 4 })
+        awesomplete.list = this.instructor_names
+
+        input.addEventListener('awesomplete-select', (e) => {
+          this.forceInstructorSearch(e.text.value)
+        })
+      }
+    }
+  },
   data () {
     return {
       predefinedInstructors: [
@@ -222,7 +242,7 @@ span.instructor {
   position: fixed;
   bottom: 25px;
   margin-left: 10px;
-  width: 250px;
+  width: 300px;
 
   h3 {
     font-size: 18px;
@@ -245,7 +265,7 @@ span.instructor {
   }
 }
 
-#searchContainer {
+#searchContainer /deep/ {
   .form-control:focus {
     box-shadow: none;
   }
@@ -257,6 +277,10 @@ span.instructor {
     color: black;
   }
 
+  input.search {
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
   ::placeholder {
     color: black !important;
   }
@@ -264,6 +288,36 @@ span.instructor {
   img.icon {
     height: 12px;
     width: auto;
+  }
+
+  .awesomplete {
+    display: inline;
+
+    ul {
+      background-color: #ddd;
+      border-radius: 0 0 0.25rem 0;
+      margin: -2px 0 0 0;
+      padding-bottom: 10px;
+      padding-right: 10px;
+
+      li {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        mark {
+          background: inherit;
+          color: #d10f84;
+          padding: 0;
+        }
+      }
+    }
+
+    span {
+      display: none;
+    }
   }
 }
 </style>

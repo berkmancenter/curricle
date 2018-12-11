@@ -132,4 +132,13 @@ Types::QueryType = GraphQL::ObjectType.define do
 
     resolve Resolvers::CoursesConnectedByInstructorResolver.new
   end
+
+  field :instructor_names, types[types.String] do
+    description 'Returns a collection of instructor names for a given range of years'
+
+    argument :semester, !Inputs::SemesterInput
+    argument :past_years, types.Int, 'Include instructors for this number of past years'
+
+    resolve Resolvers::InstructorNamesResolver.new
+  end
 end
