@@ -18,7 +18,7 @@
       class="mt-5 text-center"
     >
       <p>
-        There are no results for your search.<br>
+        This instructor has no network.<br>
         Try one of the instructors below to get started:
       </p>
 
