@@ -12,8 +12,14 @@
       v-show="!sidebarCurrentType"
     />
 
+    <the-logout-link
+      v-if="userAuthenticated"
+      v-show="!sidebarCurrentType"
+    />
+
     <div class="row h-100">
       <div
+        v-show="!sidebarCurrentType"
         id="nav-container"
         :class="{ active: !sidebarCurrentType }"
         class="col-md-2 px-0"
@@ -23,7 +29,7 @@
 
       <div
         id="main-container"
-        class="col-md-8"
+        class="col-md-10"
       >
         <the-alert
           class="mt-2 col-md-4 offset-md-8"
@@ -37,15 +43,11 @@
       </div>
 
       <div
+        v-show="sidebarCurrentType"
         id="sidebar-container"
         :class="{ active: sidebarCurrentType }"
         class="col-md-2 px-0"
       >
-        <the-logout-link
-          v-if="userAuthenticated"
-          v-show="!sidebarCurrentType"
-        />
-
         <the-sidebar />
 
         <the-feedback-link />
@@ -104,5 +106,9 @@ export default {
 #sidebar-container.active {
   background-color: #000;
   color: #fff;
+}
+
+#main-container {
+  padding: 0 10%;
 }
 </style>

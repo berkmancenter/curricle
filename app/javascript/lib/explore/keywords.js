@@ -34,8 +34,8 @@ var textPaddingSideViz = 180
 var minDocumentWidth = 600
 var documentHeight = 100
 
-// main 'container' area is 8 columns wide (out of 12 total)
-var containerWidth = window.innerWidth * 0.667
+// main 'container' area is 10 columns wide (out of 12 total) with 10% padding on left/right
+var containerWidth = window.innerWidth * 0.833 * 0.8
 
 var documentWidth = Math.max(containerWidth, minDocumentWidth)
 
