@@ -30,6 +30,7 @@ export default {
   position: fixed;
   right: 30px;
   top: 30px;
+  z-index: 999;
 
   a {
     color: black;
