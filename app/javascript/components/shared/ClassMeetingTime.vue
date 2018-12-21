@@ -28,7 +28,11 @@
       {{ course.term_name }} {{ course.term_year }}
     </div>
     <div v-else>
-      Schedule TBD
+      <img
+        class="icon-tbd"
+        src="/images/icons/tbd.png"
+        alt="Schedule TBD"
+      >
     </div>
   </div>
 </template>
@@ -127,5 +131,11 @@ export default {
 .day-name {
   display: inline-block;
   width: 32px;
+}
+
+img.icon-tbd {
+  height: 20px;
+  margin-top: 20px;
+  width: auto;
 }
 </style>
