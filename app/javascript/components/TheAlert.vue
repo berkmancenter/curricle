@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="the-alert">
     <b-alert
       :show="dismissCountDown"
       fade
@@ -44,6 +44,10 @@ export default {
 </script>
 
 <style scoped>
+#the-alert {
+  height: 50px;
+}
+
 div.alert {
   background-color: black;
   color: white;
