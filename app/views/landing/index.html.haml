@@ -14,6 +14,10 @@
       :javascript
         localStorage.setItem('curricle_api_token', '#{current_user.api_token}')
         localStorage.setItem('curricle_schedule_token', '#{current_user.schedule_token}')
+    - else
+      :javascript
+        localStorage.removeItem('curricle_api_token')
+        localStorage.removeItem('curricle_schedule_token')
 
     :javascript
       localStorage.setItem('curricle_data_updated_at', '#{Course.last.updated_at.strftime("%F")}')
