@@ -49,8 +49,6 @@
         class="col-md-2 px-0"
       >
         <the-sidebar />
-
-        <the-feedback-link />
       </div>
     </div>
 
@@ -65,7 +63,6 @@ import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
 import TheLogoutLink from 'components/TheLogoutLink'
 import TheSidebar from 'components/TheSidebar'
-import TheFeedbackLink from 'components/TheFeedbackLink'
 import TheTrayControl from 'components/TheTrayControl'
 import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
 import TheNavbarControl from 'components/TheNavbarControl'
@@ -78,7 +75,6 @@ export default {
     CourseObserver,
     TheLogoutLink,
     TheSidebar,
-    TheFeedbackLink,
     TheTrayControl,
     TheDataLastUpdatedIndicator,
     TheNavbarControl,
