@@ -49,13 +49,28 @@ export default {
     nudge: {
       type: Number,
       default: 0
+    },
+    conflictInfo: {
+      type: Object,
+      default () {
+        return { conflictCount: 0, position: 0 }
+      }
     }
   },
   computed: {
     computedStyle () {
-      var top = this.scale * this.offset + 65 + this.nudge
+      const top = this.scale * this.offset + 65 + this.nudge
+      const position = this.conflictInfo.position
+      let width = 90
+
+      if (this.conflictInfo.conflictCount !== 0) {
+        width = width / (this.conflictInfo.conflictCount + 1)
+      }
+
       return {
-        top: top + 'px'
+        top: top + 'px',
+        width: width + '%',
+        left: width * position + '%'
       }
     }
   },

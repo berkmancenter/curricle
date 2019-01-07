@@ -47,16 +47,19 @@ const getters = {
   sortedSemestersInTray (state, getters) {
     return sortedSemesters(getters.semestersInTray)
   },
-  conflictedCourseIds (state, getters) {
+  // Return a collection of courses that conflict with other courses
+  // each course object has a list of days of the week where conflicts are present
+  // and contains the meetingTime data for those conflicting courses
+  scheduledCourseConflictsByDay (state, getters) {
     const schedule = getters.scheduledCoursesBySemester
-    let courseIds = []
+    let courseConflicts = {}
 
     _.forEach(schedule, semester => {
       const semesterSchedule = partitionCoursesByMeetingTime(semester)
 
-      _.forEach(semesterSchedule, day => {
+      _.forEach(semesterSchedule, (day, dayName) => {
         _.forEach(day, course => {
-          _.forEach(day, comparisonCourse => {
+          _.forEach(day, (comparisonCourse) => {
             if (course === comparisonCourse) {
               return
             }
@@ -67,17 +70,46 @@ const getters = {
             const endTime = startTime + comparisonCourse.meetingTime[1]
 
             if (
-              (courseStartTime >= startTime && courseStartTime <= endTime) ||
-              (courseEndTime >= startTime && courseEndTime <= endTime)
+              (courseStartTime >= startTime && courseStartTime < endTime) ||
+              (courseEndTime > startTime && courseEndTime <= endTime) ||
+              (courseStartTime <= startTime && courseEndTime >= endTime)
             ) {
-              courseIds.push(course.course.id, comparisonCourse.course.id)
+              const courseId = course.course.id
+
+              if (courseId in courseConflicts) {
+                if (dayName in courseConflicts[courseId]) {
+                  courseConflicts[courseId][dayName].push(comparisonCourse.meetingTime)
+                } else {
+                  courseConflicts[courseId][dayName] = [comparisonCourse.meetingTime]
+                }
+              } else {
+                courseConflicts[courseId] = { [dayName]: [comparisonCourse.meetingTime], meetingTime: course.meetingTime }
+              }
             }
           })
         })
       })
     })
 
-    return _.uniq(courseIds)
+    return courseConflicts
+  },
+  // for a given course and day, return the number of conflicts and horizontal position
+  courseConflictInfoForDay: (state, getters) => (courseId, dayName) => {
+    const conflictsByDay = getters.scheduledCourseConflictsByDay
+
+    if (!conflictsByDay || !(courseId in conflictsByDay) || !(dayName in conflictsByDay[courseId])) {
+      return { conflictCount: 0, position: 0 }
+    }
+
+    // calculate position of course against its conflicts sorted by meeting start time, then duration, then course ID
+    const courseMeetingTime = conflictsByDay[courseId].meetingTime
+    const courseArray = conflictsByDay[courseId][dayName]
+    const position = _.sortedIndexBy(courseArray, courseMeetingTime, (cmt) => { return [cmt[0], cmt[1], cmt[2]] })
+
+    return {
+      conflictCount: conflictsByDay[courseId][dayName].length,
+      position: position
+    }
   }
 }
 
