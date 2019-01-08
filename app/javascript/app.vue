@@ -105,6 +105,6 @@ export default {
 }
 
 #main-container {
-  padding: 0 10%;
+  padding: 0 5%;
 }
 </style>

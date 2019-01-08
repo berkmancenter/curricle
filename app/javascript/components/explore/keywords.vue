@@ -156,6 +156,7 @@ export default {
     svg {
       display: block;
       margin: 0;
+      width: 100%;
     }
 
     .leftSelected {
@@ -204,10 +205,8 @@ export default {
     /* ------ Search Style ------- */
 
     .searchBox {
-      position: absolute;
+      position: fixed;
       width: 137px;
-      top: 50%;
-      left: 50%;
       background: none;
     }
 

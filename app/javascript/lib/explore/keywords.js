@@ -29,17 +29,17 @@ var rightSelection = 'Lies'
 var sideData = 'searchTerm'
 var centerData = 'subject_description' // component subject_description
 
-var textPaddingSideViz = 180
+var textPaddingSideViz = 200
 
-var minDocumentWidth = 600
+var minDocumentWidth = 350
 var documentHeight = 100
 
-// main 'container' area is 10 columns wide (out of 12 total) with 10% padding on left/right
-var containerWidth = window.innerWidth * 0.833 * 0.8
+// main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
+var containerWidth = window.innerWidth * 0.8333333 * 0.9
 
 var documentWidth = Math.max(containerWidth, minDocumentWidth)
 
-var margin = { top: 50, right: 10, bottom: 50, left: 10 }
+var margin = { top: 50, right: 0, bottom: 50, left: 0 }
 var width = documentWidth - margin.left - margin.right
 var height = documentHeight - margin.top - margin.bottom
 
@@ -113,6 +113,7 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + 0 + ',' + margin.top + ')')
+    .attr('id', 'innerViz')
 
   linesGroup = svg.append('g')
   textGroup = svg.append('g')
@@ -289,7 +290,7 @@ function setData (data) {
   typeTextScale.domain([1, nestedData[0].value.count])
 
   function redraw () {
-    containerWidth = window.innerWidth * 0.667
+    containerWidth = window.innerWidth * 0.8333333 * 0.9
     documentWidth = Math.max(containerWidth, minDocumentWidth)
 
     d3.select('#visContainer')
@@ -308,18 +309,24 @@ function setData (data) {
 }
 
 function setSideTextVis (nestedData) {
+  const innerViz = document.getElementById('innerViz')
+  const rect = innerViz.getBoundingClientRect()
+
+  const top = (rect.top + rect.bottom) / 2 + 30
+  const leftTextLeft = rect.left - 115
+  const rightTextLeft = rect.right
+
   var leftText = d3.select('#searchOne')
-  const topMargin = 215
 
   leftText.transition().duration(500)
-    .style('left', (textPaddingSideViz - 100) + 'px')
-    .style('top', (documentHeight / 2 + topMargin) + 'px')
+    .style('left', leftTextLeft + 'px')
+    .style('top', top + 'px')
 
   var rightText = d3.select('#searchTwo')
 
   rightText.transition().duration(500)
-    .style('left', (documentWidth - textPaddingSideViz + 20) + 'px')
-    .style('top', (documentHeight / 2 + topMargin) + 'px')
+    .style('left', rightTextLeft + 'px')
+    .style('top', top + 'px')
 
   // var rightData = nestedData.filter(function (d) {
   //   return d.key === rightSelection
