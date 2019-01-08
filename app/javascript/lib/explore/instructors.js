@@ -9,11 +9,8 @@ var colorMix = '#2C3194'
 
 var maxTextLength = 50
 
-var documentWidth = document.body.clientWidth
-
-if (documentWidth > 800) {
-  documentWidth = 800
-}
+// main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
+const documentWidth = window.innerWidth * 0.8333333 * 0.9
 
 var margin = { top: 50, right: 100, bottom: 150, left: 50 }
 var width = documentWidth - margin.left - margin.right
@@ -273,7 +270,7 @@ function monadicView (data) {
     .duration(500)
     .attr('class', function (d) { return 'instructorLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 - (d.title.length * 2)
+      x2 = width / 2 - (d.title.length * 3)
       y2 = classScale(d.id)
       y1 = instructorTextPosScale(d.course_instructors[0].display_name)
 
@@ -288,7 +285,7 @@ function monadicView (data) {
     .append('path')
     .attr('class', function (d) { return 'instructorLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 - (d.title.length * 2)
+      x2 = width / 2 - (d.title.length * 3)
       y2 = classScale(d.id)
       y1 = instructorTextPosScale(d.course_instructors[0].display_name)
 
@@ -339,7 +336,7 @@ function monadicView (data) {
     .duration(500)
     .attr('class', function (d) { return 'subjectLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 + (d.title.length * 2)
+      x2 = width / 2 + (d.title.length * 3)
       y2 = classScale(d.id)
       y1 = subjectPosScale(d.subject_description)
 
@@ -354,7 +351,7 @@ function monadicView (data) {
     .append('path')
     .attr('class', function (d) { return 'subjectLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 + (d.title.length * 2)
+      x2 = width / 2 + (d.title.length * 3)
       y2 = classScale(d.id)
       y1 = subjectPosScale(d.subject_description)
 
