@@ -152,6 +152,8 @@ export default {
 
 <style lang="scss" scoped>
 #interfaceContainer {
+  position: relative;
+
   /deep/ {
     svg {
       display: block;
@@ -205,7 +207,7 @@ export default {
     /* ------ Search Style ------- */
 
     .searchBox {
-      position: fixed;
+      position: absolute;
       width: 137px;
       background: none;
     }

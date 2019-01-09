@@ -113,7 +113,6 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
     .attr('height', height + margin.top + margin.bottom)
     .append('g')
     .attr('transform', 'translate(' + 0 + ',' + margin.top + ')')
-    .attr('id', 'innerViz')
 
   linesGroup = svg.append('g')
   textGroup = svg.append('g')
@@ -309,12 +308,9 @@ function setData (data) {
 }
 
 function setSideTextVis (nestedData) {
-  const innerViz = document.getElementById('innerViz')
-  const rect = innerViz.getBoundingClientRect()
-
-  const top = (rect.top + rect.bottom) / 2 + 30
-  const leftTextLeft = rect.left - 115
-  const rightTextLeft = rect.right
+  const leftTextLeft = textPaddingSideViz - 115
+  const rightTextLeft = documentWidth - textPaddingSideViz
+  const top = documentHeight / 2 + 60
 
   var leftText = d3.select('#searchOne')
 
