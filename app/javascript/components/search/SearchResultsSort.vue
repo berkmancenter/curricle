@@ -4,23 +4,23 @@
     class="pointer"
   >
     sort by:
-         <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
+    <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
-         <b-popover
-           ref="popover"
-           placement="bottom"
-           target="sort-by-dropdown"
-           triggers="click blur"
-         >
-           <b-form-radio-group
-             v-model="selected"
-             :options="sortByOptions"
-             buttons
-             button-variant="outline-dark"
-             stacked
-             name="sort-fields"
-           />
-         </b-popover>
+    <b-popover
+      ref="popover"
+      placement="bottom"
+      target="sort-by-dropdown"
+      triggers="click blur"
+    >
+      <b-form-radio-group
+        v-model="selected"
+        :options="sortByOptions"
+        buttons
+        button-variant="outline-dark"
+        stacked
+        name="sort-fields"
+      />
+    </b-popover>
   </span>
 </template>
 

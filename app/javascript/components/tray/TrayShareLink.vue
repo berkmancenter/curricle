@@ -12,10 +12,10 @@
         placement="bottom"
       >
         Share this link to allow others to view your schedule:
-                                                     <br>
-                                                     <span class="shared-schedule-url">
-                                                       {{ scheduleUrl }}
-                                                     </span>
+        <br>
+        <span class="shared-schedule-url">
+          {{ scheduleUrl }}
+        </span>
       </b-popover>
     </span>
   </p>

@@ -6,18 +6,18 @@
     >
       Apply to: <strong>{{ dropdownTitle }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
-            <b-popover
-              target="search-field-dropdown"
-              triggers="click blur"
-              placement="bottom"
-            >
-              <b-form-checkbox-group
-                v-model="selected"
-                :options="options"
-                stacked
-                name="search-fields"
-              />
-            </b-popover>
+      <b-popover
+        target="search-field-dropdown"
+        triggers="click blur"
+        placement="bottom"
+      >
+        <b-form-checkbox-group
+          v-model="selected"
+          :options="options"
+          stacked
+          name="search-fields"
+        />
+      </b-popover>
     </span>
   </span>
 </template>

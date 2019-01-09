@@ -7,59 +7,59 @@
     >
       &nbsp;<strong>{{ rangeLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
-            <b-popover
-              target="search-semester-range"
-              triggers="click blur"
-              placement="bottom"
+      <b-popover
+        target="search-semester-range"
+        triggers="click blur"
+        placement="bottom"
+      >
+        <span>Select one or more semesters</span>
+        <hr>
+        <b-form>
+          <b-row>
+            <b-col class="justify-content-md-left">
+              <b-form-radio-group
+                v-model="searchTermStart"
+                :options="optionsTermName"
+                stacked
+                name="search-start-term"
+              />
+            </b-col>
+            <b-col class="justify-content-md-left">
+              <b-form-select
+                v-model="searchYearStart"
+                :options="optionsTermYear"
+                class="year-select"
+              />
+            </b-col>
+            <b-col class="justify-content-md-left">
+              <b-form-checkbox v-model="searchTermUseRange">
+                to
+              </b-form-checkbox>
+            </b-col>
+            <b-col
+              v-show="searchTermUseRange"
+              class="justify-content-md-left"
             >
-              <span>Select one or more semesters</span>
-              <hr>
-              <b-form>
-                <b-row>
-                  <b-col class="justify-content-md-left">
-                    <b-form-radio-group
-                      v-model="searchTermStart"
-                      :options="optionsTermName"
-                      stacked
-                      name="search-start-term"
-                    />
-                  </b-col>
-                  <b-col class="justify-content-md-left">
-                    <b-form-select
-                      v-model="searchYearStart"
-                      :options="optionsTermYear"
-                      class="year-select"
-                    />
-                  </b-col>
-                  <b-col class="justify-content-md-left">
-                    <b-form-checkbox v-model="searchTermUseRange">
-                      to
-                    </b-form-checkbox>
-                  </b-col>
-                  <b-col
-                    v-show="searchTermUseRange"
-                    class="justify-content-md-left"
-                  >
-                    <b-form-radio-group
-                      v-model="searchTermEnd"
-                      :options="optionsTermName"
-                      name="search-end-term"
-                      stacked
-                    />
-                  </b-col>
-                  <b-col
-                    v-show="searchTermUseRange"
-                    class="justify-content-md-left"
-                  >
-                    <b-form-select
-                      v-model="searchYearEnd"
-                      :options="optionsTermYearEnd"
-                      class="year-select"
-                    />
-                  </b-col>
-                </b-row>
-              </b-form>
-            </b-popover>
+              <b-form-radio-group
+                v-model="searchTermEnd"
+                :options="optionsTermName"
+                name="search-end-term"
+                stacked
+              />
+            </b-col>
+            <b-col
+              v-show="searchTermUseRange"
+              class="justify-content-md-left"
+            >
+              <b-form-select
+                v-model="searchYearEnd"
+                :options="optionsTermYearEnd"
+                class="year-select"
+              />
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-popover>
     </span>
   </div>
 </template>
