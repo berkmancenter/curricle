@@ -25,7 +25,7 @@ export default {
     ...mapState('search', ['searchComplete'])
   },
   mounted () {
-    if (this.$route.params[0]) {
+    if (this.$route.params.pathMatch) {
       var obj = deserializeSearch(this.$route)
       if (obj) {
         this.$store.dispatch('search/populateSearchState', obj)

@@ -702,7 +702,7 @@ function _overlapOneDay ([s1, s2]) {
 
 function deserializeSearch (route) {
   var obj = {}
-  var p = route.params[0]
+  var p = route.params.pathMatch
 
   /* first pull the semester range to search the catalog */
   var s = /^(Spring|Summer|Fall)(\d+)(?:-(Spring|Summer|Fall)(\d+))?\/(.*)/.exec(p)
