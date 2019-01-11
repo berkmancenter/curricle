@@ -29,7 +29,7 @@
 
       <div
         id="main-container"
-        class="col-md-10"
+        class="col-md-10 h-100"
       >
         <the-alert
           class="mt-2 col-md-4 offset-md-8"
