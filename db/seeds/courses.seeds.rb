@@ -38,6 +38,7 @@ class CurricleCourseImporter < CurricleImporter
     key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
 
     return if COURSES_CACHE.key?(key)
+    return if row[:class_status] == 'X' # do not import courses that have been cancelled
 
     [
       external_course_id,
