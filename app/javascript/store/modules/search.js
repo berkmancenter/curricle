@@ -329,7 +329,6 @@ const actions = {
         c => {
           var o = _.clone(c.node)
           o.schedule = transformSchedule(o)
-          o.semester = o.term_name + ' ' + o.term_year
 
           // TODO: Get from data; random for now
           o.department_color = '#' + Math.floor((Math.random() * (999 - 599)) + 600)

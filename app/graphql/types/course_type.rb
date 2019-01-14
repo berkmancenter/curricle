@@ -59,6 +59,15 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :grading_basis_description, types.String, 'Grading basis description'
   field :id, !types.ID, 'Unique ID'
   field :prereq, types.Int, 'Prerequisite'
+
+  field :semester, types.String do
+    resolve(
+      lambda do |course, _args, _ctx|
+        "#{course.term_name} #{course.term_year}"
+      end
+    )
+  end
+
   field :subject, types.String, 'Subject'
   field :subject_academic_org_description, types.String, 'Subject academic organization description'
   field :subject_description, types.String, 'Subject description'
