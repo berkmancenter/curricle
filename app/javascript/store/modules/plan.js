@@ -58,6 +58,8 @@ const getters = {
       const semesterSchedule = partitionCoursesByMeetingTime(semester)
 
       _.forEach(semesterSchedule, (day, dayName) => {
+        if (dayName === 'TBD') { return }
+
         _.forEach(day, course => {
           _.forEach(day, (comparisonCourse) => {
             if (course === comparisonCourse) {
