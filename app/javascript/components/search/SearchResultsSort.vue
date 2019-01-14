@@ -33,6 +33,12 @@ export default {
   components: {
     FontAwesomeIcon
   },
+  props: {
+    searchType: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       selected: ''
@@ -47,7 +53,7 @@ export default {
   watch: {
     selected: function () {
       this.$refs.popover.$emit('close')
-      this.$store.dispatch('search/changeSortBy', this.selected)
+      this.$store.dispatch('search/changeSortBy', { value: this.selected, searchType: this.searchType })
     }
   }
 }

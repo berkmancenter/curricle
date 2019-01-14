@@ -19,7 +19,9 @@
         <strong>{{ resultsTotalCount }} results</strong>
       </div>
       <div class="float-left">
-        <search-results-sort />
+        <search-results-sort
+          :search-type="searchType"
+        />
       </div>
       <div class="float-right text-right">
         <b-form-checkbox v-model="showConflicts">
@@ -66,6 +68,12 @@ export default {
   components: {
     SearchResultRow,
     SearchResultsSort
+  },
+  props: {
+    searchType: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {

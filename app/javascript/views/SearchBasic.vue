@@ -4,7 +4,10 @@
 
     <search-form />
 
-    <search-results v-show="searchComplete" />
+    <search-results
+      v-show="searchComplete"
+      search-type="basic"
+    />
   </div>
 </template>
 

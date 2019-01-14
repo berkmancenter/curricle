@@ -350,10 +350,20 @@ const actions = {
 
     promise.then(handler)
   },
-  changeSortBy ({ commit, state, dispatch }, value) {
-    if (state.sortBy !== value) {
-      commit('SET_SORT_BY', value)
-      dispatch('runKeywordSearch')
+  changeSortBy ({ commit, state, dispatch }, { value, searchType }) {
+    if (state.sortBy === value) {
+      return
+    }
+
+    commit('SET_SORT_BY', value)
+
+    switch (searchType) {
+      case 'basic':
+        dispatch('runBasicSearch')
+        break
+      case 'advanced':
+        dispatch('runKeywordSearch')
+        break
     }
   },
   setTimeRanges ({ commit }, r) {

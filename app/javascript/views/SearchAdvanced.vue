@@ -4,7 +4,10 @@
 
     <search-form v-if="userAuthenticated" />
 
-    <search-results v-show="searchComplete" />
+    <search-results
+      v-show="searchComplete"
+      search-type="advanced"
+    />
   </div>
 </template>
 
