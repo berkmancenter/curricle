@@ -15,6 +15,7 @@ gem 'pg', '~> 1.1'
 gem 'progress_bar', '~> 1.3'
 gem 'puma', '~> 3.12'
 gem 'rails', '5.2.2' # @drg skip
+gem 'sanitize', '~> 5.0'
 gem 'seedbank', '~> 0.5'
 gem 'sunspot_rails', '~> 2.3'
 gem 'webpacker', '~> 4.0.0.pre' # @drg skip

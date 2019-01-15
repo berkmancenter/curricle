@@ -25,7 +25,23 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :class_section, types.String, 'Class section'
   field :component, types.String, 'Component'
   field :course_description, types.String, 'Course description'
-  field :course_description_long, types.String, 'Extended course description'
+
+  field :course_description_long, types.String, 'Extended course description' do
+    resolve(
+      lambda do |course, _args, _ctx|
+        Sanitize.fragment(
+          course.course_description_long,
+          elements: %w[
+            b
+            em
+            i
+            p
+            strong
+          ]
+        )
+      end
+    )
+  end
 
   field :course_instructors, types[Types::CourseInstructorType], 'List of course instructors' do
     resolve(
