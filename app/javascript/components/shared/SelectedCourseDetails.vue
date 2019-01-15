@@ -9,7 +9,7 @@
       <p class="float-right text-right text-uppercase mb-0">
         <strong>{{ course.component || '&mdash;' }}</strong><br>
         <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
-        <strong>{{ firstInstructor }}</strong>
+        <strong>{{ firstInstructor || '&mdash;' }}</strong>
       </p>
     </div>
 
@@ -86,11 +86,9 @@ export default {
   },
   computed: {
     firstInstructor () {
-      if (this.course.course_instructors.length) {
-        return this.course.course_instructors[0].display_name
-      } else {
-        return '&mdash;'
-      }
+      if (!this.course.course_instructors.length) { return }
+
+      return this.course.course_instructors[0].display_name
     }
   },
   methods: {
