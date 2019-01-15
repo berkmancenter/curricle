@@ -39,6 +39,7 @@ class CurricleCourseImporter < CurricleImporter
 
     return if COURSES_CACHE.key?(key)
     return if row[:class_status] == 'X' # do not import courses that have been cancelled
+    return if row[:class_type] == 'N' # do not import discussion sections
 
     [
       external_course_id,
