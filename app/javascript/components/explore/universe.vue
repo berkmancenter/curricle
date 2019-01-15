@@ -74,23 +74,17 @@ export default {
 
 <style lang="scss" scoped>
 #visWrapper {
-  /deep/ {
-    #visSVG {
-      position: absolute;
-      top: 150px;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto auto;
-    }
+  position: relative;
 
+  /deep/ {
+    #visSVG,
     #visCANVAS {
       position: absolute;
-      top: 150px;
+      top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      margin: auto auto;
+      margin: 0 auto;
     }
 
     text {

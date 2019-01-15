@@ -8,7 +8,8 @@ import { transformSchedule } from 'lib/util'
 let visSize
 
 const windowHeight = window.innerHeight
-const windowWidth = window.innerWidth
+// main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
+const documentWidth = window.innerWidth * 0.8333333 * 0.9
 let backgroundGroup
 let context
 let diameter
@@ -20,8 +21,8 @@ let showLoaderOverlay
 let tooltipDiv
 let svg
 
-if (windowHeight > windowWidth) {
-  visSize = windowWidth
+if (windowHeight > documentWidth) {
+  visSize = documentWidth
 } else {
   visSize = windowHeight
 }
