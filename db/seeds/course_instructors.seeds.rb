@@ -24,7 +24,16 @@ class CurricleCourseInstructorImporter < CurricleImporter
     updated_at
   ].freeze
 
+  VALID_INSTRUCTOR_ROLES = %w[
+    HEAD
+    INST
+    PI
+    SI
+  ].freeze
+
   def format_row(row) # rubocop:disable Metrics/MethodLength
+    return unless row[:instructor_role].in?(VALID_INSTRUCTOR_ROLES)
+
     external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
     term_year = term_year.to_i
