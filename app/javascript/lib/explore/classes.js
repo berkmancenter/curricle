@@ -25,17 +25,19 @@ var fullData
 
 let selectCourse
 let semester
+let showLoaderOverlay
 
-function initSetup (selectCourseFunction, selectedSemester) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
   documentWidth = d3.select('#visContainer').node().getBoundingClientRect().width
 
   // remove existing SVGs prior to (re)drawing new ones
   d3.select('#visContainer').selectAll('svg').remove()
 
   const marginX = 1
-  margin = {top: 40, right: marginX, bottom: 10, left: marginX}
+  margin = { top: 40, right: marginX, bottom: 10, left: marginX }
   width = documentWidth / 2 - margin.left - margin.right
   height = 100 - margin.top - margin.bottom
   courseTypeBarScale = d3.scaleLinear()
@@ -95,6 +97,8 @@ function initSetup (selectCourseFunction, selectedSemester) {
 }
 
 function loadFullData (semester) {
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
     variables: { semester }
@@ -103,6 +107,7 @@ function loadFullData (semester) {
     appendAxis()
     setDepartmentData(response.data.course_counts)
     setCourseTypeData(response.data.course_counts)
+    showLoaderOverlay(false)
   })
 }
 
@@ -146,18 +151,16 @@ function setDepartmentData (data) {
     .duration(1000)
     .attr('height', nestedDepartmentData.length * 20 + 22)
 
-  nestedDepartmentData.sort(function (a, b) {
-    return b.value.count - a.value.count
-  })
+  const sortedDepartmentData = _.sortBy(nestedDepartmentData, 'key')
 
-  departmentTextScaleMax = d3.max(nestedDepartmentData, function (d) { return d.value.count })
+  departmentTextScaleMax = d3.max(sortedDepartmentData, function (d) { return d.value.count })
 
   departmentTextScale.domain([0, departmentTextScaleMax])
   departmentBarScale.domain([0, departmentTextScaleMax])
 
   departmentSvg.select('.axis').transition(1000).call(departmentAxis)
 
-  setDepartmentVis(nestedDepartmentData)
+  setDepartmentVis(sortedDepartmentData)
 }
 
 function setCourseTypeData (data, expand) {
@@ -404,6 +407,8 @@ function loadClassData (data) {
   var searchComponent = data[0].component.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
   var searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
 
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: DEPT_COURSES_QUERY,
     variables: {
@@ -413,6 +418,7 @@ function loadClassData (data) {
     .then(function (response) {
       const courses = response.data.coursesConnection.edges.map(course => course.node)
       classVisualization(courses)
+      showLoaderOverlay(false)
     })
 }
 

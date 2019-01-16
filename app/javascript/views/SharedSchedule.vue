@@ -7,17 +7,19 @@
         <div class="actions clearfix">
           <view-selector
             :show-list-view="false"
-            type="plan"/>
+            type="plan"
+          />
 
           <semester-selector
             v-show="viewmode.plan !== 'multi-year'"
             :mode="'state'"
-            :source="'schedule'"/>
+            :source="'schedule'"
+          />
         </div>
 
         <div>
-          <plan-semester-view v-show="viewmode.plan === 'semester'"/>
-          <plan-year-view v-show="viewmode.plan === 'multi-year'"/>
+          <plan-semester-view v-show="viewmode.plan === 'semester'" />
+          <plan-year-view v-show="viewmode.plan === 'multi-year'" />
         </div>
       </div>
     </div>

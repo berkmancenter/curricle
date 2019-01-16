@@ -1,11 +1,13 @@
 <template>
   <div>
     <div
-      class="text-center text-uppercase">
+      class="text-center text-uppercase"
+    >
       Keyword Comparisons
 
       <h4
-        class="text-uppercase font-weight-bold">
+        class="text-uppercase font-weight-bold"
+      >
         {{ keywordOne }} / {{ keywordTwo }}
       </h4>
     </div>
@@ -14,30 +16,25 @@
       <div id="dimContainer">
         <ul>
           <li
+            class="dimSelect"
+            value="component"
+          >
+            Learning Styles
+          </li> |
+
+          <li
             class="dimSelect active"
-            value="component">
-          Component</li> |
-
-          <li
-            class="dimSelect"
-            value="subject_description">
-          Subject</li> |
-
-          <li
-            class="dimSelect"
-            value="units_maximum">
-          Units</li> |
-
-          <li
-            class="dimSelect"
-            value="class_academic_org_description">
-          Department</li> |
+            value="subject_description"
+          >
+            Subjects
+          </li> |
 
           <li
             id="dimClass"
             class="dimSelect"
-            value="title">
-            Class
+            value="title"
+          >
+            Classes
           </li>
         </ul>
       </div>
@@ -45,28 +42,33 @@
       <div id="searchContainer">
         <div
           id="searchOne"
-          class="searchBox">
+          class="searchBox"
+        >
           <input
             id="searchBoxOne"
             v-model="searchBoxOne"
             class="searchBoxInput"
             type="text"
             placeholder="search term..."
-            @keyup.enter="updateKeywords">
+            @keyup.enter="updateKeywords"
+          >
 
           <button
             id="searchBoxOneButton"
-            class="searchBoxButton">
+            class="searchBoxButton"
+          >
             &gt;
           </button>
         </div>
 
         <div
           id="searchTwo"
-          class="searchBox">
+          class="searchBox"
+        >
           <button
             id="searchBoxTwoButton"
-            class="searchBoxButton">
+            class="searchBoxButton"
+          >
             &lt;
           </button>
 
@@ -76,11 +78,12 @@
             class="searchBoxInput"
             type="text"
             placeholder="search term..."
-            @keyup.enter="updateKeywords">
+            @keyup.enter="updateKeywords"
+          >
         </div>
       </div>
 
-      <div id="visContainer"/>
+      <div id="visContainer" />
     </div>
 
     <div id="vis-description">
@@ -92,12 +95,13 @@
         <span
           v-b-tooltip.hover
           title="In this visualization, you can explore the use of key terms in the names and descriptions of courses to reveal compelling combinations of concepts across the curriculum. In the entry fields at left and right, enter two keywords—&quot;truth&quot; and &quot;lies,&quot; or &quot;economics&quot; and &quot;evolution,&quot; perhaps—and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. Click on course titles to access full course descriptions or add courses to your tray. To reset the visualization, simply enter new keywords at left and right."
-          class="pointer">
+          class="pointer"
+        >
           MORE&nbsp;&gt;
         </span>
       </p>
 
-      <semester-input/>
+      <semester-input />
     </div>
   </div>
 </template>
@@ -106,7 +110,7 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/keywords'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
@@ -126,15 +130,18 @@ export default {
   },
   watch: {
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay)
     }
   },
   mounted () {
     this.updateKeywords()
-    initSetup(this.selectCourse, this.semesterStart)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
+    ...mapMutations({
+      showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
+    }),
     updateKeywords () {
       this.keywordOne = this.searchBoxOne
       this.keywordTwo = this.searchBoxTwo
@@ -145,78 +152,80 @@ export default {
 
 <style lang="scss" scoped>
 #interfaceContainer {
+  position: relative;
+
   /deep/ {
-    svg{
+    svg {
       display: block;
       margin: 0;
+      width: 100%;
     }
 
-    .rightSelected, .leftSelected{
-      /*text-decoration: underline;*/
-      font-weight: 300;
-      cursor:pointer;
-    }
-
-    .rightSelected:hover, .leftSelected:hover{
-      text-decoration: underline;
-    }
-
-    .leftSelected{
+    .leftSelected {
       fill: green;
     }
 
-    .rightSelected{
+    .rightSelected {
       fill: orange;
     }
 
-    .centerText{
-      cursor:pointer;
-      text-shadow:
-      -1px -1px 0 rgba(255,255,255,.5),
-        1px -1px 0 rgba(255,255,255,.5),
-        -1px 1px 0 rgba(255,255,255,.5),
-        1px 1px 0 rgba(255,255,255,.5);
+    .rightSelected,
+    .leftSelected {
+      /* text-decoration: underline; */
+      font-weight: 300;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
-    .centerText:hover{
+    .centerText {
+      cursor: pointer;
+      text-shadow:
+        -1px -1px 0 rgba(255, 255, 255, 0.5),
+        1px -1px 0 rgba(255, 255, 255, 0.5),
+        -1px 1px 0 rgba(255, 255, 255, 0.5),
+        1px 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .centerText:hover {
       text-decoration: underline;
     }
 
-    .centerSelected{
+    .centerSelected {
       text-decoration: underline;
       font-weight: 700;
-      cursor:pointer;
+      cursor: pointer;
     }
 
-    .insideText:hover{
+    .insideText:hover {
       text-decoration: underline;
-      cursor:pointer;
+      cursor: pointer;
     }
 
-    /*------ Search Style -------*/
+    /* ------ Search Style ------- */
 
-    .searchBox{
+    .searchBox {
       position: absolute;
       width: 137px;
-      top: 50%;
-      left: 50%;
       background: none;
     }
 
-    #searchBoxOne{
+    #searchBoxOne {
       text-align: right;
       color: #f0cf61;
     }
 
-    #searchBoxTwo{
+    #searchBoxTwo {
       color: #005397;
     }
 
-    #searchBoxOneButton{
+    #searchBoxOneButton {
       text-align: right;
     }
 
-    .searchBoxInput{
+    .searchBoxInput {
       outline: none;
       font-family: 'IBM Plex Sans', sans-serif;
       border: none;
@@ -226,7 +235,7 @@ export default {
       width: 90px;
     }
 
-    .searchBoxButton{
+    .searchBoxButton {
       outline: none;
       font-family: 'IBM Plex Sans', sans-serif;
       border: none;
@@ -234,10 +243,10 @@ export default {
       background: white;
     }
 
-    /*------ Dim. Select Style -------*/
+    /* ------ Dim. Select Style ------- */
 
-    #dimContainer{
-      height: 0px;
+    #dimContainer {
+      height: 0;
       padding-top: 30px;
       text-align: center;
       min-width: 600px;
@@ -248,18 +257,18 @@ export default {
       margin: auto;
       padding: 0;
       vertical-align: middle;
-        }
-
-    #dimContainer li {
-        display: inline;
-        cursor: pointer;
     }
 
-    .dimSelect:hover{
+    #dimContainer li {
+      display: inline;
+      cursor: pointer;
+    }
+
+    .dimSelect:hover {
       text-decoration: underline;
     }
 
-    .dimSelect.active{
+    .dimSelect.active {
       text-decoration: underline;
     }
   }

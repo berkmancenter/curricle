@@ -2,15 +2,22 @@
   <div
     id="tray-control"
     class="background-black pointer text-uppercase"
-    @click="trayToggle">
+    @click="trayToggle"
+  >
     Tray
+    <span v-show="trayCourses.length">
+      ({{ trayCourses.length }})
+    </span>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters('user', ['trayCourses'])
+  },
   methods: {
     ...mapActions('app', ['trayToggle'])
   }
@@ -26,9 +33,9 @@ export default {
   padding: 15px 30px;
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateX(71px) rotate(-90deg);
-  transform-origin: left center;
+  top: 30%;
+  transform: rotate(-90deg);
+  transform-origin: right bottom;
   z-index: 99;
 }
 </style>

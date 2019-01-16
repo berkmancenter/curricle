@@ -8,7 +8,8 @@ import { transformSchedule } from 'lib/util'
 let visSize
 
 const windowHeight = window.innerHeight
-const windowWidth = window.innerWidth
+// main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
+const documentWidth = window.innerWidth * 0.8333333 * 0.9
 let backgroundGroup
 let context
 let diameter
@@ -16,11 +17,12 @@ let pack
 let root
 let selectCourse
 let semester
+let showLoaderOverlay
 let tooltipDiv
 let svg
 
-if (windowHeight > windowWidth) {
-  visSize = windowWidth
+if (windowHeight > documentWidth) {
+  visSize = documentWidth
 } else {
   visSize = windowHeight
 }
@@ -31,9 +33,10 @@ var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
 
-function initSetup (selectCourseFunction, selectedSemester) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
 
   var width = +visSize
   var height = +visSize
@@ -84,11 +87,14 @@ function initSetup (selectCourseFunction, selectedSemester) {
 }
 
 function requestFirstData () {
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
     variables: { semester: semester }
   }).then(function (response) {
     nestData(response.data.course_counts)
+    showLoaderOverlay(false)
   })
 }
 
@@ -99,7 +105,7 @@ function nestData (data) {
     // .rollup(function(d) { return d.count; });
     .rollup(function (d) { return d3.sum(d, function (d) { return d.count }) })
 
-  root = d3.hierarchy({values: nest.entries(data)}, function (d) { return d.values })
+  root = d3.hierarchy({ values: nest.entries(data) }, function (d) { return d.values })
     .sum(function (d) { return d.value })
     .sort(function (a, b) { return b.value - a.value })
 
@@ -285,6 +291,8 @@ function requestSecondData (searchText, xPos, yPos, radius) {
   var enumSearch = searchText.toUpperCase().replace(/, /g, '_').replace(/-/g, '_').replace(/\./g, '_').replace(/ /g, '_')
   const semesterRange = { start: semester }
 
+  showLoaderOverlay(true)
+
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
     variables: {
@@ -296,6 +304,7 @@ function requestSecondData (searchText, xPos, yPos, radius) {
   }).then(function (response) {
     const courses = response.data.coursesConnection.edges.map(course => course.node)
     closeUpVis(courses, xPos, yPos, radius)
+    showLoaderOverlay(false)
   })
 }
 
@@ -308,7 +317,7 @@ function closeUpVis (data, xPos, yPos, radius) {
     .size([diameter * 0.8, diameter * 0.8])
     .padding(10)
 
-  var rootCloseUp = d3.hierarchy({children: data})
+  var rootCloseUp = d3.hierarchy({ children: data })
     .sum(function (d) { return 1 })
 
   packCloseUp(rootCloseUp)

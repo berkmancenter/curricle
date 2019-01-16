@@ -3,13 +3,15 @@
     Semester:
     <span
       id="search-semester-range"
-      class="pointer">
-      &nbsp;<strong>{{ rangeLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
+      class="pointer"
+    >
+      &nbsp;<strong>{{ rangeLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
       <b-popover
         target="search-semester-range"
         triggers="click blur"
-        placement="bottom">
+        placement="bottom"
+      >
         <span>Select one or more semesters</span>
         <hr>
         <b-form>
@@ -26,7 +28,8 @@
               <b-form-select
                 v-model="searchYearStart"
                 :options="optionsTermYear"
-                class="year-select"/>
+                class="year-select"
+              />
             </b-col>
             <b-col class="justify-content-md-left">
               <b-form-checkbox v-model="searchTermUseRange">
@@ -41,7 +44,8 @@
                 v-model="searchTermEnd"
                 :options="optionsTermName"
                 name="search-end-term"
-                stacked/>
+                stacked
+              />
             </b-col>
             <b-col
               v-show="searchTermUseRange"
@@ -50,7 +54,8 @@
               <b-form-select
                 v-model="searchYearEnd"
                 :options="optionsTermYearEnd"
-                class="year-select"/>
+                class="year-select"
+              />
             </b-col>
           </b-row>
         </b-form>

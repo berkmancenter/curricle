@@ -11,6 +11,7 @@ fragment Course on Course {
   external_course_id
   grading_basis_description
   id
+  semester
   subject
   subject_academic_org_description
   subject_description

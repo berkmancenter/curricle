@@ -2,9 +2,12 @@
   <div class="py-5">
     <h3>Advanced Search:</h3>
 
-    <search-form v-if="userAuthenticated"/>
+    <search-form v-if="userAuthenticated" />
 
-    <search-results v-show="results.length"/>
+    <search-results
+      v-show="searchComplete"
+      search-type="advanced"
+    />
   </div>
 </template>
 
@@ -22,12 +25,10 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
-    ...mapState('search', ['results'])
+    ...mapState('search', ['searchComplete'])
   },
   mounted () {
-    this.$store.commit('search/RESET_RESULTS')
-
-    if (this.$route.params[0]) {
+    if (this.$route.params.pathMatch) {
       var obj = deserializeSearch(this.$route)
       if (obj) {
         this.$store.dispatch('search/populateSearchState', obj)

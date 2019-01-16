@@ -27,19 +27,19 @@ var leftSelection = 'Truth'
 var rightSelection = 'Lies'
 
 var sideData = 'searchTerm'
-var centerData = 'component' // component subject_description
+var centerData = 'subject_description' // component subject_description
 
-var textPaddingSideViz = 180
+var textPaddingSideViz = 200
 
-var minDocumentWidth = 600
+var minDocumentWidth = 350
 var documentHeight = 100
 
-// main 'container' area is 8 columns wide (out of 12 total)
-var containerWidth = window.innerWidth * 0.667
+// main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
+var containerWidth = window.innerWidth * 0.8333333 * 0.9
 
 var documentWidth = Math.max(containerWidth, minDocumentWidth)
 
-var margin = {top: 50, right: 10, bottom: 50, left: 10}
+var margin = { top: 50, right: 0, bottom: 50, left: 0 }
 var width = documentWidth - margin.left - margin.right
 var height = documentHeight - margin.top - margin.bottom
 
@@ -52,9 +52,12 @@ var fullData
 
 let selectCourse
 let semester
+let showLoaderOverlay
 
 function requestData (searchTerm, numTerm) {
   const semesterRange = { start: semester }
+
+  showLoaderOverlay(true)
 
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
@@ -71,6 +74,7 @@ function requestData (searchTerm, numTerm) {
     // course objects need to be cloned so that they can be extended by addToDataSet()
     const courses = response.data.coursesConnection.edges.map(course => _.clone(course.node))
     addToDataSet(courses, searchTerm, numTerm)
+    showLoaderOverlay(false)
   })
 }
 
@@ -95,10 +99,11 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup (selectCourseFunction, selectedSemester) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
   selectCourse = selectCourseFunction
-  centerData = 'component'
+  showLoaderOverlay = showLoaderOverlayFunction
+  centerData = 'subject_description'
 
   // remove existing SVGs prior to (re)drawing new ones
   d3.select('#visContainer').selectAll('svg').remove()
@@ -284,7 +289,7 @@ function setData (data) {
   typeTextScale.domain([1, nestedData[0].value.count])
 
   function redraw () {
-    containerWidth = window.innerWidth * 0.667
+    containerWidth = window.innerWidth * 0.8333333 * 0.9
     documentWidth = Math.max(containerWidth, minDocumentWidth)
 
     d3.select('#visContainer')
@@ -303,18 +308,21 @@ function setData (data) {
 }
 
 function setSideTextVis (nestedData) {
+  const leftTextLeft = textPaddingSideViz - 115
+  const rightTextLeft = documentWidth - textPaddingSideViz
+  const top = documentHeight / 2 + 60
+
   var leftText = d3.select('#searchOne')
-  const topMargin = 168
 
   leftText.transition().duration(500)
-    .style('left', (textPaddingSideViz - 100) + 'px')
-    .style('top', (documentHeight / 2 + topMargin) + 'px')
+    .style('left', leftTextLeft + 'px')
+    .style('top', top + 'px')
 
   var rightText = d3.select('#searchTwo')
 
   rightText.transition().duration(500)
-    .style('left', (documentWidth - textPaddingSideViz + 20) + 'px')
-    .style('top', (documentHeight / 2 + topMargin) + 'px')
+    .style('left', rightTextLeft + 'px')
+    .style('top', top + 'px')
 
   // var rightData = nestedData.filter(function (d) {
   //   return d.key === rightSelection
@@ -341,7 +349,7 @@ function dataPrepCenterVis (filteredData) {
   // var filteredData = fullData //.filter(function(d) { return d[sideData] === leftSelection || d[sideData] === rightSelection });
 
   var nestedData = d3.nest()
-    .key(function (d) { return d[centerData] })
+    .key(function (d) { return centerData === 'title' ? d['id'] : d[centerData] })
     .key(function (d) { return d[sideData] })
     .rollup(function (v) {
       return {
@@ -432,7 +440,9 @@ function setCenterVis (sortedData) {
     })
     .style('font-size', function (d) { return typeTextScale(+d.totalCount) + 'px' })
     .text(function (d) {
-      if (d.key.length > maxTextLength) { return d.key.substring(0, maxTextLength) + '...' } else { return d.key }
+      const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+
+      return (title.length > maxTextLength) ? title.substring(0, maxTextLength) + '...' : title
     })
     .on('click', centerClick)
     .on('mouseover', showCountCenterVis)
@@ -459,7 +469,9 @@ function centerClick () {
   var selectedKey = this.__data__.key
 
   var selectionData = fullData.filter(function (d) {
-    return d[centerData] === selectedKey
+    const key = (centerData === 'title') ? 'id' : centerData
+
+    return d[key] === selectedKey
   })
 
   // Courses at the intersection of both keywords will be in the selectionData array twice
@@ -485,18 +497,24 @@ function showCountCenterVis () {
   var thisData = this.__data__
 
   if (thisData.values.length === 1) {
-    if (thisData.values[0].key === leftSelection) {
-      d3.select(this).text(function (d) { return d.values[0].value.count + ' - ' + d.key })
-    } else {
-      d3.select(this).text(function (d) { return d.key + ' - ' + d.values[0].value.count })
-    }
+    d3.select(this).text(function (d) {
+      const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+
+      if (thisData.values[0].key === leftSelection) {
+        return d.values[0].value.count + ' - ' + title
+      } else {
+        return title + ' - ' + d.values[0].value.count
+      }
+    })
   } else {
     d3.select(this).text(function (d) { return d.values[0].value.count + ' - ' + d.key + ' - ' + d.values[1].value.count })
   }
 }
 function removeCountCenterVis () {
   d3.select(this).text(function (d) {
-    if (d.key.length > maxTextLength) { return d.key.substring(0, maxTextLength) + '...' } else { return d.key }
+    const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+
+    return (title.length > maxTextLength) ? title.substring(0, maxTextLength) + '...' : title
   })
 }
 

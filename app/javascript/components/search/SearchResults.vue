@@ -1,15 +1,27 @@
 <template>
-  <div
-    v-show="keywords && searchComplete"
-    class="mt-5">
-    <div class="clearfix">
+  <div class="mt-5">
+    <div
+      v-if="resultsTotalCount === 0"
+    >
+      <strong>
+        No results found for that search.
+      </strong>
+    </div>
+
+    <div
+      v-else
+      class="clearfix"
+    >
       <div
         class="float-left"
-        style="width: 28%;">
+        style="width: 28%;"
+      >
         <strong>{{ resultsTotalCount }} results</strong>
       </div>
       <div class="float-left">
-        <search-results-sort/>
+        <search-results-sort
+          :search-type="searchType"
+        />
       </div>
       <div class="float-right text-right">
         <b-form-checkbox v-model="showConflicts">
@@ -31,11 +43,13 @@
 
       <div
         v-show="resultsMoreAvailable"
-        class="text-center my-4">
+        class="text-center my-4"
+      >
         <b-button
           class="pointer"
           variant="secondary"
-          @click="searchAgain">
+          @click="searchAgain"
+        >
           More Results
         </b-button>
       </div>
@@ -55,14 +69,19 @@ export default {
     SearchResultRow,
     SearchResultsSort
   },
+  props: {
+    searchType: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       showConflicts: false
     }
   },
   computed: {
-    ...mapGetters('search', { keywords: 'activeKeywords' }),
-    ...mapState('search', ['searchComplete', 'results', 'resultsMoreAvailable', 'resultsTotalCount']),
+    ...mapState('search', ['results', 'resultsMoreAvailable', 'resultsTotalCount']),
     ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['scheduledCourses']),
     currentSchedule () {

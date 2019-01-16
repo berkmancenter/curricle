@@ -1,7 +1,7 @@
 <template>
   <div class="table-responsive">
     <table class="course-list-item invert table table-borderless">
-      <thead/>
+      <thead />
       <tbody>
         <tr
           v-for="course in courses"
@@ -11,19 +11,23 @@
           @mouseleave="removeProvisionalCourse(course)"
         >
           <td>{{ `${course.subject} ${course.catalog_number}` }}</td>
-          <td @click="selectCourse(course)">{{ course.title }}</td>
+          <td @click="selectCourse(course)">
+            {{ course.title }}
+          </td>
           <td>
             <course-action
               v-show="editable"
               :course="course.id"
               :invert="invert"
-              type="annotated"/>
+              type="annotated"
+            />
 
             <course-action
               v-show="editable"
               :course="course.id"
               :invert="invert"
-              type="schedule"/>
+              type="schedule"
+            />
           </td>
         </tr>
       </tbody>
@@ -85,5 +89,4 @@ export default {
     vertical-align: middle !important;
   }
 }
-
 </style>

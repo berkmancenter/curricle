@@ -1,10 +1,12 @@
 <template>
   <div
     id="authentication-container"
-    class="text-right text-uppercase">
+    class="text-right text-uppercase"
+  >
     <span
       class="pointer"
-      @click="logout">
+      @click="logout"
+    >
       Logout
     </span>
   </div>
@@ -28,6 +30,7 @@ export default {
   position: fixed;
   right: 30px;
   top: 30px;
+  z-index: 999;
 
   a {
     color: black;

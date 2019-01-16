@@ -1,20 +1,26 @@
 <template>
   <div class="mt-4">
-    <p class="heading">Annotations</p>
+    <p class="heading">
+      Annotations
+    </p>
 
     <div>
       <textarea
         v-model="editableText"
         :maxlength="maxLength"
         rows="5"
-        class="w-100"/>
+        class="w-100"
+      />
 
-      <span class="word-count">{{ editableTextLength }} / {{ maxLength }} characters</span>
+      <span class="word-count">
+        {{ editableTextLength }} / {{ maxLength }} characters
+      </span>
 
       <div class="button-container">
         <button
           class="btn clearfix"
-          @click="updateAnnotations">
+          @click="updateAnnotations"
+        >
           Save
         </button>
       </div>
@@ -23,9 +29,9 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
 import COURSE_QUERY from '../../graphql/Course.gql'
+import { mapMutations } from 'vuex'
 
 export default {
   apollo: {
@@ -37,9 +43,6 @@ export default {
         }
       }
     }
-  },
-  components: {
-    FontAwesomeIcon
   },
   props: {
     courseId: {
@@ -72,6 +75,7 @@ export default {
     this.editableText = this.savedAnnotation
   },
   methods: {
+    ...mapMutations('app', ['SET_ALERT_TEXT']),
     updateAnnotations () {
       this.$apollo.mutate({
         mutation: ANNOTATION_SET_MUTATION,
@@ -80,17 +84,15 @@ export default {
           course_id: this.course.id,
           id: this.course.annotation && this.course.annotation.id
         }
-      })
+      }).then(
+        this.SET_ALERT_TEXT('Annotation saved')
+      )
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .annotations textarea{
-    resize: none !important;
-  }
-
   .word-count {
     position: relative;
     color: #ccc;

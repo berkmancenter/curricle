@@ -14,28 +14,33 @@
         :key="course.index"
         :class="{ selected: currentCourse && currentCourse.id === course.id }"
         class="mb-1 mx-1 pointer"
-        @click="selectCourse(course)">
+        @click="selectCourse(course)"
+      >
         <b-col
           cols="6"
-          class="text-uppercase font-weight-bold">
+          class="text-uppercase font-weight-bold"
+        >
           {{ course.title }}
         </b-col>
 
         <b-col
           cols="2"
-          class="text-muted">
+          class="text-muted"
+        >
           {{ firstInstructorName(course) }}
         </b-col>
 
         <b-col
           cols="2"
-          class="text-muted text-uppercase">
+          class="text-muted text-uppercase"
+        >
           {{ course.subject }} {{ course.catalog_number }}
         </b-col>
 
         <b-col
           cols="2"
-          class="text-muted text-uppercase">
+          class="text-muted text-uppercase"
+        >
           {{ course.component }}
         </b-col>
       </b-row>

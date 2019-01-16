@@ -1,17 +1,19 @@
 <template>
   <span
-    :class="keywordClass"
-    :key="keyword.ident"
     :id="kwId"
+    :key="keyword.ident"
+    :class="keywordClass"
     class="text-uppercase mr-2"
   >
     <span
-      @click="bodyClick">
+      @click="bodyClick"
+    >
       {{ keyword.text }}
     </span>&nbsp;&nbsp;
     <font-awesome-icon
       icon="times"
-      @click="closeClick"/>
+      @click="closeClick"
+    />
     <b-popover
       ref="popover"
       :target="kwId"
@@ -19,11 +21,13 @@
       placement="bottom"
       @show="popoverShow($event)"
       @hide="popoverHide($event)"
-      @shown="popoverActivate($event)">
+      @shown="popoverActivate($event)"
+    >
       <b-form-input
         :id="kwId+'-kw-edit-keyword'"
         v-model="keyword.text"
-        class="mb-2"/>
+        class="mb-2"
+      />
       <b-form-group
         label="Apply to:"
       >
@@ -32,7 +36,8 @@
           :options="applyToOptions"
           :target="kwId+'-weight'"
           name="search-fields"
-          stacked/>
+          stacked
+        />
       </b-form-group>
     </b-popover>
   </span>
@@ -114,7 +119,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.inactive-keyword, .active-keyword {
+.inactive-keyword,
+.active-keyword {
   cursor: pointer;
   display: inline-block;
   padding: 5px 10px;

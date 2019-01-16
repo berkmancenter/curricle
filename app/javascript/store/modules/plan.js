@@ -2,7 +2,7 @@
 
 import Vue from 'vue/dist/vue.esm'
 import _ from 'lodash'
-import { sortedSemesters } from 'lib/util'
+import { partitionCoursesByMeetingTime, sortedSemesters } from 'lib/util'
 
 const state = {
   semester: '',
@@ -46,26 +46,92 @@ const getters = {
   },
   sortedSemestersInTray (state, getters) {
     return sortedSemesters(getters.semestersInTray)
+  },
+  // Return a collection of courses that conflict with other courses
+  // each course object has a list of days of the week where conflicts are present
+  // and contains the meetingTime data for those conflicting courses
+  scheduledCourseConflictsByDay (state, getters) {
+    const schedule = getters.scheduledCoursesBySemester
+    let courseConflicts = {}
+
+    _.forEach(schedule, semester => {
+      const semesterSchedule = partitionCoursesByMeetingTime(semester)
+
+      _.forEach(semesterSchedule, (day, dayName) => {
+        if (dayName === 'TBD') { return }
+
+        _.forEach(day, course => {
+          _.forEach(day, (comparisonCourse) => {
+            if (course === comparisonCourse) {
+              return
+            }
+
+            const courseStartTime = course.meetingTime[0]
+            const courseEndTime = courseStartTime + course.meetingTime[1]
+            const startTime = comparisonCourse.meetingTime[0]
+            const endTime = startTime + comparisonCourse.meetingTime[1]
+
+            if (
+              (courseStartTime >= startTime && courseStartTime < endTime) ||
+              (courseEndTime > startTime && courseEndTime <= endTime) ||
+              (courseStartTime <= startTime && courseEndTime >= endTime)
+            ) {
+              const courseId = course.course.id
+
+              if (courseId in courseConflicts) {
+                if (dayName in courseConflicts[courseId]) {
+                  courseConflicts[courseId][dayName].push(comparisonCourse.meetingTime)
+                } else {
+                  courseConflicts[courseId][dayName] = [comparisonCourse.meetingTime]
+                }
+              } else {
+                courseConflicts[courseId] = { [dayName]: [comparisonCourse.meetingTime], meetingTime: course.meetingTime }
+              }
+            }
+          })
+        })
+      })
+    })
+
+    return courseConflicts
+  },
+  // for a given course and day, return the number of conflicts and horizontal position
+  courseConflictInfoForDay: (state, getters) => (courseId, dayName) => {
+    const conflictsByDay = getters.scheduledCourseConflictsByDay
+
+    if (!conflictsByDay || !(courseId in conflictsByDay) || !(dayName in conflictsByDay[courseId])) {
+      return { conflictCount: 0, position: 0 }
+    }
+
+    // calculate position of course against its conflicts sorted by meeting start time, then duration, then course ID
+    const courseMeetingTime = conflictsByDay[courseId].meetingTime
+    const courseArray = conflictsByDay[courseId][dayName]
+    const position = _.sortedIndexBy(courseArray, courseMeetingTime, (cmt) => { return [cmt[0], cmt[1], cmt[2]] })
+
+    return {
+      conflictCount: conflictsByDay[courseId][dayName].length,
+      position: position
+    }
   }
 }
 
 const actions = {
-  setFilter ({commit}, filter) {
+  setFilter ({ commit }, filter) {
     commit('SET_FILTER', filter)
   },
-  setSemester ({commit}, semester) {
+  setSemester ({ commit }, semester) {
     commit('SET_SEMESTER', semester)
   },
-  addProvisionalCourse ({commit}, course) {
+  addProvisionalCourse ({ commit }, course) {
     commit('ADD_PROVISIONAL_COURSE', course)
   },
-  removeProvisionalCourse ({commit}, course) {
+  removeProvisionalCourse ({ commit }, course) {
     commit('DEL_PROVISIONAL_COURSE', course)
   }
 }
 
 const mutations = {
-  SET_FILTER (state, {name, value}) {
+  SET_FILTER (state, { name, value }) {
     if (value) {
       Vue.set(state.filters, name, value)
     } else {

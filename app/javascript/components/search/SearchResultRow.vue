@@ -2,21 +2,26 @@
   <div
     :class="{ selected, conflicted: isConflicted, hiddenConflict }"
     :style="borderStyle"
-    class="row curricle-search-result mb-5 mx-1 py-2">
+    class="row curricle-search-result mb-5 mx-1 py-2"
+  >
     <div class="col-md-1 pt-1">
       <course-action
         :course="course.id"
         :invert="selected"
         class="mr-1"
-        type="tray"/>
+        type="tray"
+      />
 
       <course-action
         :course="course.id"
         :invert="selected"
         class="mr-3"
-        type="schedule"/>
+        type="schedule"
+      />
 
-      <span class="text-muted">&mdash;</span>
+      <span class="text-muted">
+        &mdash;
+      </span>
 
       <br>
 
@@ -24,33 +29,38 @@
         :course="course.id"
         :invert="selected"
         class="mr-1"
-        type="tagged"/>
+        type="tagged"
+      />
 
       <course-action
         :course="course.id"
         :invert="selected"
-        type="annotated"/>
-
+        type="annotated"
+      />
     </div>
 
     <div
       class="col-md-9 pointer pl-0"
-      @click="selectCourse(course)">
+      @click="selectCourse(course)"
+    >
       <div
-        class="course-title font-weight-bold text-uppercase">
+        class="course-title font-weight-bold text-uppercase"
+      >
         {{ course.subject }} {{ course.catalog_number }}: {{ course.title }}
       </div>
 
       <hr
         :class="selected"
-        class="m-0">
+        class="m-0"
+      >
 
       <span class="course-instructor">
         {{ instructorNames }}
       </span>
 
       <div
-        class="course-component text-uppercase">
+        class="course-component text-uppercase"
+      >
         {{ course.component }}<br>
         {{ course.term_name }} {{ course.term_year }}
       </div>
@@ -60,7 +70,8 @@
       <class-meeting-time
         :condensed="true"
         :conflicts="conflicts"
-        :schedule="course.schedule"/>
+        :course="course"
+      />
     </div>
   </div>
 </template>
@@ -69,13 +80,11 @@
 import { mapActions } from 'vuex'
 import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
-import truncate from 'vue-truncate-collapsed'
 
 export default {
   components: {
     CourseAction,
-    ClassMeetingTime,
-    truncate
+    ClassMeetingTime
   },
   props: {
     course: {
@@ -150,7 +159,8 @@ export default {
     &.conflicted {
       background-color: #ffc0cb;
 
-      &.selected, &:hover {
+      &.selected,
+      &:hover {
         background-color: #ff91a4;
       }
     }
@@ -177,12 +187,13 @@ export default {
   }
 
   .hiddenConflict {
-    height: 0px;
+    height: 0;
     display: none;
     transition: height 2s;
   }
 
-  .usercourse, .userschedule {
+  .usercourse,
+  .userschedule {
     color: gray;
   }
 </style>

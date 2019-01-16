@@ -1,0 +1,9 @@
+query InstructorNames(
+  $semester: SemesterInput!,
+  $past_years: Int
+) {
+  instructor_names(
+    semester: $semester,
+    past_years: $past_years
+  )
+}

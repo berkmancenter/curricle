@@ -1,56 +1,70 @@
 <template>
   <div>
     <div
-      class="text-center text-uppercase">
-      Select a Component and Department
+      class="text-center text-uppercase"
+    >
+      Select a Format and Department
 
       <h4
-        class="text-uppercase font-weight-bold">
-        Learning Modes
+        class="text-uppercase font-weight-bold"
+      >
+        Learning Styles
       </h4>
     </div>
 
     <div
-      id="visContainer">
+      id="visContainer"
+    >
       <div
-        id="courseTypeVis">
+        id="courseTypeVis"
+      >
         <h5
-          id="courseTypeHeadline">
-          Components
+          id="courseTypeHeadline"
+        >
+          Formats
         </h5>
       </div>
 
       <div
-        id="departmentVis">
+        id="departmentVis"
+      >
         <h5
-          id="departmentHeadline">
+          id="departmentHeadline"
+        >
           Departments
         </h5>
       </div>
 
       <div
         id="classVis"
-        class="w-100 float-left"/>
+        class="w-100 float-left"
+      />
     </div>
 
     <div
-      id="vis-description">
+      id="vis-description"
+    >
       <h3>Explore:</h3>
 
       <p>
-        Explore courses by selecting <span class="components">components</span>
-        (class formats) and <span class="departments">departments</span>
+        Explore courses by selecting <span class="formats">
+          formats
+        </span>
+        (class types) and <span class="departments">
+          departments
+        </span>
         (subjects and courses of study).
 
         <span
           v-b-tooltip.hover
-          title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;components.&quot; In the left column, find your desired component, and look in the right column to select your desired department. Once you have selected both a department and component, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Component to reset the visualization and start again."
-          class="pointer">
+          title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;formats.&quot; In the left column, find your desired format, and look in the right column to select your desired department. Once you have selected both a department and format, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Format to reset the visualization and start again."
+          class="pointer"
+        >
           MORE&nbsp;&gt;
         </span>
       </p>
 
-      <semester-input/>
+      <semester-input />
     </div>
   </div>
 </template>
@@ -59,7 +73,7 @@
 import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/classes'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
@@ -71,20 +85,25 @@ export default {
   },
   watch: {
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay)
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay)
   },
   methods: {
-    ...mapActions('app', ['selectCourse'])
+    ...mapActions('app', ['selectCourse']),
+    ...mapMutations({
+      showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
 #visContainer {
+  overflow: none;
+
   /deep/ {
     svg {
       display: block;
@@ -103,7 +122,7 @@ export default {
 
     ::-webkit-scrollbar {
       display: none;
-      width: 0px;  /* remove scrollbar space */
+      width: 0;  /* remove scrollbar space */
       background: transparent;
     }
 
@@ -111,8 +130,8 @@ export default {
     #departmentVis {
       width: 50%;
       float: left;
-      overflow: scroll;
-      max-height:100%;
+      overflow: none;
+      max-height: 100%;
     }
 
     #courseTypeVis {
@@ -125,9 +144,16 @@ export default {
 
     #classVis {
       width: 100%;
-      float:left;
-      overflow: scroll;
+      float: left;
+      overflow: none;
       max-height: 100%;
+    }
+
+    .departmentText,
+    .departmentRect,
+    .courseTypeText,
+    .courseTypeRect {
+      cursor: pointer;
     }
 
     .departmentText:hover {
@@ -136,13 +162,6 @@ export default {
 
     .courseTypeText:hover {
       text-decoration: underline;
-    }
-
-    .departmentText,
-    .departmentRect,
-    .courseTypeText,
-    .courseTypeRect {
-      cursor: pointer;
     }
 
     .classText {
@@ -168,7 +187,7 @@ export default {
   p {
     font-size: 14px;
 
-    span.components {
+    span.formats {
       color: #f0cf61;
     }
 

@@ -1,18 +1,21 @@
 <template>
-  <div class="semester-sidebar">
+  <div>
     <semester-selector
       mode="state"
-      source="schedule"/>
+      source="schedule"
+    />
 
     <div
       v-for="day in days"
-      :key="day">
+      :key="day"
+    >
       <strong>{{ day }}</strong>
       <div
         v-show="trayCoursesByDay[day] && trayCoursesByDay[day].length"
         class="float-right pointer"
         @click="toggleEditDay(day)"
-        v-text="isEditing[day] ? 'Done' : 'Edit'"/>
+        v-text="isEditing[day] ? 'Done' : 'Edit'"
+      />
       <course-list
         :courses="isEditing[day] ? trayCoursesByDay[day] : coursesByDay[day]"
         :editable="isEditing[day]"
@@ -51,13 +54,6 @@ export default {
       return partitionCoursesByDay(courses)
     },
     days: () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-  },
-  watch: {
-    sortedSemestersInSchedule () {
-      if (!this.sortedSemestersInSchedule.includes(this.semester)) {
-        this.setSemester(this.sortedSemestersInSchedule[0])
-      }
-    }
   },
   mounted () {
     if (this.sortedSemestersInSchedule && !this.sortedSemestersInSchedule.includes(this.semester)) {

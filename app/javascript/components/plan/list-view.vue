@@ -5,13 +5,15 @@
       :key="course.id"
       :class="{ selected: selected(course) }"
       class="row plan-list-item mb-3 mx-1 py-2"
-      @click="selectCourse(course)">
+      @click="selectCourse(course)"
+    >
       <div class="col-md-1 pt-1 pointer">
         <course-action
           :course="course.id"
           :invert="selected(course)"
           class="mr-1"
-          type="tray"/>
+          type="tray"
+        />
 
         <br>
 
@@ -19,7 +21,8 @@
           :course="course.id"
           :invert="selected(course)"
           class="mr-3"
-          type="schedule"/>
+          type="schedule"
+        />
       </div>
 
       <div class="col-md-2 pointer">
@@ -30,7 +33,8 @@
         <span
           v-for="instructor in course.course_instructors"
           :key="instructor.id"
-          class="course-instructor">
+          class="course-instructor"
+        >
           {{ instructor.display_name }}
         </span>
       </div>
@@ -49,12 +53,13 @@
           class="course_description"
           clamp="[..]"
           less="Show Less"
-          type="html"/>
+          type="html"
+        />
       </div>
 
       <div class="col-md-2 px-0">
         <class-meeting-time
-          :schedule="course.schedule"
+          :course="course"
           :condensed="true"
         />
       </div>

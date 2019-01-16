@@ -1,42 +1,58 @@
 <template>
   <div id="app">
-    <loader-overlay/>
+    <loader-overlay />
+
+    <the-navbar-control
+      v-if="userAuthenticated"
+      v-show="sidebarCurrentType"
+    />
 
     <the-tray-control
       v-if="userAuthenticated"
-      v-show="!sidebarCurrentType"/>
+      v-show="!sidebarCurrentType"
+    />
+
+    <the-logout-link
+      v-if="userAuthenticated"
+      v-show="!sidebarCurrentType"
+    />
 
     <div class="row h-100">
       <div
+        v-show="!sidebarCurrentType"
         id="nav-container"
-        class="col-md-2 px-0">
-        <navbar/>
+        :class="{ active: !sidebarCurrentType }"
+        class="col-md-2 px-0"
+      >
+        <navbar v-if="!sidebarCurrentType" />
       </div>
 
       <div
         id="main-container"
-        class="col-md-8">
+        class="col-md-10 h-100"
+      >
+        <the-alert
+          class="mt-2 col-md-4 offset-md-8"
+        />
+
         <keep-alive>
-          <router-view/>
+          <router-view />
         </keep-alive>
+
+        <the-data-last-updated-indicator />
       </div>
 
       <div
+        v-show="sidebarCurrentType"
         id="sidebar-container"
         :class="{ active: sidebarCurrentType }"
-        class="col-md-2 px-0">
-        <the-logout-link
-          v-if="userAuthenticated"
-          v-show="!sidebarCurrentType"/>
-
+        class="col-md-2 px-0"
+      >
         <the-sidebar />
-
-        <the-feedback-link/>
       </div>
-
     </div>
 
-    <course-observer/>
+    <course-observer />
   </div>
 </template>
 
@@ -47,8 +63,10 @@ import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
 import TheLogoutLink from 'components/TheLogoutLink'
 import TheSidebar from 'components/TheSidebar'
-import TheFeedbackLink from 'components/TheFeedbackLink'
 import TheTrayControl from 'components/TheTrayControl'
+import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
+import TheNavbarControl from 'components/TheNavbarControl'
+import TheAlert from 'components/TheAlert'
 
 export default {
   components: {
@@ -57,8 +75,10 @@ export default {
     CourseObserver,
     TheLogoutLink,
     TheSidebar,
-    TheFeedbackLink,
-    TheTrayControl
+    TheTrayControl,
+    TheDataLastUpdatedIndicator,
+    TheNavbarControl,
+    TheAlert
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
@@ -78,9 +98,13 @@ export default {
   overflow: auto;
 }
 
-#nav-container,
+#nav-container.active,
 #sidebar-container.active {
   background-color: #000;
   color: #fff;
+}
+
+#main-container {
+  padding: 0 5%;
 }
 </style>

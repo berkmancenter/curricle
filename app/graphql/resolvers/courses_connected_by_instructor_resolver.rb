@@ -5,6 +5,34 @@ module Resolvers
   class CoursesConnectedByInstructorResolver
     MAX_CO_INSTRUCTORS = 8
 
+    COURSE_TITLE_BLACKLIST = [
+      'Directed Study',
+      'Directed Writing',
+      'Direction of Doctoral Dissertation',
+      'Direction of Doctoral Dissertations',
+      "Direction of Master's Thesis",
+      'Dissertation',
+      'Foreign Language Certification',
+      'Graduate Proseminar',
+      'Guided Research',
+      'Independent Study',
+      'Individual Reading and Research',
+      'Individual Reading Tutorial',
+      'Individual Research',
+      'Non-Resident Research',
+      'Preparation for General Examinations',
+      'Preparation for the Topical Examination',
+      'Reading and Research',
+      'Reading or Topics Course',
+      'Research',
+      'Senior Thesis Workshop',
+      'Special Examinations Direction',
+      'Special Reading and Research',
+      'Supervised Reading and Research',
+      'Thesis Research and Writing',
+      'Tutorial - Senior Year'
+    ].freeze
+
     def call(_obj, args, _ctx)
       instructor_name = args[:name]
       term_name = args[:semester][:term_name]
@@ -49,14 +77,13 @@ module Resolvers
 
       filtered_course_ids = filter_course_ids_by_counts(course_ids_taught_by_connected_instructors)
 
-      Course.where(id: filtered_course_ids)
+      Course.where(id: filtered_course_ids).where.not(title: COURSE_TITLE_BLACKLIST)
     end
 
     def query_connected_instructor_emails(course_ids, instructor_email, term_year_range)
       CourseInstructor
         .where(course_id: course_ids)
         .where(term_year: term_year_range)
-        .where(instructor_role: %w[HEAD INST PI]) # eliminate TFs, course coordinators, etc.
         .where.not(email: instructor_email)
         .distinct
         .pluck(:email)

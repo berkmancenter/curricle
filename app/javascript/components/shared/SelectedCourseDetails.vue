@@ -1,4 +1,4 @@
-<template >
+<template>
   <div class="course-details">
     <div class="header mx-0">
       <p class="float-left mb-0">
@@ -13,10 +13,14 @@
       </p>
     </div>
 
-    <h3 class="course-title text-uppercase">{{ course.title }}</h3>
+    <h3 class="course-title text-uppercase">
+      {{ course.title }}
+    </h3>
 
     <div class="description">
-      <p class="heading">Description</p>
+      <p class="heading">
+        Description
+      </p>
       <truncate
         v-if="course.course_description_long"
         :length="250"
@@ -29,9 +33,11 @@
 
     <div
       v-if="course.course_note"
-      class="notes mt-4">
+      class="notes mt-4"
+    >
       <p
-        class="heading">
+        class="heading"
+      >
         Class Notes
       </p>
 
@@ -39,11 +45,14 @@
     </div>
 
     <div class="instructors mt-4">
-      <p class="heading">Instructors</p>
+      <p class="heading">
+        Instructors
+      </p>
       <div
         v-for="instructor in course.course_instructors"
         :key="instructor.id"
-        class="instructor mb-0">
+        class="instructor mb-0"
+      >
         <p class="float-left mb-0">
           <strong>{{ instructor.display_name }}</strong>
         </p>
@@ -51,7 +60,8 @@
           <a
             href="javascript:"
             class="text-white"
-            @click="searchByInstructor(instructor.display_name)">
+            @click="searchByInstructor(instructor.display_name)"
+          >
             more courses
           </a>
         </p>
@@ -76,9 +86,9 @@ export default {
   },
   computed: {
     firstInstructor () {
-      if (this.course.course_instructors.length) {
-        return this.course.course_instructors[0].display_name
-      }
+      if (!this.course.course_instructors.length) { return }
+
+      return this.course.course_instructors[0].display_name
     }
   },
   methods: {

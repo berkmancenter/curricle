@@ -1,10 +1,11 @@
 <template>
   <div>
-    <sidebar-list-filters class="mb-4"/>
+    <sidebar-list-filters class="mb-4" />
 
     <course-list
       :courses="filteredCourses"
-      :invert="true"/>
+      :invert="true"
+    />
   </div>
 </template>
 

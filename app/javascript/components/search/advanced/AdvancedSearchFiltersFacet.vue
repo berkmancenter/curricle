@@ -6,14 +6,16 @@
       <div
         v-for="item in items"
         :key="item.id"
-        class="facet-item clearfix">
+        class="facet-item clearfix"
+      >
         <div class="float-left label-container">
           <label class="mb-1 text-white text-uppercase pointer">
             <input
               :value="item.id"
               :checked="item.selected"
               type="checkbox"
-              @change="toggleCheckbox">
+              @change="toggleCheckbox"
+            >
             {{ item.value }}
           </label>
         </div>
@@ -31,9 +33,6 @@ import { mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 
 export default {
-  components: {
-    serializeSearch
-  },
   props: {
     facet: {
       type: Object,

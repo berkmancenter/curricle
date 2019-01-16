@@ -9,23 +9,26 @@ var colorMix = '#2C3194'
 
 var maxTextLength = 50
 
-var documentWidth = document.body.clientWidth
+// main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
+const documentWidth = window.innerWidth * 0.8333333 * 0.9
 
-if (documentWidth > 800) {
-  documentWidth = 800
-}
-
-var margin = {top: 50, right: 100, bottom: 150, left: 50}
+var margin = { top: 50, right: 100, bottom: 150, left: 50 }
 var width = documentWidth - margin.left - margin.right
 var height = 900 - margin.top - margin.bottom
 var svg
-var classScale, instructorTextPosScale, departmentPosScale, instructorTextScale, departmentTextScale
+var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, subjectTextScale
 
 let selectCourse
 let semester
+let showLoaderOverlay
+let setTitleName
+let showNoResultsContainer
 
-function initSetup (selectCourseFunction) {
+function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction, showNoResultsContainerFunction) {
   selectCourse = selectCourseFunction
+  showLoaderOverlay = showLoaderOverlayFunction
+  setTitleName = setTitleNameFunction
+  showNoResultsContainer = showNoResultsContainerFunction
 
   svg = d3.select('#visContainer').append('svg')
     .attr('width', width + margin.left + margin.right)
@@ -39,13 +42,13 @@ function initSetup (selectCourseFunction) {
   instructorTextPosScale = d3.scalePoint()
     .range([margin.top, height])
 
-  departmentPosScale = d3.scalePoint()
+  subjectPosScale = d3.scalePoint()
     .range([margin.top, height])
 
   instructorTextScale = d3.scaleLinear()
     .range([9, 20])
 
-  departmentTextScale = d3.scaleLinear()
+  subjectTextScale = d3.scaleLinear()
     .range([9, 20])
 
   var gradientLeft = svg.append('defs')
@@ -109,34 +112,42 @@ function loadLecturerData (coursesConnectedByInstructor) {
   // unfreeze the data object being passed in
   let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
-  var random100
-
-  if (data.length > 20) {
-    random100 = getRandom(data, 20)
-  } else {
-    random100 = data
-  }
-
-  random100.forEach(function (d) {
-    d.departmentClass = d.class_academic_org_description.replace(/ +/g, '_')
+  data.forEach(function (d) {
+    d.subjectClass = d.subject_description.replace(/ +/g, '_')
     d.courseTypeClass = d.component
   })
 
-  random100.sort(function (a, b) {
-    return d3.ascending(a.class_academic_org_description, b.class_academic_org_description)
+  data.sort(function (a, b) {
+    return d3.ascending(a.subject_description, b.subject_description)
   })
 
-  monadicView(random100)
+  monadicView(data)
 }
 
 function requestData (instructorName, selectedSemester) {
-  semester = selectedSemester
+  semester = {
+    term_name: selectedSemester.term_name.toUpperCase(),
+    term_year: selectedSemester.term_year
+  }
+
+  setTitleName(instructorName)
+
+  showLoaderOverlay(true)
 
   apolloClient.query({
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
     variables: { instructorName, semester }
   }).then(function (response) {
-    loadLecturerData(response.data.courses_connected_by_instructor)
+    const courses = response.data.courses_connected_by_instructor
+
+    if (courses.length) {
+      showNoResultsContainer(false)
+      loadLecturerData(courses)
+    } else {
+      showNoResultsContainer(true)
+    }
+
+    showLoaderOverlay(false)
   })
 }
 
@@ -151,12 +162,12 @@ function monadicView (data) {
     .rollup()
     .entries(data)
 
-  var nestedDepartmentData = d3.nest()
-    .key(function (d) { return d.class_academic_org_description })
+  var nestedSubjectData = d3.nest()
+    .key(function (d) { return d.subject_description })
     .rollup(function (v) {
       return {
         count: v.length,
-        classes: v[0].departmentClass
+        classes: v[0].subjectClass
       }
     })
     .entries(data)
@@ -166,7 +177,7 @@ function monadicView (data) {
     .rollup(function (v) {
       return {
         count: v.length,
-        classes: v[0].departmentClass,
+        classes: v[0].subjectClass,
         // classes: function(d) { return d.amount; })
         name: v[0].course_instructors[0].display_name,
         eMail: v[0].course_instructors[0].email
@@ -180,17 +191,17 @@ function monadicView (data) {
 
   classScale.range([margin.top, height])
   instructorTextPosScale.range([margin.top + 50, height - 50])
-  departmentPosScale.range([margin.top + 50, height - 50])
+  subjectPosScale.range([margin.top + 50, height - 50])
 
   classScale.domain(data.map(function (d) { return d.id }))
 
   instructorTextScale.domain([0, Math.max(d3.max(nestedInstructorData, function (d) { return d.value.count }), 5)])
 
-  departmentTextScale.domain([0, Math.max(d3.max(nestedDepartmentData, function (d) { return d.value.count }), 5)])
+  subjectTextScale.domain([0, Math.max(d3.max(nestedSubjectData, function (d) { return d.value.count }), 5)])
 
   instructorTextPosScale.domain(nestedInstructorData.map(function (d) { return d.key }))
 
-  departmentPosScale.domain(nestedDepartmentData.map(function (d) { return d.key }))
+  subjectPosScale.domain(nestedSubjectData.map(function (d) { return d.key }))
 
   //  CenterVis
 
@@ -206,7 +217,7 @@ function monadicView (data) {
   classText
     .enter()
     .append('text')
-    .attr('class', function (d) { return 'classText ' + d.values[0].departmentClass + ' ' + d.values[0].courseTypeClass })
+    .attr('class', function (d) { return 'classText ' + d.values[0].subjectClass + ' ' + d.values[0].courseTypeClass })
     .attr('y', function (d) { return classScale(d.key) - 4 })
     .attr('x', function (d) { return width / 2 })
     .style('text-anchor', 'middle')
@@ -257,9 +268,9 @@ function monadicView (data) {
   instructorLine
     .transition()
     .duration(500)
-    .attr('class', function (d) { return 'instructorLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'instructorLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 - (d.title.length * 2)
+      x2 = width / 2 - (d.title.length * 3)
       y2 = classScale(d.id)
       y1 = instructorTextPosScale(d.course_instructors[0].display_name)
 
@@ -272,9 +283,9 @@ function monadicView (data) {
   instructorLine
     .enter()
     .append('path')
-    .attr('class', function (d) { return 'instructorLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'instructorLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 - (d.title.length * 2)
+      x2 = width / 2 - (d.title.length * 3)
       y2 = classScale(d.id)
       y1 = instructorTextPosScale(d.course_instructors[0].display_name)
 
@@ -289,24 +300,24 @@ function monadicView (data) {
   // -------------------------------------------------------------
   //  RightVis
 
-  var departmentText = svg.selectAll('.departmentText')
-    .data(nestedDepartmentData, function (d) { return d.key })
+  var subjectText = svg.selectAll('.subjectText')
+    .data(nestedSubjectData, function (d) { return d.key })
 
-  departmentText.exit().remove()
+  subjectText.exit().remove()
 
-  departmentText.transition().duration(500)
-    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (departmentPosScale(d.key) - 2) + ')' })
+  subjectText.transition().duration(500)
+    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (subjectPosScale(d.key) - 2) + ')' })
     .attr('dy', '0.3em')
-    .style('font-size', function (d, i) { return departmentTextScale(d.value.count) })
+    .style('font-size', function (d, i) { return subjectTextScale(d.value.count) })
 
-  departmentText
+  subjectText
     .enter()
     .append('text')
-    .attr('class', function (d) { return 'departmentText ' + d.value.classes })
-    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (departmentPosScale(d.key) - 2) + ')' })
+    .attr('class', function (d) { return 'subjectText ' + d.value.classes })
+    .attr('transform', function (d, i) { return 'translate(' + (width - 150) + ',' + (subjectPosScale(d.key) - 2) + ')' })
     .attr('dy', '0.3em')
     .style('text-anchor', 'start')
-    .style('font-size', function (d, i) { return departmentTextScale(d.value.count) })
+    .style('font-size', function (d, i) { return subjectTextScale(d.value.count) })
     .text(function (d) {
       if (d.key.length > maxTextLength) { return d.key.substring(0, maxTextLength) + '...' } else { return d.key }
     })
@@ -315,19 +326,19 @@ function monadicView (data) {
   x1 = width - 150
   xHalf = x1 - documentWidth / 20
 
-  var departmentLine = svg.selectAll('.departmentLine')
+  var subjectLine = svg.selectAll('.subjectLine')
     .data(data)
 
-  departmentLine.exit().remove()
+  subjectLine.exit().remove()
 
-  departmentLine
+  subjectLine
     .transition()
     .duration(500)
-    .attr('class', function (d) { return 'departmentLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'subjectLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 + (d.title.length * 2)
+      x2 = width / 2 + (d.title.length * 3)
       y2 = classScale(d.id)
-      y1 = departmentPosScale(d.class_academic_org_description)
+      y1 = subjectPosScale(d.subject_description)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -335,14 +346,14 @@ function monadicView (data) {
           ' ' + x2 + ',' + y2
     })
 
-  departmentLine
+  subjectLine
     .enter()
     .append('path')
-    .attr('class', function (d) { return 'departmentLine ' + d.departmentClass + ' ' + d.courseTypeClass })
+    .attr('class', function (d) { return 'subjectLine ' + d.subjectClass + ' ' + d.courseTypeClass })
     .attr('d', function (d) {
-      x2 = width / 2 + (d.title.length * 2)
+      x2 = width / 2 + (d.title.length * 3)
       y2 = classScale(d.id)
-      y1 = departmentPosScale(d.class_academic_org_description)
+      y1 = subjectPosScale(d.subject_description)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -366,8 +377,8 @@ function categoryClick () {
   svg.selectAll('.instructorLine').style('opacity', 0.1)
   svg.selectAll('.instructorText').style('opacity', 0.1)
 
-  svg.selectAll('.departmentLine').style('opacity', 0.1)
-  svg.selectAll('.departmentText').style('opacity', 0.1)
+  svg.selectAll('.subjectLine').style('opacity', 0.1)
+  svg.selectAll('.subjectText').style('opacity', 0.1)
 
   svg.selectAll('.' + selectedClass).style('opacity', 1)
 
@@ -391,8 +402,8 @@ function categoryClickRemoval () {
   svg.selectAll('.instructorLine').style('opacity', 1)
   svg.selectAll('.instructorText').style('opacity', 1)
 
-  svg.selectAll('.departmentLine').style('opacity', 1)
-  svg.selectAll('.departmentText').style('opacity', 1)
+  svg.selectAll('.subjectLine').style('opacity', 1)
+  svg.selectAll('.subjectText').style('opacity', 1)
 }
 // -------------------------------------------------------------
 //  lecturer Vis on Class selection
@@ -417,20 +428,6 @@ function courseClick () {
   course.schedule = transformSchedule(course)
 
   selectCourse(course)
-}
-
-function getRandom (arr, n) {
-  var result = new Array(n)
-  var len = arr.length
-  var taken = new Array(len)
-
-  if (n > len) { throw new RangeError('getRandom: more elements taken than available') }
-  while (n--) {
-    var x = Math.floor(Math.random() * len)
-    result[n] = arr[x in taken ? taken[x] : x]
-    taken[x] = --len
-  }
-  return result
 }
 
 export { initSetup, requestData }

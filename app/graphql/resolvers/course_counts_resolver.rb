@@ -16,8 +16,9 @@ module Resolvers
     def base_query
       Course
         .where.not(component: nil)
-        .where(class_section: 1) # Scope to class section 1 to eliminate duplicate sections of the same course
+        .where.not(component: '')
         .group(%i[component subject_academic_org_description])
+        .order(:subject_academic_org_description, :component)
     end
 
     def filter_by_args(query, args)

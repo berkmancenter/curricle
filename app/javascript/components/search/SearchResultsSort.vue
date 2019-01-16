@@ -1,22 +1,25 @@
 <template>
   <span
     id="sort-by-dropdown"
-    class="pointer">
+    class="pointer"
+  >
     sort by:
-    <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
+    <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
     <b-popover
       ref="popover"
       placement="bottom"
       target="sort-by-dropdown"
-      triggers="click blur">
+      triggers="click blur"
+    >
       <b-form-radio-group
         v-model="selected"
         :options="sortByOptions"
         buttons
         button-variant="outline-dark"
         stacked
-        name="sort-fields"/>
+        name="sort-fields"
+      />
     </b-popover>
   </span>
 </template>
@@ -29,6 +32,12 @@ import _ from 'lodash'
 export default {
   components: {
     FontAwesomeIcon
+  },
+  props: {
+    searchType: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
@@ -44,7 +53,7 @@ export default {
   watch: {
     selected: function () {
       this.$refs.popover.$emit('close')
-      this.$store.dispatch('search/changeSortBy', this.selected)
+      this.$store.dispatch('search/changeSortBy', { value: this.selected, searchType: this.searchType })
     }
   }
 }

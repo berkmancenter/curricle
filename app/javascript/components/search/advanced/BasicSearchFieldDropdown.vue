@@ -2,13 +2,15 @@
   <span>
     <span
       id="search-field-dropdown"
-      class="pointer">
-      Apply to: <strong>{{ dropdownTitle }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
+      class="pointer"
+    >
+      Apply to: <strong>{{ dropdownTitle }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
       <b-popover
         target="search-field-dropdown"
         triggers="click blur"
-        placement="bottom">
+        placement="bottom"
+      >
         <b-form-checkbox-group
           v-model="selected"
           :options="options"

@@ -1,9 +1,10 @@
 <template>
   <div
-    :class="{ provisional, selected }"
+    :class="{ conflicted, provisional, selected }"
     :style="computedStyle"
     class="calendar-item text-uppercase font-weight-bold p-2"
-    @click="selectCourse(item)">
+    @click="selectCourse(item)"
+  >
     {{ item.title }}
 
     <div class="course-component">
@@ -29,6 +30,10 @@ export default {
       type: Boolean,
       default: false
     },
+    conflicted: {
+      type: Boolean,
+      default: false
+    },
     scale: {
       type: Number,
       required: true
@@ -44,13 +49,28 @@ export default {
     nudge: {
       type: Number,
       default: 0
+    },
+    conflictInfo: {
+      type: Object,
+      default () {
+        return { conflictCount: 0, position: 0 }
+      }
     }
   },
   computed: {
     computedStyle () {
-      var top = this.scale * this.offset + 65 + this.nudge
+      const top = this.scale * this.offset + 65 + this.nudge
+      const position = this.conflictInfo.position
+      let width = 90
+
+      if (this.conflictInfo.conflictCount !== 0) {
+        width = width / (this.conflictInfo.conflictCount + 1)
+      }
+
       return {
-        top: top + 'px'
+        top: top + 'px',
+        width: width + '%',
+        left: width * position + '%'
       }
     }
   },
@@ -71,8 +91,8 @@ export default {
   background-color: white;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding-left: .5em;
-  padding-right: .5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   font-size: 12px;
   width: 90%;
   height: var(--height);
@@ -83,7 +103,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    background-color: #DCDCDC;
+    background-color: #dcdcdc;
     z-index: 10;
     height: auto;
   }
@@ -100,6 +120,15 @@ export default {
   &.provisional {
     opacity: 0.5;
     z-index: 5;
+  }
+
+  &.conflicted {
+    background-color: #ffc0cb;
+
+    &.selected,
+    &:hover {
+      background-color: #ff91a4;
+    }
   }
 
   .course-component {

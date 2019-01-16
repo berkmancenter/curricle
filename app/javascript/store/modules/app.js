@@ -3,6 +3,7 @@
 import _ from 'lodash'
 
 const state = {
+  alertText: '',
   viewmode: {
     tray: 'list-view',
     plan: 'list-view'
@@ -31,22 +32,24 @@ const getters = {
 }
 
 const actions = {
-  trayToggle ({commit, getters, state}) {
+  trayToggle ({ commit, getters, state }) {
     var wasVis = getters.isTrayVisible
     commit('REMOVE_SIDEBAR_ELEM', { type: 'tray' })
     if (!wasVis) {
       commit('ADD_SIDEBAR_ELEM', { type: 'tray' })
     }
   },
-  selectView ({commit}, view) { commit('CHOOSE_SIDEBAR_VIEW', view) },
-  selectCourse ({commit, getters}, course) {
+  selectView ({ commit }, view) { commit('CHOOSE_SIDEBAR_VIEW', view) },
+  selectCourse ({ commit, getters }, course) {
     // with the current setup we support only a single visible course,
     // however it would be easy to support a course history/stack
     commit('REMOVE_SIDEBAR_ELEM', { type: 'course' })
     commit('ADD_SIDEBAR_ELEM', { type: 'course', payload: course })
   },
-  closeSidebar ({commit}) {
-    commit('REMOVE_TOP_SIDEBAR_ELEM')
+  closeSidebar ({ commit, state }) {
+    for (let i = 0; i <= state.sidebarStack.length; i++) {
+      commit('REMOVE_TOP_SIDEBAR_ELEM')
+    }
   }
 }
 
@@ -77,6 +80,9 @@ const mutations = {
   },
   SET_SEMESTER: (state, s) => {
     state.semester = s
+  },
+  SET_ALERT_TEXT: (state, text) => {
+    state.alertText = text
   }
 }
 

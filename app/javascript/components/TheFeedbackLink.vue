@@ -1,19 +1,23 @@
 <template>
   <div
     id="feedback-container"
-    class="text-center text-uppercase">
+    class="text-center text-uppercase"
+  >
     <a
       :class="{ invert: sidebarCurrentType }"
       target="_blank"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSfZdL8a7O51UCurjNinVRx0RJI8ahBdUIf0uHcoNfDt6--Elw/viewform?usp=sf_link">
+      href="https://docs.google.com/forms/d/e/1FAIpQLSfZdL8a7O51UCurjNinVRx0RJI8ahBdUIf0uHcoNfDt6--Elw/viewform?usp=sf_link"
+    >
       <span
-        class="d-none d-xl-inline">
+        class="d-none d-xl-inline"
+      >
         Send your feedback
       </span>
 
       <font-awesome-icon
         :icon="['far', 'comment-alt']"
-        class="ml-2"/>
+        class="ml-2"
+      />
     </a>
   </div>
 </template>

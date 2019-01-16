@@ -1,15 +1,19 @@
 <template>
   <div
-    v-if="hasData">
+    v-if="hasData && !pastSemester"
+  >
     <div
       v-for="(day,index) in week"
       v-show="!condensed || day.timeBar"
       :key="index"
-      :class="{ conflicted: conflicts[index] }">
+      :class="{ conflicted: conflicts[index] }"
+    >
       <div
-        :class="{ inactive: !(day.timeBar && day.timeBar.length) }">
+        :class="{ inactive: !(day.timeBar && day.timeBar.length) }"
+      >
         <span
-          class="day-name">
+          class="day-name"
+        >
           {{ day.abbrev }}
         </span>
 
@@ -18,8 +22,18 @@
     </div>
   </div>
   <div
-    v-else>
-    Schedule TBD
+    v-else
+  >
+    <div v-if="pastSemester">
+      {{ course.term_name }} {{ course.term_year }}
+    </div>
+    <div v-else>
+      <img
+        class="icon-tbd"
+        src="/images/icons/tbd.png"
+        alt="Schedule TBD"
+      >
+    </div>
   </div>
 </template>
 
@@ -50,7 +64,7 @@ import { prettyTime } from 'lib/util'
 
 export default {
   props: {
-    schedule: {
+    course: {
       type: Object,
       required: true
     },
@@ -73,8 +87,8 @@ export default {
     /* turns the input params into the more sensible data structure for use by this component */
     days () {
       // handling only the 'simple' schedule type; add logic for split schedules and the like here
-      if (this.schedule.type === 'simple') {
-        return this.schedule.data
+      if (this.course.schedule.type === 'simple') {
+        return this.course.schedule.data
       }
       return []
     },
@@ -97,7 +111,10 @@ export default {
         }
       )
     },
-    hasData () { return this.days && this.days.length }
+    hasData () { return this.days && this.days.length },
+    pastSemester () {
+      return this.$store.getters['search/isPastSemester'](this.course.term_name, this.course.term_year)
+    }
   }
 }
 </script>
@@ -114,5 +131,11 @@ export default {
 .day-name {
   display: inline-block;
   width: 32px;
+}
+
+img.icon-tbd {
+  height: 20px;
+  margin-top: 20px;
+  width: auto;
 }
 </style>

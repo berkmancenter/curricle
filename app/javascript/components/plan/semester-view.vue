@@ -10,7 +10,8 @@
         <b-row>
           <b-col
             v-for="course in coursesTBD"
-            :key="course.id">
+            :key="course.id"
+          >
             <calendar-item
               :item="course"
               :scale="scale"
@@ -45,24 +46,27 @@
         </b-row>
       </b-col>
       <b-col
-        v-for="(day,index) in ['Mon','Tue','Wed','Thu','Fri']"
+        v-for="(day,index) in daylist"
         :key="index"
         class="day-column"
       >
         <b-row>
-          <b-col class="header">{{ day }}
+          <b-col class="header">
+            {{ day }}
           </b-col>
         </b-row>
         <b-row>
           <calendar-item
             v-for="item in currentScheduleByDay[index]"
-            :item="item.course"
             :key="item.course.id"
+            :item="item.course"
             :scale="scale"
             :offset="item.meetingTime[0] - earliestIdx"
             :height="item.meetingTime[1]"
             :provisional="provisionalCourseIds.includes(item.course.id)"
             :selected="currentCourse && currentCourse.id == item.course.id"
+            :conflicted="item.course.id in scheduledCourseConflictsByDay"
+            :conflict-info="courseConflictInfoForDay(item.course.id, day)"
           />
         </b-row>
       </b-col>
@@ -77,16 +81,19 @@ import { partitionCoursesByMeetingTime } from 'lib/util'
 
 import CalendarItem from 'components/plan/calendar-item'
 
-const daylist = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-
 export default {
   components: {
     CalendarItem
   },
+  data () {
+    return {
+      daylist: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    }
+  },
   computed: {
     ...mapGetters('app', ['currentCourse']),
     ...mapState('plan', ['semester', 'provisionalCourses']),
-    ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses']),
+    ...mapGetters('plan', ['sortedSemestersInSchedule', 'scheduledCourses', 'scheduledCourseConflictsByDay', 'courseConflictInfoForDay']),
     courses () {
       return _.uniqBy(
         _.filter(
@@ -101,12 +108,12 @@ export default {
     },
     // Determine if there are any courses with meeting times in the user's schedule
     hasCourses () {
-      const coursesByDay = _.at(this.coursesByMeetingTime, daylist)
+      const coursesByDay = _.at(this.coursesByMeetingTime, this.daylist)
 
       return !!_.find(coursesByDay, 'length')
     },
     currentScheduleByDay () {
-      return _.at(this.coursesByMeetingTime, daylist)
+      return _.at(this.coursesByMeetingTime, this.daylist)
     },
     coursesTBD () {
       return this.coursesByMeetingTime.TBD
@@ -149,13 +156,6 @@ export default {
       )
     }
   },
-  watch: {
-    sortedSemestersInSchedule () {
-      if (!this.sortedSemestersInSchedule.includes(this.semester)) {
-        this.setSemester(this.sortedSemestersInSchedule[0])
-      }
-    }
-  },
   mounted () {
     if (this.sortedSemestersInSchedule && !this.sortedSemestersInSchedule.includes(this.semester)) {
       this.setSemester(this.sortedSemestersInSchedule[0])
@@ -180,6 +180,6 @@ export default {
 
 .time-label {
   font-size: 12px;
-  font-family: 'IBM Plex Mono'
+  font-family: 'IBM Plex Mono', sans-serif;
 }
 </style>

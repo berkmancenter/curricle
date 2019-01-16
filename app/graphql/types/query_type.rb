@@ -6,6 +6,7 @@ end
 
 def generate_enum_values(attr)
   strs = Course.distinct.pluck(attr).compact.sort
+  strs.delete('')
 
   strs.each { |str| value(format_as_constant(str), str, value: str) }
 end
@@ -130,5 +131,14 @@ Types::QueryType = GraphQL::ObjectType.define do
     argument :semester, !Inputs::SemesterInput
 
     resolve Resolvers::CoursesConnectedByInstructorResolver.new
+  end
+
+  field :instructor_names, types[types.String] do
+    description 'Returns a collection of instructor names for a given range of years'
+
+    argument :semester, !Inputs::SemesterInput
+    argument :past_years, types.Int, 'Include instructors for this number of past years'
+
+    resolve Resolvers::InstructorNamesResolver.new
   end
 end

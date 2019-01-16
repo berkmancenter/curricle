@@ -8,7 +8,22 @@ import Vue from 'vue/dist/vue.esm'
 
 import { transformSchedule } from 'lib/util'
 
-const thisYear = (new Date()).getUTCFullYear()
+const currentDate = new Date()
+let thisYear = currentDate.getUTCFullYear()
+let thisMonth = currentDate.getMonth()
+let thisSemester
+
+if (thisMonth <= 4) {
+  thisSemester = 'Spring'
+} else {
+  thisSemester = 'Fall'
+}
+
+// Edge case for December to show Spring semester of next calendar year
+if (thisMonth === 11) {
+  thisSemester = 'Spring'
+  thisYear += 1
+}
 
 /* NOTE: any search state that affects the search results needs to be
  * taught to serializeSearch() and deserializeSearch() */
@@ -33,8 +48,8 @@ const state = {
     { text: 'Readings', value: 'READINGS', disabled: true },
     { text: 'Course ID', value: 'COURSE_ID' }
   ],
-  searchTermStart: 'Spring',
-  searchTermEnd: 'Spring',
+  searchTermStart: thisSemester,
+  searchTermEnd: thisSemester,
   searchYearStart: thisYear,
   searchYearEnd: thisYear + 1,
   searchTermUseRange: false,
@@ -107,39 +122,58 @@ const getters = {
       term_name: state.searchTermStart.toUpperCase(),
       term_year: state.searchYearStart
     }
+  },
+
+  currentSemester (state) {
+    return {
+      term_name: thisSemester,
+      term_year: thisYear
+    }
+  },
+
+  isPastSemester: (state) => (termName, termYear) => {
+    if (
+      termYear === thisYear &&
+      termName.toUpperCase() === 'SPRING' &&
+      thisSemester.toUpperCase() === 'FALL'
+    ) {
+      return true
+    } else {
+      return termYear < thisYear
+    }
   }
 }
 
 const actions = {
-  addKeyword ({commit}, keyword) {
+  addKeyword ({ commit }, keyword) {
     commit('ADD_KEYWORD', keyword)
   },
-  deactivateKeyword ({commit, state}, keyword) {
+  deactivateKeyword ({ commit, state }, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
       commit('DEACTIVATE_KEYWORD', idx)
     }
   },
-  activateKeyword ({commit, state}, keyword) {
+  activateKeyword ({ commit, state }, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
       commit('ACTIVATE_KEYWORD', idx)
     }
   },
-  removeKeyword ({commit, state}, keyword) {
+  removeKeyword ({ commit, state }, keyword) {
     var idx = _.findIndex(state.keywords, k => k.text === keyword.text)
     if (idx !== -1) {
       commit('DELETE_KEYWORD', idx)
     }
   },
-  runSearchAgain ({dispatch, getters}) {
+  runSearchAgain ({ dispatch, getters }) {
     if (getters.activeBasicSearch) {
       dispatch('runBasicSearchAgain')
     } else {
       dispatch('runKeywordSearchAgain')
     }
   },
-  runBasicSearch ({commit, state, getters, dispatch}) {
+  runBasicSearch ({ commit, state, getters, dispatch }) {
     const query = getters.activeBasicSearch
 
     commit('RESET_RESULTS_PAGE')
@@ -157,7 +191,7 @@ const actions = {
       }
     )
   },
-  runBasicSearchAgain ({commit, state, getters, dispatch}) {
+  runBasicSearchAgain ({ commit, state, getters, dispatch }) {
     const query = getters.activeBasicSearch
 
     commit('INCREMENT_RESULTS_PAGE')
@@ -174,7 +208,7 @@ const actions = {
       }
     )
   },
-  runKeywordSearch ({commit, state, getters, dispatch}) {
+  runKeywordSearch ({ commit, state, getters, dispatch }) {
     commit('SET_BASIC_SEARCH', '')
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
@@ -199,7 +233,7 @@ const actions = {
       state.results = []
     }
   },
-  runKeywordSearchAgain ({commit, state, getters, dispatch}) {
+  runKeywordSearchAgain ({ commit, state, getters, dispatch }) {
     var kw = getters.activeKeywords.map(k => _.clone(k))
     _.forEach(kw, k => delete k.active)
     _.forEach(kw, k => delete k.ident)
@@ -222,7 +256,7 @@ const actions = {
       state.results = []
     }
   },
-  runSearch ({commit, state, getters, dispatch}, {keywords, ids, handler, userCoursesSearch, basic}, searchOptions) {
+  runSearch ({ commit, state, getters, dispatch }, { keywords, ids, handler, userCoursesSearch, basic }, searchOptions) {
     var vars = {}
     var query = COURSES_SEARCH_QUERY
 
@@ -295,7 +329,6 @@ const actions = {
         c => {
           var o = _.clone(c.node)
           o.schedule = transformSchedule(o)
-          o.semester = o.term_name + ' ' + o.term_year
 
           // TODO: Get from data; random for now
           o.department_color = '#' + Math.floor((Math.random() * (999 - 599)) + 600)
@@ -316,22 +349,32 @@ const actions = {
 
     promise.then(handler)
   },
-  changeSortBy ({commit, state, dispatch}, value) {
-    if (state.sortBy !== value) {
-      commit('SET_SORT_BY', value)
-      dispatch('runKeywordSearch')
+  changeSortBy ({ commit, state, dispatch }, { value, searchType }) {
+    if (state.sortBy === value) {
+      return
+    }
+
+    commit('SET_SORT_BY', value)
+
+    switch (searchType) {
+      case 'basic':
+        dispatch('runBasicSearch')
+        break
+      case 'advanced':
+        dispatch('runKeywordSearch')
+        break
     }
   },
-  setTimeRanges ({commit}, r) {
+  setTimeRanges ({ commit }, r) {
     commit('SET_TIME_RANGES', r)
   },
-  setUseFilters ({commit}, r) {
+  setUseFilters ({ commit }, r) {
     commit('SET_USE_FILTERS', r)
   },
-  saveSearchInHistory ({commit, getters}) {
+  saveSearchInHistory ({ commit, getters }) {
     commit('PUSH_SEARCH_HISTORY', getters.searchSnapshot)
   },
-  populateSearchState ({commit}, obj) {
+  populateSearchState ({ commit }, obj) {
     commit('RESET_FACETS')
     commit('SET_SEARCH_STATE', obj)
   },
@@ -504,6 +547,9 @@ const mutations = {
   },
   SET_BASIC_SEARCH (state, query) {
     state.basic = query
+  },
+  SET_SEARCH_RUNNING (state, value) {
+    state.searchRunning = value
   }
 }
 

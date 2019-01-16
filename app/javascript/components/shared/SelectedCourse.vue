@@ -1,8 +1,8 @@
 <template>
   <div
     id="selected-course"
-    class="pt-3 px-3">
-
+    class="pt-3 px-3"
+  >
     <div>
       <span class="float-left">
         Selected course
@@ -12,31 +12,36 @@
         <font-awesome-icon
           class="pointer"
           icon="times"
-          @click="closeSidebar"/>
+          @click="closeSelectedCourse"
+        />
       </span>
     </div>
 
     <div
       v-if="userAuthenticated"
-      class="actions mt-3">
+      class="actions mt-3"
+    >
       <p class="float-left">
         <course-action
           :course="theCourse.id"
           :invert="true"
-          type="tray"/>
+          type="tray"
+        />
 
         &nbsp;
 
         <course-action
           :course="theCourse.id"
           :invert="true"
-          type="schedule"/>
+          type="schedule"
+        />
       </p>
 
       <p class="course-history float-right text-right">
         <a
           href="javascript:"
-          @click="searchByCourseId(courseId)">
+          @click="searchByCourseId(courseId)"
+        >
           See course history
         </a>
       </p>
@@ -48,25 +53,26 @@
 
     <selected-course-annotations
       v-if="userAuthenticated"
-      :course-id="theCourse.id"/>
+      :course-id="theCourse.id"
+    />
 
     <selected-course-tagging
-      :course-id="theCourse.id"/>
+      :course-id="theCourse.id"
+    />
   </div>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { mapState, mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 import CourseAction from 'components/shared/CourseAction'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import SelectedCourseAnnotations from './SelectedCourseAnnotations'
 import SelectedCourseDetails from './SelectedCourseDetails'
 import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
   components: {
-    serializeSearch,
     CourseAction,
     FontAwesomeIcon,
     SelectedCourseAnnotations,
@@ -101,7 +107,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('app', ['closeSidebar']),
+    closeSelectedCourse () {
+      this.$store.commit('app/REMOVE_TOP_SIDEBAR_ELEM')
+    },
     searchByCourseId (courseId) {
       this.$store.dispatch('search/searchByCourseId', courseId)
       this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))

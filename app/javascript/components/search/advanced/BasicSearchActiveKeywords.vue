@@ -9,13 +9,11 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Keyword from './keyword'
 import { mapGetters } from 'vuex'
+import Keyword from './keyword'
 
 export default {
   components: {
-    FontAwesomeIcon,
     Keyword
   },
   computed: {

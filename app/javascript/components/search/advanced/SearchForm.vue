@@ -1,21 +1,23 @@
 <template>
   <div>
     <div class="basic-search mb-3">
-      <semester-input/>
+      <semester-input />
 
       <div class="mt-4 w-50">
         <b-input-group>
           <b-input-group-prepend is-text>
             <img
               class="icon"
-              src="/images/icons/eye_black.png">
+              src="/images/icons/eye_black.png"
+            >
           </b-input-group-prepend>
 
           <input
             v-model="keyword"
             class="search pl-0 form-control"
             placeholder="Enter a keyword"
-            @keyup.enter="addActiveKeyword">
+            @keyup.enter="addActiveKeyword"
+          >
 
           <b-input-group-append is-text>
             <basic-search-field-dropdown
@@ -28,29 +30,28 @@
             <img
               class="icon pointer"
               src="/images/icons/return_arrow.png"
-              @click="addActiveKeyword">
+              @click="addActiveKeyword"
+            >
           </b-input-group-append>
         </b-input-group>
       </div>
     </div>
 
-    <advanced-search/>
+    <advanced-search />
 
-    <basic-search-active-keywords/>
+    <basic-search-active-keywords />
 
-    <basic-search-inactive-keywords/>
+    <basic-search-inactive-keywords />
   </div>
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { mapGetters } from 'vuex'
 import { serializeSearch } from 'lib/util'
 
 import AdvancedSearch from './AdvancedSearch'
 import BasicSearchActiveKeywords from './BasicSearchActiveKeywords'
 import BasicSearchFieldDropdown from './BasicSearchFieldDropdown'
-import BasicSearchFieldWeightDropdown from './BasicSearchFieldWeightDropdown'
 import BasicSearchInactiveKeywords from './BasicSearchInactiveKeywords'
 import SemesterInput from 'components/shared/SemesterInput'
 
@@ -60,10 +61,8 @@ export default {
     AdvancedSearch,
     BasicSearchActiveKeywords,
     BasicSearchFieldDropdown,
-    BasicSearchFieldWeightDropdown,
     BasicSearchInactiveKeywords,
-    SemesterInput,
-    FontAwesomeIcon
+    SemesterInput
   },
   data () {
     return {
@@ -107,7 +106,8 @@ export default {
     padding: 5px 8px;
   }
 
-  .input-group-text, input.search {
+  .input-group-text,
+  input.search {
     background-color: #ddd;
     border: 0;
     color: black;

@@ -4,44 +4,51 @@
       <span id="advanced-search-schedule">
         <span
           class="advanced-search-element"
-          @click="toggleSearchSchedule">
+          @click="toggleSearchSchedule"
+        >
           Schedule
         </span>
 
         <img
           class="icon-remove ml-2"
           src="/images/icons/x_black.png"
-          @click="resetAdvancedSearchFilters">
+          @click="resetAdvancedSearchFilters"
+        >
       </span>
 
       <span
         v-if="$store.state.search.searchComplete"
-        id="advanced-search-filter">
+        id="advanced-search-filter"
+      >
         <span
           id="advanced-search-filter-button"
           class="advanced-search-element ml-4"
-          @click="toggleSearchFilters">
+          @click="toggleSearchFilters"
+        >
           Filter
         </span>
 
         <img
           class="icon-remove ml-2"
           src="/images/icons/x_black.png"
-          @click="resetAdvancedSearchFilters">
+          @click="resetAdvancedSearchFilters"
+        >
       </span>
     </div>
 
     <div
       v-if="showSchedule"
-      class="advanced-search mt-4">
-      <table style="width: 100%">
+      class="advanced-search mt-4"
+    >
+      <table style="width: 100%;">
         <tr
           v-for="day in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']"
           :key="day"
         >
-          <td style="width: 100px" >
+          <td style="width: 100px;">
             <b-checkbox
-              v-model="requireDay[day]">
+              v-model="requireDay[day]"
+            >
               {{ day }}
             </b-checkbox>
           </td>
@@ -64,8 +71,9 @@
       container="advanced-search"
       target="advanced-search-filter-button"
       triggers="click blur"
-      placement="bottom">
-      <advanced-search-filters/>
+      placement="bottom"
+    >
+      <advanced-search-filters />
     </b-popover>
   </div>
 </template>
@@ -212,7 +220,7 @@ export default {
     background-color: black;
     padding: 10px;
 
-    .arrow:after {
+    .arrow::after {
       border-bottom-color: black;
     }
   }

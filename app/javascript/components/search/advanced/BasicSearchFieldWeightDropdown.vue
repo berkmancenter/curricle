@@ -2,17 +2,20 @@
   <span>
     <span
       id="search-field-weight-dropdown"
-      class="pointer">
-      Weight: <strong>{{ sel }}</strong>&nbsp;<font-awesome-icon icon="caret-down"/>
+      class="pointer"
+    >
+      Weight: <strong>{{ sel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 
       <b-popover
         target="search-field-weight-dropdown"
         triggers="click blur"
-        placement="bottom">
+        placement="bottom"
+      >
         <b-form-radio-group
           v-model="sel"
           :options="options"
-          stacked/>
+          stacked
+        />
       </b-popover>
     </span>
   </span>
