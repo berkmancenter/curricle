@@ -133,8 +133,8 @@ export default {
   data () {
     return {
       predefinedInstructors: [
-        'Jeffrey Schnapp',
-        'Sara Gorman'
+        'Leah Price',
+        'Jeffrey Schnapp'
       ],
       instructorName: '',
       showNoResultsContainer: false,
