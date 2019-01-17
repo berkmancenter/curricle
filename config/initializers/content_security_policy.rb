@@ -15,14 +15,11 @@ Rails.application.config.content_security_policy do |policy|
 #   # Specify URI for violation reports
 #   # policy.report_uri "/csp-violation-report-endpoint"
 
-  # CSP fix for Vue in development environments
+  # Configure CSP to allow webpacker / Hotjar loading
   # https://github.com/rails/webpacker#vue
   # https://vuejs.org/v2/guide/installation.html#CSP-environments
-  if Rails.env.development?
-    policy.script_src :self, :https, :unsafe_eval, :unsafe_inline
-  else
-    policy.script_src :self, :https, :unsafe_inline
-  end
+  # https://help.hotjar.com/hc/en-us/articles/115011640307-Content-Security-Policies
+  policy.script_src :self, :https, :unsafe_eval, :unsafe_inline
 end
 
 # If you are using UJS then enable automatic nonce generation
