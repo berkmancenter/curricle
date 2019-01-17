@@ -44,7 +44,7 @@ module Resolvers
 
       instructor_email = search_results.first.email
 
-      course_ids_taught_by_instructor = search_results.map(&:course_id)
+      course_ids_taught_by_instructor = search_results.map(&:course_id).compact
 
       query_co_taught_courses(course_ids_taught_by_instructor, instructor_email, term_name, term_year_range)
     end
@@ -73,7 +73,9 @@ module Resolvers
         .where(email: instructor_emails)
         .where(term_name: term_name)
         .where(term_year: term_year_range.max)
+        .distinct
         .pluck(:course_id)
+        .compact
 
       filtered_course_ids = filter_course_ids_by_counts(course_ids_taught_by_connected_instructors)
 
