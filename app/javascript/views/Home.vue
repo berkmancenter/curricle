@@ -29,7 +29,11 @@
       >
         <strong>plan</strong>
       </router-link>
-      your semester schedule.
+      your semester schedule.<br>
+      Then go to
+      <a href="https://portal.my.harvard.edu">
+        My.Harvard</a>
+      to complete registration.
     </div>
 
     <span
