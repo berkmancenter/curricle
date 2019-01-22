@@ -46,5 +46,6 @@ end
 
 group :test do
   gem 'fuubar', '~> 2.3'
+  gem 'rspec-graphql_matchers', '~> 0.7'
   gem 'shoulda-matchers', '~> 3.1'
 end
