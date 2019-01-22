@@ -18,7 +18,7 @@ gem 'rails', '5.2.2' # @drg skip
 gem 'sanitize', '~> 5.0'
 gem 'seedbank', '~> 0.5'
 gem 'sunspot_rails', '~> 2.3'
-gem 'webpacker', '~> 4.0.0.pre' # @drg skip
+gem 'webpacker', '4.0.0.rc.5' # @drg skip
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'

@@ -4,9 +4,10 @@ const vue =  require('./loaders/vue')
 
 environment.loaders.prepend('graphql', {
   test: /\.(graphql|gql)$/,
+  exclude: /node_modules/,
   loader: 'graphql-tag/loader'
 })
 
-environment.plugins.append('VueLoaderPlugin', new VueLoaderPlugin())
-environment.loaders.append('vue', vue)
+environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
+environment.loaders.prepend('vue', vue)
 module.exports = environment
