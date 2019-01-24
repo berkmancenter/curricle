@@ -7,7 +7,7 @@ gem 'batch-loader', '~> 1.2'
 gem 'bootsnap', '~> 1.3', require: false
 gem 'devise', '~> 4.5'
 gem 'devise_cas_authenticatable', '~> 1.10'
-gem 'dotenv-rails', '~> 2.5'
+gem 'dotenv-rails', '~> 2.6'
 gem 'graphql', '~> 1.8'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.8'
@@ -30,13 +30,13 @@ group :development, :test do
 end
 
 group :development do
-  gem 'brakeman', '~> 4.3'
+  gem 'brakeman', '~> 4.4'
   gem 'drg', '~> 1.5'
-  gem 'graphiql-rails', '~> 1.5'
+  gem 'graphiql-rails', '~> 1.6'
   gem 'listen', '~> 3.1'
   gem 'rack-cors', '~> 1.0'
-  gem 'rubocop', '~> 0.61'
-  gem 'rubocop-rspec', '~> 1.30'
+  gem 'rubocop', '~> 0.63'
+  gem 'rubocop-rspec', '~> 1.31'
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
