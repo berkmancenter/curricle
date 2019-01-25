@@ -273,20 +273,22 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
 }
 
 function setData (data) {
-  var nestedData = d3.nest()
-    .key(function (d) { return d[sideData] })
-    .rollup(function (v) {
-      return {
-        count: v.length
-      }
+  if (data.length) {
+    var nestedData = d3.nest()
+      .key(function (d) { return d[sideData] })
+      .rollup(function (v) {
+        return {
+          count: v.length
+        }
+      })
+      .entries(data)
+
+    nestedData.sort(function (a, b) {
+      return b.value.count - a.value.count
     })
-    .entries(data)
 
-  nestedData.sort(function (a, b) {
-    return b.value.count - a.value.count
-  })
-
-  typeTextScale.domain([1, nestedData[0].value.count])
+    typeTextScale.domain([1, nestedData[0].value.count])
+  }
 
   function redraw () {
     containerWidth = window.innerWidth * 0.8333333 * 0.9
@@ -452,7 +454,9 @@ function setCenterVis (sortedData) {
     .duration(500)
     .style('opacity', 1)
 
-  documentHeight = sortedData[sortedData.length - 1].textPosCount + margin.top + margin.bottom
+  const height = sortedData.length ? sortedData[sortedData.length - 1].textPosCount : 0
+
+  documentHeight = height + margin.top + margin.bottom
 
   if (documentHeight < 300) {
     documentHeight = 300
