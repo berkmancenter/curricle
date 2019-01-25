@@ -496,19 +496,19 @@ function centerClick () {
 function showCountCenterVis () {
   var thisData = this.__data__
 
-  if (thisData.values.length === 1) {
-    d3.select(this).text(function (d) {
-      const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
+  d3.select(this).text(function (d) {
+    const title = (centerData === 'title') ? d.values[0].value.data[0].title : d.key
 
+    if (thisData.values.length === 1) {
       if (thisData.values[0].key === leftSelection) {
         return d.values[0].value.count + ' - ' + title
       } else {
         return title + ' - ' + d.values[0].value.count
       }
-    })
-  } else {
-    d3.select(this).text(function (d) { return d.values[0].value.count + ' - ' + d.key + ' - ' + d.values[1].value.count })
-  }
+    } else {
+      return d.values[0].value.count + ' - ' + title + ' - ' + d.values[1].value.count
+    }
+  })
 }
 function removeCountCenterVis () {
   d3.select(this).text(function (d) {
