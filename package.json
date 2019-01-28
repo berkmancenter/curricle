@@ -19,6 +19,7 @@
     "bootstrap-vue": "2.0.0-rc.11",
     "caniuse-lite": "^1.0.30000836",
     "css-loader": "^1.0.1",
+    "cssesc": "^2.0.0",
     "d3": "^5.5.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.8.0",

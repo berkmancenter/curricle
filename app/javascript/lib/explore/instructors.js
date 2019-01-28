@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import apolloClient from 'apollo'
+import cssesc from 'cssesc'
 import COURSES_CONNECTED_BY_INSTRUCTOR_QUERY from '../../graphql/CoursesConnectedByInstructor.gql'
 import { transformSchedule } from 'lib/util'
 
@@ -113,8 +114,8 @@ function loadLecturerData (coursesConnectedByInstructor) {
   let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
   data.forEach(function (d) {
-    d.subjectClass = d.subject_description.replace(/ +/g, '_')
-    d.courseTypeClass = d.component
+    d.subjectClass = cssesc(d.subject_description, { isIdentifier: true })
+    d.courseTypeClass = cssesc(d.component, { isIdentifier: true })
   })
 
   data.sort(function (a, b) {
@@ -368,7 +369,7 @@ function monadicView (data) {
 //  Category Selection
 
 function categoryClick () {
-  var selectedClass = this.classList[1]
+  var selectedClass = cssesc(this.classList[1], { isIdentifier: true })
 
   svg.selectAll('.classLine').style('opacity', 0.1)
   svg.selectAll('.classCircle').style('opacity', 0.1)
