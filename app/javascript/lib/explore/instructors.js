@@ -47,7 +47,7 @@ function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNam
     .range([margin.top, height])
 
   instructorTextScale = d3.scaleLinear()
-    .range([9, 20])
+    .range([8, 19])
 
   subjectTextScale = d3.scaleLinear()
     .range([9, 20])
@@ -222,7 +222,7 @@ function monadicView (data) {
     .attr('y', function (d) { return classScale(d.key) - 4 })
     .attr('x', function (d) { return width / 2 })
     .style('text-anchor', 'middle')
-    .style('font-size', '11px')
+    .style('font-size', '12px')
     .attr('dy', '0.8em')
     .text(function (d) {
       if (d.values[0].title.length > maxTextLength) { return d.values[0].title.substring(0, maxTextLength) + '...' } else { return d.values[0].title }
