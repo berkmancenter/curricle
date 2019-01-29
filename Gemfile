@@ -36,7 +36,7 @@ group :development do
   gem 'listen', '~> 3.1'
   gem 'rack-cors', '~> 1.0'
   gem 'rubocop', '~> 0.63'
-  gem 'rubocop-rspec', '~> 1.31'
+  gem 'rubocop-rspec', '~> 1.32'
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
