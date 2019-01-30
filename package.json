@@ -30,7 +30,7 @@
     "vue": "^2.5.22",
     "vue-apollo": "^3.0.0-beta.5",
     "vue-loader": "^15.5.1",
-    "vue-matomo": "^0.5.1",
+    "vue-matomo": "^3.7.0-2",
     "vue-router": "^3.0.1",
     "vue-slider-component": "^2.6.2",
     "vue-template-compiler": "^2.5.22",

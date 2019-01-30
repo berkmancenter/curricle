@@ -9232,10 +9232,10 @@ vue-loader@^15.5.1:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-matomo@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-0.5.1.tgz#0957b9e8c1322a49e79f959ee5dfe038857edec4"
-  integrity sha512-N4I/grRxFZM4KVH0RfOGrN0qEFXpruJBg+K57gLhLDeHE2+ocaz2QpRotEGeFlddo2eczDk8RprczehpNNCK8A==
+vue-matomo@^3.7.0-2:
+  version "3.7.0-2"
+  resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-3.7.0-2.tgz#0cf6839693f12e47e8fe57a1609d85f86b23deb4"
+  integrity sha512-OcSu+vbKG2R6+y06o58nqXyQ/4A4Q8EUxhtAux6DuG+aMrdnYFmKqxtq8yIIrdi7U81Oo2cVWBHFEcTpYV8DwQ==
 
 vue-router@^3.0.1:
   version "3.0.2"
