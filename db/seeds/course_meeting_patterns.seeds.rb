@@ -38,6 +38,8 @@ class CurricleCourseMeetingPatternImporter < CurricleImporter
     meeting_time_end = Time.strptime(row[:meeting_time_end], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_end]
     course_id = COURSES_CACHE[key]
 
+    return if course_id.blank?
+
     [
       external_course_id,
       term_name,

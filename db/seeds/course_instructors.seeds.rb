@@ -40,6 +40,8 @@ class CurricleCourseInstructorImporter < CurricleImporter
     key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
     course_id = COURSES_CACHE[key]
 
+    return if course_id.blank?
+
     [
       external_course_id,
       term_name,
