@@ -14,10 +14,10 @@ var documentWidth, margin, width, height, courseTypeBarScale, departmentBarScale
 var courseTypeSvg, departmentSvg, classSvg
 
 var courseTypeTextScale = d3.scaleLinear()
-  .range([12, 16])
+  .range([14, 14])
 
 var departmentTextScale = d3.scaleLinear()
-  .range([12, 16])
+  .range([14, 14])
 
 var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departmentGradient
 
@@ -26,6 +26,8 @@ var fullData
 let selectCourse
 let semester
 let showLoaderOverlay
+
+const fontSize = '14px'
 
 function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
@@ -237,7 +239,7 @@ function setCourseTypeVis (data) {
   courseTypeText.exit().remove()
 
   courseTypeText.transition().duration(500)
-    .style('font-size', function (d, i) { return courseTypeTextScale(d.value.count) + 'px' })
+    .style('font-size', fontSize)
     .attr('transform', function (d, i) {
       return 'translate(' + (width - 5) + ',' + (i * 20) + ')'
     })
@@ -251,7 +253,7 @@ function setCourseTypeVis (data) {
     })
     .style('text-anchor', 'end')
     .style('opacity', 0)
-    .style('font-size', function (d, i) { return courseTypeTextScale(d.value.count) + 'px' })
+    .style('font-size', fontSize)
     .text(function (d) { return d.key })
     .on('click', dataFilter)
     .transition()
@@ -296,7 +298,7 @@ function setDepartmentVis (data) {
   departmentText.exit().remove()
 
   departmentText.transition().duration(500)
-    .style('font-size', function (d, i) { return departmentTextScale(d.value.count) + 'px' })
+    .style('font-size', fontSize)
     .attr('transform', function (d, i) {
       return 'translate(' + 5 + ',' + (i * 20) + ')'
     })
@@ -308,7 +310,7 @@ function setDepartmentVis (data) {
     .attr('transform', function (d, i) { return 'translate(' + 5 + ',' + (i * 20) + ')' })
     .style('text-anchor', 'start')
     .style('opacity', 0)
-    .style('font-size', function (d, i) { return departmentTextScale(d.value.count) + 'px' })
+    .style('font-size', fontSize)
     .text(function (d) { return d.key })
     .on('click', dataFilter)
     .transition()
@@ -440,7 +442,7 @@ function classVisualization (data) {
     })
     .style('text-anchor', 'left')
     .style('opacity', 0)
-    .style('font-size', function (d, i) { return 12 + 'px' })
+    .style('font-size', fontSize)
     .text(function (d) { return d.title })
     .on('click', courseClick)
     .transition()
