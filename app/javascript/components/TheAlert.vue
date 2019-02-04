@@ -1,5 +1,8 @@
 <template>
-  <div id="the-alert">
+  <div
+    id="the-alert"
+    class="mt-2 col-md-4 offset-md-8"
+  >
     <b-alert
       :show="dismissCountDown"
       fade

@@ -31,9 +31,7 @@
         id="main-container"
         class="col-md-10 h-100"
       >
-        <the-alert
-          class="mt-2 col-md-4 offset-md-8"
-        />
+        <the-alert />
 
         <keep-alive>
           <router-view />
