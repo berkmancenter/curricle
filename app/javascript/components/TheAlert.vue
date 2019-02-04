@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="the-alert"
-    class="mt-2 col-md-4 offset-md-8"
-  >
+  <div id="the-alert">
     <b-alert
       :show="dismissCountDown"
       fade
@@ -49,6 +46,14 @@ export default {
 <style scoped>
 #the-alert {
   height: 50px;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  position: fixed;
+  top: 20px;
+  right: 0;
+  z-index: 999;
 }
 
 div.alert {
