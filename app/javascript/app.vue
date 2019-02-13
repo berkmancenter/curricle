@@ -4,27 +4,27 @@
 
     <the-navbar-control
       v-if="userAuthenticated"
-      v-show="sidebarCurrentType"
+      v-show="sidebarCurrentType === 'tray'"
     />
 
     <the-tray-control
       v-if="userAuthenticated"
-      v-show="!sidebarCurrentType"
+      v-show="sidebarCurrentType !== 'tray'"
     />
 
     <the-logout-link
       v-if="userAuthenticated"
-      v-show="!sidebarCurrentType"
+      v-show="sidebarCurrentType !== 'tray'"
     />
 
     <div class="row h-100">
       <div
-        v-show="!sidebarCurrentType"
+        v-show="sidebarCurrentType !== 'tray'"
         id="nav-container"
-        :class="{ active: !sidebarCurrentType }"
+        :class="{ active: sidebarCurrentType !== 'tray' }"
         class="col-md-2 px-0"
       >
-        <navbar v-if="!sidebarCurrentType" />
+        <navbar />
       </div>
 
       <div
@@ -37,13 +37,19 @@
           <router-view />
         </keep-alive>
 
+        <selected-course
+          v-if="selectedCourse"
+          :course="selectedCourse"
+          :user-authenticated="userAuthenticated"
+        />
+
         <the-data-last-updated-indicator />
       </div>
 
       <div
-        v-show="sidebarCurrentType"
+        v-show="sidebarCurrentType === 'tray'"
         id="sidebar-container"
-        :class="{ active: sidebarCurrentType }"
+        :class="{ active: sidebarCurrentType === 'tray' }"
         class="col-md-2 px-0"
       >
         <the-sidebar />
@@ -55,10 +61,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import Navbar from 'components/TheNavbar'
 import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
+import SelectedCourse from 'components/shared/SelectedCourse'
 import TheLogoutLink from 'components/TheLogoutLink'
 import TheSidebar from 'components/TheSidebar'
 import TheTrayControl from 'components/TheTrayControl'
@@ -71,6 +78,7 @@ export default {
     Navbar,
     LoaderOverlay,
     CourseObserver,
+    SelectedCourse,
     TheLogoutLink,
     TheSidebar,
     TheTrayControl,
@@ -80,7 +88,8 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
-    ...mapGetters('app', ['sidebarCurrentType'])
+    ...mapGetters('app', ['sidebarCurrentContext', 'sidebarCurrentType']),
+    ...mapState('app', ['selectedCourse'])
   },
   mounted () {
     // load initial data

@@ -12,6 +12,7 @@ const state = {
   // TODO: make these detectable/generated from data?
   catalogYearStart: 1990,
   catalogYearEnd: 2020,
+  selectedCourse: null,
   sidebarStack: []
 }
 
@@ -23,8 +24,7 @@ const getters = {
     return state.sidebarStack.length && state.sidebarStack[0][1]
   },
   currentCourse (state) {
-    var stack = _.find(state.sidebarStack, c => c[0] === 'course')
-    return stack && stack[1]
+    return state.selectedCourse
   },
   isTrayVisible (state, getters) {
     return getters.sidebarCurrentType === 'tray'
@@ -41,10 +41,7 @@ const actions = {
   },
   selectView ({ commit }, view) { commit('CHOOSE_SIDEBAR_VIEW', view) },
   selectCourse ({ commit, getters }, course) {
-    // with the current setup we support only a single visible course,
-    // however it would be easy to support a course history/stack
-    commit('REMOVE_SIDEBAR_ELEM', { type: 'course' })
-    commit('ADD_SIDEBAR_ELEM', { type: 'course', payload: course })
+    commit('SET_SELECTED_COURSE', course)
   },
   closeSidebar ({ commit, state }) {
     for (let i = 0; i <= state.sidebarStack.length; i++) {
@@ -83,6 +80,12 @@ const mutations = {
   },
   SET_ALERT_TEXT: (state, text) => {
     state.alertText = text
+  },
+  SET_SELECTED_COURSE: (state, course) => {
+    state.selectedCourse = course
+  },
+  CLEAR_SELECTED_COURSE: (state) => {
+    state.selectedCourse = null
   }
 }
 

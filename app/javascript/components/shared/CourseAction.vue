@@ -5,6 +5,7 @@
       :icon="icon"
       :class="{ 'text-white': invert }"
       :title="tooltip"
+      class="pointer"
       @click="click"
     />
   </span>

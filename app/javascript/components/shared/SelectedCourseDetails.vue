@@ -1,86 +1,86 @@
 <template>
-  <div class="course-details">
-    <div class="header mx-0">
-      <p class="float-left mb-0">
-        <strong>{{ course.academic_group }}</strong><br>
-        <strong>{{ `${course.subject} ${course.catalog_number}` }}</strong><br>
-        <strong>{{ `${course.term_name} ${course.term_year}` }}</strong>
-      </p>
-      <p class="float-right text-right text-uppercase mb-0">
-        <strong>{{ course.component || '&mdash;' }}</strong><br>
-        <strong>{{ course.grading_basis_description || '&mdash;' }}</strong><br>
-        <strong>{{ firstInstructor || '&mdash;' }}</strong>
-      </p>
+  <div>
+    <div class="mb-3 row">
+      <div class="col-lg-5">
+        <h2 class="font-weight-bold text-uppercase">
+          {{ course.title }}
+        </h2>
+      </div>
+
+      <div class="col-lg-2 text-uppercase">
+        {{ course.academic_group }}<br>
+        {{ `${course.subject} ${course.catalog_number}` }}<br>
+        {{ `${course.term_name} ${course.term_year}` }}
+      </div>
+
+      <div class="col-lg-5 text-uppercase">
+        {{ course.component || '&mdash;' }}<br>
+        {{ course.grading_basis_description || '&mdash;' }}<br>
+        {{ firstInstructor || '&mdash;' }}
+      </div>
     </div>
 
-    <h3 class="course-title text-uppercase">
-      {{ course.title }}
-    </h3>
-
-    <div class="description">
-      <p class="heading">
-        Description
-      </p>
-      <truncate
-        v-if="course.course_description_long"
-        :length="250"
-        :text="course.course_description_long"
-        clamp="[...]"
-        less="[Close]"
-        type="html"
-      />
-    </div>
-
-    <div
-      v-if="course.course_note"
-      class="notes mt-4"
-    >
-      <p
-        class="heading"
-      >
-        Class Notes
-      </p>
-
-      {{ course.course_note }}
-    </div>
-
-    <div class="instructors mt-4">
-      <p class="heading">
-        Instructors
-      </p>
-      <div
-        v-for="instructor in course.course_instructors"
-        :key="instructor.id"
-        class="instructor mb-0"
-      >
-        <p class="float-left mb-0">
-          <strong>{{ instructor.display_name }}</strong>
+    <div class="row">
+      <div class="col-lg-7 mb-4">
+        <p class="heading">
+          Description
         </p>
-        <p class="float-right text-right mb-0">
-          <a
-            href="javascript:"
-            class="text-white"
-            @click="searchByInstructor(instructor.display_name)"
-          >
-            more courses
-          </a>
+
+        <truncate
+          v-if="course.course_description_long"
+          :length="500"
+          :text="course.course_description_long"
+          clamp="[...]"
+          less="[Close]"
+          type="html"
+        />
+      </div>
+
+      <div class="col-lg-5">
+        <p class="heading">
+          Instructors
         </p>
+
+        <div
+          v-for="instructor in course.course_instructors"
+          :key="instructor.id"
+        >
+          <p class="mb-0">
+            {{ instructor.display_name }}
+          </p>
+        </div>
+
+        <selected-course-annotations
+          v-if="userAuthenticated"
+          :course-id="course.id"
+        />
+
+        <selected-course-tagging
+          :course-id="course.id"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SelectedCourseAnnotations from './SelectedCourseAnnotations'
+import SelectedCourseTagging from './SelectedCourseTagging'
 import truncate from 'vue-truncate-collapsed'
-import { serializeSearch } from 'lib/util'
 
 export default {
   components: {
+    SelectedCourseAnnotations,
+    SelectedCourseTagging,
     truncate
   },
   props: {
     course: {
       type: Object,
+      required: true
+    },
+    userAuthenticated: {
+      type: Boolean,
       required: true
     }
   },
@@ -90,59 +90,13 @@ export default {
 
       return this.course.course_instructors[0].display_name
     }
-  },
-  methods: {
-    searchByInstructor (instructorName) {
-      this.$store.dispatch('search/searchByInstructor', instructorName)
-      this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .course-details {
-    display: inline-block;
-    font-size: 12px;
-    width: 100%;
-
-    .header {
-      display: inline-block;
-      line-height: 16px;
-      margin-bottom: 20px;
-      width: 100%;
-
-      p.float-left {
-        clear: left;
-        width: 40%;
-      }
-
-      p.float-right {
-        clear: right;
-        width: 60%;
-      }
-    }
-
-    h3.course-title {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    p.heading {
-      border-bottom: 1px solid #999;
-      margin-bottom: 8px;
-    }
-
-    .instructors {
-      display: inline-block;
-      width: 100%;
-
-      .instructor {
-        border-bottom: 1px solid #999;
-        display: inline-block;
-        padding: 4px 0;
-        width: 100%;
-      }
-    }
-  }
+p.heading {
+  border-bottom: 1px solid #999;
+  margin-bottom: 8px;
+}
 </style>

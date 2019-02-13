@@ -95,7 +95,7 @@ export default {
 }
 
 .input-tag {
-  background-color: #555;
+  background-color: black;
   border: none;
   font-size: 12px;
 }
@@ -106,7 +106,6 @@ export default {
 
 p.heading {
   border-bottom: 1px solid #999;
-  font-size: 12px;
   margin-bottom: 8px;
 }
 </style>

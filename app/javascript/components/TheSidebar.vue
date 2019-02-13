@@ -3,12 +3,7 @@
     id="sidebar"
   >
     <tray
-      v-show="sidebarCurrentType==='tray'"
-    />
-
-    <selected-course
-      v-if="sidebarCurrentType==='course'"
-      :course="sidebarCurrentContext"
+      v-show="sidebarCurrentType === 'tray'"
     />
   </div>
 </template>
@@ -16,15 +11,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import Tray from 'components/tray/tray'
-import SelectedCourse from 'components/shared/SelectedCourse'
 
 export default {
   components: {
-    Tray,
-    SelectedCourse
+    Tray
   },
   computed: {
-    ...mapGetters('app', ['sidebarCurrentType', 'sidebarCurrentContext'])
+    ...mapGetters('app', ['sidebarCurrentType'])
   }
 }
 </script>

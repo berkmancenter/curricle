@@ -4,7 +4,7 @@
     class="text-center text-uppercase"
   >
     <a
-      :class="{ invert: sidebarCurrentType }"
+      :class="{ invert: sidebarCurrentType === 'tray' }"
       target="_blank"
       href="https://docs.google.com/forms/d/e/1FAIpQLSfZdL8a7O51UCurjNinVRx0RJI8ahBdUIf0uHcoNfDt6--Elw/viewform?usp=sf_link"
     >

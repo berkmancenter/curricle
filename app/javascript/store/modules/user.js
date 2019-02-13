@@ -32,6 +32,12 @@ const state = {
 }
 
 const getters = {
+  courseIdInSchedule: (state, getters) => (courseId) => {
+    return getters.userCoursesScheduleIds.includes(courseId)
+  },
+  courseIdInTray: (state, getters) => (courseId) => {
+    return getters.userCourseIds.includes(courseId)
+  },
   // computed trayCourses
   trayCourses (state) {
     var ids = _.filter(

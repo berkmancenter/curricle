@@ -9,7 +9,7 @@
         v-model="editableText"
         :maxlength="maxLength"
         rows="5"
-        class="w-100"
+        class="p-1 w-100"
       />
 
       <span class="word-count">
@@ -107,12 +107,11 @@ export default {
 
   p.heading {
     border-bottom: 1px solid #999;
-    font-size: 12px;
     margin-bottom: 8px;
   }
 
   textarea {
-    background-color: #555;
+    background-color: black;
     border: none;
     color: white;
     font-size: 12px;

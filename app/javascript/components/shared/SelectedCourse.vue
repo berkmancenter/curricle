@@ -1,139 +1,118 @@
 <template>
   <div
     id="selected-course"
-    class="pt-3 px-3"
+    class="p-3 col-md-10"
   >
     <div>
-      <span class="float-left">
-        Selected course
-      </span>
-
       <span class="float-right">
         <font-awesome-icon
           class="pointer"
           icon="times"
-          @click="closeSelectedCourse"
+          @click="CLEAR_SELECTED_COURSE"
         />
       </span>
     </div>
 
     <div
       v-if="userAuthenticated"
-      class="actions mt-3"
+      class="mb-3 row"
     >
-      <p class="float-left">
+      <div class="col">
         <course-action
-          :course="theCourse.id"
-          :invert="true"
+          :course="course.id"
+          class="course-action"
           type="tray"
         />
 
-        &nbsp;
+        <span class="font-weight-bold text-uppercase">
+          <span v-if="courseIdInTray(course.id)">
+            Remove course from tray
+          </span>
+          <span v-else>
+            Add course to tray
+          </span>
+        </span>
+
+        <br>
 
         <course-action
-          :course="theCourse.id"
-          :invert="true"
+          :course="course.id"
+          class="course-action"
           type="schedule"
         />
-      </p>
 
-      <p class="course-history float-right text-right">
-        <a
-          href="javascript:"
-          @click="searchByCourseId(courseId)"
-        >
-          See course history
-        </a>
-      </p>
+        <span class="font-weight-bold text-uppercase">
+          <span v-if="courseIdInSchedule(course.id)">
+            Remove course from schedule
+          </span>
+          <span v-else>
+            Add course to schedule
+          </span>
+        </span>
+      </div>
     </div>
 
     <selected-course-details
-      :course="theCourse"
-    />
-
-    <selected-course-annotations
-      v-if="userAuthenticated"
-      :course-id="theCourse.id"
-    />
-
-    <selected-course-tagging
-      :course-id="theCourse.id"
+      :course="course"
+      v-bind="$props"
     />
   </div>
 </template>
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { mapState, mapGetters } from 'vuex'
-import { serializeSearch } from 'lib/util'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import CourseAction from 'components/shared/CourseAction'
-import SelectedCourseAnnotations from './SelectedCourseAnnotations'
 import SelectedCourseDetails from './SelectedCourseDetails'
-import SelectedCourseTagging from './SelectedCourseTagging'
 
 export default {
   components: {
     CourseAction,
     FontAwesomeIcon,
-    SelectedCourseAnnotations,
-    SelectedCourseDetails,
-    SelectedCourseTagging
+    SelectedCourseDetails
   },
   props: {
     course: {
-      type: [String, Number, Object],
+      type: Object,
+      required: true
+    },
+    userAuthenticated: {
+      type: Boolean,
       required: true
     }
   },
   computed: {
-    ...mapState('courses', ['courses']),
-    ...mapGetters('user', ['userAuthenticated']),
-    theCourse () {
-      if (typeof this.course === 'object') {
-        return this.course
-      }
-      return this.courses[this.course]
-    },
-    courseId () {
-      return `${this.theCourse.subject} ${this.theCourse.catalog_number}`
-    }
+    ...mapGetters('user', ['courseIdInSchedule', 'courseIdInTray'])
   },
   watch: {
     course: {
       immediate: true,
       handler: function (newCourse) {
-        this.$store.dispatch('courses/registerCourses', [newCourse])
+        this.registerCourses([newCourse])
       }
     }
   },
   methods: {
-    closeSelectedCourse () {
-      this.$store.commit('app/REMOVE_TOP_SIDEBAR_ELEM')
-    },
-    searchByCourseId (courseId) {
-      this.$store.dispatch('search/searchByCourseId', courseId)
-      this.$router.push('/search/advanced/' + serializeSearch(this.$store.getters['search/searchSnapshot']))
-    }
+    ...mapActions('courses', ['registerCourses']),
+    ...mapMutations('app', ['CLEAR_SELECTED_COURSE'])
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .actions {
-    display: inline-block;
-    width: 100%;
-  }
-
   #selected-course {
-    color: #fff;
+    background-color: #f5f5f5;
+    border: 3px solid #000;
+    border-radius: 3px;
+    bottom: 25px;
+    left: 20%;
+    position: fixed;
+    width: 60%;
+    z-index: 999;
   }
 
-  p.course-history {
-    font-size: 13px;
-    font-weight: bold;
-
-    a {
-      color: #fff;
-    }
+  .course-action {
+    display: inline-block;
+    width: 20px;
   }
 </style>
