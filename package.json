@@ -18,7 +18,7 @@
     "apollo-link-context": "^1.0.8",
     "apollo-link-http": "^1.5.4",
     "awesomplete": "^1.1.2",
-    "bootstrap-vue": "2.0.0-rc.11",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "d3": "^5.5.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.8.0",
