@@ -11,7 +11,7 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :annotation, Types::AnnotationType, 'Annotation added by the current user' do
     resolve(
       lambda do |course, _args, context|
-        BatchLoader.for(course.id).batch do |course_ids, loader|
+        BatchLoader::GraphQL.for(course.id).batch do |course_ids, loader|
           Annotation.where(course: course_ids, user: context[:current_user]).each do |annotation|
             loader.call(annotation.course_id, annotation)
           end
@@ -46,7 +46,7 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :course_instructors, types[Types::CourseInstructorType], 'List of course instructors' do
     resolve(
       lambda do |course, _args, _ctx|
-        BatchLoader.for(course.id).batch(default_value: []) do |course_ids, loader|
+        BatchLoader::GraphQL.for(course.id).batch(default_value: []) do |course_ids, loader|
           CourseInstructor.where(course_id: course_ids).each do |course_instructor|
             loader.call(course_instructor.course_id) { |memo| memo << course_instructor }
           end
@@ -58,7 +58,7 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :course_meeting_patterns, types[Types::CourseMeetingPatternType], 'List of course meeting patterns' do
     resolve(
       lambda do |course, _args, _ctx|
-        BatchLoader.for(course.id).batch(default_value: []) do |course_ids, loader|
+        BatchLoader::GraphQL.for(course.id).batch(default_value: []) do |course_ids, loader|
           CourseMeetingPattern.where(course_id: course_ids).each do |course_meeting_pattern|
             loader.call(course_meeting_pattern.course_id) { |memo| memo << course_meeting_pattern }
           end
@@ -91,7 +91,7 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :tags, types[Types::TagType], 'List of tags added by the current user' do
     resolve(
       lambda do |course, _args, context|
-        BatchLoader.for(course.id).batch(default_value: []) do |course_ids, loader|
+        BatchLoader::GraphQL.for(course.id).batch(default_value: []) do |course_ids, loader|
           Tag.where(course: course_ids, user: context[:current_user]).each do |tag|
             loader.call(tag.course_id) { |memo| memo << tag }
           end
@@ -111,7 +111,7 @@ Types::CourseType = GraphQL::ObjectType.define do
   field :user_course, Types::UserCourseType, "Metadata about the user's course selection" do
     resolve(
       lambda do |course, _args, context|
-        BatchLoader.for(course.id).batch do |course_ids, loader|
+        BatchLoader::GraphQL.for(course.id).batch do |course_ids, loader|
           UserCourse.where(course: course_ids, user: context[:current_user]).each do |user_course|
             loader.call(user_course.course_id, user_course)
           end
