@@ -66,4 +66,6 @@ class CurricleCourseMeetingPatternImporter < CurricleImporter
   end
 end
 
+CourseMeetingPattern.delete_all
+
 CurricleCourseMeetingPatternImporter.new.run

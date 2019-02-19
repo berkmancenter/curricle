@@ -63,4 +63,6 @@ class CurricleCourseInstructorImporter < CurricleImporter
   end
 end
 
+CourseInstructor.delete_all
+
 CurricleCourseInstructorImporter.new.run
