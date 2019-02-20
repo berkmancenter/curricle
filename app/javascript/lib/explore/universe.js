@@ -138,6 +138,14 @@ function drawVis (data) {
       }
     })
 
+  node
+    .on('mouseover', function () {
+      tooltipOn(this)
+    })
+    .on('mouseout', function () {
+      tooltipOff()
+    })
+
   // Create a wrapper for the arcs and text
   var hiddenArcWrapper = node.append('g')
     .attr('class', 'hiddenArcWrapper')
@@ -368,6 +376,7 @@ function closeUpVis (data, xPos, yPos, radius) {
 function tooltipOn (node) {
   const data = node.__data__
   const absoluteCoords = node.getBoundingClientRect()
+  let html
 
   tooltipDiv.transition()
     .duration(200)
@@ -377,7 +386,13 @@ function tooltipOn (node) {
   const xPos = absoluteCoords.left - 100 + (absoluteCoords.width / 2)
   const yPos = absoluteCoords.top + absoluteCoords.height + 12
 
-  tooltipDiv.html(data.data.title + '<br/>' + data.data.subject_description)
+  if (data.data.key) { // node is a department
+    html = data.data.key
+  } else { // node is a course
+    html = data.data.title + '<br/>' + data.data.subject_description
+  }
+
+  tooltipDiv.html(html)
     .style('left', xPos + 'px')
     .style('top', yPos + 'px')
 }
