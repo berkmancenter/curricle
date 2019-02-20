@@ -27,7 +27,7 @@ let selectCourse
 let semester
 let showLoaderOverlay
 
-const fontSize = '14px'
+const fontSize = '12px'
 
 function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
   semester = selectedSemester
