@@ -119,7 +119,7 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
 
   typeTextScale = d3.scaleLinear()
     .domain([1, 100])
-    .range([11, 50])
+    .range([12, 12])
 
   networkWidthScale = d3.scaleLinear()
     .range([1, 10])
@@ -286,8 +286,6 @@ function setData (data) {
     nestedData.sort(function (a, b) {
       return b.value.count - a.value.count
     })
-
-    typeTextScale.domain([1, nestedData[0].value.count])
   }
 
   function redraw () {
