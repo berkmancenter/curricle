@@ -42,8 +42,6 @@
           :course="selectedCourse"
           :user-authenticated="userAuthenticated"
         />
-
-        <the-data-last-updated-indicator />
       </div>
 
       <div
@@ -54,6 +52,8 @@
       >
         <the-sidebar />
       </div>
+
+      <the-footer />
     </div>
 
     <course-observer />
@@ -66,10 +66,10 @@ import Navbar from 'components/TheNavbar'
 import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/course-observer'
 import SelectedCourse from 'components/shared/SelectedCourse'
+import TheFooter from 'components/TheFooter'
 import TheLogoutLink from 'components/TheLogoutLink'
 import TheSidebar from 'components/TheSidebar'
 import TheTrayControl from 'components/TheTrayControl'
-import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
 import TheNavbarControl from 'components/TheNavbarControl'
 import TheAlert from 'components/TheAlert'
 
@@ -79,10 +79,10 @@ export default {
     LoaderOverlay,
     CourseObserver,
     SelectedCourse,
+    TheFooter,
     TheLogoutLink,
     TheSidebar,
     TheTrayControl,
-    TheDataLastUpdatedIndicator,
     TheNavbarControl,
     TheAlert
   },
