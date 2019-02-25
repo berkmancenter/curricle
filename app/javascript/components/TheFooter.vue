@@ -5,19 +5,19 @@
     </div>
 
     <div class="col-md-6 d-flex align-self-center justify-content-md-end">
-      <div>
-        Feedback link will go here
-      </div>
+      <the-feedback-link />
     </div>
   </footer>
 </template>
 
 <script>
 import TheDataLastUpdatedIndicator from 'components/TheDataLastUpdatedIndicator'
+import TheFeedbackLink from 'components/TheFeedbackLink'
 
 export default {
   components: {
-    TheDataLastUpdatedIndicator
+    TheDataLastUpdatedIndicator,
+    TheFeedbackLink
   }
 }
 </script>
