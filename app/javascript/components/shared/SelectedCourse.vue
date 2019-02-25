@@ -104,7 +104,7 @@ export default {
     background-color: #f5f5f5;
     border: 3px solid #000;
     border-radius: 3px;
-    bottom: 25px;
+    bottom: 6%; /* Footer is 5% of window height */
     left: 20%;
     position: fixed;
     width: 60%;
