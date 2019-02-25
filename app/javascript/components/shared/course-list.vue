@@ -86,6 +86,7 @@ export default {
   }
 
   td {
+    color: white;
     vertical-align: middle !important;
   }
 }
