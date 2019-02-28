@@ -18,7 +18,7 @@
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 
   %body
-    .container-fluid
+    .container-fluid.px-0
       #app
 
     - if current_user.present?
@@ -39,12 +39,6 @@
     :css
       body {
         font-family: 'IBM Plex Sans'
-      }
-
-      #app {
-        display: flex;
-        flex-flow: column;
-        height: 100vh;
       }
 
       .pointer {

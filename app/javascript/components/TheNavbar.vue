@@ -1,7 +1,7 @@
 <template>
   <nav
     id="nav-main"
-    class="d-none d-md-block h-100 pt-5 px-4"
+    class="d-none d-md-block pt-5 px-4"
   >
     <div
       id="logo"

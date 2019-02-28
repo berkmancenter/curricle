@@ -1,5 +1,5 @@
 <template>
-  <footer class="row w-100 mx-0">
+  <footer class="row fixed-bottom px-3">
     <div class="col-md-6 d-flex align-self-center">
       <the-data-last-updated-indicator />
     </div>
@@ -26,11 +26,9 @@ export default {
 footer {
   background-color: white;
   border-top: 1px solid #f5f5f5;
-  bottom: 0;
   color: black;
   font-size: 14px;
-  height: 5%;
-  position: absolute;
+  min-height: 5%;
   z-index: 9999;
 }
 </style>

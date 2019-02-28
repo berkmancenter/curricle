@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    class="overflow-hidden"
+  >
     <loader-overlay />
 
     <the-navbar-control
@@ -17,19 +20,19 @@
       v-show="sidebarCurrentType !== 'tray'"
     />
 
-    <div class="row h-100">
+    <div class="row">
       <div
         v-show="sidebarCurrentType !== 'tray'"
         id="nav-container"
         :class="{ active: sidebarCurrentType !== 'tray' }"
-        class="col-md-2 px-0"
+        class="col-md-2"
       >
         <navbar />
       </div>
 
       <div
         id="main-container"
-        class="col-md-10 h-100"
+        class="col-md-10"
       >
         <the-alert />
 
@@ -48,7 +51,7 @@
         v-show="sidebarCurrentType === 'tray'"
         id="sidebar-container"
         :class="{ active: sidebarCurrentType === 'tray' }"
-        class="col-md-2 px-0"
+        class="col-md-2"
       >
         <the-sidebar />
       </div>
@@ -99,9 +102,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#app {
+  height: 100vh;
+}
+
 #nav-container,
 #main-container,
 #sidebar-container {
+  height: 100vh;
   overflow: auto;
 }
 
