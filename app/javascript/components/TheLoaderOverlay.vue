@@ -1,16 +1,16 @@
 <template>
   <div
-    v-if="searchRunning"
+    v-if="showSearchesRunningOverlay"
     class="loading"
   />
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('search', ['searchRunning'])
+    ...mapGetters('search', ['showSearchesRunningOverlay'])
   }
 }
 </script>

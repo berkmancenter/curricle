@@ -39,7 +39,7 @@ const state = {
   resultsMoreAvailable: false,
   resultsTotalCount: 0,
   searchComplete: false,
-  searchRunning: false,
+  searchesRunning: 0,
   applyToOptions: [
     { text: 'Title', value: 'TITLE' },
     { text: 'Description', value: 'DESCRIPTION' },
@@ -141,6 +141,10 @@ const getters = {
     } else {
       return termYear < thisYear
     }
+  },
+
+  showSearchesRunningOverlay (state) {
+    return state.searchesRunning > 0
   }
 }
 
@@ -177,7 +181,8 @@ const actions = {
     const query = getters.activeBasicSearch
 
     commit('RESET_RESULTS_PAGE')
-    state.searchRunning = true
+    commit('SET_SEARCH_RUNNING', true)
+
     dispatch(
       'runSearch',
       {
@@ -186,7 +191,7 @@ const actions = {
           state.results = response
           state.resultsMoreAvailable = (response.length === state.resultsPerPage)
           state.searchComplete = true
-          state.searchRunning = false
+          commit('SET_SEARCH_RUNNING', false)
         }
       }
     )
@@ -195,7 +200,8 @@ const actions = {
     const query = getters.activeBasicSearch
 
     commit('INCREMENT_RESULTS_PAGE')
-    state.searchRunning = true
+    commit('SET_SEARCH_RUNNING', true)
+
     dispatch(
       'runSearch',
       {
@@ -203,7 +209,7 @@ const actions = {
         handler: response => {
           state.results = state.results.concat(response)
           state.resultsMoreAvailable = (response.length === state.resultsPerPage)
-          state.searchRunning = false
+          commit('SET_SEARCH_RUNNING', false)
         }
       }
     )
@@ -216,7 +222,7 @@ const actions = {
 
     if (kw && kw.length) {
       commit('RESET_RESULTS_PAGE')
-      state.searchRunning = true
+      commit('SET_SEARCH_RUNNING', true)
 
       dispatch(
         'runSearch',
@@ -226,7 +232,7 @@ const actions = {
             state.results = response
             state.resultsMoreAvailable = (response.length === state.resultsPerPage)
             state.searchComplete = true
-            state.searchRunning = false
+            commit('SET_SEARCH_RUNNING', false)
           }
         })
     } else {
@@ -240,7 +246,7 @@ const actions = {
 
     if (kw && kw.length) {
       commit('INCREMENT_RESULTS_PAGE')
-      state.searchRunning = true
+      commit('SET_SEARCH_RUNNING', true)
 
       dispatch(
         'runSearch',
@@ -249,7 +255,7 @@ const actions = {
           handler: response => {
             state.results = state.results.concat(response)
             state.resultsMoreAvailable = (response.length === state.resultsPerPage)
-            state.searchRunning = false
+            commit('SET_SEARCH_RUNNING', false)
           }
         })
     } else {
@@ -549,7 +555,11 @@ const mutations = {
     state.basic = query
   },
   SET_SEARCH_RUNNING (state, value) {
-    state.searchRunning = value
+    if (value === true) {
+      state.searchesRunning += 1
+    } else {
+      state.searchesRunning -= 1
+    }
   }
 }
 

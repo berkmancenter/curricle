@@ -237,10 +237,7 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
     .attr('stop-opacity', 0)
 
   requestData(leftSelection, 1)
-
-  setTimeout(function () {
-    requestData(rightSelection, 2)
-  }, 1000)
+  requestData(rightSelection, 2)
 
   $('#dimContainer li').on('click', function (event) {
     centerData = $(this).attr('value')
@@ -251,23 +248,15 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
     setData(fullData)
   })
 
-  $('#searchBoxOne').keyup(function (event) {
+  $('#searchBoxOne, #searchBoxTwo').keyup(function (event) {
     if (event.keyCode !== 13) {
       return
     }
 
     leftSelection = document.getElementById('searchBoxOne').value
-
-    requestData(leftSelection, 1)
-  })
-
-  $('#searchBoxTwo').keyup(function (event) {
-    if (event.keyCode !== 13) {
-      return
-    }
-
     rightSelection = document.getElementById('searchBoxTwo').value
 
+    requestData(leftSelection, 1)
     requestData(rightSelection, 2)
   })
 }
