@@ -1,6 +1,6 @@
 const { environment } = require('@rails/webpacker')
 const { VueLoaderPlugin } = require('vue-loader')
-const vue =  require('./loaders/vue')
+const vue = require('./loaders/vue')
 
 environment.loaders.prepend('graphql', {
   test: /\.(graphql|gql)$/,
