@@ -181,10 +181,6 @@ export default {
       color: #fff;
     }
 
-    #nav-primary-container {
-      margin-top: 250px;
-    }
-
     .nav-sub-container {
       margin: 10px 0;
     }
