@@ -176,7 +176,7 @@ export default {
 
 #vis-description {
   position: fixed;
-  bottom: 25px;
+  bottom: 6%;
   margin-left: 10px;
   width: 200px;
 
