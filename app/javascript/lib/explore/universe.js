@@ -16,7 +16,8 @@ let diameter
 let pack
 let root
 let selectCourse
-let semester
+let semesterEnd
+let semesterStart
 let showLoaderOverlay
 let tooltipDiv
 let svg
@@ -33,8 +34,9 @@ var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction) {
-  semester = selectedSemester
+function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemesterEnd, showLoaderOverlayFunction) {
+  semesterEnd = selectedSemesterEnd
+  semesterStart = selectedSemesterStart
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
 
@@ -91,7 +93,12 @@ function requestFirstData () {
 
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
-    variables: { semester: semester }
+    variables: {
+      semesterRange: {
+        start: semesterStart,
+        end: semesterEnd
+      }
+    }
   }).then(function (response) {
     nestData(response.data.course_counts)
     showLoaderOverlay(false)
@@ -297,7 +304,7 @@ function randomPoints (xPos, yPos, radius, amount) {
 
 function requestSecondData (searchText, xPos, yPos, radius) {
   var enumSearch = searchText.toUpperCase().replace(/, /g, '_').replace(/-/g, '_').replace(/\./g, '_').replace(/ /g, '_')
-  const semesterRange = { start: semester }
+  const semesterRange = { start: semesterStart, end: semesterEnd }
 
   showLoaderOverlay(true)
 

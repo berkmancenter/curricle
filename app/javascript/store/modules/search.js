@@ -124,6 +124,15 @@ const getters = {
     }
   },
 
+  semesterEnd (state) {
+    if (!state.searchTermUseRange) { return }
+
+    return {
+      term_name: state.searchTermEnd.toUpperCase(),
+      term_year: state.searchYearEnd
+    }
+  },
+
   currentSemester (state) {
     return {
       term_name: thisSemester,

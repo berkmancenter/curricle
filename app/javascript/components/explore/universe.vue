@@ -53,15 +53,18 @@ export default {
     SemesterInput
   },
   computed: {
-    ...mapGetters('search', ['semesterStart'])
+    ...mapGetters('search', ['semesterEnd', 'semesterStart'])
   },
   watch: {
+    semesterEnd (newSemester) {
+      initSetup(this.selectCourse, this.semesterStart, newSemester, this.showLoaderOverlay)
+    },
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay)
+      initSetup(this.selectCourse, newSemester, this.semesterEnd, this.showLoaderOverlay)
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay)
+    initSetup(this.selectCourse, this.semesterStart, this.semesterEnd, this.showLoaderOverlay)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

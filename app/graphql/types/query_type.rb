@@ -84,6 +84,7 @@ Types::QueryType = GraphQL::ObjectType.define do
     argument :component, ComponentEnum
     argument :department, DepartmentEnum
     argument :semester, Inputs::SemesterInput
+    argument :semester_range, Inputs::SemesterRangeInput
 
     resolve Resolvers::CourseCountsResolver.new
   end
