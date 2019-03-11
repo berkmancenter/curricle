@@ -18,6 +18,7 @@
     <div
       v-if="userAuthenticated"
       id="nav-primary-container"
+      class="mt-5"
     >
       <router-link
         class="nav primary"
