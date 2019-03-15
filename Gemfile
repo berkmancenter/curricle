@@ -7,7 +7,7 @@ gem 'batch-loader', '~> 1.3'
 gem 'bootsnap', '~> 1.4', require: false
 gem 'devise', '~> 4.6'
 gem 'devise_cas_authenticatable', '~> 1.10'
-gem 'dotenv-rails', '~> 2.6'
+gem 'dotenv-rails', '~> 2.7'
 gem 'graphql', '~> 1.9'
 gem 'haml-rails', '~> 1.0'
 gem 'jbuilder', '~> 2.8'
@@ -24,7 +24,7 @@ group :development, :test do
   gem 'awesome_print', '~> 1.8'
   gem 'factory_bot_rails', '~> 5.0'
   gem 'pry', '~> 0.12'
-  gem 'pry-byebug', '~> 3.6'
+  gem 'pry-byebug', '~> 3.7'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails', '~> 3.8'
 end
