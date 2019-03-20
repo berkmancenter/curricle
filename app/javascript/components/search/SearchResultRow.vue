@@ -45,6 +45,7 @@
     >
       <div
         class="course-title font-weight-bold text-uppercase"
+        :class="{ 'tray-course': courseIdInTray(course.id) }"
       >
         {{ course.subject }} {{ course.catalog_number }}: {{ course.title }}
       </div>
@@ -77,7 +78,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 
@@ -111,6 +112,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('user', ['courseIdInTray']),
     borderStyle () {
       return {
         'border-left-color': this.course.department_color || '#000'

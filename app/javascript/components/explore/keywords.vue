@@ -126,16 +126,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['semesterStart'])
+    ...mapGetters('search', ['semesterStart']),
+    ...mapGetters('user', ['courseIdInTray'])
   },
   watch: {
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdInTray)
     }
   },
   mounted () {
     this.updateKeywords()
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdInTray)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
