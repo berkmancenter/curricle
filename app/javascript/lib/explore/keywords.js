@@ -459,7 +459,8 @@ function setCenterVis (sortedData) {
     documentHeight = 300
   }
 
-  d3.select('svg')
+  d3.select('#visContainer')
+    .select('svg')
     .transition()
     .attr('height', documentHeight)
 

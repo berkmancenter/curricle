@@ -1,6 +1,24 @@
 <template>
   <div>
     <div
+      id="vis-description"
+    >
+      <h3>Explore:</h3>
+
+      <p>
+        Explore courses by selecting <span class="formats">
+          formats
+        </span>
+        (class types) and <span class="departments">
+          departments
+        </span>
+        (subjects and courses of study).
+      </p>
+
+      <semester-input />
+    </div>
+
+    <div
       class="text-center text-uppercase"
     >
       Select a Format and Department
@@ -39,32 +57,6 @@
         id="classVis"
         class="w-100 float-left"
       />
-    </div>
-
-    <div
-      id="vis-description"
-    >
-      <h3>Explore:</h3>
-
-      <p>
-        Explore courses by selecting <span class="formats">
-          formats
-        </span>
-        (class types) and <span class="departments">
-          departments
-        </span>
-        (subjects and courses of study).
-
-        <span
-          v-b-tooltip.hover
-          title="This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;formats.&quot; In the left column, find your desired format, and look in the right column to select your desired department. Once you have selected both a department and format, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Format to reset the visualization and start again."
-          class="pointer"
-        >
-          MORE&nbsp;&gt;
-        </span>
-      </p>
-
-      <semester-input />
     </div>
   </div>
 </template>
@@ -176,10 +168,7 @@ export default {
 }
 
 #vis-description {
-  position: fixed;
-  bottom: 6%;
-  margin-left: 10px;
-  width: 200px;
+  width: 40%;
 
   h3 {
     font-size: 18px;

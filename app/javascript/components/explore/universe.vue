@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div id="vis-description">
+      <h3>Explore:</h3>
+
+      <p>
+        Get an overview of the universe of courses offered at Harvard, and
+        explore departments and programs to browse their offerings.
+      </p>
+
+      <semester-input />
+    </div>
+
     <div
       class="text-center text-uppercase"
     >
@@ -18,25 +29,6 @@
       <svg id="visSVG">
         <g />
       </svg>
-    </div>
-
-    <div id="vis-description">
-      <h3>Explore:</h3>
-
-      <p>
-        Get an overview of the universe of courses offered at Harvard, and
-        explore departments and programs to browse their offerings.
-
-        <span
-          v-b-tooltip.hover
-          title="Here, we see the course offerings of departments and programs across Harvard College and several of the graduate and professional schools. Clicking a departmental &quot;cloud&quot; will take you to a matrix of dots representing the courses offered in that department; click on a dot to see the full information on any individual course. These dot matrices are unstructured, lending an element of surprise to the discovery of courses."
-          class="pointer"
-        >
-          MORE&nbsp;&gt;
-        </span>
-      </p>
-
-      <semester-input />
     </div>
   </div>
 </template>
@@ -181,10 +173,7 @@ export default {
 }
 
 #vis-description {
-  position: fixed;
-  bottom: 6%;
-  margin-left: 10px;
-  width: 200px;
+  width: 40%;
 
   h3 {
     font-size: 18px;
