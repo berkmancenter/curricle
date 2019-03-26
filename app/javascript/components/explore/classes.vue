@@ -13,6 +13,8 @@
           departments
         </span>
         (subjects and courses of study).
+
+        This visualization will help you explore the types of classes that are available in each department, from lecture to core studio to field experience. In the data, class types are called &quot;formats.&quot; In the left column, find your desired format, and look in the right column to select your desired department. Once you have selected both a department and format, all courses fitting that criteria will appear as a list. From this list, you can select the course titles to explore more information about the courses. Click on the Department and Format to reset the visualization and start again.
       </p>
 
       <semester-input />

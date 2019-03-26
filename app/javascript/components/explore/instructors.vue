@@ -15,6 +15,8 @@
         <span class="subjects">
           subjects
         </span>.
+
+        Instructors from different fields often explore shared interests by teaching together; this visualization explores networks of faculty by showing classes co-taught by instructors. Type the name of an instructor into the search bar and a network will appear with co-teachers. Lines connect these instructors to courses and the subjects that offer them. Select course titles to learn more. Shift across instructors for new connections and patterns.
       </p>
 
       <div

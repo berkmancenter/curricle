@@ -5,6 +5,8 @@
 
       <p>
         Visualize the appearance of terms across the curriculum.
+
+        In this visualization, you can explore the use of key terms in the names and descriptions of courses to reveal compelling combinations of concepts across the curriculum. In the entry fields at left and right, enter two keywords—&quot;truth&quot; and &quot;lies,&quot; or &quot;economics&quot; and &quot;evolution,&quot; perhaps—and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. Click on course titles to access full course descriptions or add courses to your tray. To reset the visualization, simply enter new keywords at left and right.
       </p>
 
       <semester-input />

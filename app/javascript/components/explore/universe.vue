@@ -6,6 +6,8 @@
       <p>
         Get an overview of the universe of courses offered at Harvard, and
         explore departments and programs to browse their offerings.
+
+        Here, we see the course offerings of departments and programs across Harvard College and several of the graduate and professional schools. Clicking a departmental &quot;cloud&quot; will take you to a matrix of dots representing the courses offered in that department; click on a dot to see the full information on any individual course. These dot matrices are unstructured, lending an element of surprise to the discovery of courses.
       </p>
 
       <semester-input />
