@@ -14,9 +14,9 @@ import { transformSchedule } from 'lib/util'
 // var colorRight = '#5083D4';
 // var colorMix = '#C22076';
 
-var colorLeft = '#f0cf61'
-var colorRight = '#005397'
-var colorMix = '#32b67a' // 167c80
+var colorLeft = '#d10f84'
+var colorRight = '#00adf0'
+var colorMix = '#2c3194'
 
 var maxTextLength = 30
 

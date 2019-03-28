@@ -5,9 +5,9 @@ import COURSE_COUNTS_QUERY from '../../graphql/CourseCounts.gql'
 import DEPT_COURSES_QUERY from '../../graphql/DeptCourses.gql'
 import { transformSchedule } from 'lib/util'
 
-var colorLeft = '#f0cf61'
-var colorRight = '#32b67a'
-var colorMix = '#005397'
+var colorLeft = '#d10f84'
+var colorRight = '#00adf0'
+var colorMix = '#2c3194'
 
 var documentWidth, margin, width, height, courseTypeBarScale, departmentBarScale, courseTypeAxis, departmentAxis
 

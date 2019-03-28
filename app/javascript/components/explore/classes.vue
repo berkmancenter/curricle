@@ -180,11 +180,11 @@ export default {
     font-size: 14px;
 
     span.formats {
-      color: #f0cf61;
+      color: #d10f84;
     }
 
     span.departments {
-      color: #32b67a;
+      color: #00adf0;
     }
   }
 }

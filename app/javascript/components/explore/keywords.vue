@@ -209,11 +209,11 @@ export default {
 
     #searchBoxOne {
       text-align: right;
-      color: #f0cf61;
+      color: #d10f84;
     }
 
     #searchBoxTwo {
-      color: #005397;
+      color: #00adf0;
     }
 
     #searchBoxOneButton {
