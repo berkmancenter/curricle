@@ -1,28 +1,18 @@
 <template>
   <div>
-    <div id="vis-description">
-      <h3>Explore:</h3>
+    <p class="text-uppercase">
+      Course Universe
+    </p>
 
+    <div
+      id="vis-description"
+      class="mb-4"
+    >
       <p>
-        Get an overview of the universe of courses offered at Harvard, and
-        explore departments and programs to browse their offerings.
-
-        Here, we see the course offerings of departments and programs across Harvard College and several of the graduate and professional schools. Clicking a departmental &quot;cloud&quot; will take you to a matrix of dots representing the courses offered in that department; click on a dot to see the full information on any individual course. These dot matrices are unstructured, lending an element of surprise to the discovery of courses.
+        Get an overview of the universe of the departments and programs at Harvard, and then click in to explore the classes offered by that department. This visualization is randomly structured, enjoy the element of surprise!
       </p>
 
       <semester-input />
-    </div>
-
-    <div
-      class="text-center text-uppercase"
-    >
-      Course Universe
-
-      <h4
-        class="text-uppercase font-weight-bold"
-      >
-        All Departments
-      </h4>
     </div>
 
     <div id="visWrapper">
@@ -175,7 +165,7 @@ export default {
 }
 
 #vis-description {
-  width: 40%;
+  width: 80%;
 
   h3 {
     font-size: 18px;

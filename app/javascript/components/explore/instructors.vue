@@ -1,64 +1,51 @@
 <template>
   <div>
-    <div id="vis-description">
-      <h3>Explore:</h3>
+    <p class="text-uppercase">
+      Instructor Networks
+    </p>
 
+    <div
+      id="vis-description"
+      class="mb-3"
+    >
       <p>
-        Discover faculty networks of teaching and learning from the past ten years.
-        Select an <span class="instructor">
-          instructor
-        </span>
-        to see faculty with whom they've co-taught, connecting
-        through <span class="courses">
-          courses
-        </span> to
-        <span class="subjects">
-          subjects
-        </span>.
-
-        Instructors from different fields often explore shared interests by teaching together; this visualization explores networks of faculty by showing classes co-taught by instructors. Type the name of an instructor into the search bar and a network will appear with co-teachers. Lines connect these instructors to courses and the subjects that offer them. Select course titles to learn more. Shift across instructors for new connections and patterns.
+        Discover faculty networks of teaching and learning from the past ten years. Type in an instructor to see faculty with whom they've co-taught, connecting through courses to subjects. Shift across instructors for new connections and patterns.
       </p>
-
-      <div
-        id="searchContainer"
-        class="mt-3"
-      >
-        <div id="search">
-          <b-form @submit="onSubmit">
-            <b-input-group>
-              <b-input-group-prepend is-text>
-                <img
-                  class="icon"
-                  src="/images/icons/eye_black.png"
-                >
-              </b-input-group-prepend>
-
-              <b-form-input
-                id="instructorName"
-                v-model="instructorName"
-                type="search"
-                class="search pl-0"
-                required
-                autocomplete="none"
-                placeholder="Enter instructor name"
-              />
-            </b-input-group>
-          </b-form>
-        </div>
-      </div>
     </div>
 
     <div
-      class="text-center text-uppercase"
+      id="searchContainer"
+      class="mb-4 px-0 col-sm-4"
     >
-      Instructor Networks
+      <div id="search">
+        <b-form @submit="onSubmit">
+          <b-input-group>
+            <b-input-group-prepend is-text>
+              <img
+                class="icon"
+                src="/images/icons/eye_black.png"
+              >
+            </b-input-group-prepend>
 
-      <h4
-        class="text-uppercase font-weight-bold"
-      >
-        {{ titleName }}
-      </h4>
+            <b-form-input
+              id="instructorName"
+              v-model="instructorName"
+              type="search"
+              class="search pl-0"
+              required
+              autocomplete="none"
+              placeholder="Enter instructor name"
+            />
+          </b-input-group>
+        </b-form>
+      </div>
     </div>
+
+    <h4
+      class="text-center text-uppercase font-weight-bold"
+    >
+      {{ titleName }}
+    </h4>
 
     <div
       v-show="showNoResultsContainer"
@@ -234,7 +221,7 @@ span.instructor {
 }
 
 #vis-description {
-  width: 40%;
+  width: 80%;
 
   h3 {
     font-size: 18px;

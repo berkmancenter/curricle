@@ -1,28 +1,23 @@
 <template>
   <div>
-    <div id="vis-description">
-      <h3>Explore:</h3>
+    <p class="text-uppercase">
+      Keyword Comparisons
+    </p>
 
+    <div
+      id="vis-description"
+      class="mb-4"
+    >
       <p>
-        Visualize the appearance of terms across the curriculum.
-
-        In this visualization, you can explore the use of key terms in the names and descriptions of courses to reveal compelling combinations of concepts across the curriculum. In the entry fields at left and right, enter two keywords—&quot;truth&quot; and &quot;lies,&quot; or &quot;economics&quot; and &quot;evolution,&quot; perhaps—and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. Click on course titles to access full course descriptions or add courses to your tray. To reset the visualization, simply enter new keywords at left and right.
+        Visualize the appearance of terms across the curriculum by entering any two keywords and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. To reset the visualization, simply enter new keywords at left and right.
       </p>
 
       <semester-input />
     </div>
 
-    <div
-      class="text-center text-uppercase"
-    >
-      Keyword Comparisons
-
-      <h4
-        class="text-uppercase font-weight-bold"
-      >
-        {{ keywordOne }} / {{ keywordTwo }}
-      </h4>
-    </div>
+    <h4 class="text-center text-uppercase font-weight-bold">
+      {{ keywordOne }} / {{ keywordTwo }}
+    </h4>
 
     <div id="interfaceContainer">
       <div id="dimContainer">
@@ -270,7 +265,7 @@ export default {
 }
 
 #vis-description {
-  width: 40%;
+  width: 80%;
 
   h3 {
     font-size: 18px;
