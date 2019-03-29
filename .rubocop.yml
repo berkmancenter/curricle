@@ -18,3 +18,5 @@ Rails/Output:
     - 'db/**/*'
 RSpec/NestedGroups:
   Max: 4
+Style/FrozenStringLiteralComment:
+  Enabled: false
