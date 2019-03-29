@@ -106,6 +106,8 @@ export default {
     border-radius: 3px;
     bottom: 6%; /* Footer is 5% of window height */
     left: 20%;
+    max-height: 88vh;
+    overflow: scroll;
     position: fixed;
     width: 60%;
     z-index: 999;
