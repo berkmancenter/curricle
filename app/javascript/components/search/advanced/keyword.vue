@@ -14,32 +14,6 @@
       icon="times"
       @click="closeClick"
     />
-    <b-popover
-      ref="popover"
-      :target="kwId"
-      triggers="click blur"
-      placement="bottom"
-      @show="popoverShow($event)"
-      @hide="popoverHide($event)"
-      @shown="popoverActivate($event)"
-    >
-      <b-form-input
-        :id="kwId+'-kw-edit-keyword'"
-        v-model="keyword.text"
-        class="mb-2"
-      />
-      <b-form-group
-        label="Apply to:"
-      >
-        <b-form-checkbox-group
-          v-model="selected"
-          :options="applyToOptions"
-          :target="kwId+'-weight'"
-          name="search-fields"
-          stacked
-        />
-      </b-form-group>
-    </b-popover>
   </span>
 </template>
 
@@ -94,19 +68,6 @@ export default {
       if (!this.keyword.active) {
         this.$store.dispatch('search/activateKeyword', this.keyword)
         this.performSearch()
-      }
-    },
-    popoverShow (arg) {
-      this.$root.$emit('bv::hide::popover')
-      this.editing = true
-    },
-    popoverHide (arg) {
-      this.editing = false
-    },
-    popoverActivate (arg) {
-      var el2 = document.getElementById(this.kwId + '-kw-edit-keyword')
-      if (el2) {
-        el2.focus()
       }
     },
     performSearch () {
