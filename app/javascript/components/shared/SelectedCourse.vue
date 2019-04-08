@@ -26,23 +26,6 @@
 
         <span class="font-weight-bold text-uppercase">
           <span v-if="courseIdInTray(course.id)">
-            Remove course from tray
-          </span>
-          <span v-else>
-            Add course to tray
-          </span>
-        </span>
-
-        <br>
-
-        <course-action
-          :course="course.id"
-          class="course-action"
-          type="schedule"
-        />
-
-        <span class="font-weight-bold text-uppercase">
-          <span v-if="courseIdInSchedule(course.id)">
             Remove course from schedule
           </span>
           <span v-else>

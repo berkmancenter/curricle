@@ -8,15 +8,8 @@
       <course-action
         :course="course.id"
         :invert="selected"
-        class="mr-1"
+        class="mr-5"
         type="tray"
-      />
-
-      <course-action
-        :course="course.id"
-        :invert="selected"
-        class="mr-3"
-        type="schedule"
       />
 
       <span class="text-muted">

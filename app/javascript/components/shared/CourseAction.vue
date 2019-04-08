@@ -46,11 +46,11 @@ export default {
           inactiveTooltip: 'Click to add to your tray'
         },
         schedule: {
-          activeIcon: 'clock',
-          inactiveIcon: ['far', 'clock'],
+          activeIcon: 'eye',
+          inactiveIcon: ['far', 'eye-slash'],
           clickable: true,
-          activeTooltip: 'Click to remove from your schedule',
-          inactiveTooltip: 'Click to add to your schedule'
+          activeTooltip: 'Click to show in your schedule',
+          inactiveTooltip: 'Click to hide from your schedule'
         },
         annotated: {
           activeIcon: 'pencil-alt',
@@ -105,15 +105,13 @@ export default {
       }
     },
     setUserCourse () {
-      var includeInPath = false
+      let includeInPath = !this.courseflags['schedule'][this.course]
       let alertText = ''
 
       if (this.type === 'schedule') {
-        includeInPath = !this.courseflags[this.type][this.course]
-
-        alertText = includeInPath ? 'Course added to schedule' : 'Course removed from schedule'
+        alertText = includeInPath ? 'Course shown in schedule' : 'Course hidden from schedule'
       } else {
-        alertText = 'Course added to tray'
+        alertText = 'Course added to schedule'
       }
 
       this.$apollo.provider.defaultClient.mutate({
@@ -133,7 +131,7 @@ export default {
           courseId: this.course
         }
       }).then(
-        this.toggleCourseStatus('Course removed from tray')
+        this.toggleCourseStatus('Course removed from schedule')
       )
     },
     toggleCourseStatus (alertText) {

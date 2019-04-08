@@ -145,6 +145,10 @@ const actions = {
 
       commit('SET_USER_FLAG', { type, course, value: !origState })
 
+      if (type === 'tray' && origState === false) {
+        commit('SET_USER_FLAG', { type: 'schedule', course, value: true })
+      }
+
       if (type === 'tray' && origState === true) {
         commit('SET_USER_FLAG', { type: 'schedule', course, value: false })
       }
