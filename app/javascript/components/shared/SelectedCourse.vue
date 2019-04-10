@@ -26,10 +26,10 @@
 
         <span class="font-weight-bold text-uppercase">
           <span v-if="courseIdInTray(course.id)">
-            Remove course from schedule
+            Remove from schedule
           </span>
           <span v-else>
-            Add course to schedule
+            Add to schedule
           </span>
         </span>
       </div>

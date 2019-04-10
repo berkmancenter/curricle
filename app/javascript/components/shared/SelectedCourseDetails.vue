@@ -2,9 +2,9 @@
   <div>
     <div class="mb-3 row">
       <div class="col-lg-5">
-        <h2 class="font-weight-bold text-uppercase">
+        <p class="font-weight-bold text-uppercase">
           {{ course.title }}
-        </h2>
+        </p>
       </div>
 
       <div class="col-lg-2 text-uppercase">
