@@ -61,15 +61,15 @@ export default {
   },
   computed: {
     ...mapGetters('search', ['semesterStart']),
-    ...mapGetters('user', ['courseIdInTray'])
+    ...mapGetters('user', ['courseIdStyles'])
   },
   watch: {
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdInTray)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles)
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdInTray)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

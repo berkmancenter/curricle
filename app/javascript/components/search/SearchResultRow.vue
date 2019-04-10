@@ -38,7 +38,7 @@
     >
       <div
         class="course-title font-weight-bold text-uppercase"
-        :class="{ 'tray-course': courseIdInTray(course.id) }"
+        :class="courseIdStyles(course.id)"
       >
         {{ course.subject }} {{ course.catalog_number }}: {{ course.title }}
       </div>
@@ -105,7 +105,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['courseIdInTray']),
+    ...mapGetters('user', ['courseIdStyles']),
     borderStyle () {
       return {
         'border-left-color': this.course.department_color || '#000'

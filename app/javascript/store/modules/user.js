@@ -74,6 +74,17 @@ const getters = {
   },
   userAuthenticated (state) {
     return Boolean(state.apiToken)
+  },
+  courseIdStyles: (state, getters) => (courseId) => {
+    if (getters.courseIdInSchedule(courseId)) {
+      return 'schedule-course'
+    } else {
+      if (getters.courseIdInTray(courseId)) {
+        return 'tray-course'
+      }
+    }
+
+    return ''
   }
 }
 

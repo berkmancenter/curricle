@@ -19,15 +19,15 @@ var height = 900 - margin.top - margin.bottom
 var svg
 var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, subjectTextScale
 
-let courseIdInTray
+let courseIdStyles
 let selectCourse
 let semester
 let showLoaderOverlay
 let setTitleName
 let showNoResultsContainer
 
-function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction, showNoResultsContainerFunction, courseIdInTrayFunction) {
-  courseIdInTray = courseIdInTrayFunction
+function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction, showNoResultsContainerFunction, courseIdStylesFunction) {
+  courseIdStyles = courseIdStylesFunction
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
   setTitleName = setTitleNameFunction
@@ -221,12 +221,7 @@ function monadicView (data) {
     .enter()
     .append('text')
     .attr('class', function (d) {
-      let classes = 'classText ' + d.values[0].subjectClass + ' ' + d.values[0].courseTypeClass
-
-      if (courseIdInTray(d.key)) {
-        classes += ' tray-course'
-      }
-
+      let classes = 'classText ' + d.values[0].subjectClass + ' ' + d.values[0].courseTypeClass + ' ' + courseIdStyles(d.key)
       return classes
     })
     .attr('y', function (d) { return classScale(d.key) - 4 })

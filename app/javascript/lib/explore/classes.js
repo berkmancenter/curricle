@@ -23,15 +23,15 @@ var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departm
 
 var fullData
 
-let courseIdInTray
+let courseIdStyles
 let selectCourse
 let semester
 let showLoaderOverlay
 
 const fontSize = '12px'
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdInTrayFunction) {
-  courseIdInTray = courseIdInTrayFunction
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction) {
+  courseIdStyles = courseIdStylesFunction
   selectCourse = selectCourseFunction
   semester = selectedSemester
   showLoaderOverlay = showLoaderOverlayFunction
@@ -438,7 +438,7 @@ function classVisualization (data) {
   classText
     .enter()
     .append('text')
-    .attr('class', function (d) { return courseIdInTray(d.id) ? 'tray-course classText' : 'classText' })
+    .attr('class', function (d) { return courseIdStyles(d.id) + ' classText' })
     .attr('transform', function (d, i) {
       return 'translate(' + (width - width / 3) + ',' + (i * 20) + ')'
     })

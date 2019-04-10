@@ -124,10 +124,10 @@ export default {
   },
   computed: {
     ...mapGetters('search', ['currentSemester']),
-    ...mapGetters('user', ['courseIdInTray'])
+    ...mapGetters('user', ['courseIdStyles'])
   },
   mounted () {
-    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName, this.setShowNoResultsContainer, this.courseIdInTray)
+    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName, this.setShowNoResultsContainer, this.courseIdStyles)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

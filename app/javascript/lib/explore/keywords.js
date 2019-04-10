@@ -50,7 +50,7 @@ var networkWidthScale
 
 var fullData
 
-let courseIdInTray
+let courseIdStyles
 let selectCourse
 let semester
 let showLoaderOverlay
@@ -100,8 +100,8 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdInTrayFunction) {
-  courseIdInTray = courseIdInTrayFunction
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction) {
+  courseIdStyles = courseIdStylesFunction
   semester = selectedSemester
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
@@ -415,8 +415,8 @@ function setCenterVis (sortedData) {
     .attr('class', function (d) {
       let classes = 'centerText ' + d.key
 
-      if (centerData === 'title' && courseIdInTray(d.key)) {
-        classes += ' tray-course'
+      if (centerData === 'title') {
+        classes += ' ' + courseIdStyles(d.key)
       }
 
       return classes
