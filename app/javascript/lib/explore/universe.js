@@ -183,15 +183,7 @@ function drawVis (data) {
     .style('text-anchor', 'start')
     .style('text-transform', 'uppercase')
     .attr('xlink:href', function (d, i) { return '#circleArc_' + i })
-    .text(function (d) {
-      if (d.data.key !== undefined) {
-        var name = d.data.key
-        if (name.length > 25) {
-          name = name.substring(0, 24) + '...'
-        }
-        return name
-      }
-    })
+    .text(function (d) { return d.data.key })
 
   drawCanvas(data.children)
 
