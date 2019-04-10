@@ -181,6 +181,7 @@ function drawVis (data) {
     .append('textPath')
     .attr('startOffset', '10%')
     .style('text-anchor', 'start')
+    .style('text-transform', 'uppercase')
     .attr('xlink:href', function (d, i) { return '#circleArc_' + i })
     .text(function (d) {
       if (d.data.key !== undefined) {

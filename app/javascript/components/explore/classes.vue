@@ -21,21 +21,23 @@
       <div
         id="courseTypeVis"
       >
-        <h5
+        <p
           id="courseTypeHeadline"
+          class="text-uppercase"
         >
           Formats
-        </h5>
+        </p>
       </div>
 
       <div
         id="departmentVis"
       >
-        <h5
+        <p
           id="departmentHeadline"
+          class="text-uppercase"
         >
           Departments
-        </h5>
+        </p>
       </div>
 
       <div
