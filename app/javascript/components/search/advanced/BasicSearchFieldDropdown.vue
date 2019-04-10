@@ -3,6 +3,7 @@
     <span
       id="search-field-dropdown"
       class="pointer"
+      tabindex="0"
     >
       Apply to: <strong>{{ dropdownTitle }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 

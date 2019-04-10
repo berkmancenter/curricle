@@ -4,6 +4,7 @@
     <span
       id="search-semester-range"
       class="pointer"
+      tabindex="0"
     >
       &nbsp;<strong>{{ rangeLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />
 

@@ -2,6 +2,7 @@
   <span
     id="sort-by-dropdown"
     class="pointer"
+    tabindex="0"
   >
     sort by:
     <strong>{{ sortByLabel }}</strong>&nbsp;<font-awesome-icon icon="caret-down" />

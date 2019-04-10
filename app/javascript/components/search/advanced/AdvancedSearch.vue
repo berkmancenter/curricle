@@ -23,6 +23,7 @@
         <span
           id="advanced-search-filter-button"
           class="advanced-search-element ml-4"
+          tabindex="0"
           @click="toggleSearchFilters"
         >
           Filter

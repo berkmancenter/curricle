@@ -3,6 +3,7 @@
     <span
       id="share-dropdown"
       class="pointer"
+      tabindex="0"
     >
       <font-awesome-icon icon="share-alt" />
 
