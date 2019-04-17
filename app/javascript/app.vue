@@ -5,34 +5,39 @@
   >
     <loader-overlay />
 
+    <the-mobile-menu
+      class="d-block d-sm-none"
+    />
+
     <the-navbar-control
-      v-if="userAuthenticated"
-      v-show="sidebarCurrentType === 'tray'"
+      v-if="userAuthenticated && sidebarVisible"
+      class="d-none d-sm-block"
     />
 
     <the-tray-control
-      v-if="userAuthenticated"
-      v-show="sidebarCurrentType !== 'tray'"
+      v-if="userAuthenticated && !sidebarVisible"
+      class="d-none d-sm-block"
     />
 
     <the-logout-link
-      v-if="userAuthenticated"
-      v-show="sidebarCurrentType !== 'tray'"
+      v-if="userAuthenticated && !sidebarVisible"
+      class="d-none d-sm-block"
     />
 
     <div class="row">
       <div
-        v-show="sidebarCurrentType !== 'tray'"
+        v-if="!sidebarVisible"
         id="nav-container"
-        :class="{ active: sidebarCurrentType !== 'tray' }"
-        class="col-md-2"
+        :class="{ active: !sidebarVisible }"
+        class="col-sm-2 d-none d-sm-block"
       >
         <navbar />
       </div>
 
       <div
         id="main-container"
-        class="col-md-10"
+        class="col-sm-10 d-sm-block"
+        :class="{ 'd-none': sidebarVisible }"
       >
         <the-alert />
 
@@ -48,15 +53,15 @@
       </div>
 
       <div
-        v-show="sidebarCurrentType === 'tray'"
+        v-if="sidebarVisible"
         id="sidebar-container"
-        :class="{ active: sidebarCurrentType === 'tray' }"
-        class="col-md-2"
+        :class="{ active: sidebarVisible, 'col-12': sidebarVisible }"
+        class="col-sm-2"
       >
         <the-sidebar />
       </div>
 
-      <the-footer />
+      <the-footer class="d-none d-sm-flex" />
     </div>
 
     <course-observer />
@@ -75,6 +80,7 @@ import TheSidebar from 'components/TheSidebar'
 import TheTrayControl from 'components/TheTrayControl'
 import TheNavbarControl from 'components/TheNavbarControl'
 import TheAlert from 'components/TheAlert'
+import TheMobileMenu from 'components/TheMobileMenu'
 
 export default {
   components: {
@@ -87,12 +93,16 @@ export default {
     TheSidebar,
     TheTrayControl,
     TheNavbarControl,
-    TheAlert
+    TheAlert,
+    TheMobileMenu
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
     ...mapGetters('app', ['sidebarCurrentContext', 'sidebarCurrentType']),
-    ...mapState('app', ['selectedCourse'])
+    ...mapState('app', ['selectedCourse']),
+    sidebarVisible () {
+      return this.sidebarCurrentType === 'tray'
+    }
   },
   mounted () {
     // load initial data

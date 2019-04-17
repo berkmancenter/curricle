@@ -70,6 +70,7 @@ export default {
     img#logo {
       display: block;
       height: 80px;
+      max-width: 100%;
       width: auto;
     }
 
