@@ -197,10 +197,9 @@ module Resolvers
       end
 
       sunspot.instance_eval do
-        excludes.each{ |d| with "meets_on_#{d}", false }
+        excludes.each { |d| with "meets_on_#{d}", false }
         any_of do
-          includes.each{
-            |d|
+          includes.each { |d|
             any_of do
               with "meets_on_#{d}", false
               all_of do
@@ -209,10 +208,10 @@ module Resolvers
                 # with(:meeting_time_start).greater_than_or_equal_to(range[0])
                 # with(:meeting_time_end).less_than_or_equal_to(range[1])
                 any_of do
-                  (range[0]..24).to_a.each{|a| with(:meeting_time_start, a) }
+                  (range[0]..24).to_a.each { |a| with(:meeting_time_start, a) }
                 end
                 any_of do
-                  (0..range[1]).to_a.each{|a| with(:meeting_time_end, a) }
+                  (0..range[1]).to_a.each { |a| with(:meeting_time_end, a) }
                 end
               end
             end

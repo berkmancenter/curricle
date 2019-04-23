@@ -68,6 +68,7 @@ class CourseMeetingPattern < ApplicationRecord
 
   def minutes_past(hour = 7)
     return 0 if meeting_time_start.blank?
+
     morning = meeting_time_start.change(hour: hour)
     (meeting_time_start - morning) / 60
   end
@@ -78,6 +79,7 @@ class CourseMeetingPattern < ApplicationRecord
 
   def schedule
     return meeting_days.join(' / ').to_s if meeting_time_start.blank? || meeting_time_end.blank?
+
     "#{meeting_days.join(' / ')} #{meeting_time_start.strftime('%l:%M')} - #{meeting_time_end.strftime('%l:%M %p')}"
   end
 end

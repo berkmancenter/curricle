@@ -17,6 +17,7 @@ module SessionHelper
     filter_set = []
     filters[:keywords].each do |key, value|
       next if value.blank?
+
       filter_set << {
         keywords: value,
         keyword_options: filters[:keyword_options][key],
