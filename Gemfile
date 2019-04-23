@@ -30,12 +30,13 @@ group :development, :test do
 end
 
 group :development do
-  gem 'brakeman', '~> 4.4'
+  gem 'brakeman', '~> 4.5'
   gem 'drg', '~> 1.5'
   gem 'graphiql-rails', '~> 1.7'
   gem 'listen', '~> 3.1'
   gem 'rack-cors', '~> 1.0'
-  gem 'rubocop', '~> 0.65'
+  gem 'rubocop', '~> 0.67'
+  gem 'rubocop-performance', '~> 1.1'
   gem 'rubocop-rspec', '~> 1.32'
   gem 'spring', '~> 2.0'
   gem 'spring-commands-rspec', '~> 1.0'

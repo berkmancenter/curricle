@@ -1,22 +1,31 @@
-require: rubocop-rspec
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
 AllCops:
   Exclude:
     - 'bin/**/*'
   TargetRailsVersion: 5.2
   TargetRubyVersion: 2.4
+
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
     - 'app/graphql/**/*'
     - 'db/schema.rb'
+
 Metrics/LineLength:
   Enabled: false
+
 Rails:
   Enabled: true
+
 Rails/Output:
   Exclude:
     - 'db/**/*'
+
 RSpec/NestedGroups:
   Max: 4
+
 Style/FrozenStringLiteralComment:
   Enabled: false
