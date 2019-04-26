@@ -2,7 +2,7 @@
 
 module Resolvers
   # Return a collection of courses taught by instructors connected to a given instructor
-  class CoursesConnectedByInstructorResolver
+  class CoursesConnectedByInstructor < Resolvers::Base
     MAX_CO_INSTRUCTORS = 8
 
     COURSE_TITLE_BLACKLIST = [
@@ -33,10 +33,15 @@ module Resolvers
       'Tutorial - Senior Year'
     ].freeze
 
-    def call(_obj, args, _ctx)
-      instructor_name = args[:name]
-      term_name = args[:semester][:term_name]
-      term_year_range = determine_term_year_range(args[:semester])
+    type [Types::CourseType], null: false
+
+    argument :name, String, "Instructor's name", required: true
+    argument :semester, Types::Inputs::Semester, required: true
+
+    def resolve(name:, semester:)
+      instructor_name = name
+      term_name = semester[:term_name]
+      term_year_range = determine_term_year_range(semester)
 
       search_results = search_for_instructor(instructor_name, term_year_range).results
 

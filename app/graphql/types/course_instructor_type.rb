@@ -1,18 +1,24 @@
 # frozen_string_literal: true
 
-Types::CourseInstructorType = GraphQL::ObjectType.define do
-  name 'CourseInstructor'
-  description 'Represents a course instructor in Curricle'
+module Types
+  class CourseInstructorType < Types::BaseObject
+    description 'Represents a course instructor in Curricle'
 
-  field :display_name, types.String, 'First and last name' do
-    resolve ->(course_instructor, _args, _ctx) { "#{course_instructor.first_name} #{course_instructor.last_name}" }
+    def display_name
+      "#{object.first_name} #{object.last_name}"
+    end
+
+    field :course, Types::CourseType, null: true
+    field :created_at, String, null: false
+    field :display_name, String, 'First and last name', null: true
+    field :email, String, null: true
+    field :first_name, String, null: true
+    field :id, ID, null: false
+    field :instructor_role, String, null: true
+    field :last_name, String, null: true
+    field :middle_name, String, null: true
+    field :name_prefix, String, null: true
+    field :name_suffix, String, null: true
+    field :updated_at, String, null: false
   end
-  field :email, types.String, 'Email address'
-  field :first_name, types.String, 'First name'
-  field :id, !types.ID, 'Unique ID'
-  field :instructor_role, types.String, 'Role'
-  field :last_name, types.String, 'Last name'
-  field :middle_name, types.String, 'Middle name'
-  field :name_prefix, types.String, 'Prefix for name'
-  field :name_suffix, types.String, 'Suffix for name'
 end

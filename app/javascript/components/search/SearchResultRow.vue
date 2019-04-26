@@ -40,7 +40,7 @@
         class="course-title font-weight-bold text-uppercase"
         :class="courseIdStyles(course.id)"
       >
-        {{ course.subject }} {{ course.catalog_number }}: {{ course.title }}
+        {{ course.subject }} {{ course.catalogNumber }}: {{ course.title }}
       </div>
 
       <hr
@@ -56,7 +56,7 @@
         class="course-component text-uppercase"
       >
         {{ course.component }}<br>
-        {{ course.term_name }} {{ course.term_year }}
+        {{ course.termName }} {{ course.termYear }}
       </div>
     </div>
 
@@ -119,12 +119,12 @@ export default {
 
       let formattedString = this
         .course
-        .course_instructors
+        .courseInstructors
         .slice(0, limit)
-        .map(instructor => instructor.display_name)
+        .map(instructor => instructor.displayName)
         .join(', ')
 
-      if (this.course.course_instructors.length > limit) {
+      if (this.course.courseInstructors.length > limit) {
         formattedString += '...'
       }
 

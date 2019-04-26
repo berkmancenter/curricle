@@ -27,7 +27,7 @@ var leftSelection = 'Truth'
 var rightSelection = 'Lies'
 
 var sideData = 'searchTerm'
-var centerData = 'subject_description' // component subject_description
+var centerData = 'subjectDescription' // component subject_description
 
 var textPaddingSideViz = 200
 
@@ -105,7 +105,7 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
   semester = selectedSemester
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
-  centerData = 'subject_description'
+  centerData = 'subjectDescription'
 
   // remove existing SVGs prior to (re)drawing new ones
   d3.select('#visContainer').selectAll('svg').remove()

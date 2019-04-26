@@ -21,7 +21,8 @@ module Curricle
     config.time_zone = 'UTC'
 
     config.autoload_paths += %W(#{config.root}/lib)
-    config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
+    config.autoload_paths += Dir.glob("#{config.root}/app/graphql/types/enums")
+    config.autoload_paths += Dir.glob("#{config.root}/app/graphql/types/inputs")
 
     config.middleware.use BatchLoader::Middleware
   end

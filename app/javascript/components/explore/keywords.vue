@@ -31,7 +31,7 @@
 
           <li
             class="dimSelect active"
-            value="subject_description"
+            value="subjectDescription"
           >
             Subjects
           </li> |

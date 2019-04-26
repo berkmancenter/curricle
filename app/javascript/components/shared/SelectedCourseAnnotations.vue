@@ -81,7 +81,7 @@ export default {
         mutation: ANNOTATION_SET_MUTATION,
         variables: {
           text: this.editableText,
-          course_id: this.course.id,
+          courseId: this.course.id,
           id: this.course.annotation && this.course.annotation.id
         }
       }).then(

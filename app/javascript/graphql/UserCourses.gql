@@ -1,5 +1,5 @@
 query UserCourses($scheduleToken: String) {
-  user_courses(schedule_token: $scheduleToken) {
+  userCourses(scheduleToken: $scheduleToken) {
     id
     annotation {
       id
@@ -7,9 +7,9 @@ query UserCourses($scheduleToken: String) {
     tags {
       id
     }
-    user_course {
+    userCourse {
       id
-      include_in_path
+      includeInPath
     }
   }
 }

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-CurricleSchema = GraphQL::Schema.define do
+class CurricleSchema < GraphQL::Schema
   use BatchLoader::GraphQL
 
-  mutation(Types::MutationType)
-  query(Types::QueryType)
+  mutation(Types::Mutation)
+  query(Types::Query)
 end

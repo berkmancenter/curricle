@@ -2,8 +2,15 @@
 
 module Resolvers
   # Return a collection of objects with aggregate data about course counts
-  class CourseCountsResolver
-    def call(_obj, args, _ctx)
+  class CourseCounts < Resolvers::Base
+    type [Types::CourseCountType], null: false
+
+    argument :component, Types::Enums::Component, required: false
+    argument :department, Types::Enums::Department, required: false
+    argument :semester, Types::Inputs::Semester, required: false
+    argument :semester_range, Types::Inputs::SemesterRange, required: false
+
+    def resolve(**args)
       query = base_query
 
       query = filter_by_args(query, args)

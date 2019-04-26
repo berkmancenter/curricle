@@ -1,7 +1,16 @@
 #import "./TagFragment.gql"
 
-mutation tagSet($name: String!, $course_id: ID!) {
-  tagSet(name: $name, course_id: $course_id) {
-    ...Tag
+mutation tagSet(
+  $name: String!,
+  $courseId: ID!
+) {
+  tagSet(
+    name: $name,
+    courseId: $courseId
+  ) {
+    errors
+    tag {
+      ...Tag
+    }
   }
 }

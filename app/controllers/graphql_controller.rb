@@ -15,6 +15,9 @@ class GraphqlController < ApplicationController
 
     result = CurricleSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
+  rescue => e
+    raise e unless Rails.env.development?
+    handle_error_in_development e
   end
 
   private
@@ -50,5 +53,12 @@ class GraphqlController < ApplicationController
     return if user.blank?
 
     sign_in(:user, user)
+  end
+
+  def handle_error_in_development(err)
+    logger.error err.message
+    logger.error err.backtrace.join("\n")
+
+    render json: { error: { message: err.message, backtrace: err.backtrace }, data: {} }, status: 500
   end
 end

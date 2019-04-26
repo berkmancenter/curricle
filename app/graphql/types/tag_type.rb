@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-Types::TagType = GraphQL::ObjectType.define do
-  name 'Tag'
-  description 'Tag added by a user for a course'
+module Types
+  class TagType < Types::BaseObject
+    description 'Tag added by a user for a course'
 
-  field :course, !Types::CourseType, 'Associated course' do
-    resolve ->(tag, _args, _ctx) { tag.course }
+    field :course, Types::CourseType, null: false
+    field :created_at, String, null: false
+    field :id, ID, null: false
+    field :name, String, null: false
+    field :updated_at, String, null: false
   end
-
-  field :created_at, !types.String
-  field :id, !types.ID
-  field :name, !types.String
-  field :updated_at, !types.String
 end

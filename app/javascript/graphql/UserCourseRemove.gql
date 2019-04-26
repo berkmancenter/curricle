@@ -1,3 +1,11 @@
 mutation userCourseRemove($courseId: ID!) {
-  userCourseRemove(course_id: $courseId)
+  userCourseRemove(courseId: $courseId) {
+    errors
+    course {
+      id
+      userCourse {
+        id
+      }
+    }
+  }
 }

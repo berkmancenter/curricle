@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-Types::FacetType = GraphQL::ObjectType.define do
-  name 'Facet'
-  description 'Represents a Solr facet'
+module Types
+  class FacetType < Types::BaseObject
+    description 'Represents a Solr facet'
 
-  field :value, types.String
-  field :count, types.Int
+    field :count, Integer, null: true
+    field :value, String, null: true
+  end
 end

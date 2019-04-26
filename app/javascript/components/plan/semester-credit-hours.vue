@@ -34,7 +34,7 @@
           cols="2"
           class="text-muted text-uppercase"
         >
-          {{ course.subject }} {{ course.catalog_number }}
+          {{ course.subject }} {{ course.catalogNumber }}
         </b-col>
 
         <b-col
@@ -68,8 +68,8 @@ export default {
   methods: {
     ...mapActions('app', ['selectCourse']),
     firstInstructorName (course) {
-      if (course.course_instructors.length) {
-        return course.course_instructors[0].display_name
+      if (course.courseInstructors.length) {
+        return course.courseInstructors[0].displayName
       } else {
         return 'Instructor TBD'
       }

@@ -26,7 +26,7 @@ export default {
   data () {
     return {
       facets: [
-        { key: 'academic_groups', title: 'School' },
+        { key: 'academicGroups', title: 'School' },
         { key: 'departments', title: 'Department' },
         { key: 'subjects', title: 'Subject' },
         { key: 'components', title: 'Component' }

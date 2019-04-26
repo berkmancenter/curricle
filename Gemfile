@@ -47,6 +47,6 @@ end
 
 group :test do
   gem 'fuubar', '~> 2.3'
-  gem 'rspec-graphql_matchers', '~> 0.7'
+  gem 'rspec-graphql_matchers', git: 'https://github.com/patricklewis/rspec-graphql_matchers.git', branch: 'graphql-class-api'
   gem 'shoulda-matchers', '~> 4.0'
 end

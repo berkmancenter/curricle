@@ -31,25 +31,25 @@
         </div>
 
         <span
-          v-for="instructor in course.course_instructors"
+          v-for="instructor in course.courseInstructors"
           :key="instructor.id"
           class="course-instructor"
         >
-          {{ instructor.display_name }}
+          {{ instructor.displayName }}
         </span>
       </div>
 
       <div class="col-md-2 pointer text-uppercase">
-        {{ course.subject }} {{ course.catalog_number }}<br>
-        {{ course.term_name }} {{ course.term_year }}<br>
+        {{ course.subject }} {{ course.catalogNumber }}<br>
+        {{ course.termName }} {{ course.termYear }}<br>
         {{ course.component }}
       </div>
 
       <div class="col-md-5 pointer">
         <truncate
-          v-if="course.course_description_long"
+          v-if="course.courseDescriptionLong"
           :length="200"
-          :text="course.course_description_long"
+          :text="course.courseDescriptionLong"
           class="course_description"
           clamp="[..]"
           less="Show Less"

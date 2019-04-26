@@ -87,15 +87,15 @@ import Awesomplete from 'awesomplete'
 
 export default {
   apollo: {
-    instructor_names: {
+    instructorNames: {
       query: INSTRUCTOR_NAMES_QUERY,
       variables () {
         return {
           semester: {
-            term_name: this.currentSemester.term_name.toUpperCase(),
-            term_year: this.currentSemester.term_year
+            termName: this.currentSemester.termName.toUpperCase(),
+            termYear: this.currentSemester.termYear
           },
-          past_years: 10
+          pastYears: 10
         }
       },
       result () {
@@ -103,7 +103,7 @@ export default {
         var input = document.getElementById('instructorName')
 
         let awesomplete = new Awesomplete(input, { minChars: 4 })
-        awesomplete.list = this.instructor_names
+        awesomplete.list = this.instructorNames
 
         input.addEventListener('awesomplete-select', (e) => {
           this.forceInstructorSearch(e.text.value)

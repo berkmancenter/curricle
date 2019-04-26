@@ -4,26 +4,26 @@
 query CoursesSearch(
   $basic: String,
   $ids: [ID!],
-  $deluxeKeywords: [DeluxeKeywordInput!],
-  $semesterRange: SemesterRangeInput,
+  $deluxeKeywords: [DeluxeKeyword!],
+  $semesterRange: SemesterRange,
   $page: Int,
   $perPage: Int,
-  $sortBy: SortByEnum,
-  $timeRanges: [TimeRangeInput!],
-  $schools: [SchoolEnum!],
-  $departments: [DepartmentEnum!],
-  $subjects: [SubjectEnum!],
-  $components: [ComponentEnum!]
+  $sortBy: CourseSortField,
+  $timeRanges: [TimeRange!],
+  $schools: [School!],
+  $departments: [Department!],
+  $subjects: [Subject!],
+  $components: [Component!]
 ) {
     coursesConnection(
       basic: $basic,
       ids: $ids,
-      deluxe_keywords: $deluxeKeywords,
-      semester_range: $semesterRange,
+      deluxeKeywords: $deluxeKeywords,
+      semesterRange: $semesterRange,
       page: $page,
-      per_page: $perPage,
-      sort_by: $sortBy,
-      time_ranges: $timeRanges,
+      perPage: $perPage,
+      sortBy: $sortBy,
+      timeRanges: $timeRanges,
       schools: $schools,
       departments: $departments,
       subjects: $subjects,
@@ -37,7 +37,7 @@ query CoursesSearch(
         subjects {
           ...Facet
         }
-        academic_groups {
+        academicGroups {
           ...Facet
         }
         components {

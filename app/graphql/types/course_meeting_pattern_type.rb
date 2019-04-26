@@ -1,30 +1,32 @@
 # frozen_string_literal: true
 
-Types::CourseMeetingPatternType = GraphQL::ObjectType.define do
-  name 'CourseMeetingPattern'
-  description 'Represents a course meeting pattern in Curricle'
+module Types
+  class CourseMeetingPatternType < Types::BaseObject
+    description 'Represents a course meeting pattern in Curricle'
 
-  field :class_meeting_number, types.String, 'Class meeting number'
-  field :class_section, types.String, 'Class section'
-  field :created_at, !types.String, 'Created at'
-  field :end_date, types.String, 'End date'
-  field :external_course_id, types.Int, 'External course ID'
-  field :external_facility_id, types.String, 'External facility ID'
-  field :facility_description, types.String, 'Facility description'
-  field :id, !types.ID, 'Unique ID'
-  field :meeting_time_end, types.String, 'Meeting time end'
-  field :meeting_time_end_tod, types.String, 'Meeting time end (time of day)'
-  field :meeting_time_start, types.String, 'Meeting time start'
-  field :meeting_time_start_tod, types.String, 'Meeting time start (time of day)'
-  field :meets_on_friday, types.Boolean, 'Meets on Friday'
-  field :meets_on_monday, types.Boolean, 'Meets on Monday'
-  field :meets_on_saturday, types.Boolean, 'Meets on Saturday'
-  field :meets_on_sunday, types.Boolean, 'Meets on Sunday'
-  field :meets_on_thursday, types.Boolean, 'Meets on Thursday'
-  field :meets_on_tuesday, types.Boolean, 'Meets on Tuesday'
-  field :meets_on_wednesday, types.Boolean, 'Meets on Wednesday'
-  field :start_date, types.String, 'Start date'
-  field :term_name, types.String, 'Term name'
-  field :term_year, types.Int, 'Term year'
-  field :updated_at, !types.String, 'Updated at'
+    field :class_meeting_number, String, null: true
+    field :class_section, String, null: true
+    field :course, Types::CourseType, null: true
+    field :created_at, String, null: false
+    field :end_date, String, null: true
+    field :external_course_id, Integer, null: true
+    field :external_facility_id, String, null: true
+    field :facility_description, String, null: true
+    field :id, ID, null: false
+    field :meeting_time_end, String, null: true
+    field :meeting_time_end_tod, String, 'Meeting time end (time of day)', null: true
+    field :meeting_time_start, String, null: true
+    field :meeting_time_start_tod, String, 'Meeting time start (time of day)', null: true
+    field :meets_on_friday, Boolean, null: true
+    field :meets_on_monday, Boolean, null: true
+    field :meets_on_saturday, Boolean, null: true
+    field :meets_on_sunday, Boolean, null: true
+    field :meets_on_thursday, Boolean, null: true
+    field :meets_on_tuesday, Boolean, null: true
+    field :meets_on_wednesday, Boolean, null: true
+    field :start_date, String, null: true
+    field :term_name, String, null: true
+    field :term_year, Integer, null: true
+    field :updated_at, String, null: false
+  end
 end

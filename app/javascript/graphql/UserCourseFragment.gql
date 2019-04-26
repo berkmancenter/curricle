@@ -1,4 +1,10 @@
-fragment UserCourse on UserCourse {
+fragment userCourse on UserCourse {
   id
-  include_in_path
+  course {
+    id
+    userCourse {
+      id
+    }
+  }
+  includeInPath
 }

@@ -2,21 +2,33 @@
 
 module Mutations
   # Mutation function for removing a user course
-  class UserCourseRemove < GraphQL::Function
+  class UserCourseRemove < Mutations::BaseMutation
     description "Removes a user's course selection"
 
-    type types.ID
+    argument :course_id, ID, required: true
 
-    argument :course_id, !types.ID
+    field :course, Types::CourseType, null: true
+    field :errors, [String], null: false
 
-    def call(_obj, args, context)
+    def resolve(course_id:)
       current_user = context[:current_user]
 
       raise "Anonymous users can't remove user courses" if current_user.blank?
 
-      UserCourse.find_by(course_id: args[:course_id], user: current_user).destroy
+      user_course = UserCourse.find_by(course_id: course_id, user: current_user)
+      course = user_course.course
 
-      args[:course_id]
+      if user_course.destroy
+        {
+          course: course,
+          errors: []
+        }
+      else
+        {
+          course: nil,
+          errors: user_course.errors.full_messages
+        }
+      end
     end
   end
 end

@@ -3,11 +3,9 @@
 FactoryBot.define do
   factory :course_instructor do
     course
-
+    sequence(:email) { |n| "instructor#{n}@example.edu" }
     first_name { 'Course' }
     instructor_role { 'HEAD' }
-    last_name { 'Instructor' }
-
-    sequence(:email) { |n| "instructor#{n}@example.edu" }
+    sequence(:last_name) { |n| "Instructor #{n}" }
   end
 end

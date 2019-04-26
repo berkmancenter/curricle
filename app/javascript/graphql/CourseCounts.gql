@@ -1,10 +1,10 @@
 query CourseCounts(
-  $semester: SemesterInput,
-  $semesterRange: SemesterRangeInput
+  $semester: Semester,
+  $semesterRange: SemesterRange
 ) {
-  course_counts(
-    semester: $semester,
-    semester_range: $semesterRange
+  courseCounts(
+    semester: $semester
+    semesterRange: $semesterRange
   ) {
     component
     department

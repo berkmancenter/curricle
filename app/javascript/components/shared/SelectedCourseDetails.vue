@@ -8,14 +8,14 @@
       </div>
 
       <div class="col-lg-2 text-uppercase">
-        {{ course.academic_group }}<br>
-        {{ `${course.subject} ${course.catalog_number}` }}<br>
-        {{ `${course.term_name} ${course.term_year}` }}
+        {{ course.academicGroup }}<br>
+        {{ `${course.subject} ${course.catalogNumber}` }}<br>
+        {{ `${course.termName} ${course.termYear}` }}
       </div>
 
       <div class="col-lg-5 text-uppercase">
         {{ course.component || '&mdash;' }}<br>
-        {{ course.grading_basis_description || '&mdash;' }}<br>
+        {{ course.gradingBasisDescription || '&mdash;' }}<br>
         {{ firstInstructor || '&mdash;' }}
       </div>
     </div>
@@ -27,9 +27,9 @@
         </p>
 
         <truncate
-          v-if="course.course_description_long"
+          v-if="course.courseDescriptionLong"
           :length="500"
-          :text="course.course_description_long"
+          :text="course.courseDescriptionLong"
           clamp="[...]"
           less="[Close]"
           type="html"
@@ -42,11 +42,11 @@
         </p>
 
         <div
-          v-for="instructor in course.course_instructors"
+          v-for="instructor in course.courseInstructors"
           :key="instructor.id"
         >
           <p class="mb-0">
-            {{ instructor.display_name }}
+            {{ instructor.displayName }}
           </p>
         </div>
 
@@ -86,9 +86,9 @@ export default {
   },
   computed: {
     firstInstructor () {
-      if (!this.course.course_instructors.length) { return }
+      if (!this.course.courseInstructors.length) { return }
 
-      return this.course.course_instructors[0].display_name
+      return this.course.courseInstructors[0].displayName
     }
   }
 }

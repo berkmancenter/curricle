@@ -151,15 +151,15 @@ export { prettyTime }
 
 /* transform the core course data into the expected days structure for other times */
 function transformSchedule (c) {
-  if (c && c.course_meeting_patterns && c.course_meeting_patterns.length) {
-    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
-    const dayFields = _.map(days, d => 'meets_on_' + d)
+  if (c && c.courseMeetingPatterns && c.courseMeetingPatterns.length) {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    const dayFields = _.map(days, d => 'meetsOn' + d)
     var schedule = []
     var courseAddCount = 0
 
     /* Conceptually, we are iterating over all of the rows and adding
      * to the schedule for the specific days to which this
-     * course_meeting_pattern applies.  This will allow us to support disjoint
+     * courseMeetingPattern applies.  This will allow us to support disjoint
      * meeting times per day as well as the (unlikely) possibility that there
      * is a single course that meets multiple times per day.
      *
@@ -170,11 +170,11 @@ function transformSchedule (c) {
      * know how that goes...)
      */
     _.each(
-      c.course_meeting_patterns,
+      c.courseMeetingPatterns,
       pat => {
         var durs = [
-          calcDuration('0:00', pat.meeting_time_start_tod),
-          calcDuration(pat.meeting_time_start_tod, pat.meeting_time_end_tod),
+          calcDuration('0:00', pat.meetingTimeStartTod),
+          calcDuration(pat.meetingTimeStartTod, pat.meetingTimeEndTod),
           c.id
         ]
         _.each(

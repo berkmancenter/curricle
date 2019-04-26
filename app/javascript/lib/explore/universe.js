@@ -100,7 +100,7 @@ function requestFirstData () {
       }
     }
   }).then(function (response) {
-    nestData(response.data.course_counts)
+    nestData(response.data.courseCounts)
     showLoaderOverlay(false)
   })
 }
@@ -389,7 +389,7 @@ function tooltipOn (node) {
   if (data.data.key) { // node is a department
     html = data.data.key
   } else { // node is a course
-    html = data.data.title + '<br/>' + data.data.subject_description
+    html = data.data.title + '<br/>' + data.data.subjectDescription
   }
 
   tooltipDiv.html(html)

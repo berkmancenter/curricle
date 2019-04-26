@@ -1,8 +1,12 @@
 mutation tagRemove($id: ID!) {
   tagRemove(id: $id) {
-    id
-    tags {
+    errors
+    course {
       id
+      tags {
+        id
+        name
+      }
     }
   }
 }

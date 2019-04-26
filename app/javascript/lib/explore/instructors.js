@@ -116,12 +116,12 @@ function loadLecturerData (coursesConnectedByInstructor) {
   let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
   data.forEach(function (d) {
-    d.subjectClass = cssesc(d.subject_description, { isIdentifier: true })
+    d.subjectClass = cssesc(d.subjectDescription, { isIdentifier: true })
     d.courseTypeClass = cssesc(d.component, { isIdentifier: true })
   })
 
   data.sort(function (a, b) {
-    return d3.ascending(a.subject_description, b.subject_description)
+    return d3.ascending(a.subjectDescription, b.subjectDescription)
   })
 
   monadicView(data)
@@ -129,8 +129,8 @@ function loadLecturerData (coursesConnectedByInstructor) {
 
 function requestData (instructorName, selectedSemester) {
   semester = {
-    term_name: selectedSemester.term_name.toUpperCase(),
-    term_year: selectedSemester.term_year
+    termName: selectedSemester.termName.toUpperCase(),
+    termYear: selectedSemester.termYear
   }
 
   setTitleName(instructorName)
@@ -141,7 +141,7 @@ function requestData (instructorName, selectedSemester) {
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
     variables: { instructorName, semester }
   }).then(function (response) {
-    const courses = response.data.courses_connected_by_instructor
+    const courses = response.data.coursesConnectedByInstructor
 
     if (courses.length) {
       showNoResultsContainer(false)
@@ -166,7 +166,7 @@ function monadicView (data) {
     .entries(data)
 
   var nestedSubjectData = d3.nest()
-    .key(function (d) { return d.subject_description })
+    .key(function (d) { return d.subjectDescription })
     .rollup(function (v) {
       return {
         count: v.length,
@@ -176,14 +176,14 @@ function monadicView (data) {
     .entries(data)
 
   var nestedInstructorData = d3.nest()
-    .key(function (d) { return d.course_instructors[0].display_name })
+    .key(function (d) { return d.courseInstructors[0].displayName })
     .rollup(function (v) {
       return {
         count: v.length,
         classes: v[0].subjectClass,
         // classes: function(d) { return d.amount; })
-        name: v[0].course_instructors[0].display_name,
-        eMail: v[0].course_instructors[0].email
+        name: v[0].courseInstructors[0].displayName,
+        eMail: v[0].courseInstructors[0].email
       }
     })
     .entries(data)
@@ -278,7 +278,7 @@ function monadicView (data) {
     .attr('d', function (d) {
       x2 = width / 2 - (d.title.length * 3)
       y2 = classScale(d.id)
-      y1 = instructorTextPosScale(d.course_instructors[0].display_name)
+      y1 = instructorTextPosScale(d.courseInstructors[0].displayName)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -293,7 +293,7 @@ function monadicView (data) {
     .attr('d', function (d) {
       x2 = width / 2 - (d.title.length * 3)
       y2 = classScale(d.id)
-      y1 = instructorTextPosScale(d.course_instructors[0].display_name)
+      y1 = instructorTextPosScale(d.courseInstructors[0].displayName)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -344,7 +344,7 @@ function monadicView (data) {
     .attr('d', function (d) {
       x2 = width / 2 + (d.title.length * 3)
       y2 = classScale(d.id)
-      y1 = subjectPosScale(d.subject_description)
+      y1 = subjectPosScale(d.subjectDescription)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +
@@ -359,7 +359,7 @@ function monadicView (data) {
     .attr('d', function (d) {
       x2 = width / 2 + (d.title.length * 3)
       y2 = classScale(d.id)
-      y1 = subjectPosScale(d.subject_description)
+      y1 = subjectPosScale(d.subjectDescription)
 
       return 'M' + x1 + ',' + y1 +
           'C' + xHalf + ',' + y1 +

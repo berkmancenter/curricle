@@ -10,7 +10,7 @@
           @mouseenter="addProvisionalCourse(course)"
           @mouseleave="removeProvisionalCourse(course)"
         >
-          <td>{{ `${course.subject} ${course.catalog_number}` }}</td>
+          <td>{{ `${course.subject} ${course.catalogNumber}` }}</td>
           <td @click="selectCourse(course)">
             {{ course.title }}
           </td>

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-Types::CourseCountType = GraphQL::ObjectType.define do
-  name 'CourseCountType'
-  description 'Aggregate data about the number of courses'
+module Types
+  class CourseCountType < Types::BaseObject
+    description 'Aggregate data about the number of courses'
 
-  field :component, !types.String
-  field :department, !types.String
-  field :count, !types.Int
+    field :component, String, null: false
+    field :count, Integer, null: false
+    field :department, String, null: false
+  end
 end

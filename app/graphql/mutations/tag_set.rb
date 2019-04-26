@@ -2,21 +2,34 @@
 
 module Mutations
   # Mutation function for adding or updating a course annotation
-  class TagSet < GraphQL::Function
+  class TagSet < Mutations::BaseMutation
     description 'Adds a tag'
 
-    type Types::TagType
+    argument :name, String, required: true
+    argument :course_id, ID, required: true
 
-    argument :name, !types.String
-    argument :course_id, !types.ID
+    field :tag, Types::TagType, null: true
+    field :errors, [String], null: false
 
-    def call(_obj, args, context)
+    def resolve(course_id:, name:)
       current_user = context[:current_user]
 
       # TODO: find a more elegant way of handling mutation requests from anonymous users
       raise "Anonymous users can't add tags" if current_user.blank?
 
-      Tag.create!(name: args[:name], course_id: args[:course_id], user: current_user)
+      tag = Tag.new(name: name, course_id: course_id, user: current_user)
+
+      if tag.save
+        {
+          tag: tag,
+          errors: []
+        }
+      else
+        {
+          tag: nil,
+          errors: tag.errors.full_messages
+        }
+      end
     end
   end
 end

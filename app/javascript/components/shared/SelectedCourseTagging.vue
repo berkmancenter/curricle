@@ -69,7 +69,7 @@ export default {
           mutation: TAG_SET_MUTATION,
           variables: {
             name: this.tagInput,
-            course_id: this.course.id
+            courseId: this.course.id
           }
         })
 

@@ -1,122 +1,98 @@
 # frozen_string_literal: true
 
-Types::CourseType = GraphQL::ObjectType.define do
-  name 'Course'
-  description 'Represents a course in Curricle'
+module Types
+  class CourseType < Types::BaseObject
+    description 'Represents a course in Curricle'
 
-  field :academic_group, types.String, 'Academic group'
-  field :academic_group_description, types.String, 'Academic group description'
-  field :academic_year, types.Int, 'Academic year'
-
-  field :annotation, Types::AnnotationType, 'Annotation added by the current user' do
-    resolve(
-      lambda do |course, _args, context|
-        BatchLoader::GraphQL.for(course.id).batch do |course_ids, loader|
-          Annotation.where(course: course_ids, user: context[:current_user]).each do |annotation|
-            loader.call(annotation.course_id, annotation)
-          end
+    def annotation
+      BatchLoader::GraphQL.for(object.id).batch do |course_ids, loader|
+        Annotation.where(course: course_ids, user: context[:current_user]).each do |annotation|
+          loader.call(annotation.course_id, annotation)
         end
       end
-    )
-  end
+    end
 
-  field :catalog_number, types.String, 'Catalog number'
-  field :class_academic_org_description, types.String, 'Class academic organization description'
-  field :class_section, types.String, 'Class section'
-  field :component, types.String, 'Component'
-  field :course_description, types.String, 'Course description'
+    def course_description_long
+      Sanitize.fragment(
+        object.course_description_long,
+        elements: %w[
+          b
+          em
+          i
+          p
+          strong
+        ]
+      )
+    end
 
-  field :course_description_long, types.String, 'Extended course description' do
-    resolve(
-      lambda do |course, _args, _ctx|
-        Sanitize.fragment(
-          course.course_description_long,
-          elements: %w[
-            b
-            em
-            i
-            p
-            strong
-          ]
-        )
-      end
-    )
-  end
-
-  field :course_instructors, types[Types::CourseInstructorType], 'List of course instructors' do
-    resolve(
-      lambda do |course, _args, _ctx|
-        BatchLoader::GraphQL.for(course.id).batch(default_value: []) do |course_ids, loader|
-          CourseInstructor.where(course_id: course_ids).each do |course_instructor|
-            loader.call(course_instructor.course_id) { |memo| memo << course_instructor }
-          end
+    def course_instructors
+      BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |course_ids, loader|
+        CourseInstructor.where(course_id: course_ids).each do |course_instructor|
+          loader.call(course_instructor.course_id) { |memo| memo << course_instructor }
         end
       end
-    )
-  end
+    end
 
-  field :course_meeting_patterns, types[Types::CourseMeetingPatternType], 'List of course meeting patterns' do
-    resolve(
-      lambda do |course, _args, _ctx|
-        BatchLoader::GraphQL.for(course.id).batch(default_value: []) do |course_ids, loader|
-          CourseMeetingPattern.where(course_id: course_ids).each do |course_meeting_pattern|
-            loader.call(course_meeting_pattern.course_id) { |memo| memo << course_meeting_pattern }
-          end
+    def course_meeting_patterns
+      BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |course_ids, loader|
+        CourseMeetingPattern.where(course_id: course_ids).each do |course_meeting_pattern|
+          loader.call(course_meeting_pattern.course_id) { |memo| memo << course_meeting_pattern }
         end
       end
-    )
-  end
+    end
 
-  field :course_note, types.String, 'Course note'
-  field :created_at, !types.String, 'Created at'
-  field :division, types.String, 'Division'
-  field :division_description, types.String, 'Division description'
-  field :external_course_id, types.Int, 'External course ID'
-  field :grading_basis_description, types.String, 'Grading basis description'
-  field :id, !types.ID, 'Unique ID'
-  field :prereq, types.Int, 'Prerequisite'
+    def semester
+      "#{object.term_name} #{object.term_year}"
+    end
 
-  field :semester, types.String do
-    resolve(
-      lambda do |course, _args, _ctx|
-        "#{course.term_name} #{course.term_year}"
-      end
-    )
-  end
-
-  field :subject, types.String, 'Subject'
-  field :subject_academic_org_description, types.String, 'Subject academic organization description'
-  field :subject_description, types.String, 'Subject description'
-
-  field :tags, types[Types::TagType], 'List of tags added by the current user' do
-    resolve(
-      lambda do |course, _args, context|
-        BatchLoader::GraphQL.for(course.id).batch(default_value: []) do |course_ids, loader|
-          Tag.where(course: course_ids, user: context[:current_user]).each do |tag|
-            loader.call(tag.course_id) { |memo| memo << tag }
-          end
+    def tags
+      BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |course_ids, loader|
+        Tag.where(course: course_ids, user: context[:current_user]).each do |tag|
+          loader.call(tag.course_id) { |memo| memo << tag }
         end
       end
-    )
-  end
+    end
 
-  field :term_name, types.String, 'Term name'
-  field :term_pattern_code, types.String, 'Term pattern code'
-  field :term_pattern_description, types.String, 'Term pattern description'
-  field :term_year, types.Int, 'Term year'
-  field :title, types.String, 'Title'
-  field :units_maximum, types.Int, 'Maximum units'
-  field :updated_at, !types.String, 'Updated at'
-
-  field :user_course, Types::UserCourseType, "Metadata about the user's course selection" do
-    resolve(
-      lambda do |course, _args, context|
-        BatchLoader::GraphQL.for(course.id).batch do |course_ids, loader|
-          UserCourse.where(course: course_ids, user: context[:current_user]).each do |user_course|
-            loader.call(user_course.course_id, user_course)
-          end
+    def user_course
+      BatchLoader::GraphQL.for(object.id).batch do |course_ids, loader|
+        UserCourse.where(course: course_ids, user: context[:current_user]).each do |user_course|
+          loader.call(user_course.course_id, user_course)
         end
       end
-    )
+    end
+
+    field :academic_group, String, null: true
+    field :academic_group_description, String, null: true
+    field :academic_year, Integer, null: true
+    field :annotation, Types::AnnotationType, 'Annotation added by the current user', null: true
+    field :catalog_number, String, null: true
+    field :class_academic_org_description, String, null: true
+    field :class_section, String, null: true
+    field :component, String, null: true
+    field :course_description, String, null: true
+    field :course_description_long, String, 'Extended course description', null: true
+    field :course_instructors, [Types::CourseInstructorType, null: true], 'List of course instructors', null: true
+    field :course_meeting_patterns, [Types::CourseMeetingPatternType, null: true], 'List of course meeting patterns', null: true
+    field :course_note, String, null: true
+    field :created_at, String, null: false
+    field :division, String, null: true
+    field :division_description, String, null: true
+    field :external_course_id, Integer, null: true
+    field :grading_basis_description, String, null: true
+    field :id, ID, null: false
+    field :prereq, Integer, 'Prerequisite', null: true
+    field :semester, String, null: true
+    field :subject, String, null: true
+    field :subject_academic_org_description, String, null: true
+    field :subject_description, String, null: true
+    field :tags, [Types::TagType, null: true], 'List of tags added by the current user', null: true
+    field :term_name, String, null: true
+    field :term_pattern_code, String, null: true
+    field :term_pattern_description, String, null: true
+    field :term_year, Integer, null: true
+    field :title, String, null: true
+    field :units_maximum, Integer, null: true
+    field :updated_at, String, null: false
+    field :user_course, Types::UserCourseType, "Metadata about the user's course selection", null: true
   end
 end

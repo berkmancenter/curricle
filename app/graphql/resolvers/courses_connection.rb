@@ -2,35 +2,55 @@
 
 module Resolvers
   # Return collections of courses based on query arguments
-
-  # TODO: Remove this in favor of CoursesConnectionResolver which has performance improvements
-  # and the ability to return metadata for search results
-  class CoursesResolver
+  class CoursesConnection < Resolvers::Base
     # TODO: enable search for additional fields
     FIELD_MAPPING = {
       'DESCRIPTION' => :course_description_long,
       'INSTRUCTOR' => %i[first_name last_name],
+      'NOTES' => :course_note,
       # 'Readings' => :readings,
       'TITLE' => :title
     }.freeze
 
-    def call(_obj, args, ctx)
-      return Course.find(args[:ids]) if args[:ids].present?
+    # Time range sliders are from 7 AM to 8 PM
+    TIME_RANGE_START = 7
+    TIME_RANGE_END = 20
 
+    COURSE_ID_REGEX = /\A([a-zA-Z-]+)\s?(\d\S*)\z/.freeze
+
+    type Types::CoursesConnectionType, null: false
+
+    argument :annotated, Boolean, 'Only return courses annotated by current user', required: false
+    argument :basic, String, 'Simple search queries using the my.harvard operators', required: false
+    argument :components, [Types::Enums::Component], 'Filter results by component', required: false
+    argument :deluxe_keywords, [Types::Inputs::DeluxeKeyword], 'List of objects for a weighted, field-specific search', required: false
+    argument :departments, [Types::Enums::Department], 'Filter results by department', required: false
+    argument :ids, [ID], 'List of course IDs', required: false
+    argument :page, Integer, 'Pagination page', required: false
+    argument :per_page, Integer, 'Number of courses to return', required: false
+    argument :schools, [Types::Enums::School], 'Filter results by school', required: false
+    argument :semester_range, Types::Inputs::SemesterRange, 'Range of semesters to search', required: false
+    argument :sort_by, Types::Enums::CourseSortField, 'Sort method for search results', required: false
+    argument :subjects, [Types::Enums::Subject], 'Filter results by subject', required: false
+    argument :time_ranges, [Types::Inputs::TimeRange], 'List of times/days to look for courses', required: false
+
+    def resolve(**args)
       search = search_by_keywords(args)
 
       return if search.blank?
 
       if args[:annotated].present?
-        filter_by_annotation(search.results, ctx[:current_user])
+        filter_by_annotation(search.results, context[:current_user])
       else
-        search.results
+        search
       end
     end
 
     def search_by_keywords(args)
       Course.search do
+        with :id, args[:ids] if args[:ids].present?
         args[:deluxe_keywords]&.each { |keyword| add_keyword_to_search(self, keyword) }
+        basic_search(self, args[:basic]) if args[:basic].present?
         apply_filters(self, args)
         apply_time_ranges(self, args[:time_ranges]) if args[:time_ranges]
         semester_range_scope(self, args[:semester_range])
@@ -49,16 +69,15 @@ module Resolvers
     #
     # * LIFESCI 50A
     # * xmit 11.487
-    # * XR-S -052A
     #
     def course_id?(string)
-      string =~ /\A[a-zA-Z-]+ \S+\z/
+      (string =~ COURSE_ID_REGEX) && true
     end
 
     def add_keyword_to_search(sunspot, keyword)
       sunspot.instance_eval do
         if keyword[:fields].include?('COURSE_ID') && course_id?(keyword[:text])
-          search_by_course_id(self, keyword)
+          search_by_course_id(self, keyword[:text])
         elsif keyword[:fields] == ['ID'] && keyword[:text] =~ /\A\d+\z/
           with :id, keyword[:text].to_i
         elsif keyword[:fields] != ['COURSE_ID']
@@ -69,12 +88,30 @@ module Resolvers
       end
     end
 
-    def search_by_course_id(sunspot, keyword)
-      subject, catalog_number = keyword[:text].split
+    def basic_search(sunspot, query)
+      if course_id?(query)
+        search_by_course_id(sunspot, query)
+        return
+      end
+
+      stripped_query = query.gsub(/[()]/, '"')
+      phrases = stripped_query.split('|')
+
+      sunspot.instance_eval do
+        any do
+          phrases.each do |phrase|
+            fulltext phrase, fields: %i[class_academic_org_description course_description_long title]
+          end
+        end
+      end
+    end
+
+    def search_by_course_id(sunspot, query)
+      subject, catalog_number = query.match(COURSE_ID_REGEX).captures
 
       sunspot.instance_eval do
         with :subject, subject.upcase
-        with :catalog_number, catalog_number
+        with :catalog_number, catalog_number.upcase
       end
     end
 
@@ -112,7 +149,7 @@ module Resolvers
 
             if intermediate_years.any?
               all_of do
-                with :term_name, TermNameEnum.values.values.map(&:value)
+                with :term_name, Types::Enums::TermName.values.values.map(&:value)
                 with :term_year, intermediate_years
               end
             end
@@ -170,7 +207,7 @@ module Resolvers
     end
 
     def apply_time_ranges(sunspot, times)
-      return unless times.any?
+      return if times.blank?
 
       # times is an array of days of week and start/end values for
       # valid meeting times.
@@ -178,44 +215,57 @@ module Resolvers
       # per definition, if a day is not included in this search, we
       # *must* exclude anything which meets on this particular day.
 
-      # so for each day, we must either include it in the search or
-      # explicitly exclude it from the search.
+      # skip any Solr-based filtering if all ranges equal the min/max values
+      non_default_ranges = times.reject { |time| [time.time_start, time.time_end] == [TIME_RANGE_START, TIME_RANGE_END] }
+      return if non_default_ranges.blank? && times.length == 5
 
-      # convert to a more useful format...
-      lkup = Hash[times.collect { |t| [t[:day_name], [t[:time_start], t[:time_end]]] }]
-      days = %w(monday tuesday wednesday thursday friday)
+      time_ranges = Hash[times.collect { |t| [t[:day_name], [t[:time_start], t[:time_end]]] }]
 
-      excludes = []
-      includes = []
-
-      days.each do |d|
-        if lkup[d.capitalize]
-          includes.push(d)
-        else
-          excludes.push(d)
-        end
-      end
+      weekdays = %w[monday tuesday wednesday thursday friday]
+      days = weekdays + %w[saturday sunday]
+      included_days = weekdays.select { |day| time_ranges.key?(day.capitalize) }
+      excluded_days = weekdays - included_days
 
       sunspot.instance_eval do
-        excludes.each { |d| with "meets_on_#{d}", false }
         any_of do
-          includes.each { |d|
-            any_of do
-              with "meets_on_#{d}", false
-              all_of do
-                range = lkup[d.capitalize]
-                with "meets_on_#{d}", true
-                # with(:meeting_time_start).greater_than_or_equal_to(range[0])
-                # with(:meeting_time_end).less_than_or_equal_to(range[1])
+          # always include TBD courses with no meeting patterns
+          all_of do
+            days.each { |d| with "meets_on_#{d}", false }
+          end
+
+          # Some courses have meets_on_x values but no meeting_time_start or _end
+          # Unfortunately the Sunspot bug referenced in issue #652 prevents this from working:
+          # with(:meeting_time_start, nil)
+          # with(:meeting_time_end, nil)
+
+          included_days.each do |d|
+            all_of do
+              range = time_ranges[d.capitalize]
+              with "meets_on_#{d}", true
+              excluded_days.each { |day| with("meets_on_#{day}", false) }
+
+              # Sunspot bug https://github.com/sunspot/sunspot/issues/652
+              # prevents this syntax from working...
+              #
+              # with(:meeting_time_start).greater_than_or_equal_to(range[0])
+              # with(:meeting_time_end).less_than_or_equal_to(range[1])
+              #
+              # ...so we are using this slower version:
+              if range[0] != TIME_RANGE_START
                 any_of do
-                  (range[0]..24).to_a.each { |a| with(:meeting_time_start, a) }
+                  # 19:00 is the latest a class can start
+                  (range[0]..19).to_a.each { |a| with(:meeting_time_start, a) }
                 end
+              end
+
+              if range[1] != TIME_RANGE_END
                 any_of do
-                  (0..range[1]).to_a.each { |a| with(:meeting_time_end, a) }
+                  # 8:00 is the earliest a class can end
+                  (8..range[1]).to_a.each { |a| with(:meeting_time_end, a) }
                 end
               end
             end
-          }
+          end
         end
       end
     end

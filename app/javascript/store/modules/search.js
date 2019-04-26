@@ -119,8 +119,8 @@ const getters = {
 
   semesterStart (state) {
     return {
-      term_name: state.searchTermStart.toUpperCase(),
-      term_year: state.searchYearStart
+      termName: state.searchTermStart.toUpperCase(),
+      termYear: state.searchYearStart
     }
   },
 
@@ -128,15 +128,15 @@ const getters = {
     if (!state.searchTermUseRange) { return }
 
     return {
-      term_name: state.searchTermEnd.toUpperCase(),
-      term_year: state.searchYearEnd
+      termName: state.searchTermEnd.toUpperCase(),
+      termYear: state.searchYearEnd
     }
   },
 
   currentSemester (state) {
     return {
-      term_name: thisSemester,
-      term_year: thisYear
+      termName: thisSemester,
+      termYear: thisYear
     }
   },
 
@@ -285,15 +285,15 @@ const actions = {
 
     vars.semesterRange = {
       start: {
-        term_name: state.searchTermStart.toUpperCase(),
-        term_year: state.searchYearStart
+        termName: state.searchTermStart.toUpperCase(),
+        termYear: state.searchYearStart
       }
     }
 
     if (state.searchTermUseRange) {
       vars.semesterRange.end = {
-        term_name: state.searchTermEnd.toUpperCase(),
-        term_year: state.searchYearEnd
+        termName: state.searchTermEnd.toUpperCase(),
+        termYear: state.searchYearEnd
       }
     }
 
@@ -329,7 +329,7 @@ const actions = {
       return
     }
 
-    vars.schools = getters.selectedFilters('academic_groups')
+    vars.schools = getters.selectedFilters('academicGroups')
     vars.departments = getters.selectedFilters('departments')
     vars.subjects = getters.selectedFilters('subjects')
     vars.components = getters.selectedFilters('components')
@@ -408,7 +408,7 @@ const actions = {
     )
   },
   populateFacets ({ state }, { facets }) {
-    const facetNames = ['academic_groups', 'components', 'departments', 'subjects']
+    const facetNames = ['academicGroups', 'components', 'departments', 'subjects']
 
     facetNames.forEach(
       (facetName) => {

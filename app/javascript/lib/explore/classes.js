@@ -107,10 +107,10 @@ function loadFullData (semester) {
     query: COURSE_COUNTS_QUERY,
     variables: { semester }
   }).then(function (response) {
-    fullData = response.data.course_counts
+    fullData = response.data.courseCounts
     appendAxis()
-    setDepartmentData(response.data.course_counts)
-    setCourseTypeData(response.data.course_counts)
+    setDepartmentData(response.data.courseCounts)
+    setCourseTypeData(response.data.courseCounts)
     showLoaderOverlay(false)
   })
 }

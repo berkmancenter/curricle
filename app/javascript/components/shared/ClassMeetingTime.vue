@@ -25,7 +25,7 @@
     v-else
   >
     <div v-if="pastSemester">
-      {{ course.term_name }} {{ course.term_year }}
+      {{ course.termName }} {{ course.termYear }}
     </div>
     <div v-else>
       <img
@@ -113,7 +113,7 @@ export default {
     },
     hasData () { return this.days && this.days.length },
     pastSemester () {
-      return this.$store.getters['search/isPastSemester'](this.course.term_name, this.course.term_year)
+      return this.$store.getters['search/isPastSemester'](this.course.termName, this.course.termYear)
     }
   }
 }

@@ -1,9 +1,9 @@
 #import "./CourseFragment.gql"
 query CoursesConnectedByInstructor(
   $instructorName: String!,
-  $semester: SemesterInput!
+  $semester: Semester!
 ) {
-    courses_connected_by_instructor(
+    coursesConnectedByInstructor(
       name: $instructorName,
       semester: $semester
     ) {

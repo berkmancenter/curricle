@@ -105,7 +105,7 @@ const actions = {
       query: USER_COURSES_QUERY,
       variables: { scheduleToken: state.sharedScheduleToken }
     }).then(response => {
-      const userCourses = response.data.user_courses
+      const userCourses = response.data.userCourses
 
       if (userCourses.length) {
         _.each(
@@ -117,7 +117,7 @@ const actions = {
               commit('SET_USER_FLAG', { type: 'annotated', course: course.id, value: true })
             }
 
-            if (course.user_course.include_in_path) {
+            if (course.userCourse.includeInPath) {
               commit('SET_USER_FLAG', { type: 'schedule', course: course.id, value: true })
             }
           }
