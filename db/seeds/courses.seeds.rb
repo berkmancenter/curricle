@@ -7,10 +7,13 @@ class CurricleCourseImporter < CurricleImporter
 
   SQL_COLUMNS = %w[
     external_course_id
+    offer_number
     course_description
     title
     term_name
     term_year
+    term_code
+    session_code
     academic_year
     class_section
     component
@@ -31,22 +34,35 @@ class CurricleCourseImporter < CurricleImporter
     updated_at
   ].freeze
 
+  UNIQUE_KEY_COLUMNS = %w[
+    external_course_id
+    offer_number
+    term_code
+    session_code
+    class_section
+  ].freeze
+
   def format_row(row) # rubocop:disable Metrics/MethodLength
     external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
     term_year = term_year.to_i
-    key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
 
-    return if COURSES_CACHE.key?(key)
+    # These fields are used in the composite key in the database and are required,
+    # skip the rows that have incomplete data
+    return if (row[:course_offer_number] && row[:session_code] && row[:class_section]).blank?
+
     return if row[:class_status] == 'X' # do not import courses that have been cancelled
     return if row[:class_type] == 'N' # do not import discussion sections
 
     [
       external_course_id,
+      row[:course_offer_number],
       row[:course_descr],
       row[:course_title_long],
       term_name,
-      term_year.to_i,
+      term_year,
+      row[:term_code],
+      row[:session_code],
       row[:academic_year],
       row[:class_section],
       row[:component_description],

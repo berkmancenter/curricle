@@ -17,6 +17,7 @@ class CurricleImporter
   def initialize
     @table_name = self.class::TABLE_NAME
     @sql_columns = self.class::SQL_COLUMNS
+    @unique_key_columns = self.class::UNIQUE_KEY_COLUMNS
     @csv_file = Rails.root.join('lib', 'seeds', "#{@table_name}.csv")
     @progressbar = progressbar(@csv_file)
     @pgconn = Course.connection.raw_connection
@@ -24,9 +25,11 @@ class CurricleImporter
   end
 
   def run
-    puts "Seeding #{@table_name}"
+    puts "Loading #{@table_name} into temporary #{@table_name}_temp table"
 
-    @pgconn.copy_data("COPY #{@table_name} (#{@sql_columns.join(',')}) FROM STDIN", @enco) do
+    @pgconn.exec("CREATE TEMP TABLE #{@table_name}_temp AS SELECT #{@sql_columns.join(',')} FROM #{@table_name} WITH NO DATA;")
+
+    @pgconn.copy_data("COPY #{@table_name}_temp (#{@sql_columns.join(',')}) FROM STDIN", @enco) do
       CSV.foreach(@csv_file, headers: true, header_converters: :symbol) do |row|
         formatted_row = format_row(row)
 
@@ -35,6 +38,20 @@ class CurricleImporter
         @progressbar.increment!
       end
     end
+
+    puts "Copying courses from temporary #{@table_name}_temp table into #{@table_name} table"
+
+    sql = "INSERT INTO #{@table_name} (#{@sql_columns.join(',')})
+      SELECT #{@sql_columns.join(',')}
+      FROM #{@table_name}_temp
+      ON CONFLICT (#{@unique_key_columns.join(',')})
+      DO UPDATE SET
+        (#{@sql_columns.join(',')}) =
+        (#{@sql_columns.map { |c| "EXCLUDED.#{c}" }.join(',')});
+
+      DISCARD TEMP;"
+
+    @pgconn.exec(sql)
   end
 
   private

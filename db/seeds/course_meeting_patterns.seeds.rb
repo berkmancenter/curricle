@@ -29,6 +29,8 @@ class CurricleCourseMeetingPatternImporter < CurricleImporter
     updated_at
   ].freeze
 
+  UNIQUE_KEY_COLUMNS = ['id'].freeze
+
   def format_row(row) # rubocop:disable Metrics/MethodLength
     external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')

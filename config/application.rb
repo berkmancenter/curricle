@@ -25,5 +25,7 @@ module Curricle
     config.autoload_paths += Dir.glob("#{config.root}/app/graphql/types/inputs")
 
     config.middleware.use BatchLoader::Middleware
+
+    config.active_record.schema_format = :sql
   end
 end

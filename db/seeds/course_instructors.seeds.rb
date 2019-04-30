@@ -31,6 +31,8 @@ class CurricleCourseInstructorImporter < CurricleImporter
     SI
   ].freeze
 
+  UNIQUE_KEY_COLUMNS = ['id'].freeze
+
   def format_row(row) # rubocop:disable Metrics/MethodLength
     return unless row[:instructor_role].in?(VALID_INSTRUCTOR_ROLES)
 

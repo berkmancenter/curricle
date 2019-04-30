@@ -16,4 +16,10 @@ RSpec.describe Course, type: :model do
   it 'has a valid factory' do
     expect(course).to be_valid
   end
+
+  it { is_expected.to validate_presence_of(:external_course_id) }
+  it { is_expected.to validate_presence_of(:offer_number) }
+  it { is_expected.to validate_presence_of(:term_code) }
+  it { is_expected.to validate_presence_of(:session_code) }
+  it { is_expected.to validate_presence_of(:class_section) }
 end

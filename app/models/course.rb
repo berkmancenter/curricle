@@ -9,6 +9,12 @@ class Course < ApplicationRecord
   has_many :users, through: :user_courses, inverse_of: :courses
   has_many :annotations, dependent: :destroy
 
+  validates :external_course_id, presence: true
+  validates :offer_number, presence: true
+  validates :term_code, presence: true
+  validates :session_code, presence: true
+  validates :class_section, presence: true
+
   searchable do
     integer :id
     integer :external_course_id
