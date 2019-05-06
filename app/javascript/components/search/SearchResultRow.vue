@@ -8,28 +8,20 @@
       <course-action
         :course="course.id"
         :invert="selected"
-        class="mr-5"
+        class="mr-1"
         type="tray"
+      />
+
+      <course-action
+        :course="course.id"
+        :invert="selected"
+        class="mr-2"
+        type="schedule"
       />
 
       <span class="text-muted">
         &mdash;
       </span>
-
-      <br>
-
-      <course-action
-        :course="course.id"
-        :invert="selected"
-        class="mr-1"
-        type="tagged"
-      />
-
-      <course-action
-        :course="course.id"
-        :invert="selected"
-        type="annotated"
-      />
     </div>
 
     <div
