@@ -32,11 +32,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import PlanSemesterView from 'components/plan/semester-view'
-import PlanYearView from 'components/plan/multi-year-view'
-import SemesterSelector from 'components/plan/semester-selector'
+import PlanSemesterView from 'components/plan/SemesterView'
+import PlanYearView from 'components/plan/MultiYearView'
+import SemesterSelector from 'components/plan/SemesterSelector'
 import TheSidebar from 'components/TheSidebar'
-import ViewSelector from 'components/shared/view-selector'
+import ViewSelector from 'components/shared/ViewSelector'
 
 export default {
   components: {

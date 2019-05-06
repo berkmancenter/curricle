@@ -12,7 +12,7 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import SemesterCreditHours from 'components/plan/semester-credit-hours'
+import SemesterCreditHours from 'components/plan/SemesterCreditHours'
 
 export default {
   components: {

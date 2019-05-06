@@ -79,7 +79,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import { partitionCoursesByMeetingTime } from 'lib/util'
 
-import CalendarItem from 'components/plan/calendar-item'
+import CalendarItem from 'components/plan/CalendarItem'
 
 export default {
   components: {

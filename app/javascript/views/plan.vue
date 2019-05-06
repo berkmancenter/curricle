@@ -24,11 +24,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import PlanListView from 'components/plan/list-view'
-import PlanYearView from 'components/plan/multi-year-view'
-import PlanSemesterView from 'components/plan/semester-view'
-import DepartmentSelector from 'components/plan/department-selector'
-import SemesterSelector from 'components/plan/semester-selector'
+import PlanListView from 'components/plan/ListView'
+import PlanYearView from 'components/plan/MultiYearView'
+import PlanSemesterView from 'components/plan/SemesterView'
+import DepartmentSelector from 'components/plan/DepartmentSelector'
+import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
   components: {

@@ -10,7 +10,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Tray from 'components/tray/tray'
+import Tray from 'components/tray/Tray'
 
 export default {
   components: {

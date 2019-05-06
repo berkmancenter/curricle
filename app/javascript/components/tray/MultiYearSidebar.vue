@@ -21,7 +21,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import CourseList from 'components/shared/course-list'
+import CourseList from 'components/shared/CourseList'
 import _ from 'lodash'
 
 export default {

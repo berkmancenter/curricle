@@ -11,8 +11,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import DepartmentSelector from 'components/plan/department-selector'
-import SemesterSelector from 'components/plan/semester-selector'
+import DepartmentSelector from 'components/plan/DepartmentSelector'
+import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
   components: {

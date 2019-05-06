@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CourseList from 'components/shared/course-list'
+import CourseList from 'components/shared/CourseList'
 import SidebarListFilters from './SidebarListFilters'
 
 export default {
