@@ -4,42 +4,42 @@
 
     <div class="drop-down actions">
       <department-selector
-        v-show="viewmode.plan == 'list-view'"
+        v-show="viewMode == 'list'"
       />
 
       <semester-selector
-        v-show="viewmode.plan !== 'multi-year'"
-        :mode="viewmode.plan == 'list-view' ? 'filter' : 'state'"
-        :source="viewmode.plan == 'list-view' ? 'tray' : 'schedule'"
+        v-show="viewMode !== 'semester'"
+        :mode="viewMode == 'list' ? 'filter' : 'state'"
+        :source="viewMode == 'list' ? 'tray' : 'schedule'"
       />
     </div>
     <div class="clearfix" />
     <div>
-      <plan-list-view v-show="viewmode.plan === 'list-view'" />
-      <plan-semester-view v-show="viewmode.plan === 'semester'" />
-      <plan-year-view v-show="viewmode.plan === 'multi-year'" />
+      <list-view v-show="viewMode === 'list'" />
+      <week-view v-show="viewMode === 'week'" />
+      <semester-view v-show="viewMode === 'semester'" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import PlanListView from 'components/plan/ListView'
-import PlanYearView from 'components/plan/MultiYearView'
-import PlanSemesterView from 'components/plan/SemesterView'
+import ListView from 'components/plan/ListView'
+import WeekView from 'components/plan/WeekView'
+import SemesterView from 'components/plan/SemesterView'
 import DepartmentSelector from 'components/plan/DepartmentSelector'
 import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
   components: {
     DepartmentSelector,
-    PlanListView,
-    PlanYearView,
-    PlanSemesterView,
+    ListView,
+    WeekView,
+    SemesterView,
     SemesterSelector
   },
   computed: {
-    ...mapState('app', ['viewmode'])
+    ...mapState('plan', ['viewMode'])
   }
 }
 </script>

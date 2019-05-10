@@ -5,46 +5,39 @@
         <p>Shared Schedule</p>
         <hr>
         <div class="actions clearfix">
-          <view-selector
-            :show-list-view="false"
-            type="plan"
-          />
-
           <semester-selector
-            v-show="viewmode.plan !== 'multi-year'"
+            v-show="viewMode !== 'semester'"
             :mode="'state'"
             :source="'schedule'"
           />
         </div>
 
         <div>
-          <plan-semester-view v-show="viewmode.plan === 'semester'" />
-          <plan-year-view v-show="viewmode.plan === 'multi-year'" />
+          <week-view v-show="viewMode === 'week'" />
+          <semester-view v-show="viewMode === 'semester'" />
         </div>
       </div>
     </div>
 
     <div class="col-md-3 top-header">
-      <the-sidebar />
+      <the-tray />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import PlanSemesterView from 'components/plan/SemesterView'
-import PlanYearView from 'components/plan/MultiYearView'
+import WeekView from 'components/plan/WeekView'
+import SemesterView from 'components/plan/SemesterView'
 import SemesterSelector from 'components/plan/SemesterSelector'
-import TheSidebar from 'components/TheSidebar'
-import ViewSelector from 'components/shared/ViewSelector'
+import TheTray from 'components/TheTray'
 
 export default {
   components: {
-    PlanSemesterView,
-    PlanYearView,
+    WeekView,
+    SemesterView,
     SemesterSelector,
-    TheSidebar,
-    ViewSelector
+    TheTray
   },
   props: {
     scheduleToken: {
@@ -53,11 +46,10 @@ export default {
     }
   },
   computed: {
-    ...mapState('app', ['viewmode'])
+    ...mapState('plan', ['viewMode'])
   },
   created () {
     this.$store.commit('user/SET_SHARED_SCHEDULE_TOKEN', this.scheduleToken)
-    this.$store.commit('app/CHOOSE_SIDEBAR_VIEW', { type: 'plan', view: 'semester' })
   }
 }
 </script>

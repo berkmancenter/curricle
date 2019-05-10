@@ -29,10 +29,14 @@
     </div>
     <div v-else>
       <img
+        v-if="tbdIcon"
         class="icon-tbd"
         src="/images/icons/tbd.png"
         alt="Schedule TBD"
       >
+      <p v-else>
+        TBD
+      </p>
     </div>
   </div>
 </template>
@@ -77,10 +81,9 @@ export default {
       type: Boolean,
       default: false
     },
-    scaleWidth: {
-      type: Number,
-      required: false,
-      default: 0
+    tbdIcon: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -130,7 +133,7 @@ export default {
 
 .day-name {
   display: inline-block;
-  width: 32px;
+  width: 36px;
 }
 
 img.icon-tbd {

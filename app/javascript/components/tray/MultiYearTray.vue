@@ -1,5 +1,5 @@
 <template>
-  <div class="multi-year-sidebar">
+  <div class="multi-year-tray">
     <div
       v-for="semester in sortedSemestersInTray.slice().reverse()"
       :key="semester"
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import CourseList from 'components/shared/CourseList'
 import _ from 'lodash'
 
@@ -34,7 +34,6 @@ export default {
     }
   },
   computed: {
-    ...mapState('app', ['viewmode']),
     ...mapGetters('plan', ['scheduledCoursesBySemester', 'trayCoursesBySemester', 'sortedSemestersInTray'])
   },
   mounted () {

@@ -104,9 +104,9 @@
         class="nav-sub-container"
       >
         <span
-          :class="{ 'router-link-exact-active': viewmode['plan'] === 'list-view' }"
+          :class="{ 'router-link-exact-active': viewMode === 'list' }"
           class="nav sub"
-          @click="selectView({ view: 'list-view', type: 'plan' })"
+          @click="selectView('list')"
         >
           List
         </span>
@@ -114,9 +114,9 @@
         <br>
 
         <span
-          :class="{ 'router-link-exact-active': viewmode['plan'] === 'semester' }"
+          :class="{ 'router-link-exact-active': viewMode === 'week' }"
           class="nav sub"
-          @click="selectView({ view: 'semester', type: 'plan' })"
+          @click="selectView('week')"
         >
           Week
         </span>
@@ -124,10 +124,10 @@
         <br>
 
         <span
-          :class="{ 'router-link-exact-active': viewmode['plan'] === 'multi-year' }"
+          :class="{ 'router-link-exact-active': viewMode === 'semester' }"
           class="nav sub"
           href="javascript:null"
-          @click="selectView({ view: 'multi-year', type: 'plan' })"
+          @click="selectView('semester')"
         >
           Semester
         </span>
@@ -165,13 +165,13 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
-    ...mapState('app', ['viewmode']),
+    ...mapState('plan', ['viewMode']),
     activeNavPrimary () {
       return this.$route.path.split('/')[1]
     }
   },
   methods: {
-    ...mapActions('app', ['selectView'])
+    ...mapActions('plan', ['selectView'])
   }
 }
 </script>

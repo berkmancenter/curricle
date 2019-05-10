@@ -2,7 +2,7 @@
   <div
     id="navbar-control"
     class="background-black pointer text-uppercase"
-    @click="closeSidebar"
+    @click="trayClose"
   >
     Menu
   </div>
@@ -13,7 +13,7 @@ import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions('app', ['closeSidebar'])
+    ...mapActions('app', ['trayClose'])
   }
 }
 </script>

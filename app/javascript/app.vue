@@ -10,25 +10,25 @@
     />
 
     <the-navbar-control
-      v-if="userAuthenticated && sidebarVisible"
+      v-if="userAuthenticated && trayVisible"
       class="d-none d-sm-block"
     />
 
     <the-tray-control
-      v-if="userAuthenticated && !sidebarVisible"
+      v-if="userAuthenticated && !trayVisible"
       class="d-none d-sm-block"
     />
 
     <the-logout-link
-      v-if="userAuthenticated && !sidebarVisible"
+      v-if="userAuthenticated && !trayVisible"
       class="d-none d-sm-block"
     />
 
     <div class="row">
       <div
-        v-if="!sidebarVisible"
+        v-if="!trayVisible"
         id="nav-container"
-        :class="{ active: !sidebarVisible }"
+        :class="{ active: !trayVisible }"
         class="col-sm-2 d-none d-sm-block"
       >
         <navbar />
@@ -37,7 +37,7 @@
       <div
         id="main-container"
         class="col-sm-10 d-sm-block"
-        :class="{ 'd-none': sidebarVisible }"
+        :class="{ 'd-none': trayVisible }"
       >
         <the-alert />
 
@@ -53,12 +53,12 @@
       </div>
 
       <div
-        v-if="sidebarVisible"
-        id="sidebar-container"
-        :class="{ active: sidebarVisible, 'col-12': sidebarVisible }"
+        v-if="trayVisible"
+        id="tray-container"
+        :class="{ active: trayVisible, 'col-12': trayVisible }"
         class="col-sm-2"
       >
-        <the-sidebar />
+        <the-tray />
       </div>
 
       <the-footer class="d-none d-sm-flex" />
@@ -76,7 +76,7 @@ import CourseObserver from 'components/course-observer'
 import SelectedCourse from 'components/shared/SelectedCourse'
 import TheFooter from 'components/TheFooter'
 import TheLogoutLink from 'components/TheLogoutLink'
-import TheSidebar from 'components/TheSidebar'
+import TheTray from 'components/TheTray'
 import TheTrayControl from 'components/TheTrayControl'
 import TheNavbarControl from 'components/TheNavbarControl'
 import TheAlert from 'components/TheAlert'
@@ -90,7 +90,7 @@ export default {
     SelectedCourse,
     TheFooter,
     TheLogoutLink,
-    TheSidebar,
+    TheTray,
     TheTrayControl,
     TheNavbarControl,
     TheAlert,
@@ -98,11 +98,7 @@ export default {
   },
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
-    ...mapGetters('app', ['sidebarCurrentContext', 'sidebarCurrentType']),
-    ...mapState('app', ['selectedCourse']),
-    sidebarVisible () {
-      return this.sidebarCurrentType === 'tray'
-    }
+    ...mapState('app', ['selectedCourse', 'trayVisible'])
   },
   mounted () {
     // load initial data
@@ -118,13 +114,13 @@ export default {
 
 #nav-container,
 #main-container,
-#sidebar-container {
+#tray-container {
   height: 100vh;
   overflow: auto;
 }
 
 #nav-container.active,
-#sidebar-container.active {
+#tray-container.active {
   background-color: #000;
   color: #fff;
 }

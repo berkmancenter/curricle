@@ -1,5 +1,5 @@
 <template>
-  <p class="tray-share float-right text-right">
+  <span class="tray-share">
     <span
       id="share-dropdown"
       class="pointer"
@@ -19,7 +19,7 @@
         </span>
       </b-popover>
     </span>
-  </p>
+  </span>
 </template>
 
 <script>
