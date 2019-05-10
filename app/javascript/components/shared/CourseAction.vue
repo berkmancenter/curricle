@@ -6,7 +6,7 @@
       :class="{ 'text-white': invert }"
       :title="tooltip"
       class="pointer"
-      @click="click"
+      @click.stop="click"
     />
   </span>
 </template>
