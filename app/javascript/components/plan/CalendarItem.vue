@@ -1,11 +1,17 @@
 <template>
   <div
-    :class="{ conflicted, provisional, selected }"
+    :class="{ conflicted, provisional, selected, hidden }"
     :style="computedStyle"
     class="calendar-item text-uppercase font-weight-bold p-2"
     @click="selectCourse(item)"
   >
     {{ item.title }}
+
+    <course-action
+      :course="item.id"
+      :invert="selected"
+      type="schedule"
+    />
 
     <div class="course-component">
       {{ item.component }}
@@ -15,8 +21,12 @@
 
 <script>
 import { mapActions } from 'vuex'
+import CourseAction from 'components/shared/CourseAction.vue'
 
 export default {
+  components: {
+    CourseAction
+  },
   props: {
     item: {
       type: Object,
@@ -31,6 +41,10 @@ export default {
       default: false
     },
     conflicted: {
+      type: Boolean,
+      default: false
+    },
+    hidden: {
       type: Boolean,
       default: false
     },
@@ -131,8 +145,15 @@ export default {
     }
   }
 
+  &.hidden {
+    border-color: #999;
+    color: #999;
+    font-style: italic;
+  }
+
   .course-component {
     color: #777;
+    font-style: normal;
     font-weight: normal;
     white-space: nowrap;
     transform: translateX(-10px) translateY(-15px) rotate(-90deg);
@@ -140,6 +161,12 @@ export default {
     position: absolute;
     top: 100%;
     left: 100%;
+  }
+
+  .course-action {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
   }
 }
 </style>
