@@ -86,6 +86,7 @@ module Types
     field :subject_academic_org_description, String, null: true
     field :subject_description, String, null: true
     field :tags, [Types::TagType, null: true], 'List of tags added by the current user', null: true
+    field :term_code, Integer, null: false
     field :term_name, String, null: true
     field :term_pattern_code, String, null: true
     field :term_pattern_description, String, null: true

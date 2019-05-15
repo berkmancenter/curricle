@@ -15,6 +15,7 @@ fragment Course on Course {
   subject
   subjectAcademicOrgDescription
   subjectDescription
+  termCode
   termName
   termYear
   title

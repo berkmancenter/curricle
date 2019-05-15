@@ -5,7 +5,17 @@
       source="schedule"
     />
 
-    <b-row v-show="coursesTBD && coursesTBD.length">
+    <br>
+
+    <my-harvard-link
+      v-if="scheduleCourses.length"
+      :courses="scheduleCourses"
+      class="mt-2 mb-4"
+    />
+
+    <b-row
+      v-show="coursesTBD && coursesTBD.length"
+    >
       <b-col style="height: 150px;">
         <b-row>
           <b-col class="md-1 font-weight-bold text-uppercase">
@@ -86,11 +96,13 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import { partitionCoursesByMeetingTime } from 'lib/util'
 import CalendarItem from 'components/plan/CalendarItem'
+import MyHarvardLink from 'components/plan/MyHarvardLink'
 import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
   components: {
     CalendarItem,
+    MyHarvardLink,
     SemesterSelector
   },
   data () {
@@ -101,7 +113,7 @@ export default {
   computed: {
     ...mapGetters('app', ['currentCourse']),
     ...mapState('plan', ['semester', 'provisionalCourses']),
-    ...mapGetters('plan', ['sortedSemestersInTray', 'trayCourses', 'scheduledCourseConflictsByDay', 'courseConflictInfoForDay']),
+    ...mapGetters('plan', ['sortedSemestersInTray', 'trayCourses', 'scheduledCourseConflictsByDay', 'courseConflictInfoForDay', 'scheduledCoursesBySemester']),
     ...mapGetters('user', ['courseIdInSchedule']),
     courses () {
       return _.uniqBy(
@@ -163,6 +175,9 @@ export default {
         _.keys(this.provisionalCourses),
         _.map(this.trayCourses, 'id')
       )
+    },
+    scheduleCourses () {
+      return this.scheduledCoursesBySemester[this.semester] || []
     }
   },
   mounted () {

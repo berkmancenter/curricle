@@ -7,6 +7,14 @@
       source="tray"
     />
 
+    <br>
+
+    <my-harvard-link
+      v-if="semester && scheduleCourses.length"
+      :courses="scheduleCourses"
+      class="mt-2 mb-4"
+    />
+
     <div
       v-for="course in filteredCourses"
       :key="course.id"
@@ -75,11 +83,12 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
 import DepartmentSelector from 'components/plan/DepartmentSelector'
+import MyHarvardLink from 'components/plan/MyHarvardLink'
 import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
@@ -88,11 +97,19 @@ export default {
     CourseAction,
     ClassMeetingTime,
     DepartmentSelector,
+    MyHarvardLink,
     SemesterSelector
   },
   computed: {
     ...mapGetters('app', ['currentCourse']),
-    ...mapGetters('plan', ['filteredCourses'])
+    ...mapGetters('plan', ['filteredCourses', 'scheduledCoursesBySemester']),
+    ...mapState('plan', ['filters']),
+    scheduleCourses () {
+      return this.scheduledCoursesBySemester[this.semester] || []
+    },
+    semester () {
+      return this.filters.semester
+    }
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
