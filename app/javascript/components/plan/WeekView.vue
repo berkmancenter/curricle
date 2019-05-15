@@ -1,5 +1,10 @@
 <template>
-  <div class="mt-3">
+  <div>
+    <semester-selector
+      mode="state"
+      source="schedule"
+    />
+
     <b-row v-show="coursesTBD && coursesTBD.length">
       <b-col style="height: 150px;">
         <b-row>
@@ -80,12 +85,13 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import { partitionCoursesByMeetingTime } from 'lib/util'
-
 import CalendarItem from 'components/plan/CalendarItem'
+import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
   components: {
-    CalendarItem
+    CalendarItem,
+    SemesterSelector
   },
   data () {
     return {

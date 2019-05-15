@@ -6,7 +6,7 @@ import { deserializeSearch } from 'lib/util'
 import CurricleAbout from '../views/About'
 import CurricleExplore from '../views/explore'
 import CurricleHome from '../views/Home'
-import CurriclePlan from '../views/plan'
+import CurriclePlan from 'views/Plan'
 import SearchAdvanced from 'views/SearchAdvanced'
 import SearchBasic from 'views/SearchBasic'
 import SharedSchedule from '../views/SharedSchedule'
@@ -15,6 +15,9 @@ import ExploreClasses from '../components/explore/classes'
 import ExploreInstructors from '../components/explore/instructors'
 import ExploreKeywords from '../components/explore/keywords'
 import ExploreUniverse from '../components/explore/universe'
+import PlanListView from 'components/plan/ListView'
+import PlanWeekView from 'components/plan/WeekView'
+import PlanSemesterView from 'components/plan/SemesterView'
 
 Vue.use(VueRouter)
 
@@ -42,7 +45,15 @@ const router = new VueRouter({
       }]
     },
     { path: '/home', component: CurricleHome },
-    { path: '/plan', component: CurriclePlan },
+    { path: '/plan',
+      component: CurriclePlan,
+      children: [
+        { path: '', component: PlanListView },
+        { path: '/plan/list', component: PlanListView },
+        { path: '/plan/week', component: PlanWeekView },
+        { path: '/plan/semester', component: PlanSemesterView }
+      ]
+    },
     { path: '/search', component: SearchBasic },
     { path: '/search/advanced', component: SearchAdvanced },
     { path: '/search/advanced/*', component: SearchAdvanced, props: deserializeSearch },

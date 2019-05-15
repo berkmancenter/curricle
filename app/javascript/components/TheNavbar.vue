@@ -90,7 +90,7 @@
       </div>
 
       <router-link
-        class="nav primary plan"
+        class="nav primary"
         to="/plan"
       >
         Plan
@@ -98,39 +98,34 @@
 
       <br>
 
-      <!-- TODO: Update Plan navigation to use vue-router -->
       <div
         v-show="activeNavPrimary === 'plan'"
         class="nav-sub-container"
       >
-        <span
-          :class="{ 'router-link-exact-active': viewMode === 'list' }"
+        <router-link
           class="nav sub"
-          @click="selectView('list')"
+          to="/plan/list"
         >
           List
-        </span>
+        </router-link>
 
         <br>
 
-        <span
-          :class="{ 'router-link-exact-active': viewMode === 'week' }"
+        <router-link
           class="nav sub"
-          @click="selectView('week')"
+          to="/plan/week"
         >
           Week
-        </span>
+        </router-link>
 
         <br>
 
-        <span
-          :class="{ 'router-link-exact-active': viewMode === 'semester' }"
+        <router-link
           class="nav sub"
-          href="javascript:null"
-          @click="selectView('semester')"
+          to="/plan/semester"
         >
           Semester
-        </span>
+        </router-link>
       </div>
     </div>
 
@@ -160,18 +155,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters('user', ['userAuthenticated']),
-    ...mapState('plan', ['viewMode']),
     activeNavPrimary () {
       return this.$route.path.split('/')[1]
     }
-  },
-  methods: {
-    ...mapActions('plan', ['selectView'])
   }
 }
 </script>
@@ -215,11 +206,6 @@ export default {
         background: white;
         color: black;
         border-radius: 4px;
-
-        &.plan {
-          background: inherit;
-          color: white;
-        }
       }
     }
   }

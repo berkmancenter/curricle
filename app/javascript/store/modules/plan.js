@@ -11,8 +11,7 @@ const state = {
     department: 'classAcademicOrgDescription',
     semester: 'semester'
   },
-  provisionalCourses: {},
-  viewMode: 'list'
+  provisionalCourses: {}
 }
 
 const getters = {
@@ -117,9 +116,6 @@ const getters = {
 }
 
 const actions = {
-  selectView ({ commit }, view) {
-    commit('SET_VIEW_MODE', view)
-  },
   setFilter ({ commit }, filter) {
     commit('SET_FILTER', filter)
   },
@@ -153,11 +149,6 @@ const mutations = {
   DEL_PROVISIONAL_COURSE (state, course) {
     if (course && course.id) {
       Vue.delete(state.provisionalCourses, course.id)
-    }
-  },
-  SET_VIEW_MODE: (state, value) => {
-    if (['list', 'week', 'semester'].includes(value)) {
-      state.viewMode = value
     }
   }
 }

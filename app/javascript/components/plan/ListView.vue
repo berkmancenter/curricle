@@ -1,5 +1,12 @@
 <template>
-  <div class="mt-4">
+  <div>
+    <department-selector />
+
+    <semester-selector
+      mode="filter"
+      source="tray"
+    />
+
     <div
       v-for="course in filteredCourses"
       :key="course.id"
@@ -72,12 +79,16 @@ import { mapGetters, mapActions } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
+import DepartmentSelector from 'components/plan/DepartmentSelector'
+import SemesterSelector from 'components/plan/SemesterSelector'
 
 export default {
   components: {
     truncate,
     CourseAction,
-    ClassMeetingTime
+    ClassMeetingTime,
+    DepartmentSelector,
+    SemesterSelector
   },
   computed: {
     ...mapGetters('app', ['currentCourse']),

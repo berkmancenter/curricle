@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <div>
     <semester-credit-hours
       v-for="semester in sortedSemestersInSchedule"
       :key="semester"
@@ -11,7 +11,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 import SemesterCreditHours from 'components/plan/SemesterCreditHours'
 
 export default {
