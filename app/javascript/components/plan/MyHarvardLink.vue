@@ -30,8 +30,7 @@ https://courses.my.harvard.edu/psp/courses/EMPLOYEE/EMPL/h/
 &SearchReqJSON={
   "Category":"HU_SCL_SCHEDULED_BRACKETED_COURSES",
   "FacetsInResults":true,
-  "SearchText":"${this.courseIdSearchString}",
-  "STRM":"${this.termCode}"
+  "SearchText":"(${this.courseIdSearchString}) (STRM:${this.termCode})"
 }
       `
     },
