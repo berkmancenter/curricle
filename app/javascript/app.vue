@@ -115,7 +115,7 @@ export default {
 #nav-container,
 #main-container,
 #tray-container {
-  height: 100vh;
+  height: 95vh;
   overflow: auto;
 }
 
