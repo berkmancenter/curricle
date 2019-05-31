@@ -35,7 +35,7 @@
       >
         <router-link
           class="nav sub"
-          to="/explore/classes"
+          to="/explore/learning-styles"
         >
           Learning Styles
         </router-link>
@@ -44,7 +44,7 @@
 
         <router-link
           class="nav sub"
-          to="/explore/instructor"
+          to="/explore/instructor-networks"
         >
           Instructor Networks
         </router-link>
@@ -53,7 +53,7 @@
 
         <router-link
           class="nav sub"
-          to="/explore/universe"
+          to="/explore/course-universe"
         >
           Course Universe
         </router-link>
@@ -62,7 +62,7 @@
 
         <router-link
           class="nav sub"
-          to="/explore/keywords"
+          to="/explore/keyword-comparisons"
         >
           Keyword Comparisons
         </router-link>

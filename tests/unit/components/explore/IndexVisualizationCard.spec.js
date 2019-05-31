@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
-import VisualizationCard from '@/components/explore/VisualizationCard.vue'
+import VisualizationCard from '@/components/explore/IndexVisualizationCard.vue'
 import BootstrapVue from 'bootstrap-vue'
 
 const localVue = createLocalVue()

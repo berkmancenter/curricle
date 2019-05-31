@@ -51,7 +51,7 @@
 <script>
 import 'd3'
 import 'jquery'
-import { initSetup } from 'lib/explore/classes'
+import { initSetup } from 'lib/explore/learning-styles'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import SemesterInput from 'components/shared/SemesterInput'
 

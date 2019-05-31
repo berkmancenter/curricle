@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { initSetup, requestData } from 'lib/explore/instructors'
+import { initSetup, requestData } from 'lib/explore/instructor-networks'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import INSTRUCTOR_NAMES_QUERY from 'graphql/InstructorNames.gql'
 import Awesomplete from 'awesomplete'

@@ -98,7 +98,7 @@
 <script>
 import 'd3'
 import 'jquery'
-import { initSetup } from 'lib/explore/keywords'
+import { initSetup } from 'lib/explore/keyword-comparisons'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import SemesterInput from 'components/shared/SemesterInput'
 

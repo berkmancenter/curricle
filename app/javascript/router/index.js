@@ -4,17 +4,17 @@ import VueRouter from 'vue-router'
 import { deserializeSearch } from 'lib/util'
 
 import CurricleAbout from '../views/About'
-import CurricleExplore from '../views/explore'
+import CurricleExplore from 'views/Explore'
 import CurricleHome from '../views/Home'
 import CurriclePlan from 'views/Plan'
 import SearchAdvanced from 'views/SearchAdvanced'
 import SearchBasic from 'views/SearchBasic'
 import SharedSchedule from '../views/SharedSchedule'
-import ExploreIndex from '../components/explore/index'
-import ExploreClasses from '../components/explore/classes'
-import ExploreInstructors from '../components/explore/instructors'
-import ExploreKeywords from '../components/explore/keywords'
-import ExploreUniverse from '../components/explore/universe'
+import ExploreIndex from 'components/explore/Index'
+import ExploreLearningStyles from 'components/explore/LearningStyles'
+import ExploreInstructorNetworks from 'components/explore/InstructorNetworks'
+import ExploreCourseUniverse from 'components/explore/CourseUniverse'
+import ExploreKeywordComparisons from 'components/explore/KeywordComparisons'
 import PlanListView from 'components/plan/ListView'
 import PlanWeekView from 'components/plan/WeekView'
 import PlanSemesterView from 'components/plan/SemesterView'
@@ -31,17 +31,17 @@ const router = new VueRouter({
         component: ExploreIndex,
         default: true
       }, {
-        path: 'classes',
-        component: ExploreClasses
+        path: 'learning-styles',
+        component: ExploreLearningStyles
       }, {
-        path: 'instructor',
-        component: ExploreInstructors
+        path: 'instructor-networks',
+        component: ExploreInstructorNetworks
       }, {
-        path: 'keywords',
-        component: ExploreKeywords
+        path: 'course-universe',
+        component: ExploreCourseUniverse
       }, {
-        path: 'universe',
-        component: ExploreUniverse
+        path: 'keyword-comparisons',
+        component: ExploreKeywordComparisons
       }]
     },
     { path: '/home', component: CurricleHome },
