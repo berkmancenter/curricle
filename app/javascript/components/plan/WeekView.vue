@@ -95,9 +95,9 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import _ from 'lodash'
 import { partitionCoursesByMeetingTime } from 'lib/util'
-import CalendarItem from 'components/plan/CalendarItem'
-import MyHarvardLink from 'components/plan/MyHarvardLink'
-import SemesterSelector from 'components/plan/SemesterSelector'
+import CalendarItem from './WeekViewCalendarItem'
+import MyHarvardLink from './shared/MyHarvardLink'
+import SemesterSelector from 'components/shared/SemesterSelector'
 
 export default {
   components: {

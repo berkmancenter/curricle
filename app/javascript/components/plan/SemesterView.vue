@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import SemesterCreditHours from 'components/plan/SemesterCreditHours'
+import SemesterCreditHours from './SemesterViewSemesterCreditHours'
 
 export default {
   components: {

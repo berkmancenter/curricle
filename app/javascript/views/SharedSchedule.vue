@@ -29,7 +29,7 @@
 import { mapState } from 'vuex'
 import WeekView from 'components/plan/WeekView'
 import SemesterView from 'components/plan/SemesterView'
-import SemesterSelector from 'components/plan/SemesterSelector'
+import SemesterSelector from 'components/shared/SemesterSelector'
 import TheTray from 'components/TheTray'
 
 export default {

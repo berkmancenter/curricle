@@ -72,7 +72,7 @@
 import { mapGetters, mapState } from 'vuex'
 import Navbar from 'components/TheNavbar'
 import LoaderOverlay from 'components/TheLoaderOverlay'
-import CourseObserver from 'components/course-observer'
+import CourseObserver from 'components/TheCourseObserver'
 import SelectedCourse from 'components/shared/SelectedCourse'
 import TheFooter from 'components/TheFooter'
 import TheLogoutLink from 'components/TheLogoutLink'

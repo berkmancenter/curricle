@@ -87,9 +87,9 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import truncate from 'vue-truncate-collapsed'
 import CourseAction from 'components/shared/CourseAction'
 import ClassMeetingTime from 'components/shared/ClassMeetingTime'
-import DepartmentSelector from 'components/plan/DepartmentSelector'
-import MyHarvardLink from 'components/plan/MyHarvardLink'
-import SemesterSelector from 'components/plan/SemesterSelector'
+import DepartmentSelector from './ListViewDepartmentSelector'
+import MyHarvardLink from './shared/MyHarvardLink'
+import SemesterSelector from 'components/shared/SemesterSelector'
 
 export default {
   components: {

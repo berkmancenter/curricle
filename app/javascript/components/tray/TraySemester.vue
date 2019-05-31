@@ -28,7 +28,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import CourseList from 'components/shared/CourseList'
-import SemesterSelector from 'components/plan/SemesterSelector'
+import SemesterSelector from 'components/shared/SemesterSelector'
 import _ from 'lodash'
 import { partitionCoursesByDay } from 'lib/util'
 
