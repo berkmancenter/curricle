@@ -5,6 +5,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -237,7 +238,8 @@ CREATE TABLE public.courses (
     division_description character varying,
     term_code integer NOT NULL,
     offer_number integer NOT NULL,
-    session_code character varying NOT NULL
+    session_code character varying NOT NULL,
+    component_filtered character varying
 );
 
 
@@ -843,6 +845,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190318142236'),
 ('20190318143427'),
 ('20190318143539'),
-('20190318144611');
+('20190318144611'),
+('20190603140030');
 
 

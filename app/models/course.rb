@@ -30,6 +30,7 @@ class Course < ApplicationRecord
     integer :academic_year
     string :class_section
     string :component
+    string :component_filtered
     integer :prereq
     string :subject
     text :subject_description

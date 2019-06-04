@@ -191,10 +191,15 @@ module Resolvers
 
     def apply_filters(sunspot, args)
       sunspot.instance_eval do
-        with :academic_group, Array(args[:schools])
-        with :subject_academic_org_description, Array(args[:departments])
-        with :subject, Array(args[:subjects])
-        with :component, Array(args[:components])
+        all_of do
+          with :academic_group, Array(args[:schools])
+          with :subject_academic_org_description, Array(args[:departments])
+          with :subject, Array(args[:subjects])
+          any_of do
+            with :component, Array(args[:components])
+            with :component_filtered, Array(args[:components])
+          end
+        end
       end
     end
 

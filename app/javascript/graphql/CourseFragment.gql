@@ -5,6 +5,7 @@ fragment Course on Course {
   classAcademicOrgDescription
   classSection
   component
+  componentFiltered
   courseDescription
   courseDescriptionLong
   courseNote

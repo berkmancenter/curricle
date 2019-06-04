@@ -69,6 +69,7 @@ module Types
     field :class_academic_org_description, String, null: true
     field :class_section, String, null: true
     field :component, String, null: true
+    field :component_filtered, String, 'Simplified component field with similar components combined for less granularity', null: true
     field :course_description, String, null: true
     field :course_description_long, String, 'Extended course description', null: true
     field :course_instructors, [Types::CourseInstructorType, null: true], 'List of course instructors', null: true

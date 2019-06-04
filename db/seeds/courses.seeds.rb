@@ -17,6 +17,7 @@ class CurricleCourseImporter < CurricleImporter
     academic_year
     class_section
     component
+    component_filtered
     subject
     subject_description
     subject_academic_org_description
@@ -42,10 +43,27 @@ class CurricleCourseImporter < CurricleImporter
     class_section
   ].freeze
 
+  COMPONENT_FILTERS = {
+    'Field Education' => 'Field Course',
+    'Field Experience' => 'Field Course',
+    'Field Trip' => 'Field Course',
+    'Field-Based Practicum' => 'Field Course',
+    'Laboratory Research' => 'Laboratory',
+    'Lecture Taught in Sections' => 'Lecture',
+    'Lecture with Sections' => 'Lecture',
+    'Lecture/Lab' => 'Lecture',
+    'Lecture/Workshop' => 'Lecture',
+    'Proseminar' => 'Seminar',
+    'Reading Seminar' => 'Seminar',
+    'Research Seminar' => 'Seminar',
+    'Seminar Workshop' => 'Seminar'
+  }.freeze
+
   def format_row(row) # rubocop:disable Metrics/MethodLength
     external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
     term_year = term_year.to_i
+    component = row[:component_description]
 
     # These fields are used in the composite key in the database and are required,
     # skip the rows that have incomplete data
@@ -65,7 +83,8 @@ class CurricleCourseImporter < CurricleImporter
       row[:session_code],
       row[:academic_year],
       row[:class_section],
-      row[:component_description],
+      component,
+      COMPONENT_FILTERS[component] || component,
       row[:subject],
       row[:subject_description],
       row[:subject_acad_org_description],

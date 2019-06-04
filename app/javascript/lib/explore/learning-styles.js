@@ -105,7 +105,7 @@ function loadFullData (semester) {
 
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
-    variables: { semester }
+    variables: { filtered: true, semester: semester }
   }).then(function (response) {
     fullData = response.data.courseCounts
     appendAxis()
@@ -407,16 +407,20 @@ function resizing () {
 }
 
 function loadClassData (data) {
+  const searchComponent = data[0].component.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
+  const searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
   const semesterRange = { start: semester }
-  var searchComponent = data[0].component.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
-  var searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
+  const sortBy = 'TITLE'
 
   showLoaderOverlay(true)
 
   apolloClient.query({
     query: DEPT_COURSES_QUERY,
     variables: {
-      semesterRange, searchDepartment, searchComponent
+      searchComponent,
+      searchDepartment,
+      semesterRange,
+      sortBy
     }
   })
     .then(function (response) {

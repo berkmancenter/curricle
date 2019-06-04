@@ -1,9 +1,11 @@
 query CourseCounts(
+  $filtered: Boolean,
   $semester: Semester,
   $semesterRange: SemesterRange
 ) {
   courseCounts(
-    semester: $semester
+    filtered: $filtered,
+    semester: $semester,
     semesterRange: $semesterRange
   ) {
     component

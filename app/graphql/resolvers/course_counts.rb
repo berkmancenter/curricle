@@ -7,13 +7,16 @@ module Resolvers
 
     argument :component, Types::Enums::Component, required: false
     argument :department, Types::Enums::Department, required: false
+    argument :filtered, Boolean, required: false
     argument :semester, Types::Inputs::Semester, required: false
     argument :semester_range, Types::Inputs::SemesterRange, required: false
 
     def resolve(**args)
-      query = base_query
+      component_field = args[:filtered] ? 'component_filtered' : 'component'
 
-      query = filter_by_args(query, args)
+      query = base_query(component_field)
+
+      query = filter_by_args(query, args, component_field)
       query = filter_by_semester(query, args)
       query = filter_by_semester_range(query, args[:semester_range])
 
@@ -22,16 +25,14 @@ module Resolvers
 
     private
 
-    def base_query
+    def base_query(component_field)
       Course
-        .where.not(component: nil)
-        .where.not(component: '')
-        .group(%i[component subject_academic_org_description])
-        .order(:subject_academic_org_description, :component)
+        .group([component_field, 'subject_academic_org_description'])
+        .order(:subject_academic_org_description, component_field)
     end
 
-    def filter_by_args(query, args)
-      query = query.where(component: args[:component]) if args[:component].present?
+    def filter_by_args(query, args, component_field)
+      query = query.where("#{component_field} = ?", args[:component]) if args[:component].present?
       query = query.where(subject_academic_org_description: args[:department]) if args[:department].present?
 
       query

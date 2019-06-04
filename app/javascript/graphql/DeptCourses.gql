@@ -1,15 +1,17 @@
 #import "./CourseFragment.gql"
 
 query DeptCourses(
-  $searchDepartment: [Department!],
   $searchComponent: [Component!],
+  $searchDepartment: [Department!],
   $semesterRange:  SemesterRange!
+  $sortBy: CourseSortField,
 ) {
   coursesConnection(
-    semesterRange: $semesterRange,
-    departments: $searchDepartment,
     components: $searchComponent,
-    perPage: 500
+    departments: $searchDepartment,
+    semesterRange: $semesterRange,
+    perPage: 500,
+    sortBy: $sortBy
   ) {
     edges {
       node {
