@@ -93,7 +93,8 @@ export default {
     ...mapMutations({
       showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
     }),
-    performSearch () {
+    performSearch (e) {
+      e.preventDefault()
       requestFirstData(this.searchQuery)
     }
   }
