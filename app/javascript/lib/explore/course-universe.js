@@ -15,7 +15,9 @@ let context
 let diameter
 let pack
 let root
+let searchQuery
 let selectCourse
+let selectedIndex
 let semesterEnd
 let semesterStart
 let showLoaderOverlay
@@ -88,12 +90,15 @@ function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemeste
   requestFirstData()
 }
 
-function requestFirstData () {
+function requestFirstData (searchQueryParam) {
+  searchQuery = searchQueryParam
+
   showLoaderOverlay(true)
 
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
     variables: {
+      basic: searchQuery,
       semesterRange: {
         start: semesterStart,
         end: semesterEnd
@@ -121,6 +126,11 @@ function nestData (data) {
 
 function drawVis (data) {
   pack(data)
+
+  // clear previous visualization if we are redrawing it with an updated search query
+  if (selectedIndex) { svg.select('#backgroundGroup').dispatch('click') }
+  d3.select('#visGroup').selectAll('g').remove()
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height)
 
   var node = svg.select('#visGroup')
     .selectAll('g')
@@ -190,8 +200,6 @@ function drawVis (data) {
   svg.select('#backgroundGroup').on('click', function () {
     zoomOut(root)
   })
-
-  var selectedIndex
 
   function zoomIn (d, thisKey) {
     selectedIndex = d.index
@@ -304,6 +312,7 @@ function requestSecondData (searchText, xPos, yPos, radius) {
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
     variables: {
+      basic: searchQuery,
       page: 1,
       perPage: 1000,
       departments: enumSearch,
@@ -411,4 +420,4 @@ function courseClick (course) {
   selectCourse(courseData)
 }
 
-export { initSetup }
+export { initSetup, requestFirstData }

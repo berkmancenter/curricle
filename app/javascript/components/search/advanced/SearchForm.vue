@@ -14,6 +14,7 @@
 
           <input
             v-model="keyword"
+            type="search"
             class="search pl-0 form-control"
             placeholder="Enter a keyword"
             @keyup.enter="addActiveKeyword"

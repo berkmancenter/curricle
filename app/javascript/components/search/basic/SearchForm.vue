@@ -14,6 +14,7 @@
 
           <input
             v-model="searchQuery"
+            type="search"
             class="search pl-0 form-control"
             placeholder="Search courses"
             @keyup.enter="performSearch"

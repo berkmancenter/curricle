@@ -15,6 +15,39 @@
       <semester-input />
     </div>
 
+    <div
+      id="searchContainer"
+      class="mb-4 px-0 col-sm-4"
+    >
+      <div id="search">
+        <b-form @submit="performSearch">
+          <b-input-group>
+            <b-input-group-prepend is-text>
+              <img
+                class="icon"
+                src="/images/icons/eye_black.png"
+              >
+            </b-input-group-prepend>
+
+            <input
+              v-model="searchQuery"
+              type="search"
+              class="search pl-0 form-control"
+              placeholder="Search courses"
+            >
+
+            <b-input-group-append is-text>
+              <img
+                class="icon pointer"
+                src="/images/icons/return_arrow.png"
+                @click="performSearch"
+              >
+            </b-input-group-append>
+          </b-input-group>
+        </b-form>
+      </div>
+    </div>
+
     <div id="visWrapper">
       <canvas id="visCANVAS" />
 
@@ -28,13 +61,18 @@
 <script>
 import 'd3'
 import 'jquery'
-import { initSetup } from 'lib/explore/course-universe'
+import { initSetup, requestFirstData } from 'lib/explore/course-universe'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
     SemesterInput
+  },
+  data () {
+    return {
+      searchQuery: ''
+    }
   },
   computed: {
     ...mapGetters('search', ['semesterEnd', 'semesterStart'])
@@ -54,7 +92,10 @@ export default {
     ...mapActions('app', ['selectCourse']),
     ...mapMutations({
       showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
-    })
+    }),
+    performSearch () {
+      requestFirstData(this.searchQuery)
+    }
   }
 }
 </script>
@@ -173,6 +214,28 @@ export default {
 
   p {
     font-size: 14px;
+  }
+}
+
+#searchContainer /deep/ {
+  .form-control:focus {
+    box-shadow: none;
+  }
+
+  .input-group-text,
+  input.search {
+    background-color: #ddd;
+    border: 0;
+    color: black;
+  }
+
+  ::placeholder {
+    color: black !important;
+  }
+
+  img.icon {
+    height: 12px;
+    width: auto;
   }
 }
 </style>

@@ -1,9 +1,11 @@
 query CourseCounts(
+  $basic: String,
   $filtered: Boolean,
   $semester: Semester,
   $semesterRange: SemesterRange
 ) {
   courseCounts(
+    basic: $basic,
     filtered: $filtered,
     semester: $semester,
     semesterRange: $semesterRange
