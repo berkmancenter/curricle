@@ -4,7 +4,7 @@ import _ from 'lodash'
 import apolloClient from 'apollo'
 import COURSES_SEARCH_QUERY from '../../graphql/CoursesSearch.gql'
 import USER_COURSES_SEARCH_QUERY from '../../graphql/UserCoursesSearch.gql'
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 
 import { transformSchedule } from 'lib/util'
 

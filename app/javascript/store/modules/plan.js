@@ -1,6 +1,6 @@
 // Manipulation of plan-related data
 
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 import _ from 'lodash'
 import { partitionCoursesByMeetingTime, sortedSemesters } from 'lib/util'
 

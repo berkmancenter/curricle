@@ -1,6 +1,6 @@
 // Manipulation of non-course-related course-specific data
 
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 import _ from 'lodash'
 
 /*

@@ -1,7 +1,7 @@
 // Manipulation of user-related data
 
 import _ from 'lodash'
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 import apolloClient from 'apollo'
 import USER_COURSES_QUERY from '../../graphql/UserCourses.gql'
 
