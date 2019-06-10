@@ -24,6 +24,9 @@ var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departm
 var fullData
 
 let courseIdStyles
+let filteredData
+let filterDatumDepartment
+let filterDatumCourseType
 let selectCourse
 let semester
 let showLoaderOverlay
@@ -36,6 +39,8 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
   semester = selectedSemester
   showLoaderOverlay = showLoaderOverlayFunction
   documentWidth = d3.select('#visContainer').node().getBoundingClientRect().width
+  filterDatumDepartment = undefined
+  filterDatumCourseType = undefined
 
   // remove existing SVGs prior to (re)drawing new ones
   d3.select('#visContainer').selectAll('svg').remove()
@@ -320,10 +325,6 @@ function setDepartmentVis (data) {
     .duration(500)
     .style('opacity', 1)
 }
-
-var filterDatumDepartment
-var filterDatumCourseType
-var filteredData
 
 function dataFilter () {
   if (this.classList[0] === 'departmentText' || this.classList[0] === 'departmentRect') {
