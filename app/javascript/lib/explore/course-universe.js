@@ -92,6 +92,9 @@ function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemeste
 
 function requestFirstData (searchQueryParam) {
   searchQuery = searchQueryParam
+  let noResults = document.getElementById('noResults')
+
+  noResults.style.display = 'none'
 
   showLoaderOverlay(true)
 
@@ -105,8 +108,14 @@ function requestFirstData (searchQueryParam) {
       }
     }
   }).then(function (response) {
-    nestData(response.data.courseCounts)
     showLoaderOverlay(false)
+
+    if (response.data.courseCounts.length) {
+      nestData(response.data.courseCounts)
+    } else {
+      clearVis()
+      noResults.style.display = 'block'
+    }
   })
 }
 
@@ -127,10 +136,7 @@ function nestData (data) {
 function drawVis (data) {
   pack(data)
 
-  // clear previous visualization if we are redrawing it with an updated search query
-  if (selectedIndex) { svg.select('#backgroundGroup').dispatch('click') }
-  d3.select('#visGroup').selectAll('g').remove()
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+  clearVis()
 
   var node = svg.select('#visGroup')
     .selectAll('g')
@@ -418,6 +424,12 @@ function courseClick (course) {
   courseData.schedule = transformSchedule(courseData)
 
   selectCourse(courseData)
+}
+
+function clearVis () {
+  if (selectedIndex) { svg.select('#backgroundGroup').dispatch('click') }
+  d3.select('#visGroup').selectAll('g').remove()
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height)
 }
 
 export { initSetup, requestFirstData }

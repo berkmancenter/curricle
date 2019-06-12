@@ -48,6 +48,15 @@
       </div>
     </div>
 
+    <div
+      id="noResults"
+      style="display: none;"
+    >
+      <strong>
+        No results found for that search.
+      </strong>
+    </div>
+
     <div id="visWrapper">
       <canvas id="visCANVAS" />
 
