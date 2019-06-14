@@ -43,3 +43,5 @@ config/webpacker.yml
 solr
 
 TODO.org
+
+/.vscode

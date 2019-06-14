@@ -22,11 +22,13 @@ gem 'webpacker', '~> 4.0'
 
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
+  gem 'debase', '~> 0.2'
   gem 'factory_bot_rails', '~> 5.0'
   gem 'pry', '~> 0.12'
   gem 'pry-byebug', '~> 3.7'
   gem 'pry-rails', '~> 0.3'
   gem 'rspec-rails', '~> 3.8'
+  gem 'ruby-debug-ide', '~> 0.7'
 end
 
 group :development do
