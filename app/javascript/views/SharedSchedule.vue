@@ -1,26 +1,13 @@
 <template>
   <div class="row mx-0">
-    <div class="col-md-9 top-header">
+    <div class="col-md-12 top-header">
       <div>
         <p>Shared Schedule</p>
+
         <hr>
-        <div class="actions clearfix">
-          <semester-selector
-            v-show="viewMode !== 'semester'"
-            :mode="'state'"
-            :source="'schedule'"
-          />
-        </div>
 
-        <div>
-          <week-view v-show="viewMode === 'week'" />
-          <semester-view v-show="viewMode === 'semester'" />
-        </div>
+        <week-view :read-only="true" />
       </div>
-    </div>
-
-    <div class="col-md-3 top-header">
-      <the-tray />
     </div>
   </div>
 </template>
@@ -28,16 +15,10 @@
 <script>
 import { mapState } from 'vuex'
 import WeekView from 'components/plan/WeekView'
-import SemesterView from 'components/plan/SemesterView'
-import SemesterSelector from 'components/shared/SemesterSelector'
-import TheTray from 'components/TheTray'
 
 export default {
   components: {
-    WeekView,
-    SemesterView,
-    SemesterSelector,
-    TheTray
+    WeekView
   },
   props: {
     scheduleToken: {

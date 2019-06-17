@@ -8,6 +8,7 @@
     {{ item.title }}
 
     <course-action
+      v-if="!readOnly"
       :course="item.id"
       :invert="selected"
       type="schedule"
@@ -69,6 +70,10 @@ export default {
       default () {
         return { conflictCount: 0, position: 0 }
       }
+    },
+    readOnly: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

@@ -95,6 +95,5 @@ module Types
     field :title, String, null: true
     field :units_maximum, Integer, null: true
     field :updated_at, String, null: false
-    field :user_course, Types::UserCourseType, "Metadata about the user's course selection", null: true
   end
 end

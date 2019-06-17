@@ -29,7 +29,7 @@ module Types
       Resolvers::InstructorNames.run(semester: semester, past_years: past_years)
     end
 
-    field :user_courses, [Types::CourseType], null: false, description: "Return user's selected courses" do
+    field :user_courses, [Types::UserCourseType], null: false, description: "Return user's selected courses" do
       argument :schedule_token, String, 'Token for looking up a shared schedule', required: false
     end
 

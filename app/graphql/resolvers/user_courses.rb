@@ -11,7 +11,7 @@ module Resolvers
 
       return Course.none if user.blank?
 
-      user.courses
+      user.user_courses
     end
   end
 end

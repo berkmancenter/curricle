@@ -110,20 +110,20 @@ const actions = {
       if (userCourses.length) {
         _.each(
           userCourses,
-          course => {
-            commit('SET_USER_FLAG', { type: 'tray', course: course.id, value: true })
+          userCourse => {
+            commit('SET_USER_FLAG', { type: 'tray', course: userCourse.course.id, value: true })
 
-            if (course.annotation) {
-              commit('SET_USER_FLAG', { type: 'annotated', course: course.id, value: true })
+            if (userCourse.course.annotation) {
+              commit('SET_USER_FLAG', { type: 'annotated', course: userCourse.course.id, value: true })
             }
 
-            if (course.userCourse.includeInPath) {
-              commit('SET_USER_FLAG', { type: 'schedule', course: course.id, value: true })
+            if (userCourse.includeInPath) {
+              commit('SET_USER_FLAG', { type: 'schedule', course: userCourse.course.id, value: true })
             }
           }
         )
         // now actually update the courses
-        dispatch('courses/resolveCourses', _.map(userCourses, 'id'), { root: true })
+        dispatch('courses/resolveCourses', _.map(userCourses, 'course.id'), { root: true })
       }
     })
   },

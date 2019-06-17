@@ -1,15 +1,15 @@
 query UserCourses($scheduleToken: String) {
   userCourses(scheduleToken: $scheduleToken) {
     id
-    annotation {
+    includeInPath
+    course {
       id
-    }
-    tags {
-      id
-    }
-    userCourse {
-      id
-      includeInPath
+      annotation {
+        id
+      }
+      tags {
+        id
+      }
     }
   }
 }

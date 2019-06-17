@@ -3,9 +3,6 @@ mutation userCourseRemove($courseId: ID!) {
     errors
     course {
       id
-      userCourse {
-        id
-      }
     }
   }
 }

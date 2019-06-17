@@ -36,6 +36,7 @@
               :provisional="provisionalCourseIds.includes(course.id)"
               :selected="currentCourse && currentCourse.id == course.id"
               :hidden="!courseIdInSchedule(course.id)"
+              :read-only="readOnly"
             />
           </b-col>
         </b-row>
@@ -84,6 +85,7 @@
             :conflicted="item.course.id in scheduledCourseConflictsByDay"
             :conflict-info="courseConflictInfoForDay(item.course.id, day)"
             :hidden="!courseIdInSchedule(item.course.id)"
+            :read-only="readOnly"
           />
         </b-row>
       </b-col>
@@ -104,6 +106,12 @@ export default {
     CalendarItem,
     MyHarvardLink,
     SemesterSelector
+  },
+  props: {
+    readOnly: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {

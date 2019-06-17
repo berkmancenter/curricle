@@ -56,6 +56,7 @@
         />
 
         <selected-course-tagging
+          v-if="userAuthenticated"
           :course-id="course.id"
         />
       </div>

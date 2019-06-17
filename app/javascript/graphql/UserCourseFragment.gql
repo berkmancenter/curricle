@@ -2,9 +2,6 @@ fragment userCourse on UserCourse {
   id
   course {
     id
-    userCourse {
-      id
-    }
   }
   includeInPath
 }

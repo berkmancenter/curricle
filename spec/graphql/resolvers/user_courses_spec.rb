@@ -10,7 +10,7 @@ module Resolvers
       let(:inputs) { { current_user: user } }
 
       it 'returns the expected list of courses' do
-        expect(outcome).to match_array(user_courses.map(&:course))
+        expect(outcome).to match_array(user_courses)
       end
     end
 
@@ -18,7 +18,7 @@ module Resolvers
       let(:inputs) { { current_user: nil, schedule_token: user.schedule_token } }
 
       it 'returns the expected list of courses' do
-        expect(outcome).to match_array(user_courses.map(&:course))
+        expect(outcome).to match_array(user_courses)
       end
     end
 
