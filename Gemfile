@@ -41,7 +41,7 @@ group :development do
   gem 'rubocop-performance', '~> 1.3'
   gem 'rubocop-rails', '~> 2.0'
   gem 'rubocop-rspec', '~> 1.33'
-  gem 'spring', '~> 2.0'
+  gem 'spring', '~> 2.1'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
   gem 'sunspot_solr', '~> 2.3'
@@ -51,5 +51,5 @@ end
 group :test do
   gem 'fuubar', '~> 2.4'
   gem 'rspec-graphql_matchers', git: 'https://github.com/patricklewis/rspec-graphql_matchers.git', branch: 'graphql-class-api'
-  gem 'shoulda-matchers', '~> 4.0'
+  gem 'shoulda-matchers', '~> 4.1'
 end
