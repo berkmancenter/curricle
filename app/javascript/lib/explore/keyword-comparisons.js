@@ -54,6 +54,7 @@ let courseIdStyles
 let selectCourse
 let semester
 let showLoaderOverlay
+let showNoResultsContainer
 
 function requestData (searchTerm, numTerm) {
   const semesterRange = { start: semester }
@@ -100,11 +101,12 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction, showNoResultsContainerFunction) {
   courseIdStyles = courseIdStylesFunction
   semester = selectedSemester
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
+  showNoResultsContainer = showNoResultsContainerFunction
   centerData = 'subjectDescription'
 
   // remove existing SVGs prior to (re)drawing new ones
@@ -277,6 +279,10 @@ function setData (data) {
     nestedData.sort(function (a, b) {
       return b.value.count - a.value.count
     })
+
+    showNoResultsContainer(false)
+  } else {
+    showNoResultsContainer(true)
   }
 
   function redraw () {

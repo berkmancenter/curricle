@@ -92,6 +92,16 @@
 
       <div id="visContainer" />
     </div>
+
+    <div
+      v-show="showNoResultsContainer"
+      id="no-results"
+      class="text-center"
+    >
+      <strong>
+        No results found for that search.
+      </strong>
+    </div>
   </div>
 </template>
 
@@ -111,7 +121,8 @@ export default {
       keywordOne: '',
       keywordTwo: '',
       searchBoxOne: 'Truth',
-      searchBoxTwo: 'Lies'
+      searchBoxTwo: 'Lies',
+      showNoResultsContainer: false
     }
   },
   computed: {
@@ -120,12 +131,12 @@ export default {
   },
   watch: {
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer)
     }
   },
   mounted () {
     this.updateKeywords()
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
@@ -135,6 +146,9 @@ export default {
     updateKeywords () {
       this.keywordOne = this.searchBoxOne
       this.keywordTwo = this.searchBoxTwo
+    },
+    setShowNoResultsContainer (bool) {
+      this.showNoResultsContainer = bool
     }
   }
 }
@@ -274,5 +288,9 @@ export default {
   p {
     font-size: 14px;
   }
+}
+
+#no-results {
+  margin-top: -120px;
 }
 </style>
