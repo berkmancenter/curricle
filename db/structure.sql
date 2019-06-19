@@ -239,7 +239,9 @@ CREATE TABLE public.courses (
     term_code integer NOT NULL,
     offer_number integer NOT NULL,
     session_code character varying NOT NULL,
-    component_filtered character varying
+    component_filtered character varying,
+    requirement_group character varying,
+    requirement_group_description character varying
 );
 
 
@@ -846,6 +848,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190318143427'),
 ('20190318143539'),
 ('20190318144611'),
-('20190603140030');
+('20190603140030'),
+('20190619154529');
 
 

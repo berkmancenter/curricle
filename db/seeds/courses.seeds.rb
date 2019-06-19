@@ -31,6 +31,8 @@ class CurricleCourseImporter < CurricleImporter
     catalog_number
     course_description_long
     course_note
+    requirement_group
+    requirement_group_description
     created_at
     updated_at
   ].freeze
@@ -98,6 +100,8 @@ class CurricleCourseImporter < CurricleImporter
       row[:catalog_number],
       row[:course_descrlong],
       row[:course_note],
+      row[:requirement_group],
+      row[:requirement_group_description],
       Time.current,
       Time.current
     ]

@@ -50,6 +50,8 @@ class Course < ApplicationRecord
     text :course_note
     text :class_academic_org_description
     string :class_academic_org_description
+    string :requirement_group
+    string :requirement_group_description
     join(:class_meeting_number, target: CourseMeetingPattern, type: :string, join: { from: :course_id, to: :id })
     join(:meeting_time_start, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
     join(:meeting_time_end, target: CourseMeetingPattern, type: :integer, join: { from: :course_id, to: :id })
