@@ -13,16 +13,15 @@ module Resolvers
     argument :semester_range, Types::Inputs::SemesterRange, required: false
 
     def resolve(**args)
-      search = perform_search(args)
+      component_field = args[:filtered] ? :component_filtered : :component
+      search = perform_search(args, component_field)
 
-      count_courses(search)
+      count_courses(search, component_field)
     end
 
     private
 
-    def perform_search(args)
-      component_field = args[:filtered] ? :component_filtered : :component
-
+    def perform_search(args, component_field)
       Course.search do
         with(component_field, args[:component]) if args[:component]
         with(:subject_academic_org_description, args[:department]) if args[:department]
@@ -31,7 +30,8 @@ module Resolvers
         filter_by_semester_range(self, args[:semester_range]) if args[:semester_range]
         basic_search(self, args[:basic]) if args[:basic]
 
-        json_facet(:subject_academic_org_description, limit: -1, nested: { field: component_field })
+        # TODO: identify a cleaner way of returning all results or revert to using JSON faceting when available
+        paginate page: 1, per_page: 99_999
       end
     end
 
@@ -85,16 +85,24 @@ module Resolvers
       end
     end
 
-    def count_courses(search)
-      search.facet(:subject_academic_org_description).rows.each_with_object([]) do |row, arr|
-        row.nested.each do |nested_row|
-          arr << OpenStruct.new(
-            component: nested_row.value,
-            department: row.value,
-            count: nested_row.count
+    def count_courses(search, component_field)
+      course_ids = search.results.pluck(:id)
+
+      data =
+        Course
+        .where(id: course_ids)
+        .group([component_field, 'subject_academic_org_description'])
+        .order(:subject_academic_org_description, component_field)
+
+      data
+        .count
+        .map do |(component, department), count|
+          OpenStruct.new(
+            component: component,
+            department: department,
+            count: count
           )
         end
-      end
     end
 
     def start_year_term_scope(term_name)
