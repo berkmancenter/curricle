@@ -15,7 +15,7 @@ const documentWidth = window.innerWidth * 0.8333333 * 0.9
 
 var margin = { top: 50, right: 100, bottom: 150, left: 50 }
 var width = documentWidth - margin.left - margin.right
-var height = 900 - margin.top - margin.bottom
+var height = 1200 - margin.top - margin.bottom
 var svg
 var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, subjectTextScale
 

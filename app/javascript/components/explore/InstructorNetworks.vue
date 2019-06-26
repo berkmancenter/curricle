@@ -11,6 +11,8 @@
       <p>
         Discover faculty networks of teaching and learning from the past ten years. Type in an instructor to see faculty with whom they've co-taught, connecting through courses to subjects. Shift across instructors for new connections and patterns.
       </p>
+
+      <semester-input />
     </div>
 
     <div
@@ -84,30 +86,26 @@ import { initSetup, requestData } from 'lib/explore/instructor-networks'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import INSTRUCTOR_NAMES_QUERY from 'graphql/InstructorNames.gql'
 import Awesomplete from 'awesomplete'
+import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
+  components: {
+    SemesterInput
+  },
   apollo: {
     instructorNames: {
       query: INSTRUCTOR_NAMES_QUERY,
       variables () {
         return {
           semester: {
-            termName: this.currentSemester.termName.toUpperCase(),
-            termYear: this.currentSemester.termYear
+            termName: this.semesterStart.termName.toUpperCase(),
+            termYear: this.semesterStart.termYear
           },
           pastYears: 10
         }
       },
       result () {
-        // Set up awesomplete-based autocomplete on the instructor name input
-        var input = document.getElementById('instructorName')
-
-        let awesomplete = new Awesomplete(input, { minChars: 4 })
-        awesomplete.list = this.instructorNames
-
-        input.addEventListener('awesomplete-select', (e) => {
-          this.forceInstructorSearch(e.text.value)
-        })
+        this.awesomplete.list = this.instructorNames
       }
     }
   },
@@ -123,10 +121,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['currentSemester']),
+    ...mapGetters('search', ['semesterStart']),
     ...mapGetters('user', ['courseIdStyles'])
   },
+  watch: {
+    semesterStart (newSemester) {
+      if (this.instructorName) {
+        requestData(this.instructorName, newSemester)
+      }
+    }
+  },
   mounted () {
+    this.setupAwesomplete()
+
     initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName, this.setShowNoResultsContainer, this.courseIdStyles)
   },
   methods: {
@@ -137,18 +144,26 @@ export default {
     forceInstructorSearch (name) {
       this.instructorName = name
 
-      requestData(this.instructorName, this.currentSemester)
+      requestData(this.instructorName, this.semesterStart)
     },
     onSubmit (e) {
       e.preventDefault()
       this.setShowNoResultsContainer(false)
-      requestData(this.instructorName, this.currentSemester)
+      requestData(this.instructorName, this.semesterStart)
     },
     setTitleName (name) {
       this.titleName = name
     },
     setShowNoResultsContainer (bool) {
       this.showNoResultsContainer = bool
+    },
+    setupAwesomplete () {
+      let input = document.getElementById('instructorName')
+      this.awesomplete = new Awesomplete(input, { minChars: 4 })
+
+      input.addEventListener('awesomplete-select', (e) => {
+        this.forceInstructorSearch(e.text.value)
+      })
     }
   }
 }
