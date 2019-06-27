@@ -73,6 +73,49 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: course_attributes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.course_attributes (
+    id bigint NOT NULL,
+    external_course_id integer NOT NULL,
+    course_offer_number integer,
+    course_id bigint,
+    term_code integer NOT NULL,
+    term_description character varying NOT NULL,
+    session_code character varying NOT NULL,
+    class_section character varying NOT NULL,
+    crse_attribute character varying,
+    crse_attribute_description character varying,
+    crse_attr_value character varying,
+    crse_attr_value_description character varying,
+    academic_career character varying,
+    bracketed_flag character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: course_attributes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.course_attributes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: course_attributes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.course_attributes_id_seq OWNED BY public.course_attributes.id;
+
+
+--
 -- Name: course_instructors; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -429,6 +472,13 @@ ALTER TABLE ONLY public.annotations ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: course_attributes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.course_attributes ALTER COLUMN id SET DEFAULT nextval('public.course_attributes_id_seq'::regclass);
+
+
+--
 -- Name: course_instructors id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -498,6 +548,14 @@ ALTER TABLE ONLY public.annotations
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: course_attributes course_attributes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.course_attributes
+    ADD CONSTRAINT course_attributes_pkey PRIMARY KEY (id);
 
 
 --
@@ -591,6 +649,13 @@ CREATE INDEX index_annotations_on_course_id ON public.annotations USING btree (c
 --
 
 CREATE INDEX index_annotations_on_user_id ON public.annotations USING btree (user_id);
+
+
+--
+-- Name: index_course_attributes_on_course_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_course_attributes_on_course_id ON public.course_attributes USING btree (course_id);
 
 
 --
@@ -784,6 +849,14 @@ ALTER TABLE ONLY public.annotations
 
 
 --
+-- Name: course_attributes fk_rails_95e3af577e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.course_attributes
+    ADD CONSTRAINT fk_rails_95e3af577e FOREIGN KEY (course_id) REFERENCES public.courses(id);
+
+
+--
 -- Name: tags fk_rails_e689f6d0cc; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -849,6 +922,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190318143539'),
 ('20190318144611'),
 ('20190603140030'),
-('20190619154529');
+('20190619154529'),
+('20190621140452');
 
 

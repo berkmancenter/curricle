@@ -25,6 +25,13 @@ fragment Course on Course {
     id
     text
   }
+  courseAttributes {
+    id
+    crseAttribute
+    crseAttributeDescription
+    crseAttrValue
+    crseAttrValueDescription
+  }
   courseInstructors {
     displayName
     id

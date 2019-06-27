@@ -39,7 +39,7 @@ class CurricleCourseInstructorImporter < CurricleImporter
     external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
     term_year = term_year.to_i
-    key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
+    key = "#{row[:term_code]}#{external_course_id}#{row[:class_section]}"
     course_id = COURSES_CACHE[key]
 
     return if course_id.blank?

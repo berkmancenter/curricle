@@ -34,6 +34,18 @@
           less="[Close]"
           type="html"
         />
+
+        <p class="heading mt-4">
+          Course Attributes
+        </p>
+
+        <span
+          v-for="attribute in course.courseAttributes"
+          :key="attribute.id"
+        >
+          <strong>{{ attribute.crseAttributeDescription }}:</strong> {{ attribute.crseAttrValueDescription }}
+          <br>
+        </span>
       </div>
 
       <div class="col-lg-5">

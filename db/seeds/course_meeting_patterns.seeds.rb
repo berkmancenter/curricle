@@ -35,7 +35,7 @@ class CurricleCourseMeetingPatternImporter < CurricleImporter
     external_course_id = row[:course_id].to_i
     term_year, term_name = row[:term_description].to_s.split(' ')
     term_year = term_year.to_i
-    key = "#{term_year}#{term_name}#{external_course_id}#{row[:class_section]}"
+    key = "#{row[:term_code]}#{external_course_id}#{row[:class_section]}"
     meeting_time_start = Time.strptime(row[:meeting_time_start], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_start]
     meeting_time_end = Time.strptime(row[:meeting_time_end], '%d-%b-%y %I.%M.%S.000000000 %P') if row[:meeting_time_end]
     course_id = COURSES_CACHE[key]

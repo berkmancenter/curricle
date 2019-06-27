@@ -6,6 +6,7 @@ module Types
 
     it { is_expected.to have_field(:academic_group).of_type('String') }
     it { is_expected.to have_field(:academic_group_description).of_type('String') }
+    it { is_expected.to have_field(:course_attributes).of_type('[CourseAttribute]') }
     # it { is_expected.to have_field(:created_at).of_type('String!') }
     # it { is_expected.to have_field(:display_name).of_type('String') }
     # it { is_expected.to have_field(:email).of_type('String') }

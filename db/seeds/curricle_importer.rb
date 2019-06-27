@@ -6,7 +6,7 @@ require 'csv'
 class CurricleImporter
   COURSES_CACHE =
     Course
-    .pluck(:id, :term_year, :term_name, :external_course_id, :class_section)
+    .pluck(:id, :term_code, :external_course_id, :class_section)
     .each_with_object({}) do |el, hash|
       key = el[1..-1].join
       value = el[0]
@@ -39,7 +39,7 @@ class CurricleImporter
       end
     end
 
-    puts "Copying courses from temporary #{@table_name}_temp table into #{@table_name} table"
+    puts "Copying rows from temporary #{@table_name}_temp table into #{@table_name} table"
 
     sql = "INSERT INTO #{@table_name} (#{@sql_columns.join(',')})
       SELECT #{@sql_columns.join(',')}

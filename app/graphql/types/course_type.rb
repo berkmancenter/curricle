@@ -25,6 +25,14 @@ module Types
       )
     end
 
+    def course_attributes
+      BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |course_ids, loader|
+        CourseAttribute.where(course: course_ids).each do |course_attribute|
+          loader.call(course_attribute.course_id) { |memo| memo << course_attribute }
+        end
+      end
+    end
+
     def course_instructors
       BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |course_ids, loader|
         CourseInstructor.where(course_id: course_ids).each do |course_instructor|
@@ -70,6 +78,7 @@ module Types
     field :class_section, String, null: true
     field :component, String, null: true
     field :component_filtered, String, 'Simplified component field with similar components combined for less granularity', null: true
+    field :course_attributes, [Types::CourseAttributeType, null: true], null: true
     field :course_description, String, null: true
     field :course_description_long, String, 'Extended course description', null: true
     field :course_instructors, [Types::CourseInstructorType, null: true], 'List of course instructors', null: true

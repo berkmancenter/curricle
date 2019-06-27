@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Course < ApplicationRecord
-  has_many :course_meeting_patterns, dependent: :destroy
+  has_many :course_attributes, dependent: :destroy
   has_many :course_instructors, dependent: :destroy
+  has_many :course_meeting_patterns, dependent: :destroy
   has_many :course_readings, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :user_courses, dependent: :destroy

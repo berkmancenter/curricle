@@ -6,6 +6,7 @@ RSpec.describe Course, type: :model do
   let(:course) { create(:course) }
 
   it { is_expected.to have_many(:annotations) }
+  it { is_expected.to have_many(:course_attributes) }
   it { is_expected.to have_many(:course_instructors) }
   it { is_expected.to have_many(:course_meeting_patterns) }
   it { is_expected.to have_many(:course_readings) }
