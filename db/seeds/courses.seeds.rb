@@ -71,6 +71,9 @@ class CurricleCourseImporter < CurricleImporter
     # skip the rows that have incomplete data
     return if (row[:course_offer_number] && row[:session_code] && row[:class_section]).blank?
 
+    # skip Leave of Absence courses
+    return if component == 'Leave'
+
     return if row[:class_status] == 'X' # do not import courses that have been cancelled
     return if row[:class_type] == 'N' # do not import discussion sections
 
