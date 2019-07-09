@@ -142,7 +142,7 @@ const getters = {
 
   isPastSemester: (state) => (termName, termYear) => {
     if (
-      termYear === thisYear &&
+      Number(termYear) === thisYear &&
       termName.toUpperCase() === 'SPRING' &&
       thisSemester.toUpperCase() === 'FALL'
     ) {
