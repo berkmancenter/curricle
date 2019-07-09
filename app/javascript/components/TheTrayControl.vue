@@ -5,19 +5,13 @@
     @click="trayToggle"
   >
     Tray
-    <span v-show="trayCourses.length">
-      ({{ trayCourses.length }})
-    </span>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
-  computed: {
-    ...mapGetters('user', ['trayCourses'])
-  },
   methods: {
     ...mapActions('app', ['trayToggle'])
   }
