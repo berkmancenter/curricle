@@ -13,10 +13,16 @@
         {{ `${course.termName} ${course.termYear}` }}
       </div>
 
-      <div class="col-lg-5 text-uppercase">
+      <div class="col-lg-3 text-uppercase">
         {{ course.component || '&mdash;' }}<br>
         {{ course.gradingBasisDescription || '&mdash;' }}<br>
         {{ firstInstructor || '&mdash;' }}
+      </div>
+
+      <div class="col-lg-2 text-uppercase">
+        <a :href="syllabusUrl">
+          Syllabus
+        </a>
       </div>
     </div>
 
@@ -102,6 +108,9 @@ export default {
       if (!this.course.courseInstructors.length) { return }
 
       return this.course.courseInstructors[0].displayName
+    },
+    syllabusUrl () {
+      return `https://syllabus.harvard.edu/?course_id=${this.course.externalCourseId}`
     }
   }
 }
@@ -111,5 +120,9 @@ export default {
 p.heading {
   border-bottom: 1px solid #999;
   margin-bottom: 8px;
+}
+
+a {
+  color: black;
 }
 </style>
