@@ -75,11 +75,6 @@
           v-if="userAuthenticated"
           :course-id="course.id"
         />
-
-        <selected-course-tagging
-          v-if="userAuthenticated"
-          :course-id="course.id"
-        />
       </div>
     </div>
   </div>
@@ -87,13 +82,11 @@
 
 <script>
 import SelectedCourseAnnotations from './SelectedCourseAnnotations'
-import SelectedCourseTagging from './SelectedCourseTagging'
 import truncate from 'vue-truncate-collapsed'
 
 export default {
   components: {
     SelectedCourseAnnotations,
-    SelectedCourseTagging,
     truncate
   },
   props: {
