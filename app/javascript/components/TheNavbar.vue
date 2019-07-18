@@ -146,9 +146,9 @@
       <a
         class="nav secondary"
         target="_blank"
-        href="http://curricle.wpengine.com"
+        href="https://curricledev.wpengine.com"
       >
-        Curricle Lens
+        Development Updates
       </a>
     </div>
   </nav>

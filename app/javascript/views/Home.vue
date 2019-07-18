@@ -52,7 +52,7 @@
         <em>
           Check out our
           <a
-            href="http://curricledev.wpengine.com/"
+            href="https://curricledev.wpengine.com/"
             target="_blank"
           >
             development blog</a>
