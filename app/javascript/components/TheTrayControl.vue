@@ -4,7 +4,7 @@
     class="background-black pointer text-uppercase"
     @click="trayToggle"
   >
-    Tray
+    Schedule
   </div>
 </template>
 

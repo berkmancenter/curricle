@@ -6,7 +6,7 @@
     >
       <div class="your-tray-parent clearfix">
         <p>
-          Your Tray
+          Your Schedule
 
           <span class="float-right">
             <share-link />

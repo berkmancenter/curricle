@@ -22,7 +22,7 @@
           class="mt-3"
           @click="trayToggle"
         >
-          Tray
+          Schedule
         </b-nav-item>
 
         <b-nav-item
