@@ -20,7 +20,10 @@
       </div>
 
       <div class="col-lg-2 text-uppercase">
-        <a :href="syllabusUrl">
+        <a
+          target="_blank"
+          :href="syllabusUrl"
+        >
           Syllabus
         </a>
       </div>
