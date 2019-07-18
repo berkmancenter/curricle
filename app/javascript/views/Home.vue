@@ -66,6 +66,7 @@
       id="login-link-container"
     >
       <a
+        class="text-decoration-none"
         href="/users/sign_in"
       >
         Sign in with HarvardKey
