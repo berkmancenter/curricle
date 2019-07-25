@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   props: {
     courses: {
@@ -46,12 +48,12 @@ https://courses.my.harvard.edu/psp/courses/EMPLOYEE/EMPL/h/
 &SearchReqJSON={
   "Category":"HU_SCL_SCHEDULED_BRACKETED_COURSES",
   "FacetsInResults":true,
-  "SearchText":"(${this.courseIdSearchString}) (STRM:${this.termCode})"
+  "SearchText":"(${this.courseIdSearchString}) (${this.termCodes})"
 }
       `
     },
-    termCode () {
-      return this.courses[0].termCode
+    termCodes () {
+      return _(this.courses).map((course) => `STRM:${course.termCode}`).uniq().join(' | ')
     }
   }
 }

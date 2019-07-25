@@ -14,8 +14,8 @@
     <br>
 
     <my-harvard-link
-      v-if="semester && scheduleCourses.length"
-      :courses="scheduleCourses"
+      v-if="filteredCourses"
+      :courses="filteredCourses"
       class="mt-2 mb-4"
     />
 
