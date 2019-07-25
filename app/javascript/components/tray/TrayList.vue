@@ -5,7 +5,6 @@
       :key="semester"
       :semester="semester"
       :courses="trayCoursesBySemester[semester]"
-      class="mb-5"
     />
   </div>
 </template>

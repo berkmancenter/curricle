@@ -6,11 +6,9 @@
     >
       <div class="your-tray-parent clearfix">
         <p>
-          Your Schedule
+          Schedule
 
           <span class="float-right">
-            <share-link />
-
             <font-awesome-icon
               class="pointer ml-2"
               icon="times"
@@ -21,6 +19,18 @@
       </div>
 
       <tray-list />
+
+      <b-button
+        class="w-100 mt-4"
+        variant="light"
+        to="/plan/week"
+      >
+        Go to Week View
+      </b-button>
+
+      <share-link
+        class="mt-2"
+      />
     </div>
   </div>
 </template>

@@ -29,7 +29,7 @@
         v-if="!trayVisible"
         id="nav-container"
         :class="{ active: !trayVisible }"
-        class="col-sm-2 d-none d-sm-block"
+        class="col-sm-2 d-none d-sm-block pr-0"
       >
         <navbar />
       </div>
@@ -56,7 +56,7 @@
         v-if="trayVisible"
         id="tray-container"
         :class="{ active: trayVisible, 'col-12': trayVisible }"
-        class="col-sm-2"
+        class="col-sm-2 pl-0"
       >
         <the-tray />
       </div>

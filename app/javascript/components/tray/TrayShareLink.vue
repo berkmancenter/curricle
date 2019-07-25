@@ -1,35 +1,31 @@
 <template>
-  <span class="tray-share">
-    <span
-      id="share-dropdown"
-      class="pointer"
-      tabindex="0"
+  <div class="text-center">
+    <b-button
+      id="share-schedule-button"
+      class="w-100"
+      variant="light"
     >
-      <font-awesome-icon icon="share-alt" />
+      Share Schedule
+    </b-button>
 
-      <b-popover
-        target="share-dropdown"
-        triggers="click blur"
-        placement="bottom"
-      >
-        Share this link to allow others to view your schedule:
-        <br>
-        <span class="shared-schedule-url">
-          {{ scheduleUrl }}
-        </span>
-      </b-popover>
-    </span>
-  </span>
+    <b-popover
+      target="share-schedule-button"
+      triggers="click blur"
+      placement="bottom"
+    >
+      Share this link to allow others to view your schedule:
+      <br>
+      <span class="shared-schedule-url">
+        {{ scheduleUrl }}
+      </span>
+    </b-popover>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
-  components: {
-    FontAwesomeIcon
-  },
   computed: {
     ...mapState('user', ['scheduleToken']),
     scheduleUrl () {
