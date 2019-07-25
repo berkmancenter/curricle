@@ -93,7 +93,7 @@ export default {
     },
     showConflicts: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   computed: {

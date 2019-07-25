@@ -77,7 +77,7 @@ export default {
   },
   data () {
     return {
-      showConflicts: false
+      showConflicts: true
     }
   },
   computed: {
