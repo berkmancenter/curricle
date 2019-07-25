@@ -48,10 +48,10 @@ const router = new VueRouter({
     { path: '/plan',
       component: CurriclePlan,
       children: [
-        { path: '', component: PlanListView },
-        { path: '/plan/list', component: PlanListView },
+        { path: '', component: PlanWeekView },
         { path: '/plan/week', component: PlanWeekView },
-        { path: '/plan/semester', component: PlanSemesterView }
+        { path: '/plan/semester', component: PlanSemesterView },
+        { path: '/plan/list', component: PlanListView }
       ]
     },
     { path: '/search', component: SearchBasic },

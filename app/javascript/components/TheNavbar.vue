@@ -20,6 +20,8 @@
       id="nav-primary-container"
       class="mt-5"
     >
+      <hr>
+
       <router-link
         class="nav primary"
         to="/explore"
@@ -89,6 +91,8 @@
         </router-link>
       </div>
 
+      <hr>
+
       <router-link
         class="nav primary"
         to="/plan"
@@ -104,15 +108,6 @@
       >
         <router-link
           class="nav sub"
-          to="/plan/list"
-        >
-          List
-        </router-link>
-
-        <br>
-
-        <router-link
-          class="nav sub"
           to="/plan/week"
         >
           Week
@@ -126,14 +121,19 @@
         >
           Semester
         </router-link>
-      </div>
-    </div>
 
-    <div
-      v-if="userAuthenticated"
-      id="nav-secondary-container"
-      class="text-uppercase mt-5"
-    >
+        <br>
+
+        <router-link
+          class="nav sub"
+          to="/plan/list"
+        >
+          List
+        </router-link>
+      </div>
+
+      <hr>
+
       <router-link
         class="nav secondary"
         to="/about"
@@ -196,6 +196,7 @@ export default {
       &.sub {
         color: #777;
         margin-bottom: 4px;
+        margin-left: 10px;
       }
 
       &.router-link-active {
@@ -207,6 +208,10 @@ export default {
         color: black;
         border-radius: 4px;
       }
+    }
+
+    hr {
+      border-top-color: #999;
     }
   }
 </style>
