@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h3>
+      Plan:
+    </h3>
+
     <semester-credit-hours
       v-for="semester in sortedSemestersInSchedule"
       :key="semester"

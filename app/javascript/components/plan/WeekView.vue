@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h3>
+      Plan:
+    </h3>
+
     <semester-selector
       mode="state"
       source="schedule"

@@ -1,12 +1,28 @@
 <template>
-  <b-button
-    :href="myHarvardLink"
-    size="sm"
-    target="_blank"
-    variant="dark"
-  >
-    Send to my.harvard
-  </b-button>
+  <div>
+    <b-button
+      id="myHarvardLink"
+      :href="myHarvardLink"
+      size="sm"
+      target="_blank"
+      variant="dark"
+    >
+      Export to my.Harvard
+    </b-button>
+
+    <b-popover
+      target="myHarvardLink"
+      placement="bottom"
+      triggers="hover"
+    >
+      <template slot="default">
+        Sends all courses in<br>
+        your schedule that are<br>
+        offered this semester<br>
+        to my.Harvard
+      </template>
+    </b-popover>
+  </div>
 </template>
 
 <script>

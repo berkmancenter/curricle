@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h3>
+      Plan as List:
+    </h3>
+
     <department-selector />
 
     <semester-selector
