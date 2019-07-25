@@ -28,8 +28,10 @@
         Go to Week View
       </b-button>
 
-      <share-link
-        class="mt-2"
+      <share-schedule-link
+        id="share-schedule-link-tray"
+        class="mt-2 w-100"
+        variant="light"
       />
     </div>
   </div>
@@ -38,13 +40,13 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import ShareLink from 'components/tray/TrayShareLink'
+import ShareScheduleLink from 'components/shared/ShareScheduleLink'
 import TrayList from 'components/tray/TrayList'
 
 export default {
   components: {
     FontAwesomeIcon,
-    ShareLink,
+    ShareScheduleLink,
     TrayList
   },
   computed: {

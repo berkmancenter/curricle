@@ -1,20 +1,28 @@
 <template>
   <div>
     <h3>
-      Plan:
+      Plan by Week:
     </h3>
-
-    <semester-selector
-      mode="state"
-      source="schedule"
-    />
-
-    <br>
 
     <my-harvard-link
       v-if="scheduleCourses.length"
       :courses="scheduleCourses"
-      class="mt-2 mb-4"
+      class="mt-4 mb-2"
+    />
+
+    <share-schedule-link
+      id="share-schedule-link-plan-week"
+      size="sm"
+      variant="dark"
+      class="mt-4 mb-2"
+    />
+
+    <br>
+
+    <semester-selector
+      mode="state"
+      source="schedule"
+      class="mb-4"
     />
 
     <b-row
@@ -104,12 +112,14 @@ import { partitionCoursesByMeetingTime } from 'lib/util'
 import CalendarItem from './WeekViewCalendarItem'
 import MyHarvardLink from './shared/MyHarvardLink'
 import SemesterSelector from 'components/shared/SemesterSelector'
+import ShareScheduleLink from 'components/shared/ShareScheduleLink'
 
 export default {
   components: {
     CalendarItem,
     MyHarvardLink,
-    SemesterSelector
+    SemesterSelector,
+    ShareScheduleLink
   },
   props: {
     readOnly: {
