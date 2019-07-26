@@ -91,6 +91,7 @@ module Types
     field :grading_basis_description, String, null: true
     field :id, ID, null: false
     field :prereq, Integer, 'Prerequisite', null: true
+    field :q_guide_course_id, Integer, null: true
     field :semester, String, null: true
     field :subject, String, null: true
     field :subject_academic_org_description, String, null: true

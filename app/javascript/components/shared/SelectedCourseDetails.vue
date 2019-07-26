@@ -20,6 +20,17 @@
       </div>
 
       <div class="col-lg-2 text-uppercase">
+        <span v-if="qGuideUrl">
+          <a
+            target="_blank"
+            :href="qGuideUrl"
+          >
+            Q Guide
+          </a>
+
+          <br>
+        </span>
+
         <a
           target="_blank"
           :href="syllabusUrl"
@@ -104,6 +115,11 @@ export default {
       if (!this.course.courseInstructors.length) { return }
 
       return this.course.courseInstructors[0].displayName
+    },
+    qGuideUrl () {
+      if (!this.course.qGuideCourseId) { return }
+
+      return `https://course-evaluation-reports.fas.harvard.edu/fas/course_summary.html?course_id=${this.course.qGuideCourseId}`
     },
     syllabusUrl () {
       return `https://syllabus.harvard.edu/?course_id=${this.course.externalCourseId}`

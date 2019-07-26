@@ -284,7 +284,8 @@ CREATE TABLE public.courses (
     session_code character varying NOT NULL,
     component_filtered character varying,
     requirement_group character varying,
-    requirement_group_description character varying
+    requirement_group_description character varying,
+    q_guide_course_id integer
 );
 
 
@@ -923,6 +924,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190318144611'),
 ('20190603140030'),
 ('20190619154529'),
-('20190621140452');
+('20190621140452'),
+('20190726173851');
 
 

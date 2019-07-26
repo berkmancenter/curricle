@@ -12,6 +12,7 @@ fragment Course on Course {
   externalCourseId
   gradingBasisDescription
   id
+  qGuideCourseId
   semester
   subject
   subjectAcademicOrgDescription
