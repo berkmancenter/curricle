@@ -17,9 +17,10 @@ const state = {
 const getters = {
   filteredCourses (state, getters) {
     // per lodash docs, empty object is true for all
-    return _.filter(getters.trayCourses, _.mapKeys(state.filters, (v, k) => {
-      return state.filterFieldMap[k] || k
-    }))
+    return _(getters.trayCourses)
+      .filter(_.mapKeys(state.filters, (v, k) => { return state.filterFieldMap[k] || k }))
+      .sortBy(['termCode', 'title'])
+      .value()
   },
   // this is to import the vuex user.trayCourses and use locally as dependent
   trayCourses (state, getters, rootState, rootGetters) {
