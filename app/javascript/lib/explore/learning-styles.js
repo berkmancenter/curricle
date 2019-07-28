@@ -24,6 +24,7 @@ var departmentTextScaleMax, nestedCourseTypeDataMax, courseTypeGradient, departm
 var fullData
 
 let courseIdStyles
+let courseLevels
 let filteredData
 let filterDatumDepartment
 let filterDatumCourseType
@@ -33,8 +34,9 @@ let showLoaderOverlay
 
 const fontSize = '12px'
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction, selectedCourseLevel) {
   courseIdStyles = courseIdStylesFunction
+  courseLevels = [selectedCourseLevel]
   selectCourse = selectCourseFunction
   semester = selectedSemester
   showLoaderOverlay = showLoaderOverlayFunction
@@ -110,7 +112,7 @@ function loadFullData (semester) {
 
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
-    variables: { filtered: true, semester: semester }
+    variables: { filtered: true, semester: semester, courseLevels: courseLevels }
   }).then(function (response) {
     fullData = response.data.courseCounts
     appendAxis()
@@ -418,6 +420,7 @@ function loadClassData (data) {
   apolloClient.query({
     query: DEPT_COURSES_QUERY,
     variables: {
+      courseLevels,
       searchComponent,
       searchDepartment,
       semesterRange,

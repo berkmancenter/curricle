@@ -72,6 +72,7 @@ class Course < ApplicationRecord
     join(:title, prefix: 'reading', target: CourseReading, type: :text, join: { from: :course_id, to: :id })
     join(:author_first_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
     join(:author_last_name, target: CourseReading, type: :text, join: { from: :course_id, to: :id })
+    join(:crse_attr_value, target: CourseAttribute, type: :string, join: { from: :course_id, to: :id })
   end
 
   scope :return_as_relation, ->(search_results) do

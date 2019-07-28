@@ -33,6 +33,10 @@ module Types
       end
     end
 
+    def course_level
+      object.course_attributes.course_level.first.crse_attr_value
+    end
+
     def course_instructors
       BatchLoader::GraphQL.for(object.id).batch(default_value: []) do |course_ids, loader|
         CourseInstructor.where(course_id: course_ids).each do |course_instructor|
@@ -82,6 +86,7 @@ module Types
     field :course_description, String, null: true
     field :course_description_long, String, 'Extended course description', null: true
     field :course_instructors, [Types::CourseInstructorType, null: true], 'List of course instructors', null: true
+    field :course_level, Types::Enums::CourseLevel, null: true
     field :course_meeting_patterns, [Types::CourseMeetingPatternType, null: true], 'List of course meeting patterns', null: true
     field :course_note, String, null: true
     field :created_at, String, null: false

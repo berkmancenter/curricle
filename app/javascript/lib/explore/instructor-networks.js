@@ -20,14 +20,16 @@ var svg
 var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, subjectTextScale
 
 let courseIdStyles
+let courseLevels
 let selectCourse
 let semester
 let showLoaderOverlay
 let setTitleName
 let showNoResultsContainer
 
-function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction, showNoResultsContainerFunction, courseIdStylesFunction) {
+function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNameFunction, showNoResultsContainerFunction, courseIdStylesFunction, selectedCourseLevel) {
   courseIdStyles = courseIdStylesFunction
+  courseLevels = [selectedCourseLevel]
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
   setTitleName = setTitleNameFunction
@@ -127,7 +129,9 @@ function loadLecturerData (coursesConnectedByInstructor) {
   monadicView(data)
 }
 
-function requestData (instructorName, selectedSemester) {
+function requestData (instructorName, selectedSemester, selectedCourseLevel) {
+  courseLevels = [selectedCourseLevel]
+
   semester = {
     termName: selectedSemester.termName.toUpperCase(),
     termYear: selectedSemester.termYear
@@ -139,7 +143,7 @@ function requestData (instructorName, selectedSemester) {
 
   apolloClient.query({
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
-    variables: { instructorName, semester }
+    variables: { courseLevels, instructorName, semester }
   }).then(function (response) {
     const courses = response.data.coursesConnectedByInstructor
 

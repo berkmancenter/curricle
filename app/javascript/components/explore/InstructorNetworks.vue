@@ -13,6 +13,8 @@
       </p>
 
       <semester-input />
+
+      <course-level-input v-model="courseLevel" />
     </div>
 
     <div
@@ -86,10 +88,12 @@ import { initSetup, requestData } from 'lib/explore/instructor-networks'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import INSTRUCTOR_NAMES_QUERY from 'graphql/InstructorNames.gql'
 import Awesomplete from 'awesomplete'
+import CourseLevelInput from 'components/shared/CourseLevelInput'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
+    CourseLevelInput,
     SemesterInput
   },
   apollo: {
@@ -111,11 +115,12 @@ export default {
   },
   data () {
     return {
+      courseLevel: null,
+      instructorName: '',
       predefinedInstructors: [
         'Leah Price',
         'Jeffrey Schnapp'
       ],
-      instructorName: '',
       showNoResultsContainer: false,
       titleName: ''
     }
@@ -125,16 +130,21 @@ export default {
     ...mapGetters('user', ['courseIdStyles'])
   },
   watch: {
+    courseLevel (newCourseLevel) {
+      if (this.instructorName) {
+        requestData(this.instructorName, this.semesterStart, newCourseLevel)
+      }
+    },
     semesterStart (newSemester) {
       if (this.instructorName) {
-        requestData(this.instructorName, newSemester)
+        requestData(this.instructorName, newSemester, this.courseLevel)
       }
     }
   },
   mounted () {
     this.setupAwesomplete()
 
-    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName, this.setShowNoResultsContainer, this.courseIdStyles)
+    initSetup(this.selectCourse, this.showLoaderOverlay, this.setTitleName, this.setShowNoResultsContainer, this.courseIdStyles, this.courseLevel)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

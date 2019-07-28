@@ -13,6 +13,8 @@
       </p>
 
       <semester-input />
+
+      <course-level-input v-model="courseLevel" />
     </div>
 
     <div
@@ -72,14 +74,17 @@ import 'd3'
 import 'jquery'
 import { initSetup, requestFirstData } from 'lib/explore/course-universe'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import CourseLevelInput from 'components/shared/CourseLevelInput'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
+    CourseLevelInput,
     SemesterInput
   },
   data () {
     return {
+      courseLevel: null,
       searchQuery: ''
     }
   },
@@ -87,15 +92,18 @@ export default {
     ...mapGetters('search', ['semesterEnd', 'semesterStart'])
   },
   watch: {
+    courseLevel (newCourseLevel) {
+      initSetup(this.selectCourse, this.semesterStart, this.semesterEnd, this.showLoaderOverlay, newCourseLevel)
+    },
     semesterEnd (newSemester) {
-      initSetup(this.selectCourse, this.semesterStart, newSemester, this.showLoaderOverlay)
+      initSetup(this.selectCourse, this.semesterStart, newSemester, this.showLoaderOverlay, this.courseLevel)
     },
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.semesterEnd, this.showLoaderOverlay)
+      initSetup(this.selectCourse, newSemester, this.semesterEnd, this.showLoaderOverlay, this.courseLevel)
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart, this.semesterEnd, this.showLoaderOverlay)
+    initSetup(this.selectCourse, this.semesterStart, this.semesterEnd, this.showLoaderOverlay, this.courseLevel)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

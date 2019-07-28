@@ -8,9 +8,23 @@ module Types
       argument :id, ID, 'Course ID', required: true
     end
 
-    field :course_counts,
-          description: 'Return course counts',
-          resolver: Resolvers::CourseCounts
+    def course(id:)
+      Course.find(id)
+    end
+
+    field :course_counts, [Types::CourseCountType], null: false, description: 'Returns aggregate data about the number of courses for given criteria' do
+      argument :basic, String, 'Simple search queries using the my.harvard operators', required: false
+      argument :component, Types::Enums::Component, required: false
+      argument :course_levels, [Types::Enums::CourseLevel], required: false
+      argument :department, Types::Enums::Department, required: false
+      argument :filtered, Boolean, required: false
+      argument :semester, Types::Inputs::Semester, required: false
+      argument :semester_range, Types::Inputs::SemesterRange, required: false
+    end
+
+    def course_counts(**args)
+      Resolvers::CourseCounts.run(args)
+    end
 
     field :courses_connected_by_instructor,
           description: 'Returns collection of courses taught by instructors connected to a given instructor',
@@ -37,8 +51,5 @@ module Types
       Resolvers::UserCourses.run(current_user: context[:current_user], schedule_token: schedule_token)
     end
 
-    def course(id:)
-      Course.find(id)
-    end
   end
 end

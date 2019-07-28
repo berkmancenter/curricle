@@ -13,6 +13,8 @@
       </p>
 
       <semester-input />
+
+      <course-level-input v-model="courseLevel" />
     </div>
 
     <h4 class="text-center text-uppercase font-weight-bold">
@@ -110,14 +112,17 @@ import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/keyword-comparisons'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import CourseLevelInput from 'components/shared/CourseLevelInput'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
+    CourseLevelInput,
     SemesterInput
   },
   data () {
     return {
+      courseLevel: null,
       keywordOne: '',
       keywordTwo: '',
       searchBoxOne: 'Truth',
@@ -130,13 +135,16 @@ export default {
     ...mapGetters('user', ['courseIdStyles'])
   },
   watch: {
+    courseLevel (newCourseLevel) {
+      initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer, newCourseLevel)
+    },
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer, this.courseLevel)
     }
   },
   mounted () {
     this.updateKeywords()
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, this.setShowNoResultsContainer, this.courseLevel)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

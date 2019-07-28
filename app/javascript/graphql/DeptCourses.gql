@@ -1,6 +1,7 @@
 #import "./CourseFragment.gql"
 
 query DeptCourses(
+  $courseLevels: [CourseLevel!],
   $searchComponent: [Component!],
   $searchDepartment: [Department!],
   $semesterRange:  SemesterRange!
@@ -8,6 +9,7 @@ query DeptCourses(
 ) {
   coursesConnection(
     components: $searchComponent,
+    courseLevels: $courseLevels,
     departments: $searchDepartment,
     semesterRange: $semesterRange,
     perPage: 500,

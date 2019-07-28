@@ -35,10 +35,11 @@ module Resolvers
 
     type [Types::CourseType], null: false
 
+    argument :course_levels, [Types::Enums::CourseLevel], required: false
     argument :name, String, "Instructor's name", required: true
     argument :semester, Types::Inputs::Semester, required: true
 
-    def resolve(name:, semester:)
+    def resolve(course_levels:, name:, semester:)
       instructor_name = name
       term_name = semester[:term_name]
       term_year_range = determine_term_year_range(semester)
@@ -51,7 +52,7 @@ module Resolvers
 
       course_ids_taught_by_instructor = search_results.map(&:course_id).compact
 
-      query_co_taught_courses(course_ids_taught_by_instructor, instructor_email, term_name, term_year_range)
+      query_co_taught_courses(course_ids_taught_by_instructor, instructor_email, term_name, term_year_range, course_levels)
     end
 
     private
@@ -70,7 +71,7 @@ module Resolvers
       end
     end
 
-    def query_co_taught_courses(course_ids_taught_by_instructor, instructor_email, term_name, term_year_range)
+    def query_co_taught_courses(course_ids_taught_by_instructor, instructor_email, term_name, term_year_range, course_levels)
       instructor_emails = query_connected_instructor_emails(course_ids_taught_by_instructor, instructor_email, term_year_range)
 
       course_ids_taught_by_connected_instructors =
@@ -84,7 +85,12 @@ module Resolvers
 
       filtered_course_ids = filter_course_ids_by_counts(course_ids_taught_by_connected_instructors)
 
-      Course.where(id: filtered_course_ids).where.not(title: COURSE_TITLE_BLACKLIST)
+      Course.search do
+        with :crse_attr_value, Array(course_levels)
+        with :id, filtered_course_ids
+        without :title_sortable, COURSE_TITLE_BLACKLIST
+        paginate page: 1, per_page: 30
+      end.results
     end
 
     def query_connected_instructor_emails(course_ids, instructor_email, term_year_range)

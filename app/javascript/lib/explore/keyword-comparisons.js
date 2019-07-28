@@ -51,6 +51,7 @@ var networkWidthScale
 var fullData
 
 let courseIdStyles
+let courseLevels
 let selectCourse
 let semester
 let showLoaderOverlay
@@ -64,13 +65,14 @@ function requestData (searchTerm, numTerm) {
   apolloClient.query({
     query: COURSES_SEARCH_QUERY,
     variables: {
-      page: 1,
-      perPage: 5000,
-      semesterRange: semesterRange,
+      courseLevels: courseLevels,
       deluxeKeywords: [{
         text: searchTerm,
         applyTo: ['TITLE', 'DESCRIPTION']
-      }]
+      }],
+      page: 1,
+      perPage: 5000,
+      semesterRange: semesterRange
     }
   }).then(function (response) {
     // course objects need to be cloned so that they can be extended by addToDataSet()
@@ -101,8 +103,9 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction, showNoResultsContainerFunction) {
+function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction, showNoResultsContainerFunction, selectedCourseLevel) {
   courseIdStyles = courseIdStylesFunction
+  courseLevels = [selectedCourseLevel]
   semester = selectedSemester
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction

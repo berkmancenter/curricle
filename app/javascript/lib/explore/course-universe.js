@@ -12,6 +12,7 @@ const windowHeight = window.innerHeight
 const documentWidth = window.innerWidth * 0.8333333 * 0.9
 let backgroundGroup
 let context
+let courseLevels
 let diameter
 let pack
 let root
@@ -36,7 +37,8 @@ var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
 
-function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemesterEnd, showLoaderOverlayFunction) {
+function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemesterEnd, showLoaderOverlayFunction, selectedCourseLevel) {
+  courseLevels = [selectedCourseLevel]
   semesterEnd = selectedSemesterEnd
   semesterStart = selectedSemesterStart
   selectCourse = selectCourseFunction
@@ -102,6 +104,7 @@ function requestFirstData (searchQueryParam) {
     query: COURSE_COUNTS_QUERY,
     variables: {
       basic: searchQuery,
+      courseLevels: courseLevels,
       semesterRange: {
         start: semesterStart,
         end: semesterEnd
@@ -319,9 +322,10 @@ function requestSecondData (searchText, xPos, yPos, radius) {
     query: COURSES_SEARCH_QUERY,
     variables: {
       basic: searchQuery,
+      courseLevels: courseLevels,
+      departments: enumSearch,
       page: 1,
       perPage: 1000,
-      departments: enumSearch,
       semesterRange: semesterRange
     }
   }).then(function (response) {

@@ -1,12 +1,14 @@
 #import "./CourseFragment.gql"
 query CoursesConnectedByInstructor(
+  $courseLevels: [CourseLevel!],
   $instructorName: String!,
   $semester: Semester!
 ) {
-    coursesConnectedByInstructor(
-      name: $instructorName,
-      semester: $semester
-    ) {
-      ...Course
-      }
-  }
+  coursesConnectedByInstructor(
+    courseLevels: $courseLevels,
+    name: $instructorName,
+    semester: $semester
+  ) {
+    ...Course
+    }
+}

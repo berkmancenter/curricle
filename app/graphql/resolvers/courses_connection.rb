@@ -23,6 +23,7 @@ module Resolvers
     argument :annotated, Boolean, 'Only return courses annotated by current user', required: false
     argument :basic, String, 'Simple search queries using the my.harvard operators', required: false
     argument :components, [Types::Enums::Component], 'Filter results by component', required: false
+    argument :course_levels, [Types::Enums::CourseLevel], required: false
     argument :deluxe_keywords, [Types::Inputs::DeluxeKeyword], 'List of objects for a weighted, field-specific search', required: false
     argument :departments, [Types::Enums::Department], 'Filter results by department', required: false
     argument :ids, [ID], 'List of course IDs', required: false
@@ -199,6 +200,7 @@ module Resolvers
             with :component, Array(args[:components])
             with :component_filtered, Array(args[:components])
           end
+          with :crse_attr_value, Array(args[:course_levels])
         end
       end
     end

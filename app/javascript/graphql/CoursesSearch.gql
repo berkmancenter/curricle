@@ -3,31 +3,33 @@
 
 query CoursesSearch(
   $basic: String,
-  $ids: [ID!],
+  $components: [Component!],
+  $courseLevels: [CourseLevel!],
   $deluxeKeywords: [DeluxeKeyword!],
-  $semesterRange: SemesterRange,
+  $departments: [Department!],
+  $ids: [ID!],
   $page: Int,
   $perPage: Int,
-  $sortBy: CourseSortField,
-  $timeRanges: [TimeRange!],
   $schools: [School!],
-  $departments: [Department!],
+  $semesterRange: SemesterRange,
+  $sortBy: CourseSortField,
   $subjects: [Subject!],
-  $components: [Component!]
+  $timeRanges: [TimeRange!]
 ) {
     coursesConnection(
       basic: $basic,
-      ids: $ids,
+      components: $components,
+      courseLevels: $courseLevels,
       deluxeKeywords: $deluxeKeywords,
-      semesterRange: $semesterRange,
+      departments: $departments,
+      ids: $ids,
       page: $page,
       perPage: $perPage,
-      sortBy: $sortBy,
-      timeRanges: $timeRanges,
       schools: $schools,
-      departments: $departments,
+      semesterRange: $semesterRange,
+      sortBy: $sortBy,
       subjects: $subjects,
-      components: $components
+      timeRanges: $timeRanges
     ) {
         edges {
           node {

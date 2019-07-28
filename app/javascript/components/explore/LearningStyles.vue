@@ -13,6 +13,8 @@
       </p>
 
       <semester-input />
+
+      <course-level-input v-model="courseLevel" />
     </div>
 
     <div
@@ -53,23 +55,33 @@ import 'd3'
 import 'jquery'
 import { initSetup } from 'lib/explore/learning-styles'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import CourseLevelInput from 'components/shared/CourseLevelInput'
 import SemesterInput from 'components/shared/SemesterInput'
 
 export default {
   components: {
+    CourseLevelInput,
     SemesterInput
+  },
+  data () {
+    return {
+      courseLevel: null
+    }
   },
   computed: {
     ...mapGetters('search', ['semesterStart']),
     ...mapGetters('user', ['courseIdStyles'])
   },
   watch: {
+    courseLevel (newCourseLevel) {
+      initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, newCourseLevel)
+    },
     semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles)
+      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles, this.courseLevel)
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles)
+    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, this.courseLevel)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
