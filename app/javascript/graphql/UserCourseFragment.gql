@@ -2,6 +2,13 @@ fragment userCourse on UserCourse {
   id
   course {
     id
+    annotation {
+      id
+    }
+    tags {
+      id
+    }
   }
+  imported
   includeInPath
 }

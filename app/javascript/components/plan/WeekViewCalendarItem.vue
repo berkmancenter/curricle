@@ -11,7 +11,7 @@
       v-if="!readOnly"
       :course="item.id"
       :invert="selected"
-      type="schedule"
+      :type="courseActionType"
     />
 
     <div class="course-component">
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import CourseAction from 'components/shared/CourseAction.vue'
 
 export default {
@@ -77,6 +77,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('user', ['courseIdImported']),
     computedStyle () {
       const top = this.scale * this.offset + 65 + this.nudge
       const position = this.conflictInfo.position
@@ -90,6 +91,13 @@ export default {
         top: top + 'px',
         width: width + '%',
         left: width * position + '%'
+      }
+    },
+    courseActionType () {
+      if (this.courseIdImported(this.item.id)) {
+        return 'imported'
+      } else {
+        return 'schedule'
       }
     }
   },

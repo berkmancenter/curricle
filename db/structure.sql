@@ -395,7 +395,9 @@ CREATE TABLE public.user_courses (
     include_in_path boolean,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    course_meeting_pattern_id integer
+    course_meeting_pattern_id integer,
+    imported boolean DEFAULT false NOT NULL,
+    external_user_id character varying
 );
 
 
@@ -765,6 +767,13 @@ CREATE INDEX index_courses_on_to_tsvector_english_course_description_long ON pub
 
 
 --
+-- Name: index_user_courses_on_course_id_and_external_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_user_courses_on_course_id_and_external_user_id ON public.user_courses USING btree (course_id, external_user_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -925,6 +934,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190603140030'),
 ('20190619154529'),
 ('20190621140452'),
+('20190702152901'),
+('20190702192320'),
+('20190702195125'),
 ('20190726173851');
 
 

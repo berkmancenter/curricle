@@ -7,6 +7,7 @@ module Types
     field :course, Types::CourseType, null: false
     field :created_at, String, null: false
     field :id, ID, null: false
+    field :imported, Boolean, null: false
     field :include_in_path, Boolean, null: false
     field :updated_at, String, null: false
   end

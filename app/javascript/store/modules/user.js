@@ -27,7 +27,8 @@ const state = {
     // id -> ['list', 'of', 'annotations']; empty if not annotated
     annotated: {},
     // id ->
-    tagged: {}
+    tagged: {},
+    imported: {}
   }
 }
 
@@ -37,6 +38,9 @@ const getters = {
   },
   courseIdInTray: (state, getters) => (courseId) => {
     return getters.userCourseIds.includes(courseId)
+  },
+  courseIdImported: (state, getters) => (courseId) => {
+    return getters.userCoursesImportedIds.includes(courseId)
   },
   // computed trayCourses
   trayCourses (state) {
@@ -78,6 +82,14 @@ const getters = {
     return _.filter(
       _.keys(state.courseflags.schedule),
       k => state.courseflags.schedule[k]
+    )
+  },
+
+  // return a list of course ids flagged as imported from enrollment data
+  userCoursesImportedIds (state) {
+    return _.filter(
+      _.keys(state.courseflags.imported),
+      k => state.courseflags.imported[k]
     )
   },
   userAuthenticated (state) {
@@ -127,6 +139,10 @@ const actions = {
 
             if (userCourse.includeInPath) {
               commit('SET_USER_FLAG', { type: 'schedule', course: userCourse.course.id, value: true })
+            }
+
+            if (userCourse.imported) {
+              commit('SET_USER_FLAG', { type: 'imported', course: userCourse.course.id, value: true })
             }
           }
         )

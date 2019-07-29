@@ -1,15 +1,6 @@
+#import "./UserCourseFragment.gql"
 query UserCourses($scheduleToken: String) {
   userCourses(scheduleToken: $scheduleToken) {
-    id
-    includeInPath
-    course {
-      id
-      annotation {
-        id
-      }
-      tags {
-        id
-      }
-    }
+    ...userCourse
   }
 }

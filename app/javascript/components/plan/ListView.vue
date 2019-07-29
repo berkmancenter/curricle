@@ -27,21 +27,32 @@
       @click="selectCourse(course)"
     >
       <div class="col-md-1 pt-1 pointer">
-        <course-action
-          :course="course.id"
-          :invert="selected(course)"
-          class="mr-1"
-          type="tray"
-        />
+        <template v-if="courseIdImported(course.id)">
+          <course-action
+            :course="course.id"
+            :invert="selected(course)"
+            class="mr-4"
+            type="imported"
+          />
+        </template>
 
-        <br>
+        <template v-else>
+          <course-action
+            :course="course.id"
+            :invert="selected(course)"
+            class="mr-1"
+            type="tray"
+          />
 
-        <course-action
-          :course="course.id"
-          :invert="selected(course)"
-          class="mr-3"
-          type="schedule"
-        />
+          <br>
+
+          <course-action
+            :course="course.id"
+            :invert="selected(course)"
+            class="mr-3"
+            type="schedule"
+          />
+        </template>
       </div>
 
       <div class="col-md-2 pointer">
@@ -107,6 +118,7 @@ export default {
   computed: {
     ...mapGetters('app', ['currentCourse']),
     ...mapGetters('plan', ['filteredCourses', 'scheduledCoursesBySemester']),
+    ...mapGetters('user', ['courseIdImported']),
     ...mapState('plan', ['filters']),
     scheduleCourses () {
       return this.scheduledCoursesBySemester[this.semester] || []

@@ -13,25 +13,28 @@
       </span>
     </div>
 
-    <div
-      v-if="userAuthenticated"
-      class="mb-3 row"
-    >
+    <div class="mb-3 row">
       <div class="col">
-        <course-action
-          :course="course.id"
-          class="course-action"
-          type="tray"
-        />
+        <template v-if="userAuthenticated && !courseIdImported(course.id)">
+          <course-action
+            :course="course.id"
+            class="course-action"
+            type="tray"
+          />
 
-        <span class="font-weight-bold text-uppercase">
-          <span v-if="courseIdInTray(course.id)">
-            Remove from schedule
+          <span class="font-weight-bold text-uppercase">
+            <span v-if="courseIdInTray(course.id)">
+              Remove from schedule
+            </span>
+            <span v-else>
+              Add to schedule
+            </span>
           </span>
-          <span v-else>
-            Add to schedule
-          </span>
-        </span>
+        </template>
+
+        <template v-else>
+          &nbsp;
+        </template>
       </div>
     </div>
 
@@ -65,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['courseIdInSchedule', 'courseIdInTray'])
+    ...mapGetters('user', ['courseIdInSchedule', 'courseIdInTray', 'courseIdImported'])
   },
   watch: {
     course: {

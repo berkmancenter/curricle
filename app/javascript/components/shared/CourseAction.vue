@@ -59,6 +59,11 @@ export default {
           activeTooltip: 'You have annotated this course',
           inactiveTooltip: 'You have not annotated this course'
         },
+        imported: {
+          activeIcon: 'lock',
+          clickable: false,
+          activeTooltip: 'You enrolled in this course in a past semester'
+        },
         tagged: {
           activeIcon: 'tag',
           inactiveIcon: 'tag',
