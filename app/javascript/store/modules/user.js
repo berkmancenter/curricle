@@ -45,7 +45,11 @@ const getters = {
       k => state.courseflags.tray[k]
     )
     var courses = ids.map(i => state.courses[i]) || []
-    return courses.filter(e => !_.isUndefined(e))
+
+    return _(courses)
+      .filter(e => !_.isUndefined(e))
+      .sortBy('termCode', 'title')
+      .value()
   },
 
   scheduledCourses (state) {
@@ -54,7 +58,11 @@ const getters = {
       k => state.courseflags.schedule[k]
     )
     var courses = ids.map(i => state.courses[i]) || []
-    return courses.filter(e => !_.isUndefined(e))
+
+    return _(courses)
+      .filter(e => !_.isUndefined(e))
+      .sortBy('termCode', 'title')
+      .value()
   },
 
   // return a list of course ids in the tray
