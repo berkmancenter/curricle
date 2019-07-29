@@ -79,34 +79,4 @@ class Course < ApplicationRecord
     matching_item_ids = search_results.hits.map(&:primary_key)
     where id: matching_item_ids
   end
-
-  before_save :set_division
-
-  def set_division
-    mapping = DivisionMapping.find_by(
-      academic_group: academic_group,
-      subject_description: subject_description
-    )
-
-    # if we didn't find a mapping, search for one without an academic_group
-    if mapping.blank?
-      mapping = DivisionMapping.find_by(
-        academic_group: nil,
-        subject_description: subject_description
-      )
-    end
-
-    if mapping.blank?
-      self.division = 'misc'
-      self.division_description = 'Misc'
-    else
-      self.division = mapping.division
-      self.division_description = mapping.division_description
-    end
-  end
-
-  def set_division!
-    set_division
-    save
-  end
 end
