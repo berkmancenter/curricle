@@ -25,10 +25,10 @@ export default {
     return {
       options: [
         { value: null, text: 'All' },
+        { value: 'PRIMUGRD', text: 'Primarily for Undergraduate Students' },
         { value: 'UGRDGRAD', text: 'For Undergraduate and Graduate Students' },
-        { value: 'GRADCOURSE', text: 'Graduate Course' },
         { value: 'PRIMGRAD', text: 'Primarily for Graduate Students' },
-        { value: 'PRIMUGRD', text: 'Primarily for Undergraduate Students' }
+        { value: 'GRADCOURSE', text: 'For Graduate Students Only' }
       ]
     }
   },
