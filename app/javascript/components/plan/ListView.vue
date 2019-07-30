@@ -4,19 +4,22 @@
       Plan as List:
     </h3>
 
-    <department-selector />
-
-    <semester-selector
-      mode="filter"
-      source="tray"
+    <my-harvard-link
+      v-if="filteredCourses"
+      :courses="filteredCourses"
+      class="mt-4 mb-2"
     />
 
     <br>
 
-    <my-harvard-link
-      v-if="filteredCourses"
-      :courses="filteredCourses"
-      class="mt-2 mb-4"
+    <department-selector
+      class="mb-4"
+    />
+
+    <semester-selector
+      mode="filter"
+      source="tray"
+      class="mb-4"
     />
 
     <div
