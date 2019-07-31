@@ -40,24 +40,20 @@
         to complete registration.
       </p>
 
-      <p>
+      <p class="font-italic">
         <strong>
-          <em>
-            Curricle is preparing for its launch in Fall 2019!
-          </em>
+          CURRICLE Beta 2 is preparing for its Fall 2019 roll-out!
         </strong>
 
         <br>
 
-        <em>
-          Check out our
-          <a
-            href="https://curricledev.wpengine.com/"
-            target="_blank"
-          >
-            development blog</a>
-          for the latest update and new features.
-        </em>
+        Check out our
+        <a
+          href="https://curricle.wpengine.com/"
+          target="_blank"
+        >
+          news</a>
+        for the latest update and new features.
       </p>
     </div>
 
