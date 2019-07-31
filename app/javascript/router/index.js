@@ -3,10 +3,11 @@ import VueRouter from 'vue-router'
 
 import { deserializeSearch } from 'lib/util'
 
-import CurricleAbout from '../views/About'
+import CurricleAbout from 'views/About'
 import CurricleExplore from 'views/Explore'
-import CurricleHome from '../views/Home'
+import CurricleHome from 'views/Home'
 import CurriclePlan from 'views/Plan'
+import CurricleTools from 'views/Tools'
 import SearchAdvanced from 'views/SearchAdvanced'
 import SearchBasic from 'views/SearchBasic'
 import SharedSchedule from '../views/SharedSchedule'
@@ -58,6 +59,7 @@ const router = new VueRouter({
     { path: '/search/advanced', component: SearchAdvanced },
     { path: '/search/advanced/*', component: SearchAdvanced, props: deserializeSearch },
     { path: '/shared-schedule/:scheduleToken', component: SharedSchedule, props: true },
+    { path: '/tools', component: CurricleTools },
     { path: '*', redirect: 'home' }
   ]
 })

@@ -136,6 +136,15 @@
 
       <router-link
         class="nav secondary"
+        to="/tools"
+      >
+        Tools
+      </router-link>
+
+      <br>
+
+      <router-link
+        class="nav secondary"
         to="/about"
       >
         About

@@ -41,7 +41,13 @@
         </b-nav-item>
 
         <b-nav-item
-          class="mt-3"
+          class="mt-4"
+          to="/tools"
+        >
+          Tools
+        </b-nav-item>
+
+        <b-nav-item
           to="/about"
         >
           About
@@ -51,7 +57,7 @@
           target="_blank"
           href="http://curricle.wpengine.com"
         >
-          Curricle Lens
+          Development Updates
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
