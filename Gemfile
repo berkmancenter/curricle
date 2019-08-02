@@ -17,7 +17,7 @@ gem 'puma', '~> 4.0'
 gem 'rails', '5.2.3' # @drg skip
 gem 'sanitize', '~> 5.0'
 gem 'seedbank', '~> 0.5'
-gem 'sunspot_rails', '~> 2.3'
+gem 'sunspot_rails', '~> 2.5'
 gem 'webpacker', '~> 4.0'
 
 group :development, :test do
@@ -32,19 +32,19 @@ group :development, :test do
 end
 
 group :development do
-  gem 'brakeman', '~> 4.5'
+  gem 'brakeman', '~> 4.6'
   gem 'drg', '~> 1.5'
   gem 'graphiql-rails', '~> 1.7'
   gem 'listen', '~> 3.1'
   gem 'rack-cors', '~> 1.0'
-  gem 'rubocop', '~> 0.72'
+  gem 'rubocop', '~> 0.74'
   gem 'rubocop-performance', '~> 1.4'
-  gem 'rubocop-rails', '~> 2.1'
-  gem 'rubocop-rspec', '~> 1.33'
+  gem 'rubocop-rails', '~> 2.2'
+  gem 'rubocop-rspec', '~> 1.35'
   gem 'spring', '~> 2.1'
   gem 'spring-commands-rspec', '~> 1.0'
   gem 'spring-commands-rubocop', '~> 0.2'
-  gem 'sunspot_solr', '~> 2.3'
+  gem 'sunspot_solr', '~> 2.5'
   gem 'web-console', '~> 3.7' # @drg skip
 end
 
