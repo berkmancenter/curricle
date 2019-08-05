@@ -66,7 +66,7 @@ const router = new VueRouter({
 
 // Prevent anonymous access to any route other than the landing and shared-schedule pages
 router.beforeEach((to, _from, next) => {
-  if (to.path === '/home' || to.path.split('/')[1] === 'shared-schedule' || localStorage.getItem('curricle_api_token')) {
+  if (to.path === '/home' || to.path === '/about' || to.path.split('/')[1] === 'shared-schedule' || localStorage.getItem('curricle_api_token')) {
     next()
   } else {
     window.location = '/users/sign_in'

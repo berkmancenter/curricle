@@ -19,9 +19,10 @@
       class="d-none d-sm-block"
     />
 
-    <the-logout-link
-      v-if="userAuthenticated && !trayVisible"
+    <the-authentication-link
+      v-if="!trayVisible"
       class="d-none d-sm-block"
+      :user-authenticated="userAuthenticated"
     />
 
     <div class="row">
@@ -31,7 +32,9 @@
         :class="{ active: !trayVisible }"
         class="col-sm-2 d-none d-sm-block pr-0"
       >
-        <navbar />
+        <navbar
+          :user-authenticated="userAuthenticated"
+        />
       </div>
 
       <div
@@ -42,7 +45,9 @@
         <the-alert />
 
         <keep-alive>
-          <router-view />
+          <router-view
+            :user-authenticated="userAuthenticated"
+          />
         </keep-alive>
 
         <selected-course
@@ -75,7 +80,7 @@ import LoaderOverlay from 'components/TheLoaderOverlay'
 import CourseObserver from 'components/TheCourseObserver'
 import SelectedCourse from 'components/shared/SelectedCourse'
 import TheFooter from 'components/TheFooter'
-import TheLogoutLink from 'components/TheLogoutLink'
+import TheAuthenticationLink from 'components/TheAuthenticationLink'
 import TheTray from 'components/TheTray'
 import TheTrayControl from 'components/TheTrayControl'
 import TheNavbarControl from 'components/TheNavbarControl'
@@ -89,7 +94,7 @@ export default {
     CourseObserver,
     SelectedCourse,
     TheFooter,
-    TheLogoutLink,
+    TheAuthenticationLink,
     TheTray,
     TheTrayControl,
     TheNavbarControl,

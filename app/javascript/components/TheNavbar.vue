@@ -16,7 +16,6 @@
     </div>
 
     <div
-      v-if="userAuthenticated"
       id="nav-primary-container"
       class="mt-5"
     >
@@ -24,6 +23,7 @@
 
       <router-link
         class="nav primary"
+        :class="classObject"
         to="/explore"
       >
         Explore
@@ -72,6 +72,7 @@
 
       <router-link
         class="nav primary"
+        :class="classObject"
         to="/search"
       >
         Search
@@ -95,6 +96,7 @@
 
       <router-link
         class="nav primary"
+        :class="classObject"
         to="/plan"
       >
         Plan
@@ -136,6 +138,7 @@
 
       <router-link
         class="nav secondary"
+        :class="classObject"
         to="/tools"
       >
         Tools
@@ -164,13 +167,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    userAuthenticated: {
+      type: Boolean,
+      required: true
+    }
+  },
   computed: {
-    ...mapGetters('user', ['userAuthenticated']),
     activeNavPrimary () {
       return this.$route.path.split('/')[1]
+    },
+    classObject () {
+      return {
+        anonymous: !this.userAuthenticated
+      }
     }
   }
 }
@@ -178,10 +190,6 @@ export default {
 
 <style lang="scss" scoped>
   #nav-main {
-    #logo a {
-      color: #fff;
-    }
-
     .nav-sub-container {
       margin: 10px 0;
     }
@@ -200,6 +208,10 @@ export default {
         color: #999;
         margin: 4px 0;
         text-transform: uppercase;
+
+        &.anonymous {
+          color: #555;
+        }
       }
 
       &.sub {

@@ -4,16 +4,30 @@
     class="text-right text-uppercase"
   >
     <span
+      v-if="userAuthenticated"
       class="pointer"
       @click="logout"
     >
       Logout
     </span>
+
+    <a
+      v-else
+      href="/users/sign_in"
+    >
+      Sign In
+    </a>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    userAuthenticated: {
+      type: Boolean,
+      required: true
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('user/clearTokens')
