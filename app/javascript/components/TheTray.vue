@@ -57,3 +57,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#tray {
+  padding-bottom: 100px;
+}
+</style>
