@@ -32,11 +32,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Expand your horizon with interactive visualizations of the course catalog"
         placement="right"
         target="explore-link"
         triggers="hover"
-      />
+      >
+        Expand your horizon with interactive
+        <br>
+        visualizations of the course catalog
+      </b-popover>
 
       <br>
 
@@ -90,11 +93,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Narrow down your choices with a range of filters and parameters"
         placement="right"
         target="search-link"
         triggers="hover"
-      />
+      >
+        Narrow down your choices with a
+        <br>
+        range of filters and parameters
+      </b-popover>
 
       <br>
 
@@ -123,11 +129,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Plan out your schedule, whether for this semester or for the long haul"
         placement="right"
         target="plan-link"
         triggers="hover"
-      />
+      >
+        Plan out your schedule, whether for
+        <br>
+        this semester or for the long haul
+      </b-popover>
 
       <br>
 
@@ -174,11 +183,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Your one-stop shop for all links important to the course selection process"
         placement="right"
         target="tools-link"
         triggers="hover"
-      />
+      >
+        Your one-stop shop for all links important
+        <br>
+        to the course selection process
+      </b-popover>
 
       <br>
 
@@ -192,11 +204,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Find answers to the most common questions or ask one yourself"
         placement="right"
         target="faq-link"
         triggers="hover"
-      />
+      >
+        Find answers to the most common
+        <br>
+        questions or ask one yourself
+      </b-popover>
 
       <br>
 
@@ -210,11 +225,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Read about Curricle and the team that has brought it to you"
         placement="right"
         target="about-link"
         triggers="hover"
-      />
+      >
+        Read about Curricle and the team
+        <br>
+        that has brought it to you
+      </b-popover>
 
       <br>
 
@@ -229,11 +247,14 @@
 
       <b-popover
         boundary="viewport"
-        content="Keep up to date with the latest features and project updates"
         placement="right"
         target="news-link"
         triggers="hover"
-      />
+      >
+        Keep up to date with the latest
+        <br>
+        features and project updates
+      </b-popover>
     </div>
   </nav>
 </template>
