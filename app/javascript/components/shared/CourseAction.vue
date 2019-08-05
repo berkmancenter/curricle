@@ -49,8 +49,8 @@ export default {
           activeIcon: 'eye',
           inactiveIcon: ['far', 'eye-slash'],
           clickable: true,
-          activeTooltip: 'Click to show in your schedule',
-          inactiveTooltip: 'Click to hide from your schedule'
+          activeTooltip: 'Click to hide from your schedule',
+          inactiveTooltip: 'Click to show in your schedule'
         },
         annotated: {
           activeIcon: 'pencil-alt',
