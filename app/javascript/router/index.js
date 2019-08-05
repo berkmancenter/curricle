@@ -5,6 +5,7 @@ import { deserializeSearch } from 'lib/util'
 
 import CurricleAbout from 'views/About'
 import CurricleExplore from 'views/Explore'
+import CurricleFaq from 'views/Faq'
 import CurricleHome from 'views/Home'
 import CurriclePlan from 'views/Plan'
 import CurricleTools from 'views/Tools'
@@ -45,6 +46,7 @@ const router = new VueRouter({
         component: ExploreKeywordComparisons
       }]
     },
+    { path: '/faq', component: CurricleFaq },
     { path: '/home', component: CurricleHome },
     { path: '/plan',
       component: CurriclePlan,
