@@ -42,8 +42,8 @@ export default {
           activeIcon: 'minus',
           inactiveIcon: 'plus',
           clickable: true,
-          activeTooltip: 'Click to remove from your tray',
-          inactiveTooltip: 'Click to add to your tray'
+          activeTooltip: 'Click to remove from your schedule',
+          inactiveTooltip: 'Click to add to your schedule'
         },
         schedule: {
           activeIcon: 'eye',
