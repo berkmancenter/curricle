@@ -1,6 +1,7 @@
 <template>
   <div
     id="home-content"
+    class="pt-5"
   >
     <p>
       Welcome to
@@ -76,8 +77,6 @@
     color: black;
     font-size: 24px;
     line-height: 28px;
-    margin-left: 5%;
-    margin-top: 20%;
 
     img#logo {
       display: block;
