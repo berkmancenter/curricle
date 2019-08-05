@@ -22,6 +22,7 @@
       <hr>
 
       <router-link
+        id="explore-link"
         class="nav primary"
         :class="classObject"
         to="/explore"
@@ -29,12 +30,29 @@
         Explore
       </router-link>
 
+      <b-popover
+        boundary="viewport"
+        content="Expand your horizon with interactive visualizations of the course catalog"
+        placement="right"
+        target="explore-link"
+        triggers="hover"
+      />
+
       <br>
 
       <div
         v-show="activeNavPrimary === 'explore'"
         class="nav-sub-container"
       >
+        <router-link
+          class="nav sub"
+          to="/explore/keyword-comparisons"
+        >
+          Keyword Comparisons
+        </router-link>
+
+        <br>
+
         <router-link
           class="nav sub"
           to="/explore/learning-styles"
@@ -59,24 +77,24 @@
         >
           Course Universe
         </router-link>
-
-        <br>
-
-        <router-link
-          class="nav sub"
-          to="/explore/keyword-comparisons"
-        >
-          Keyword Comparisons
-        </router-link>
       </div>
 
       <router-link
+        id="search-link"
         class="nav primary"
         :class="classObject"
         to="/search"
       >
         Search
       </router-link>
+
+      <b-popover
+        boundary="viewport"
+        content="Narrow down your choices with a range of filters and parameters"
+        placement="right"
+        target="search-link"
+        triggers="hover"
+      />
 
       <br>
 
@@ -95,12 +113,21 @@
       <hr>
 
       <router-link
+        id="plan-link"
         class="nav primary"
         :class="classObject"
         to="/plan"
       >
         Plan
       </router-link>
+
+      <b-popover
+        boundary="viewport"
+        content="Plan out your schedule, whether for this semester or for the long haul"
+        placement="right"
+        target="plan-link"
+        triggers="hover"
+      />
 
       <br>
 
@@ -137,6 +164,7 @@
       <hr>
 
       <router-link
+        id="tools-link"
         class="nav secondary"
         :class="classObject"
         to="/tools"
@@ -144,24 +172,68 @@
         Tools
       </router-link>
 
+      <b-popover
+        boundary="viewport"
+        content="Your one-stop shop for all links important to the course selection process"
+        placement="right"
+        target="tools-link"
+        triggers="hover"
+      />
+
       <br>
 
       <router-link
+        id="faq-link"
+        class="nav secondary"
+        to="/faq"
+      >
+        FAQ
+      </router-link>
+
+      <b-popover
+        boundary="viewport"
+        content="Find answers to the most common questions or ask one yourself"
+        placement="right"
+        target="faq-link"
+        triggers="hover"
+      />
+
+      <br>
+
+      <router-link
+        id="about-link"
         class="nav secondary"
         to="/about"
       >
         About
       </router-link>
 
+      <b-popover
+        boundary="viewport"
+        content="Read about Curricle and the team that has brought it to you"
+        placement="right"
+        target="about-link"
+        triggers="hover"
+      />
+
       <br>
 
       <a
+        id="news-link"
         class="nav secondary"
         target="_blank"
         href="https://curricledev.wpengine.com"
       >
-        Development Updates
+        News
       </a>
+
+      <b-popover
+        boundary="viewport"
+        content="Keep up to date with the latest features and project updates"
+        placement="right"
+        target="news-link"
+        triggers="hover"
+      />
     </div>
   </nav>
 </template>

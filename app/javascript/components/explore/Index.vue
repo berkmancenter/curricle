@@ -1,6 +1,13 @@
 <template>
   <div>
     <visualization-card
+      title="Keyword Comparisons"
+      text="Visualize descriptive terms across the curriculum through keyword comparisons."
+      link="/explore/keyword-comparisons"
+      image="/images/explore/keywords.png"
+    />
+
+    <visualization-card
       title="Learning Styles"
       text="Explore courses by selecting class learning styles and departments."
       link="/explore/learning-styles"
@@ -19,13 +26,6 @@
       text="Explore all of Harvard's departments and programs to browse their offerings."
       link="/explore/course-universe"
       image="/images/explore/universe.png"
-    />
-
-    <visualization-card
-      title="Keyword Comparisons"
-      text="Visualize descriptive terms across the curriculum through keyword comparisons."
-      link="/explore/keyword-comparisons"
-      image="/images/explore/keywords.png"
     />
   </div>
 </template>
