@@ -57,7 +57,7 @@
       class="mt-5 text-center"
     >
       <p>
-        This instructor has no network.<br>
+        This instructor has no network for the selected semester and course level.<br>
         Try one of the instructors below to get started:
       </p>
 

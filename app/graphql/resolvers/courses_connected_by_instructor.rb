@@ -83,6 +83,8 @@ module Resolvers
         .pluck(:course_id)
         .compact
 
+      return Course.none if course_ids_taught_by_connected_instructors.blank?
+
       filtered_course_ids = filter_course_ids_by_counts(course_ids_taught_by_connected_instructors)
 
       Course.search do
