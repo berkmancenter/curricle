@@ -77,6 +77,7 @@
     color: black;
     font-size: 24px;
     line-height: 28px;
+    margin-top: 10%;
 
     img#logo {
       display: block;
