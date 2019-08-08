@@ -110,7 +110,7 @@ export default {
       }
     },
     setUserCourse () {
-      let includeInPath = !this.courseflags['schedule'][this.course]
+      const includeInPath = !this.courseflags['schedule'][this.course]
       let alertText = ''
 
       if (this.type === 'schedule') {

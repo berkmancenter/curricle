@@ -53,7 +53,7 @@ const getters = {
   // and contains the meetingTime data for those conflicting courses
   scheduledCourseConflictsByDay (state, getters) {
     const schedule = getters.scheduledCoursesBySemester
-    let courseConflicts = {}
+    const courseConflicts = {}
 
     _.forEach(schedule, semester => {
       const semesterSchedule = partitionCoursesByMeetingTime(semester)

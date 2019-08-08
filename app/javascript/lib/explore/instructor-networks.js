@@ -115,7 +115,7 @@ function initSetup (selectCourseFunction, showLoaderOverlayFunction, setTitleNam
 
 function loadLecturerData (coursesConnectedByInstructor) {
   // unfreeze the data object being passed in
-  let data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
+  const data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
   data.forEach(function (d) {
     d.subjectClass = cssesc(d.subjectDescription, { isIdentifier: true })
@@ -225,7 +225,7 @@ function monadicView (data) {
     .enter()
     .append('text')
     .attr('class', function (d) {
-      let classes = 'classText ' + d.values[0].subjectClass + ' ' + d.values[0].courseTypeClass + ' ' + courseIdStyles(d.key)
+      const classes = 'classText ' + d.values[0].subjectClass + ' ' + d.values[0].courseTypeClass + ' ' + courseIdStyles(d.key)
       return classes
     })
     .attr('y', function (d) { return classScale(d.key) - 4 })

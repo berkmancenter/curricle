@@ -168,7 +168,7 @@ export default {
       this.showNoResultsContainer = bool
     },
     setupAwesomplete () {
-      let input = document.getElementById('instructorName')
+      const input = document.getElementById('instructorName')
       this.awesomplete = new Awesomplete(input, { minChars: 4 })
 
       input.addEventListener('awesomplete-select', (e) => {

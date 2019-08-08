@@ -33,7 +33,7 @@ function partitionCoursesByDay (courses) {
          * if it contains valid data, specifically one or more courses
          * meeting on this day */
         if (dat && dat.length) {
-          ret[ days[idx] ].push(c)
+          ret[days[idx]].push(c)
         }
       })
     } else {
@@ -725,7 +725,7 @@ function deserializeSearch (route) {
         if (e) {
           var res = /^([a-z]):(.*)/.exec(e)
           if (res) {
-            var [ , type, rest ] = res
+            var [, type, rest] = res
             if (type) {
               if (!tokens[type]) { tokens[type] = [] }
               tokens[type].push(rest)
@@ -749,7 +749,7 @@ function deserializeSearch (route) {
           var res = /^([atdinrc]+):(.*)$/.exec(k)
 
           if (res) {
-            var [ , types, term ] = res
+            var [, types, term] = res
             kw.push({ applyTo: searchTypes(types), text: decodeURI(term) })
           }
         }

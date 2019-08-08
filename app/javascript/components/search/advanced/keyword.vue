@@ -49,7 +49,7 @@ export default {
       return 'keyword-elem-' + this.keyword.ident
     },
     keywordApplyTo () {
-      if (this.selected.length === this.applyToOptions.length - _.filter(this.applyToOptions, { 'disabled': true }).length) {
+      if (this.selected.length === this.applyToOptions.length - _.filter(this.applyToOptions, { disabled: true }).length) {
         return 'a'
       }
       if (this.selected.length === 1) {

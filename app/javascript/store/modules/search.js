@@ -10,7 +10,7 @@ import { transformSchedule } from 'lib/util'
 
 const currentDate = new Date()
 let thisYear = currentDate.getUTCFullYear()
-let thisMonth = currentDate.getMonth()
+const thisMonth = currentDate.getMonth()
 let thisSemester
 
 if (thisMonth <= 4) {

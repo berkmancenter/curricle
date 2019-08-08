@@ -94,7 +94,7 @@ function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemeste
 
 function requestFirstData (searchQueryParam) {
   searchQuery = searchQueryParam
-  let noResults = document.getElementById('noResults')
+  const noResults = document.getElementById('noResults')
 
   noResults.style.display = 'none'
 
@@ -423,7 +423,7 @@ function tooltipOff () {
 }
 
 function courseClick (course) {
-  let courseData = _.clone(course.__data__.data)
+  const courseData = _.clone(course.__data__.data)
 
   courseData.schedule = transformSchedule(courseData)
 
