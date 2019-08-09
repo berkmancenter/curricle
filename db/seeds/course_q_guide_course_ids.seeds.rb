@@ -5,19 +5,22 @@ require_relative 'curricle_importer'
 # Associate Q guide course IDs with Curricle course records
 class CourseQGuideCourseIdImporter < CurricleImporter
   def initialize
+    @id_map = {}
     @csv_file = Rails.root.join('lib', 'seeds', 'q_guide_course_ids.csv')
-    @progressbar = progressbar(@csv_file)
+
+    puts 'Counting the number of rows in the Q guide CSV file..'
+
+    # map course IDs to their most recent Q IDs
+    CSV.foreach(@csv_file, headers: true) { |row| @id_map[row['sis_id']] = row['q_id'] }
+
+    @progressbar = ProgressBar.new(@id_map.length)
   end
 
   def run
-    CSV.foreach(@csv_file, headers: true) do |row|
-      course = Course.find_by(external_course_id: row['sis_id'], term_code: row['strm'])
+    @id_map.each do |external_course_id, q_guide_course_id|
+      Course.where(external_course_id: external_course_id).update_all(q_guide_course_id: q_guide_course_id)
 
       @progressbar.increment!
-
-      next if course.blank?
-
-      course.update(q_guide_course_id: row['q_id'])
     end
   end
 end
