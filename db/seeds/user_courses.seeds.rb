@@ -19,14 +19,16 @@ class CurricleUserCoursesImporter < CurricleImporter
     User
     .pluck(:id, :huid)
     .each_with_object({}) do |el, hash|
+      next if el[1].blank?
+
       hash[el[1]] = el[0]
     end
 
   UNIQUE_KEY_COLUMNS = %w[course_id external_user_id].freeze
 
   def format_row(row) # rubocop:disable Metrics/MethodLength
-    empl_id = row[:emplid]
-    user_id = USERS_CACHE[empl_id]
+    huid = row[:emplid]
+    user_id = USERS_CACHE[huid]
     external_course_id = row[:course_id].to_i
     key = "#{row[:term_code]}#{external_course_id}#{row[:class_section]}"
     course_id = COURSES_CACHE[key]
@@ -36,7 +38,7 @@ class CurricleUserCoursesImporter < CurricleImporter
     [
       course_id,
       user_id,
-      empl_id,
+      huid,
       true,
       true,
       Time.current,
@@ -44,5 +46,7 @@ class CurricleUserCoursesImporter < CurricleImporter
     ]
   end
 end
+
+UserCourse.where(imported: true).delete_all
 
 CurricleUserCoursesImporter.new.run
