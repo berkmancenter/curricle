@@ -359,10 +359,12 @@ const actions = {
       dispatch('courses/registerCourses', courses, { root: true })
 
       return courses
-      // finally run any user hanlder
     })
 
-    promise.then(handler)
+    promise.then(handler).catch(error => {
+      console.error(error)
+      commit('SET_SEARCH_RUNNING', false)
+    })
   },
   changeSortBy ({ commit, state, dispatch }, { value, searchType }) {
     if (state.sortBy === value) {
