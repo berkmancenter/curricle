@@ -10,7 +10,7 @@
       <router-link to="/">
         <img
           class="w-100"
-          src="/images/logos/curricle-black-bg.svg"
+          src="/images/logos/curricle-black-bg-16861.svg"
         >
       </router-link>
     </div>

@@ -10,7 +10,7 @@
     <p>
       <img
         id="logo"
-        src="/images/logos/curricle-white-bg.svg"
+        src="/images/logos/curricle-white-bg-16861.svg"
       >
     </p>
 
