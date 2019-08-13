@@ -312,7 +312,7 @@ const actions = {
         state.timeRanges,
         (v, k) => {
           if (dayLkup[k]) {
-            vars.timeRanges.push({ day_name: dayLkup[k], time_start: v[0], time_end: v[1] })
+            vars.timeRanges.push({ dayName: dayLkup[k], timeStart: v[0], timeEnd: v[1] })
           }
         }
       )
