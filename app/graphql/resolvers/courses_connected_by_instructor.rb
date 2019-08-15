@@ -39,7 +39,7 @@ module Resolvers
     argument :name, String, "Instructor's name", required: true
     argument :semester, Types::Inputs::Semester, required: true
 
-    def resolve(course_levels:, name:, semester:)
+    def resolve(course_levels: [], name:, semester:)
       instructor_name = name
       term_name = semester[:term_name]
       term_year_range = determine_term_year_range(semester)
@@ -88,7 +88,7 @@ module Resolvers
       filtered_course_ids = filter_course_ids_by_counts(course_ids_taught_by_connected_instructors)
 
       Course.search do
-        with :crse_attr_value, Array(course_levels)
+        with :crse_attr_value, course_levels if course_levels.any?
         with :id, filtered_course_ids
         without :title_sortable, COURSE_TITLE_BLACKLIST
         paginate page: 1, per_page: 30
