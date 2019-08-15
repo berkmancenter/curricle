@@ -68,6 +68,7 @@ module Resolvers
       CourseInstructor.search do
         fulltext instructor_name
         with(:term_year, term_year_range)
+        paginate page: 1, per_page: 500
       end
     end
 
@@ -91,7 +92,8 @@ module Resolvers
         with :crse_attr_value, course_levels if course_levels.any?
         with :id, filtered_course_ids
         without :title_sortable, COURSE_TITLE_BLACKLIST
-        paginate page: 1, per_page: 30
+        paginate page: 1, per_page: 500
+        order_by(:external_course_id)
       end.results
     end
 
