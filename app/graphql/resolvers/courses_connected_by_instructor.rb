@@ -101,7 +101,7 @@ module Resolvers
       CourseInstructor
         .where(course_id: course_ids)
         .where(term_year: term_year_range)
-        .where.not(email: instructor_email)
+        .where.not(email: ['', instructor_email])
         .distinct
         .pluck(:email)
     end
