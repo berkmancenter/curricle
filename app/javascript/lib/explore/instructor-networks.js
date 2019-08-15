@@ -13,9 +13,9 @@ var maxTextLength = 50
 // main 'container' area is 10 columns wide (out of 12 total) with 5% padding on left/right
 const documentWidth = window.innerWidth * 0.8333333 * 0.9
 
-var margin = { top: 50, right: 100, bottom: 150, left: 50 }
+var margin = { top: 30, right: 100, bottom: 30, left: 50 }
 var width = documentWidth - margin.left - margin.right
-var height = 1200 - margin.top - margin.bottom
+var height = 500 - margin.top - margin.bottom
 var svg
 var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, subjectTextScale
 
@@ -194,7 +194,7 @@ function monadicView (data) {
 
   height = ((nestedCourseData.length * 16) + 300)
 
-  d3.select('svg').attr('height', height + margin.top + margin.bottom)
+  d3.select('#visContainer > svg').attr('height', height + margin.top + margin.bottom)
 
   classScale.range([margin.top, height])
   instructorTextPosScale.range([margin.top + 50, height - 50])
