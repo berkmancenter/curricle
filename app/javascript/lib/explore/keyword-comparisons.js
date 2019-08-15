@@ -2,7 +2,7 @@ import $ from 'jquery'
 import * as d3 from 'd3'
 import _ from 'lodash'
 import apolloClient from 'apollo'
-import COURSES_SEARCH_QUERY from '../../graphql/CoursesSearch.gql'
+import SEARCH_QUERY from 'graphql/KeywordComparisons.gql'
 import { transformSchedule } from 'lib/util'
 //  Colors
 
@@ -63,15 +63,13 @@ function requestData (searchTerm, numTerm) {
   showLoaderOverlay(true)
 
   apolloClient.query({
-    query: COURSES_SEARCH_QUERY,
+    query: SEARCH_QUERY,
     variables: {
       courseLevels: courseLevels,
       deluxeKeywords: [{
         text: searchTerm,
         applyTo: ['TITLE', 'DESCRIPTION']
       }],
-      page: 1,
-      perPage: 5000,
       semesterRange: semesterRange
     }
   }).then(function (response) {

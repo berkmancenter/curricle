@@ -1,0 +1,22 @@
+query KeywordComparisons(
+  $courseLevels: [CourseLevel!],
+  $deluxeKeywords: [DeluxeKeyword!],
+  $semesterRange: SemesterRange,
+) {
+    coursesConnection(
+      courseLevels: $courseLevels,
+      deluxeKeywords: $deluxeKeywords,
+      page: 1,
+      perPage: 5000,
+      semesterRange: $semesterRange,
+    ) {
+        edges {
+          node {
+            id
+            component
+            subjectDescription
+            title
+          }
+        }
+      }
+  }

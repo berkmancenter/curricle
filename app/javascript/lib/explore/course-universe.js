@@ -2,7 +2,7 @@ import _ from 'lodash'
 import * as d3 from 'd3'
 import apolloClient from 'apollo'
 import COURSE_COUNTS_QUERY from '../../graphql/CourseCounts.gql'
-import COURSES_SEARCH_QUERY from '../../graphql/CoursesSearch.gql'
+import COURSES_SEARCH_QUERY from 'graphql/CourseUniverse.gql'
 import { transformSchedule } from 'lib/util'
 
 let visSize
@@ -324,8 +324,6 @@ function requestSecondData (searchText, xPos, yPos, radius) {
       basic: searchQuery,
       courseLevels: courseLevels,
       departments: enumSearch,
-      page: 1,
-      perPage: 1000,
       semesterRange: semesterRange
     }
   }).then(function (response) {

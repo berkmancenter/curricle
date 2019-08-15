@@ -1,5 +1,3 @@
-#import "./CourseFragment.gql"
-
 query DeptCourses(
   $courseLevels: [CourseLevel!],
   $searchComponent: [Component!],
@@ -17,7 +15,8 @@ query DeptCourses(
   ) {
     edges {
       node {
-        ...Course
+        id
+        title
       }
     }
   }

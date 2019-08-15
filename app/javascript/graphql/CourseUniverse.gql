@@ -1,0 +1,23 @@
+query CourseUniverse(
+  $basic: String,
+  $courseLevels: [CourseLevel!],
+  $departments: [Department!],
+  $semesterRange: SemesterRange,
+) {
+    coursesConnection(
+      basic: $basic,
+      courseLevels: $courseLevels,
+      departments: $departments,
+      page: 1,
+      perPage: 5000,
+      semesterRange: $semesterRange,
+    ) {
+        edges {
+          node {
+            id
+            subjectDescription
+            title
+          }
+        }
+    }
+  }
