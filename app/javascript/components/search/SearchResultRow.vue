@@ -6,14 +6,14 @@
   >
     <div class="col-md-1 pt-1">
       <course-action
-        :course="course.id"
+        :course-id="course.id"
         :invert="selected"
         class="mr-1"
         type="tray"
       />
 
       <course-action
-        :course="course.id"
+        :course-id="course.id"
         :invert="selected"
         class="mr-2"
         type="schedule"

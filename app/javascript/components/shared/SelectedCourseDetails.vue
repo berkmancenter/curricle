@@ -82,9 +82,9 @@
           </p>
         </div>
 
-        <selected-course-annotations
+        <annotations
           v-if="userAuthenticated"
-          :course-id="course.id"
+          :course="course"
         />
       </div>
     </div>
@@ -92,12 +92,12 @@
 </template>
 
 <script>
-import SelectedCourseAnnotations from './SelectedCourseAnnotations'
+import Annotations from './SelectedCourseDetailsAnnotations'
 import truncate from 'vue-truncate-collapsed'
 
 export default {
   components: {
-    SelectedCourseAnnotations,
+    Annotations,
     truncate
   },
   props: {

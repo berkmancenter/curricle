@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="course.id"
     id="selected-course"
     class="p-3 col-md-10"
   >
@@ -17,7 +18,7 @@
       <div class="col">
         <template v-if="userAuthenticated && !courseIdImported(course.id)">
           <course-action
-            :course="course.id"
+            :course-id="course.id"
             class="course-action"
             type="tray"
           />
@@ -39,6 +40,7 @@
     </div>
 
     <selected-course-details
+      v-if="course.id"
       :course="course"
       v-bind="$props"
     />
@@ -48,23 +50,39 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import COURSE_QUERY from 'graphql/Course.gql'
 import CourseAction from 'components/shared/CourseAction'
 import SelectedCourseDetails from './SelectedCourseDetails'
 
 export default {
+  apollo: {
+    course: {
+      query: COURSE_QUERY,
+      variables () {
+        return {
+          id: this.courseId
+        }
+      }
+    }
+  },
   components: {
     CourseAction,
     FontAwesomeIcon,
     SelectedCourseDetails
   },
   props: {
-    course: {
-      type: Object,
+    courseId: {
+      type: String,
       required: true
     },
     userAuthenticated: {
       type: Boolean,
       required: true
+    }
+  },
+  data () {
+    return {
+      course: {}
     }
   },
   computed: {

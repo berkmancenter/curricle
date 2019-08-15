@@ -9,7 +9,7 @@
 
     <course-action
       v-if="!readOnly"
-      :course="item.id"
+      :course-id="item.id"
       :invert="selected"
       :type="courseActionType"
     />

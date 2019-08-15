@@ -17,14 +17,14 @@
           <td>
             <course-action
               v-show="editable"
-              :course="course.id"
+              :course-id="course.id"
               :invert="invert"
               type="annotated"
             />
 
             <course-action
               v-show="editable"
-              :course="course.id"
+              :course-id="course.id"
               :invert="invert"
               type="schedule"
             />

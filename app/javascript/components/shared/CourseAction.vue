@@ -26,7 +26,7 @@ export default {
       type: String,
       required: true
     },
-    course: {
+    courseId: {
       type: String,
       required: true
     },
@@ -86,7 +86,7 @@ export default {
       if (this.type === 'shareable') {
         return true
       }
-      return !!this.courseflags[this.type][this.course]
+      return !!this.courseflags[this.type][this.courseId]
     },
     tooltip () {
       return this.active ? this.config.activeTooltip : this.config.inactiveTooltip
@@ -103,14 +103,14 @@ export default {
     click () {
       if (!this.config.clickable) { return }
 
-      if (this.type === 'tray' && this.courseflags[this.type][this.course]) {
+      if (this.type === 'tray' && this.courseflags[this.type][this.courseId]) {
         this.removeUserCourse()
       } else {
         this.setUserCourse()
       }
     },
     setUserCourse () {
-      const includeInPath = !this.courseflags['schedule'][this.course]
+      const includeInPath = !this.courseflags['schedule'][this.courseId]
       let alertText = ''
 
       if (this.type === 'schedule') {
@@ -122,7 +122,7 @@ export default {
       this.$apollo.provider.defaultClient.mutate({
         mutation: USER_COURSE_SET_MUTATION,
         variables: {
-          courseId: this.course,
+          courseId: this.courseId,
           includeInPath: includeInPath
         }
       }).then(
@@ -133,7 +133,7 @@ export default {
       this.$apollo.provider.defaultClient.mutate({
         mutation: USER_COURSE_REMOVE_MUTATION,
         variables: {
-          courseId: this.course
+          courseId: this.courseId
         }
       }).then(
         this.toggleCourseStatus('Course removed from schedule')
@@ -142,7 +142,7 @@ export default {
     toggleCourseStatus (alertText) {
       this.SET_ALERT_TEXT(alertText)
 
-      this.$store.dispatch('user/toggleCourseStatus', { type: this.type, course: this.course })
+      this.$store.dispatch('user/toggleCourseStatus', { type: this.type, course: this.courseId })
     }
   }
 }

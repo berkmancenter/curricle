@@ -30,29 +30,17 @@
 
 <script>
 import ANNOTATION_SET_MUTATION from '../../graphql/AnnotationSet.gql'
-import COURSE_QUERY from '../../graphql/Course.gql'
 import { mapMutations } from 'vuex'
 
 export default {
-  apollo: {
-    course: {
-      query: COURSE_QUERY,
-      variables () {
-        return {
-          id: this.courseId
-        }
-      }
-    }
-  },
   props: {
-    courseId: {
-      type: String,
+    course: {
+      type: Object,
       required: true
     }
   },
   data () {
     return {
-      course: {},
       editableText: '',
       maxLength: 500,
       editableTextLength: 0

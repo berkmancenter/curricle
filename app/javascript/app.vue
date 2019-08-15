@@ -52,7 +52,7 @@
 
         <selected-course
           v-if="selectedCourse"
-          :course="selectedCourse"
+          :course-id="selectedCourse.id"
           :user-authenticated="userAuthenticated"
         />
       </div>

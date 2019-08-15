@@ -13,7 +13,7 @@
       <div class="d-table-row">
         <div class="d-table-cell pr-2">
           <course-action
-            :course="course.id"
+            :course-id="course.id"
             :invert="true"
             type="tray"
           />

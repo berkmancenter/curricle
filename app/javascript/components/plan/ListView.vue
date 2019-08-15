@@ -32,7 +32,7 @@
       <div class="col-md-1 pt-1 pointer">
         <template v-if="courseIdImported(course.id)">
           <course-action
-            :course="course.id"
+            :course-id="course.id"
             :invert="selected(course)"
             class="mr-4"
             type="imported"
@@ -41,7 +41,7 @@
 
         <template v-else>
           <course-action
-            :course="course.id"
+            :course-id="course.id"
             :invert="selected(course)"
             class="mr-1"
             type="tray"
@@ -50,7 +50,7 @@
           <br>
 
           <course-action
-            :course="course.id"
+            :course-id="course.id"
             :invert="selected(course)"
             class="mr-3"
             type="schedule"
