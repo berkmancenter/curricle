@@ -1,6 +1,6 @@
 {
   "name": "curricle",
-  "version": "1.2.3",
+  "version": "1.2.3.2",
   "private": true,
   "scripts": {
     "gen_weekly_semesters": "bin/gen_weekly_semesters > app/javascript/lib/semester-weeks.json",
