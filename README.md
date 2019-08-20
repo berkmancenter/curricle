@@ -9,7 +9,7 @@ Curricle uses a Rails 5.2 backend running in API mode to serve a GraphQL API and
 ### Requirements
 * Ruby 2.4.1
 * PostgreSQL 9.6
-* Node.js 8.11.3 LTS
+* Node.js 10.16.2 LTS
 * Yarn 1.x
 * Java 8 Runtime Environment (for Solr search engine)
 
