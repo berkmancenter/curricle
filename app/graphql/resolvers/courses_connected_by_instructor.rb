@@ -91,6 +91,7 @@ module Resolvers
       Course.search do
         with :crse_attr_value, course_levels if course_levels.any?
         with :id, filtered_course_ids
+        without :title, nil
         without :title_sortable, COURSE_TITLE_BLACKLIST
         paginate page: 1, per_page: 500
         order_by(:external_course_id)
