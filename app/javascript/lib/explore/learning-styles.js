@@ -29,16 +29,16 @@ let filteredData
 let filterDatumDepartment
 let filterDatumCourseType
 let selectCourse
-let semester
+let semesterRange
 let showLoaderOverlay
 
 const fontSize = '12px'
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction, selectedCourseLevel) {
+function initSetup (selectCourseFunction, selectedSemesterRange, showLoaderOverlayFunction, courseIdStylesFunction, selectedCourseLevel) {
   courseIdStyles = courseIdStylesFunction
   courseLevels = [selectedCourseLevel]
   selectCourse = selectCourseFunction
-  semester = selectedSemester
+  semesterRange = selectedSemesterRange
   showLoaderOverlay = showLoaderOverlayFunction
   documentWidth = d3.select('#visContainer').node().getBoundingClientRect().width
   filterDatumDepartment = undefined
@@ -99,7 +99,7 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
     .attr('stop-color', '#fff')
     .attr('offset', '1')
 
-  loadFullData(semester)
+  loadFullData()
 
   document.getElementById('departmentHeadline').onclick = function () { setCourseTypeData(fullData, true) }
   document.getElementById('courseTypeHeadline').onclick = function () { setDepartmentData(fullData, true) }
@@ -107,12 +107,12 @@ function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFun
   window.addEventListener('resize', resizing)
 }
 
-function loadFullData (semester) {
+function loadFullData () {
   showLoaderOverlay(true)
 
   apolloClient.query({
     query: COURSE_COUNTS_QUERY,
-    variables: { filtered: true, semester: semester, courseLevels: courseLevels }
+    variables: { filtered: true, semesterRange: semesterRange, courseLevels: courseLevels }
   }).then(function (response) {
     fullData = response.data.courseCounts
     appendAxis()
@@ -412,7 +412,6 @@ function resizing () {
 function loadClassData (data) {
   const searchComponent = data[0].component.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
   const searchDepartment = data[0].department.toUpperCase().replace(/\s/g, '_').replace(/\s/g, '_').replace(/[`~!@#$%^&*()|+\-=?:'",.<>{}[\]\\/]/gi, '')
-  const semesterRange = { start: semester }
   const sortBy = 'TITLE'
 
   showLoaderOverlay(true)

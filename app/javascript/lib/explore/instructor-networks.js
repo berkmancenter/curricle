@@ -22,7 +22,7 @@ var classScale, instructorTextPosScale, subjectPosScale, instructorTextScale, su
 let courseIdStyles
 let courseLevels
 let selectCourse
-let semester
+let semesterRange
 let showLoaderOverlay
 let setTitleName
 let showNoResultsContainer
@@ -129,13 +129,9 @@ function loadLecturerData (coursesConnectedByInstructor) {
   monadicView(data)
 }
 
-function requestData (instructorName, selectedSemester, selectedCourseLevel) {
+function requestData (instructorName, selectedSemesterRange, selectedCourseLevel) {
   courseLevels = [selectedCourseLevel]
-
-  semester = {
-    termName: selectedSemester.termName.toUpperCase(),
-    termYear: selectedSemester.termYear
-  }
+  semesterRange = selectedSemesterRange
 
   setTitleName(instructorName)
 
@@ -143,7 +139,7 @@ function requestData (instructorName, selectedSemester, selectedCourseLevel) {
 
   apolloClient.query({
     query: COURSES_CONNECTED_BY_INSTRUCTOR_QUERY,
-    variables: { courseLevels, instructorName, semester }
+    variables: { courseLevels, instructorName, semesterRange }
   }).then(function (response) {
     const courses = response.data.coursesConnectedByInstructor
 
@@ -429,7 +425,7 @@ function lectureClick () {
     .attr('height', height + margin.bottom)
     .style('fill', 'rgba(255,255,255,.5)')
 
-  requestData(lecturerName, semester)
+  requestData(lecturerName, semesterRange)
 }
 
 function courseClick () {

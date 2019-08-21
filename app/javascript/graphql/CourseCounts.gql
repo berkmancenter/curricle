@@ -2,14 +2,12 @@ query CourseCounts(
   $basic: String,
   $courseLevels: [CourseLevel!],
   $filtered: Boolean,
-  $semester: Semester,
   $semesterRange: SemesterRange
 ) {
   courseCounts(
     basic: $basic,
     courseLevels: $courseLevels,
     filtered: $filtered,
-    semester: $semester,
     semesterRange: $semesterRange
   ) {
     component

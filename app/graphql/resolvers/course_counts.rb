@@ -3,7 +3,6 @@
 module Resolvers
   # Return a collection of objects with aggregate data about course counts
   class CourseCounts
-
     START_YEAR_TERM_SCOPE = {
       'Spring' => %w[Spring Summer Fall],
       'Summer' => %w[Summer Fall],

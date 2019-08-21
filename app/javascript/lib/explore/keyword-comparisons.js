@@ -53,13 +53,11 @@ var fullData
 let courseIdStyles
 let courseLevels
 let selectCourse
-let semester
+let semesterRange
 let showLoaderOverlay
 let showNoResultsContainer
 
 function requestData (searchTerm, numTerm) {
-  const semesterRange = { start: semester }
-
   showLoaderOverlay(true)
 
   apolloClient.query({
@@ -101,10 +99,10 @@ function mergeData () {
   setData(fullData)
 }
 
-function initSetup (selectCourseFunction, selectedSemester, showLoaderOverlayFunction, courseIdStylesFunction, showNoResultsContainerFunction, selectedCourseLevel) {
+function initSetup (selectCourseFunction, selectedSemesterRange, showLoaderOverlayFunction, courseIdStylesFunction, showNoResultsContainerFunction, selectedCourseLevel) {
   courseIdStyles = courseIdStylesFunction
   courseLevels = [selectedCourseLevel]
-  semester = selectedSemester
+  semesterRange = selectedSemesterRange
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
   showNoResultsContainer = showNoResultsContainerFunction

@@ -1,12 +1,12 @@
 query CoursesConnectedByInstructor(
   $courseLevels: [CourseLevel!],
   $instructorName: String!,
-  $semester: Semester!
+  $semesterRange: SemesterRange!
 ) {
   coursesConnectedByInstructor(
     courseLevels: $courseLevels,
     name: $instructorName,
-    semester: $semester
+    semesterRange: $semesterRange
   ) {
       id
       component

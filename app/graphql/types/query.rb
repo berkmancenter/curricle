@@ -26,9 +26,20 @@ module Types
       Resolvers::CourseCounts.run(args)
     end
 
-    field :courses_connected_by_instructor,
-          description: 'Returns collection of courses taught by instructors connected to a given instructor',
-          resolver: Resolvers::CoursesConnectedByInstructor
+    field :courses_connected_by_instructor, [Types::CourseType], null: false, description: 'Returns collection of courses taught by instructors connected to a given instructor' do
+      argument :course_levels, [Types::Enums::CourseLevel], required: false
+      argument :name, String, "Instructor's name", required: true
+      argument :semester, Types::Inputs::Semester, required: false
+      argument :semester_range, Types::Inputs::SemesterRange, required: false
+    end
+
+    def courses_connected_by_instructor(**args)
+      Resolvers::CoursesConnectedByInstructor.run(
+        course_levels: args[:course_levels] || [],
+        name: args[:name],
+        semester_range: args[:semester_range] || { start: args[:semester] }
+      )
+    end
 
     field :courses_connection,
           description: 'Queries that return lists of courses with connection metadata',
@@ -50,6 +61,5 @@ module Types
     def user_courses(schedule_token: nil)
       Resolvers::UserCourses.run(current_user: context[:current_user], schedule_token: schedule_token)
     end
-
   end
 end

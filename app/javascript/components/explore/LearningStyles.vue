@@ -69,25 +69,38 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['semesterStart']),
-    ...mapGetters('user', ['courseIdStyles'])
+    ...mapGetters('search', ['semesterEnd', 'semesterStart']),
+    ...mapGetters('user', ['courseIdStyles']),
+    searchFilters () {
+      return [this.courseLevel, this.semesterEnd, this.semesterStart]
+    },
+    semesterRange () {
+      const range = { start: this.semesterStart }
+
+      if (this.semesterEnd) { range.end = this.semesterEnd }
+
+      return range
+    }
   },
   watch: {
-    courseLevel (newCourseLevel) {
-      initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, newCourseLevel)
-    },
-    semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.showLoaderOverlay, this.courseIdStyles, this.courseLevel)
+    searchFilters: {
+      handler () {
+        this.refreshVisualization()
+      },
+      deep: true
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart, this.showLoaderOverlay, this.courseIdStyles, this.courseLevel)
+    this.refreshVisualization()
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
     ...mapMutations({
       showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
-    })
+    }),
+    refreshVisualization () {
+      initSetup(this.selectCourse, this.semesterRange, this.showLoaderOverlay, this.courseIdStyles, this.courseLevel)
+    }
   }
 }
 </script>

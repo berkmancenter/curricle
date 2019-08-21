@@ -126,19 +126,25 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['semesterStart']),
-    ...mapGetters('user', ['courseIdStyles'])
+    ...mapGetters('search', ['semesterEnd', 'semesterStart']),
+    ...mapGetters('user', ['courseIdStyles']),
+    searchFilters () {
+      return [this.courseLevel, this.semesterEnd, this.semesterStart]
+    },
+    semesterRange () {
+      const range = { start: this.semesterStart }
+
+      if (this.semesterEnd) { range.end = this.semesterEnd }
+
+      return range
+    }
   },
   watch: {
-    courseLevel (newCourseLevel) {
-      if (this.instructorName) {
-        requestData(this.instructorName, this.semesterStart, newCourseLevel)
-      }
-    },
-    semesterStart (newSemester) {
-      if (this.instructorName) {
-        requestData(this.instructorName, newSemester, this.courseLevel)
-      }
+    searchFilters: {
+      handler () {
+        this.refreshVisualization()
+      },
+      deep: true
     }
   },
   mounted () {
@@ -154,12 +160,12 @@ export default {
     forceInstructorSearch (name) {
       this.instructorName = name
 
-      requestData(this.instructorName, this.semesterStart)
+      this.refreshVisualization()
     },
     onSubmit (e) {
       e.preventDefault()
       this.setShowNoResultsContainer(false)
-      requestData(this.instructorName, this.semesterStart)
+      this.refreshVisualization()
     },
     setTitleName (name) {
       this.titleName = name
@@ -174,6 +180,9 @@ export default {
       input.addEventListener('awesomplete-select', (e) => {
         this.forceInstructorSearch(e.text.value)
       })
+    },
+    refreshVisualization () {
+      requestData(this.instructorName, this.semesterRange, this.courseLevel)
     }
   }
 }
