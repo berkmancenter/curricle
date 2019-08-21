@@ -13,8 +13,11 @@
         triggers="click blur"
         placement="bottom"
       >
-        <span>Select one or more semesters</span>
+        <span v-if="allowRange">Select one or more semesters:</span>
+        <span v-else>Select a semester:</span>
+
         <hr>
+
         <b-form>
           <b-row>
             <b-col class="justify-content-md-left">
@@ -32,32 +35,37 @@
                 class="year-select"
               />
             </b-col>
-            <b-col class="justify-content-md-left">
-              <b-form-checkbox v-model="searchTermUseRange">
-                to
-              </b-form-checkbox>
-            </b-col>
-            <b-col
-              v-show="searchTermUseRange"
-              class="justify-content-md-left"
-            >
-              <b-form-radio-group
-                v-model="searchTermEnd"
-                :options="optionsTermName"
-                name="search-end-term"
-                stacked
-              />
-            </b-col>
-            <b-col
-              v-show="searchTermUseRange"
-              class="justify-content-md-left"
-            >
-              <b-form-select
-                v-model="searchYearEnd"
-                :options="optionsTermYearEnd"
-                class="year-select"
-              />
-            </b-col>
+
+            <template v-if="allowRange">
+              <b-col class="justify-content-md-left">
+                <b-form-checkbox v-model="searchTermUseRange">
+                  to
+                </b-form-checkbox>
+              </b-col>
+
+              <b-col
+                v-show="searchTermUseRange"
+                class="justify-content-md-left"
+              >
+                <b-form-radio-group
+                  v-model="searchTermEnd"
+                  :options="optionsTermName"
+                  name="search-end-term"
+                  stacked
+                />
+              </b-col>
+
+              <b-col
+                v-show="searchTermUseRange"
+                class="justify-content-md-left"
+              >
+                <b-form-select
+                  v-model="searchYearEnd"
+                  :options="optionsTermYearEnd"
+                  class="year-select"
+                />
+              </b-col>
+            </template>
           </b-row>
         </b-form>
       </b-popover>
@@ -75,6 +83,12 @@ export default {
   components: {
     FontAwesomeIcon
   },
+  props: {
+    allowRange: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       optionsTermName: [
@@ -91,7 +105,7 @@ export default {
       var from = this.searchTermStart + ' ' + this.searchYearStart
       var to = this.searchTermEnd + ' ' + this.searchYearEnd
 
-      if (this.searchTermUseRange) {
+      if (this.searchTermUseRange && this.allowRange) {
         return from + ' - ' + to
       } else {
         return from

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="basic-search mb-3">
-      <semester-input />
+      <semester-input :allow-range="true" />
 
       <div class="mt-4 w-50">
         <b-input-group>

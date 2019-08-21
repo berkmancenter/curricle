@@ -131,7 +131,7 @@ function loadLecturerData (coursesConnectedByInstructor) {
 
 function requestData (instructorName, selectedSemesterRange, selectedCourseLevel) {
   courseLevels = [selectedCourseLevel]
-  semesterRange = selectedSemesterRange
+  semesterRange = { start: selectedSemesterRange.start }
 
   setTitleName(instructorName)
 

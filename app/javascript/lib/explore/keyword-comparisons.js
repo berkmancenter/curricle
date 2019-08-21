@@ -102,7 +102,7 @@ function mergeData () {
 function initSetup (selectCourseFunction, selectedSemesterRange, showLoaderOverlayFunction, courseIdStylesFunction, showNoResultsContainerFunction, selectedCourseLevel) {
   courseIdStyles = courseIdStylesFunction
   courseLevels = [selectedCourseLevel]
-  semesterRange = selectedSemesterRange
+  semesterRange = { start: selectedSemesterRange.start }
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
   showNoResultsContainer = showNoResultsContainerFunction

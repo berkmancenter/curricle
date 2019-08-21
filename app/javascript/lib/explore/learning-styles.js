@@ -38,7 +38,7 @@ function initSetup (selectCourseFunction, selectedSemesterRange, showLoaderOverl
   courseIdStyles = courseIdStylesFunction
   courseLevels = [selectedCourseLevel]
   selectCourse = selectCourseFunction
-  semesterRange = selectedSemesterRange
+  semesterRange = { start: selectedSemesterRange.start }
   showLoaderOverlay = showLoaderOverlayFunction
   documentWidth = d3.select('#visContainer').node().getBoundingClientRect().width
   filterDatumDepartment = undefined

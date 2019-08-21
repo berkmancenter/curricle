@@ -19,7 +19,6 @@ let root
 let searchQuery
 let selectCourse
 let selectedIndex
-let semesterEnd
 let semesterStart
 let showLoaderOverlay
 let tooltipDiv
@@ -39,7 +38,6 @@ if (dotSize > 2) { dotSize = 2 }
 
 function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemesterEnd, showLoaderOverlayFunction, selectedCourseLevel) {
   courseLevels = [selectedCourseLevel]
-  semesterEnd = selectedSemesterEnd
   semesterStart = selectedSemesterStart
   selectCourse = selectCourseFunction
   showLoaderOverlay = showLoaderOverlayFunction
@@ -106,8 +104,7 @@ function requestFirstData (searchQueryParam) {
       basic: searchQuery,
       courseLevels: courseLevels,
       semesterRange: {
-        start: semesterStart,
-        end: semesterEnd
+        start: semesterStart
       }
     }
   }).then(function (response) {
@@ -314,7 +311,7 @@ function randomPoints (xPos, yPos, radius, amount) {
 
 function requestSecondData (searchText, xPos, yPos, radius) {
   var enumSearch = searchText.toUpperCase().replace(/, /g, '_').replace(/-/g, '_').replace(/\./g, '_').replace(/ /g, '_')
-  const semesterRange = { start: semesterStart, end: semesterEnd }
+  const semesterRange = { start: semesterStart }
 
   showLoaderOverlay(true)
 
