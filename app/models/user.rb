@@ -22,12 +22,14 @@ class User < ApplicationRecord
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
-      when :mail
-        self.email = value
       when :displayName
         self.display_name = value
       when :givenName
         self.given_name = value
+      when :harvardEduIdNumber
+        self.huid = value
+      when :mail
+        self.email = value
       when :sn
         self.surname = value
       end
