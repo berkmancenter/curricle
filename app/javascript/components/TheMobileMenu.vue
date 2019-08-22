@@ -47,9 +47,11 @@
           Tools
         </b-nav-item>
 
-        <b-nav-item
-          to="/about"
-        >
+        <b-nav-item to="/faq">
+          FAQ
+        </b-nav-item>
+
+        <b-nav-item to="/about">
           About
         </b-nav-item>
 
@@ -58,6 +60,16 @@
           href="http://curricle.wpengine.com"
         >
           Development Updates
+        </b-nav-item>
+
+        <b-nav-item class="mt-4">
+          Curricle Lens
+
+          <br>
+
+          <span class="text-capitalize font-italic">
+            Coming soon!
+          </span>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
