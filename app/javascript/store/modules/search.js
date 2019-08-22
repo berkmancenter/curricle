@@ -124,6 +124,10 @@ const getters = {
     }
   },
 
+  semesterStartString (state) {
+    return `${state.searchTermStart} ${state.searchYearStart}`
+  },
+
   semesterEnd (state) {
     if (!state.searchTermUseRange) { return }
 

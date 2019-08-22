@@ -13,9 +13,11 @@ const documentWidth = window.innerWidth * 0.8333333 * 0.9
 let backgroundGroup
 let context
 let courseLevels
+let departmentsInSchedule
 let diameter
 let pack
 let root
+let scheduledCourseIds
 let searchQuery
 let selectCourse
 let selectedIndex
@@ -23,6 +25,8 @@ let semesterStart
 let showLoaderOverlay
 let tooltipDiv
 let svg
+const clickedCourseIds = []
+const departmentsInScheduleNodes = []
 
 if (windowHeight > documentWidth) {
   visSize = documentWidth
@@ -36,11 +40,13 @@ var dotSize = visSize / 500
 
 if (dotSize > 2) { dotSize = 2 }
 
-function initSetup (selectCourseFunction, selectedSemesterStart, selectedSemesterEnd, showLoaderOverlayFunction, selectedCourseLevel) {
-  courseLevels = [selectedCourseLevel]
-  semesterStart = selectedSemesterStart
-  selectCourse = selectCourseFunction
-  showLoaderOverlay = showLoaderOverlayFunction
+function initSetup (args) {
+  courseLevels = [args.courseLevel]
+  departmentsInSchedule = args.departmentsInSchedule
+  semesterStart = args.semesterStart
+  selectCourse = args.selectCourse
+  showLoaderOverlay = args.showLoaderOverlay
+  scheduledCourseIds = args.userCoursesScheduleIds
 
   var width = +visSize
   var height = +visSize
@@ -154,7 +160,12 @@ function drawVis (data) {
       return 'mainCircle_' + i
     })
     .attr('r', function (d) { return d.r })
+    .attr('class', (d) => { return departmentsInSchedule.includes(d.data.key) ? 'scheduled' : '' })
     .on('click', function (d) {
+      // remove 'scheduled' class/colored background on department when zooming in
+      departmentsInScheduleNodes.push(this)
+      this.classList = ''
+
       if (focus !== d) {
         zoomIn(d, this.__data__.data.key)
         d3.event.stopPropagation()
@@ -220,6 +231,9 @@ function drawVis (data) {
   function zoomOut (d, thisKey) {
     node.transition().duration(500).style('opacity', 1).style('pointer-events', 'auto')
     backgroundGroup.transition().duration(500).style('opacity', 0)
+
+    // restore 'scheduled' class/colored background on department when zooming out
+    departmentsInScheduleNodes.forEach((node) => { node.classList = 'scheduled' })
 
     //  Load Close-Up View
     removeCloseUpVis()
@@ -368,6 +382,13 @@ function closeUpVis (data, xPos, yPos, radius) {
     .delay(500)
     .duration(500)
     .attr('r', function (d) { return d.r })
+    .attr('class', (d) => {
+      if (scheduledCourseIds.includes(d.data.id)) {
+        return 'scheduled'
+      } else if (clickedCourseIds.includes(d.data.id)) {
+        return 'clicked'
+      }
+    })
 
   node.transition()
     .duration(1000)
@@ -419,6 +440,10 @@ function tooltipOff () {
 
 function courseClick (course) {
   const courseData = _.clone(course.__data__.data)
+
+  d3.select(course).select('circle').classed('clicked', true)
+
+  clickedCourseIds.push(courseData.id)
 
   courseData.schedule = transformSchedule(courseData)
 

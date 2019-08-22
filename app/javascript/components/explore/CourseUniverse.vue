@@ -72,6 +72,7 @@
 <script>
 import 'd3'
 import 'jquery'
+import _ from 'lodash'
 import { initSetup, requestFirstData } from 'lib/explore/course-universe'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import CourseLevelInput from 'components/shared/CourseLevelInput'
@@ -89,21 +90,37 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('search', ['semesterEnd', 'semesterStart'])
+    ...mapGetters('plan', ['scheduledCoursesBySemester']),
+    ...mapGetters('search', ['semesterStart', 'semesterStartString']),
+    ...mapGetters('user', ['userCoursesScheduleIds']),
+    args () {
+      return {
+        courseLevel: this.courseLevel,
+        departmentsInSchedule: this.departmentsInSchedule,
+        selectCourse: this.selectCourse,
+        semesterStart: this.semesterStart,
+        showLoaderOverlay: this.showLoaderOverlay,
+        userCoursesScheduleIds: this.userCoursesScheduleIds
+      }
+    },
+    departmentsInSchedule () {
+      const courses = this.scheduledCoursesBySemester[this.semesterStartString]
+      return _(courses).map('classAcademicOrgDescription').uniq().value()
+    }
   },
   watch: {
-    courseLevel (newCourseLevel) {
-      initSetup(this.selectCourse, this.semesterStart, this.semesterEnd, this.showLoaderOverlay, newCourseLevel)
+    args: {
+      handler () {
+        this.refreshVisualization()
+      },
+      deep: true
     },
-    semesterEnd (newSemester) {
-      initSetup(this.selectCourse, this.semesterStart, newSemester, this.showLoaderOverlay, this.courseLevel)
-    },
-    semesterStart (newSemester) {
-      initSetup(this.selectCourse, newSemester, this.semesterEnd, this.showLoaderOverlay, this.courseLevel)
+    userCoursesScheduleIds () {
+      this.refreshVisualization()
     }
   },
   mounted () {
-    initSetup(this.selectCourse, this.semesterStart, this.semesterEnd, this.showLoaderOverlay, this.courseLevel)
+    this.refreshVisualization()
   },
   methods: {
     ...mapActions('app', ['selectCourse']),
@@ -113,6 +130,9 @@ export default {
     performSearch (e) {
       e.preventDefault()
       requestFirstData(this.searchQuery)
+    },
+    refreshVisualization () {
+      initSetup(this.args)
     }
   }
 }
@@ -150,6 +170,10 @@ export default {
       stroke: rgba(0, 0, 0, 0);
       fill: rgba(0, 0, 0, 0);
       cursor: pointer;
+
+      &.scheduled {
+        fill: rgba(100, 119, 232, 0.4);
+      }
     }
 
     .node--leaf circle:hover {
@@ -161,6 +185,16 @@ export default {
 
     .closeUpNode {
       cursor: pointer;
+    }
+
+    .closeUpNode circle {
+      &.clicked {
+        fill: rgba(155, 155, 155, 1);
+      }
+
+      &.scheduled {
+        fill: rgba(100, 119, 232, 1);
+      }
     }
 
     .closeUpNode circle:hover {
