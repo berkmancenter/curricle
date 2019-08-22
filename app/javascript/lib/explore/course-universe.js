@@ -163,7 +163,10 @@ function drawVis (data) {
     .attr('class', (d) => { return departmentsInSchedule.includes(d.data.key) ? 'scheduled' : '' })
     .on('click', function (d) {
       // remove 'scheduled' class/colored background on department when zooming in
-      departmentsInScheduleNodes.push(this)
+      if (departmentsInSchedule.includes(d.data.key)) {
+        departmentsInScheduleNodes.push(this)
+      }
+
       this.classList = ''
 
       if (focus !== d) {
