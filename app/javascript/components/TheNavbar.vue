@@ -255,7 +255,8 @@
     <hr>
 
     <p
-      class="nav secondary"
+      id="curricle-lens-link"
+      class="nav pointer secondary"
     >
       Curricle Lens
 
@@ -268,6 +269,17 @@
         Coming soon!
       </span>
     </p>
+
+    <b-popover
+      boundary="viewport"
+      placement="right"
+      target="curricle-lens-link"
+      triggers="hover"
+    >
+      Dynamically interact with the
+      <br>
+      history of the Harvard curriculum
+    </b-popover>
 
     <hr>
   </nav>
