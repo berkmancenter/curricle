@@ -1,12 +1,60 @@
 <template>
   <b-button
     id="myHarvardLink"
-    :href="myHarvardLink"
+    v-b-modal.export-modal
     size="sm"
-    target="_blank"
     variant="dark"
   >
-    Export to my.Harvard
+    Export to my.harvard
+
+    <b-modal
+      id="export-modal"
+      size="lg"
+    >
+      <template slot="default">
+        <p>
+          Before you leave Curricle to continue enrolling in my.harvard...
+        </p>
+
+        <p>
+          We ask you to take <strong>three minutes</strong> of your time and
+          <strong>fill out a short survey</strong> on your experience with using
+          Curricle. Your feedback is invaluable to our continued efforts to
+          improve the tool for the semesters to come.
+        </p>
+
+        <p>
+          Thanks!
+        </p>
+
+        <div class="row mb-4">
+          <div class="col pr-1">
+            <b-button
+              id="button-no"
+              class="text-center"
+              :href="myHarvardLink"
+              target="_blank"
+              variant="light"
+            >
+              NO, take me to my.harvard
+            </b-button>
+          </div>
+
+          <div class="col pl-1">
+            <b-button
+              id="button-yes"
+              href="https://goo.gl/forms/0ibJHd1MUG7xzB5k1"
+              target="_blank"
+              variant="dark"
+            >
+              YES, I'd like to
+              <br>
+              share my feedback!
+            </b-button>
+          </div>
+        </div>
+      </template>
+    </b-modal>
 
     <b-popover
       target="myHarvardLink"
@@ -54,3 +102,21 @@ https://courses.my.harvard.edu/psp/courses/EMPLOYEE/EMPL/h/
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#button-no, #button-yes {
+  align-items: center;
+  display: flex;
+  height: 62px;
+  justify-content: center;
+  width: 100%;
+}
+
+#button-no {
+  border: 1px solid black;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+}
+</style>
