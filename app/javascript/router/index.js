@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import _ from 'lodash'
 
 import { deserializeSearch } from 'lib/util'
 
@@ -25,54 +26,129 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
-    { path: '/about', component: CurricleAbout },
+    {
+      path: '/about',
+      component: CurricleAbout,
+      meta: { title: 'About' }
+    },
     { path: '/explore',
       component: CurricleExplore,
-      children: [{
-        path: '',
-        component: ExploreIndex,
-        default: true
-      }, {
-        path: 'learning-styles',
-        component: ExploreLearningStyles
-      }, {
-        path: 'instructor-networks',
-        component: ExploreInstructorNetworks
-      }, {
-        path: 'course-universe',
-        component: ExploreCourseUniverse
-      }, {
-        path: 'keyword-comparisons',
-        component: ExploreKeywordComparisons
-      }]
+      children: [
+        {
+          path: '',
+          component: ExploreIndex,
+          default: true,
+          meta: { title: 'Explore' }
+        },
+        {
+          path: 'learning-styles',
+          component: ExploreLearningStyles,
+          meta: { title: 'Explore: Learning Styles' }
+        },
+        {
+          path: 'instructor-networks',
+          component: ExploreInstructorNetworks,
+          meta: { title: 'Explore: Instructor Networks' }
+        },
+        {
+          path: 'course-universe',
+          component: ExploreCourseUniverse,
+          meta: { title: 'Explore: Course Universe' }
+        },
+        {
+          path: 'keyword-comparisons',
+          component: ExploreKeywordComparisons,
+          meta: { title: 'Explore: Keyword Comparisons' }
+        }
+      ]
     },
-    { path: '/faq', component: CurricleFaq },
-    { path: '/home', component: CurricleHome },
+    {
+      path: '/faq',
+      component: CurricleFaq,
+      meta: { title: 'FAQ' }
+    },
+    {
+      path: '/home',
+      component: CurricleHome
+    },
     { path: '/plan',
       component: CurriclePlan,
       children: [
-        { path: '', component: PlanWeekView },
-        { path: '/plan/week', component: PlanWeekView },
-        { path: '/plan/semester', component: PlanSemesterView },
-        { path: '/plan/list', component: PlanListView }
+        {
+          path: '',
+          component: PlanWeekView,
+          meta: { title: 'Plan by Week' }
+        },
+        {
+          path: '/plan/week',
+          component: PlanWeekView,
+          meta: { title: 'Plan by Week' }
+        },
+        {
+          path: '/plan/semester',
+          component: PlanSemesterView,
+          meta: { title: 'Plan by Semester' }
+        },
+        {
+          path: '/plan/list',
+          component: PlanListView,
+          meta: { title: 'Plan as List' }
+        }
       ]
     },
-    { path: '/search', component: SearchBasic },
-    { path: '/search/advanced', component: SearchAdvanced },
-    { path: '/search/advanced/*', component: SearchAdvanced, props: deserializeSearch },
-    { path: '/shared-schedule/:scheduleToken', component: SharedSchedule, props: true },
-    { path: '/tools', component: CurricleTools },
-    { path: '*', redirect: 'home' }
+    {
+      path: '/search',
+      component: SearchBasic,
+      meta: { title: 'Search' }
+    },
+    {
+      path: '/search/advanced',
+      component: SearchAdvanced,
+      meta: { title: 'Advanced Search' }
+    },
+    {
+      path: '/search/advanced/*',
+      component: SearchAdvanced,
+      props: deserializeSearch,
+      meta: { title: 'Advanced Search' }
+    },
+    {
+      path: '/shared-schedule/:scheduleToken',
+      component: SharedSchedule,
+      props: true,
+      meta: { title: 'Shared Schedule' }
+    },
+    {
+      path: '/tools',
+      component: CurricleTools,
+      meta: { title: 'Tools' }
+    },
+    {
+      path: '*',
+      redirect: 'home'
+    }
   ]
 })
 
-// Prevent anonymous access to any route other than the landing and shared-schedule pages
 router.beforeEach((to, _from, next) => {
-  if (to.path === '/home' || to.path === '/about' || to.path === '/faq' || to.path.split('/')[1] === 'shared-schedule' || localStorage.getItem('curricle_api_token')) {
+  // Control anonymous access to specific pages
+  const ANONYMOUS_PATHS = ['/home', '/about', '/faq']
+
+  if (_.includes(ANONYMOUS_PATHS, to.path) || to.path.split('/')[1] === 'shared-schedule' || localStorage.getItem('curricle_api_token')) {
     next()
   } else {
     window.location = '/users/sign_in'
   }
+})
+
+router.afterEach((to, from) => {
+  Vue.nextTick(() => {
+    let title = 'Curricle'
+
+    if (to.meta.title) { title += ` - ${to.meta.title}` }
+
+    document.title = title
+  })
 })
 
 export default router
