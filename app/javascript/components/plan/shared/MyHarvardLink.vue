@@ -12,22 +12,22 @@
       size="lg"
     >
       <template slot="default">
-        <p>
+        <p class="px-3">
           Before you leave Curricle to continue enrolling in my.harvard...
         </p>
 
-        <p>
+        <p class="px-3">
           We ask you to take <strong>three minutes</strong> of your time and
           <strong>fill out a short survey</strong> on your experience with using
           Curricle. Your feedback is invaluable to our continued efforts to
           improve the tool for the semesters to come.
         </p>
 
-        <p>
+        <p class="px-3">
           Thanks!
         </p>
 
-        <div class="row mb-4">
+        <div class="row px-3 mb-3">
           <div class="col pr-1">
             <b-button
               id="button-no"
@@ -43,7 +43,7 @@
           <div class="col pl-1">
             <b-button
               id="button-yes"
-              href="https://goo.gl/forms/0ibJHd1MUG7xzB5k1"
+              href="https://forms.gle/pJGzsArGDAGaqN2R8"
               target="_blank"
               variant="dark"
             >

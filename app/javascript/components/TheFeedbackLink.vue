@@ -5,7 +5,7 @@
   >
     <a
       target="_blank"
-      href="https://goo.gl/forms/0ibJHd1MUG7xzB5k1"
+      href="https://forms.gle/pJGzsArGDAGaqN2R8"
     >
       Send feedback
 
