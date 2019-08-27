@@ -390,14 +390,13 @@ ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
 
 CREATE TABLE public.user_courses (
     id integer NOT NULL,
-    user_id integer,
+    user_id character varying,
     course_id integer,
     include_in_path boolean,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     course_meeting_pattern_id integer,
-    imported boolean DEFAULT false NOT NULL,
-    external_user_id character varying
+    imported boolean DEFAULT false NOT NULL
 );
 
 
@@ -442,7 +441,7 @@ CREATE TABLE public.users (
     schedule_token character varying,
     display_name character varying,
     given_name character varying,
-    huid character varying,
+    huid character varying NOT NULL,
     surname character varying,
     username character varying DEFAULT ''::character varying NOT NULL
 );
@@ -767,17 +766,17 @@ CREATE INDEX index_courses_on_to_tsvector_english_course_description_long ON pub
 
 
 --
--- Name: index_user_courses_on_course_id_and_external_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_user_courses_on_course_id_and_external_user_id ON public.user_courses USING btree (course_id, external_user_id);
-
-
---
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_huid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_huid ON public.users USING btree (huid);
 
 
 --
@@ -832,14 +831,6 @@ ALTER TABLE ONLY public.course_meeting_patterns
 
 ALTER TABLE ONLY public.annotations
     ADD CONSTRAINT fk_rails_4043df79bf FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- Name: user_courses fk_rails_4a55f742c8; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.user_courses
-    ADD CONSTRAINT fk_rails_4a55f742c8 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -937,6 +928,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190702152901'),
 ('20190702192320'),
 ('20190702195125'),
-('20190726173851');
+('20190726173851'),
+('20190826200843'),
+('20190827134051'),
+('20190827141551');
 
 
