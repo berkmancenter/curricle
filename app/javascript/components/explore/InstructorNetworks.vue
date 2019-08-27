@@ -9,7 +9,11 @@
       class="mb-3"
     >
       <p>
-        Discover faculty networks of teaching and learning from the past ten years. Type in an instructor to see faculty with whom they've co-taught, connecting through courses to subjects. Shift across instructors for new connections and patterns.
+        Type in an instructor’s name to see the faculty with whom they've
+        co-taught or with whom they share departmental affiliations and/or
+        intellectual affinities. Click on the name of one of these colleagues
+        (left column) to highlight their specific sub-network of connections;
+        click on one of the department names (right column) to reveal their individual course offerings.
       </p>
 
       <semester-input />
@@ -57,8 +61,9 @@
       class="mt-5 text-center"
     >
       <p>
-        This instructor has no network for the selected semester and course level.<br>
-        Try one of the instructors below to get started:
+        This instructor has no network for the selected semester and course level.
+        <br>
+        Try changing the semester or course level, or start with a different instructor.
       </p>
 
       <p

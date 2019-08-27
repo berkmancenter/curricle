@@ -10,28 +10,48 @@
       </h3>
 
       <p>
-        Get all of your burning questions about Curricle and how it works answered here. If your question isn’t here, reach out to us!
+        Get all of your burning questions about Curricle answered here. If your question isn’t addressed,
+        feel free reach out to us at <a href="mailto:info@metalab.harvard.edu">info@metalab.harvard.edu</a>.
       </p>
 
       <h5>
-        How is Curricle different from my.Harvard?
+        How is Curricle different from my.harvard?
       </h5>
 
       <p>
-        Glad that you asked! We offer
+        Glad that you asked. While my.harvard is the centralized information
+        system used by Harvard students to manage course registration and by
+        faculty, staff, and administrators to oversee enrollments and advising,
+        Curricle is designed with the curriculum firmly in mind. It is built to
+        prompt intellectual curiosity and adventure, and to help with planning.
+        To that end, it offers
         <router-link to="/explore">
           a set of engaging visualizations</router-link>
-        to help you navigate the Harvard course catalog and discover interesting classes.
-
-        We have a planning tool that gives you
+        to help you navigate
+        the Harvard course catalog and discover interesting classes. It also provides
+        a planning tool that gives you
         <router-link to="/plan/week">
           a weekly calendar view</router-link>
         of your schedule,
         <router-link to="/plan/semester">
           semester-by-semester planning</router-link>
-        with automatically imported transcript, and annotations to help you stay organized.
+        with an automatically imported transcript,
+        and annotations to help you stay organized. Curricle further streamlines
+        the course selection process by connecting courses directly to their syllabi
+        and to Q evaluations while letting you export your courses to my.harvard with a single click.
+      </p>
 
-        We also make the course selection process streamlined by connecting courses directly to their Q evaluations and syllabus information and letting you send your courses to my.Harvard in one click.
+      <h5>
+        How should I make use of my "Schedule" in Curricle?
+      </h5>
+
+      <p>
+        Creatively! Your "Schedule" is where you can add courses that
+        potentially interest you. You can sift through these courses,
+        view them in a weekly plan, annotate them, and share them with
+        friends and advisers. Your schedule is yours alone. Unless you
+        share it with others, it's your place to collect, curate, and
+        play with course plans and ideas.
       </p>
 
       <h5>
@@ -39,7 +59,10 @@
       </h5>
 
       <p>
-        Nope! Make sure you click on the Export to my.Harvard button to send your schedule from this semester to my.Harvard catalog search page and finish the enrollment process there.
+        Not quite. Make sure you click on the Export to my.harvard button
+        to send your schedule over to my.harvard where you can complete
+        the enrollment process. Curricle is a course discovery, exploration,
+        and planning tool, not a registration platform.
       </p>
 
       <h5>
@@ -47,15 +70,30 @@
       </h5>
 
       <p>
-        When you click on Share Schedule, we generate for you a link for the Week view of your schedule with all the classes you have added there. This will include hidden classes and annotations you have already made.
+        When you click on Share Schedule, Curricle generates a link to
+        the Week View of your schedule with all the classes you have
+        added, even if they are hidden.
       </p>
 
       <h5>
-        The visualization doesn’t seem to work properly. Is it broken?
+        Are the annotations I add to courses private?
       </h5>
 
       <p>
-        Try reloading the page if the visualization is behaving in an unexpected manner. If you suspect it’s a bug, let us know as we continue to improve Curricle in the many semesters to come.
+        Your personal notes for courses &mdash; whether they are added
+        to your schedule or not &mdash; will remain private and visible
+        only to you.
+      </p>
+
+      <h5>
+        A visualization doesn’t seem to work properly. Is it broken?
+      </h5>
+
+      <p>
+        Try refreshing the page if one of Curricle’s EXPLORE
+        visualizations is behaving in an unexpected manner. If you
+        suspect it’s a bug, please let us know. Our goal is to keep
+        improving the tool.
       </p>
 
       <h5>
@@ -63,7 +101,10 @@
       </h5>
 
       <p>
-        We welcome suggestions and collaboration - whether you are a student or not! Get in touch with us at <a href="mailto:info@metalab.harvard.edu">info@metalab.harvard.edu</a> or use the giant Contact Us button below.
+        We welcome suggestions and collaborators &mdash; whether you're
+        a student, an instructor, or an administrator. Please get in touch
+        with us at <a href="mailto:info@metalab.harvard.edu">info@metalab.harvard.edu</a>
+        or click on the Contact Us button below.
       </p>
 
       <div class="row mt-5 vertical-align">
@@ -78,7 +119,7 @@
         </div>
 
         <div class="col-sm-12 col-md-8">
-          Don’t see your question here? Is there a bug you’d like to report? Want to give us feedback? Write us, and we’ll get back to you as soon as we can!
+          Is there a bug you’d like to report? Want to provide some feedback? Write us and we’ll get back to you as soon as we can.
         </div>
       </div>
     </div>

@@ -9,7 +9,12 @@
       class="mb-4"
     >
       <p>
-        Get an overview of the universe of the departments and programs at Harvard, and then click in to explore the classes offered by that department. This visualization is randomly structured, enjoy the element of surprise!
+        The word “university” comes from the Latin word “universitas,” which
+        means totality, and Course Universe allows you to explore that totality
+        at the level of the curriculum as a whole. Zoom out and survey the
+        university’s entire course catalog. Zoom in and examine individual
+        departments. Zoom in further to explore specific courses. The courses
+        and departments loaded into your current schedule are highlighted.
       </p>
 
       <semester-input />

@@ -33,23 +33,23 @@ export default {
     return {
       rows: [
         {
-          buttonLabel: 'my.Harvard',
-          description: 'Once you have your semester schedule planned out here, don’t forget to go to my.Harvard to complete your course registration.',
+          buttonLabel: 'my.harvard',
+          description: 'Ready to register for your classes this semester? Once your schedule has been fully worked out in Curricle and you have exported your schedule, don’t forget to go to my.harvard to complete the registration process. my.harvard is the centralized information system used by students to manage course registration, advising, and graduation planning and used by faculty, staff, and administrators to manage enrollments and advising.',
           link: 'https://portal.my.harvard.edu'
         },
         {
           buttonLabel: 'Syllabus Explorer',
-          description: 'Read through the syllabi of courses in your plan to get a glimpse of the exciting intellectual journeys ahead.',
+          description: 'Want to browse individual course syllabi? Syllabus Explorer provides access to over 10,000 Harvard syllabi dating back to the 2015-16 academic year. A link to the relevant Syllabus Explorer record (when available) can be found in every course pop-up window in Curricle.',
           link: 'https://syllabus.harvard.edu'
         },
         {
           buttonLabel: 'Q Evaluations',
-          description: 'Curious about what previous students thought of a course and its workload? Check out the Q guide for past course evaluations.',
+          description: 'Curious about what previous students thought of a course and its workload? Consult the Q guide for course evaluations. Keep in mind that courses vary from year to year, as do instructors, and that new courses or non-recurring courses will be absent as well, so Q Evaluations from prior years are an imperfect selection tool. A link to the relevant Q Evaluation record (when available) can be found in every course pop-up window in Curricle.',
           link: 'https://q.fas.harvard.edu'
         },
         {
           buttonLabel: 'Gen Ed Requirements',
-          description: 'Confused about the new Gen Ed and Distribution requirements? No sweat - this page explains them in detail.',
+          description: 'Confused about Gen Ed or other requirements? The Program in General Education’s Resources page explains the four categories of required courses, as well as providing links to pages that explain the College\'s language requirement, Expository Writing requirement, Divisional Distribution requirement, and Quantitative Reasoning with Data requirement.',
           link: 'https://gened.fas.harvard.edu/resources-students'
         }
       ]

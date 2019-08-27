@@ -32,7 +32,7 @@
       target="explore-link"
       triggers="hover"
     >
-      Expand your horizon with interactive
+      Expand your horizons by exploring
       <br>
       visualizations of the course catalog
     </b-popover>
@@ -93,9 +93,9 @@
       target="search-link"
       triggers="hover"
     >
-      Narrow down your choices with a
+      Narrow down your choices by applying
       <br>
-      range of filters and parameters
+      custom filters and parameters
     </b-popover>
 
     <br>
@@ -129,9 +129,9 @@
       target="plan-link"
       triggers="hover"
     >
-      Plan out your schedule, whether for
+      Plan out your schedule, whether
       <br>
-      this semester or for the long haul
+      for this semester or the long haul
     </b-popover>
 
     <br>
@@ -183,9 +183,9 @@
       target="tools-link"
       triggers="hover"
     >
-      Your one-stop shop for all links important
+      Your one-stop shop for links important
       <br>
-      to the course selection process
+      for the course selection process
     </b-popover>
 
     <br>
@@ -204,9 +204,9 @@
       target="faq-link"
       triggers="hover"
     >
-      Find answers to the most common
+      Find answers to common
       <br>
-      questions or ask one yourself
+      questions &mdash; or ask one yourself
     </b-popover>
 
     <br>
@@ -225,9 +225,9 @@
       target="about-link"
       triggers="hover"
     >
-      Read about Curricle and the team
+      Read about Curricle and the
       <br>
-      that has brought it to you
+      Curricle development team
     </b-popover>
 
     <br>
@@ -247,7 +247,7 @@
       target="news-link"
       triggers="hover"
     >
-      Keep up to date with the latest
+      Keep up to date on the latest
       <br>
       features and project updates
     </b-popover>

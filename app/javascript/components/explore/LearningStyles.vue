@@ -9,7 +9,10 @@
       class="mb-4"
     >
       <p>
-        Explore the types of classes available in each department. Click on your desired format, select a department, and all courses fitting that criteria will appear as a list. Click again on your selected department and format to reset the visualization.
+        Explore the teaching and learning format of classes across the university.
+        Once you have selected the format that interests you, click on a specific
+        department to display the corresponding courses. Click again on the department
+        and format you have chosen to reset the visualization.
       </p>
 
       <semester-input />

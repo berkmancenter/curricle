@@ -2,6 +2,11 @@
   <div class="py-5">
     <h3>Search:</h3>
 
+    <p>
+      Type in a keyword to find a list of best matches.
+      Use the semester selector to define and/or expand the range of your search.
+    </p>
+
     <search-form />
 
     <search-results

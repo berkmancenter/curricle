@@ -2,6 +2,10 @@
   <div class="py-5">
     <h3>Advanced Search:</h3>
 
+    <p>
+      Refine your search by specific properties of courses in the catalog data.
+    </p>
+
     <search-form v-if="userAuthenticated" />
 
     <search-results

@@ -64,7 +64,7 @@
       Sends all courses in<br>
       your schedule that are<br>
       offered this semester<br>
-      to my.Harvard
+      to my.harvard
     </b-popover>
   </b-button>
 </template>

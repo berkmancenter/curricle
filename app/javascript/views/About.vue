@@ -10,29 +10,112 @@
       </h3>
 
       <p>
-        Curricle is a platform for course discovery across the Harvard curriculum, past and present. When completed, the platform will offer a full suite of tools for understanding current course offerings, charting schedules and sequencing courses in concentration and distribution, and developing a calendar of classes over the term, the year, and an entire degree program. Unlike conventional course selection systems, Curricle reveals the curriculum not as a mere listing of courses but as a dynamic network of connections that, like a living organism, evolves over time.
+        Curricle is a platform for course discovery and exploration across the Harvard curriculum. Unlike conventional course management systems, Curricle reveals the curriculum not as a mere listing of courses but as a dynamic network of connections that, like a living organism, evolves over time.
       </p>
 
       <p>
-        Curricle accomplishes these tasks through three modes of operation: EXPLORE, SEARCH, and PLAN.
+        Curricle is built to promote intellectual inquiry, adventure, and experimentation with the curriculum itself as its living core. It accomplishes these tasks by means of three modes of operation:
+        <ul>
+          <li>
+            EXPLORE offers vivid, intuitive, and interactive data visualizations for highlighting connections among courses, topics, fields, and instructors.
+          </li>
+          <li>
+            SEARCH provides a customizable interface for data-driven keyword search of course descriptions, instructors, and meeting times.
+          </li>
+          <li>
+            PLAN presents a robust set of tools for annotating, organizing, tagging, and annotation tools to planning course of study across weekly, yearly, and multi-year views.
+          </li>
+        </ul>
       </p>
 
       <p>
-        EXPLORE offers vivid, intuitive, and interactive data visualizations for highlighting connections among courses, topics, fields, and instructors.
+        Curricle is not an administrative or enterprise system nor does it intend to replace systems, such as Harvard University's my.harvard, for managing course registration and enrollments. Rather, it complements such enterprise systems.
       </p>
 
       <p>
-        SEARCH provides a customizable interface for data-driven keyword search of course descriptions, instructors, and meeting times.
+        The principal target audience of the platform is current students, but Curricle is a multifunctional tool that will be of value also to advisers, faculty, administrative leaders, researchers, parents of students, and even alumni.
       </p>
 
       <p>
-        PLAN presents a robust set of organizing, tagging, and annotation tools to sequence courses across weekly, yearly, and multi-year views.
+        Curricle allows current STUDENTS to
+        <ul>
+          <li>
+            Visualize, annotate, and share course selection possibilities
+          </li>
+          <li>
+            Plan courses of study over the term, the year, and their entire college career
+          </li>
+          <li>
+            Balance workloads, learning styles, and modes of inquiry
+          </li>
+          <li>
+            Find hidden gems in the curriculum in serendipitous discoveries
+          </li>
+        </ul>
       </p>
 
       <p>
-        Still in beta testing, Curricle is not a replacement for my.harvard, Harvard University's official course-selection tool, but a complement to it. The Curricle team welcomes feedback and ideas for further development. While the platform is being tested and improved, feel free to explore, and to let us know what you find. We adhere to
-        <a href="https://www.harvard.edu/privacy-statement">
-          Harvard’s Privacy Statement</a>.
+        Curricle allows ADVISERS to
+        <ul>
+          <li>
+            Visualize and contextualize pathways across the curriculum
+          </li>
+          <li>
+            Stay in touch with multiple advisees
+          </li>
+          <li>
+            Foster rich, searching conversations with advisees and colleagues
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        Curricle allows FACULTY to
+        <ul>
+          <li>
+            Visualize topical and pedagogical continuities across divisions and schools
+          </li>
+          <li>
+            Surface hidden connections—and blind spots—in course offerings
+          </li>
+          <li>
+            Situate their own teaching practice within the curriculum as a knowledge network
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        Curricle allows ADMINISTRATORS to
+        <ul>
+          <li>
+            Visualize historical trends in course offerings and curricular design
+          </li>
+          <li>
+            Identify curriculum strengths and blind spots
+          </li>
+          <li>
+            Foster trans-disciplinary dialogue regarding teaching and learning
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        Curricle allows PARENTS OF STUDENTS and ALUMNI to
+        <ul>
+          <li>
+            Explore current course offerings and compare them to the era of their own studies
+          </li>
+          <li>
+            Share potential and emerging course plans with current students at a distance
+          </li>
+          <li>
+            Track the careers of favorite faculty and the development of fields of study
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        The Curricle team welcomes all feedback and ideas for further development.
         For inquiries, email
         <a href="mailto:info@metalab.harvard.edu">
           info@metalab.harvard.edu
@@ -40,11 +123,32 @@
       </p>
 
       <p>
-        HISTORY
+        <strong>
+          HISTORY
+        </strong>
       </p>
 
       <p>
-        The Curricle project began in 2015, when then-dean of Humanities Diana Sorensen challenged metaLAB to envision a course selection tool driven by a liberal-arts spirit of inquiry. It has been supported by the office of the Division of Arts and Humanities and the current dean, Robin Kelsey, with significant financial support from the Provost's Office and the Richard Menschel Fund to foster innovation in the humanities. The Curricle team is based in metaLAB (at) Harvard and its institutional home in the Berkman Klein Center for Internet and Society at Harvard University. Thanks are due to members of that team, past and present. At Berkman, Jon Murley has provided critical administrative and financial oversight. Director of Technology Sebastian Diaz has overseen Curricle technical development. At metaLAB, creative technologist Jessica Yurkofsky has driven the design and development of Curricle at every stage of the project. Creative Researcher Sarah Newman contributed crucially to the design and intellectual direction of the project. Interns Maia Suazo-Maler, Snow Dong, Sinead Danaher, and Berkman intern Dash El-Hauge contributed student perspectives, ingenuity, and intellectual energy. Jeffrey Schnapp, founder and faculty director of metaLAB, has provided vision and leadership throughout the project. Curricle has also benefited from advice and discussion generated by the Curriculum Mapping Working Group at the Harvard Institute for Learning and Teaching led by Erin Driver-Linn and Jaime Goldstein. The project is currently led by Associate Director Matthew Battles and Technical Project Manager Alexandra Dolan-Mescal.
+        Curricle was launched in 2015, when then-dean of Humanities Diana Sorensen challenged the faculty director of metaLAB (at) Harvard, Jeffrey Schnapp, to lead an effort to envision a course selection tool driven by a liberal-arts spirit of inquiry, curiosity, and intellectual adventure. The project has received strong support from the office of the Division of Arts and Humanities and its current dean, Robin Kelsey, with financial support provided by the Office of the Provost's and the Richard Menschel Fund. The Curricle team is based in metaLAB; its institutional home is in the Berkman Klein Center for Internet and Society.
+      </p>
+
+      <p>
+        <strong>
+          ACKNOWLEDGEMENT
+        </strong>
+      </p>
+
+      <p>
+        Thanks are due to members of that team past and present. At Berkman, Financial Director Jon Murley has provided administrative and financial oversight, and Director of Technology Sebastian Diaz has overseen Curricle technical development. At metaLAB, Creative Technologist Jessica Yurkofsky has driven the development of Curricle at every stage; Data Visualization Designer Kim Albrecht has led the design of interactive visualization tools and, with Matthew Battles, Curricle Lens. Senior Researcher Sarah Newman contributed to the project concept and execution as well. Undergraduate interns Maia Suazo-Maler, Snow Dong, Sinead Danaher, and Sydney Lewis, as well as Berkman intern Dash El-Hauge, contributed student perspectives and intellectual energy. Jeffrey Schnapp, Founder and Faculty Director of metaLAB, has provided vision and leadership throughout the project, working closely with Associate Director Matthew Battles, and Project Managers Alexandra Dolan-Mescal (2019-2020) and Oliver Luo (current).
+      </p>
+
+      <p>
+        <img
+          src="/images/logos/metalab.gif"
+          alt="metaLAB logo"
+          height="151"
+          width="151"
+        >
       </p>
     </div>
   </div>

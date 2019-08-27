@@ -13,7 +13,8 @@
       class="row mb-5"
     >
       <div class="col-sm-12 col-md-5">
-        Use visualizations to explore the curriculum, follow unexpected connections, and discover new courses.
+        Use these visualizations to explore the Harvard course catalog,
+        follow unexpected pathways, and discover new courses.
       </div>
     </div>
 

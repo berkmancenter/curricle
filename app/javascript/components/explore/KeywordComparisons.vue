@@ -9,7 +9,10 @@
       class="mb-4"
     >
       <p>
-        Visualize the appearance of terms across the curriculum by entering any two keywords and the visualization will display the courses using those words, independently or in tandem, in their titles or descriptions. To reset the visualization, simply enter new keywords at left and right.
+        Enter two keywords at the left and right to visualize the courses in which
+        these two words intersect from the standpoint of class formats, academic
+        disciplines, or specific class offerings. To reset the visualization,
+        simply enter new keywords.
       </p>
 
       <semester-input />

@@ -15,13 +15,19 @@
     </p>
 
     <p>
-      A new way to discover interesting classes and plan your course of study&mdash;check it out!
+      A transformative tool for course discovery, selection, and planning.
     </p>
 
-    <div
-      id="video-container"
-      class="mb-4"
-    />
+    <div class="mb-4">
+      <iframe
+        src="https://player.vimeo.com/video/354848830"
+        width="640"
+        height="360"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      />
+    </div>
 
     <div class="row vertical-align">
       <div class="col-sm-12 col-md-4">
@@ -40,18 +46,18 @@
 
       <div class="col-sm-12 col-md-8">
         <strong class="font-italic">
-          CURRICLE Beta 2 is preparing for its Fall 2019 roll-out!
+          CURRICLE Beta 2 is ready for the 2019-2020 calendar year!
         </strong>
 
         <br>
 
-        Check out our
+        Check out the latest
         <a
           href="https://curricle.wpengine.com/"
           target="_blank"
         >
           news</a>
-        for the latest updates and new features.
+        on updates and new features.
       </div>
     </div>
   </div>
@@ -85,12 +91,6 @@
     a {
       color: white;
     }
-  }
-
-  #video-container {
-    border: 2px solid black;
-    height: 360px;
-    width: 640px;
   }
 
   .vertical-align {

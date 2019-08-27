@@ -21,14 +21,14 @@
       >
         <strong>explore</strong>
       </router-link>
-      and
+      the curriculum and
       <router-link
         class="text-decoration-none text-uppercase"
         to="/search"
       >
         <strong>search</strong>
       </router-link>
-      the curriculum for interesting classes
+      for courses
 
       <br>
 
@@ -38,36 +38,36 @@
       >
         <strong>plan</strong>
       </router-link>
-      your semester with confidence
+      out your semester
 
       <br>
 
       <strong class="text-uppercase">
-        EXPORT
+        ENROLL
       </strong>
-      your schedule to
+      in classes at
       <a
         class="text-decoration-none font-italic"
         href="https://portal.my.harvard.edu"
       >
-        my.Harvard</a>
-      to enroll
+        my.harvard</a>
+      by exporting your schedule
     </p>
 
     <p>
       <strong class="font-italic">
-        CURRICLE Beta 2 is preparing for its Fall 2019 roll-out!
+        CURRICLE Beta 2 is ready for the 2019-2020 calendar year!
       </strong>
 
       <br>
 
-      Check out our
+      Check out the latest
       <a
         href="https://curricle.wpengine.com/"
         target="_blank"
       >
         news</a>
-      for the latest updates and new features.
+      on updates and new features.
     </p>
   </div>
 </template>

@@ -44,7 +44,6 @@
             target="search-tips"
             triggers="click"
           >
-            The search bar searches for individual matches of words you specify.<br>
             Use * as a wildcard to search on partial words<br>
             Group search terms using ( )<br>
             Use | for "or" logic<br>
