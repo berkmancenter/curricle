@@ -3,7 +3,6 @@ import * as d3 from 'd3'
 import apolloClient from 'apollo'
 import COURSE_COUNTS_QUERY from '../../graphql/CourseCounts.gql'
 import COURSES_SEARCH_QUERY from 'graphql/CourseUniverse.gql'
-import { transformSchedule } from 'lib/util'
 
 let visSize
 
@@ -447,8 +446,6 @@ function courseClick (course) {
   d3.select(course).select('circle').classed('clicked', true)
 
   clickedCourseIds.push(courseData.id)
-
-  courseData.schedule = transformSchedule(courseData)
 
   selectCourse(courseData)
 }

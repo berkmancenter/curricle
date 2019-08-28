@@ -3,7 +3,6 @@ import * as d3 from 'd3'
 import _ from 'lodash'
 import apolloClient from 'apollo'
 import SEARCH_QUERY from 'graphql/KeywordComparisons.gql'
-import { transformSchedule } from 'lib/util'
 //  Colors
 
 // var colorLeft = '#B53139';
@@ -486,8 +485,6 @@ function centerClick () {
 
   if (centerData === 'title' && uniqueCourses.length === 1) {
     const course = _.clone(selectionData[0])
-
-    course.schedule = transformSchedule(course)
 
     selectCourse(course)
   }

@@ -50,6 +50,7 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { transformSchedule } from 'lib/util'
 import COURSE_QUERY from 'graphql/Course.gql'
 import CourseAction from 'components/shared/CourseAction'
 import SelectedCourseDetails from './SelectedCourseDetails'
@@ -92,6 +93,8 @@ export default {
     course: {
       immediate: true,
       handler: function (newCourse) {
+        newCourse.schedule = transformSchedule(newCourse)
+
         this.registerCourses([newCourse])
       }
     }

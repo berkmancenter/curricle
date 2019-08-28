@@ -2,7 +2,6 @@ import * as d3 from 'd3'
 import apolloClient from 'apollo'
 import cssesc from 'cssesc'
 import COURSES_CONNECTED_BY_INSTRUCTOR_QUERY from '../../graphql/CoursesConnectedByInstructor.gql'
-import { transformSchedule } from 'lib/util'
 
 var colorLeft = '#D10F84'
 var colorRight = '#00ADF0'
@@ -430,8 +429,6 @@ function lectureClick () {
 
 function courseClick () {
   const course = this.__data__.values[0]
-
-  course.schedule = transformSchedule(course)
 
   selectCourse(course)
 }
