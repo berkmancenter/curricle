@@ -266,7 +266,7 @@
         id="coming-soon"
         class="font-italic"
       >
-        Coming soon!
+        Coming Oct. 1st!
       </span>
     </p>
 
@@ -276,7 +276,7 @@
       target="curricle-lens-link"
       triggers="hover"
     >
-      Dynamically interact with the
+      Dig into data-driven stories about the
       <br>
       history of the Harvard curriculum
     </b-popover>

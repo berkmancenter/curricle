@@ -97,6 +97,23 @@
       </p>
 
       <h5>
+        What is Curricle Lens?
+      </h5>
+
+      <p>
+        Curricle Lens is a research platform where you can dig into
+        data-driven stories about the history of the Harvard curriculum.
+        Leveraging the strength of visualized data and interactive
+        storytelling, Curricle Lens can take you on a guided tour of how
+        the Department of African and African-American Studies has grown
+        and transformed, how the curricular tension between humanities and
+        sciences shifted over time, how prominent luminaries like Gertrude
+        Stein and T. S. Eliot navigated the course catalog in their
+        collegiate days, and many more stories like these. Tune in for the
+        platform launch on October 1, 2019!
+      </p>
+
+      <h5>
         This tool is pretty cool, but I do have some thoughts/feedback about it. How can I contribute?
       </h5>
 

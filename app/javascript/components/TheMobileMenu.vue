@@ -68,7 +68,7 @@
           <br>
 
           <span class="text-capitalize font-italic">
-            Coming soon!
+            Coming Oct. 1st!
           </span>
         </b-nav-item>
       </b-navbar-nav>
