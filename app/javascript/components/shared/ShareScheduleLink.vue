@@ -3,7 +3,7 @@
     :id="id"
     :size="size"
     :variant="variant"
-    @click="$refs.tooltip.$emit('close')"
+    @click="clickHandler"
   >
     Share Schedule
 
@@ -55,6 +55,13 @@ export default {
     ...mapState('user', ['scheduleToken']),
     scheduleUrl () {
       return `http://${window.location.host}/#/shared-schedule/${this.scheduleToken}`
+    }
+  },
+  methods: {
+    clickHandler () {
+      this.$matomo.trackEvent(['Share Schedule', 'Click'])
+
+      this.$refs.tooltip.$emit('close')
     }
   }
 }

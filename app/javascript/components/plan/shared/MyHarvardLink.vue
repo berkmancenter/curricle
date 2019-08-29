@@ -4,6 +4,7 @@
     v-b-modal.export-modal
     size="sm"
     variant="dark"
+    @click="$matomo.trackEvent(['Export', 'Click'])"
   >
     Export to my.harvard
 
