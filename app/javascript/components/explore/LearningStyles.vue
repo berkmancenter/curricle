@@ -94,7 +94,9 @@ export default {
     }
   },
   mounted () {
-    this.refreshVisualization()
+    window.setTimeout(() => {
+      this.refreshVisualization()
+    }, 500)
   },
   methods: {
     ...mapActions('app', ['selectCourse']),

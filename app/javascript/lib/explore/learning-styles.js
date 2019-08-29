@@ -39,7 +39,7 @@ function initSetup (selectCourseFunction, selectedSemesterRange, showLoaderOverl
   selectCourse = selectCourseFunction
   semesterRange = { start: selectedSemesterRange.start }
   showLoaderOverlay = showLoaderOverlayFunction
-  documentWidth = d3.select('#visContainer').node().getBoundingClientRect().width
+  documentWidth = calculateWidth()
   filterDatumDepartment = undefined
   filterDatumCourseType = undefined
 
@@ -370,7 +370,7 @@ function dataFilter () {
 }
 
 function resizing () {
-  const containerWidth = d3.select('#visContainer').node().getBoundingClientRect().width
+  const containerWidth = calculateWidth()
 
   if (documentWidth !== containerWidth) {
     documentWidth = containerWidth
@@ -463,6 +463,10 @@ function courseClick () {
   const course = _.clone(this.__data__)
 
   selectCourse(course)
+}
+
+function calculateWidth () {
+  return d3.select('#visContainer').node().getBoundingClientRect().width
 }
 
 export { initSetup }
