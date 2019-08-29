@@ -97,6 +97,16 @@
       </p>
 
       <h5>
+        Can the advanced search filter classes by times of the day or days of the week?
+      </h5>
+
+      <p>
+        Search by times when classes meet is a feature that is currently
+        in the works. We will update the platform as soon as we have that
+        feature tested, so check back soon!
+      </p>
+
+      <h5>
         What is Curricle Lens?
       </h5>
 

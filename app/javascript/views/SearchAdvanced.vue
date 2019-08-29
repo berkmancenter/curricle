@@ -3,7 +3,7 @@
     <h3>Advanced Search:</h3>
 
     <p>
-      Refine your search by specific properties of courses in the catalog data.
+      Narrow down your search to specific parts of course catalog entries and filter your results by additional parameters.
     </p>
 
     <search-form v-if="userAuthenticated" />

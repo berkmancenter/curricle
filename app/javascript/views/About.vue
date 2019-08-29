@@ -9,11 +9,20 @@
         About:
       </h3>
 
-      <p>
+      <p class="mb-4">
         Curricle is a platform for course discovery and exploration across the Harvard curriculum. Unlike conventional course management systems, Curricle reveals the curriculum not as a mere listing of courses but as a dynamic network of connections that, like a living organism, evolves over time.
       </p>
 
-      <p>
+      <iframe
+        src="https://player.vimeo.com/video/354848830"
+        width="640"
+        height="360"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      />
+
+      <p class="mt-4">
         Curricle is built to promote intellectual inquiry, adventure, and experimentation with the curriculum itself as its living core. It accomplishes these tasks by means of three modes of operation:
         <ul>
           <li>
@@ -118,8 +127,13 @@
         The Curricle team welcomes all feedback and ideas for further development.
         For inquiries, email
         <a href="mailto:info@metalab.harvard.edu">
-          info@metalab.harvard.edu
-        </a>
+          info@metalab.harvard.edu</a>.
+      </p>
+
+      <p>
+        We adhere to
+        <a href="https://www.harvard.edu/privacy-statement">
+          Harvard’s Privacy Statement</a>.
       </p>
 
       <p>

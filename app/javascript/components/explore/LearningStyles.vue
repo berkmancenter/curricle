@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-uppercase">
+    <p class="text-uppercase font-weight-bold">
       Learning Styles
     </p>
 
