@@ -1,22 +1,16 @@
 <template>
   <div>
     <div class="mb-3 row">
-      <div class="col-lg-5">
+      <div class="col-lg-7">
         <p class="font-weight-bold text-uppercase">
           {{ course.title }}
         </p>
       </div>
 
-      <div class="col-lg-2 text-uppercase">
-        {{ course.academicGroup }}<br>
-        {{ `${course.subject} ${course.catalogNumber}` }}<br>
-        {{ `${course.termName} ${course.termYear}` }}
-      </div>
-
       <div class="col-lg-3 text-uppercase">
+        {{ `${course.subject} ${course.catalogNumber}` }}<br>
         {{ course.component || '&mdash;' }}<br>
-        {{ course.gradingBasisDescription || '&mdash;' }}<br>
-        {{ firstInstructor || '&mdash;' }}
+        {{ `${course.academicGroup} &mdash; ${course.termName} ${course.termYear}` }}
       </div>
 
       <div class="col-lg-2 text-uppercase">
