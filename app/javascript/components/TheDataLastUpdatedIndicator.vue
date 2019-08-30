@@ -1,6 +1,6 @@
 <template>
   <div v-if="updatedAt">
-    Data last updated on {{ updatedAt }}
+    Data last updated on {{ updatedAt }}. See <a href="https://my.harvard.edu/">my.harvard</a> for the most recent changes to courses.
   </div>
 </template>
 
@@ -13,3 +13,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+a {
+   color: black;
+}
+</style>

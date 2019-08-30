@@ -42,6 +42,16 @@
       </p>
 
       <h5>
+        Are the courses I'm seeing on Curricle also on my.harvard?
+      </h5>
+
+      <p>
+        While Curricle course data are updated frequently, my.harvard
+        is the home of Harvard's authoritative course database. Be sure
+        to check there to get changes or additions to the latest course listings.
+      </p>
+
+      <h5>
         How should I make use of my "Schedule" in Curricle?
       </h5>
 
