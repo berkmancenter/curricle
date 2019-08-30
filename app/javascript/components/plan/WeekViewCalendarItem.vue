@@ -127,11 +127,12 @@ export default {
   border-radius: 4px;
   border: 2px solid black;
   background-clip: padding-box;
+  z-index: 10;
   cursor: pointer;
 
   &:hover {
     background-color: #dcdcdc;
-    z-index: 10;
+    z-index: 15 !important;
     height: auto;
   }
 
@@ -159,6 +160,7 @@ export default {
   }
 
   &.hidden {
+    z-index: 1;
     border-color: #999;
     color: #999;
     font-style: italic;
