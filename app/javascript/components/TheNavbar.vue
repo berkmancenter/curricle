@@ -236,7 +236,7 @@
       id="news-link"
       class="nav secondary"
       target="_blank"
-      href="https://curricledev.wpengine.com"
+      href="http://curricle.wpengine.com/"
     >
       News
     </a>
