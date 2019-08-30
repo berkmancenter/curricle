@@ -116,7 +116,7 @@ export default {
       if (this.type === 'schedule') {
         alertText = includeInPath ? 'Course shown in schedule' : 'Course hidden from schedule'
       } else {
-        this.$matomo.trackEvent(['Course', 'Add To Schedule', this.$router.currentRoute.path, this.courseId])
+        this.$matomo.trackEvent('Course', 'Add To Schedule', this.$router.currentRoute.path, this.courseId)
 
         alertText = 'Course added to schedule'
       }
@@ -132,7 +132,7 @@ export default {
       )
     },
     removeUserCourse () {
-      this.$matomo.trackEvent(['Course', 'Remove From Schedule', this.$router.currentRoute.path, this.courseId])
+      this.$matomo.trackEvent('Course', 'Remove From Schedule', this.$router.currentRoute.path, this.courseId)
 
       this.$apollo.provider.defaultClient.mutate({
         mutation: USER_COURSE_REMOVE_MUTATION,

@@ -24,7 +24,7 @@
           <a
             target="_blank"
             :href="qGuideUrl"
-            @click="$matomo.trackEvent(['Q Guide', 'Click', course.id])"
+            @click="$matomo.trackEvent('Q Guide', 'Click', course.id)"
           >
             Q Guide
           </a>
@@ -35,7 +35,7 @@
         <a
           target="_blank"
           :href="syllabusUrl"
-          @click="$matomo.trackEvent(['Syllabus', 'Click', course.id])"
+          @click="$matomo.trackEvent('Syllabus', 'Click', course.id)"
         >
           Syllabus
         </a>

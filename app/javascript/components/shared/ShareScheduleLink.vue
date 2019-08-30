@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     clickHandler () {
-      this.$matomo.trackEvent(['Share Schedule', 'Click'])
+      this.$matomo.trackEvent('Share Schedule', 'Click')
 
       this.$refs.tooltip.$emit('close')
     }

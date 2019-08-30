@@ -95,7 +95,7 @@ export default {
       handler: function (newCourse) {
         if (!newCourse.id) { return }
 
-        this.$matomo.trackEvent(['Course', 'Select', newCourse.id])
+        this.$matomo.trackEvent('Course', 'Select', newCourse.id)
 
         newCourse.schedule = transformSchedule(newCourse)
 

@@ -65,7 +65,7 @@ export default {
   methods: {
     ...mapMutations('app', ['SET_ALERT_TEXT']),
     updateAnnotations () {
-      this.$matomo.trackEvent(['Annotation', 'Save'])
+      this.$matomo.trackEvent('Annotation', 'Save')
 
       this.$apollo.mutate({
         mutation: ANNOTATION_SET_MUTATION,
