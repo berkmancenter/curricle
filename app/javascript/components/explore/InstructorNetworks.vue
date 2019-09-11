@@ -163,12 +163,14 @@ export default {
       showLoaderOverlay: 'search/SET_SEARCH_RUNNING'
     }),
     forceInstructorSearch (name) {
+      this.setTitleName(name)
       this.instructorName = name
 
       this.refreshVisualization()
     },
     onSubmit (e) {
       e.preventDefault()
+      this.setTitleName(this.instructorName)
       this.setShowNoResultsContainer(false)
       this.refreshVisualization()
     },
@@ -187,8 +189,8 @@ export default {
       })
     },
     refreshVisualization () {
-      if (this.instructorName && this.semesterRange) {
-        requestData(this.instructorName, this.semesterRange, this.courseLevel)
+      if (this.titleName && this.semesterRange) {
+        requestData(this.titleName, this.semesterRange, this.courseLevel)
       }
     }
   }

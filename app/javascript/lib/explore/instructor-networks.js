@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import _ from 'lodash'
 import apolloClient from 'apollo'
 import cssesc from 'cssesc'
 import COURSES_CONNECTED_BY_INSTRUCTOR_QUERY from '../../graphql/CoursesConnectedByInstructor.gql'
@@ -117,8 +118,8 @@ function loadLecturerData (coursesConnectedByInstructor) {
   const data = JSON.parse(JSON.stringify(coursesConnectedByInstructor))
 
   data.forEach(function (d) {
-    d.subjectClass = cssesc(d.subjectDescription, { isIdentifier: true })
-    d.courseTypeClass = cssesc(d.component, { isIdentifier: true })
+    d.subjectClass = cssesc(d.subjectDescription.split(' ').join(''), { isIdentifier: true })
+    d.courseTypeClass = cssesc(d.component.split(' ').join(''), { isIdentifier: true })
   })
 
   data.sort(function (a, b) {
@@ -150,6 +151,7 @@ function requestData (instructorName, selectedSemesterRange, selectedCourseLevel
     }
 
     showLoaderOverlay(false)
+    resetOpacity()
   })
 }
 
@@ -177,10 +179,11 @@ function monadicView (data) {
   var nestedInstructorData = d3.nest()
     .key(function (d) { return d.courseInstructors[0].displayName })
     .rollup(function (v) {
+      const classes = _(v).map('subjectClass').uniq().value().join(' ')
+
       return {
         count: v.length,
-        classes: v[0].subjectClass,
-        // classes: function(d) { return d.amount; })
+        classes: classes,
         name: v[0].courseInstructors[0].displayName,
         eMail: v[0].courseInstructors[0].email
       }
@@ -236,10 +239,12 @@ function monadicView (data) {
   // -------------------------------------------------------------
   //  LeftVis
 
-  var instructorText = svg.selectAll('.instructorText')
+  svg.selectAll('.instructorText').remove()
+
+  const instructorText = svg.selectAll('.instructorText')
     .data(nestedInstructorData, function (d) { return d.key })
 
-  instructorText.exit().remove()
+  // instructorText.exit().remove()
 
   instructorText.transition().duration(500)
     .attr('transform', function (d, i) { return 'translate(' + 150 + ',' + (instructorTextPosScale(d.key) - 2) + ')' })
@@ -385,19 +390,19 @@ function categoryClick () {
   svg.selectAll('.subjectLine').style('opacity', 0.1)
   svg.selectAll('.subjectText').style('opacity', 0.1)
 
-  svg.selectAll('.' + selectedClass).style('opacity', 1)
+  svg.selectAll(`.${selectedClass}`).style('opacity', 1)
 
-  d3.select('svg').insert('rect', 'g') // .append('rect')
+  d3.select('#visContainer > svg').insert('rect', 'g') // .append('rect')
     .attr('class', 'categoryClickRect')
     .attr('x', 0)
     .attr('y', 0)
     .attr('width', width + margin.right + margin.left)
     .attr('height', height + margin.top + margin.bottom)
     .style('fill', 'rgba(255,255,255,0')
-    .on('click', categoryClickRemoval)
+    .on('click', resetOpacity)
 }
 
-function categoryClickRemoval () {
+function resetOpacity () {
   svg.selectAll('.categoryClickRect').remove()
 
   svg.selectAll('.classLine').style('opacity', 1)
