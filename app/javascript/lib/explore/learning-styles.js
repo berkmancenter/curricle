@@ -54,8 +54,25 @@ function initSetup (selectCourseFunction, selectedSemesterRange, showLoaderOverl
     .range([width, 0])
   departmentBarScale = d3.scaleLinear()
     .range([0, width])
-  courseTypeAxis = d3.axisTop(courseTypeBarScale).ticks(5)
-  departmentAxis = d3.axisTop(departmentBarScale).ticks(5)
+  courseTypeAxis =
+    d3
+      .axisTop(courseTypeBarScale)
+      .ticks(5)
+      .tickFormat(
+        (domain, value) => {
+          if (value !== 0) { return domain }
+        }
+      )
+  departmentAxis =
+    d3
+      .axisTop(departmentBarScale)
+      .ticks(5)
+      .tickFormat(
+        (domain, value) => {
+          if (value !== 0) { return domain }
+        }
+      )
+
   courseTypeSvg = d3.select('#courseTypeVis').append('svg')
     .attr('width', width + margin.left + margin.right)
     .attr('height', height + margin.top + margin.bottom)
