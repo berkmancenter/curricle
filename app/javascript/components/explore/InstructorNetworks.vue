@@ -187,7 +187,9 @@ export default {
       })
     },
     refreshVisualization () {
-      requestData(this.instructorName, this.semesterRange, this.courseLevel)
+      if (this.instructorName && this.semesterRange) {
+        requestData(this.instructorName, this.semesterRange, this.courseLevel)
+      }
     }
   }
 }

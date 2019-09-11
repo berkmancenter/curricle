@@ -34,9 +34,13 @@ module Types
     end
 
     def courses_connected_by_instructor(**args)
+      name = args[:name]
+
+      return Course.none if name.blank?
+
       Resolvers::CoursesConnectedByInstructor.run(
         course_levels: args[:course_levels] || [],
-        name: args[:name],
+        name: name,
         semester_range: args[:semester_range] || { start: args[:semester] }
       )
     end
