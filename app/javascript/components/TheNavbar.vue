@@ -254,21 +254,14 @@
 
     <hr>
 
-    <p
+    <a
       id="curricle-lens-link"
-      class="nav pointer secondary"
+      class="nav secondary"
+      target="_blank"
+      href="https://curricle.net"
     >
       Curricle Lens
-
-      <br>
-
-      <span
-        id="coming-soon"
-        class="font-italic"
-      >
-        Coming Oct. 1st!
-      </span>
-    </p>
+    </a>
 
     <b-popover
       boundary="viewport"

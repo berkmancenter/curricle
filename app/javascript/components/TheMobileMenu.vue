@@ -62,14 +62,12 @@
           Development Updates
         </b-nav-item>
 
-        <b-nav-item class="mt-4">
+        <b-nav-item
+          target="_blank"
+          href="https://curricle.net"
+          class="mt-4"
+        >
           Curricle Lens
-
-          <br>
-
-          <span class="text-capitalize font-italic">
-            Coming Oct. 1st!
-          </span>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
