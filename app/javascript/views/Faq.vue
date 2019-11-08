@@ -129,8 +129,8 @@
         and transformed, how the curricular tension between humanities and
         sciences shifted over time, how prominent luminaries like Gertrude
         Stein and T. S. Eliot navigated the course catalog in their
-        collegiate days, and many more stories like these. Tune in for the
-        platform launch on October 1, 2019!
+        collegiate days, and many more stories like these.
+        Check it out&nbsp;<a href="https://curricle.net/">here</a>!
       </p>
 
       <h5>
