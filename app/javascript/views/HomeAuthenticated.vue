@@ -10,7 +10,7 @@
     <p>
       <img
         id="logo"
-        src="/images/logos/curricle-white-bg-16861.svg"
+        src="/images/logos/curricle_white_bg_no_beta.svg"
       >
     </p>
 
@@ -56,7 +56,7 @@
 
     <p>
       <strong class="font-italic">
-        CURRICLE Beta 2 is ready for the 2019-2020 calendar year!
+        CURRICLE is ready for Spring 2020!
       </strong>
 
       <br>
