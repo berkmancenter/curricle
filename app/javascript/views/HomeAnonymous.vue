@@ -45,12 +45,6 @@
       </div>
 
       <div class="col-sm-12 col-md-8">
-        <strong class="font-italic">
-          CURRICLE is ready for Spring 2020!
-        </strong>
-
-        <br>
-
         Check out the latest
         <a
           href="https://curricle.wpengine.com/"

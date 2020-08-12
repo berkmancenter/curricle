@@ -55,12 +55,6 @@
     </p>
 
     <p>
-      <strong class="font-italic">
-        CURRICLE is ready for Spring 2020!
-      </strong>
-
-      <br>
-
       Check out the latest
       <a
         href="https://curricle.wpengine.com/"
