@@ -18,6 +18,12 @@ class User < ApplicationRecord
   has_secure_token :api_token
   has_secure_token :schedule_token
 
+  before_validation do
+    return unless ENV['AUTHENTICATION_SCHEME'] == 'DATABASE'
+
+    self.huid = username
+  end
+
   # populate attributes with data returned by CAS
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
