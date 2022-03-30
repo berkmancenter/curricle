@@ -13,7 +13,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'jbuilder', '~> 2.9'
 gem 'pg', '~> 1.1'
 gem 'progress_bar', '~> 1.3'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'rails', '5.2.3' # @drg skip
 gem 'sanitize', '~> 5.0'
 gem 'seedbank', '~> 0.5'
